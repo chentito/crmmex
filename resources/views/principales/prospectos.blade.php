@@ -3,7 +3,7 @@
 @section( 'content' )
     <div class="tab-content">
         <div id="cartera" class="tab-pane in active">
-            @include( 'configuraciones.pipeline' )
+            @include( 'prospectos.listado' )
         </div>
         <div id="alta" class="tab-pane fade">
             @include( 'configuraciones.forecast' )
