@@ -6,10 +6,10 @@
             @include( 'prospectos.listado' )
         </div>
         <div id="alta" class="tab-pane fade">
-            @include( 'configuraciones.forecast' )
+            @include( 'prospectos.alta' )
         </div>
-        <div id="seguimientos" class="tab-pane fade">
-            @include( 'configuraciones.otras' )
+        <div id="seguimiento" class="tab-pane fade">
+            @include( 'prospectos.seguimiento' )
         </div>
     </div>
 @endsection
@@ -26,7 +26,7 @@
           <a class="nav-link" href="#alta">Alta</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#seguimientos">Seguimiento</a>
+          <a class="nav-link" href="#seguimiento">Seguimiento</a>
         </li>
     </ul>
 @endsection

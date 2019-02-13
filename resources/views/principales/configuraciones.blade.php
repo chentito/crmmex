@@ -8,6 +8,12 @@
         <div id="forecast" class="tab-pane fade">
             @include( 'configuraciones.forecast' )
         </div>
+        <div id="smtp" class="tab-pane fade">
+            @include( 'configuraciones.smtp' )
+        </div>
+        <div id="adicionales" class="tab-pane fade">
+            @include( 'configuraciones.camposAdicionales' )
+        </div>
         <div id="otras" class="tab-pane fade">
             @include( 'configuraciones.otras' )
         </div>
@@ -24,6 +30,12 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#forecast">Forecast</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#smtp">SMTP</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#adicionales">Campos Adicionales</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#otras">Otras</a>

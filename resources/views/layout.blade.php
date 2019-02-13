@@ -9,28 +9,18 @@
         <!-- Javascript -->
         <script src="{{ asset( 'js/jquery/jquery.js' ) }}"></script>
         <script src="{{ asset( 'js/tabs.js' ) }}"></script>
+        <script src="{{ asset( 'js/forms.js' ) }}"></script>
         <script src="{{ asset( 'assets/dist/js/bootstrap.js' ) }}"></script>
         <!-- CSS -->
         <link href="{{ asset( 'assets/dist/css/bootstrap.min.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'css/dashboard.css' ) }}" rel="stylesheet">
+        <link href="{{ asset( 'css/forms.css' ) }}" rel="stylesheet">
     </head>
 
     <body>
         <div class="d-flex" id="wrapper">
             <!-- Menu -->
-            <div class="bg-light border-right" id="sidebar-wrapper">
-                <div class="sidebar-sticky"><img src="imgs/logoMexagon.png"></div>
-                <!--div class="sidebar-heading">CRM Mexagon</div-->
-                <div class="list-group list-group-flush">
-                    <a href="/prospectos" class="list-group-item list-group-item-action bg-light">Prospectos</a>
-                    <a href="/clientes" class="list-group-item list-group-item-action bg-light">Clientes</a>
-                    <a href="/ventas" class="list-group-item list-group-item-action bg-light">Ventas</a>
-                    <a href="/mercadotecnia" class="list-group-item list-group-item-action bg-light">Mercadotecnia</a>
-                    <a href="/reportes" class="list-group-item list-group-item-action bg-light">Reportes</a>
-                    <a href="/configuraciones" class="list-group-item list-group-item-action bg-light">Configuraciones</a>
-                </div>
-                <div class="powered" >Powered by <a href="https://www.mexagon.net" target="_blank">Mexagon.net</a></div>
-            </div>
+            @include( 'generales.menu' )
             
             <!-- Page Content -->
             <div id="page-content-wrapper">
@@ -45,11 +35,13 @@
                                 <a class="nav-link" href="{{ route('home') }}">CRM</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Avisos</a>
+                                <button type="button" class="btn btn-sm btn-danger">
+                                    Avisos <span class="badge badge-light">4</span>
+                                </button>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Acciones
+                                    {{ Auth::user()->name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="z-index: 10000; font-size: 12px">
                                     <a class="dropdown-item" href="/perfil">Perfil</a>
@@ -79,12 +71,12 @@
         </div>
 
   <!-- Menu Toggle Script -->
-  <script>
+<script>
     $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
     });
-  </script>
+</script>
 
     </body>
 </html>
