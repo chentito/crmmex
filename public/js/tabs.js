@@ -6,11 +6,15 @@
 
 $(document).ready(function(){
     $(".nav-tabs a").click(function(){
-        $(this).tab('show');
-    });
+        var $this   = $( this ),
+            loadurl = $this.attr( 'href' ),
+            targ    = $this.attr( 'data-target' );
 
-    $('.nav-tabs a').on('shown.bs.tab', function(event){
-        var x = $(event.target).text();         // active tab
-        var y = $(event.relatedTarget).text();  // previous tab
+        $.get( loadurl , function( data ) {
+            $( targ ).html( data );
+        });
+
+        $this.tab('show');
+        return false;
     });
 });

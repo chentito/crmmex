@@ -14,42 +14,23 @@ Auth::routes();
 
 // Rutas protegidas por sesion
 Route::middleware('auth')->group(function(){
-    Route::get('/home', 'HomeController@index')->name('home');
-    // Dashboard, pantalla inicial
-    Route::get( '/home2' , function(){
-        return view( 'home2' );
-    });
-    
-    Route::get( '/prospectos' , function(){
-        return view( 'principales.prospectos' );
-    });
-    
-    Route::get( '/clientes' , function(){
-        return view( 'principales.clientes' );
-    });
-    
-    Route::get( '/ventas' , function(){
-        return view( 'principales.ventas' );
-    });
-
-    Route::get( '/mercadotecnia' , function(){
-        return view( 'principales.mercadotecnia' );
-    });
-    
-    Route::get( '/reportes' , function(){
-        return view( 'principales.reportes' );
-    });
-    
-    Route::get( '/configuraciones' , function(){
-        return view( 'principales.configuraciones' );
-    });
-    
-    Route::get( '/perfil' , function(){
-        return view( 'usuarios.perfil' );
-    });
+    Route::get( '/home', 'HomeController@index')->name('home');
+    Route::get( '/home2' , function(){ return view( 'home2' ); });
+    Route::get( '/prospectos' , function(){ return view( 'principales.prospectos' ); });
+    Route::get( '/clientes' , function(){ return view( 'principales.clientes' ); });
+    Route::get( '/ventas' , function(){ return view( 'principales.ventas' ); });
+    Route::get( '/mercadotecnia' , function(){ return view( 'principales.mercadotecnia' ); });
+    Route::get( '/reportes' , function(){ return view( 'principales.reportes' ); });
+    Route::get( '/configuraciones' , function(){ return view( 'principales.configuraciones' ); });
+    // Usuarios
+    Route::get( '/usuarios/admin'         , function(){ return view( 'usuarios.perfil' ); });
+    //Route::get( '/usuarios/listado'       , function(){ echo "hola borolas: listado usuarios"; });
+    Route::get( '/usuarios/listado'       , 'ControllerAdministradores@listado' );
+    //Route::get( '/usuarios/misdatos/{id}' , function( $id ){ echo "hola borolas: informacion del id ".$id; });
+    Route::get( '/usuarios/misdatos/{id}' , 'ControllerAdministradores@detalle' );
+    Route::get( '/usuarios/nuevo'         , function(){ echo "hola borolas: agregaContacto"; });
+    Route::get( '/usuarios/seguimiento'   , function(){ echo "hola borolas: seguimiento"; });
 });
 
-Route::get('/', function () {
-    return redirect( '/login' );
-});
+Route::get('/', function () { return redirect( '/login' ); });
 

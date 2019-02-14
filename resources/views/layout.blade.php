@@ -44,7 +44,7 @@
                                     {{ Auth::user()->name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="z-index: 10000; font-size: 12px">
-                                    <a class="dropdown-item" href="/perfil">Perfil</a>
+                                    <a class="dropdown-item" href="/usuarios/admin">Perfil</a>
                                     <a class="dropdown-item" href="/eventos">Mis Tareas</a>
                                     <div class="dropdown-divider"></div>
                                     <!--a class="dropdown-item" href="{{ route('logout') }}">Cerrar Sesi&oacute;n</a-->
@@ -70,13 +70,13 @@
             </div>
         </div>
 
-  <!-- Menu Toggle Script -->
-<script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-</script>
+        <!-- Menu Toggle Script -->
+        <script>
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+        </script>
 
     </body>
 </html>
