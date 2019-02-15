@@ -16,7 +16,12 @@ class ControllerAdministradores extends Controller
     public function detalle( $id ) {
         $admin = Administradores::find( $id )->toArray();
         //echo serialize( $admin );
-        return view( 'usuarios.informacion' , [ 'nombreUsuario' => $admin[ 'name' ] ]);
+        return view( 'usuarios.informacion' , 
+                [ 
+                    'nombreUsuario' => $admin[ 'name' ] , 
+                    'emailUsuario'  => $admin[ 'email' ] ,
+                    'passUsuario'   => $admin[ 'password' ] 
+                ]);
     }
     
 }
