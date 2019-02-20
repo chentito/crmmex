@@ -4,7 +4,6 @@
     <div class="tab-content">
         <div id="forecast" class="tab-pane in active">
             @include( 'configuraciones.forecast' )
-            
         </div>
          <div id="smtp" class="tab-pane fade">
             @include( 'configuraciones.smtp' )

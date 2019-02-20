@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/htdocs/crm/resources/views/principales/configuraciones.blade.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/configuraciones/pipeline.blade.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/configuraciones/forecast.blade.php</file>
             <file>file:/C:/htdocs/crm/routes/web.php</file>
-            <file>file:/C:/htdocs/crm/resources/views/usuarios/informacion.blade.php</file>
-            <file>file:/C:/htdocs/crm/resources/views/usuarios/perfil.blade.php</file>
-            <file>file:/C:/htdocs/crm/app/Models/Usuarios/Administradores.php</file>
-            <file>file:/C:/htdocs/crm/public/js/tabs.js</file>
-            <file>file:/C:/htdocs/crm/app/Http/Controllers/ControllerAdministradores.php</file>
-            <file>file:/C:/htdocs/crm/resources/views/layout.blade.php</file>
         </group>
     </open-files>
 </project-private>
