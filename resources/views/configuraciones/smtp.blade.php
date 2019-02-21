@@ -2,7 +2,7 @@
 <fieldset class="mt-2 pt-2">
     <form>
         
-        <div class="container">
+        <div class="card pt-2 pb-2 container">
             <div class="row">
                 <div class="col-sm-3">
                     <label for="conf_smtp_host">Servidor SMTP (host)</label>
