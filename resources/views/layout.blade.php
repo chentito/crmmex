@@ -11,9 +11,11 @@
         <script src="{{ asset( 'js/tabs.js' ) }}"></script>
         <script src="{{ asset( 'js/forms.js' ) }}"></script>
         <script src="{{ asset( 'assets/dist/js/bootstrap.js' ) }}"></script>
+        <script src="{{ asset( 'js/jquery/jquery.dataTables.min.js' ) }}"></script>
         <!-- CSS -->
         <link href="{{ asset( 'assets/dist/css/bootstrap.min.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'css/dashboard.css' ) }}" rel="stylesheet">
+        <link href="{{ asset( 'css/jquery.dataTables.min.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'css/forms.css' ) }}" rel="stylesheet">
     </head>
 

@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <label for="conf_datosAdicionales_nombre">Nombre del campo</label>
-                            <input id="conf_datosAdicionales_nombre" type="text" class="form-control form-control-sm" >
+                            <input id="conf_datosAdicionales_nombre" type="text" class="form-control form-control-sm" required>
                         </div>
                         <div class="col-sm-4">
                             <label for="conf_datosAdicionales_tipoDato">Tipo de dato</label>
@@ -57,13 +57,23 @@
                             <label for="conf_datosAdicionales_validacion">Validaci&oacute;n (Expresi&oacute;n Regular)</label>
                             <input id="conf_datosAdicionales_validacion" type="text" class="form-control form-control-sm" >
                         </div>
+                        <div class="col-sm-4">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label" for="inlineRadio1">Habilitado</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                <label class="form-check-label" for="inlineRadio2">Deshabilitado</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <br />
         <div class="col-xs-1" align="center">
-            <button type="button" class="btn btn-sm btn-success">Guardar Campo</button>
+            <button type="submit" class="btn btn-sm btn-success">Guardar Campo</button>
         </div>
     </form>
 </fieldset>

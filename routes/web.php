@@ -17,6 +17,7 @@ Route::middleware('auth')->group(function(){
     Route::get( '/home', 'HomeController@index')->name('home');
     Route::get( '/home2' , function(){ return view( 'home2' ); });
     Route::get( '/prospectos' , function(){ return view( 'principales.prospectos' ); });
+    Route::get( '/prospectos/listado' , 'Prospectos@listado' );
     Route::get( '/clientes' , function(){ return view( 'principales.clientes' ); });
     Route::get( '/ventas' , function(){ return view( 'principales.ventas' ); });
     Route::get( '/mercadotecnia' , function(){ return view( 'principales.mercadotecnia' ); });
