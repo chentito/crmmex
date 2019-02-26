@@ -20,7 +20,7 @@ class ControllerAdministradores extends Controller
                 [ 
                     'nombreUsuario' => $admin[ 'name' ] , 
                     'emailUsuario'  => $admin[ 'email' ] ,
-                    'passUsuario'   => $admin[ 'password' ] 
+                    'passUsuario'   => $admin[ 'password' ]
                 ]);
     }
     

@@ -17,7 +17,7 @@ class Prospectos extends Controller
                 "salary"     => "$320,800",
                 "start_date" => "2011/04/25",
                 "office"     => "Romerolandia",
-                "extn"       => ""
+                "extn"       => "320"
             ) ,
             array(
                 "name"       => "Carlos Reyes",
@@ -34,8 +34,7 @@ class Prospectos extends Controller
                 "start_date" => "2011/04/25",
                 "office"     => "Santa Ana",
                 "extn"       => "5025"
-            ) 
-            
+            )
         ) );
         
         return response()->json( $prospectos );

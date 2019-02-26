@@ -1,14 +1,14 @@
 
 <div class="container mt-2 pt-2">
     
-    <table id="example" class="display" style="width:100%">
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Direccion</th>
+                <th>Direcci&oacute;n</th>
                 <th>Correo</th>
-                <th>Telefono</th>
-                <th>Compa&ntilde;ia</th>
+                <th>Tel&eacute;fono</th>
+                <th>Compa&ntilde;&iacute;a</th>
                 <th>M&aacute;s</th>
             </tr>
         </thead>

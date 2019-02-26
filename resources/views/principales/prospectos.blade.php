@@ -17,16 +17,16 @@
 @section( 'submenu' )
     <ul class="nav nav-tabs sticky-top bg-white">
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">Prospectos</a>
+            <a class="nav-link disabled" href="#">Prospectos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#cartera">Cartera</a>
+            <a class="nav-link active" href="#cartera">Cartera</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#alta">Alta</a>
+            <a class="nav-link" href="#alta">Alta</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#seguimiento">Seguimiento</a>
+            <a class="nav-link" href="#seguimiento">Seguimiento</a>
         </li>
     </ul>
 @endsection

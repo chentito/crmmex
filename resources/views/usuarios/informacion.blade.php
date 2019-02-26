@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="col-xs-1" align="center">
-            <button type="button" class="btn btn-success">Actualizar Informaci&oacute;n</button>
+            <button type="button" class="btn btn-success btn-sm">Actualizar Informaci&oacute;n</button>
         </div>
     </form>
 </fieldset>

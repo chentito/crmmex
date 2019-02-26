@@ -5,6 +5,7 @@
         <a href="/prospectos" class="list-group-item list-group-item-action bg-light">Prospectos</a>
         <a href="/clientes" class="list-group-item list-group-item-action bg-light">Clientes</a>
         <a href="/ventas" class="list-group-item list-group-item-action bg-light">Ventas</a>
+        <a href="/productos" class="list-group-item list-group-item-action bg-light">Productos/Servicios</a>
         <a href="/mercadotecnia" class="list-group-item list-group-item-action bg-light">Mercadotecnia</a>
         <a href="/reportes" class="list-group-item list-group-item-action bg-light">Reportes</a>
         <a href="/configuraciones" class="list-group-item list-group-item-action bg-light">Configuraciones</a>

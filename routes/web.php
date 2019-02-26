@@ -13,13 +13,15 @@
 Auth::routes();
 
 // Rutas protegidas por sesion
-Route::middleware('auth')->group(function(){
+Route::middleware('auth')->group( function() {
     Route::get( '/home', 'HomeController@index')->name('home');
     Route::get( '/home2' , function(){ return view( 'home2' ); });
     Route::get( '/prospectos' , function(){ return view( 'principales.prospectos' ); });
     Route::get( '/prospectos/listado' , 'Prospectos@listado' );
     Route::get( '/clientes' , function(){ return view( 'principales.clientes' ); });
     Route::get( '/ventas' , function(){ return view( 'principales.ventas' ); });
+    Route::get( '/productos' , function(){ return view( 'principales.productos' ); });
+    Route::get( '/productos/listado' , 'Productos@listadoProductos' );
     Route::get( '/mercadotecnia' , function(){ return view( 'principales.mercadotecnia' ); });
     Route::get( '/reportes' , function(){ return view( 'principales.reportes' ); });
     Route::get( '/configuraciones' , function(){ return view( 'principales.configuraciones' ); });
