@@ -5,7 +5,10 @@
         <group>
             <file>file:/C:/htdocs/crm/app/Http/Controllers/Prospectos.php</file>
             <file>file:/C:/htdocs/crm/resources/views/principales/prospectos.blade.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/prospectos/listado.blade.php</file>
             <file>file:/C:/htdocs/crm/routes/web.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/usuarios/informacion.blade.php</file>
+            <file>file:/C:/htdocs/crm/app/Http/Controllers/Productos.php</file>
             <file>file:/C:/htdocs/crm/resources/views/productos/listado.blade.php</file>
         </group>
     </open-files>

@@ -18,6 +18,7 @@
         <link href="{{ asset( 'css/dashboard.css' ) }}" rel="stylesheet">
         <!--link href="{{ asset( 'css/jquery.dataTables.min.css' ) }}" rel="stylesheet"-->
         <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <link href="{{ asset( 'css/forms.css' ) }}" rel="stylesheet">
     </head>
 
@@ -48,6 +49,7 @@
                                     {{ Auth::user()->name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="z-index: 10000; font-size: 12px">
+                                    <a class="dropdown-item" href="/administracion">Administraci&oacute;n</a>
                                     <a class="dropdown-item" href="/usuarios/admin">Perfil</a>
                                     <a class="dropdown-item" href="/eventos">Mis Tareas</a>
                                     <div class="dropdown-divider"></div>
