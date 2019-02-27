@@ -41,6 +41,11 @@ Route::middleware('auth')->group( function() {
     Route::get( '/administracion/listado'      , 'Administradores@listaAdmin' );
     Route::get( '/administracion/guardaAdmin'  , ['as' => 'form_url', 'uses' => 'Administradores@store'] );
     Route::get( '/administracion/elimina/{id}' , 'Administradores@delete' );
+    
+    /*
+     * Clientes
+     */
+    Route::get( '/clientes/listado' , 'Clientes@listadoClientes' );
 });
 
 Route::get('/', function () { return redirect( '/login' ); });
