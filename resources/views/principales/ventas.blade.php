@@ -3,7 +3,7 @@
 @section( 'content' )
     <div class="tab-content">
         <div id="listadoVentas" class="tab-pane in active">
-            pantalla listado ventas
+            @include( 'ventas.propuestas' )
         </div>
         <div id="listadoPendientes" class="tab-pane fade">
             pantalla listado pendientes
@@ -20,7 +20,7 @@
             <a class="nav-link disabled" href="#">Ventas</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" href="#listadoVentas">Listado Ventas</a>
+            <a class="nav-link active" href="#listadoVentas">Listado Propuestas</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#listadoPendientes">Listado Pendientes</a>

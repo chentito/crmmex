@@ -46,6 +46,11 @@ Route::middleware('auth')->group( function() {
      * Clientes
      */
     Route::get( '/clientes/listado' , 'Clientes@listadoClientes' );
+    
+    /*
+     * Ventas
+     */
+    Route::get( '/ventas/listadoPropuestas' , 'VentasController@propuestas' );
 });
 
 Route::get('/', function () { return redirect( '/login' ); });

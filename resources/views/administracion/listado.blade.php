@@ -1,6 +1,5 @@
 
 <div class="container mt-2 pt-2">
-    
     <table id="administradores" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
