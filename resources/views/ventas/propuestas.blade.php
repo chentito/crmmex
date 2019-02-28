@@ -20,7 +20,7 @@
             <tr>
                 <th>Cliente</th>
                 <th>Contacto</th>
-                <th>Fecha Env&i&iacute;o</th>
+                <th>Fecha Env&iacute;o</th>
                 <th>Monto</th>
                 <th>Descuento</th>
                 <th>Observaciones</th>

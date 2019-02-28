@@ -3,13 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/htdocs/crm/resources/views/ventas/propuestas.blade.php</file>
+            <file>file:/C:/htdocs/crm/app/Ventas.php</file>
+            <file>file:/C:/htdocs/crm/app/Admins.php</file>
             <file>file:/C:/htdocs/crm/resources/views/clientes/listado.blade.php</file>
             <file>file:/C:/htdocs/crm/resources/views/administracion/listado.blade.php</file>
             <file>file:/C:/htdocs/crm/app/Http/Controllers/Administradores.php</file>
             <file>file:/C:/htdocs/crm/resources/views/principales/administracion.blade.php</file>
-            <file>file:/C:/htdocs/crm/app/Cartera.php</file>
             <file>file:/C:/htdocs/crm/app/Http/Controllers/Clientes.php</file>
+            <file>file:/C:/htdocs/crm/app/Cartera.php</file>
             <file>file:/C:/htdocs/crm/resources/views/principales/clientes.blade.php</file>
+            <file>file:/C:/htdocs/crm/app/Http/Controllers/VentasController.php</file>
         </group>
     </open-files>
 </project-private>

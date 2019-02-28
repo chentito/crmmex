@@ -9,11 +9,11 @@ class Ventas extends Model
     protected $table = 'crmmex_ventas_propuestacomercial';
     
     public function ejecutivos() {
-        return $this->belongsToMany( 'App\Admins' );
+        return $this->hasOne( 'App\Admins' , 'id' );
     }
     
     public function clientes() {
-        return $this->belongsToMany( 'App\Cartera' );
+        return $this->hasOne( 'App\Cartera' , 'id' );
     }
     
 }
