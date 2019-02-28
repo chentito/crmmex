@@ -8,12 +8,12 @@ class Ventas extends Model
 {
     protected $table = 'crmmex_ventas_propuestacomercial';
     
-    public function ejecutivo() {
-        return $this->hasOne( 'App\Admins' , 'id' );
+    public function ejecutivos() {
+        return $this->belongsToMany( 'App\Admins' );
     }
     
-    public function cliente() {
-        return $this->hasOne( 'App\Cartera' , 'id' );
+    public function clientes() {
+        return $this->belongsToMany( 'App\Cartera' );
     }
     
 }

@@ -14,13 +14,13 @@ class VentasController extends Controller
         
         foreach( $propuestas AS $propuesta ) {
             $arrProp[ 'propuestas' ][] = array(
-                'cliente'       => $propuesta->cliente->razonSocial,
+                'cliente'       => $propuesta->clientes,
                 'contacto'      => $propuesta->idContacto,
                 'fechaEnvio'    => $propuesta->fechaEnvio,
                 'monto'         => $propuesta->monto,
                 'descuento'     => $propuesta->descuento,
                 'observaciones' => $propuesta->observaciones,
-                'idEjecutivo'   => $propuesta->ejecutivo->email,
+                'idEjecutivo'   => $propuesta->ejecutivos,
                 'status'        => $propuesta->status,
                 'opciones'      => ''
             );
