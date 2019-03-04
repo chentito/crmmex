@@ -12,9 +12,12 @@
         <script src="{{ asset( 'js/forms.js' ) }}"></script>
         <script src="{{ asset( 'assets/dist/js/bootstrap.js' ) }}"></script>
         <script src="{{ asset( 'js/jquery/jquery.dataTables.min.js' ) }}"></script>
+        <script src="{{ asset( 'js/datepicker/bootstrap-datepicker.min.js' ) }}"></script>
+        <script src="{{ asset( 'js/datepicker/bootstrap-datepicker.es.min.js' ) }}"></script>
         <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
         <!-- CSS -->
         <link href="{{ asset( 'assets/dist/css/bootstrap.min.css' ) }}" rel="stylesheet">
+        <link href="{{ asset( '/css/datepicker/bootstrap-datepicker.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'css/dashboard.css' ) }}" rel="stylesheet">
         <!--link href="{{ asset( 'css/jquery.dataTables.min.css' ) }}" rel="stylesheet"-->
         <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">

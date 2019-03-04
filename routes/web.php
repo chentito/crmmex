@@ -19,7 +19,7 @@ Route::middleware('auth')->group( function() {
     Route::get( '/prospectos'                 , function(){ return view( 'principales.prospectos' ); });
     Route::get( '/prospectos/listado'         , 'Prospectos@listado' );
     Route::get( '/clientes'                   , function(){ return view( 'principales.clientes' ); });
-    Route::get( '/ventas'                     , function(){ return view( 'principales.ventas' ); });
+    Route::get( '/ventas'                     , function(){ return view( 'principales.ventas' )->with( [ 'registros' => array() ] ); });
     Route::get( '/productos'                  , function(){ return view( 'principales.productos' ); });
     Route::get( '/productos/listado'          , 'Productos@listadoProductos' );
     Route::get( '/mercadotecnia'              , function(){ return view( 'principales.mercadotecnia' ); });
@@ -51,6 +51,9 @@ Route::middleware('auth')->group( function() {
      * Ventas
      */
     Route::get( '/ventas/listadoPropuestas' , 'VentasController@propuestas' );
+    Route::get( '/ventas/verListadoPropuestas' , function(){ return view( 'ventas.propuestas' ); } );
+    Route::get( '/ventas/forecast' , 'ForecastController@datosCalculoForecast' );
+
 });
 
 Route::get('/', function () { return redirect( '/login' ); });

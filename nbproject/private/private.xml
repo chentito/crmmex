@@ -8,12 +8,13 @@
             <file>file:/C:/htdocs/crm/app/Admins.php</file>
             <file>file:/C:/htdocs/crm/resources/views/clientes/listado.blade.php</file>
             <file>file:/C:/htdocs/crm/resources/views/administracion/listado.blade.php</file>
+            <file>file:/C:/htdocs/crm/app/Providers/BroadcastServiceProvider.php</file>
+            <file>file:/C:/htdocs/crm/routes/web.php</file>
             <file>file:/C:/htdocs/crm/app/Http/Controllers/Administradores.php</file>
             <file>file:/C:/htdocs/crm/resources/views/principales/administracion.blade.php</file>
             <file>file:/C:/htdocs/crm/app/Http/Controllers/Clientes.php</file>
             <file>file:/C:/htdocs/crm/app/Cartera.php</file>
             <file>file:/C:/htdocs/crm/resources/views/principales/clientes.blade.php</file>
-            <file>file:/C:/htdocs/crm/app/Http/Controllers/VentasController.php</file>
         </group>
     </open-files>
 </project-private>

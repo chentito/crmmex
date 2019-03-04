@@ -2,14 +2,9 @@
 
 @section( 'content' )
     <div class="tab-content">
-        <div id="listadoVentas" class="tab-pane in active">
-            @include( 'ventas.propuestas' )
-        </div>
-        <div id="listadoPendientes" class="tab-pane fade">
-            pantalla listado pendientes
+        <div id="listadoVentas" class="tab-pane fade">
         </div>
         <div id="forecast" class="tab-pane fade">
-            pantalla forecast
         </div>
     </div>  
 @endsection
@@ -20,13 +15,13 @@
             <a class="nav-link disabled" href="#">Ventas</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" href="#listadoVentas">Listado Propuestas</a>
+            <a class="nav-link" href="/ventas/verListadoPropuestas">Listado</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#listadoPendientes">Listado Pendientes</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#forecast">Forecast</a>
+            <a class="nav-link" href="/ventas/forecast">Forecast</a>
         </li>
     </ul>
+
+    @yield( 'individual' )
 @endsection
+
