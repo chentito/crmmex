@@ -1,11 +1,11 @@
 
 <div class="container mt-2 pt-2">
     
-    <table id="example" class="table table-striped table-bordered" style="width:100%">
+    <table id="example" class="table table-striped table-bordered table-responsive-sm" style="width:100%">
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Direcci&oacute;n</th>
+                <th>Puesto</th>
                 <th>Correo</th>
                 <th>Tel&eacute;fono</th>
                 <th>Compa&ntilde;&iacute;a</th>

@@ -16,8 +16,15 @@ Auth::routes();
 Route::middleware('auth')->group( function() {
     Route::get( '/home'                       , 'HomeController@index')->name('home');
     Route::get( '/home2'                      , function(){ return view( 'home2' ); });
+    
+    /*
+     * Administracion de prospectos
+     */
     Route::get( '/prospectos'                 , function(){ return view( 'principales.prospectos' ); });
     Route::get( '/prospectos/listado'         , 'Prospectos@listado' );
+    Route::get( '/prospectos/alta'            , function(){ return view( 'prospectos.alta' ); } );
+    
+    
     Route::get( '/clientes'                   , function(){ return view( 'principales.clientes' ); });
     Route::get( '/ventas'                     , function(){ return view( 'principales.ventas' )->with( [ 'registros' => array() ] ); });
     Route::get( '/productos'                  , function(){ return view( 'principales.productos' ); });

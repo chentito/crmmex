@@ -21,6 +21,35 @@
             </div>
             
             <div class="card ml-1 mt-1 mb-1 pb-1 col-sm">
+                <h6 class="card-title border-bottom">Indicadores</h6>
+                <div class='card-text input-group'>
+                    <ul class="list-group list-group-flush w-100">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm">Indicador 1</div>
+                                <div class="col-sm"><input type="number" value="0.00" class="form-control form-control-sm"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm">Indicador 2</div>
+                                <div class="col-sm"><input type="number" value="0.00" class="form-control form-control-sm"></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm">Indicador 2</div>
+                                <div class="col-sm"><input type="number" value="0.00" class="form-control form-control-sm"></div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="card-body">
+                        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#pipelineAgregaIndicador" data-whatever="@mdo">Agregar indicador</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card ml-1 mt-1 mb-1 pb-1 col-sm">
                 <h6 class="card-title border-bottom"><div class="form-inline"><input type="checkbox" class="form-control form-control-sm mr-2"> USAR BANT:</div></h6>
                 <div class="card-text input-group">
                     <ul class="list-group list-group-flush w-100">
@@ -52,13 +81,6 @@
                 </div>
             </div>
             
-            <div class="card ml-1 mt-1 mb-1 pb-1 col-sm">
-                <h6 class="card-title border-bottom"></h6>
-                
-            </div>
-            
-            
-            
         </div>
         
     </div>
@@ -83,6 +105,30 @@
                         <option>Campo 4</option>
                     </select>
                 </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-sm btn-primary" id="conf_forecast_btn_addPeriodo">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="pipelineAgregaIndicador" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Indicador</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm">Nombre Indicador</div>
+                    <div class="col-sm">Peso</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm"><input type="text" class="form-control form-control-sm"></div>
+                    <div class="col-sm"><input type="number" class="form-control form-control-sm"></div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cerrar</button>

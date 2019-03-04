@@ -44,18 +44,21 @@
                 @php($vp = $vp + $r['ventasPendientes'])
                 @php($pr = $pr + $r['prevision'])
                 @php($tt = $tt + $r['estimado'])
+                @php($mv = $mv + $r['montoVentas'])
+                @php($pm = $pm + $r['precioMedio'])
+                @php($vb = $vb + $r['ventaBruta'])
             @endforeach
         </tbody>
         <tfoot>
             <tr>
                 <th>Totales</th>
                 <th>{{$vt}}</th>
-                <th></th>
-                <th></th>
+                <th>{{@moneda($mv)}}</th>
+                <th>{{@moneda($pm)}}</th>
                 <th>{{$vp}}</th>
                 <th>{{$pr}}</th>
                 <th>{{$tt}}</th>
-                <th></th>
+                <th>{{@moneda($vb)}}</th>
             </tr>
         </tfoot>
     </table>

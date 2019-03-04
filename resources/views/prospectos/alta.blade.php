@@ -1,1 +1,9 @@
-alta de prospectos
+
+@extends( 'principales.prospectos' )
+
+@section( 'individual' )
+
+
+
+@endsection
+

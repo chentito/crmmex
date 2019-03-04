@@ -14,26 +14,29 @@ class Prospectos extends Controller
             array(
                 "name"       => "José Guitérrez",
                 "position"   => "Desarrollador",
-                "salary"     => "$320,800",
-                "start_date" => "2011/04/25",
-                "office"     => "Romerolandia",
-                "extn"       => "320"
+                "salary"     => "correo1@gmail.com",
+                "start_date" => "0447225901744",
+                "office"     => "Sabritas SA de CV",
+                "extn"       => '<a href="/administracion/edita/"><i class="fas fa-edit"></i></a>'
+                              . '<a href="/administracion/datosEmpresa/" class="pl-2"><i class="fas fa-building"></i></a>'
             ) ,
             array(
                 "name"       => "Carlos Reyes",
-                "position"   => "Achichincle",
-                "salary"     => "$320,800",
-                "start_date" => "2011/04/25",
-                "office"     => "Toluca",
-                "extn"       => "310"
+                "position"   => "Desarrollador",
+                "salary"     => "correo2@gmail.com",
+                "start_date" => "0447222015231",
+                "office"     => "Mexagon.net",
+                "extn"       => '<a href="/administracion/edita/"><i class="fas fa-edit"></i></a>'
+                              . '<a href="/administracion/datosEmpresa/" class="pl-2"><i class="fas fa-building"></i></a>'
             ) ,
             array(
                 "name"       => "Juan Linares",
                 "position"   => "Gerente",
-                "salary"     => "$1,000,800",
-                "start_date" => "2011/04/25",
-                "office"     => "Santa Ana",
-                "extn"       => "5025"
+                "salary"     => "correo5.9660@gmail.com",
+                "start_date" => "5578010599",
+                "office"     => "UAEMex SA de CV",
+                "extn"       => '<a href="/administracion/edita/"><i class="fas fa-edit"></i></a>'
+                              . '<a href="/administracion/datosEmpresa/" class="pl-2"><i class="fas fa-building"></i></a>'
             )
         ) );
         

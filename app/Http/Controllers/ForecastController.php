@@ -18,6 +18,9 @@ class ForecastController extends Controller
         $vp             = 0;
         $pr             = 0;
         $tt             = 0;
+        $mv             = 0;
+        $pm             = 0;
+        $vb             = 0;
 
         foreach( $ejecutivos AS $ejecutivo ) {
             $total       = rand( 1000 , 10000 );
@@ -38,6 +41,6 @@ class ForecastController extends Controller
             );
         }
 
-        return view( 'ventas.tablaForecast' , compact( 'registros' , 'periodoInicial' , 'periodoFinal' , 'vt' , 'vp' , 'pr' , 'tt' ) );
+        return view( 'ventas.tablaForecast' , compact( 'registros' , 'periodoInicial' , 'periodoFinal' , 'vt' , 'vp' , 'pr' , 'tt' , 'mv' , 'pm' , 'vb' ) );
     }
 }

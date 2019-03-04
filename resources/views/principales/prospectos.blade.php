@@ -6,10 +6,10 @@
             @include( 'prospectos.listado' )
         </div>
         <div id="alta" class="tab-pane fade">
-            @include( 'prospectos.alta' )
+            
         </div>
         <div id="seguimiento" class="tab-pane fade">
-            @include( 'prospectos.seguimiento' )
+            
         </div>
     </div>
 @endsection
@@ -23,10 +23,12 @@
             <a class="nav-link active" href="#cartera">Cartera</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#alta">Alta</a>
+            <a class="nav-link" href="/prospectos/alta">Alta</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#seguimiento">Seguimiento</a>
         </li>
     </ul>
+
+    @yield( 'individual' )
 @endsection
