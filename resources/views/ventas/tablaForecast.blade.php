@@ -5,7 +5,7 @@
 <h4 class="pt-2 text-center">
     Ventas [{{$periodoInicial}} / {{$periodoFinal}}]
     <span class="float-lg-right pr-2">
-        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#forecastActualizaPeriodos" data-whatever="@mdo">Cambiar periodo</button>
+        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#forecastActualizaPeriodos" data-whatever="@mdo">Agregar Filtros</button>
     </span>
 </h4>
 
@@ -68,14 +68,37 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Actualiza Periodo</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Reporte Forecast</h5>
             </div>
             <div class="modal-body">
-                <div id="sandbox-container">
-                    <div class="input-daterange" id="datepicker">
-                        <input type="text" class="input-small" name="start" />
-                        <span class="ad">to</span>
-                        <input type="text" class="input-small" name="end" />
+                <div class="row">
+                    <div class="col">
+                        <div class="header">Filtrar por fechas</div>
+                        <div class="row">
+                            <div class="col-6">Del <input type="text" class="form-control form-control-sm" size="8" /></div>
+                            <div class="col-6">al <input type="text" class="form-control form-control-sm" size="8" /></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-2">
+                    <div class="col">
+                        <div class="header">Filtrar por ejecutivo</div>
+                            <select multiple class="form-control">
+                            @foreach($registros AS $r)
+                                <option>{{$r['ejecutivo']}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="row pt-2">
+                    <div class="col">
+                        <div class="header">Filtrar por categor&iacute;as</div>
+                            <select multiple class="form-control">
+                                <option>Emisi&oacute;n CFDi</option>
+                                <option>Adicionales CFDi</option>
+                                <option>Perifericos</option>
+                                <option>Servidores</option>
+                        </select>
                     </div>
                 </div>
             </div>

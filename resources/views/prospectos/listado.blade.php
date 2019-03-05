@@ -1,4 +1,8 @@
 
+@extends( 'principales.prospectos' )
+
+@section( 'individual' )
+
 <div class="container mt-2 pt-2">
     
     <table id="example" class="table table-striped table-bordered table-responsive-sm" style="width:100%">
@@ -32,7 +36,7 @@
     $(document).ready( function() {
         $('#example').DataTable({
             ajax   :{
-                url: '/prospectos/listado',
+                url: '/api/listadoProspectos',
                 dataSrc: 'prospectos'
             },
             columns: [
@@ -50,3 +54,5 @@
         });
     });
 </script>
+
+@endsection

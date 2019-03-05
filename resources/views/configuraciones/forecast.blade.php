@@ -57,7 +57,32 @@
                     </div>
                 </div>
             </div>
-            <div class="col-8"></div>
+            <div class="card ml-1 mt-1 mb-1 pb-1 col-sm">
+                <h6 class="card-title border-bottom">C&aacute;lculo de Previsi&oacute;n</h6>
+                <div class="card-text pl-2">
+                    <div class="row">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked="checked">
+                            <label class="form-check-label" for="inlineRadio1">Media (promedio)</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                            <label class="form-check-label" for="inlineRadio2">Moda</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                            <label class="form-check-label" for="inlineRadio3">Mediana</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="inlineRadio4">Formula:</label>
+                            <input class="form-control form-control-sm" type="text" name="inlineRadioOptions" id="inlineRadio4" size="20" >
+                            <div class="input-group-append">
+                                <button class="btn btn-sm btn-primary" type="button" data-toggle="modal" data-target="#modalFormula" data-whatever="@mdo">?</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <br />
@@ -65,6 +90,21 @@
         <button type="button" class="btn btn-sm btn-success">Guardar Configuraci&oacute;n</button>
     </div>
 </fieldset>
+
+<div class="modal fade" id="modalFormula" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Instrucciones</h5>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-sm btn-primary" id="conf_forecast_btn_addPeriodo">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

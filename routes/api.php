@@ -17,4 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource( 'ejemplo' , 'Api' );
+//Route::resource( 'ejemplo' , 'Api' );
+Route::get( 'listadoProspectos' , 'Prospectos@listado' ); 
+

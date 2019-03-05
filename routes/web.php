@@ -20,23 +20,42 @@ Route::middleware('auth')->group( function() {
     /*
      * Administracion de prospectos
      */
-    Route::get( '/prospectos'                 , function(){ return view( 'principales.prospectos' ); });
-    Route::get( '/prospectos/listado'         , 'Prospectos@listado' );
+    Route::get( '/prospectos'                 , function(){ return view( 'prospectos.listado' ); });
     Route::get( '/prospectos/alta'            , function(){ return view( 'prospectos.alta' ); } );
-    
+    Route::get( '/prospectos/seguimiento'     , function(){ return view( 'prospectos.seguimiento' ); } );
+    //Route::get( '/prospectos/listado'         , 'Prospectos@listado' );    Ruta removida a api
     
     Route::get( '/clientes'                   , function(){ return view( 'principales.clientes' ); });
     Route::get( '/ventas'                     , function(){ return view( 'principales.ventas' )->with( [ 'registros' => array() ] ); });
+    
+    /*
+     * Productos
+     */
     Route::get( '/productos'                  , function(){ return view( 'principales.productos' ); });
     Route::get( '/productos/listado'          , 'Productos@listadoProductos' );
+    Route::get( '/productos/verProductos'       , function(){ return view( 'productos.verProductos' ); } );
+    Route::get( '/productos/configuracion/{id}' , function( $id ){ return view( 'productos.configuracion' , [ 'id' => $id ] ); } );
+    
+    /*
+     * Mercadotecnia
+     */
     Route::get( '/mercadotecnia'              , function(){ return view( 'principales.mercadotecnia' ); });
+    
+    /*
+     * Reportes
+     */
     Route::get( '/reportes'                   , function(){ return view( 'principales.reportes' ); });
+    
+    /*
+     * Configuraciones
+     */
     Route::get( '/configuraciones'            , function(){ return view( 'principales.configuraciones' ); });
-    // Usuarios
+
+    /* 
+     * Usuarios 
+     */
     Route::get( '/usuarios/admin'             , function(){ return view( 'usuarios.perfil' ); });
-    //Route::get( '/usuarios/listado'       , function(){ echo "hola borolas: listado usuarios"; });
     Route::get( '/usuarios/listado'           , 'ControllerAdministradores@listado' );
-    //Route::get( '/usuarios/misdatos/{id}' , function( $id ){ echo "hola borolas: informacion del id ".$id; });
     Route::get( '/usuarios/misdatos/{id}'     , 'ControllerAdministradores@detalle' );
     Route::get( '/usuarios/nuevo'             , function(){ echo "hola borolas: agregaContacto"; });
     Route::get( '/usuarios/seguimiento'       , function(){ echo "hola borolas: seguimiento"; });

@@ -1,1 +1,9 @@
-seguimiento de prospectos
+
+@extends( 'principales.prospectos' )
+
+@section( 'individual' )
+
+seguimiento
+
+@endsection
+
