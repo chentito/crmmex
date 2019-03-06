@@ -7,9 +7,12 @@ use App\Cartera AS Cartera;
 
 class Clientes extends Controller
 {
+    /*
+     * Regresa el arreglo de prospectos
+     */
     public function listadoClientes() {
         $arrClientes = array();
-        $clientes = Cartera::where( 'status' , '1' )->get();
+        $clientes = Cartera::where( 'status' , '1' )->where( 'tipo' , '1' )->get();
         
         foreach( $clientes AS $cliente ) {
             $arrClientes[ 'clientes' ][] = array(

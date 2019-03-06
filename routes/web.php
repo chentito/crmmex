@@ -20,10 +20,18 @@ Route::middleware('auth')->group( function() {
     /*
      * Administracion de prospectos
      */
-    Route::get( '/prospectos'                 , function(){ return view( 'prospectos.listado' ); });
-    Route::get( '/prospectos/alta'            , function(){ return view( 'prospectos.alta' ); } );
-    Route::get( '/prospectos/seguimiento'     , function(){ return view( 'prospectos.seguimiento' ); } );
-    //Route::get( '/prospectos/listado'         , 'Prospectos@listado' );    Ruta removida a api
+    Route::get( '/prospectos'                    , function(){ return view( 'prospectos.listado' ); } );
+    Route::get( '/prospectos/alta'               , function(){ 
+        return view( 'prospectos.contactos' )
+                ->with(['id' => '','nombre' => '','paterno' => '','materno' => '','email' => '','celular' => '','telefono' => '','extension' => '','puesto' => '']); 
+    });
+    Route::get( '/prospectos/contactos/{idP}'    , function( $id ){ return view( 'prospectos.listadoContactos' , [ 'id' => $id ] ); } );
+    Route::get( '/prospectos/contactos/edita/{idC}' , function( $id ){ 
+        return view( 'prospectos.contactos' )
+                ->with(['id' => $id,'nombre' => 'Carlos','paterno' => 'Reyes','materno' => 'Salazar','email' => 'cvreyes@mexagon.net','celular' => '5578100961','telefono' => '12055555','extension' => '310','puesto' => 'Programador']); 
+    });
+    Route::get( '/prospectos/altaContacto/{idP}' , function( $id ){ return view( 'prospectos.alta' , [ 'id' => $id ] ); } );
+    Route::get( '/prospectos/seguimiento'        , function(){ return view( 'prospectos.seguimiento' ); } );
     
     Route::get( '/clientes'                   , function(){ return view( 'principales.clientes' ); });
     Route::get( '/ventas'                     , function(){ return view( 'principales.ventas' )->with( [ 'registros' => array() ] ); });

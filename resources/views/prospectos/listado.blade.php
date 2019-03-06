@@ -9,23 +9,22 @@
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Puesto</th>
-                <th>Correo</th>
-                <th>Tel&eacute;fono</th>
-                <th>Compa&ntilde;&iacute;a</th>
+                <th>RFC</th>
+                <th>Giro</th>
+                <th>Ejecutivo</th>
+                <th>Fecha Alta</th>
                 <th>M&aacute;s</th>
             </tr>
         </thead>
         <tbody>
-           
         </tbody>
         <tfoot>
             <tr>
                 <th>Nombre</th>
-                <th>Direccion</th>
-                <th>Correo</th>
-                <th>Telefono</th>
-                <th>Compa&ntilde;ia</th>
+                <th>RFC</th>
+                <th>Giro</th>
+                <th>Ejecutivo</th>
+                <th>Fecha Alta</th>
                 <th>M&aacute;s</th>
             </tr>
         </tfoot>
@@ -40,12 +39,12 @@
                 dataSrc: 'prospectos'
             },
             columns: [
-                { data: 'name' },
-                { data: 'position' },
-                { data: 'salary' },
-                { data: 'start_date' },
-                { data: 'office' },
-                { data: 'extn' }
+                { data: 'razonSocial' },
+                { data: 'rfc' },
+                { data: 'giro' },
+                { data: 'ejecutivo' },
+                { data: 'fechaAlta' },
+                { data: 'opciones' }
             ],
             select: {
                 items: 'rows',

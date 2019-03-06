@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Route::resource( 'ejemplo' , 'Api' );
 Route::get( 'listadoProspectos' , 'Prospectos@listado' ); 
 
+Route::get( 'listadoContactos' , 'ContactosController@listadoContactos' ); 
+
