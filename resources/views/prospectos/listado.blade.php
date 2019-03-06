@@ -5,7 +5,7 @@
 
 <div class="container mt-2 pt-2">
     
-    <table id="example" class="table table-striped table-bordered table-responsive-sm" style="width:100%">
+    <table id="example" class="table table-striped table-bordered table-responsive-sm shadow-sm p-1 mb-5 bg-white rounded" style="width:100%">
         <thead>
             <tr>
                 <th>Nombre</th>

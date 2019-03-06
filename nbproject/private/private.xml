@@ -5,13 +5,17 @@
         <group>
             <file>file:/C:/htdocs/crm/app/Http/Controllers/Prospectos.php</file>
             <file>file:/C:/htdocs/crm/resources/views/principales/prospectos.blade.php</file>
-            <file>file:/C:/htdocs/crm/resources/views/prospectos/listado.blade.php</file>
             <file>file:/C:/htdocs/crm/resources/views/prospectos/alta.blade.php</file>
             <file>file:/C:/htdocs/crm/routes/web.php</file>
-            <file>file:/C:/htdocs/crm/app/Http/Controllers/Administradores.php</file>
             <file>file:/C:/htdocs/crm/resources/views/ventas/tablaForecast.blade.php</file>
-            <file>file:/C:/htdocs/crm/app/Forecast.php</file>
             <file>file:/C:/htdocs/crm/app/Http/Controllers/Clientes.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/prospectos/listado.blade.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/prospectos/listadoContactos.blade.php</file>
+            <file>file:/C:/htdocs/crm/app/Http/Controllers/ContactosController.php</file>
+            <file>file:/C:/htdocs/crm/routes/api.php</file>
+            <file>file:/C:/htdocs/crm/app/Cartera.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/productos/configuracion.blade.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/prospectos/contactos.blade.php</file>
         </group>
     </open-files>
 </project-private>

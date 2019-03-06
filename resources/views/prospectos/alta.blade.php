@@ -153,7 +153,7 @@
 
 <script>
     $( '#btnRegresar' ).click( function(){
-        location.replace( '/prospectos/contactos/{{$id}}' );
+        history.back();
     });
 </script>
 

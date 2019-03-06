@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout' )
 
 @section( 'content' )
     <br />
@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="card" style="width: 18rem;">
+        <!--div class="card" style="width: 18rem;">
             <div class="card-body">
                 dssdf
             </div>
@@ -35,7 +35,7 @@
             <div class="card-body">
                 sdsf
             </div>
-        </div>
+        </div-->
     </div>
     
     

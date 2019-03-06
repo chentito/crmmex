@@ -32,8 +32,8 @@
             
             <!-- Page Content -->
             <div id="page-content-wrapper">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                    <button class="btn btn-primary btn-sm" id="menu-toggle">Men&uacute;</button>
+                <nav class="navbar navbar-expand-lg navbar-light bg-info border-bottom">
+                    <button class="btn btn-success btn-sm" id="menu-toggle">Men&uacute;</button>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
