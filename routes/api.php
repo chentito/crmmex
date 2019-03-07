@@ -23,4 +23,3 @@ Route::get( 'listadoProspectos' , 'Prospectos@listado' );
 Route::get( 'listadoContactos' , 'ContactosController@listadoContactos' ); 
 
 Route::get( 'listadoSeguimientos' , 'SeguimientosController@listadoSeguimientos' ); 
-

@@ -95,4 +95,7 @@ Route::middleware('auth')->group( function() {
 
 Route::get('/', function () { return redirect( '/login' ); });
 Route::get('/vue', function () { return view( 'vue' ); });
+Route::get('/vueDat', function () { 
+    return "Holaaa";
+});
 
