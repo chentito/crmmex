@@ -7,21 +7,25 @@
         <title>Vue y Laravel</title>
         <script src="{{ asset( 'js/jquery/jquery.js' ) }}"></script>
         <script src="{{ asset( 'assets/dist/js/bootstrap.js' ) }}"></script>
+        <script src="{{ asset( 'js/jquery/jquery.dataTables.min.js' ) }}"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
         <script src="{{ asset( 'css/app.js' ) }}" ></script> 
         <link href="{{ asset( 'assets/dist/css/bootstrap.min.css' ) }}" rel="stylesheet">
+        <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     </head>
 
     <body>
         <div id="app">
-            <example-component title="Titulo uno" texto="Aqui irá algo de texto dinamico"></example-component>
+            <!--example-component title="Titulo uno" texto="Aqui irá algo de texto dinamico">dasdasd</example-component>
             <example-component title="Titulo dos" texto="Aqui también"></example-component>
-            <example-component title="Titulo tres" texto="Y aquí iguanas ranas"></example-component>
+            <example-component title="Titulo tres" texto="Y aquí iguanas ranas"></example-component-->
 
-            <div class="row">
+            <!--div class="row">
                 <div class="col-sm-6"><boton texto="Regresar"></boton></div>
                 <div class="col-sm-6"><boton texto="Guardar Informacion"></boton></div>
-            </div>
+            </div-->
             
+            <grid id="tablaDatos"></grid>
         </div> 
         
         <script src="{{ asset( 'js/app.js' ) }}" ></script> 

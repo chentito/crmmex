@@ -23,6 +23,8 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('task', require('./components/Task.vue'));
 Vue.component('boton', require('./components/Boton.vue').default);
+Vue.component('datos', require('./components/Datos.vue').default);
+Vue.component('grid', require('./components/Grid.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
