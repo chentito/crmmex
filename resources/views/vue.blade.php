@@ -1,0 +1,2 @@
+
+<example-component></example-component>

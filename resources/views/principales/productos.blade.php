@@ -28,4 +28,5 @@
     </ul>
 
     @yield( 'individual' )
+
 @endsection
