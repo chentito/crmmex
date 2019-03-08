@@ -51,7 +51,10 @@
                     info: false
                 }
             });
+            alert("montado");
+        },
+        created() {
+            alert("creado");
         }
-        
     }
 </script>

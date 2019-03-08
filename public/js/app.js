@@ -1912,6 +1912,10 @@ __webpack_require__.r(__webpack_exports__);
         info: false
       }
     });
+    alert("montado");
+  },
+  created: function created() {
+    alert("creado");
   }
 });
 
