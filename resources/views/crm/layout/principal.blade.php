@@ -123,7 +123,7 @@
                         </nav>
                     </div>
 
-                    <div class="main-content-container container-fluid px-4">
+                    <div class="main-content-container container-fluid px-4" style="font-size: 12px">
 
                         @yield( 'seccionHeader' )
 
