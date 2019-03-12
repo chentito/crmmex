@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container-fluid">
         <h4>{{titulo}}</h4>
         <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
             <thead>
@@ -30,19 +30,19 @@
             axios( this.url )
                 .then( function( response ) {
                     $(document).ready(function() {
-             
+                        var columnas = [
+                                    { data: 'id' },
+                                    { data: 'nombre' },
+                                    { data: 'correo' },
+                                    { data: 'telefono' },
+                                    { data: 'area' },
+                                    { data: 'puesto' },
+                                    { data: 'opts' }
+                                ];
                         var table = $('#example').DataTable({
                             responsive: true,
                             data      : response.data,
-                            columns   : [
-                                { data: 'id' },
-                                { data: 'nombre' },
-                                { data: 'correo' },
-                                { data: 'telefono' },
-                                { data: 'area' },
-                                { data: 'puesto' },
-                                { data: 'opts' }
-                            ]
+                            columns   : columnas
                         });
                         new $.fn.dataTable.FixedHeader( table );
                     });

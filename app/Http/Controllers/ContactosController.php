@@ -37,6 +37,42 @@ class ContactosController extends Controller
                 'area'     => 'Ventas',
                 'puesto'   => 'Ejecutivo Comercial',
                 'opts'     => '<a href="/prospectos/contactos/edita/3"><i class="fas fa-edit"></i></a>'
+            ),
+            array(
+                'id'       => 4,
+                'nombre'   => 'Carlos Lam Santiesteban',
+                'correo'   => 'jlam@mexagon.net',
+                'telefono' => '558963222',
+                'area'     => 'Ventas',
+                'puesto'   => 'Ejecutivo Comercial',
+                'opts'     => '<a href="/prospectos/contactos/edita/3"><i class="fas fa-edit"></i></a>'
+            ),
+            array(
+                'id'       => 5,
+                'nombre'   => 'Carlos Lam Santiesteban',
+                'correo'   => 'jlam@mexagon.net',
+                'telefono' => '558963222',
+                'area'     => 'Ventas',
+                'puesto'   => 'Ejecutivo Comercial',
+                'opts'     => '<a href="/prospectos/contactos/edita/3"><i class="fas fa-edit"></i></a>'
+            ),
+            array(
+                'id'       => 6,
+                'nombre'   => 'Carlos Lam Santiesteban',
+                'correo'   => 'jlam@mexagon.net',
+                'telefono' => '558963222',
+                'area'     => 'Ventas',
+                'puesto'   => 'Ejecutivo Comercial',
+                'opts'     => '<a href="/prospectos/contactos/edita/3"><i class="fas fa-edit"></i></a>'
+            ),
+            array(
+                'id'       => 7,
+                'nombre'   => 'Carlos Lam Santiesteban',
+                'correo'   => 'jlam@mexagon.net',
+                'telefono' => '558963222',
+                'area'     => 'Ventas',
+                'puesto'   => 'Ejecutivo Comercial',
+                'opts'     => '<a href="/prospectos/contactos/edita/3"><i class="fas fa-edit"></i></a>'
             )
         );
         

@@ -1827,24 +1827,25 @@ __webpack_require__.r(__webpack_exports__);
     var colIds = this.colIds;
     axios(this.url).then(function (response) {
       $(document).ready(function () {
+        var columnas = [{
+          data: 'id'
+        }, {
+          data: 'nombre'
+        }, {
+          data: 'correo'
+        }, {
+          data: 'telefono'
+        }, {
+          data: 'area'
+        }, {
+          data: 'puesto'
+        }, {
+          data: 'opts'
+        }];
         var table = $('#example').DataTable({
           responsive: true,
           data: response.data,
-          columns: [{
-            data: 'id'
-          }, {
-            data: 'nombre'
-          }, {
-            data: 'correo'
-          }, {
-            data: 'telefono'
-          }, {
-            data: 'area'
-          }, {
-            data: 'puesto'
-          }, {
-            data: 'opts'
-          }]
+          columns: columnas
         });
         new $.fn.dataTable.FixedHeader(table);
       });
@@ -52227,7 +52228,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
+  return _c("div", { staticClass: "container-fluid" }, [
     _c("h4", [_vm._v(_vm._s(_vm.titulo))]),
     _vm._v(" "),
     _c(

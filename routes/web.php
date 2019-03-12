@@ -14,6 +14,14 @@ Auth::routes();
 
 // Rutas protegidas por sesion
 Route::middleware('auth')->group( function() {
+    
+    /* V2 */
+    Route::get( '/home3'     , function(){ return view( 'crm.crm' ); });
+    /* Prospectos */
+    Route::get( '/prospecto' , function(){ return view( 'crm.prospectos.prospectos' ); });
+    Route::get( '/prospectoAlta' , function(){ return view( 'crm.prospectos.prospectoAlta' ); });
+    Route::get( '/prospectoSeguimiento' , function(){ return view( 'crm.prospectos.prospectoSeguimiento' ); });
+    
     Route::get( '/home'                       , 'HomeController@index')->name('home');
     Route::get( '/home2'                      , function(){ return view( 'home2' ); });
 
