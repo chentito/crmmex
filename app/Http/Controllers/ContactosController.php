@@ -8,9 +8,9 @@ class ContactosController extends Controller
 {
     
     public function listadoContactos() {
-        $arrContactos = array();
+        //$arrContactos = array();
         
-        $arrContactos[ 'contactos' ] = array(
+        $arrContactos = array(
             array(
                 'id'       => 1,
                 'nombre'   => 'Carlos Reyes Salazar',

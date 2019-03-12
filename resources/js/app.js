@@ -21,10 +21,8 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('task', require('./components/Task.vue'));
-Vue.component('boton', require('./components/Boton.vue').default);
-Vue.component('datos', require('./components/Datos.vue').default);
-Vue.component('grid', require('./components/Grid.vue').default);
+//Vue.component('task', require('./components/Task.vue').default);
+Vue.component('grid-datos', require('./components/GridDatos.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
