@@ -101,9 +101,9 @@
                                         <img class="user-avatar rounded-circle mr-2" src="{{ asset( 'assets2/img/0.jpg' ) }}" alt="User Avatar"> <span class="d-none d-md-inline-block">{{ Auth::user()->name }}</span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-small">
-                                        <a class="dropdown-item" href="./user-profile-lite.html"><i class="material-icons">person</i> Profile</a>
-                                        <a class="dropdown-item" href="./components-blog-posts.html"><i class="material-icons">vertical_split</i> Blog Posts</a>
-                                        <a class="dropdown-item" href="./add-new-post.html"><i class="material-icons">note_add</i> Add New Post</a>
+                                        <a class="dropdown-item" href="/ejecutivos"><i class="material-icons">person</i> Perfil</a>
+                                        <a class="dropdown-item" href="/ejecutivoActividades"><i class="material-icons">local_activity</i> Actividades</a>
+                                        <a class="dropdown-item" href="/ejecutivoListado"><i class="material-icons">supervisor_account</i> Ejecutivos</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item text-danger" href="{{ route('logout') }}" 
                                            onclick="event.preventDefault();

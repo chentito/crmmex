@@ -16,7 +16,7 @@ class Productos extends Controller
                 'periodicidad'      => 'Mensual',
                 'tipo'              => 'Servicio',
                 'costo'             => $this->formatoMoneda( '400' ),
-                'configuracion'     => '<a href="/productos/configuracion/250/"><i class="fas fa-cogs"></i></a>'
+                'configuracion'     => '<a href="/productoConfiguracion/250"><i class="material-icons">settings</i></a>'
             ),
             array(
                 'id'                => 201,
@@ -25,7 +25,7 @@ class Productos extends Controller
                 'periodicidad'      => 'Mensual',
                 'tipo'              => 'Servicio',
                 'costo'             => $this->formatoMoneda( '2500' ),
-                'configuracion'     => '<a href="/productos/configuracion/201/"><i class="fas fa-cogs"></i></a>'
+                'configuracion'     => '<a href="/productoConfiguracion/201"><i class="material-icons">settings</i></a>'
             ),
             array(
                 'id'                => 106,
@@ -34,7 +34,7 @@ class Productos extends Controller
                 'periodicidad'      => 'Anual',
                 'tipo'              => 'Servicio',
                 'costo'             => $this->formatoMoneda( '6000' ),
-                'configuracion'     => '<a href="/productos/configuracion/106/"><i class="fas fa-cogs"></i></a>'
+                'configuracion'     => '<a href="/productoConfiguracion/106"><i class="material-icons">settings</i></a>'
             ),
             array(
                 'id'                => 120,
@@ -43,7 +43,7 @@ class Productos extends Controller
                 'periodicidad'      => 'Un solo pago',
                 'tipo'              => 'Producto',
                 'costo'             => $this->formatoMoneda( '1250' ),
-                'configuracion'     => '<a href="/productos/configuracion/120/"><i class="fas fa-cogs"></i></a>'
+                'configuracion'     => '<a href="/productoConfiguracion/120"><i class="material-icons">settings</i></a>'
             ),
             array(
                 'id'                => 95,
@@ -52,7 +52,7 @@ class Productos extends Controller
                 'periodicidad'      => 'Variable',
                 'tipo'              => 'Servicio',
                 'costo'             => $this->formatoMoneda( 'Variable' ),
-                'configuracion'     => '<a href="/productos/configuracion/95/"><i class="fas fa-cogs"></i></a>'
+                'configuracion'     => '<a href="/productoConfiguracion/95"><i class="material-icons">settings</i></a>'
             ),
             array(
                 'id'                => 88,
@@ -61,7 +61,7 @@ class Productos extends Controller
                 'periodicidad'      => 'Un solo pago',
                 'tipo'              => 'Producto',
                 'costo'             => $this->formatoMoneda( '1750' ),
-                'configuracion'     => '<a href="/productos/configuracion/88/"><i class="fas fa-cogs"></i></a>'
+                'configuracion'     => '<a href="/productoConfiguracion/88"><i class="material-icons">settings</i></a>'
             ),
             array(
                 'id'                => 50,
@@ -70,7 +70,7 @@ class Productos extends Controller
                 'periodicidad'      => 'Variable',
                 'tipo'              => 'Producto',
                 'costo'             => $this->formatoMoneda( '25900' ),
-                'configuracion'     => '<a href="/productos/configuracion/50/"><i class="fas fa-cogs"></i></a>'
+                'configuracion'     => '<a href="/productoConfiguracion/50"><i class="material-icons">settings</i></a>'
             ),
             array(
                 'id'                => 6,
@@ -79,7 +79,7 @@ class Productos extends Controller
                 'periodicidad'      => 'Anual',
                 'tipo'              => 'Servicio',
                 'costo'             => $this->formatoMoneda( '4500' ),
-                'configuracion'     => '<a href="/productos/configuracion/6/"><i class="fas fa-cogs"></i></a>'
+                'configuracion'     => '<a href="/productoConfiguracion/6"><i class="material-icons">settings</i></a>'
             )
         ));
         

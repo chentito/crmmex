@@ -3,15 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/htdocs/crm/resources/views/clientes/listado.blade.php</file>
-            <file>file:/C:/htdocs/crm/resources/js/components/GridDatos.vue</file>
+            <file>file:/C:/htdocs/crm/resources/views/crm/configuraciones/configuraciones.blade.php</file>
             <file>file:/C:/htdocs/crm/resources/views/vue.blade.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/crm/configuraciones/configuracionForecast.blade.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/crm/crm.blade.php</file>
             <file>file:/C:/htdocs/crm/routes/web.php</file>
-            <file>file:/C:/htdocs/crm/app/Http/Controllers/ContactosController.php</file>
+            <file>file:/C:/htdocs/crm/resources/js/components/GridDatos.vue</file>
+            <file>file:/C:/htdocs/crm/resources/views/configuraciones/forecast.blade.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/crm/layout/principal.blade.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/crm/layout/menu.blade.php</file>
             <file>file:/C:/htdocs/crm/routes/api.php</file>
             <file>file:/C:/htdocs/crm/resources/js/app.js</file>
-            <file>file:/C:/htdocs/crm/resources/js/components/ExampleComponent.vue</file>
             <file>file:/C:/htdocs/crm/resources/js/bootstrap.js</file>
+            <file>file:/C:/htdocs/crm/resources/views/prospectos/contactos.blade.php</file>
         </group>
     </open-files>
 </project-private>

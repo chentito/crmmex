@@ -36,6 +36,6 @@ class HomeController extends Controller
         /*return view('home2')->with([
             'secciones' => $secciones
         ]);*/
-        return view('home2');
+        return view('crm.crm' , [ 'seccion' => '' ]);
     }
 }

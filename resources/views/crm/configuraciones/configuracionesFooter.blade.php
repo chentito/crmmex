@@ -1,5 +1,6 @@
-<footer class="main-footer d-flex p-2 px-3 bg-white border-top sticky">
-    <ul class="nav">
+
+<footer class="main-footer d-flex p-2 px-3 border-top bg-white">
+    <ul class="nav float-right">
         <li class="nav-item active">
             <a class="nav-link active" href="/configuracion">Configuraciones Generales</a>
         </li>
@@ -16,5 +17,4 @@
             <a class="nav-link" href="/configuracionSMTP">SMTP</a>
         </li>
     </ul>
-    <span class="copyright ml-auto my-auto mr-2"><a href="/home3" rel="nofollow">.:: CRM Mexagon ::.</a></span>
 </footer>

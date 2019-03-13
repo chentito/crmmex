@@ -10,5 +10,4 @@
             <a class="nav-link" href="/prospectoSeguimiento">Seguimientos</a>
         </li>
     </ul>
-    <span class="copyright ml-auto my-auto mr-2"><a href="/home3" rel="nofollow">.:: CRM Mexagon ::.</a></span>
 </footer>

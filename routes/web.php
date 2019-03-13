@@ -14,7 +14,6 @@ Auth::routes();
 
 // Rutas protegidas por sesion
 Route::middleware('auth')->group( function() {
-    
     /* V2 */
     Route::get( '/home3'     , function(){ return view( 'crm.crm' ); });
     /* Prospectos */
@@ -27,7 +26,27 @@ Route::middleware('auth')->group( function() {
     /* Configuraciones */
     Route::get( '/configuracion' , function(){ return view( 'crm.configuraciones.configuraciones' ); });
     Route::get( '/configuracionForecast' , function(){ return view( 'crm.configuraciones.configuracionForecast' ); });
-
+    Route::get( '/configuracionPipeline' , function(){ return view( 'crm.configuraciones.configuracionPipeline' ); });
+    Route::get( '/configuracionCamposAdicionales' , function(){ return view( 'crm.configuraciones.configuracionCamposAdicionales' ); });
+    Route::get( '/configuracionSMTP' , function(){ return view( 'crm.configuraciones.configuracionSMTP' ); });
+    /* Productos/Servicios */
+    Route::get( '/producto' , function(){ return view( 'crm.productos.productos' ); });
+    Route::get( '/productoConfiguracion/{id}' , function(){ return view( 'crm.productos.productoConfiguracion' ); });
+    Route::get( '/productoAlta' , function(){ return view( 'crm.productos.productoAlta' ); });
+    /* Ventas */
+    Route::get( '/venta' , function(){ return view( 'crm.ventas.ventas' ); });
+    /* Mercadotecnia */
+    Route::get( '/mercadotecnia' , function(){ return view( 'crm.mercadotecnia.mercadotecnia' ); });
+    /* Reportes */
+    Route::get( '/reportes' , function(){ return view( 'crm.reportes.reportes' ); });
+    /* Ejecutivos */
+    Route::get( '/ejecutivos' , function(){ return view( 'crm.ejecutivos.perfil' ); });
+    Route::get( '/ejecutivoListado' , function(){ return view( 'crm.ejecutivos.ejecutivoListado' ); });
+    
+    
+    
+    
+    
     /* V1 */
     Route::get( '/home'                       , 'HomeController@index')->name('home');
     Route::get( '/home2'                      , function(){ return view( 'home2' ); });
@@ -65,12 +84,12 @@ Route::middleware('auth')->group( function() {
     /****************
      * Mercadotecnia
      ****************/
-    Route::get( '/mercadotecnia'              , function(){ return view( 'principales.mercadotecnia' ); });
+    //Route::get( '/mercadotecnia'              , function(){ return view( 'principales.mercadotecnia' ); });
 
     /***********
      * Reportes
      ***********/
-    Route::get( '/reportes'                   , function(){ return view( 'principales.reportes' ); });
+    //Route::get( '/reportes'                   , function(){ return view( 'principales.reportes' ); });
 
     /******************
      * Configuraciones

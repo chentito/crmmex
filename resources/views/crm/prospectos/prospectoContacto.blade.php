@@ -1,5 +1,9 @@
 @extends( 'crm.layout.principal' , ['seccion' => 'prospectos'] )
 
+@section( 'seccionHeader' )
+    @include( 'crm.prospectos.prospectoHeader' , [ 'seccion' => 'prospectos' , 'subseccion' => 'Agrega Contacto' ] )
+@endsection
+
 @section( 'seccionHeader' ) 
     <!-- Page Header -->
     <div class="page-header row no-gutters py-4">
