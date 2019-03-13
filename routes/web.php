@@ -21,7 +21,14 @@ Route::middleware('auth')->group( function() {
     Route::get( '/prospecto' , function(){ return view( 'crm.prospectos.prospectos' ); });
     Route::get( '/prospectoAlta' , function(){ return view( 'crm.prospectos.prospectoAlta' ); });
     Route::get( '/prospectoSeguimiento' , function(){ return view( 'crm.prospectos.prospectoSeguimiento' ); });
-    
+    Route::get( '/prospectoContacto/{idP}' , function( $id ){ return view( 'crm.prospectos.prospectoContacto' ); });
+    /* Clientes */
+    Route::get( '/cliente' , function(){ return view( 'crm.clientes.clientes' ); });
+    /* Configuraciones */
+    Route::get( '/configuracion' , function(){ return view( 'crm.configuraciones.configuraciones' ); });
+    Route::get( '/configuracionForecast' , function(){ return view( 'crm.configuraciones.configuracionForecast' ); });
+
+    /* V1 */
     Route::get( '/home'                       , 'HomeController@index')->name('home');
     Route::get( '/home2'                      , function(){ return view( 'home2' ); });
 
@@ -90,7 +97,7 @@ Route::middleware('auth')->group( function() {
     /***********
      * Clientes
      ***********/
-    Route::get( '/clientes/listado' , 'Clientes@listadoClientes' );
+    //Route::get( '/clientes/listado' , 'Clientes@listadoClientes' );
 
     /*********
      * Ventas

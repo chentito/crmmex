@@ -23,7 +23,7 @@ class Prospectos extends Controller
                 'ejecutivo'   => $cliente->ejecutivo,
                 'fechaAlta'   => $cliente->fechaAlta,
                 'id'          => $cliente->id,
-                'opciones'    => '<a href="/prospectos/contactos/'.$cliente->id.'"><i class="fas fa-user"></i></a>'
+                'opciones'    => '<a href="/prospectoContacto/'.$cliente->id.'"><i class="material-icons">person</i></a>'
             );
         }
         

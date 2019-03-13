@@ -8,8 +8,8 @@
             <div class="card">
                 <div class="card-header">Datos Generales</div>
                 <div class="card-body">
-                    
-                    
+
+
                     <div class="row">
                         <div class="col-sm-3">
                             <label for="info_contactos_nombre">Nombre(s)</label>
@@ -28,8 +28,7 @@
                             <input type="text" id="info_contactos_email" class="form-control form-control-sm" value="{{$email}}">
                         </div>
                     </div>
-                    
-                    
+
                     <div class="row">
                         <div class="col-sm-3">
                             <label for="info_contactos_celular">Celular</label>
@@ -53,8 +52,7 @@
                             <input type="text" id="info_contactos_extension" class="form-control form-control-sm" value="{{$extension}}">
                         </div>
                     </div>
-                    
-                    
+
                     <div class="row">
                         <div class="col-sm-3">
                             <label for="info_contactos_celular_area">Area</label>

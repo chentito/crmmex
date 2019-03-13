@@ -1,4 +1,4 @@
-@extends( 'crm.layout.principal' )
+@extends( 'crm.layout.principal' , ['seccion' => 'prospectos'] )
 
 @section( 'seccionHeader' ) 
     <!-- Page Header -->

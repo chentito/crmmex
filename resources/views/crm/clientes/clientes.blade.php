@@ -1,22 +1,21 @@
-@extends( 'crm.layout.principal' , ['seccion' => 'prospectos'] )
+@extends( 'crm.layout.principal' , ['seccion' => 'clientes'] )
 
 @section( 'seccionHeader' ) 
     <!-- Page Header -->
     <div class="page-header row no-gutters py-4">
       <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-        <span class="text-uppercase page-subtitle">Prospectos</span>
+        <span class="text-uppercase page-subtitle">Clientes</span>
         <h3 class="page-title">Listado</h3>
       </div>
     </div>
 @endsection
 
 @section( 'seccionContenido' )
-
 <div class="row">
     <div class="col-sm-12">
         <div class="card card-small w-100">
             <div class="card-body">
-                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                <table id="clientes" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>
                             <th>Nombre</th>
@@ -47,10 +46,10 @@
 
 <script>
     $(document).ready( function() {
-        $('#example').DataTable({
+        $('#clientes').DataTable({
             ajax   :{
-                url: '/api/listadoProspectos',
-                dataSrc: 'prospectos'
+                url: '/api/listadoClientes',
+                dataSrc: 'clientes'
             },
             columns: [
                 { data: 'razonSocial' },
@@ -58,15 +57,14 @@
                 { data: 'giro' },
                 { data: 'ejecutivo' },
                 { data: 'fechaAlta' },
-                { data: 'opciones' }
+                { data: 'opciones',align: 'center' }
             ],
             responsive: true
         });
     });
 </script>
-
 @endsection
 
 @section( 'seccionFooter' )
-    @include( 'crm.prospectos.prospectoFooter' )
-@endsection
+    @include( 'crm.clientes.clientesFooter' )
+@endSection

@@ -23,6 +23,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 //Vue.component('task', require('./components/Task.vue').default);
 Vue.component('grid-datos', require('./components/GridDatos.vue').default);
+Vue.component('boton-regresar', require('./components/BotonRegresar.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

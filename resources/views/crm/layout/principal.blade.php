@@ -40,7 +40,7 @@
                     </div>
                     <!-- Menu principal -->
                     <div class="nav-wrapper">
-                        @include( 'crm.layout.menu' )
+                        @include( 'crm.layout.menu' , [ 'seccion' , $seccion ])
                     </div>
                 </aside>
                 <!-- Fin barra lateral izquierda -->
@@ -129,7 +129,7 @@
 
                         @yield( 'seccionContenido' )
 
-                    </div>
+                    </div> 
                     
                     @yield( 'seccionFooter' )
                     
@@ -137,6 +137,7 @@
             </div>
         </div>
         
+        <script src="{{ asset( 'js/app.js' ) }}" ></script> 
         <script src="{{ asset( 'assets2/js/popper.js' ) }}"></script>
         <script src="{{ asset( 'assets2/js/bootstrap.js' ) }}"></script>
         <script src="{{ asset( 'assets2/js/Chart.js' ) }}"></script>
@@ -152,5 +153,7 @@
         <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+        
+        
     </body>
 </html>
