@@ -23,6 +23,7 @@ Route::middleware('auth')->group( function() {
     Route::get( '/prospectoContacto/{idP}' , function( $id ){ return view( 'crm.prospectos.prospectoContacto' ); });
     /* Clientes */
     Route::get( '/cliente' , function(){ return view( 'crm.clientes.clientes' ); });
+    Route::get( '/clienteAlta' , function(){ return view( 'crm.clientes.clienteAlta' ); });
     /* Configuraciones */
     Route::get( '/configuracion' , function(){ return view( 'crm.configuraciones.configuraciones' ); });
     Route::get( '/configuracionForecast' , function(){ return view( 'crm.configuraciones.configuracionForecast' ); });
@@ -44,7 +45,7 @@ Route::middleware('auth')->group( function() {
     Route::get( '/ejecutivoListado' , function(){ return view( 'crm.ejecutivos.ejecutivoListado' ); });
     Route::get( '/ejecutivoEdicion/{id}' , function(){ return view( 'crm.ejecutivos.ejecutivoEdicion' ); });
     Route::get( '/ejecutivoAlta' , function(){ return view( 'crm.ejecutivos.ejecutivoAlta' ); });
-    Route::get( '/ejecutivoRoles' , function(){ return view( 'crm.ejecutivos.ejecutivoRoles' ); });
+    Route::get( '/ejecutivoRoles/{idRol?}' , 'ejecutivo\RolesController@listadoModulos' );
     
     
     Route::get( '/misModulos' , 'ejecutivo\RolesController@listadoModulos' );

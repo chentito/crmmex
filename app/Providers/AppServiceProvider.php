@@ -32,7 +32,5 @@ class AppServiceProvider extends ServiceProvider
             return "'$' . number_format( $amount , 2 )";
         });
         
-        
-        
     }
 }

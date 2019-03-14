@@ -3,7 +3,9 @@
         <li class="nav-item active">
             <a class="nav-link active" href="/cliente">Listado</a>
         </li>
+        <li class="nav-item active">
+            <a class="nav-link active" href="/clienteAlta">Alta</a>
+        </li>
     </ul>
-    <span class="copyright ml-auto my-auto mr-2"><a href="/home3" rel="nofollow">.:: CRM Mexagon ::.</a></span>
 </footer>
 

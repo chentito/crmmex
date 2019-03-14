@@ -29,3 +29,5 @@ Route::get( 'listadoClientes' , 'Clientes@listadoClientes' );
 Route::get( 'listadoProductos' , 'Productos@listadoProductos' );
 
 Route::get( 'listadoEjecutivos' , 'Administradores@listaAdmin' );
+
+Route::get( 'listadoPropuestas' , 'VentasController@propuestas' );
