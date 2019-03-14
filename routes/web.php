@@ -42,9 +42,12 @@ Route::middleware('auth')->group( function() {
     /* Ejecutivos */
     Route::get( '/ejecutivos' , function(){ return view( 'crm.ejecutivos.perfil' ); });
     Route::get( '/ejecutivoListado' , function(){ return view( 'crm.ejecutivos.ejecutivoListado' ); });
+    Route::get( '/ejecutivoEdicion/{id}' , function(){ return view( 'crm.ejecutivos.ejecutivoEdicion' ); });
+    Route::get( '/ejecutivoAlta' , function(){ return view( 'crm.ejecutivos.ejecutivoAlta' ); });
+    Route::get( '/ejecutivoRoles' , function(){ return view( 'crm.ejecutivos.ejecutivoRoles' ); });
     
     
-    
+    Route::get( '/misModulos' , 'ejecutivo\RolesController@listadoModulos' );
     
     
     /* V1 */

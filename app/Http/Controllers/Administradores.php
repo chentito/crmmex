@@ -24,9 +24,9 @@ class Administradores extends Controller
                 'rol'       => $administrador->rol,
                 'extension' => $administrador->extension,
                 'status'    => $administrador->status,
-                'opciones'  => '<a href="/administracion/edita/' . $administrador->id . '"><i class="fas fa-edit"></i></a>'
-                             . '<a href="#" class="pl-2"><i class="fas fa-cogs"></i></a>'
-                             . '<a href="/administracion/elimina/' . $administrador->id . '" class="pl-2"><i class="fas fa-trash-alt"></i></a>'
+                'opciones'  => '<a href="/ejecutivoEdicion/' . $administrador->id . '"><i class="material-icons">edit</i></a>'
+                             . '<a href="#" class="pl-2"><i class="material-icons">settings</i></a>'
+                             . '<a href="/administracion/elimina/' . $administrador->id . '" class="pl-2"><i class="material-icons">delete_sweep</i></a>'
             );
         }
 
@@ -45,7 +45,7 @@ class Administradores extends Controller
             $administrador->fechaAlta = date('Y-m-d H:i:s');
             $administrador->save();
 
-        return redirect( '/administracion' );
+        return redirect( '/ejecutivoListado' );
     }
 
     public function delete( $id ) {
@@ -54,7 +54,7 @@ class Administradores extends Controller
             $administrador->fechaBaja = date('Y-m-d H:i:s');;
             $administrador->save();
 
-        return redirect( '/administracion' );
+        return redirect( '/ejecutivoListado' );
     }
 
     public function search( $id ) {
@@ -74,7 +74,7 @@ class Administradores extends Controller
             $administrador->fechaAlta = date('Y-m-d H:i:s');
             $administrador->save();
         
-        return redirect( '/administracion' );
+        return redirect( '/ejecutivoListado' );
     }
     
 }
