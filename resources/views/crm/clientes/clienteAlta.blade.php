@@ -73,9 +73,10 @@
                 </div>
             </div>
             <nav>
-                <div class="card-header nav nav-tabs" id="nav-tab" role="tablist">
+                <div class="card-header border-bottom nav nav-tabs" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Contacto</a>
                     <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Direcci&oacute;n</a>
+                    <a class="nav-item nav-link" id="nav-mas-tab" data-toggle="tab" href="#nav-mas" role="tab" aria-controls="nav-mas" aria-selected="false">Más Información</a>
                 </div>
             </nav>
             <div class="card-body tab-content" id="nav-tabContent">
@@ -151,6 +152,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="tab-pane fade" id="nav-mas" role="tabpanel" aria-labelledby="nav-mas-tab">
+                    Más Información
+                </div>
+            </div>
+            <div class="card-header">
+                <div id="app"><boton-regresar></boton-regresar></div>
+                <button class="btn btn-sm btn-outline-accent float-right"><i class="material-icons">save</i> Guardar</button>
             </div>
         </div>
     </div>

@@ -123,6 +123,10 @@
                         </div>
                     </div>
                 </div>
+                <div class="card-header">
+                    <div id="app"><boton-regresar></boton-regresar></div>
+                    <button class="btn btn-sm btn-outline-accent float-right"><i class="material-icons">save</i> Guardar</button>
+                </div>
             </div>
         </div>
     </div>
