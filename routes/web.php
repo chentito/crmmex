@@ -50,6 +50,7 @@ Route::middleware('auth')->group( function() {
     
     Route::get( '/misModulos' , 'ejecutivo\RolesController@listadoModulos' );
     
+    Route::get( '/opcionesCat/{id}' , 'CatalogoController@catalogo' );
     
     /* V1 */
     Route::get( '/home'                       , 'HomeController@index')->name('home');

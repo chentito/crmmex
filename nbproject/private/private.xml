@@ -3,17 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/htdocs/crm/resources/views/crm/ejecutivos/ejecutivoRoles.blade.php</file>
-            <file>file:/C:/htdocs/crm/resources/views/crm/ejecutivos/ejecutivosFooter.blade.php</file>
-            <file>file:/C:/htdocs/crm/app/Http/Controllers/ejecutivo/RolesController.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/crm/prospectos/prospectoAlta.blade.php</file>
             <file>file:/C:/htdocs/crm/routes/web.php</file>
             <file>file:/C:/htdocs/crm/resources/views/crm/layout/menu.blade.php</file>
-            <file>file:/C:/htdocs/crm/app/Http/Controllers/Administradores.php</file>
             <file>file:/C:/htdocs/crm/routes/api.php</file>
-            <file>file:/C:/htdocs/crm/resources/views/crm/configuraciones/configuracionCamposAdicionales.blade.php</file>
-            <file>file:/C:/htdocs/crm/resources/views/crm/ejecutivos/ejecutivoEdicion.blade.php</file>
-            <file>file:/C:/htdocs/crm/resources/views/crm/ejecutivos/ejecutivoAlta.blade.php</file>
-            <file>file:/C:/htdocs/crm/resources/views/crm/ejecutivos/ejecutivoListado.blade.php</file>
         </group>
     </open-files>
 </project-private>

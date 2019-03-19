@@ -31,3 +31,5 @@ Route::get( 'listadoProductos' , 'Productos@listadoProductos' );
 Route::get( 'listadoEjecutivos' , 'Administradores@listaAdmin' );
 
 Route::get( 'listadoPropuestas' , 'VentasController@propuestas' );
+
+Route::get( '/opcionesCombos/{id}' , 'CatalogoController@catalogo' );

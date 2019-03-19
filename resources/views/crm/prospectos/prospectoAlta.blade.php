@@ -5,7 +5,6 @@
 @endsection
 
 @section( 'seccionContenido' )
-
 <div class="row">
     <div class="col-sm-12">
         <div class="card card-small w-100 mb-3">
@@ -19,53 +18,21 @@
                         <input type="text" id="alta_prospecto_nombre_rfc" class="form-control form-control-sm" placeholder="RFC">
                     </div>
                     <div class="col-sm-3 mb-1">
-                        <select id="alta_prospecto_nombre_giro" class="custom-select custom-select-sm">
-                            <option>Giro</option>
-                            <option>Educaci&oacute;n</option>
-                            <option>Alimentos</option>
-                            <option>Tecnolog&iacute;a</option>
-                            <option>Servicios</option>
-                            <option>Telecomunicaciones</option>
-                        </select>
+                        <combo-box id-cat="5" nombre-select="combo_giro"></combo-box>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3 mb-1">
-                        <select id="alta_prospecto_nombre_categoria" class="custom-select custom-select-sm">
-                            <option>Categor&iacute;a</option>
-                            <option>Categor&iacute;a 1</option>
-                            <option>Categor&iacute;a 2</option>
-                            <option>Categor&iacute;a 3</option>
-                        </select>
+                        <combo-box id-cat="1" nombre-select="combo_categorias"></combo-box>
                     </div>
                     <div class="col-sm-3 mb-1">
-                        <select id="alta_prospecto_nombre_subCategoria" class="custom-select custom-select-sm">
-                            <option>Sub-categor&iacute;a</option>
-                            <option>Categor&iacute;a 1</option>
-                            <option>Categor&iacute;a 2</option>
-                            <option>Categor&iacute;a 3</option>
-                        </select>
+                        <combo-box id-cat="2" nombre-select="combo_subcategorias"></combo-box>
                     </div>
                     <div class="col-sm-3 mb-1">
-                        <select id="alta_prospecto_nombre_medioContacto" class="custom-select custom-select-sm">
-                            <option>Medio de contacto</option>
-                            <option>Internet</option>
-                            <option>Publicidad impresa</option>
-                            <option>Recomendaci&oacute;n</option>
-                            <option>501 a 1000</option>
-                            <option>M&aacute;s de 1000</option>
-                        </select>
+                        <combo-box id-cat="3" nombre-select="combo_mediodecontacto"></combo-box>
                     </div>
                     <div class="col-sm-3 mb-1">
-                        <select id="alta_prospecto_nombre_subCategoria" class="custom-select custom-select-sm">
-                            <option>Empleados</option>
-                            <option>1 a 10</option>
-                            <option>11 a 50</option>
-                            <option>51 a 100</option>
-                            <option>101 a 500</option>
-                            <option>501 a 1000</option>
-                            <option>M&aacute;s de 1000</option>
-                        </select>
+                        <combo-box id-cat="4" nombre-select="combo_empleados"></combo-box>
                     </div>
                 </div>
             </div>
@@ -130,7 +97,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @section( 'seccionFooter' )
