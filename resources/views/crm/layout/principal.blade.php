@@ -21,7 +21,6 @@
         <script async="" defer="defer" src="{{ asset( 'assets2/js/buttons.js' ) }}"></script>
     </head>
     <body class="h-100">
-        <div id="app">
             <div class="container-fluid">
                 <div class="row">
                     <!-- Barra lateral izquierda -->
@@ -136,7 +135,6 @@
 
                     </main>
                 </div>
-            </div>
         </div>
         
         <script src="{{ asset( 'js/app.js' ) }}" ></script> 

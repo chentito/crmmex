@@ -1,49 +1,50 @@
 @extends( 'crm.layout.principal' , ['seccion' => 'prospectos'] )
 
 @section( 'seccionHeader' )
-    @include( 'crm.prospectos.prospectoHeader' , [ 'seccion' => 'prospectos' , 'subseccion' => 'Nuevo Prospecto' ] )
+@include( 'crm.prospectos.prospectoHeader' , [ 'seccion' => 'prospectos' , 'subseccion' => 'Nuevo Prospecto' ] )
 @endsection
 
 @section( 'seccionContenido' )
-<div class="row">
-    <div class="col-sm-12">
-        <div class="card card-small w-100 mb-3">
-            <div class="card-header border-bottom">Datos Generales</div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-3 mb-1">
-                        <input type="text" id="alta_prospecto_nombre_compania" class="form-control form-control-sm" placeholder="Compa&ntilde;&iacute;a">
+<div id="app">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-small w-100 mb-3">
+                <div class="card-header border-bottom">Datos Generales</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3 mb-1">
+                            <input type="text" id="alta_prospecto_nombre_compania" class="form-control form-control-sm" placeholder="Compa&ntilde;&iacute;a">
+                        </div>
+                        <div class="col-sm-3 mb-1">
+                            <input type="text" id="alta_prospecto_nombre_rfc" class="form-control form-control-sm" placeholder="RFC">
+                        </div>
+                        <div class="col-sm-3 mb-1">
+                            <combo-box id-cat="5" nombre-select="combo_giro"></combo-box>
+                        </div>
                     </div>
-                    <div class="col-sm-3 mb-1">
-                        <input type="text" id="alta_prospecto_nombre_rfc" class="form-control form-control-sm" placeholder="RFC">
-                    </div>
-                    <div class="col-sm-3 mb-1">
-                        <combo-box id-cat="5" nombre-select="combo_giro"></combo-box>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3 mb-1">
-                        <combo-box id-cat="1" nombre-select="combo_categorias"></combo-box>
-                    </div>
-                    <div class="col-sm-3 mb-1">
-                        <combo-box id-cat="2" nombre-select="combo_subcategorias"></combo-box>
-                    </div>
-                    <div class="col-sm-3 mb-1">
-                        <combo-box id-cat="3" nombre-select="combo_mediodecontacto"></combo-box>
-                    </div>
-                    <div class="col-sm-3 mb-1">
-                        <combo-box id-cat="4" nombre-select="combo_empleados"></combo-box>
+                    <div class="row">
+                        <div class="col-sm-3 mb-1">
+                            <combo-box id-cat="1" nombre-select="combo_categorias"></combo-box>
+                        </div>
+                        <div class="col-sm-3 mb-1">
+                            <combo-box id-cat="2" nombre-select="combo_subcategorias"></combo-box>
+                        </div>
+                        <div class="col-sm-3 mb-1">
+                            <combo-box id-cat="3" nombre-select="combo_mediodecontacto"></combo-box>
+                        </div>
+                        <div class="col-sm-3 mb-1">
+                            <combo-box id-cat="4" nombre-select="combo_empleados"></combo-box>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-12">
-        <div class="card card-small w-100">
-            <div class="card-header border-bottom">Direcci&oacute;n</div>
-            <div class="card-body">
-                <div class="row mb-1">
-                         <div class="col-sm-3 mb-1">
+        <div class="col-sm-12">
+            <div class="card card-small w-100">
+                <div class="card-header border-bottom">Direcci&oacute;n</div>
+                <div class="card-body">
+                    <div class="row mb-1">
+                        <div class="col-sm-3 mb-1">
                             <input type="text" id="alta_prospecto_direccion_calle" class="form-control form-control-sm" placeholder="Calle">
                         </div>
                         <div class="col-sm-3 mb-1">
@@ -97,8 +98,9 @@
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @section( 'seccionFooter' )
-    @include( 'crm.prospectos.prospectoFooter' )
+@include( 'crm.prospectos.prospectoFooter' )
 @endsection
