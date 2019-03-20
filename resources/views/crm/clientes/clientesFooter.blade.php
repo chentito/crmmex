@@ -6,6 +6,9 @@
         <li class="nav-item active">
             <a class="nav-link active" href="/clienteAlta">Alta</a>
         </li>
+        <li class="nav-item active">
+            <a class="nav-link active" href="/clienteSeguimiento">Seguimiento</a>
+        </li>
     </ul>
 </footer>
 

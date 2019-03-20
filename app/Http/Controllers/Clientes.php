@@ -23,7 +23,7 @@ class Clientes extends Controller
                 'ejecutivo'   => $cliente->ejecutivo,
                 'fechaAlta'   => $cliente->fechaAlta,
                 'id'          => $cliente->id,
-                'opciones'    => ''
+                'opciones'    => '<a href="/clientePropuesta/'.$cliente->id.'"><i class="material-icons">person</i></a>'
             );
         }
         

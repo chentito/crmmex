@@ -24,6 +24,8 @@ Route::middleware('auth')->group( function() {
     /* Clientes */
     Route::get( '/cliente' , function(){ return view( 'crm.clientes.clientes' ); });
     Route::get( '/clienteAlta' , function(){ return view( 'crm.clientes.clienteAlta' ); });
+    Route::get( '/clienteSeguimiento' , function(){ return view( 'crm.clientes.clienteSeguimiento' ); });
+    Route::get( '/clientePropuesta/{idCliente}' , function(){ return view( 'crm.clientes.clientePropuesta' ); });
     /* Configuraciones */
     Route::get( '/configuracion' , function(){ return view( 'crm.configuraciones.configuraciones' ); });
     Route::get( '/configuracionForecast' , function(){ return view( 'crm.configuraciones.configuracionForecast' ); });

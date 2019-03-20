@@ -1,11 +1,10 @@
-@extends( 'crm.layout.principal' , ['seccion' => 'prospectos'] )
+@extends( 'crm.layout.principal' , ['seccion' => 'clientes'] )
 
 @section( 'seccionHeader' )
-    @include( 'crm.prospectos.prospectoHeader' , [ 'seccion' => 'prospectos' , 'subseccion' => 'Seguimiento' ] )
+    @include( 'crm.clientes.clienteHeader' , [ 'seccion' => 'clientes' , 'subseccion' => 'Seguimiento' ] )
 @endsection
 
 @section( 'seccionContenido' )
-
 <div class="row">
     <div class="col-sm-12">
         <div class="card card-small w-100">
@@ -40,7 +39,6 @@
         </div>
     </div>
 </div>
-
 <script>
     $(document).ready( function() {
         $('#seguimientos').DataTable({
@@ -61,9 +59,9 @@
         });
     });
 </script>
-
 @endsection
 
 @section( 'seccionFooter' )
-    @include( 'crm.prospectos.prospectoFooter' )
-@endsection
+    @include( 'crm.clientes.clientesFooter' )
+@endSection
+
