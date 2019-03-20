@@ -1,7 +1,7 @@
 @extends( 'crm.layout.principal' , ['seccion' => 'reportes'] )
 
 @section( 'seccionHeader' ) 
-    @include( 'crm.reportes.reporteHeader' , [ 'seccion' => 'reportes' , 'subseccion' => 'Reportes' ] )
+    @include( 'crm.layout.subseccionHeader' , [ 'seccion' => 'reportes' , 'subseccion' => 'Reportes' ] )
 @endsection
 
 @section( 'seccionContenido' )

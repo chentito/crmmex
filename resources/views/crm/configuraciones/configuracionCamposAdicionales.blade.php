@@ -2,7 +2,7 @@
 @extends( 'crm.layout.principal' , ['seccion' => 'configuraciones'] )
 
 @section( 'seccionHeader' )
-    @include( 'crm.configuraciones.configuracionHeader' , [ 'seccion' => 'configuraciones' , 'subseccion' => 'Campos Adicionales' ] )
+    @include( 'crm.layout.subseccionHeader' , [ 'seccion' => 'configuraciones' , 'subseccion' => 'Campos Adicionales' ] )
 @endsection
 
 @section( 'seccionContenido' )

@@ -1,7 +1,7 @@
-@extends( 'crm.layout.principal' , ['seccion' => 'prospectos'] )
+@extends( 'crm.layout.principal' , ['seccion' => 'ejecutivos'] )
 
 @section( 'seccionHeader' )
-    @include( 'crm.layout.subseccionHeader' , [ 'seccion' => 'prospectos' , 'subseccion' => 'Seguimiento' ] )
+    @include( 'crm.layout.subseccionHeader' , [ 'seccion' => 'ejecutivos' , 'subseccion' => 'Actividades' ] )
 @endsection
 
 @section( 'seccionContenido' )
@@ -65,5 +65,6 @@
 @endsection
 
 @section( 'seccionFooter' )
-    @include( 'crm.prospectos.prospectoFooter' )
+    @include( 'crm.ejecutivos.ejecutivosFooter' )
 @endsection
+

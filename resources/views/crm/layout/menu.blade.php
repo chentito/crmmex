@@ -11,7 +11,7 @@
             <span>Clientes</span>
         </a>
     </li>
-    <li class="nav-item">
+    <!--li class="nav-item">
         <a class="nav-link @if($seccion=='ventas') active @endif" href="/venta">
             <i class="material-icons">monetization_on</i>
             <span>Ventas</span>
@@ -22,7 +22,7 @@
             <i class="material-icons">view_module</i>
             <span>Productos / Servicios</span>
         </a>
-    </li>
+    </li-->
     <li class="nav-item">
         <a class="nav-link @if($seccion=='mercadotecnia') active @endif" href="/mercadotecnia">
             <i class="material-icons">important_devices</i>

@@ -1,7 +1,7 @@
 @extends( 'crm.layout.principal' , ['seccion' => 'clientes'] )
 
 @section( 'seccionHeader' )
-    @include( 'crm.prospectos.prospectoHeader' , [ 'seccion' => 'clientes' , 'subseccion' => 'Propuesta Comercial' ] )
+    @include( 'crm.layout.subseccionHeader' , [ 'seccion' => 'clientes' , 'subseccion' => 'Propuesta Comercial' ] )
 @endsection
 
 @section( 'seccionContenido' )
@@ -54,13 +54,28 @@
                                     <input class="form-control form-control-sm" placeholder="Cantidad">
                                 </div>
                                 <div class="col-sm-3">
-                                    <input class="form-control form-control-sm" placeholder="Cantidad">
+                                    <select class="custom-select custom-select-sm">
+                                        <option>Ciclo de facturación</option>
+                                        <option>Bienal</option>
+                                        <option>Anual</option>
+                                        <option>Semestral</option>
+                                        <option>Trimestral</option>
+                                        <option>Mensual</option>
+                                        <option>Un solo pago</option>
+                                    </select>
                                 </div>
                                 <div class="col-sm-3">
-                                    <input class="form-control form-control-sm" placeholder="Cantidad">
+                                    <select class="custom-select custom-select-sm">
+                                        <option>Grupo</option>
+                                        <option>Consumibles</option>
+                                        <option>Equipos de cómputo</option>
+                                        <option>Facturación electrónica</option>
+                                        <option>Servicios de internet</option>
+                                        <option>Servicios profesionales</option>
+                                    </select>
                                 </div>
                                 <div class="col-sm-3">
-                                    <input class="form-control form-control-sm" placeholder="Cantidad">
+                                    <input class="form-control form-control-sm" placeholder="Precio (Reemplazar el precio configurado)">
                                 </div>
                             </div>
                         </div>
@@ -68,6 +83,11 @@
                 </div>
                 <div class="card-footer">
                     <boton-regresar></boton-regresar>
+                    <div class="float-right">
+                        <button class="btn btn-sm btn-outline-accent"><i class="material-icons">add</i> Agregar Producto</button>
+                        <button class="btn btn-sm btn-outline-accent"><i class="material-icons">insert_photo</i> Vista Previa</button>
+                        <button class="btn btn-sm btn-outline-accent"><i class="material-icons">picture_as_pdf</i> Generar Propuesta</button>
+                    </div>
                 </div>
             </div>
         </div>

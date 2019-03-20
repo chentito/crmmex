@@ -1,7 +1,7 @@
-@extends( 'crm.layout.principal' , ['seccion' => 'productos'] )
+@extends( 'crm.layout.principal' , ['seccion' => 'configuraciones'] )
 
 @section( 'seccionHeader' ) 
-    @include( 'crm.productos.productoHeader' , [ 'seccion' => 'productos' , 'subseccion' => 'Alta Producto' ] )
+    @include( 'crm.layout.subseccionHeader' , [ 'seccion' => 'configuraciones' , 'subseccion' => 'Alta Producto' ] )
 @endsection
 
 @section( 'seccionContenido' )
@@ -9,5 +9,5 @@ ALTA DE PRODUCTO
 @endsection
 
 @section( 'seccionFooter' )
-    @include( 'crm.productos.productoFooter' )
+    @include( 'crm.configuraciones.configuracionesFooter' )
 @endsection
