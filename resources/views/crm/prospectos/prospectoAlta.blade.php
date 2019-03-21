@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card card-small w-100 mb-3">
-                <div class="card-header border-bottom">Datos Generales</div>
+                <div class="card-header border-bottom"><h6 class="m-0">Datos Generales</h6></div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-3 mb-1">
@@ -41,7 +41,7 @@
         </div>
         <div class="col-sm-12">
             <div class="card card-small w-100">
-                <div class="card-header border-bottom">Direcci&oacute;n</div>
+                <div class="card-header border-bottom"><h6 class="m-0">Direcci&oacute;n</h6></div>
                 <div class="card-body">
                     <div class="row mb-1">
                         <div class="col-sm-3 mb-1">
