@@ -106,5 +106,5 @@
 @endsection
 
 @section( 'seccionFooter' )
-    @include( 'crm.prospectos.prospectoFooter' )
+    @include( 'crm.clientes.clientesFooter' )
 @endsection

@@ -25,15 +25,6 @@
         <link href="{{ asset( 'css/forms.css' ) }}" rel="stylesheet">
         <style>
             .fondo {
-                /* The image used */
-                /*background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(20).jpg");*/
-                background-image: url("{{ asset( 'imgs/background/edificios.jpg' ) }}");
-                /* Full height 
-                height: 100%;*/
-                /* Center and scale the image nicely 
-                background-position: inherit;
-                background-repeat: no-repeat;
-                background-size: cover;*/
                 background: url("{{ asset( 'imgs/background/edificios.jpg' ) }}") no-repeat center center fixed; 
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
@@ -87,7 +78,7 @@
                                             <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                             <label class="form-check-label" for="remember">
-                                                {{ __('Remember Me') }}
+                                                Recordar datos
                                             </label>
                                         </div>
                                     </div>
@@ -95,11 +86,11 @@
                                 <div class="form-group row mb-0">
                                     <div class="col-md-8 offset-md-4">
                                         <button type="submit" class="btn btn-primary">
-                                            {{ __('Login') }}
+                                            Entrar
                                         </button>
                                         @if (Route::has('password.request'))
                                             <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                {{ __('Forgot Your Password?') }}
+                                                Recuperar contraseña
                                             </a>
                                         @endif
                                     </div>
