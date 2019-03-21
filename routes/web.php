@@ -12,6 +12,8 @@
 */
 Auth::routes();
 
+Route::get( '/nLogin' , function(){ return view( 'crm.login.login' ); });
+
 // Rutas protegidas por sesion
 Route::middleware('auth')->group( function() {
     /* V2 */

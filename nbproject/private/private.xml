@@ -3,10 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/htdocs/crm/resources/views/crm/prospectos/prospectoAlta.blade.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/crm/login/login.blade.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/crm/configuraciones/configuraciones.blade.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/crm/productos/productoConfiguracion.blade.php</file>
             <file>file:/C:/htdocs/crm/routes/web.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/layouts/app.blade.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/crm/clientes/clienteSeguimiento.blade.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/crm/productos/productoAlta.blade.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/crm/prospectos/prospectoAlta.blade.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/crm/layout/subseccionHeader.blade.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/crm/layout/principal.blade.php</file>
             <file>file:/C:/htdocs/crm/resources/views/crm/layout/menu.blade.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/crm/productos/productos.blade.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/crm/clientes/clientePropuesta.blade.php</file>
             <file>file:/C:/htdocs/crm/routes/api.php</file>
+            <file>file:/C:/htdocs/crm/resources/views/crm/clientes/clienteAlta.blade.php</file>
         </group>
     </open-files>
 </project-private>
