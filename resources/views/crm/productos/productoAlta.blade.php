@@ -53,6 +53,21 @@
                             <input type="text" class="form-control form-control-sm" aria-label="Precio recurrente" value="">
                         </div>
                     </div>
+                    <div class="card-header border-bottom mb-1"><h6 class="m-0">Condiguraciones Adicionales</h6></div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control form-control-sm" placeholder="Conf Add 1">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control form-control-sm" placeholder="Conf Add 2">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control form-control-sm" placeholder="Conf Add 3">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control form-control-sm" placeholder="Conf Add 4">
+                        </div>
+                    </div>
                 </div>
                 <div class="card-footer">
                     <boton-regresar></boton-regresar>

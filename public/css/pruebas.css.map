@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA;;;;EAIE;AACF;;;EAGE;ACRF;;;;EAIE;AACF;;;EAGE;ADOE,MAAG;EACC,gBAAgB,EALJ,OAAO;EAMnB,KAAK,ECRD,OAAO",
+"sources": ["../../resources/sass/pruebas.scss","../../resources/sass/partial/_boton.scss"],
+"names": [],
+"file": "pruebas.css"
+}

@@ -10,17 +10,51 @@
         <link href="{{ asset( 'assets2/css/all.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets2/css/icon.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets2/css/bootstrap.css' ) }}" rel="stylesheet">
-        <link href="{{ asset( 'assets2/css/shards-dashboards.css' ) }}" rel="stylesheet">
-        <link href="{{ asset( 'assets2/css/extras.css' ) }}" rel="stylesheet">
+        <!--link href="{{ asset( 'assets2/css/shards-dashboards.css' ) }}" rel="stylesheet">
+        <link href="{{ asset( 'assets2/css/extras.css' ) }}" rel="stylesheet"-->
+        <link href="{{ asset( 'styles/shards-dashboards.1.1.0.min.css' ) }}" id="main-stylesheet" data-version="1.1.0" rel="stylesheet">
+        <link href="{{ asset( 'styles/extras.1.1.0.min.css' ) }}" rel="stylesheet">
         <link href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
         <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css" rel="stylesheet">
         
         <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
         
         <script src="{{ asset( 'assets2/js/jquery-3.js' ) }}"></script>
-        <script async="" defer="defer" src="{{ asset( 'assets2/js/buttons.js' ) }}"></script>
+        <!--script async="" defer="defer" src="{{ asset( 'assets2/js/buttons.js' ) }}"></script-->
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
     </head>
+    
+    
     <body class="h-100">
+        <div class="color-switcher animated">
+      <h5>Colores Disponibles</h5>
+      <ul class="accent-colors">
+        <li class="accent-primary active" data-color="primary">
+          <i class="material-icons">check</i>
+        </li>
+        <li class="accent-secondary" data-color="secondary">
+          <i class="material-icons">check</i>
+        </li>
+        <li class="accent-success" data-color="success">
+          <i class="material-icons">check</i>
+        </li>
+        <li class="accent-info" data-color="info">
+          <i class="material-icons">check</i>
+        </li>
+        <li class="accent-warning" data-color="warning">
+          <i class="material-icons">check</i>
+        </li>
+        <li class="accent-danger" data-color="danger">
+          <i class="material-icons">check</i>
+        </li>
+      </ul>
+      <div class="close">
+        <i class="material-icons">close</i>
+      </div>
+    </div>
+    <div class="color-switcher-toggle animated pulse infinite">
+      <i class="material-icons">settings</i>
+    </div>
             <div class="container-fluid">
                 <div class="row">
                     <!-- Barra lateral izquierda -->
@@ -140,11 +174,16 @@
         <script src="{{ asset( 'js/app.js' ) }}" ></script> 
         <script src="{{ asset( 'assets2/js/popper.js' ) }}"></script>
         <script src="{{ asset( 'assets2/js/bootstrap.js' ) }}"></script>
+        
+        
+        <script src="{{ asset( 'assets2/js/jquery.js' ) }}"></script>
         <script src="{{ asset( 'assets2/js/Chart.js' ) }}"></script>
         <script src="{{ asset( 'assets2/js/shards.js' ) }}"></script>
-        <script src="{{ asset( 'assets2/js/jquery.js' ) }}"></script>
-        <script src="{{ asset( 'assets2/js/extras.js' ) }}"></script>
-        <script src="{{ asset( 'assets2/js/shards-dashboards.js' ) }}"></script>
+        <!--script src="{{ asset( 'assets2/js/extras.js' ) }}"></script>
+        <script src="{{ asset( 'assets2/js/shards-dashboards.js' ) }}"></script-->
+        <script src="scripts/extras.1.1.0.min.js"></script>
+        <script src="scripts/shards-dashboards.1.1.0.min.js"></script>
+        <script src="scripts/app/app-blog-overview.1.1.0.js"></script>
         
         <script src="{{ asset( 'js/jquery/jquery.dataTables.min.js' ) }}"></script>
         <script src="{{ asset( 'js/datepicker/bootstrap-datepicker.min.js' ) }}"></script>
