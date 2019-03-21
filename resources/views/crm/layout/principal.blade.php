@@ -132,7 +132,7 @@
                                     <li class="nav-item dropdown">
                                         <!-- Opciones usuario -->
                                         <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                            <img class="user-avatar rounded-circle mr-2" src="{{ asset( 'assets2/img/0.jpg' ) }}" alt="User Avatar"> <span class="d-none d-md-inline-block">{{ Auth::user()->name }}</span>
+                                            <img class="user-avatar rounded-circle mr-2" src="{{ asset( 'assets2/img/saint.jpg' ) }}" alt="User Avatar"> <span class="d-none d-md-inline-block">{{ Auth::user()->name }}</span>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-small">
                                             <a class="dropdown-item" href="/ejecutivos"><i class="material-icons">person</i> Perfil</a>
