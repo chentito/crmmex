@@ -14,8 +14,7 @@ Auth::routes();
 
 Route::get( '/nLogin' , function(){ return view( 'crm.login.login' ); });
 Route::get( '/template' , function(){ return view( 'crm.layout.nuevo' ); });
-Route::get( '/template2/{tema?}' , function( $tema=null ){ 
-    
+Route::get( '/template2/{tema?}' , function( $tema=null ) {
     $estilo = "";
     $css    = "";
     $btns   = "";
@@ -30,12 +29,15 @@ Route::get( '/template2/{tema?}' , function( $tema=null ){
         case 'white' :$estilo='bg-white';  $btns='btn-white';  $css='white.css';break;
         default      :$estilo='bg-dark';   $btns='btn-dark';   $css='dark.css';
     }
-    
-    return view( 'crm.layout.nuevo2' , [ 'estilo' => $estilo , 'css' => $css , 'btn' => $btns ]); 
+    return view( 'crm.layout.nuevo2' , [ 'estilo' => $estilo , 'css' => $css , 'btn' => $btns ] );
 });
 
 // Rutas protegidas por sesion
 Route::middleware('auth')->group( function() {
+    /* V3 */
+    Route::get( '/home4' , 'branding\BrandingController@index' );
+    
+    
     /* V2 */
     Route::get( '/home3'     , function(){ return view( 'crm.crm' ); });
     /* Prospectos */
@@ -72,12 +74,11 @@ Route::middleware('auth')->group( function() {
     Route::get( '/ejecutivoAlta' , function(){ return view( 'crm.ejecutivos.ejecutivoAlta' ); });
     Route::get( '/ejecutivoRoles/{idRol?}' , 'ejecutivo\RolesController@listadoModulos' );
     Route::get( '/ejecutivoActividades/{idRol?}' , function(){ return view( 'crm.ejecutivos.ejecutivoActividades' ); } );
-    
-    
+
     Route::get( '/misModulos' , 'ejecutivo\RolesController@listadoModulos' );
-    
+
     Route::get( '/opcionesCat/{id}' , 'CatalogoController@catalogo' );
-    
+
     /* V1 */
     Route::get( '/home'                       , 'HomeController@index')->name('home');
     Route::get( '/home2'                      , function(){ return view( 'home2' ); });

@@ -110,8 +110,14 @@
                                                 <a class="dropdown-item" href="#">Something else here</a>
                                             </div>
                                         </li>
-                                        <li class="nav-item active">
-                                            <a class="nav-link" href="/">Cerrar Sesi&oacute;n <span class="sr-only">(current)</span></a>
+                                        <li class="nav-item">
+                                            <!--a class="nav-link" href="/logout">Cerrar Sesi&oacute;n <span class="sr-only">(current)</span></a-->
+                                            <a class="nav-link" href="{{ route('logout') }}" 
+                                               onclick="event.preventDefault();
+        document.getElementById('logout-form').submit();">
+                                                Cerrar Sesi&oacute;n 
+                                            </a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> @csrf </form>
                                         </li>
                                     </ul>
                                 </div>
@@ -156,3 +162,4 @@
         </script>
     </body>
 </html>
+
