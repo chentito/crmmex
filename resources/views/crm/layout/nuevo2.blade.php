@@ -60,8 +60,8 @@
                             <li>
                                 <a href="#configuracionesCatalogos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Catálogos</a>
                                 <ul class="collapse list-unstyled" id="configuracionesCatalogos">
-                                    <li><a href="#">Catálogos Generales</a></li>
-                                    <li><a href="#">Productos/Servicios</a></li>
+                                    <li><a href="#"> > Catálogos Generales</a></li>
+                                    <li><a href="#"> > Productos/Servicios</a></li>
                                 </ul>
                             </li>
                             <li><a href="#">Forecast</a></li>
