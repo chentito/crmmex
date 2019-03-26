@@ -13,6 +13,8 @@
 Auth::routes();
 
 Route::get( '/nLogin' , function(){ return view( 'crm.login.login' ); });
+Route::get( '/template' , function(){ return view( 'crm.layout.nuevo' ); });
+Route::get( '/template2' , function(){ return view( 'crm.layout.nuevo2' ); });
 
 // Rutas protegidas por sesion
 Route::middleware('auth')->group( function() {
