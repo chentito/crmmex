@@ -72,7 +72,6 @@
                         </ul>
                     </li>
                 </ul>
-                <div class="powered">Powered by <a href="https://www.mexagon.net" target="_blank">Mexagon.net</a></div>
             </nav>
             <!-- Page Content -->
             <div class="container-fluid" id="content">

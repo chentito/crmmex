@@ -31,9 +31,7 @@ Route::get( '/template2/{tema?}' , function( $tema=null ){
         default      :$estilo='bg-dark';   $btns='btn-dark';   $css='dark.css';
     }
     
-    
     return view( 'crm.layout.nuevo2' , [ 'estilo' => $estilo , 'css' => $css , 'btn' => $btns ]); 
-    
 });
 
 // Rutas protegidas por sesion
