@@ -8,7 +8,8 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title> {{ config('app.name', 'Laravel') }} </title>
         <link href="{{ asset( 'assets2/css/bootstrap.css' ) }}" rel="stylesheet">
-        <link href="{{ asset( 'assets3/css/principal2.css' ) }}" rel="stylesheet">
+        <!--link href="{{ asset( 'assets3/css/themes/blue.css' ) }}" rel="stylesheet"-->
+        <link href="/assets3/css/themes/{{$css}}" rel="stylesheet">
         <script src="{{ asset( 'assets2/js/jquery-3.js' ) }}"></script>
         <script src="{{ asset( 'assets2/js/popper.js' ) }}"></script>
         <script src="{{ asset( 'assets2/js/bootstrap.js' ) }}"></script>
@@ -21,8 +22,8 @@
         <!-- Contenedor principal -->
         <div class="wrapper">
             <!-- Sidebar -->
-            <nav id="sidebar" class="bg-dark shadow">
-                <div class="sidebar-header">
+            <nav id="sidebar" class="{{$estilo}} shadow">
+                <div class="sidebar-header sticky-top">
                     <img src="{{ asset( 'imgs/logoCRM.jpg' ) }}">
                 </div>
                 <ul class="list-unstyled components">
@@ -71,12 +72,13 @@
                         </ul>
                     </li>
                 </ul>
+                <div class="powered">Powered by <a href="https://www.mexagon.net" target="_blank">Mexagon.net</a></div>
             </nav>
             <!-- Page Content -->
             <div class="container-fluid" id="content">
-                <header id="header" class="bg-light">
+                <header id="header" class="bg-light sticky-top">
                     <div class="container-fluid">
-                        <button type="button" id="sidebarCollapse" class="btn btn-dark mt-2">
+                        <button type="button" id="sidebarCollapse" class="btn {{$btn}} mt-2">
                             <i class="fas fa-align-left"></i>
                         </button>
                         <div class="float-right">
@@ -86,11 +88,9 @@
                                 </button>
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav mr-auto">
+                                        
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="/">Cerrar Sesi&oacute;n <span class="sr-only">(current)</span></a>
-                                        </li>
-                                        <li class="nav-item active">
-                                            <a class="nav-link" href="/">CRM <span class="sr-only">(current)</span></a>
+                                            <a class="nav-link" href="/home">CRM <span class="sr-only">(current)</span></a>
                                         </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -111,6 +111,9 @@
                                                 <a class="dropdown-item" href="#">Something else here</a>
                                             </div>
                                         </li>
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="/">Cerrar Sesi&oacute;n <span class="sr-only">(current)</span></a>
+                                        </li>
                                     </ul>
                                 </div>
                             </nav>
@@ -118,7 +121,7 @@
                     </div>
                 </header>
                 <div style="height: 35px" style="z-index: 1400">
-                    <ol class="breadcrumb rounded-0 bg-dark shadow">
+                    <ol class="breadcrumb rounded-0 {{$estilo}} shadow">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item"><a href="#">Library</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Data</li>
@@ -126,7 +129,7 @@
                 </div>
                 <div class="container">
                     <div class="row">
-                        <div class="col-12 mt-3">
+                        <div class="col-12 mt-3 mb-3">
                             <div class="card card-small shadow bg-light">
                                 <div class="card-body">
                                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum<br /><br /><br />
@@ -134,7 +137,10 @@
                                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum<br /><br /><br />
                                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum<br /><br /><br />
                                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum<br /><br /><br />
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum<br /><br /><br />
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum<br /><br /><br />
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum<br /><br /><br />
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum<br /><br /><br />
                                 </div>
                             </div>
                         </div>
@@ -144,9 +150,8 @@
         </div>
         <script type="text/javascript">
             $( document ).ready(function () {
-                //feather.replace();
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar').toggleClass( 'active' );
+                $( '#sidebarCollapse' ).on( 'click' , function () {
+                    $( '#sidebar' ).toggleClass( 'active' );
                 });
             });
         </script>

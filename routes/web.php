@@ -14,7 +14,27 @@ Auth::routes();
 
 Route::get( '/nLogin' , function(){ return view( 'crm.login.login' ); });
 Route::get( '/template' , function(){ return view( 'crm.layout.nuevo' ); });
-Route::get( '/template2' , function(){ return view( 'crm.layout.nuevo2' ); });
+Route::get( '/template2/{tema?}' , function( $tema=null ){ 
+    
+    $estilo = "";
+    $css    = "";
+    $btns   = "";
+    switch( $tema ) {
+        case 'dark'  :$estilo='bg-dark';   $btns='btn-dark';   $css='dark.css';break;
+        case 'blue'  :$estilo='bg-primary';$btns='btn-primary';$css='blue2.css';break;
+        case 'grey'  :$estilo='bg-ligth';  $btns='btn-ligth';  $css='grey.css';break;
+        case 'blue2' :$estilo='bg-info';   $btns='btn-info';   $css='blue.css';break;
+        case 'red'   :$estilo='bg-danger'; $btns='btn-danger'; $css='red.css';break;
+        case 'yellow':$estilo='bg-warning';$btns='btn-warning';$css='yellow.css';break;
+        case 'green' :$estilo='bg-success';$btns='btn-success';$css='green.css';break;
+        case 'white' :$estilo='bg-white';  $btns='btn-white';  $css='white.css';break;
+        default      :$estilo='bg-dark';   $btns='btn-dark';   $css='dark.css';
+    }
+    
+    
+    return view( 'crm.layout.nuevo2' , [ 'estilo' => $estilo , 'css' => $css , 'btn' => $btns ]); 
+    
+});
 
 // Rutas protegidas por sesion
 Route::middleware('auth')->group( function() {
