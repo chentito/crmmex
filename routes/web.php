@@ -37,6 +37,12 @@ Route::middleware('auth')->group( function() {
     /* V3 */
     Route::get( '/home4' , 'branding\BrandingController@index' );
     
+    Route::get( '/contenidos/{id}' , 'contenidos\ContenidosController@contenidos' );
+    
+    
+    
+    
+    
     
     /* V2 */
     Route::get( '/home3'     , function(){ return view( 'crm.crm' ); });

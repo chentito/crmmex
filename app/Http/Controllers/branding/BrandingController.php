@@ -12,7 +12,7 @@ class BrandingController extends Controller
     /* Acceso */
     public function index() {
         $datos = Branding::where( 'seleccionado' , 1 )->first();
-        return view( 'crmmex.index' , array( 'estilo' => $datos->estilo , 'css' => $datos->css , 'btn' => $datos->boton ) );
+        return view( 'crmmex.home' , array( 'estilo' => $datos->estilo , 'css' => $datos->css , 'btn' => $datos->boton ) );
     }
 
 }

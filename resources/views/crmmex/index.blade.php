@@ -13,12 +13,27 @@
         <script src="{{ asset( 'assets2/js/jquery-3.js' ) }}"></script>
         <script src="{{ asset( 'assets2/js/popper.js' ) }}"></script>
         <script src="{{ asset( 'assets2/js/bootstrap.js' ) }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+        <script src="/assets3/js/contenidos.js" rel="stylesheet"></script>
         <!-- Font Awesome JS -->
         <script src="http://192.168.30.7/js/feather.min.js"></script>
         <script src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"></script>
         <script src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"></script>
     </head>
     <body class="h-100">
+        <style>
+            .bd-example-modal-lg .modal-dialog{
+                display: table;
+                position: relative;
+                margin: 0 auto;
+                top: calc(50% - 24px);
+              }
+
+              .bd-example-modal-lg .modal-dialog .modal-content{
+                background-color: transparent;
+                border: none;
+              }
+        </style>
         <!-- Contenedor principal -->
         <div class="wrapper">
             <!-- Sidebar -->
@@ -26,52 +41,7 @@
                 <div class="sidebar-header sticky-top">
                     <img src="{{ asset( 'imgs/logoCRM.jpg' ) }}">
                 </div>
-                <ul class="list-unstyled components">
-                    <li>
-                        <a href="#prospectos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users-cog fa-lg"></i>  Prospectos</a>
-                        <ul class="collapse list-unstyled" id="prospectos">
-                            <li><a href="#">Listado</a></li>
-                            <li><a href="#">Nuevo Prospecto</a></li>
-                            <li><a href="#">Seguimientos</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#clientes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users fa-lg"></i>  Clientes</a>
-                        <ul class="collapse list-unstyled" id="clientes">
-                            <li><a href="#">Listado</a></li>
-                            <li><a href="#">Alta</a></li>
-                            <li><a href="#">Seguimientos</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#mercadotecnia" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user fa-lg"></i>  Mercadotecnia</a>
-                        <ul class="collapse list-unstyled" id="mercadotecnia">
-                            <li><a href="#">Mercadotecnia</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#reportes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-chart-pie fa-lg"></i>  Reportes</a>
-                        <ul class="collapse list-unstyled" id="reportes">
-                            <li><a href="#">Reportes</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#configuraciones" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cogs fa-lg"></i>  Configuraciones</a>
-                        <ul class="collapse list-unstyled" id="configuraciones">
-                            <li>
-                                <a href="#configuracionesCatalogos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Catálogos</a>
-                                <ul class="collapse list-unstyled" id="configuracionesCatalogos">
-                                    <li><a href="#"> > Catálogos Generales</a></li>
-                                    <li><a href="#"> > Productos/Servicios</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Forecast</a></li>
-                            <li><a href="#">Pipeline</a></li>
-                            <li><a href="#">Campos Adicionales</a></li>
-                            <li><a href="#">SMTP</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                @include( 'crmmex.utils.menu' )
             </nav>
             <!-- Page Content -->
             <div class="container-fluid" id="content">
@@ -136,16 +106,8 @@
                     <div class="row">
                         <div class="col-12 mt-3 mb-3">
                             <div class="card card-small shadow bg-light">
-                                <div class="card-body">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum<br /><br /><br />
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum<br /><br /><br />
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum<br /><br /><br />
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum<br /><br /><br />
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum<br /><br /><br />
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum<br /><br /><br />
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum<br /><br /><br />
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum<br /><br /><br />
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum<br /><br /><br />
+                                <div class="card-body" id="contenidosPrincipales">
+                                    @yield( 'contenidos' )
                                 </div>
                             </div>
                         </div>
@@ -153,6 +115,15 @@
                 </div>
             </div>
         </div>
+        
+        <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="width: 48px">
+                    <span class="fa fa-spinner fa-spin fa-3x"></span>
+                </div>
+            </div>
+        </div>
+        
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#sidebarCollapse').on('click', function () {
