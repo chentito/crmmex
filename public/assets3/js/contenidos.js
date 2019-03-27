@@ -7,14 +7,19 @@
 
 function contenidos( idContenido ) {
     //abreModal();
-    axios( '/contenidos/' + idContenido )
+    /*axios( '/contenidos/' + idContenido )
         .then( datos => {
             $( '#contenidosPrincipales' ).html(  datos.data );
             //cierraModal();
         })
         .catch( err => {
             console.error(err);
-        });
+        });*/
+
+    $.get( '/contenidos/' + idContenido , function( d ){
+        $( '#contenidosPrincipales' ).html(  d );
+    });
+
 }
 
 function abreModal() {
