@@ -67,13 +67,13 @@ a:focus {
 }
 
 #sidebar ul li a:hover {
-    color: #A4A4A4;
-    background: #A9E2F3;
+    color: #FFFFFF;
+    background: #3f869b;
 }
 
 #sidebar ul li.active>a,a[aria-expanded="true"] {
-    color: #A4A4A4;
-    background: #CEF6F5;
+    color: #ffffff;
+    background: #3f869b;
 }
 
 a[data-toggle="collapse"] {
@@ -91,7 +91,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #CEF6F5;
+    background: #8cd2e7;
 }
 
 ul.CTAs {
@@ -176,5 +176,8 @@ ol > li > a:hover {
     }
 }
 
+.modal-backdrop {
+   background-color: #2d606f;
+}
 
 

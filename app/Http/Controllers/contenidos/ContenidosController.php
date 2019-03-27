@@ -9,7 +9,8 @@ use App\Models\Secciones AS Secciones;
 class ContenidosController extends Controller
 {
     // Controlador encargado para cargar la pantalla seleccionada
-    public function contenidos( $id ) {sleep(1);
+    public function contenidos( $id ) {        
+        usleep(200000);
         $secciones = Secciones::where( 'identificador' , $id )->first();
         return view( $secciones->vista );
     }

@@ -68,12 +68,12 @@ a:focus {
 
 #sidebar ul li a:hover {
     color: #fff;
-    background: #BEDAEF;
+    background: #e5e5e5;
 }
 
 #sidebar ul li.active>a,a[aria-expanded="true"] {
     color: #fff;
-    background: #90BFD9;
+    background: #999999;
 }
 
 a[data-toggle="collapse"] {
@@ -91,7 +91,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #90BFD9;
+    background: #b2b2b2;
 }
 
 ul.CTAs {
@@ -152,12 +152,12 @@ header{
     BREADCRUMB
 ----------------------------------------------------- */
 ol > li > a { 
-    color:white 
+    color:#7f7f7f; 
 }
 
 ol > li > a:hover { 
-    color:white;
-    font-weight: bold 
+    color:#4c4c4c;
+    font-weight: bold;
 }
 
 /* ---------------------------------------------------
@@ -176,5 +176,7 @@ ol > li > a:hover {
     }
 }
 
-
+.modal-backdrop {
+   background-color: #cccccc;
+}
 

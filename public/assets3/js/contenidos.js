@@ -6,7 +6,7 @@
  */
 
 function contenidos( idContenido ) {
-    /*
+    abreModal();
     axios( '/contenidos/' + idContenido )
         .then( datos => {
             $( '#contenidosPrincipales' ).html(  datos.data );
@@ -14,22 +14,7 @@ function contenidos( idContenido ) {
         })
         .catch( err => {
             console.error(err);
-        });*/
-    
-    $.ajax({
-        url: '/contenidos/' + idContenido,
-        beforeSend: function( xhr ) {
-            abreModal();
-        },
-        complete:function() {
-            cierraModal();
-        }
-    })
-    .done( function( data ) {
-        $( '.modal' ).modal( 'hide' );
-        $( '#contenidosPrincipales' ).html(  data );
-    });
-    
+        });
 }
 
 function abreModal() {
