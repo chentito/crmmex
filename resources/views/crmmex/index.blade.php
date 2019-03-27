@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title> {{ config('app.name', 'Laravel') }} </title>
+        <script src="{{ asset( 'js/app.js' ) }}" rel="stylesheet"></script>
         <!-- ESTILOS -->
         <link href="{{ asset( 'assets2/css/bootstrap.css' ) }}" rel="stylesheet">
         <!-- Grid -->
@@ -14,23 +15,6 @@
         <link href="{{ asset( 'assets3/css/responsive.bootstrap.min.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/dataTables.bootstrap4.min.css' ) }}" rel="stylesheet">
         <link href="/assets3/css/themes/{{$css}}" rel="stylesheet">
-        <!-- SCRIPTS -->
-        <script src="{{ asset( 'assets2/js/jquery-3.js' ) }}" rel="stylesheet"></script>
-        <script src="{{ asset( 'assets2/js/popper.js' ) }}" rel="stylesheet"></script>
-        <script src="{{ asset( 'assets2/js/bootstrap.js' ) }}" rel="stylesheet"></script>
-        <script src="{{ asset( 'assets3/js/axios.js' ) }}" rel="stylesheet"></script>
-        <script src="{{ asset( 'assets3/js/feather.min.js' ) }}" rel="stylesheet"></script>
-        <!-- Grid -->
-        <script src="{{ asset( 'js/jquery/jquery.dataTables.min.js' ) }}" rel="stylesheet"></script>
-        <script src="{{ asset( 'assets3/js/dataTables.bootstrap4.min.js' ) }}" rel="stylesheet"></script>
-        <script src="{{ asset( 'assets3/js/dataTables.fixedHeader.min.js' ) }}" rel="stylesheet"></script>
-        <script src="{{ asset( 'assets3/js/dataTables.responsive.min.js' ) }}" rel="stylesheet"></script>
-        <script src="{{ asset( 'assets3/js/responsive.bootstrap.min.js' ) }}" rel="stylesheet"></script>
-        <!-- Fonts -->
-        <script src="{{ asset( 'assets3/js/solid.js' ) }}" rel="stylesheet"></script>
-        <script src="{{ asset( 'assets3/js/fontawesome.js' ) }}" rel="stylesheet"></script>
-        <!-- Funcionalidades -->
-        <script src="{{ asset( 'assets3/js/contenidos.js' ) }}" rel="stylesheet"></script>
     </head>
     <body class="h-100">
         <style>
@@ -136,6 +120,21 @@
         
         <div id="app"></div>
         
+        <!-- SCRIPTS -->
+        <script src="{{ asset( 'assets2/js/popper.js' ) }}" rel="stylesheet"></script>
+        <script src="{{ asset( 'assets3/js/feather.min.js' ) }}" rel="stylesheet"></script>
+        <!-- Grid -->
+        <script src="{{ asset( 'js/jquery/jquery.dataTables.min.js' ) }}" rel="stylesheet"></script>
+        <script src="{{ asset( 'assets3/js/dataTables.bootstrap4.min.js' ) }}" rel="stylesheet"></script>
+        <script src="{{ asset( 'assets3/js/dataTables.fixedHeader.min.js' ) }}" rel="stylesheet"></script>
+        <script src="{{ asset( 'assets3/js/dataTables.responsive.min.js' ) }}" rel="stylesheet"></script>
+        <script src="{{ asset( 'assets3/js/responsive.bootstrap.min.js' ) }}" rel="stylesheet"></script>
+        <!-- Fonts -->
+        <script src="{{ asset( 'assets3/js/solid.js' ) }}" rel="stylesheet"></script>
+        <script src="{{ asset( 'assets3/js/fontawesome.js' ) }}" rel="stylesheet"></script>
+        <!-- Funcionalidades -->
+        <script src="{{ asset( 'assets3/js/contenidos.js' ) }}" rel="stylesheet"></script>
+
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#sidebarCollapse').on('click', function () {
@@ -145,4 +144,3 @@
         </script>
     </body>
 </html>
-
