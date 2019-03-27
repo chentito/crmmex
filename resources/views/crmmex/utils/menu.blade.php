@@ -33,14 +33,14 @@
             <li>
                 <a href="#configuracionesCatalogos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Catálogos</a>
                 <ul class="collapse list-unstyled" id="configuracionesCatalogos">
-                    <li><a href="#"> > Catálogos Generales</a></li>
-                    <li><a href="#"> > Productos/Servicios</a></li>
+                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_catalogos_generales');"> > Catálogos Generales</a></li>
+                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_catalogos_productos');"> > Productos/Servicios</a></li>
                 </ul>
             </li>
-            <li><a href="#">Forecast</a></li>
-            <li><a href="#">Pipeline</a></li>
-            <li><a href="#">Campos Adicionales</a></li>
-            <li><a href="#">SMTP</a></li>
+            <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_forecast');">Forecast</a></li>
+            <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_pipeline');">Pipeline</a></li>
+            <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_adicionales');">Campos Adicionales</a></li>
+            <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_smtp');">SMTP</a></li>
             <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_branding');">Branding</a></li>
         </ul>
     </li>
