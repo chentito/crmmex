@@ -32,17 +32,15 @@ Route::get( '/template2/{tema?}' , function( $tema=null ) {
     return view( 'crm.layout.nuevo2' , [ 'estilo' => $estilo , 'css' => $css , 'btn' => $btns ] );
 });
 
+
+Route::get( '/home4' , 'branding\BrandingController@index' );
+Route::get( '/setTema/{id}' , 'branding\BrandingController@update' );
+Route::get( '/contenidos/{id}' , 'contenidos\ContenidosController@contenidos' );
+
+
 // Rutas protegidas por sesion
 Route::middleware('auth')->group( function() {
     /* V3 */
-    Route::get( '/home4' , 'branding\BrandingController@index' );
-    
-    Route::get( '/setTema/{id}' , 'branding\BrandingController@update' );
-    
-    Route::get( '/contenidos/{id}' , 'contenidos\ContenidosController@contenidos' );
-    
-    
-    
     
     
     
