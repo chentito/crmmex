@@ -6,11 +6,11 @@
  */
 
 function contenidos( idContenido ) {
-    abreModal();
+    //abreModal();
     axios( '/contenidos/' + idContenido )
         .then( datos => {
             $( '#contenidosPrincipales' ).html(  datos.data );
-            cierraModal();
+            //cierraModal();
         })
         .catch( err => {
             console.error(err);
