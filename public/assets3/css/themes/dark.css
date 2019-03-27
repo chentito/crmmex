@@ -155,8 +155,13 @@ ol > li > a {
     color:white 
 }
 
-ol > li > a:hover { 
+ol > li { 
     color:white;
+    font-weight: bold;
+}
+
+ol > li > a:hover { 
+    color:white; 
     font-weight: bold 
 }
 
@@ -176,5 +181,9 @@ ol > li > a:hover {
     }
 }
 
-
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: #7f7f7f; 
+   color: #fff;
+ }
 

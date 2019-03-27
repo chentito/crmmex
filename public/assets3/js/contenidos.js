@@ -6,20 +6,16 @@
  */
 
 function contenidos( idContenido ) {
-    //abreModal();
-    /*axios( '/contenidos/' + idContenido )
+    abreModal();
+    axios( '/contenidos/' + idContenido )
         .then( datos => {
-            $( '#contenidosPrincipales' ).html(  datos.data );
-            //cierraModal();
+            $( '#contenidosPrincipales' ).html(  datos.data.body );
+            $( '#contenedorBreadCrumb' ).html(  datos.data.breadcrumb );
+            cierraModal();
         })
         .catch( err => {
             console.error(err);
-        });*/
-
-    $.get( '/contenidos/' + idContenido , function( d ){
-        $( '#contenidosPrincipales' ).html(  d );
-    });
-
+        });
 }
 
 function abreModal() {

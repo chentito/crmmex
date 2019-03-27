@@ -12,7 +12,7 @@ class BrandingController extends Controller
     /* Acceso */
     public function index() {
         $datos = Branding::where( 'seleccionado' , 1 )->first();
-        return view( 'crmmex.home' , array( 'estilo' => $datos->estilo , 'css' => $datos->css , 'btn' => $datos->boton ) );
+        return view( 'crmmex.home' , array( 'estilo' => $datos->estilo , 'css' => $datos->css , 'btn' => $datos->boton , 'borde' => $datos->borde ) );
     }
 
     /* Actualiza tema utilizado */
@@ -27,5 +27,5 @@ class BrandingController extends Controller
         $seleccionado->seleccionado=1;
         $seleccionado->save();
     }
-    
+
 }

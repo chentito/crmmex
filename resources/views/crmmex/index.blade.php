@@ -19,6 +19,17 @@
         <script src="http://192.168.30.7/js/feather.min.js"></script>
         <script src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"></script>
         <script src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"></script>
+        <link href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+        
+        <script src="http://192.168.30.109/js/jquery/jquery.dataTables.min.js"></script>
+        <script src="http://192.168.30.109/js/datepicker/bootstrap-datepicker.min.js"></script>
+        <script src="http://192.168.30.109/js/datepicker/bootstrap-datepicker.es.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
     </head>
     <body class="h-100">
         <style>
@@ -95,17 +106,15 @@
                         </div>
                     </div>
                 </header>
-                <div style="height: 35px" style="z-index: 1400">
+                <div style="height: 35px" style="z-index: 1400" id="contenedorBreadCrumb">
                     <ol class="breadcrumb rounded-0 {{$estilo}} shadow">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Library</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Data</li>
+                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                     </ol>
                 </div>
                 <div class="container">
                     <div class="row">
                         <div class="col-12 mt-3 mb-3">
-                            <div class="card card-small shadow bg-light">
+                            <div class="card card-small shadow {{$borde}}">
                                 <div class="card-body" id="contenidosPrincipales">
                                     @yield( 'contenidos' )
                                 </div>
@@ -123,6 +132,8 @@
                 </div>
             </div>
         </div>
+        
+        <div id="app"></div>
         
         <script type="text/javascript">
             $(document).ready(function () {

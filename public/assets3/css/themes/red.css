@@ -180,4 +180,8 @@ ol > li > a:hover {
    background-color: #6c2927;
 }
 
-
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: #e48683; 
+   color: #fff;
+ }
