@@ -37,6 +37,8 @@ Route::middleware('auth')->group( function() {
     /* V3 */
     Route::get( '/home4' , 'branding\BrandingController@index' );
     
+    Route::get( '/setTema/{id}' , 'branding\BrandingController@update' );
+    
     Route::get( '/contenidos/{id}' , 'contenidos\ContenidosController@contenidos' );
     
     

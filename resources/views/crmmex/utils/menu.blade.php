@@ -41,6 +41,7 @@
             <li><a href="#">Pipeline</a></li>
             <li><a href="#">Campos Adicionales</a></li>
             <li><a href="#">SMTP</a></li>
+            <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_branding');">Branding</a></li>
         </ul>
     </li>
 </ul>

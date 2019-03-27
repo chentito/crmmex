@@ -10,7 +10,7 @@ class ContenidosController extends Controller
 {
     // Controlador encargado para cargar la pantalla seleccionada
     public function contenidos( $id ) {        
-        usleep(200000);
+        usleep(500000);
         $secciones = Secciones::where( 'identificador' , $id )->first();
         return view( $secciones->vista );
     }

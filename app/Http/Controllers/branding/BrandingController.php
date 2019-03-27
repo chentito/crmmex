@@ -15,4 +15,17 @@ class BrandingController extends Controller
         return view( 'crmmex.home' , array( 'estilo' => $datos->estilo , 'css' => $datos->css , 'btn' => $datos->boton ) );
     }
 
+    /* Actualiza tema utilizado */
+    public function update( $id ) {
+        /* Quita default */
+        $actual = Branding::where( 'seleccionado' , 1 )->first();
+        $actual->seleccionado=0;
+        $actual->save();
+        
+        /* Asigna nuevo */
+        $seleccionado = Branding::where( 'id' , $id )->first();
+        $seleccionado->seleccionado=1;
+        $seleccionado->save();
+    }
+    
 }
