@@ -18,13 +18,13 @@
     <li>
         <a href="#mercadotecnia" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user fa-lg"></i>  Mercadotecnia</a>
         <ul class="collapse list-unstyled" id="mercadotecnia">
-            <li><a href="#">Mercadotecnia</a></li>
+            <li><a href="javascript:void(0)">Mercadotecnia</a></li>
         </ul>
     </li>
     <li>
         <a href="#reportes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-chart-pie fa-lg"></i>  Reportes</a>
         <ul class="collapse list-unstyled" id="reportes">
-            <li><a href="#">Reportes</a></li>
+            <li><a href="javascript:void(0)">Reportes</a></li>
         </ul>
     </li>
     <li>

@@ -7,29 +7,30 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title> {{ config('app.name', 'Laravel') }} </title>
+        <!-- ESTILOS -->
         <link href="{{ asset( 'assets2/css/bootstrap.css' ) }}" rel="stylesheet">
-        <!--link href="{{ asset( 'assets3/css/themes/blue.css' ) }}" rel="stylesheet"-->
+        <!-- Grid -->
+        <link href="{{ asset( 'assets3/css/fixedHeader.bootstrap.min.css' ) }}" rel="stylesheet">
+        <link href="{{ asset( 'assets3/css/responsive.bootstrap.min.css' ) }}" rel="stylesheet">
+        <link href="{{ asset( 'assets3/css/dataTables.bootstrap4.min.css' ) }}" rel="stylesheet">
         <link href="/assets3/css/themes/{{$css}}" rel="stylesheet">
-        <script src="{{ asset( 'assets2/js/jquery-3.js' ) }}"></script>
-        <script src="{{ asset( 'assets2/js/popper.js' ) }}"></script>
-        <script src="{{ asset( 'assets2/js/bootstrap.js' ) }}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-        <script src="/assets3/js/contenidos.js" rel="stylesheet"></script>
-        <!-- Font Awesome JS -->
-        <script src="http://192.168.30.7/js/feather.min.js"></script>
-        <script src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"></script>
-        <script src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"></script>
-        <link href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-        
-        <script src="http://192.168.30.109/js/jquery/jquery.dataTables.min.js"></script>
-        <script src="http://192.168.30.109/js/datepicker/bootstrap-datepicker.min.js"></script>
-        <script src="http://192.168.30.109/js/datepicker/bootstrap-datepicker.es.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-        <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
-        <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-        <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+        <!-- SCRIPTS -->
+        <script src="{{ asset( 'assets2/js/jquery-3.js' ) }}" rel="stylesheet"></script>
+        <script src="{{ asset( 'assets2/js/popper.js' ) }}" rel="stylesheet"></script>
+        <script src="{{ asset( 'assets2/js/bootstrap.js' ) }}" rel="stylesheet"></script>
+        <script src="{{ asset( 'assets3/js/axios.js' ) }}" rel="stylesheet"></script>
+        <script src="{{ asset( 'assets3/js/feather.min.js' ) }}" rel="stylesheet"></script>
+        <!-- Grid -->
+        <script src="{{ asset( 'js/jquery/jquery.dataTables.min.js' ) }}" rel="stylesheet"></script>
+        <script src="{{ asset( 'assets3/js/dataTables.bootstrap4.min.js' ) }}" rel="stylesheet"></script>
+        <script src="{{ asset( 'assets3/js/dataTables.fixedHeader.min.js' ) }}" rel="stylesheet"></script>
+        <script src="{{ asset( 'assets3/js/dataTables.responsive.min.js' ) }}" rel="stylesheet"></script>
+        <script src="{{ asset( 'assets3/js/responsive.bootstrap.min.js' ) }}" rel="stylesheet"></script>
+        <!-- Fonts -->
+        <script src="{{ asset( 'assets3/js/solid.js' ) }}" rel="stylesheet"></script>
+        <script src="{{ asset( 'assets3/js/fontawesome.js' ) }}" rel="stylesheet"></script>
+        <!-- Funcionalidades -->
+        <script src="{{ asset( 'assets3/js/contenidos.js' ) }}" rel="stylesheet"></script>
     </head>
     <body class="h-100">
         <style>
