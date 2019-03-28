@@ -7,7 +7,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title> {{ config('app.name', 'Laravel') }} </title>
-        <script src="{{ asset( 'js/app.js' ) }}" rel="stylesheet"></script>
         <!-- ESTILOS -->
         <link href="{{ asset( 'assets2/css/bootstrap.css' ) }}" rel="stylesheet">
         <!-- Grid -->
@@ -15,21 +14,9 @@
         <link href="{{ asset( 'assets3/css/responsive.bootstrap.min.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/dataTables.bootstrap4.min.css' ) }}" rel="stylesheet">
         <link href="/assets3/css/themes/{{$css}}" rel="stylesheet">
+        <link href="{{ asset( 'assets3/css/generales.css' ) }}" rel="stylesheet">
     </head>
     <body class="h-100">
-        <style>
-            .bd-example-modal-lg .modal-dialog{
-                display: table;
-                position: relative;
-                margin: 0 auto;
-                top: calc(50% - 24px);
-              }
-
-              .bd-example-modal-lg .modal-dialog .modal-content{
-                background-color: transparent;
-                border: none;
-              }
-        </style>
         <!-- Contenedor principal -->
         <div class="wrapper">
             <!-- Sidebar -->
@@ -53,9 +40,8 @@
                                 </button>
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav mr-auto">
-
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="/home">CRM <span class="sr-only">(current)</span></a>
+                                            <a class="nav-link" href="/home4">CRM <span class="sr-only">(current)</span></a>
                                         </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -78,10 +64,10 @@
                                         </li>
                                         <li class="nav-item">
                                             <!--a class="nav-link" href="/logout">Cerrar Sesi&oacute;n <span class="sr-only">(current)</span></a-->
-                                            <a class="nav-link" href="{{ route('logout') }}" 
+                                            <a class="nav-link" href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
-        document.getElementById('logout-form').submit();">
-                                                Cerrar Sesi&oacute;n 
+                                                        document.getElementById('logout-form').submit();">
+                                                Cerrar Sesi&oacute;n
                                             </a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> @csrf </form>
                                         </li>
@@ -109,7 +95,6 @@
                 </div>
             </div>
         </div>
-        
         <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content" style="width: 48px">
@@ -117,30 +102,30 @@
                 </div>
             </div>
         </div>
-        
         <div id="app"></div>
-        
         <!-- SCRIPTS -->
-        <script src="{{ asset( 'assets2/js/popper.js' ) }}" rel="stylesheet"></script>
-        <script src="{{ asset( 'assets3/js/feather.min.js' ) }}" rel="stylesheet"></script>
+        <script src="{{ asset( 'js/app.js' ) }}"></script>
+        <script src="{{ asset( 'assets2/js/popper.js' ) }}"></script>
+        <script src="{{ asset( 'assets2/js/mdb.js' ) }}"></script>
+        <script src="{{ asset( 'assets3/js/feather.min.js' ) }}"></script>
         <!-- Grid -->
-        <script src="{{ asset( 'js/jquery/jquery.dataTables.min.js' ) }}" rel="stylesheet"></script>
-        <script src="{{ asset( 'assets3/js/dataTables.bootstrap4.min.js' ) }}" rel="stylesheet"></script>
-        <script src="{{ asset( 'assets3/js/dataTables.fixedHeader.min.js' ) }}" rel="stylesheet"></script>
-        <script src="{{ asset( 'assets3/js/dataTables.responsive.min.js' ) }}" rel="stylesheet"></script>
-        <script src="{{ asset( 'assets3/js/responsive.bootstrap.min.js' ) }}" rel="stylesheet"></script>
+        <script src="{{ asset( 'js/jquery/jquery.dataTables.min.js' ) }}"></script>
+        <script src="{{ asset( 'assets3/js/dataTables.bootstrap4.min.js' ) }}"></script>
+        <script src="{{ asset( 'assets3/js/dataTables.fixedHeader.min.js' ) }}"></script>
+        <script src="{{ asset( 'assets3/js/dataTables.responsive.min.js' ) }}"></script>
+        <script src="{{ asset( 'assets3/js/responsive.bootstrap.min.js' ) }}"></script>
         <!-- Fonts -->
-        <script src="{{ asset( 'assets3/js/solid.js' ) }}" rel="stylesheet"></script>
-        <script src="{{ asset( 'assets3/js/fontawesome.js' ) }}" rel="stylesheet"></script>
+        <script src="{{ asset( 'assets3/js/solid.js' ) }}"></script>
+        <script src="{{ asset( 'assets3/js/fontawesome.js' ) }}"></script>
         <!-- Funcionalidades -->
-        <script src="{{ asset( 'assets3/js/contenidos.js' ) }}" rel="stylesheet"></script>
-
+        <script src="{{ asset( 'assets3/js/contenidos.js' ) }}"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#sidebarCollapse').on('click', function () {
                     $('#sidebar').toggleClass('active');
                 });
             });
+            contenidos( 'dashboard' );
         </script>
     </body>
 </html>
