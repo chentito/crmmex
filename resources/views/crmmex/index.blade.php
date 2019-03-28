@@ -21,9 +21,12 @@
         <div class="wrapper">
             <!-- Sidebar -->
             <nav id="sidebar" class="{{$estilo}} shadow">
-                <div class="sidebar-header sticky-top">
+                <div id="logoBranding" class="sidebar-header sticky-top">
                     <img src="{{ asset( 'imgs/logoCRM.jpg' ) }}">
                 </div>
+                <button type="button" id="sidebarCollapse2" class="btn {{$btn}} mt-2">
+                    <i class="fas fa-angle-left"></i>
+                </button>
                 @include( 'crmmex.utils.menu' )
             </nav>
             <!-- Page Content -->
@@ -34,7 +37,7 @@
                             <i class="fas fa-align-left"></i>
                         </button>
                         <div class="float-right">
-                            <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+                            <!--nav class="navbar navbar-expand-lg navbar-light bg-light" >
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                     <span class="navbar-toggler-icon"></span>
                                 </button>
@@ -63,7 +66,6 @@
                                             </div>
                                         </li>
                                         <li class="nav-item">
-                                            <!--a class="nav-link" href="/logout">Cerrar Sesi&oacute;n <span class="sr-only">(current)</span></a-->
                                             <a class="nav-link" href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
@@ -73,7 +75,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </nav>
+                            </nav-->
                         </div>
                     </div>
                 </header>
@@ -123,6 +125,9 @@
             $(document).ready(function () {
                 $('#sidebarCollapse').on('click', function () {
                     $('#sidebar').toggleClass('active');
+                });
+                $('#sidebarCollapse2').on('click', function () {
+                    $('#sidebar').removeClass('active');
                 });
             });
             contenidos( 'dashboard' );

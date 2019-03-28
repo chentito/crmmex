@@ -26,6 +26,9 @@ a:focus {
     transition: all 0.3s;
 }
 
+#sidebarCollapse2  {
+        display: none;
+}
 /* ---------------------------------------------------
     SIDEBAR MENU
 ----------------------------------------------------- */
@@ -87,7 +90,7 @@ a[data-toggle="collapse"] {
     position: absolute;
     top: 50%;
     right: 20px;
-    transform: translateY(-50%);
+    transform: translateY(-100%);
 }
 
 ul ul a {
@@ -149,7 +152,6 @@ header{
     bottom: 4px;
 }
 
-
 /* ---------------------------------------------------
     BREADCRUMB
 ----------------------------------------------------- */
@@ -176,10 +178,18 @@ ol > li > a:hover {
         margin-left: -200px;
     }
     #sidebar.active {
-        margin-left: 0;
+        margin-left: 0px;
+        min-width: calc(100% - 0px);
+        max-width: calc(100% - 0px);
     }
     #sidebarCollapse span {
         display: none;
+    }
+    #sidebarCollapse2  {
+        display: block;
+    }
+    #logoBranding{
+        display:none;
     }
 }
 
@@ -188,4 +198,3 @@ ol > li > a:hover {
    background-color: #7f7f7f; 
    color: #fff;
  }
-

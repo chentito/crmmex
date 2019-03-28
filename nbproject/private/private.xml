@@ -3,16 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/htdocs/crm/public/assets3/css/generales.css</file>
-            <file>file:/C:/htdocs/crm/app/Http/Controllers/contenidos/ContenidosController.php</file>
-            <file>file:/C:/htdocs/crm/app/Http/Controllers/branding/BrandingController.php</file>
+            <file>file:/C:/htdocs/crm/public/assets3/css/themes/green.css</file>
+            <file>file:/C:/htdocs/crm/public/assets3/css/themes/yellow.css</file>
             <file>file:/C:/htdocs/crm/resources/views/crmmex/index.blade.php</file>
+            <file>file:/C:/htdocs/crm/public/assets3/css/themes/red.css</file>
             <file>file:/C:/htdocs/crm/routes/web.php</file>
+            <file>file:/C:/htdocs/crm/public/assets3/css/themes/grey.css</file>
+            <file>file:/C:/htdocs/crm/public/assets3/css/themes/white.css</file>
             <file>file:/C:/htdocs/crm/routes/api.php</file>
-            <file>file:/C:/htdocs/crm/public/assets3/js/contenidos.js</file>
-            <file>file:/C:/htdocs/crm/resources/js/app.js</file>
-            <file>file:/C:/htdocs/crm/resources/views/crmmex/home.blade.php</file>
+            <file>file:/C:/htdocs/crm/public/assets3/css/themes/blue2.css</file>
             <file>file:/C:/htdocs/crm/resources/views/crmmex/utils/menu.blade.php</file>
+            <file>file:/C:/htdocs/crm/public/assets3/css/themes/dark.css</file>
+            <file>file:/C:/htdocs/crm/public/assets3/css/themes/blue.css</file>
         </group>
     </open-files>
 </project-private>

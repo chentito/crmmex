@@ -24,6 +24,9 @@ a:focus {
     transition: all 0.3s;
 }
 
+#sidebarCollapse2  {
+        display: none;
+}
 /* ---------------------------------------------------
     SIDEBAR MENU
 ----------------------------------------------------- */
@@ -165,14 +168,22 @@ ol > li > a:hover {
 ----------------------------------------------------- */
 
 @media (max-width: 768px) {
-    #sidebar {
+   #sidebar {
         margin-left: -200px;
     }
     #sidebar.active {
-        margin-left: 0;
+        margin-left: 0px;
+        min-width: calc(100% - 0px);
+        max-width: calc(100% - 0px);
     }
     #sidebarCollapse span {
         display: none;
+    }
+    #sidebarCollapse2  {
+        display: block;
+    }
+    #logoBranding{
+        display:none;
     }
 }
 

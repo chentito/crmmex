@@ -24,4 +24,5 @@ function abreModal() {
 
 function cierraModal() {
     $( '.modal' ).modal( 'hide' );
+    $( '#sidebar' ).removeClass( 'active' );
 }
