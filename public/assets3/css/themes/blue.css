@@ -8,10 +8,10 @@ and open the template in the editor.
     Author     : Carlos
 */
 
-@import url('https://fonts.googleapis.com/css?family=Italiana');
+@import url('https://fonts.googleapis.com/css?family=Jura');
 
 body {
-    font-family: 'Italiana', serif;
+    font-family: 'Jura', sans-serif;
     background: #fafafa;
     font-size: 11px;
 }
