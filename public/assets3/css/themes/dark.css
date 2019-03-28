@@ -8,10 +8,12 @@ and open the template in the editor.
     Author     : Carlos
 */
 
-@import url('https://fonts.googleapis.com/css?family=Exo+2');
+/*@import url('https://fonts.googleapis.com/css?family=Exo+2');*/
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 body {
-    font-family: 'Exo 2', sans-serif;
+    /*font-family: 'Exo 2', sans-serif;*/
+    font-family: 'Montserrat', sans-serif;
     background: #fafafa;
     font-size: 11px;
 }
