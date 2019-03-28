@@ -123,7 +123,6 @@ a.article,a.article:hover {
 
 .navbar {
   position: static;
-  
 }
 
 .navbar .nav > li {
@@ -199,4 +198,11 @@ ol > li > a:hover {
    background-color: #7f7f7f; 
    color: #fff;
  }
-
+ 
+header nav div ul li a:hover{
+    background-color: #fafafa;
+}
+ 
+header nav div ul li a:focus{
+    background-color: #fafafa;
+}

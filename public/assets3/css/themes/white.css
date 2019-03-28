@@ -191,3 +191,11 @@ ol > li > a:hover {
    background-color: #cccccc;
 }
 
+header nav div ul li a:hover{
+    background-color: #fafafa;
+}
+ 
+header nav div ul li a:focus{
+    background-color: #fafafa;
+}
+
