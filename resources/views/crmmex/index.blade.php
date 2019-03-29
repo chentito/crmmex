@@ -33,7 +33,7 @@
                 <div id="logoBranding" class="sidebar-header sticky-top" >
                     <img src="{{ asset( 'imgs/logoCRM.jpg' ) }}">
                 </div>
-                <button type="button" id="sidebarCollapse2" class="btn {{$btn}} mt-2">
+                <button type="button" id="sidebarCollapse2" class="btn {{$btn}} mt-2" style="width: 100%">
                     <i class="fas fa-angle-left"></i>
                 </button>
                 @include( 'crmmex.utils.menu' )
