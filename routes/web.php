@@ -33,15 +33,15 @@ Route::get( '/template2/{tema?}' , function( $tema=null ) {
 });
 
 
-Route::get( '/home4' , 'branding\BrandingController@index' );
-Route::get( '/setTema/{id}' , 'branding\BrandingController@update' );
-Route::get( '/contenidos/{id}' , 'contenidos\ContenidosController@contenidos' );
-
-
 // Rutas protegidas por sesion
 Route::middleware('auth')->group( function() {
     /* V3 */
-    
+    Route::get( '/home4' , function(){
+        return redirect('/login');
+    });
+    Route::get( '/setTema/{id}' , 'branding\BrandingController@update' );
+    Route::get( '/contenidos/{id}' , 'contenidos\ContenidosController@contenidos' );
+    Route::get( '/home' , 'branding\BrandingController@index');
     
     
     /* V2 */
@@ -86,7 +86,7 @@ Route::middleware('auth')->group( function() {
     Route::get( '/opcionesCat/{id}' , 'CatalogoController@catalogo' );
 
     /* V1 */
-    Route::get( '/home'                       , 'HomeController@index')->name('home');
+    //Route::get( '/home'                       , 'HomeController@index')->name('home');
     Route::get( '/home2'                      , function(){ return view( 'home2' ); });
 
     /*******************************

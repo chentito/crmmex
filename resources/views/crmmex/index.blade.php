@@ -17,11 +17,20 @@
         <link href="{{ asset( 'assets3/css/generales.css' ) }}" rel="stylesheet">
     </head>
     <body class="h-100">
+        <style>
+            .fondo {
+                background: url("http://192.168.30.109/imgs/background/salajuntas.jpg") no-repeat center center fixed; 
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+        </style>
         <!-- Contenedor principal -->
-        <div class="wrapper">
+        <div class="wrapper fondo">
             <!-- Barra lateral, contiene menu e imagen corporativa -->
-            <nav id="sidebar" class="{{$estilo}} shadow">
-                <div id="logoBranding" class="sidebar-header sticky-top">
+            <nav id="sidebar" class="{{$estilo}} shadow" style="opacity: .8">
+                <div id="logoBranding" class="sidebar-header sticky-top" >
                     <img src="{{ asset( 'imgs/logoCRM.jpg' ) }}">
                 </div>
                 <button type="button" id="sidebarCollapse2" class="btn {{$btn}} mt-2">
@@ -32,7 +41,7 @@
             <!-- Contenido central, contiene header, botones contro menu, breadcrumb y contenido principal -->
             <div class="container-fluid" id="content">
                 <!-- Header -->
-                <header id="header" class="bg-light sticky-top">
+                <header id="header" class="bg-light sticky-top" style="opacity: .9; font-weight: bold">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light" >
                         <button type="button" id="sidebarCollapse" class="btn {{$btn}} mt-1">
                             <i class="fas fa-align-left"></i>
@@ -44,7 +53,7 @@
                     </nav>
                 </header>
                 <!-- Breadcrumb -->
-                <div style="height: 35px" style="z-index: 1400" id="contenedorBreadCrumb">
+                <div style="height: 35px; opacity: .8" style="z-index: 1400" id="contenedorBreadCrumb">
                     <ol class="breadcrumb rounded-0 {{$estilo}} shadow">
                         <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                     </ol>
@@ -53,7 +62,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12 mt-3 mb-3">
-                            <div class="card card-small shadow {{$borde}}">
+                            <div class="card card-small shadow {{$borde}}" style="opacity: .9">
                                 <div class="card-body" id="contenidosPrincipales">
                                     @yield( 'contenidos' )
                                 </div>
