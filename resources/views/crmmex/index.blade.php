@@ -19,7 +19,7 @@
     <body class="h-100">
         <!-- Contenedor principal -->
         <div class="wrapper">
-            <!-- Sidebar -->
+            <!-- Barra lateral, contiene menu e imagen corporativa -->
             <nav id="sidebar" class="{{$estilo}} shadow">
                 <div id="logoBranding" class="sidebar-header sticky-top">
                     <img src="{{ asset( 'imgs/logoCRM.jpg' ) }}">
@@ -29,8 +29,9 @@
                 </button>
                 @include( 'crmmex.utils.menu' )
             </nav>
-            <!-- Page Content -->
+            <!-- Contenido central, contiene header, botones contro menu, breadcrumb y contenido principal -->
             <div class="container-fluid" id="content">
+                <!-- Header -->
                 <header id="header" class="bg-light sticky-top">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light" >
                         <button type="button" id="sidebarCollapse" class="btn {{$btn}} mt-1">
@@ -39,48 +40,16 @@
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="/home4">Dashboard<span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a href="#" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle">
-                                        Bienvenido Carlos Reyes
-                                    </a>
-                                    <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
-                                        <li><a id="menuHeader" class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('prospectos_listado');">Editar Perfil</a></li>
-                                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('prospectos_nuevo');">Actividades</a></li>
-                                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('prospectos_seguimiento');">Reportes</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a href="#" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle">
-                                        Alertas
-                                    </a>
-                                    <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
-                                        <li><a id="menuHeader" class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('prospectos_listado');">Editar Perfil</a></li>
-                                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('prospectos_nuevo');">Actividades</a></li>
-                                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('prospectos_seguimiento');">Reportes</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                        Cerrar Sesi&oacute;n
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> @csrf </form>
-                                </li>
-                            </ul>
-                        </div>
+                        @include( 'crmmex.utils.header' )
                     </nav>
                 </header>
+                <!-- Breadcrumb -->
                 <div style="height: 35px" style="z-index: 1400" id="contenedorBreadCrumb">
                     <ol class="breadcrumb rounded-0 {{$estilo}} shadow">
                         <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                     </ol>
                 </div>
+                <!-- Contenido Principal -->
                 <div class="container">
                     <div class="row">
                         <div class="col-12 mt-3 mb-3">
