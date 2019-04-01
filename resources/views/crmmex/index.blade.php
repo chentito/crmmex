@@ -19,7 +19,7 @@
     <body class="h-100">
         <style>
             .fondo {
-                background: url("http://192.168.30.109/imgs/background/salajuntas.jpg") no-repeat center center fixed; 
+                background: url("{{ asset( 'imgs/background/salajuntas.jpg' ) }}") no-repeat center center fixed; 
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;
