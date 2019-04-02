@@ -1,0 +1,43 @@
+/*
+    Hoja que le dara estilos a los componentes internos de cada seccion
+*/
+/* 
+    Created on : 1/04/2019, 05:56:03 PM
+    Author     : Carlos
+*/
+
+.card-header{
+    height: 25px;
+    padding-top: 5px;
+}
+
+.card-header h6{
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.card-body{
+    padding: 10px;
+}
+
+input{
+    border: 1px;
+}
+
+::-webkit-input-placeholder {
+   font-style: italic;
+   font-size: 10px;
+}
+:-moz-placeholder {
+   font-style: italic;  
+   font-size: 10px;
+}
+::-moz-placeholder {
+   font-style: italic;  
+   font-size: 10px;
+}
+:-ms-input-placeholder {  
+   font-style: italic; 
+   font-size: 10px;
+}
+

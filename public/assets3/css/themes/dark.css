@@ -199,10 +199,20 @@ ol > li > a:hover {
    color: #fff;
  }
  
-header nav div ul li a:hover{
+header nav div ul li a:hover {
     background-color: #fafafa;
 }
  
-header nav div ul li a:focus{
+header nav div ul li a:focus {
     background-color: #fafafa;
+}
+
+.form-control:focus {
+  border-color: #7f7f7f;
+  box-shadow: inset 0 1px 1px rgba(15, 0, 0, 0.075), 0 0 8px rgba(41, 43, 44, 0.6);
+}
+
+.custom-select:focus {
+  border-color: #7f7f7f;
+  box-shadow: inset 0 1px 1px rgba(15, 0, 0, 0.075), 0 0 8px rgba(41, 43, 44, 0.6);
 }

@@ -32,6 +32,9 @@ Route::get( '/template2/{tema?}' , function( $tema=null ) {
     return view( 'crm.layout.nuevo2' , [ 'estilo' => $estilo , 'css' => $css , 'btn' => $btns ] );
 });
 
+Route::get( '/fachada' , function() {
+    echo EsPDF::check('algo.pdf');
+});
 
 // Rutas protegidas por sesion
 Route::middleware('auth')->group( function() {

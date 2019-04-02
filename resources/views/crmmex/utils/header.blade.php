@@ -8,20 +8,15 @@
                 Bienvenido Carlos Reyes
             </a>
             <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
-                <li><a id="menuHeader" class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('prospectos_listado');">Editar Perfil</a></li>
-                <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('prospectos_nuevo');">Actividades</a></li>
-                <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('prospectos_seguimiento');">Reportes</a></li>
+                <li><a id="menuHeader" class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('ejecutivos_perfil');">Editar Perfil</a></li>
+                <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('ejecutivos_actividades');">Actividades</a></li>
+                <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('ejecutivos_reportes');">Reportes</a></li>
+                <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('ejecutivos_listado');">Ejecutivos</a></li>
+                <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('ejecutivos_roles');">Roles</a></li>
             </ul>
         </li>
-        <li class="nav-item dropdown">
-            <a href="#" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle">
-                Alertas
-            </a>
-            <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
-                <li><a id="menuHeader" class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('prospectos_listado');">Editar Perfil</a></li>
-                <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('prospectos_nuevo');">Actividades</a></li>
-                <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('prospectos_seguimiento');">Reportes</a></li>
-            </ul>
+        <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)" onclick="return contenidos('ejecutivos_avisos');">Avisos</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}"

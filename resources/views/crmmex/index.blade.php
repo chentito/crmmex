@@ -15,8 +15,9 @@
         <link href="{{ asset( 'assets3/css/dataTables.bootstrap4.min.css' ) }}" rel="stylesheet">
         <link href="/assets3/css/themes/{{$css}}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/generales.css' ) }}" rel="stylesheet">
+        <link href="{{ asset( 'assets3/css/contenidos.css' ) }}" rel="stylesheet">
     </head>
-    <body class="h-100">
+    <body>
         <style>
             .fondo {
                 background: url("{{ asset( 'imgs/background/salajuntas.jpg' ) }}") no-repeat center center fixed; 
@@ -73,6 +74,7 @@
             </div>
         </div>
 
+        <!-- MODAL -->
         <div class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content" style="width: 48px">
@@ -80,6 +82,30 @@
                 </div>
             </div>
         </div>
+        
+        <!-- TOAST -->
+        <!--div style="position: absolute; top: 60px; right: 0; z-index: 1900">
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="mr-auto">Avisos...</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="toast-body">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. <br>
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                </div>
+            </div>
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="mr-auto">Avisos...</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="toast-body">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. <br>
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                </div>
+            </div>
+        </div-->
 
         <div id="app"></div>
 
@@ -101,13 +127,14 @@
         <script src="{{ asset( 'assets3/js/contenidos.js' ) }}"></script>
 
         <script type="text/javascript">
-            $(document).ready(function () {
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar').toggleClass('active');
+            $( document ).ready( function() {
+                $( '#sidebarCollapse' ).on( 'click' , function () {
+                    $( '#sidebar' ).toggleClass( 'active' );
                 });
-                $('#sidebarCollapse2').on('click', function () {
-                    $('#sidebar').removeClass('active');
+                $( '#sidebarCollapse2' ).on( 'click' , function () {
+                    $( '#sidebar' ).removeClass( 'active' );
                 });
+                $( '.toast' ).toast();
             });
             contenidos( 'dashboard' );
         </script>

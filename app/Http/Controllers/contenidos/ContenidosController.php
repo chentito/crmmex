@@ -17,16 +17,16 @@ class ContenidosController extends Controller
         $breadcrumb = explode( '|' , $secciones->ruta );
 
         return response()->json([
-                'body'       => view( $secciones->vista , [ 'estilo' => $branding->estilo , 
-                                                            'css'    => $branding->css , 
+                'body'       => view( $secciones->vista , [ 'estilo' => $branding->estilo ,
+                                                            'css'    => $branding->css ,
                                                             'btn'    => $branding->boton , 
-                                                            'borde'  => $branding->borde ] 
+                                                            'borde'  => $branding->borde ]
                                     )->render(),
                 'breadcrumb' => view( 'crmmex.utils.breadcrumb' , [ 'elementos' => $breadcrumb , 
                                                                     'estilo'    => $branding->estilo ] 
                                     )->render()
+
         ]);
     }
-
 
 }

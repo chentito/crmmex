@@ -34,7 +34,7 @@ class RolesController extends Controller
                 );
             }
         }
-        session( [ 'MiLLave' => 'mi valor valor valor' ] );
+
         return view( 'crm.ejecutivos.ejecutivoRoles' , [ 'modulos' => $datos , 'roles' => $this->listadoRoles() , 'rolUrl' => $idRol ] );
     }
 

@@ -205,4 +205,12 @@ header nav div ul li a:focus{
     background-color: #fafafa;
 }
 
- 
+ .form-control:focus {
+  border-color: #7f7f7f;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(91, 192, 222, 0.6);
+}
+
+.custom-select:focus {
+  border-color: #7f7f7f;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(91, 192, 222, 0.6);
+}
