@@ -13,6 +13,7 @@
         <link href="{{ asset( 'assets3/css/fixedHeader.bootstrap.min.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/responsive.bootstrap.min.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/dataTables.bootstrap4.min.css' ) }}" rel="stylesheet">
+        <link href="{{ asset( 'assets3/css/jodit.min.css' ) }}" rel="stylesheet">
         <link href="/assets3/css/themes/{{$css}}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/generales.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/contenidos.css' ) }}" rel="stylesheet">
@@ -20,6 +21,8 @@
     <body>
         <div id="app"></div>
         <script src="{{ asset( 'js/app.js' ) }}"></script>
+        <script src="{{ asset( 'assets3/js/jodit.min.js' ) }}"></script>
+
         <style>
             .fondo {
                 background: url("{{ asset( 'imgs/background/salajuntas.jpg' ) }}") no-repeat center center fixed;
@@ -30,9 +33,6 @@
             }
         </style>
         
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jodit/3.1.39/jodit.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/jodit/3.1.39/jodit.min.js"></script>
-
         <!-- Contenedor principal -->
         <div class="wrapper fondo">
             <!-- Barra lateral, contiene menu e imagen corporativa -->

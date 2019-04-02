@@ -53,6 +53,7 @@
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-sm-4">
         <button onclick="contenidos( 'mercadotecnia_listado' )" class="mt-1 btn btn-sm {{$btn}}"><i class="fa fa-sm fa-undo"></i> Regresar</button>
