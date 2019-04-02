@@ -10,8 +10,9 @@
                     <div class="col-sm-3 mb-1">
                         <input type="text" id="alta_prospecto_nombre_rfc" class="form-control form-control-sm" placeholder="RFC">
                     </div>
-                    <div class="col-sm-3 mb-1">
+                    <div class="col-sm-3 mb-1"><div id="app">
                         <combo-box id-cat="5" nombre-select="combo_giro"></combo-box>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -83,9 +84,8 @@
                     </div>
                 </div>
             </div>
-            <div class="card-header">
-                <div id="app"><boton-regresar></boton-regresar></div>
-                <button class="btn btn-sm btn-outline-accent float-right"><i class="material-icons">save</i> Guardar</button>
+            <div class="card-footer">
+                <button class="btn btn-sm {{$btn}} float-right"><i class="fa fa-users fa-lg">save</i> Guardar</button>
             </div>
         </div>
     </div>

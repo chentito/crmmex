@@ -18,7 +18,7 @@
     <li>
         <a href="#mercadotecnia" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-lightbulb fa-lg"></i>  Mercadotecnia</a>
         <ul class="collapse list-unstyled" id="mercadotecnia">
-            <li><a href="javascript:void(0)">Mercadotecnia</a></li>
+            <li><a href="javascript:void(0)" onclick="return contenidos('mercadotecnia_listado');">Campañas</a></li>
         </ul>
     </li>
     <li>

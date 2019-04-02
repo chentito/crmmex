@@ -6,6 +6,10 @@
     Author     : Carlos
 */
 
+#container button{
+    font-size: 10px;
+}
+
 .card-header{
     height: 25px;
     padding-top: 5px;

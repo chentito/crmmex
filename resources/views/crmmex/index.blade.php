@@ -18,15 +18,21 @@
         <link href="{{ asset( 'assets3/css/contenidos.css' ) }}" rel="stylesheet">
     </head>
     <body>
+        <div id="app"></div>
+        <script src="{{ asset( 'js/app.js' ) }}"></script>
         <style>
             .fondo {
-                background: url("{{ asset( 'imgs/background/salajuntas.jpg' ) }}") no-repeat center center fixed; 
+                background: url("{{ asset( 'imgs/background/salajuntas.jpg' ) }}") no-repeat center center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;
                 background-size: cover;
             }
         </style>
+        
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jodit/3.1.39/jodit.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jodit/3.1.39/jodit.min.js"></script>
+
         <!-- Contenedor principal -->
         <div class="wrapper fondo">
             <!-- Barra lateral, contiene menu e imagen corporativa -->
@@ -37,7 +43,7 @@
                 <button type="button" id="sidebarCollapse2" class="btn {{$btn}} mt-2" style="width: 100%">
                     <i class="fas fa-angle-left"></i>
                 </button>
-                @include( 'crmmex.utils.menu' )
+                @include( 'crmmex.utils.menu' , [ 'estilo' => $estilo , 'boton' => $btn ] )
             </nav>
             <!-- Contenido central, contiene header, botones contro menu, breadcrumb y contenido principal -->
             <div class="container-fluid" id="content">
@@ -82,7 +88,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- TOAST -->
         <!--div style="position: absolute; top: 60px; right: 0; z-index: 1900">
             <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -107,10 +113,7 @@
             </div>
         </div-->
 
-        <div id="app"></div>
-
         <!-- SCRIPTS -->
-        <script src="{{ asset( 'js/app.js' ) }}"></script>
         <script src="{{ asset( 'assets2/js/popper.js' ) }}"></script>
         <script src="{{ asset( 'assets2/js/mdb.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/feather.min.js' ) }}"></script>
