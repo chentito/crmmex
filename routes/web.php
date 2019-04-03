@@ -32,6 +32,8 @@ Route::get( '/template2/{tema?}' , function( $tema=null ) {
     return view( 'crm.layout.nuevo2' , [ 'estilo' => $estilo , 'css' => $css , 'btn' => $btns ] );
 });
 
+Route::get( '/combos/{id}' , 'contenidos\CatalogosController@generaListadoCombo');
+
 Route::get( '/fachada' , function() {
     echo EsPDF::check('algo.pdf');
 });

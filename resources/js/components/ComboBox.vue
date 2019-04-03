@@ -13,6 +13,7 @@
         },
         mounted: function(){
             this.datosCombo( this.idCat );
+            console.log('montado combo box');
         },
         methods: {
             datosCombo( id ) {

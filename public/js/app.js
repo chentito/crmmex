@@ -1800,6 +1800,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.datosCombo(this.idCat);
+    console.log('montado combo box');
   },
   methods: {
     datosCombo: function datosCombo(id) {

@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\contenidos;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Catalogo AS Catalogo;
 
-class CatalogoController extends Controller
+class CatalogosController extends Controller
 {
-    //
-    public function catalogo( $id ) {
+    
+    public function generaListadoCombo( $id ) {
         $catalogo = array();
         $opciones = Catalogo::find( $id );
 
@@ -29,7 +29,7 @@ class CatalogoController extends Controller
 
         return response()->json( $catalogo );
     }
-
+    
     public function catalogoPorId( $id ) {
         $catalogo = array();
         $opciones = Catalogo::find( $id );

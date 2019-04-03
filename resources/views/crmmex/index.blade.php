@@ -8,6 +8,8 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title> {{ config('app.name', 'Laravel') }} </title>
         <!-- ESTILOS -->
+        <link href="{{ asset( 'assets2/css/all.css' ) }}" rel="stylesheet">
+        <link href="{{ asset( 'assets2/css/icon.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets2/css/bootstrap.css' ) }}" rel="stylesheet">
         <!-- Grid -->
         <link href="{{ asset( 'assets3/css/fixedHeader.bootstrap.min.css' ) }}" rel="stylesheet">
@@ -17,24 +19,16 @@
         <link href="/assets3/css/themes/{{$css}}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/generales.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/contenidos.css' ) }}" rel="stylesheet">
+
+        <script src="{{ asset( 'assets2/js/jquery-3.js' ) }}"></script>
+        <!--script async="" defer="defer" src="{{ asset( 'assets2/js/buttons.js' ) }}"></script-->
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
     </head>
     <body>
-        <div id="app"></div>
-        <script src="{{ asset( 'js/app.js' ) }}"></script>
-        <script src="{{ asset( 'assets3/js/jodit.min.js' ) }}"></script>
-
-        <style>
-            .fondo {
-                background: url("{{ asset( 'imgs/background/salajuntas.jpg' ) }}") no-repeat center center fixed;
-                -webkit-background-size: cover;
-                -moz-background-size: cover;
-                -o-background-size: cover;
-                background-size: cover;
-            }
-        </style>
-        
         <!-- Contenedor principal -->
+        <div id="app"></div>
         <div class="wrapper fondo">
+
             <!-- Barra lateral, contiene menu e imagen corporativa -->
             <nav id="sidebar" class="{{$estilo}} shadow" style="opacity: .8">
                 <div id="logoBranding" class="sidebar-header sticky-top" >
@@ -45,6 +39,7 @@
                 </button>
                 @include( 'crmmex.utils.menu' , [ 'estilo' => $estilo , 'boton' => $btn ] )
             </nav>
+
             <!-- Contenido central, contiene header, botones contro menu, breadcrumb y contenido principal -->
             <div class="container-fluid" id="content">
                 <!-- Header -->
@@ -59,17 +54,22 @@
                         @include( 'crmmex.utils.header' )
                     </nav>
                 </header>
+
                 <!-- Breadcrumb -->
                 <div style="height: 35px; opacity: .8" style="z-index: 1400" id="contenedorBreadCrumb">
                     <ol class="breadcrumb rounded-0 {{$estilo}} shadow">
                         <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                     </ol>
                 </div>
+
                 <!-- Contenido Principal -->
                 <div class="container">
                     <div class="row">
                         <div class="col-12 mt-3 mb-3">
                             <div class="card card-small shadow {{$borde}}" style="opacity: .9">
+                                <!--div id="app">
+                                    <combo-box id-cat="5" nombre-select="combo_giro"></combo-box>
+                                </div-->
                                 <div class="card-body" id="contenidosPrincipales">
                                     @yield( 'contenidos' )
                                 </div>
@@ -114,7 +114,9 @@
         </div-->
 
         <!-- SCRIPTS -->
+        <script src="{{ asset( 'js/app.js' ) }}" ></script>
         <script src="{{ asset( 'assets2/js/popper.js' ) }}"></script>
+        <script src="{{ asset( 'assets2/js/jquery.js' ) }}"></script>
         <script src="{{ asset( 'assets2/js/mdb.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/feather.min.js' ) }}"></script>
         <!-- Grid -->
