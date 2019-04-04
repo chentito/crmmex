@@ -16,6 +16,7 @@
         <link href="{{ asset( 'assets3/css/responsive.bootstrap.min.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/dataTables.bootstrap4.min.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/jodit.min.css' ) }}" rel="stylesheet">
+        <link href="{{ asset( 'assets3/css/responsive-calendar.css' ) }}" rel="stylesheet">
         <link href="/assets3/css/themes/{{$css}}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/generales.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/contenidos.css' ) }}" rel="stylesheet">
@@ -26,6 +27,18 @@
         <script async defer src="https://buttons.github.io/buttons.js"></script>
     </head>
     <body>
+        
+        <style>
+            .fondo {
+                background: url("{{asset('/imgs/background/'.$back)}}") no-repeat center center fixed;
+                /*background: url("/imgs/background/salajuntas.jpg") no-repeat center center fixed;*/
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+        </style>
+        
         <!-- Contenedor principal -->
         <div id="app"></div>
         <div class="wrapper fondo">
@@ -120,6 +133,7 @@
         <script src="{{ asset( 'assets2/js/jquery.js' ) }}"></script>
         <script src="{{ asset( 'assets2/js/mdb.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/feather.min.js' ) }}"></script>
+        <script src="{{ asset( 'assets3/js/responsive-calendar.js' ) }}"></script>
         <!-- Grid -->
         <script src="{{ asset( 'js/jquery/jquery.dataTables.min.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/dataTables.bootstrap4.min.js' ) }}"></script>
@@ -144,6 +158,8 @@
             });
             contenidos( 'dashboard' );
         </script>
-
+        
+        
+        
     </body>
 </html>

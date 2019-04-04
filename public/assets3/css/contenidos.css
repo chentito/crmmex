@@ -5,14 +5,6 @@
     Created on : 1/04/2019, 05:56:03 PM
     Author     : Carlos
 */
-
-.fondo {
-    background: url("/imgs/background/salajuntas.jpg") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
         
 #container button{
     font-size: 10px;

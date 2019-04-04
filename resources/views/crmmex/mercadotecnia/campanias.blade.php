@@ -51,6 +51,17 @@
                 <script>var editor = new Jodit('#editorN');</script>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-8 mt-2"></div>
+            <div class="col-sm-4 mt-2"> 
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Activar seguimiento de apertura ?</span>
+                    </div>
+                    <input class="form-control form-control-sm" type="checkbox">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

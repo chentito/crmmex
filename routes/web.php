@@ -45,6 +45,7 @@ Route::middleware('auth')->group( function() {
         return redirect('/login');
     });
     Route::get( '/setTema/{id}' , 'branding\BrandingController@update' );
+    Route::get( '/setImagen/{id}' , 'branding\BrandingController@updateImagen' );
     Route::get( '/contenidos/{id}' , 'contenidos\ContenidosController@contenidos' );
     Route::get( '/home' , 'branding\BrandingController@index');
     
