@@ -15,6 +15,11 @@
     padding-top: 5px;
 }
 
+.card-footer{
+    height: 36px;
+    padding-top: 2px;
+}
+
 .card-header h6{
     font-size: 12px;
     font-weight: bold;
