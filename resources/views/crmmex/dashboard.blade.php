@@ -1,9 +1,12 @@
 
 <div class="row">
-    <div class="col-sm-3"><canvas id="myChart" style="max-width: 500px;"></canvas></div>
-    <div class="col-sm-3"><canvas id="lineChart"></canvas></div>
-    <div class="col-sm-3"><canvas id="barChart"></canvas></div>
-    <div class="col-sm-3"><canvas id="horizontalBar"></canvas></div>
+    <div class="col-sm-12 text-center mx-lg-n5">Datos Rápidos<br><br><br></div>
+</div>
+<div class="row">
+    <div class="col-sm-4 mt-6"><canvas id="myChart" style="max-width: 500px;"></canvas></div>
+    <div class="col-sm-4 mt-6"><canvas id="lineChart"></canvas></div>
+    <div class="col-sm-4 mt-6"><canvas id="barChart"></canvas></div>
+    <!--div class="col-sm-4"><canvas id="horizontalBar"></canvas></div-->
 </div>
 
 
@@ -12,9 +15,9 @@
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+      labels: ["Noviembre", "Diciembre", "Enero", "Febrero", "Marzo", "Abril"],
       datasets: [{
-        label: '# of Votes',
+        label: '# de Altas',
         data: [12, 19, 3, 5, 2, 3],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -85,17 +88,17 @@
   var myBarChart = new Chart(ctxB, {
     type: 'bar',
     data: {
-      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-      datasets: [{
-        label: '# of Votes',
+        labels: ["Noviembre", "Diciembre", "Enero", "Febrero", "Marzo", "Abril"],
+        datasets: [{
+        label: 'Propuestas Enviadas',
         data: [12, 19, 3, 5, 2, 3],
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
         ],
         borderColor: [
           'rgba(255,99,132,1)',
