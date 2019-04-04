@@ -21,6 +21,7 @@
         <link href="{{ asset( 'assets3/css/contenidos.css' ) }}" rel="stylesheet">
 
         <script src="{{ asset( 'assets2/js/jquery-3.js' ) }}"></script>
+        <script src="{{ asset( 'assets3/js/jodit.min.js' ) }}"></script>
         <!--script async="" defer="defer" src="{{ asset( 'assets2/js/buttons.js' ) }}"></script-->
         <script async defer src="https://buttons.github.io/buttons.js"></script>
     </head>
