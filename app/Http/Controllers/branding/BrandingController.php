@@ -54,13 +54,15 @@ class BrandingController extends Controller
         $seleccionado = Branding::where( 'seleccionado' , 1 )->first();
         $seleccionado->usa_background = 0;
         $seleccionado->background     = "";
+        $seleccionado->transparencia  = 1;
         $seleccionado->save();
     }
-    
+
     /* Establece Transparencia */
     public function guardaTrans( $val ) {
         $seleccionado = Branding::where( 'seleccionado' , 1 )->first();
         $seleccionado->transparencia = $val/10;
         $seleccionado->save();
     }
+
 }

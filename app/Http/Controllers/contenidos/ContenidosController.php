@@ -19,12 +19,12 @@ class ContenidosController extends Controller
         return response()->json([
                 'body'       => view( $secciones->vista , [ 'estilo' => $branding->estilo ,
                                                             'css'    => $branding->css ,
-                                                            'btn'    => $branding->boton , 
-                                                            'trans'  => ( $branding->transparencia * 10 ) , 
+                                                            'btn'    => $branding->boton ,
+                                                            'trans'  => ( $branding->transparencia * 10 ) ,
                                                             'borde'  => $branding->borde ]
                                     )->render(),
-                'breadcrumb' => view( 'crmmex.utils.breadcrumb' , [ 'elementos' => $breadcrumb , 
-                                                                    'estilo'    => $branding->estilo ] 
+                'breadcrumb' => view( 'crmmex.utils.breadcrumb' , [ 'elementos' => $breadcrumb ,
+                                                                    'estilo'    => $branding->estilo ]
                                     )->render()
         ]);
 

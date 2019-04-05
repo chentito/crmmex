@@ -1,4 +1,4 @@
-<div class="row"> 
+<div class="row">
     <div class="col-sm-12">
         <div class="card card-small">
             <div class="card-header"><h6>Temas Disponibles</h6></div>
@@ -21,7 +21,7 @@
         </div>
     </div>
 </div>
-<div class="row mt-3"> 
+<div class="row mt-3">
     <div class="col-sm-12">
         <div class="card card-small">
             <div class="card-header"><h6>Imágen de Fondo</h6></div>
@@ -48,7 +48,7 @@
                             <button class="btn btn-sm {{$btn}}" onclick="return quitaImagen();">Quitar imágen de fondo</button>
                         </div>
                         <div class="col-sm-6">
-                            Transparencia 
+                            Transparencia
                             <div class="input-group mb-3">
                                 <input type="number" min="1" max="10" id="transparenciaValor" class="form-control form-control-sm" value="{{$trans}}" placeholder="Transparencia" aria-label="Transparencia" aria-describedby="button-addon2">
                                 <div class="input-group-append">
