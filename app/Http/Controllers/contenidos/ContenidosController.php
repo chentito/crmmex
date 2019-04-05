@@ -20,13 +20,14 @@ class ContenidosController extends Controller
                 'body'       => view( $secciones->vista , [ 'estilo' => $branding->estilo ,
                                                             'css'    => $branding->css ,
                                                             'btn'    => $branding->boton , 
+                                                            'trans'  => ( $branding->transparencia * 10 ) , 
                                                             'borde'  => $branding->borde ]
                                     )->render(),
                 'breadcrumb' => view( 'crmmex.utils.breadcrumb' , [ 'elementos' => $breadcrumb , 
                                                                     'estilo'    => $branding->estilo ] 
                                     )->render()
-
         ]);
+
     }
 
 }

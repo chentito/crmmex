@@ -42,6 +42,22 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-12">
+                    <div class="row mb-3">
+                        <div class="col-sm-6 text-center">
+                            <button class="btn btn-sm {{$btn}}" onclick="return quitaImagen();">Quitar imágen de fondo</button>
+                        </div>
+                        <div class="col-sm-6">
+                            Transparencia 
+                            <div class="input-group mb-3">
+                                <input type="number" min="1" max="10" id="transparenciaValor" class="form-control form-control-sm" value="{{$trans}}" placeholder="Transparencia" aria-label="Transparencia" aria-describedby="button-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-sm {{$btn}}" type="button" id="button-addon2" onclick="return guardaTransparencia()">Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="card-footer">
                 <div class="col-sm-12 float-right">
@@ -63,6 +79,16 @@
 <script>
     function cambiaTema( idT ) {
         axios( '/setTema/' + idT )
+            .then( datos => { location.reload(); })
+            .catch( err => { console.error(err); });
+    }
+    function cambiaFondo( imagen ) {
+        axios( '/setImagen/' + imagen )
+            .then( datos => { location.reload(); })
+            .catch( err => { console.error(err); });
+    }
+    function quitaImagen() {
+        axios( '/quitaImagen/' )
             .then( datos => {
                 location.reload();
             })
@@ -70,8 +96,9 @@
                 console.error(err);
             });
     }
-    function cambiaFondo( imagen ) {
-        axios( '/setImagen/' + imagen )
+    function guardaTransparencia() {
+        valor = $( '#transparenciaValor' ).val();
+        axios( '/guardaTrans/' + valor )
             .then( datos => {
                 location.reload();
             })

@@ -38,10 +38,10 @@
         </style>
         <!-- Contenedor principal -->
         <div id="app"></div>
-        <div class="wrapper fondo">
+        <div class="wrapper @if($usaBack==1) fondo @endif">
 
             <!-- Barra lateral, contiene menu e imagen corporativa -->
-            <nav id="sidebar" class="{{$estilo}} shadow" style="opacity: .8">
+            <nav id="sidebar" class="{{$estilo}} shadow" style="opacity: {{$trans}}">
                 <div id="logoBranding" class="sidebar-header sticky-top" >
                     <img src="{{ asset( 'imgs/logoCRM.jpg' ) }}">
                 </div>
@@ -54,7 +54,7 @@
             <!-- Contenido central, contiene header, botones contro menu, breadcrumb y contenido principal -->
             <div class="container-fluid" id="content">
                 <!-- Header -->
-                <header id="header" class="bg-light sticky-top" style="opacity: .9; font-weight: bold">
+                <header id="header" class="bg-light sticky-top" style="opacity: {{$trans}}; font-weight: bold">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light" >
                         <button type="button" id="sidebarCollapse" class="btn {{$btn}} mt-1">
                             <i class="fas fa-align-left"></i>
@@ -67,7 +67,7 @@
                 </header>
 
                 <!-- Breadcrumb -->
-                <div style="height: 35px; opacity: .8" style="z-index: 1400" id="contenedorBreadCrumb">
+                <div style="height: 35px; opacity: {{$trans}}" style="z-index: 1400" id="contenedorBreadCrumb">
                     <ol class="breadcrumb rounded-0 {{$estilo}} shadow">
                         <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                     </ol>
@@ -77,7 +77,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12 mt-3 mb-3">
-                            <div class="card card-small shadow {{$borde}}" style="opacity: .9">
+                            <div class="card card-small shadow {{$borde}}" style="opacity: {{$trans}}">
                                 <!--div id="app">
                                     <combo-box id-cat="5" nombre-select="combo_giro"></combo-box>
                                 </div-->
@@ -99,30 +99,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- TOAST -->
-        <!--div style="position: absolute; top: 60px; right: 0; z-index: 1900">
-            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <strong class="mr-auto">Avisos...</strong>
-                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="toast-body">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. <br>
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-                </div>
-            </div>
-            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <strong class="mr-auto">Avisos...</strong>
-                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="toast-body">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. <br>
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-                </div>
-            </div>
-        </div-->
 
         <!-- SCRIPTS -->
         <script src="{{ asset( 'js/app.js' ) }}" ></script>
@@ -151,7 +127,6 @@
                 $( '#sidebarCollapse2' ).on( 'click' , function () {
                     $( '#sidebar' ).removeClass( 'active' );
                 });
-                $( '.toast' ).toast();
             });
             contenidos( 'dashboard' );
         </script>
