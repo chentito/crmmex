@@ -14,7 +14,7 @@ function contenidos( idContenido ) {
             cierraModal();
         })
         .catch( err => {
-            console.error(err);
+            console.error( err );
         });
 }
 
@@ -24,12 +24,12 @@ function cargaDatosComboCatalogo() {
         if( idty.substring( 0 , 8 ) === 'catalogo' ) {
             id = idty.split( '_' );
             axios
-                .get( '/api/opcionesCombosPorId/' + id[ 1 ] )
-                .then(response => {
-                    response.data.forEach((item) => {
-                        $( "#" + $( this ).attr( 'id' ) ).append( '<option value="' + item.id + '">' + item.nombre + '</option>' );
-                    });
+            .get( '/api/opcionesCombosPorId/' + id[ 1 ] )
+            .then(response => {
+                response.data.forEach((item) => {
+                    $( "#" + $( this ).attr( 'id' ) ).append( '<option value="' + item.id + '">' + item.nombre + '</option>' );
                 });
+            });
         }
     });
 }

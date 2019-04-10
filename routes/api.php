@@ -39,3 +39,5 @@ Route::get( '/opcionesCombos/{id}' , 'CatalogoController@catalogo' );
 Route::get( '/opcionesCombosPorId/{id}' , 'CatalogoController@catalogoPorId' );
 
 Route::get( '/listadoCatalogos' , 'configuraciones\CatalogosController@catalogosConf' );
+
+Route::get( '/agregaOpcionCatalogo' , 'configuraciones\CatalogosController@agregarOpcionCatalogo' );

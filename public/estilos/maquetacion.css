@@ -1,0 +1,61 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 9/04/2019, 09:22:42 AM
+    Author     : Carlos
+*/
+
+/* Template */
+html, body {
+    height: 100%;
+}
+            
+.wrapper,.row{   
+    height: 100%;
+    margin-left:0;
+    margin-right:0;
+}
+
+/* Lista Menu */
+#menuLateral {
+    /*background: #f6a828;*/
+    color: #fff;
+    transition: all 0.3s;
+}
+
+#menuLateral ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+#menuLateral ul.components {
+    padding: 0;
+    /*border-bottom: 1px solid #f6a828;*/
+}
+
+#menuLateral ul li a:hover {
+    color: #fff;
+    background: #666666;
+}
+
+#menuLateral ul li.active>a,a[aria-expanded="true"] {
+    color: #fff;
+    background: #323232;
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #7f7f7f;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+
+

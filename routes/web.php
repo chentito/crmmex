@@ -34,6 +34,9 @@ Route::get( '/template2/{tema?}' , function( $tema=null ) {
 
 Route::get( '/combos/{id}' , 'contenidos\CatalogosController@generaListadoCombo');
 
+Route::get( '/menu' , function(){ return view( 'crmmex.index2' ); } );
+Route::get( '/menu2' , function(){ return view( 'crmmex.index3' ); } );
+        
 Route::get( '/fachada' , function() {
     echo EsPDF::check('algo.pdf');
 });

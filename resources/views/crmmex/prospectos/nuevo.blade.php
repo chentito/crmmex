@@ -2,13 +2,19 @@
     <div class="col-sm-12">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Contacto</a>
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+                    <i class="fa fa-user fa-sm"></i><span class="d-none d-sm-inline">Contacto</span>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Razón Social</a>
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                    <i class="fa fa-briefcase fa-sm"></i><span class="d-none d-sm-inline">Razón Social</span>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Dirección</a>
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">
+                    <i class="fa fa-address-book fa-sm"></i><span class="d-none d-sm-inline">Dirección</span>
+                </a>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -181,7 +187,7 @@
         </div>
     </div>
     <div class="col-sm-12 text-center">
-        <button class="btn btn-sm {{$btn}} float-right"><i class="fa fa-users fa-lg">save</i> Guardar</button>
+        <button class="text-small btn btn-sm {{$btn}}"><i class="fa fa-users fa-lg">save</i> Guardar</button>
     </div>
 </div>
 
