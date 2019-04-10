@@ -53,8 +53,9 @@ Route::middleware('auth')->group( function() {
     Route::get( '/guardaTrans/{val}' , 'branding\BrandingController@guardaTrans' );
     Route::get( '/contenidos/{id}/{param?}' , 'contenidos\ContenidosController@contenidos' );
     Route::get( '/home' , 'branding\BrandingController@index');
-    
-    
+    Route::get( '/estructuraContacto' , function(){ return view( 'crmmex.prospectos.contacto' , [ 'rand' => rand(1111,9999) , 'btn' => 'btn-danger' ] ); } );
+
+
     /* V2 */
     Route::get( '/home3'     , function(){ return view( 'crm.crm' ); });
     /* Prospectos */

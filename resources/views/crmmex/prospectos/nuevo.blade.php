@@ -23,11 +23,11 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <div class="card card-small w-100 mb-3">
-                        <div class="card-body">
+                        <div class="card-body" id="contenedorContactos">
                             <div class="row">
                                 <div class="col-sm-3 mb-1">
                                     <label for="contacto_nombre">Nombre(s)</label>
-                                    <input type="text" id="contacto_nombre" name="contacto_nombre" class="form-control form-control-sm" value="" placeholder="Nombre(s)">
+                                    <input type="text" id="contacto_nombre" name="contacto_nombre[]" class="form-control form-control-sm" value="" placeholder="Nombre(s)">
                                 </div>
                                 <div class="col-sm-3 mb-1">
                                     <label for="contacto_paterno">Apellido Paterno</label>
@@ -82,6 +82,8 @@
                                     <label for="contacto_puesto">Puesto</label>
                                     <input type="text" id="contacto_puesto" name="contacto_puesto" class="form-control form-control-sm" value="" placeholder="Puesto">
                                 </div>
+                                <div class="col-sm-3 mb-1"></div>
+                                <div class="col-sm-3 mb-1 text-center my-auto"><button class="btn btn-sm {{$btn}}" id="btnAgregaEstructuraCliente">Agregar contacto</button></div>
                             </div>
                         </div>
                     </div>
@@ -187,7 +189,7 @@
                                 <div class="col-sm-3 mb-1"></div>
                                 <div class="col-sm-3 mb-1"></div>
                                 <div class="col-sm-3 mb-1 text-center my-auto">
-                                    <button class="text-small btn btn-sm {{$btn}}" onclick="guardaInfoExpediente()"><i class="fa fa-users fa-lg">save</i> Guardar</button>
+                                    <button class="text-small btn btn-sm {{$btn}}" id="btnGuardaExpediente" ><i class="fa fa-users fa-lg">save</i> Guardar</button>
                                 </div>
                             </div>
                         </div>
@@ -199,19 +201,29 @@
 </form>
 
 <script>
+    cargaDatosComboCatalogo();
+    
     $('#myTab a').on( 'click', function ( e ) {
         e.preventDefault();
         $( this ).tab( 'show' );
     });
 
-    cargaDatosComboCatalogo();
+    $( '#btnGuardaExpediente' ).click( function( e ){
+        e.preventDefault();
+        
+        var myForm = document.forms.form_alta_expediente;
+        var myControls = myForm.elements['contacto_nombre[]'];
+        for (var i = 0; i < myControls.length; i++) {
+            alert( myControls[i].value );
+        }
+
+        guardaInfoExpediente();
+    });
 
     function guardaInfoExpediente() {
-        var datos = $( '#form_alta_expediente' ).serialize();
+        var datos = $( '#form_alta_expediente' ).serialize();alert(datos);
         var ruta = '/api/altaExpediente';
-
         $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
-
         $.ajax({
             type  : "post",
             url   : ruta,
@@ -220,6 +232,26 @@
             beforeSend : function() { console.log( datos ); },
             success : function(d) {
                 alert(d);
+            },
+            error : function() {}
+        });
+    }
+
+    $( '#btnAgregaEstructuraCliente' ).button().click( function( e ) {
+        e.preventDefault();
+        agregaEstructuraContacto()
+    });
+    
+    function agregaEstructuraContacto(){
+        ruta = '/estructuraContacto';
+        $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+        $.ajax({
+            type  : "get",
+            url   : ruta,
+            cache : false,
+            beforeSend : function() {},
+            success : function( d ) {
+                $( "#contenedorContactos" ).append( d );
             },
             error : function() {}
         });
