@@ -51,7 +51,7 @@ Route::middleware('auth')->group( function() {
     Route::get( '/setImagen/{id}' , 'branding\BrandingController@updateImagen' );
     Route::get( '/quitaImagen' , 'branding\BrandingController@quitaImagen' );
     Route::get( '/guardaTrans/{val}' , 'branding\BrandingController@guardaTrans' );
-    Route::get( '/contenidos/{id}' , 'contenidos\ContenidosController@contenidos' );
+    Route::get( '/contenidos/{id}/{param?}' , 'contenidos\ContenidosController@contenidos' );
     Route::get( '/home' , 'branding\BrandingController@index');
     
     

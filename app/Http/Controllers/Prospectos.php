@@ -23,7 +23,7 @@ class Prospectos extends Controller
                 'ejecutivo'   => $cliente->ejecutivo,
                 'fechaAlta'   => $cliente->fechaAlta,
                 'id'          => $cliente->id,
-                'opciones'    => '<a href="/prospectoContacto/'.$cliente->id.'"><i class="material-icons">person</i></a>'
+                'opciones'    => '<a href="javascript:void(0)" onclick="contenidos(\'prospectos_edicion\',\''.$cliente->id.'\')"><i class="material-icons">edit</i></a>'
             );
         }
         

@@ -51,4 +51,8 @@ class CatalogosController extends Controller
         $catalogo->save();
     }
 
+    public function eliminarOpcionCatalogo(Request $request) {
+        
+    }
+    
 }

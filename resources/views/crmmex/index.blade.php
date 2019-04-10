@@ -118,6 +118,7 @@
         <script src="{{ asset( 'assets3/js/fontawesome.js' ) }}"></script>
         <!-- Funcionalidades -->
         <script src="{{ asset( 'assets3/js/contenidos.js' ) }}"></script>
+        <script src="{{ asset( 'assets3/js/funcionalidades.js' ) }}"></script>
 
         <script type="text/javascript">
             $( document ).ready( function() {

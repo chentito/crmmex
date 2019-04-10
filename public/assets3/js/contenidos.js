@@ -5,9 +5,11 @@
  * @Fecha Marzo 2019
  */
 
-function contenidos( idContenido ) {
+function contenidos( idContenido , param='' ) {
     abreModal();
-    axios( '/contenidos/' + idContenido )
+    path  = '/contenidos/' + idContenido;
+    path += ( param != '' ) ? '/'+param : '';
+    axios( path )
         .then( datos => {
             $( '#contenidosPrincipales' ).html( datos.data.body );
             $( '#contenedorBreadCrumb' ).html( datos.data.breadcrumb );

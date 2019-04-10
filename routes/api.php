@@ -17,7 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route::resource( 'ejemplo' , 'Api' );
 Route::get( 'listadoProspectos' , 'Prospectos@listado' ); 
 
 Route::get( 'listadoContactos' , 'ContactosController@listadoContactos' );
@@ -41,3 +40,9 @@ Route::get( '/opcionesCombosPorId/{id}' , 'CatalogoController@catalogoPorId' );
 Route::get( '/listadoCatalogos' , 'configuraciones\CatalogosController@catalogosConf' );
 
 Route::get( '/agregaOpcionCatalogo' , 'configuraciones\CatalogosController@agregarOpcionCatalogo' );
+
+Route::get( '/eliminaOpcionCatalogo' , 'configuraciones\CatalogosController@eliminarOpcionCatalogo' );
+
+Route::post( '/altaExpediente' , 'cliente\ExpedienteController@altaExpediente' );
+
+Route::get( '/obtieneExpediente/{id}' , 'cliente\ExpedienteController@obtieneExpediente' );
