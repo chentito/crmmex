@@ -21,12 +21,15 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('componente', require('./components/Componente.vue').default);
+Vue.component('ejemplo-vue', require('./components/EjemploVue.vue').default);
 //Vue.component('task', require('./components/Task.vue').default);
 Vue.component('grid-datos', require('./components/GridDatos.vue').default);
 Vue.component('boton-regresar', require('./components/BotonRegresar.vue').default);
-Vue.component('combo-box', require('./components/ComboBox.vue').default,{
+Vue.component('combo-box', require('./components/ComboBox.vue').default);
+/*Vue.component('combo-box', require('./components/ComboBox.vue').default,{
     name: 'combo-box'
-});
+});¨*/
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

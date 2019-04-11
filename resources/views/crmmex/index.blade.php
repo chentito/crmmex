@@ -37,7 +37,6 @@
             }
         </style>
         <!-- Contenedor principal -->
-        <div id="app"></div>
         <div class="wrapper @if($usaBack==1) fondo @endif">
 
             <!-- Barra lateral, contiene menu e imagen corporativa -->
@@ -78,13 +77,22 @@
                     <div class="row">
                         <div class="col-12 mt-3 mb-3">
                             <div class="card card-small shadow {{$borde}}" style="opacity: {{$trans}}">
-                                <!--div id="app">
-                                    <combo-box id-cat="5" nombre-select="combo_giro"></combo-box>
-                                </div-->
                                 <div class="card-body" id="contenidosPrincipales">
                                     @yield( 'contenidos' )
                                 </div>
                             </div>
+                        </div>
+                    </div> 
+                    <div id="app">
+                        <div class="row">
+                            <div class="col-sm-3"><componente></componente></div>
+                            <div class="col-sm-3"><componente></componente></div>
+                            <div class="col-sm-3"><componente></componente></div>
+                            <div class="col-sm-3"><componente></componente></div>
+                        </div>
+                        <div class="row">
+                            <select class="custom-select"></select>
+                            <ejemplo-vue></ejemplo-vue>
                         </div>
                     </div>
                 </div>
