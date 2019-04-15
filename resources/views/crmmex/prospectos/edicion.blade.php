@@ -3,6 +3,12 @@
 
 @include( 'crmmex.prospectos.nuevo' )
 
+<div class="row">
+    <div class="col-sm-12 text-center">
+        <button class="btn btn-sm {{$btn}}" onclick="javascript:contenidos('prospectos_listado')">Regresar</button>
+    </div>
+</div>
+
 <script>
     idContenido = document.getElementById( 'idCargaInfo' ).value;
     document.getElementById( 'expediente_id' ).value = idContenido;

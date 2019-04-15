@@ -27,6 +27,13 @@
             </tfoot>
         </table>
     </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <botton class="btn btn-sm {{$btn}}" onclick="javascript:contenidos('prospectos_nuevoseguimiento');">Agregar Seguimiento</botton>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>

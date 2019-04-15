@@ -11,47 +11,46 @@ use App\Models\RolRegla AS RolRegla;
 
 class RolesController extends Controller
 {
-    
+
     /*  Metodo que obtiene todos los modulos agregados */
     public function listadoModulos( $idRol='' ) {
         $datos   = array();
         $modulos = Modulos::where( 'status' , '1' )->get();
-        
+
         foreach( $modulos AS $modulo ) {
-            $datos[ $modulo->id ][ 'modulo' ] = array(
-                'nombre' => $modulo->nombre,
-                'ruta'   => $modulo->rutaInicial
-            );
+            $dato             = array();
+            $dato[ 'id' ]     = $modulo->id;
+            $dato[ 'nombre' ] = $modulo->nombre;
 
             $secciones = Secciones::where( [ 'status' => '1' , 'modulo' => $modulo->id ] )->get();
             foreach( $secciones AS $seccion ) {
-                $datos[ $modulo->id ][ 'secciones' ][] = array(
+                $dato[ 'secciones' ][] = array(
                     'id'          => $seccion->id,
                     'nombre'      => $seccion->nombre,
-                    'descripcion' => $seccion->descripcion,
-                    'ruta'        => $seccion->ruta,
                     'privilegio'  => ( ( $idRol != '' ) ? $this->obtienePrivilegioUsuario( $idRol , $seccion->id ) : '' )
                 );
             }
+            
+            $datos[] = $dato;
         }
 
-        return view( 'crm.ejecutivos.ejecutivoRoles' , [ 'modulos' => $datos , 'roles' => $this->listadoRoles() , 'rolUrl' => $idRol ] );
+        return response()->json( $datos );
     }
 
-    protected function listadoRoles() {
+    public function listadoRoles() {
         $datos = array();
         $roles = Roles::where( 'status' , '1' )->get();
-        
+
         foreach( $roles AS $rol ) {
             $datos[] = array(
                 'idty'   => $rol->id,
                 'nombre' => $rol->rol
             );
         }
-        
+
         return $datos;
     }
-    
+
     private function obtienePrivilegioUsuario( $idRol , $seccion ) {
         $val = ( $idRol == '1' ) ?
                 "1"

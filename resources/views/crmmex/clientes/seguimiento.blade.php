@@ -28,9 +28,8 @@
         </table>
     </div>
     <div class="card-footer">
-        <boton-regresar></boton-regresar>
-        <div class="float-right">
-            <button class="btn btn-sm btn-outline-accent" id="abreAltaSeguimiento"><i class="material-icons">add</i> Agregar Actividad</button>
+        <div class="text-center">
+            <button class="btn btn-sm {{$btn}}" id="abreAltaSeguimiento"><i class="fa fa-plus fa-lg"></i> Agregar Actividad</button>
         </div>
     </div>
 </div>

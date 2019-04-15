@@ -83,7 +83,7 @@
                             </div>
                         </div>
                     </div> 
-                    <div id="app">
+                    <!--div id="app">
                         <div class="row">
                             <div class="col-sm-3"><componente></componente></div>
                             <div class="col-sm-3"><componente></componente></div>
@@ -94,7 +94,7 @@
                             <select class="custom-select"></select>
                             <ejemplo-vue></ejemplo-vue>
                         </div>
-                    </div>
+                    </div-->
                 </div>
             </div>
         </div>

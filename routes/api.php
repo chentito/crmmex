@@ -17,11 +17,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get( 'listadoProspectos' , 'Prospectos@listado' ); 
+Route::get( 'listadoProspectos' , 'Prospectos@listado' );
 
 Route::get( 'listadoContactos' , 'ContactosController@listadoContactos' );
 
-Route::get( 'listadoSeguimientos' , 'SeguimientosController@listadoSeguimientos' ); 
+Route::get( 'listadoSeguimientos' , 'SeguimientosController@listadoSeguimientos' );
 
 Route::get( 'listadoClientes' , 'Clientes@listadoClientes' );
 
@@ -46,3 +46,11 @@ Route::get( '/eliminaOpcionCatalogo' , 'configuraciones\CatalogosController@elim
 Route::post( '/altaExpediente' , 'cliente\ExpedienteController@altaExpediente' );
 
 Route::get( '/obtieneExpediente/{id}' , 'cliente\ExpedienteController@obtieneExpediente' );
+
+Route::get( '/listadoPropuestas/{cliID?}' , 'cliente\PropuestasController@listadoPropuestas' );
+
+Route::get( '/configuracionRoles/{rolID?}' , 'ejecutivo\RolesController@listadoModulos' );
+
+Route::get( '/rolesDisponibles' , 'ejecutivo\RolesController@listadoRoles' );
+
+
