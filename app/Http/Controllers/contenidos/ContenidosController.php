@@ -11,6 +11,7 @@ class ContenidosController extends Controller
 {
     // Controlador encargado para cargar la pantalla seleccionada
     public function contenidos( $id , $param='' ) {
+        $this->middleware( 'auth' );
         usleep(500000);
         $branding   = Branding::where( 'seleccionado' , 1 )->first();
         $secciones  = Secciones::where( 'identificador' , $id )->first();

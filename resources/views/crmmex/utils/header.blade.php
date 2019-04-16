@@ -15,9 +15,9 @@
                 <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('ejecutivos_roles');">Roles</a></li>
             </ul>
         </li>
-        <li class="nav-item">
+        <!--li class="nav-item">
             <a class="nav-link" href="javascript:void(0)" onclick="return contenidos('ejecutivos_avisos');">Avisos</a>
-        </li>
+        </li-->
         <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}"
                onclick="event.preventDefault();

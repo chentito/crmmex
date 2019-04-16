@@ -24,6 +24,7 @@
         <script src="{{ asset( 'assets3/js/jodit.min.js' ) }}"></script>
         <!--script async="" defer="defer" src="{{ asset( 'assets2/js/buttons.js' ) }}"></script-->
         <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     </head>
     <body>
         <style>
@@ -83,6 +84,7 @@
                             </div>
                         </div>
                     </div> 
+                    <div id="app"></div>
                     <!--div id="app">
                         <div class="row">
                             <div class="col-sm-3"><componente></componente></div>
