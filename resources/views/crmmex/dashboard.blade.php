@@ -1,17 +1,7 @@
 
-<div class="row">
-    <div class="col-sm-12 text-center mx-lg-n5">Datos Rápidos<br><br><br></div>
-</div>
-
 <style>
-    .chart {
-        width: 100%; 
-        min-height: 450px;
-    }
-
-    .row {
-        margin:0 !important;
-    }
+    .chart { width: 100%; min-height: 450px; }
+    .row { margin:0 !important; }
 </style>
 
 <script type="text/javascript">
@@ -29,10 +19,9 @@
             ['Abril'    , 9]
         ]);
 
-      var options = {'title':'Propuestas enviadas por mes' };
-
-      var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-      chart.draw(data, options);
+        var options = {'title':'Propuestas enviadas por mes' };
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
     }
 
     google.charts.load("current", {packages:["corechart"]});
@@ -47,15 +36,11 @@
             ['Abril'    , 7]
         ]);
 
-        var options = {
-            title: 'Alta de clientes',
-            pieHole: 0.4,
-        };
-
+        var options = { title: 'Alta de clientes', pieHole: 0.4 };
         var chart = new google.visualization.PieChart(document.getElementById('chart_div_2'));
-        chart.draw(data, options);
+        chart.draw( data , options );
     }
-    
+
     google.charts.load("current", {packages:["timeline"]});
     google.charts.setOnLoadCallback(drawChart3);
     function drawChart3() {
@@ -83,11 +68,8 @@
           [ 'Alta de servicio'  , 'Levi Lincoln'                , new Date(2019, 04, 02), new Date(2019, 04, 16)],
           [ 'Alta de servicio'  , 'James Madison'               , new Date(2019, 04, 06), new Date(2019, 04, 16)]
         ]);
-        
-        var options = {
-            height: '400'
-        };
 
+        var options = { height: '400' };
         chart.draw(dataTable,options);
     }
 
@@ -98,7 +80,6 @@
         data.addColumn('timeofday', 'Time of Day');
         data.addColumn('number', 'Motivation Level');
         data.addColumn('number', 'Energy Level');
-
         data.addRows([
             [{v: [8, 0, 0], f: '8 am'}, 1, .25],
             [{v: [9, 0, 0], f: '9 am'}, 2, .5],
@@ -115,30 +96,25 @@
         var options = {
             title: 'Motivation and Energy Level Throughout the Day',
             colors: ['#9575cd', '#33ac71'],
-            hAxis: {
-                title: 'Time of Day',
-                format: 'h:mm a',
-                viewWindow: {
-                    min: [7, 30, 0],
-                    max: [17, 30, 0]
-                }
-            },
-            vAxis: {
-                title: 'Rating (scale of 1-10)'
-            }
+            hAxis: { title: 'Time of Day', format: 'h:mm a',
+            viewWindow: { min: [7, 30, 0], max: [17, 30, 0] } },
+            vAxis: { title: 'Rating (scale of 1-10)' }
         };
-
         var chart = new google.visualization.ColumnChart(document.getElementById('chart_div_3'));
         chart.draw(data, options);
     }
 
-    $(window).resize(function(){
+    $(window).resize( function() {
         drawChart();
         drawChart2();
         drawChart3();
         drawChart4();
     });
 </script>
+
+<div class="row">
+    <div class="col-sm-12 text-center mx-lg-n5">Datos Rápidos<br><br><br></div>
+</div>
 
 <div class="row">
     <div class="col-sm-4">

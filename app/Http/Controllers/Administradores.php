@@ -64,16 +64,16 @@ class Administradores extends Controller
     
     public function update(Request $request) {
         $administrador = Usuarios::find( $request[ 'admin_altaAdmin_id' ] );
-            $administrador->nombres   = $request[ 'admin_altaAdmin_nombre' ];
-            $administrador->appat     = $request[ 'admin_altaAdmin_apPaterno' ];
-            $administrador->apmat     = $request[ 'admin_altaAdmin_apMaterno' ];
-            $administrador->email     = $request[ 'admin_altaAdmin_email' ];
-            $administrador->rol       = $request[ 'admin_altaAdmin_rol' ];
-            $administrador->extension = $request[ 'admin_altaAdmin_extension' ];
-            $administrador->status    = 1;
-            $administrador->fechaAlta = date('Y-m-d H:i:s');
-            $administrador->save();
-        
+        $administrador->nombres   = $request[ 'admin_altaAdmin_nombre' ];
+        $administrador->appat     = $request[ 'admin_altaAdmin_apPaterno' ];
+        $administrador->apmat     = $request[ 'admin_altaAdmin_apMaterno' ];
+        $administrador->email     = $request[ 'admin_altaAdmin_email' ];
+        $administrador->rol       = $request[ 'admin_altaAdmin_rol' ];
+        $administrador->extension = $request[ 'admin_altaAdmin_extension' ];
+        $administrador->status    = 1;
+        $administrador->fechaAlta = date('Y-m-d H:i:s');
+        $administrador->save();
+
         return redirect( '/ejecutivoListado' );
     }
     

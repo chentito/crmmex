@@ -37,7 +37,7 @@ Route::get( '/opcionesCombos/{id}' , 'CatalogoController@catalogo' );
 
 Route::get( '/opcionesCombosPorId/{id}' , 'CatalogoController@catalogoPorId' );
 
-Route::get( '/listadoCatalogos' , 'configuraciones\CatalogosController@catalogosConf' );
+Route::get( '/listadoCatalogos' , 'configuraciones\CatalogosController@catalogosConf' )->middleware( 'cors' );
 
 Route::get( '/agregaOpcionCatalogo' , 'configuraciones\CatalogosController@agregarOpcionCatalogo' );
 
@@ -52,5 +52,3 @@ Route::get( '/listadoPropuestas/{cliID?}' , 'cliente\PropuestasController@listad
 Route::get( '/configuracionRoles/{rolID?}' , 'ejecutivo\RolesController@listadoModulos' );
 
 Route::get( '/rolesDisponibles' , 'ejecutivo\RolesController@listadoRoles' );
-
-

@@ -9,6 +9,6 @@ use App\Models\contacto\Contacto AS Contacto;
 class ContactoController extends Controller
 {
     //
-    
-    
+
+
 }

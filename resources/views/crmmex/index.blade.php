@@ -83,7 +83,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                     <div id="app"></div>
                     <!--div id="app">
                         <div class="row">
@@ -141,6 +141,6 @@
             });
             contenidos( 'dashboard' );
         </script>
-        
+
     </body>
 </html>
