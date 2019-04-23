@@ -52,3 +52,11 @@ Route::get( '/listadoPropuestas/{cliID?}' , 'cliente\PropuestasController@listad
 Route::get( '/configuracionRoles/{rolID?}' , 'ejecutivo\RolesController@listadoModulos' );
 
 Route::get( '/rolesDisponibles' , 'ejecutivo\RolesController@listadoRoles' );
+
+
+
+// Api para pruebas con angular
+Route::get ( '/users'      , 'UsersController@index' )->middleware( 'cors' );
+Route::get ( '/users/{id}' , 'UsersController@show'  )->middleware( 'cors' );
+Route::post( '/users'      , 'UsersController@store' )->middleware( 'cors' );
+Route::post( '/users/{id}' , 'UsersController@update' )->middleware( 'cors' );

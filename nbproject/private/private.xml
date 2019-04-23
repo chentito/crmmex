@@ -5,6 +5,7 @@
         <group>
             <file>file:/C:/htdocs/crm/routes/web.php</file>
             <file>file:/C:/htdocs/crm/routes/api.php</file>
+            <file>file:/C:/htdocs/crm/app/Http/Controllers/configuraciones/CatalogosController.php</file>
         </group>
     </open-files>
 </project-private>
