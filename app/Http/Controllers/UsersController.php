@@ -37,10 +37,11 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        $data = json_decode($request->getContent(), true);
         $usuarios = new Users();
-        $usuarios->name = $request->name;
-        $usuarios->username = $request->username;
-        $usuarios->email = $request->email;
+        $usuarios->name = $data[ 'name' ];
+        $usuarios->username = $data[ 'username' ];
+        $usuarios->email = $data[ 'email' ];
         $usuarios->save();
     }
 
@@ -93,8 +94,7 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
-        Users::destroy($id);
-        
+        Users::destroy( $id );
     }
     
 }
