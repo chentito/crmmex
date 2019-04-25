@@ -7,7 +7,7 @@ use App\Models\Users AS Users;
 
 class UsersController extends Controller
 {
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -96,5 +96,5 @@ class UsersController extends Controller
         //
         Users::destroy( $id );
     }
-    
+
 }
