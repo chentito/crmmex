@@ -20,6 +20,7 @@ class ClientesController extends Controller
     public function listado() {
     }
 
+    /* Alta de un nuevo cliente con sus respectivas estructuras */
     public function guardaCliente( Request $request ) {
         /* Alta del registro cliente */
         $cliente = new Clientes;
@@ -92,9 +93,10 @@ class ClientesController extends Controller
         return response()->json( $r );
     }
 
+    /* Obtiene el listado de clientes */
     public function listadoClientes() {
       $arrClientes = array();
-      $clientes = Clientes::where( 'status' , '1' )->get();
+      $clientes    = Clientes::where( 'status' , '1' )->get();
 
       foreach( $clientes AS $cliente ) {
           $arrClientes[ 'clientes' ][] = array(
@@ -114,6 +116,7 @@ class ClientesController extends Controller
       return response()->json( $arrClientes );
     }
 
+    /* Consulta de cliente por ID */
     public function obtieneCliente( $clienteID ) {
       $expediente = array();
 
@@ -162,6 +165,23 @@ class ClientesController extends Controller
       );
 
       return response()->json( $expediente );
+    }
+
+    public function actualizaCliente( Request $request , $id ) {
+        $cliente = Clientes::find( $id );
+        $cliente->razonSocial       = $request->cliente_razon_social;
+        $cliente->rfc               = $request->cliente_rfc;
+        $cliente->giro              = $request->catalogo_5;
+        $cliente->categoria         = $request->catalogo_1;
+        $cliente->subcategoria      = $request->catalogo_2;
+        $cliente->ejecutivo         = 1;
+        $cliente->fechaModificacion = date( 'Y-m-d H:i:s' );
+        $cliente->tipo              = $request->cliente_tipo;
+        $cliente->observaciones     = $request->cliente_observaciones;
+        $cliente->status            = 1;
+        $gCliente                   = $cliente->save();
+
+
     }
 
 }

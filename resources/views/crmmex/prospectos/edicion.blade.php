@@ -1,5 +1,5 @@
 
-<input type="hidden" id="idCargaInfo" name='idCargaInfo' value="{{$param}}" />
+<input type="hidden" id="idCargaInfo" name="idCargaInfo" value="{{$param}}" />
 
 <div style="position:absolute; right: 90px; z-index: 900">
   <button id="btnGuardaExpediente" class="btn btn-sm {{$btn}}" onclick="javascript:contenidos('clientes_listado')"><i class="fa fa-undo-alt fa-lg">save</i><span class="d-none d-sm-inline">  Regresar</span></button>

@@ -235,8 +235,14 @@
 
     function guardaInfoExpediente() {
         var datos = $( '#form_alta_expediente' ).serialize();
+        if( $( '#idCargaInfo' ).val() == undefined ) {
+          alert( "Estas agregando" );
+        } else {
+          alert( "Estas editando" );
+        }
         var ruta  = '/api/altaExpediente';
-        $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+        var ruta  = '/api/editaExpediente';
+        /*$.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
         $.ajax({
             type  : "post",
             url   : ruta,
@@ -247,11 +253,21 @@
                 contenidos( 'clientes_listado' );
             },
             error : function() {}
-        });
+        });*/
     }
 
     function agregaEstructuraContacto(nom='',appat='',apmat='',correo='',celular='',compania='',tel='',ext='',area='',puesto='') {
-        ruta = '/estructuraContacto/'+nom+'/'+appat+'/'+apmat+'/'+correo+'/'+celular+'/'+compania+'/'+tel+'/'+ext+'/'+area+'/'+puesto+'/';
+        ruta  = '/estructuraContacto/';
+        ruta += ( nom!='' )      ? nom+'/'      : '';
+        ruta += ( appat!='' )    ? appat+'/'    : '';
+        ruta += ( apmat!='' )    ? apmat+'/'    : '';
+        ruta += ( correo!='' )   ? correo+'/'   : '';
+        ruta += ( celular!='' )  ? celular+'/'  : '';
+        ruta += ( compania!='' ) ? compania+'/' : '';
+        ruta += ( tel!='' )      ? tel+'/'      : '';
+        ruta += ( ext!='' )      ? ext+'/'      : '';
+        ruta += ( area!='' )     ? area+'/'     : '';
+        ruta += ( puesto!='' )   ? puesto+'/'   : '';
         $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
         $.ajax({
             type  : "get",

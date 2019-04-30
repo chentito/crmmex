@@ -55,11 +55,12 @@ Route::middleware('auth')->group( function() {
     Route::get( '/contenidos/{id}/{param?}' , 'contenidos\ContenidosController@contenidos' );
     Route::get( '/home' , 'branding\BrandingController@index');
     Route::get( '/estructuraContacto/{nom?}/{appat?}/{apmat?}/{correo?}/{celular?}/{compania?}/{tel?}/{ext?}/{area?}/{puesto?}/' ,
-        function($nom,$appat,$apmat,$correo,$celular,$compania,$tel,$ext,$area,$puesto){
+        function($nom='',$appat='',$apmat='',$correo='',$celular='',$compania='',$tel='',$ext='',$area='',$puesto='') {
           return view( 'crmmex.prospectos.contacto' ,
             [
               'rand' => rand(1111,9999), 'btn' => 'btn-danger', 'nom' => $nom, 'appat' => $appat, 'apmat' => $apmat, 'correo' => $correo,
-              'celular' => $celular, 'compania' => $compania ,'tel' => $tel ,'ext' => $ext, 'area' => $area, 'puesto' => $puesto ]
+              'celular' => $celular, 'compania' => $compania ,'tel' => $tel ,'ext' => $ext, 'area' => $area, 'puesto' => $puesto
+            ]
           );
         }
     );
