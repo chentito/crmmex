@@ -1,17 +1,17 @@
 <ul class="list-unstyled components">
-    <li>
+    <!--li>
         <a href="#prospectos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users-cog fa-lg"></i>  Prospectos</a>
         <ul class="collapse list-unstyled" id="prospectos">
             <li><a href="javascript:void(0)" onclick="return contenidos('prospectos_listado');">Listado</a></li>
             <li><a href="javascript:void(0)" onclick="return contenidos('prospectos_nuevo');">Nuevo Prospecto</a></li>
             <li><a href="javascript:void(0)" onclick="return contenidos('prospectos_seguimiento');">Seguimientos</a></li>
         </ul>
-    </li>
+    </li-->
     <li>
         <a href="#clientes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users fa-lg"></i>  Clientes</a>
         <ul class="collapse list-unstyled" id="clientes">
+            <li><a href="javascript:void(0)" onclick="return contenidos('clientes_alta');">Alta</a></li>
             <li><a href="javascript:void(0)" onclick="return contenidos('clientes_listado');">Listado</a></li>
-            <li><a href="javascript:void(0)" onclick="return contenidos('clientes_alta');">Nuevo Cliente</a></li>
             <li><a href="javascript:void(0)" onclick="return contenidos('clientes_seguimiento');">Seguimientos</a></li>
         </ul>
     </li>

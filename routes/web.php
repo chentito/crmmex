@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Mail\EnvioPrueba AS EP;
 Auth::routes();
 
 Route::get( '/nLogin' , function(){ return view( 'crm.login.login' ); });
@@ -36,7 +37,7 @@ Route::get( '/combos/{id}' , 'contenidos\CatalogosController@generaListadoCombo'
 
 Route::get( '/menu' , function(){ return view( 'crmmex.index2' ); } );
 Route::get( '/menu2' , function(){ return view( 'crmmex.index3' ); } );
-        
+
 Route::get( '/fachada' , function() {
     echo EsPDF::check('algo.pdf');
 });
@@ -53,8 +54,15 @@ Route::middleware('auth')->group( function() {
     Route::get( '/guardaTrans/{val}' , 'branding\BrandingController@guardaTrans' );
     Route::get( '/contenidos/{id}/{param?}' , 'contenidos\ContenidosController@contenidos' );
     Route::get( '/home' , 'branding\BrandingController@index');
-    Route::get( '/estructuraContacto' , function(){ return view( 'crmmex.prospectos.contacto' , [ 'rand' => rand(1111,9999) , 'btn' => 'btn-danger' ] ); } );
-
+    Route::get( '/estructuraContacto/{nom?}/{appat?}/{apmat?}/{correo?}/{celular?}/{compania?}/{tel?}/{ext?}/{area?}/{puesto?}/' ,
+        function($nom,$appat,$apmat,$correo,$celular,$compania,$tel,$ext,$area,$puesto){
+          return view( 'crmmex.prospectos.contacto' ,
+            [
+              'rand' => rand(1111,9999), 'btn' => 'btn-danger', 'nom' => $nom, 'appat' => $appat, 'apmat' => $apmat, 'correo' => $correo,
+              'celular' => $celular, 'compania' => $compania ,'tel' => $tel ,'ext' => $ext, 'area' => $area, 'puesto' => $puesto ]
+          );
+        }
+    );
 
     /* V2 */
     Route::get( '/home3'     , function(){ return view( 'crm.crm' ); });
@@ -177,8 +185,19 @@ Route::middleware('auth')->group( function() {
 
 });
 
-    Route::get('/', function () { return redirect( '/login' ); });
-    Route::get('/vue', function () { return view( 'vue' ); });
-    Route::get('/vueDat', function () { 
+    Route::get( '/', function () { return redirect( '/login' ); });
+    Route::get( '/vue', function () { return view( 'vue' ); });
+    Route::get( '/vueDat', function () {
         return "Holaaa";
+    });
+
+    Route::get( '/imprimir' , function() {
+      $nombre = "Carlos Vicente Reyes Salazar";
+      $fecha  = date( 'Y-m-d H:i:s' );
+      $pdf = \PDF::loadView( 'crmmex.pdf.ejemplo' , compact( 'nombre' , 'fecha' ) );
+      return $pdf->download( 'ejemplo.pdf' );
+    });
+
+    Route::get( '/email' , function() {
+      Mail::to( 'cvreyes@mexagon.net' )->send(new EP);
     });

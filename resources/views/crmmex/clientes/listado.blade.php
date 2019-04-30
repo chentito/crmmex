@@ -3,11 +3,12 @@
         <table id="clientes22" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
-                    <th>Nombre</th>
+                    <th>Nombres</th>
                     <th>RFC</th>
                     <th>Giro</th>
                     <th>Ejecutivo</th>
                     <th>Fecha Alta</th>
+                    <th>Condición</th>
                     <th>M&aacute;s</th>
                 </tr>
             </thead>
@@ -20,6 +21,7 @@
                     <th>Giro</th>
                     <th>Ejecutivo</th>
                     <th>Fecha Alta</th>
+                    <th>Condición</th>
                     <th>M&aacute;s</th>
                 </tr>
             </tfoot>
@@ -40,6 +42,7 @@
                 { data: 'giro' },
                 { data: 'ejecutivo' },
                 { data: 'fechaAlta' },
+                { data: 'tipo' },
                 { data: 'opciones',align: 'center' }
             ],
             responsive: true

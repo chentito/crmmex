@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.live.com'),
+    'host' => env('MAIL_HOST', 'smtp.mexagon.net'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'dgdramirez@hotmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'CRM Mexagon'),
+        'address' => env('MAIL_FROM_ADDRESS', 'cvreyes@mexagon.net'),
+        'name' => env('MAIL_FROM_NAME', 'Carlos Reyes'),
     ],
 
     /*
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('dgdramirez@hotmail.com'),
+    'username' => env('cvreyes@mexagon.net'),
 
-    'password' => env('s@pMxg02'),
+    'password' => env('XXXXXXXXXX'),
 
     /*
     |--------------------------------------------------------------------------

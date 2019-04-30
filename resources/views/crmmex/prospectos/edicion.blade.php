@@ -1,13 +1,12 @@
 
 <input type="hidden" id="idCargaInfo" name='idCargaInfo' value="{{$param}}" />
 
+<div style="position:absolute; right: 90px; z-index: 900">
+  <button id="btnGuardaExpediente" class="btn btn-sm {{$btn}}" onclick="javascript:contenidos('clientes_listado')"><i class="fa fa-undo-alt fa-lg">save</i><span class="d-none d-sm-inline">  Regresar</span></button>
+</div>
+
 @include( 'crmmex.prospectos.nuevo' )
 
-<div class="row">
-    <div class="col-sm-12 text-center">
-        <button class="btn btn-sm {{$btn}}" onclick="javascript:contenidos('prospectos_listado')">Regresar</button>
-    </div>
-</div>
 
 <script>
     idContenido = document.getElementById( 'idCargaInfo' ).value;
@@ -29,29 +28,37 @@
             document.getElementById( 'direccion_pais' ).value        = direccion[ 'pais' ];
             // Cliente
             cliente = d[ 'cliente' ];
-            document.getElementById( 'cliente_razon_social' ).value = cliente[ 'razonSocial' ];
-            document.getElementById( 'cliente_rfc' ).value          = cliente[ 'rfc' ];
-            document.getElementById( 'catalogo_5' ).value           = cliente[ 'giro' ];
-            document.getElementById( 'catalogo_1' ).value           = cliente[ 'categoria' ];
-            document.getElementById( 'catalogo_2' ).value           = cliente[ 'subcategoria' ];
+            document.getElementById( 'cliente_razon_social' ).value  = cliente[ 'razonSocial' ];
+            document.getElementById( 'cliente_rfc' ).value           = cliente[ 'rfc' ];
+            document.getElementById( 'catalogo_5' ).value            = cliente[ 'giro' ];
+            document.getElementById( 'catalogo_1' ).value            = cliente[ 'categoria' ];
+            document.getElementById( 'catalogo_2' ).value            = cliente[ 'subcategoria' ];
+            document.getElementById( 'cliente_observaciones' ).value = cliente[ 'observaciones' ];
+            document.getElementById( 'cliente_tipo' ).value          = cliente[ 'tipo' ];
             // Contactos
             contactos = d[ 'contactos' ];
             $.each( contactos , function( a , b ){
-                document.getElementById( 'contacto_nombre' ).value           = b.nombre;
-                document.getElementById( 'contacto_paterno' ).value          = b.apellidoPaterno;
-                document.getElementById( 'contacto_materno' ).value          = b.apellidoMaterno;
-                document.getElementById( 'contacto_email' ).value            = b.correoElectronico;
-                document.getElementById( 'contacto_celular' ).value          = b.celular;
-                document.getElementById( 'contacto_celular_compania' ).value = b.compania;
-                document.getElementById( 'contacto_telefono' ).value         = b.telefono;
-                document.getElementById( 'contacto_extension' ).value        = b.extension;
-                document.getElementById( 'contacto_area' ).value             = b.area;
-                document.getElementById( 'contacto_puesto' ).value           = b.puesto;
+                if( a > 0 ) {
+                  agregaEstructuraContacto(b.nombre,b.apellidoPaterno,b.apellidoMaterno,b.correoElectronico,b.celular,b.compania,b.telefono,b.extension,b.area,b.puesto);
+                  console.log(b.nombre);
+                  //document.getElementById( 'contacto_nombre' ).value           = b.nombre;
+                } else {
+                  document.getElementById( 'contacto_nombre' ).value           = b.nombre;
+                  document.getElementById( 'contacto_paterno' ).value          = b.apellidoPaterno;
+                  document.getElementById( 'contacto_materno' ).value          = b.apellidoMaterno;
+                  document.getElementById( 'contacto_email' ).value            = b.correoElectronico;
+                  document.getElementById( 'contacto_celular' ).value          = b.celular;
+                  document.getElementById( 'contacto_celular_compania' ).value = b.compania;
+                  document.getElementById( 'contacto_telefono' ).value         = b.telefono;
+                  document.getElementById( 'contacto_extension' ).value        = b.extension;
+                  document.getElementById( 'contacto_area' ).value             = b.area;
+                  document.getElementById( 'contacto_puesto' ).value           = b.puesto;
+                }
             });
-    
+
         })
         .catch( err => {
             console.error( err );
         });
-    
+
 </script>

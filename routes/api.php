@@ -17,13 +17,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+/* Modulo Clientes */
+//Route::post( '/altaExpediente' , 'cliente\ExpedienteController@altaExpediente' );
+Route::post( '/altaExpediente'  , 'crmmex\Clientes\ClientesController@guardaCliente' );
+Route::get ( '/listadoClientes' , 'crmmex\Clientes\ClientesController@listadoClientes' );
+Route::get ( '/obtieneExpediente/{id}' , 'crmmex\Clientes\ClientesController@obtieneCliente' );
+
+
+
 Route::get( 'listadoProspectos' , 'Prospectos@listado' );
 
 Route::get( 'listadoContactos' , 'ContactosController@listadoContactos' );
 
 Route::get( 'listadoSeguimientos' , 'SeguimientosController@listadoSeguimientos' );
-
-Route::get( 'listadoClientes' , 'Clientes@listadoClientes' );
 
 Route::get( 'listadoProductos' , 'Productos@listadoProductos' );
 
@@ -43,15 +49,17 @@ Route::get( '/agregaOpcionCatalogo' , 'configuraciones\CatalogosController@agreg
 
 Route::get( '/eliminaOpcionCatalogo' , 'configuraciones\CatalogosController@eliminarOpcionCatalogo' );
 
-Route::post( '/altaExpediente' , 'cliente\ExpedienteController@altaExpediente' );
-
-Route::get( '/obtieneExpediente/{id}' , 'cliente\ExpedienteController@obtieneExpediente' );
-
 Route::get( '/listadoPropuestas/{cliID?}' , 'cliente\PropuestasController@listadoPropuestas' );
 
 Route::get( '/configuracionRoles/{rolID?}' , 'ejecutivo\RolesController@listadoModulos' );
 
 Route::get( '/rolesDisponibles' , 'ejecutivo\RolesController@listadoRoles' );
+
+
+
+
+
+
 
 
 

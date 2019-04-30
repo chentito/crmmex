@@ -1,13 +1,21 @@
 /*
     Hoja que le dara estilos a los componentes internos de cada seccion
 */
-/* 
+/*
     Created on : 1/04/2019, 05:56:03 PM
     Author     : Carlos
 */
-        
-#container button{
+
+body button{
     font-size: 10px;
+}
+
+input{
+  font-size: 10px;
+}
+
+.btn{
+  font-size: 10px;
 }
 
 .card-header{
@@ -31,6 +39,7 @@
 
 input{
     border: 1px;
+    font-size: 10px;
 }
 
 ::-webkit-input-placeholder {
@@ -38,15 +47,14 @@ input{
    font-size: 10px;
 }
 :-moz-placeholder {
-   font-style: italic;  
+   font-style: italic;
    font-size: 10px;
 }
 ::-moz-placeholder {
-   font-style: italic;  
+   font-style: italic;
    font-size: 10px;
 }
-:-ms-input-placeholder {  
-   font-style: italic; 
+:-ms-input-placeholder {
+   font-style: italic;
    font-size: 10px;
 }
-
