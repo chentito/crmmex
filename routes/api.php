@@ -22,6 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post( '/altaExpediente'  , 'crmmex\Clientes\ClientesController@guardaCliente' );
 Route::get ( '/listadoClientes' , 'crmmex\Clientes\ClientesController@listadoClientes' );
 Route::get ( '/obtieneExpediente/{id}' , 'crmmex\Clientes\ClientesController@obtieneCliente' );
+Route::post( '/editaExpediente'  , 'crmmex\Clientes\ClientesController@actualizaCliente' );
 
 
 

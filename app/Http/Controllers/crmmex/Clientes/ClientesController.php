@@ -99,7 +99,7 @@ class ClientesController extends Controller
       $clientes    = Clientes::where( 'status' , '1' )->get();
 
       foreach( $clientes AS $cliente ) {
-          $arrClientes[ 'clientes' ][] = array(
+          $arrClientes[ 'clientes' ][] = array (
               'id'          => $cliente->id,
               'razonSocial' => $cliente->razonSocial,
               'rfc'         => $cliente->rfc,
@@ -134,9 +134,10 @@ class ClientesController extends Controller
       $clienteID = $cliente->id;
 
       /* Busca datos del contacto */
-      $contactos = Contactos::where( 'clienteID' , $clienteID )->get();
+      $contactos = Contactos::where( [ 'clienteID' => $clienteID , 'status' => 1 ] )->orderBy( 'id' , 'asc' )->get();
       foreach( $contactos AS $contacto ) {
-          $expediente[ 'contactos' ][] = array(
+          $expediente[ 'contactos' ][] = array (
+              'idty'              => $contacto->id,
               'nombre'            => $contacto->nombre,
               'apellidoPaterno'   => $contacto->apellidoPaterno,
               'apellidoMaterno'   => $contacto->apellidoMaterno,
@@ -167,8 +168,10 @@ class ClientesController extends Controller
       return response()->json( $expediente );
     }
 
-    public function actualizaCliente( Request $request , $id ) {
-        $cliente = Clientes::find( $id );
+    public function actualizaCliente( Request $request ) {
+        $idtyCli = $request->expediente_id;
+
+        $cliente = Clientes::find( $idtyCli );
         $cliente->razonSocial       = $request->cliente_razon_social;
         $cliente->rfc               = $request->cliente_rfc;
         $cliente->giro              = $request->catalogo_5;
@@ -181,6 +184,57 @@ class ClientesController extends Controller
         $cliente->status            = 1;
         $gCliente                   = $cliente->save();
 
+        $direccion = Direccion::where( 'clienteID' , $idtyCli )->first();
+        $direccion->clienteID         = $idtyCli;
+        $direccion->calle             = $request->direccion_calle;
+        $direccion->noExterior        = $request->direccion_no_exterior;
+        $direccion->noInterior        = $request->direccion_no_interior;
+        $direccion->colonia           = $request->direccion_colonia;
+        $direccion->cp                = $request->direccion_cp;
+        $direccion->delegacion        = $request->direccion_delegacion;
+        $direccion->ciudad            = $request->direccion_ciudad;
+        $direccion->estado            = $request->direccion_estado;
+        $direccion->pais              = $request->direccion_pais;
+        $direccion->fechaModificacion = date( 'Y-m-d H:i:s' );
+        $direccion->ejecutivoAlta     = 1;
+        $direccion->status            = 1;
+        $gDireccion                   = $direccion->save();
+
+        $contadorContactos = count( $request->contacto_nombre );
+        $idsContactos      = $request->idsContactos;
+        for( $i = 0 ; $i < $contadorContactos ; $i++ ) {
+            $idCurrContacto = $request->contacto_idty[ $i ];
+            $idsContactos   = str_replace( $idCurrContacto.',' , '' , $idsContactos );
+
+            $contacto = Contactos::updateOrCreate (
+                [ 'id' => $request->contacto_idty[ $i ] ],
+                [
+                  'clienteID'         => $idtyCli,
+                  'nombre'            => $request->contacto_nombre[ $i ],
+                  'apellidoPaterno'   => $request->contacto_paterno[ $i ],
+                  'apellidoMaterno'   => $request->contacto_materno[ $i ],
+                  'correoElectronico' => $request->contacto_email[ $i ],
+                  'celular'           => $request->contacto_celular[ $i ],
+                  'compania'          => $request->contacto_celular_compania[ $i ],
+                  'telefono'          => $request->contacto_telefono[ $i ],
+                  'extension'         => $request->contacto_extension[ $i ],
+                  'area'              => $request->contacto_area[ $i ],
+                  'puesto'            => $request->contacto_puesto[ $i ],
+                  'status'            => 1,
+                  'fechaAlta'         => date( 'Y-m-d H:i:s' ),
+                  'fechaEdicion'      => date( 'Y-m-d H:i:s' ),
+                  'ejecutivoAlta'     => 1,
+                  'ejecutivo'         => 1
+                ]
+            );
+
+        }
+
+        /* Elimina los contactos que no se enviaron en la peticion */
+        $eliminados = explode( ',' , $idsContactos );
+        foreach( $eliminados AS $eliminado ) {
+            $e = Contactos::where( 'id' , $eliminado )->update( [ 'status' => 0 ] );
+        }
 
     }
 

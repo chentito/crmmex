@@ -13,4 +13,24 @@ class Contactos extends Model
 {
     protected $table = "crmmex_ventas_contacto";
     public $timestamps = false;
+
+    protected $fillable = [
+                           'clienteID',
+                           'nombre',
+                           'apellidoPaterno',
+                           'apellidoMaterno',
+                           'correoElectronico',
+                           'celular',
+                           'compania',
+                           'telefono',
+                           'extension',
+                           'area',
+                           'puesto',
+                           'status',
+                           'fechaAlta',
+                           'fechaEdicion',
+                           'ejecutivoAlta',
+                           'ejecutivo'
+                         ];
+
 }

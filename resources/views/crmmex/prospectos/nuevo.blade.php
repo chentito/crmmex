@@ -1,5 +1,6 @@
 <form id="form_alta_expediente" name="form_alta_expediente">
     <input type="hidden" name="expediente_id" id="expediente_id" value="0">
+    <input type="hidden" name="idsContactos" id="idsContactos" value="" />
 
     <div style="position:absolute; right: 10px; z-index: 900">
       <button id="btnGuardaExpediente" class="btn btn-sm {{$btn}}"><i class="fa fa-users fa-lg">save</i><span class="d-none d-sm-inline">  Guardar</span></button>
@@ -33,6 +34,7 @@
                                 <div class="col-sm-3 mb-1">
                                     <label for="contacto_nombre">Nombre(s)</label>
                                     <input type="text" id="contacto_nombre" name="contacto_nombre[]" class="form-control form-control-sm" value="" placeholder="Nombre(s)">
+                                    <input type="hidden" id="contacto_idty" name="contacto_idty[]" value="">
                                 </div>
                                 <div class="col-sm-3 mb-1">
                                     <label for="contacto_paterno">Apellido Paterno</label>
@@ -235,14 +237,16 @@
 
     function guardaInfoExpediente() {
         var datos = $( '#form_alta_expediente' ).serialize();
-        if( $( '#idCargaInfo' ).val() == undefined ) {
-          alert( "Estas agregando" );
+        var mov   = '';
+        if( $( '#idCargaInfo' ).length == 0 ) {
+          var ruta  = '/api/altaExpediente';
+          mov = 'alta';
         } else {
-          alert( "Estas editando" );
+          var ruta  = '/api/editaExpediente';
+          mov = 'edicion';
         }
-        var ruta  = '/api/altaExpediente';
-        var ruta  = '/api/editaExpediente';
-        /*$.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+
+        $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
         $.ajax({
             type  : "post",
             url   : ruta,
@@ -250,15 +254,20 @@
             cache : false,
             beforeSend : function() {},
             success : function(d) {
-                contenidos( 'clientes_listado' );
+                if( mov == 'alta' ) {
+                    contenidos( 'clientes_listado' );
+                } else {
+                    contenidos( 'clientes_edicion' , $( '#idCargaInfo' ).val() );
+                }
             },
             error : function() {}
-        });*/
+        });
     }
 
-    function agregaEstructuraContacto(nom='',appat='',apmat='',correo='',celular='',compania='',tel='',ext='',area='',puesto='') {
+    function agregaEstructuraContacto(nom='',idty='',appat='',apmat='',correo='',celular='',compania='',tel='',ext='',area='',puesto='') {
         ruta  = '/estructuraContacto/';
         ruta += ( nom!='' )      ? nom+'/'      : '';
+        ruta += ( idty!='' )     ? idty+'/'     : '';
         ruta += ( appat!='' )    ? appat+'/'    : '';
         ruta += ( apmat!='' )    ? apmat+'/'    : '';
         ruta += ( correo!='' )   ? correo+'/'   : '';
@@ -270,14 +279,14 @@
         ruta += ( puesto!='' )   ? puesto+'/'   : '';
         $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
         $.ajax({
-            type  : "get",
-            url   : ruta,
-            cache : false,
+            type       : "get",
+            url        : ruta,
+            cache      : false,
             beforeSend : function() {},
-            success : function( d ) {
+            success    : function( d ) {
                 $( "#contenedorContactos" ).append( d );
             },
-            error : function() {}
+            error : function() { }
         });
     }
 </script>

@@ -1,12 +1,13 @@
 
 <input type="hidden" id="idCargaInfo" name="idCargaInfo" value="{{$param}}" />
 
+<h3>Cliente ID {{$param}} <span id="nombreCliente"></span></h3>
+
 <div style="position:absolute; right: 90px; z-index: 900">
-  <button id="btnGuardaExpediente" class="btn btn-sm {{$btn}}" onclick="javascript:contenidos('clientes_listado')"><i class="fa fa-undo-alt fa-lg">save</i><span class="d-none d-sm-inline">  Regresar</span></button>
+  <button class="btn btn-sm {{$btn}}" onclick="javascript:contenidos('clientes_listado')"><i class="fa fa-undo-alt fa-lg">undo</i><span class="d-none d-sm-inline">  Regresar</span></button>
 </div>
 
 @include( 'crmmex.prospectos.nuevo' )
-
 
 <script>
     idContenido = document.getElementById( 'idCargaInfo' ).value;
@@ -29,6 +30,7 @@
             // Cliente
             cliente = d[ 'cliente' ];
             document.getElementById( 'cliente_razon_social' ).value  = cliente[ 'razonSocial' ];
+            document.getElementById( 'nombreCliente' ).innerHTML     = cliente[ 'razonSocial' ];
             document.getElementById( 'cliente_rfc' ).value           = cliente[ 'rfc' ];
             document.getElementById( 'catalogo_5' ).value            = cliente[ 'giro' ];
             document.getElementById( 'catalogo_1' ).value            = cliente[ 'categoria' ];
@@ -37,12 +39,12 @@
             document.getElementById( 'cliente_tipo' ).value          = cliente[ 'tipo' ];
             // Contactos
             contactos = d[ 'contactos' ];
-            $.each( contactos , function( a , b ){
+            $.each( contactos , function( a , b ) {
                 if( a > 0 ) {
-                  agregaEstructuraContacto(b.nombre,b.apellidoPaterno,b.apellidoMaterno,b.correoElectronico,b.celular,b.compania,b.telefono,b.extension,b.area,b.puesto);
-                  console.log(b.nombre);
-                  //document.getElementById( 'contacto_nombre' ).value           = b.nombre;
+                  document.getElementById( 'idsContactos' ).value              = document.getElementById( 'idsContactos' ).value + b.idty + ',';
+                  agregaEstructuraContacto(b.nombre,b.idty,b.apellidoPaterno,b.apellidoMaterno,b.correoElectronico,b.celular,b.compania,b.telefono,b.extension,b.area,b.puesto);
                 } else {
+                  document.getElementById( 'contacto_idty' ).value             = b.idty;
                   document.getElementById( 'contacto_nombre' ).value           = b.nombre;
                   document.getElementById( 'contacto_paterno' ).value          = b.apellidoPaterno;
                   document.getElementById( 'contacto_materno' ).value          = b.apellidoMaterno;
@@ -55,10 +57,8 @@
                   document.getElementById( 'contacto_puesto' ).value           = b.puesto;
                 }
             });
-
         })
         .catch( err => {
             console.error( err );
         });
-
 </script>

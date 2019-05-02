@@ -7,6 +7,7 @@
         <div class="col-sm-3 mb-1">
             <label for="contacto_nombre">Nombre(s)</label>
             <input type="text" id="contacto_nombre" name="contacto_nombre[]" class="form-control form-control-sm" value="{{$nom}}" placeholder="Nombre(s)">
+            <input type="hidden" id="contacto_idty" name="contacto_idty[]" value="{{$idty}}">
         </div>
         <div class="col-sm-3 mb-1">
             <label for="contacto_paterno">Apellido Paterno</label>

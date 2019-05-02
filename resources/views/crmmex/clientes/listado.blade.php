@@ -3,7 +3,8 @@
         <table id="clientes22" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
-                    <th>Nombres</th>
+                    <th>ID</th>
+                    <th>Razón Social</th>
                     <th>RFC</th>
                     <th>Giro</th>
                     <th>Ejecutivo</th>
@@ -16,7 +17,8 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th>Nombre</th>
+                    <th>ID</th>
+                    <th>Razón Social</th>
                     <th>RFC</th>
                     <th>Giro</th>
                     <th>Ejecutivo</th>
@@ -37,13 +39,14 @@
                 dataSrc: 'clientes'
             },
             columns: [
+                { data: 'id' },
                 { data: 'razonSocial' },
                 { data: 'rfc' },
                 { data: 'giro' },
                 { data: 'ejecutivo' },
                 { data: 'fechaAlta' },
                 { data: 'tipo' },
-                { data: 'opciones',align: 'center' }
+                { data: 'opciones',align: 'center',ordering:false }
             ],
             responsive: true
         });
