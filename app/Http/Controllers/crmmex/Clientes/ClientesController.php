@@ -233,7 +233,7 @@ class ClientesController extends Controller
         /* Elimina los contactos que no se enviaron en la peticion */
         $eliminados = explode( ',' , $idsContactos );
         foreach( $eliminados AS $eliminado ) {
-            $e = Contactos::where( 'id' , $eliminado )->update( [ 'status' => 0 ] );
+            Contactos::where( 'id' , $eliminado )->update( [ 'status' => 0 ] );
         }
 
     }
