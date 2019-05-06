@@ -26,45 +26,30 @@ Route::post( '/editaExpediente'  , 'crmmex\Clientes\ClientesController@actualiza
 Route::get ( '/listadoSeguimientos/{clienteID}' , 'crmmex\Clientes\SeguimientoController@listadoSeguimientos' );
 Route::get ( '/listadoContactos/{clienteID}' , 'crmmex\Clientes\SeguimientoController@listadoContactosPorCliente' );
 Route::post( '/guardaSeguimiento' , 'crmmex\Clientes\SeguimientoController@guardaSeguimiento' );
+Route::get ( '/obtieneSeguimiento/{id}' , 'crmmex\Clientes\SeguimientoController@obtieneSeguimiento' );
+Route::post( '/actualizaSeguimiento' , 'crmmex\Clientes\SeguimientoController@actualizaSeguimiento' );
+
+
+
+
+
 
 
 Route::get( 'listadoProspectos' , 'Prospectos@listado' );
-
 Route::get( 'listadoContactos' , 'ContactosController@listadoContactos' );
-
 //Route::get( 'listadoSeguimientos' , 'SeguimientosController@listadoSeguimientos' );
-
 Route::get( 'listadoProductos' , 'Productos@listadoProductos' );
-
 Route::get( 'listadoEjecutivos' , 'Administradores@listaAdmin' );
-
 Route::get( 'listadoPropuestas' , 'VentasController@propuestas' );
-
 Route::get( 'listadoCampanias' , 'mercadotecnia\CampaniasController@listadoCampanias' );
-
 Route::get( '/opcionesCombos/{id}' , 'CatalogoController@catalogo' );
-
 Route::get( '/opcionesCombosPorId/{id}' , 'CatalogoController@catalogoPorId' );
-
 Route::get( '/listadoCatalogos' , 'configuraciones\CatalogosController@catalogosConf' )->middleware( 'cors' );
-
 Route::get( '/agregaOpcionCatalogo' , 'configuraciones\CatalogosController@agregarOpcionCatalogo' );
-
 Route::get( '/eliminaOpcionCatalogo' , 'configuraciones\CatalogosController@eliminarOpcionCatalogo' );
-
 Route::get( '/listadoPropuestas/{cliID?}' , 'cliente\PropuestasController@listadoPropuestas' );
-
 Route::get( '/configuracionRoles/{rolID?}' , 'ejecutivo\RolesController@listadoModulos' );
-
 Route::get( '/rolesDisponibles' , 'ejecutivo\RolesController@listadoRoles' );
-
-
-
-
-
-
-
-
 
 // Api para pruebas con angular
 Route::get   ( '/users'      , 'UsersController@index'   )->middleware( 'cors' );

@@ -39,10 +39,10 @@
   </div>
 </div>
 <script>
-    $(document).ready( function() {
+    $( document ).ready( function() {
         clienteID = document.getElementById( 'clienteID' ).value;
         $('#seguimientosCli').DataTable({
-            ajax   :{
+            ajax   : {
                 url: '/api/listadoSeguimientos/'+clienteID,
                 dataSrc: 'seguimientos'
             },
@@ -59,9 +59,9 @@
             responsive: true
         });
 
-        $( '#abreAltaSeguimiento' ).click(function( e ){
+        $( '#abreAltaSeguimiento' ).click(function( e ) {
             e.preventDefault();
-            contenidos("clientes_nuevoseguimiento",clienteID);
+            contenidos( "clientes_nuevoseguimiento" , clienteID );
         });
     });
 </script>

@@ -1,6 +1,7 @@
-<h3>Cliente ID {{$param}} <span id="nombreCliente"></span></h3>
+<h3>Seguimiento ID {{$param}} <span id="nombreCliente"></span></h3>
 <form id="formSeguimiento" name="formSeguimiento">
   <input type="hidden" name="clienteID" id="clienteID" value="{{$param}}">
+  <input type="hidden" name="seguimiento_idty" id="seguimiento_idty" value="">
   <div class="row">
       <div class="col-sm-3">
           <label for="prospectos_nuevoseguimiento_titulo">Título</label>
@@ -47,25 +48,30 @@
       </div>
   </div>
   <div class="row">
-      <div class="col-sm-12 text-center">
+      <div class="col-sm-12 text-center" id="seguimientos_contenedor_botones">
           <button class="btn btn-sm {{$btn}}" id="btnRegresaListadoSeguimientosPorCliente"><i class="fa fa-undo-alt fa-lg"></i> Regresar</button>
-          <button class="btn btn-sm {{$btn}}" id="btnGuardaSeguimiento" >Guardar Seguimiento</button>
+          <button class="btn btn-sm {{$btn}}" id="btnGuardaSeguimiento"><i class="fa fa-save fa-lg"></i> Guardar Seguimiento</button>
+          <button class="btn btn-sm {{$btn}}" id="btnActualizaSeguimiento"><i class="fa fa-edit fa-lg"></i> Actualizar Seguimiento</button>
       </div>
   </div>
 </form>
 
 <script>
 
+  if( document.getElementById( 'edicionSeguimiento' ) == undefined ) {
+      document.getElementById( 'btnActualizaSeguimiento' ).outerHTML = "";
+  }
+
   cargaContactos();
 
   $( '#btnGuardaSeguimiento' ).click( function( e ) {
-    e.preventDefault();
-    guardaSeguimiento();
+      e.preventDefault();
+      guardaSeguimiento();
   });
 
   $( '#btnRegresaListadoSeguimientosPorCliente' ).click( function( e ) {
     e.preventDefault();
-    contenidos('clientes_seguimiento',document.getElementById( 'clienteID' ).value)
+    contenidos( 'clientes_seguimiento' , document.getElementById( 'clienteID' ).value );
   });
 
   function cargaContactos() {
@@ -86,7 +92,12 @@
 
   function guardaSeguimiento() {
       var datos = $( '#formSeguimiento' ).serialize();
-      var ruta  = '/api/guardaSeguimiento';
+
+      if( document.getElementById( 'seguimiento_idty' ).value == '' ) {
+          var ruta  = '/api/guardaSeguimiento'; // Se da de alta
+        } else {
+          var ruta  = '/api/actualizaSeguimiento'; // Se actualiza
+      }
 
       $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
       $.ajax({
