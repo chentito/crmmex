@@ -42,6 +42,32 @@ LOCK TABLES `crm_sis_rol_reglas` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `crmmex_cat_estados`
+--
+
+DROP TABLE IF EXISTS `crmmex_cat_estados`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `crmmex_cat_estados` (
+  `id` int(11) DEFAULT NULL,
+  `entidad` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+  `pais` int(11) DEFAULT '1',
+  `status` int(11) DEFAULT '1',
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `crmmex_cat_estados`
+--
+
+LOCK TABLES `crmmex_cat_estados` WRITE;
+/*!40000 ALTER TABLE `crmmex_cat_estados` DISABLE KEYS */;
+INSERT INTO `crmmex_cat_estados` VALUES (1,'Aguascalientes',1,1),(2,'Baja California',1,1),(3,'Baja California Sur',1,1),(4,'Campeche',1,1),(5,'Chiapas',1,1),(6,'Chihuahua',1,1),(7,'Coahuila',1,1),(8,'Colima',1,1),(9,'Distrito Federal',1,1),(10,'Durango',1,1),(11,'Estado de México',1,1),(12,'Guanajuato',1,1),(13,'Guerrero',1,1),(14,'Hidalgo',1,1),(15,'Jalisco',1,1),(16,'Michoacán',1,1),(17,'Morelos',1,1),(18,'Nayarit',1,1),(19,'Nuevo León',1,1),(20,'Oaxaca',1,1),(21,'Puebla',1,1),(22,'Querétaro',1,1),(23,'Quintana Roo',1,1),(24,'San Luís Potosí',1,1),(25,'Sinaloa',1,1),(26,'Sonora',1,1),(27,'Tabasco',1,1),(28,'Tamaulipas',1,1),(29,'Tlaxcala',1,1),(30,'Veracruz',1,1),(31,'Yucatán',1,1),(32,'Zacatecas',1,1),(33,'Ciudad de México',1,1);
+/*!40000 ALTER TABLE `crmmex_cat_estados` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `crmmex_cat_formacontacto`
 --
 
@@ -71,6 +97,32 @@ INSERT INTO `crmmex_cat_formacontacto` VALUES (1,'Google','2019-02-11 00:00:00',
 UNLOCK TABLES;
 
 --
+-- Table structure for table `crmmex_cat_paises`
+--
+
+DROP TABLE IF EXISTS `crmmex_cat_paises`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `crmmex_cat_paises` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) DEFAULT NULL,
+  `codigo` varchar(10) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `crmmex_cat_paises`
+--
+
+LOCK TABLES `crmmex_cat_paises` WRITE;
+/*!40000 ALTER TABLE `crmmex_cat_paises` DISABLE KEYS */;
+INSERT INTO `crmmex_cat_paises` VALUES (1,'México','MEX',1);
+/*!40000 ALTER TABLE `crmmex_cat_paises` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `crmmex_cat_statuspropuesta`
 --
 
@@ -93,6 +145,38 @@ LOCK TABLES `crmmex_cat_statuspropuesta` WRITE;
 /*!40000 ALTER TABLE `crmmex_cat_statuspropuesta` DISABLE KEYS */;
 INSERT INTO `crmmex_cat_statuspropuesta` VALUES (1,'En espera',1),(2,'Aceptada',1),(3,'Rechazada',1),(4,'Pagada',1);
 /*!40000 ALTER TABLE `crmmex_cat_statuspropuesta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `crmmex_clientes_seguimiento`
+--
+
+DROP TABLE IF EXISTS `crmmex_clientes_seguimiento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `crmmex_clientes_seguimiento` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `clienteID` int(11) DEFAULT NULL,
+  `contactoID` int(11) DEFAULT NULL,
+  `tipoActividad` int(11) DEFAULT NULL,
+  `nombreActividad` varchar(100) DEFAULT NULL,
+  `descripcion` text,
+  `fechaAlta` datetime DEFAULT NULL,
+  `fechaEjecucion` datetime DEFAULT NULL,
+  `estado` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `crmmex_clientes_seguimiento`
+--
+
+LOCK TABLES `crmmex_clientes_seguimiento` WRITE;
+/*!40000 ALTER TABLE `crmmex_clientes_seguimiento` DISABLE KEYS */;
+INSERT INTO `crmmex_clientes_seguimiento` VALUES (1,26,9,1,'Actividad de pruebas','AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA','2019-05-02 16:50:00','2019-05-02 16:50:00',1,1),(2,26,10,3,'Seguimiento de pruebas','Se reunirá con el equipo técnico para resolver dudas referentes a la implementación del servicio.','2019-05-07 00:00:00','2019-05-07 00:00:00',1,1),(3,26,10,3,'Seguimiento de pruebas','Se reunirá con el equipo técnico para resolver dudas referentes a la implementación del servicio.','2019-05-07 00:00:00','2019-05-07 00:00:00',1,1),(4,26,10,3,'Seguimiento de pruebas','Se reunirá con el equipo técnico para resolver dudas referentes a la implementación del servicio.','2019-05-07 00:00:00','2019-05-07 00:00:00',1,1),(5,26,9,1,'Otro seguimiento','Algo de texto','2019-05-05 00:00:00','2019-05-05 00:00:00',2,1),(6,50,NULL,4,'Nuevo seguimiento en linix','Probando seguimientos','2019-05-15 00:00:00','2019-05-15 00:00:00',2,1),(7,26,NULL,1,'Seguimiento test id 23','EN ESPERA DE RETROALIMENTACION POR PARTE DEL CLIENTE','2019-05-10 00:00:00','2019-05-10 00:00:00',4,1),(8,26,9,3,'UN NUEVO SEGUIMIENTO','EDICION DE SEGUIMIENTO... EDICION DE SEGUIMIENTO... EDICION DE SEGUIMIENTO... EDICION DE SEGUIMIENTO... EDICION DE SEGUIMIENTO... EDICION DE SEGUIMIENTO... EDICION DE SEGUIMIENTO... EDICION DE SEGUIMIENTO... EDICION DE SEGUIMIENTO... EDICION DE SEGUIMIENTO... EDICION DE SEGUIMIENTO... EDICION DE SEGUIMIENTO... EDICION DE SEGUIMIENTO... EDICION DE SEGUIMIENTO... EDICION DE SEGUIMIENTO...',NULL,'2019-05-22 00:00:00',2,1),(9,26,15,8,'ALTA NUEVO SEGUIMIENTO','BLA BLA BLA BLA BLA BLA','2019-05-20 00:00:00',NULL,2,1);
+/*!40000 ALTER TABLE `crmmex_clientes_seguimiento` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -342,7 +426,7 @@ CREATE TABLE `crmmex_sis_secciones` (
   `controlador` varchar(100) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -351,7 +435,7 @@ CREATE TABLE `crmmex_sis_secciones` (
 
 LOCK TABLES `crmmex_sis_secciones` WRITE;
 /*!40000 ALTER TABLE `crmmex_sis_secciones` DISABLE KEYS */;
-INSERT INTO `crmmex_sis_secciones` VALUES (1,'Listado','Grid que despliega todos los usuarios del sistema y permite su administración','1','ejecutivos|listado','crmmex.ejecutivos.listado','ejecutivos_listado',NULL,1),(2,'Perfil','Formulario que permite la edición de los datos del usuario','1','ejecutivos|perfil','crmmex.ejecutivos.perfil','ejecutivos_perfil',NULL,1),(3,'Alta ejecutivo','Formulario que permite la alta de un nuevo usuario','1','/ejecutivoAlta',NULL,NULL,NULL,1),(4,'Listado','Grid que muestra la lista de prospectos existentes','2','prospectos|listado','crmmex.prospectos.listado','prospectos_listado',NULL,1),(5,'Nuevo prospecto',NULL,'2','prospectos|alta','crmmex.prospectos.nuevo','prospectos_nuevo',NULL,1),(6,'Seguimiento',NULL,'2','prospectos|seguimiento','crmmex.prospectos.seguimiento','prospectos_seguimiento',NULL,1),(7,'Listado',NULL,'3','clientes|listado','crmmex.clientes.listado','clientes_listado',NULL,1),(8,'Seguimiento de propuestas',NULL,'4','propuestas|seguimientos','','',NULL,1),(9,'Listado productos',NULL,'5','/producto',NULL,NULL,NULL,1),(10,'Alta producto',NULL,'5','/productoAlta',NULL,NULL,NULL,1),(11,'Campañas',NULL,'6','mercadotecnia|nueva campaña','crmmex.mercadotecnia.campanias','mercadotecnia_campanias',NULL,1),(12,'Reportes',NULL,'7','/reportes',NULL,NULL,NULL,1),(13,'Catalogos Generales',NULL,'8','configuraciones|catálogos|generales','crmmex.configuraciones.catalogos.generales','configuraciones_catalogos_generales',NULL,1),(14,'Forecast',NULL,'8','configuraciones|forecast','crmmex.configuraciones.forecast','configuraciones_forecast',NULL,1),(15,'Pipeline',NULL,'8','configuraciones|pipeline','crmmex.configuraciones.pipeline','configuraciones_pipeline',NULL,1),(16,'Campos adicionales',NULL,'8','configuraciones|campos adicionales','crmmex.configuraciones.adicionales','configuraciones_adicionales',NULL,1),(17,'SMTP',NULL,'8','configuraciones|smtp','crmmex.configuraciones.smtp','configuraciones_smtp',NULL,1),(18,'Roles',NULL,'1','ejecutivos|roles','crmmex.ejecutivos.roles','ejecutivos_roles','ejecutivo\\RolesControlador@listadoModulos',1),(19,'Nuevo Cliente',NULL,'3','clientes|alta','crmmex.prospectos.nuevo','clientes_alta',NULL,1),(20,'Branding',NULL,'8','configuraciones|branding','crmmex.configuraciones.branding','configuraciones_branding',NULL,1),(21,'Seguimiento',NULL,'3','clientes|seguimiento','crmmex.clientes.seguimiento','clientes_seguimiento',NULL,1),(22,'Productos/Servicios',NULL,'8','configuraciones|catálogos|productos/servicios','crmmex.configuraciones.catalogos.productos','configuraciones_catalogos_productos',NULL,1),(23,'Dashboard',NULL,'0','Dashboard','crmmex.dashboard','dashboard',NULL,1),(24,'Tareas ejecutivo',NULL,'1','ejecutivos|tareas','crmmex.ejecutivos.actividades','ejecutivos_actividades',NULL,1),(25,'Avisos',NULL,'1','ejecutivos|avisos','crmmex.ejecutivos.avisos','ejecutivos_avisos',NULL,1),(26,'Reportes',NULL,'1','ejecutivos|reportes','crmmex.ejecutivos.reportes','ejecutivos_reportes',NULL,1),(27,'Listado',NULL,'6','mercadotecnia|listado','crmmex.mercadotecnia.listado','mercadotecnia_listado',NULL,1),(28,'Estadísticas',NULL,'6','mercadotecnia|estadísticas','crmmex.mercadotecnia.estadisticas','mercadotecnia_estadisticas',NULL,1),(29,'Detalle Campaña',NULL,'6','mercadotecnia|detalle campaña','crmmex.mercadotecnia.detalle','mercadotecnia_detalle',NULL,1),(30,'Edita Expediente',NULL,'2','prospectos|edita expediente','crmmex.prospectos.edicion','prospectos_edicion',NULL,1),(31,'Nuevo Seguimiento',NULL,'2','prospectos|nuevo seguimiento','crmmex.prospectos.nuevoseguimiento','prospectos_nuevoseguimiento',NULL,1),(32,'Propuestas',NULL,'2','prospectos|propuesta comercial','crmmex.clientes.propuesta','clientes_propuesta',NULL,1),(33,'Edita Expediente',NULL,'3','clientes|edita expediente','crmmex.prospectos.edicion','clientes_edicion',NULL,1);
+INSERT INTO `crmmex_sis_secciones` VALUES (1,'Listado','Grid que despliega todos los usuarios del sistema y permite su administración','1','ejecutivos|listado','crmmex.ejecutivos.listado','ejecutivos_listado',NULL,1),(2,'Perfil','Formulario que permite la edición de los datos del usuario','1','ejecutivos|perfil','crmmex.ejecutivos.perfil','ejecutivos_perfil',NULL,1),(3,'Alta ejecutivo','Formulario que permite la alta de un nuevo usuario','1','/ejecutivoAlta',NULL,NULL,NULL,1),(4,'Listado','Grid que muestra la lista de prospectos existentes','2','prospectos|listado','crmmex.prospectos.listado','prospectos_listado',NULL,1),(5,'Nuevo prospecto',NULL,'2','prospectos|alta','crmmex.prospectos.nuevo','prospectos_nuevo',NULL,1),(6,'Seguimiento',NULL,'2','prospectos|seguimiento','crmmex.prospectos.seguimiento','prospectos_seguimiento',NULL,1),(7,'Listado',NULL,'3','clientes|listado','crmmex.clientes.listado','clientes_listado',NULL,1),(8,'Seguimiento de propuestas',NULL,'4','propuestas|seguimientos','','',NULL,1),(9,'Listado productos',NULL,'5','/producto',NULL,NULL,NULL,1),(10,'Alta producto',NULL,'5','/productoAlta',NULL,NULL,NULL,1),(11,'Campañas',NULL,'6','mercadotecnia|nueva campaña','crmmex.mercadotecnia.campanias','mercadotecnia_campanias',NULL,1),(12,'Reportes',NULL,'7','/reportes',NULL,NULL,NULL,1),(13,'Catalogos Generales',NULL,'8','configuraciones|catálogos|generales','crmmex.configuraciones.catalogos.generales','configuraciones_catalogos_generales',NULL,1),(14,'Forecast',NULL,'8','configuraciones|forecast','crmmex.configuraciones.forecast','configuraciones_forecast',NULL,1),(15,'Pipeline',NULL,'8','configuraciones|pipeline','crmmex.configuraciones.pipeline','configuraciones_pipeline',NULL,1),(16,'Campos adicionales',NULL,'8','configuraciones|campos adicionales','crmmex.configuraciones.adicionales','configuraciones_adicionales',NULL,1),(17,'SMTP',NULL,'8','configuraciones|smtp','crmmex.configuraciones.smtp','configuraciones_smtp',NULL,1),(18,'Roles',NULL,'1','ejecutivos|roles','crmmex.ejecutivos.roles','ejecutivos_roles','ejecutivo\\RolesControlador@listadoModulos',1),(19,'Nuevo Cliente',NULL,'3','clientes|alta','crmmex.prospectos.nuevo','clientes_alta',NULL,1),(20,'Branding',NULL,'8','configuraciones|branding','crmmex.configuraciones.branding','configuraciones_branding',NULL,1),(21,'Seguimiento',NULL,'3','clientes|seguimiento','crmmex.clientes.seguimiento','clientes_seguimiento',NULL,1),(22,'Productos/Servicios',NULL,'8','configuraciones|catálogos|productos/servicios','crmmex.configuraciones.catalogos.productos','configuraciones_catalogos_productos',NULL,1),(23,'Dashboard',NULL,'0','Dashboard','crmmex.dashboard','dashboard',NULL,1),(24,'Tareas ejecutivo',NULL,'1','ejecutivos|tareas','crmmex.ejecutivos.actividades','ejecutivos_actividades',NULL,1),(25,'Avisos',NULL,'1','ejecutivos|avisos','crmmex.ejecutivos.avisos','ejecutivos_avisos',NULL,1),(26,'Reportes',NULL,'1','ejecutivos|reportes','crmmex.ejecutivos.reportes','ejecutivos_reportes',NULL,1),(27,'Listado',NULL,'6','mercadotecnia|listado','crmmex.mercadotecnia.listado','mercadotecnia_listado',NULL,1),(28,'Estadísticas',NULL,'6','mercadotecnia|estadísticas','crmmex.mercadotecnia.estadisticas','mercadotecnia_estadisticas',NULL,1),(29,'Detalle Campaña',NULL,'6','mercadotecnia|detalle campaña','crmmex.mercadotecnia.detalle','mercadotecnia_detalle',NULL,1),(30,'Edita Expediente',NULL,'2','prospectos|edita expediente','crmmex.prospectos.edicion','prospectos_edicion',NULL,1),(31,'Nuevo Seguimiento',NULL,'3','clientes|nuevo seguimiento','crmmex.clientes.nuevoseguimiento','clientes_nuevoseguimiento',NULL,1),(32,'Propuestas',NULL,'2','prospectos|propuesta comercial','crmmex.clientes.propuesta','clientes_propuesta',NULL,1),(33,'Edita Expediente',NULL,'3','clientes|edita expediente','crmmex.prospectos.edicion','clientes_edicion',NULL,1),(34,'Edita Seguimiento',NULL,'3','clientes|edición seguimiento','crmmex.clientes.editaseguimiento','clientes_editaseguimiento',NULL,1);
 /*!40000 ALTER TABLE `crmmex_sis_secciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -408,7 +492,7 @@ CREATE TABLE `crmmex_ventas_cliente` (
   `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unico` (`rfc`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -417,7 +501,7 @@ CREATE TABLE `crmmex_ventas_cliente` (
 
 LOCK TABLES `crmmex_ventas_cliente` WRITE;
 /*!40000 ALTER TABLE `crmmex_ventas_cliente` DISABLE KEYS */;
-INSERT INTO `crmmex_ventas_cliente` VALUES (26,NULL,'Mexagon SA de CV','MEX030512V22',23,3,6,1,'2019-04-30 17:49:07',NULL,2,'Pruebas probandoooo',1),(27,NULL,'Carlos Vicente Reyes Salazar','RESC840317J72',23,3,5,1,'2019-04-30 18:03:18',NULL,2,'Pruebas mas mas',1),(28,NULL,'Razón Social de Pruebas SA de CV','RSP150926H57',27,2,7,1,'2019-04-30 18:16:31',NULL,1,'Medio de contacto',1),(44,NULL,'Compañia de Pruebas SA de CV','CPS100505L95',28,2,8,1,'2019-04-30 22:05:30',NULL,2,'Un comentario más para mis pruebas',1);
+INSERT INTO `crmmex_ventas_cliente` VALUES (26,NULL,'Mexagon S.A. de C.V.','MEX030512V22',22,1,5,1,'2019-04-30 17:49:07','2019-05-02 21:55:12',1,'Pruebas probandoooo',1),(27,NULL,'Carlos Vicente Reyes Salazar','RESC840317J72',22,1,5,1,'2019-04-30 18:03:18','2019-05-02 18:49:57',2,'Pruebas mas mas de edición de registro',1),(28,NULL,'Razón Social de Pruebas SA de CV','RSP150926H57',27,1,5,1,'2019-04-30 18:16:31','2019-05-06 15:48:27',1,'Medio de contacto',1),(44,NULL,'Compañia de Pruebas SA de CV','CPS100505L95',22,1,5,1,'2019-04-30 22:05:30','2019-05-02 16:47:41',1,'Este cliente se editó para agregarle un nuevo contacto.',1),(50,NULL,'Linix S.A. de C.V.','LIN090915W96',22,1,5,1,'2019-05-02 16:26:34','2019-05-02 23:07:33',1,NULL,1),(51,NULL,'Sistemas Corporativos Independencia S.A de C.V.','SCI190911H57',30,1,5,1,'2019-05-02 17:16:57','2019-05-06 15:48:08',2,'Se tiene pendiente el envio de propuesta comercial.',1);
 /*!40000 ALTER TABLE `crmmex_ventas_cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -447,8 +531,10 @@ CREATE TABLE `crmmex_ventas_contacto` (
   `ejecutivoAlta` int(11) DEFAULT NULL,
   `ejecutivo` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `unico` (`correoElectronico`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+  UNIQUE KEY `unico` (`correoElectronico`),
+  KEY `clienteID_idx` (`clienteID`),
+  CONSTRAINT `clienteID` FOREIGN KEY (`clienteID`) REFERENCES `crmmex_ventas_cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -457,7 +543,7 @@ CREATE TABLE `crmmex_ventas_contacto` (
 
 LOCK TABLES `crmmex_ventas_contacto` WRITE;
 /*!40000 ALTER TABLE `crmmex_ventas_contacto` DISABLE KEYS */;
-INSERT INTO `crmmex_ventas_contacto` VALUES (9,26,'Carlos Vicente','Reyes','Salazar','chentito002@gmail.com','5578100961',1,'12055555','310',3,'Desarrollador',1,'2019-04-30 17:49:07',NULL,1,1),(10,26,'José','Gutiérrez','García','jgutierrez@mexagon.net','7226504499',2,'12055555','320',3,'Desarrollador',1,'2019-04-30 17:49:07',NULL,1,1),(11,27,'Lorenzo Job','Reyes','Cuellar','lorenzo@mail.com','5578122961',1,'2370849',NULL,1,'Administrador',1,'2019-04-30 18:03:18',NULL,1,1),(12,28,'Contacto Conocido','Appat','Apmat','correo@mail.com','5578201499',3,'12098844',NULL,1,'Contador',1,'2019-04-30 18:16:31',NULL,1,1),(15,26,'Prueba','Adicional','Contacto','correos@mails.com','5589066699',3,'12055566','30',1,'Recepcion',1,'2019-04-30 17:55:30',NULL,1,1),(16,44,'Claudia','Reyes','Salazar','clau.reyes@yahoo.com.mx','7223504899',2,'2384566',NULL,1,'Contador',1,'2019-04-30 22:05:30',NULL,1,1);
+INSERT INTO `crmmex_ventas_contacto` VALUES (9,26,'Carlos Vicente','Reyes','Salazar','chentito002@gmail.com','5578100961',1,'12055555','310',3,'Desarrollador',1,'2019-05-02 21:55:12','2019-05-02 21:55:12',1,1),(10,26,'José Heliodoro','Gutiérrez','García','jgutierrez@mexagon.net','7226504499',2,'12055555','320',3,'Desarrollador',1,'2019-05-02 21:55:12','2019-05-02 21:55:12',1,1),(11,27,'Lorenzo Job','Reyes','Cuellar','lorenzo@mail.com','5578122961',1,'2370849',NULL,1,'Administrador',1,'2019-05-02 18:49:57','2019-05-02 18:49:57',1,1),(12,28,'Contacto Conocido','Appat','Apmat','correo@mail.com','5578201499',3,'12098844',NULL,1,'Contador',1,'2019-05-06 15:48:27','2019-05-06 15:48:27',1,1),(15,26,'Prueba','Adicional','Contacto','correos@mails.com','5589066699',3,'12055566','30',1,'Recepcion',1,'2019-05-02 21:55:12','2019-05-02 21:55:12',1,1),(16,44,'Claudia','Reyes','Salazar','clau.reyes@yahoo.com.mx','7223504899',2,'2370849','180',1,'Contador',1,'2019-05-02 16:47:41','2019-05-02 16:47:41',1,1),(17,27,'Editando Contacto','Nuevo','Adicional','email.contacto@gmail.com','5523601455',4,'12850066','760',5,'Gerente de RH',1,'2019-05-02 16:41:42','2019-05-02 16:41:42',1,1),(18,44,'Diana','Reyes','Salazar','nenita@gmail.com','7226501455',2,'2370849','190',4,'Gerencia',1,'2019-05-02 16:47:42','2019-05-02 16:47:42',1,1),(19,44,'Luis Fernando','Reyes','Salazar','fer@gmail.com','7225906844',1,'2370849','200',3,'Desarrollador',1,'2019-05-02 16:47:42','2019-05-02 16:47:42',1,1),(20,50,'Juan','Linares','Hernandez','jlinares@linix.com.mx','7226506692',2,'2693044','500',3,'Director General',1,'2019-05-02 23:07:33','2019-05-02 23:07:33',1,1),(21,50,'José Luis','Padilla','Sandoval','jpadilla@linix.com.mx','7225048566',3,'2693044','501',3,'Desarrollador',1,'2019-05-02 23:06:26','2019-05-02 23:06:26',1,1),(22,50,'Carlos','Romero','Gutiérrez','cromero@linix.com.mx','7225698853',2,'2693044','502',3,'Desarrollador',1,'2019-05-02 23:06:26','2019-05-02 23:06:26',1,1),(23,27,'Eli','Cuellar','Vera','elicuellar@hotmail.com','7226985211',2,'2370849','760',3,'Desarrollador',1,'2019-05-02 18:49:57','2019-05-02 18:49:57',1,1),(24,51,'Lorenzo Job','Reyes','Cuellar','ljobreyes@gmail.com','7226930566',1,'2866211','3690',3,'Developer',1,'2019-05-06 15:48:08','2019-05-06 15:48:08',1,1),(25,51,'Vicente','Reyes','Carmon','vreyesc@hotmail.com','7226931488',1,'null','null',1,'Contador',1,'2019-05-06 15:48:08','2019-05-06 15:48:08',1,1),(26,28,'Contacto','Adicional','Razon Social Prueba','contadd@hotmail.com','8569740566',1,'25963384','509',1,'Asistente dirección',1,'2019-05-06 15:48:28','2019-05-06 15:48:28',1,1),(27,50,'Josefino','Padilla','Romero','ositodos@gmail.com','7223695211',2,'2693044','505',3,'Programador',1,'2019-05-02 23:06:26','2019-05-02 23:06:26',1,1);
 /*!40000 ALTER TABLE `crmmex_ventas_contacto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -484,8 +570,9 @@ CREATE TABLE `crmmex_ventas_direccion` (
   `fechaModificacion` datetime DEFAULT NULL,
   `ejecutivoAlta` int(11) DEFAULT NULL,
   `status` int(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`),
+  KEY `clienteID_idx` (`clienteID`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -494,7 +581,7 @@ CREATE TABLE `crmmex_ventas_direccion` (
 
 LOCK TABLES `crmmex_ventas_direccion` WRITE;
 /*!40000 ALTER TABLE `crmmex_ventas_direccion` DISABLE KEYS */;
-INSERT INTO `crmmex_ventas_direccion` VALUES (5,26,'Clemencia Borja Taboada','59','3','Juriquilla','06700','Juriquilla','Querétaro',4,1,'2019-04-30 17:49:07',NULL,1,1),(6,27,'Limones','12','312','Santa Clara','52004','Lerma','Lerma',5,1,'2019-04-30 18:03:18',NULL,1,1),(7,28,'Jacarandas','859','99','Independencia','52999','San Mateo Atenco','San Mateo Atenco',5,1,'2019-04-30 18:16:32',NULL,1,1),(10,44,'Aguazarca','6',NULL,'S/C','50505','Capulhuac','San Miguel Almaya',5,1,'2019-04-30 22:05:30',NULL,1,1);
+INSERT INTO `crmmex_ventas_direccion` VALUES (5,26,'Clemencia Borja Taboada','59','3','Juriquilla','06700','Juriquilla','Querétaro',4,1,'2019-04-30 17:49:07','2019-05-02 21:55:12',1,1),(6,27,'Limones','12','312','Santa Clara','52004','Lerma','Lerma',5,1,'2019-04-30 18:03:18','2019-05-02 18:49:57',1,1),(7,28,'Jacarandas','859','99','Independencia','52999','San Mateo Atenco','San Mateo Atenco',5,1,'2019-04-30 18:16:32','2019-05-06 15:48:27',1,1),(10,44,'Aguazarca','6',NULL,'S/C','50505','Capulhuac','San Miguel Almaya',5,1,'2019-04-30 22:05:30','2019-05-02 16:47:41',1,1),(32,50,'Calle de los Ingenieros','396','Segundo Piso','Santa Ana Tlapaltitlán','50075','Metepec','Toluca',5,1,NULL,'2019-05-02 23:07:33',1,1),(33,51,'Laguna de Mairán','7',NULL,'Ocho Cedros','50096','Toluca','Toluca',5,1,'2019-05-02 17:16:58','2019-05-06 15:48:08',1,1);
 /*!40000 ALTER TABLE `crmmex_ventas_direccion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -781,7 +868,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Carlos Reyes','cvreyes@mexagon.net',NULL,'$2y$10$xK3Y2a0gWgCoS0s7pPdo2esGMQ4gFsCecAFU.bBhHHMX8uJ0Yb51y','OWerbee9sc6BN17Q5u4Na2Qy2sHdxrtvdFE3FObn5wrhfN5PbfBYFb25ZXXt','2019-03-05 22:30:42','2019-03-05 22:30:42'),(2,'Carlos Lam','clam@mexagon.net',NULL,'$2y$10$x0kD3I1PtL3dGGmGKzheXO2ZYdgUzfbfPyoqxpL359Y0TLvHPRPX6','8VTpH9PMmRAGwrMSgwr93Q2e2HIeFJMUupg8vCFkPPri8pENr2wWynkPRVjq','2019-03-12 05:12:22','2019-03-12 05:12:22');
+INSERT INTO `users` VALUES (1,'Carlos Reyes','cvreyes@mexagon.net',NULL,'$2y$10$xK3Y2a0gWgCoS0s7pPdo2esGMQ4gFsCecAFU.bBhHHMX8uJ0Yb51y','Tsbnp1WprMAgavD5ZXCWlhp7DzDF6iEbymPXAvfA94DJssoOBNvTDMZ2SVyX','2019-03-05 22:30:42','2019-03-05 22:30:42'),(2,'Carlos Lam','clam@mexagon.net',NULL,'$2y$10$x0kD3I1PtL3dGGmGKzheXO2ZYdgUzfbfPyoqxpL359Y0TLvHPRPX6','8VTpH9PMmRAGwrMSgwr93Q2e2HIeFJMUupg8vCFkPPri8pENr2wWynkPRVjq','2019-03-12 05:12:22','2019-03-12 05:12:22');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -820,4 +907,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-30 18:39:37
+-- Dump completed on 2019-05-06 18:40:40
