@@ -12,13 +12,12 @@
 <script>
     idContenido = document.getElementById( 'idCargaInfo' ).value;
     document.getElementById( 'expediente_id' ).value = idContenido;
+    comboEstados();
+    comboPaises();
     path  = '/api/obtieneExpediente/' + idContenido;
     axios( path )
         .then( datos => {
             // Direccion
-            /*$( '#direccion_estado' ).empty();
-            comboEstados();
-            comboPaises();*/
             d = datos.data;
             direccion = d[ 'direccion' ];
             document.getElementById( 'direccion_calle' ).value       = direccion[ 'calle' ];

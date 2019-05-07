@@ -8,7 +8,6 @@
 namespace App\Http\Controllers\crmmex\Ventas;
 
 use App\Models\crmmex\Ventas\Facturas AS Facturas;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -22,7 +21,7 @@ class VentasController extends Controller
           $facturas = Facturas::where( 'status' , 1 )->get();
 
           foreach( $facturas AS $factura ) {
-            $datos[ 'facturas' ][] = array(
+            $datos[ 'facturas' ][] = array (
                 'facturaID'    => $factura->facturaID,
                 'clienteID'    => $factura->clienteID,
                 'propuestaID'  => $factura->propuestaID,
@@ -35,7 +34,5 @@ class VentasController extends Controller
 
           return response()->json( $datos );
      }
-
-
 
 }

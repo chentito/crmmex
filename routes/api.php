@@ -23,6 +23,7 @@ Route::post( '/altaExpediente'  , 'crmmex\Clientes\ClientesController@guardaClie
 Route::get ( '/listadoClientes' , 'crmmex\Clientes\ClientesController@listadoClientes' );
 Route::get ( '/obtieneExpediente/{id}' , 'crmmex\Clientes\ClientesController@obtieneCliente' );
 Route::post( '/editaExpediente'  , 'crmmex\Clientes\ClientesController@actualizaCliente' );
+Route::get( '/validaRFC/{rfc}' , 'crmmex\Clientes\ClientesController@valRFC' );
 Route::get ( '/listadoSeguimientos/{clienteID}' , 'crmmex\Clientes\SeguimientoController@listadoSeguimientos' );
 Route::get ( '/listadoContactos/{clienteID}' , 'crmmex\Clientes\SeguimientoController@listadoContactosPorCliente' );
 Route::post( '/guardaSeguimiento' , 'crmmex\Clientes\SeguimientoController@guardaSeguimiento' );

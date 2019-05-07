@@ -34,6 +34,7 @@
 <script>
     $(document).ready( function() {
         $('#clientes22').DataTable({
+            "lengthMenu" : [[8, 16, 24, -1], [8, 16, 24, "All"]],
             ajax   :{
                 url: '/api/listadoClientes',
                 dataSrc: 'clientes'

@@ -24,7 +24,7 @@
         <script src="{{ asset( 'assets3/js/jodit.min.js' ) }}"></script>
         <!--script async="" defer="defer" src="{{ asset( 'assets2/js/buttons.js' ) }}"></script-->
         <script async defer src="https://buttons.github.io/buttons.js"></script>
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="{{ asset( 'assets3/js/loader.js' ) }}"></script>
     </head>
     <body>
         <style>
@@ -132,6 +132,7 @@
 
         <script type="text/javascript">
             $( document ).ready( function() {
+                $( '[data-toggle="tooltip"]' ).tooltip();
                 $( '#sidebarCollapse' ).on( 'click' , function () {
                     $( '#sidebar' ).toggleClass( 'active' );
                 });

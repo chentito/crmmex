@@ -52,7 +52,7 @@
                             <div class="row">
                                 <div class="col-sm-3 mb-1">
                                     <label for="contacto_celular">No. Celular</label>
-                                    <input type="text" id="contacto_celular" name="contacto_celular[]" class="form-control form-control-sm" value="" placeholder="Celular">
+                                    <input type="text" id="contacto_celular" name="contacto_celular[]" class="form-control form-control-sm" value="" placeholder="Celular" maxlength="10">
                                 </div>
                                 <div class="col-sm-3 mb-1">
                                     <label for="contacto_celular_compania">Compañia</label>
@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="col-sm-3 mb-1">
                                     <label for="contacto_telefono">Teléfono</label>
-                                    <input type="text" id="contacto_telefono" name="contacto_telefono[]" class="form-control form-control-sm" value="" placeholder="Tel&eacute;fono">
+                                    <input type="text" id="contacto_telefono" name="contacto_telefono[]" class="form-control form-control-sm" value="" placeholder="Tel&eacute;fono" maxlength="10">
                                 </div>
                                 <div class="col-sm-3 mb-1">
                                     <label for="contacto_extension">Extensión</label>
@@ -105,7 +105,7 @@
                                 </div>
                                 <div class="col-sm-3 mb-1">
                                     <label for="cliente_rfc">RFC</label>
-                                    <input type="text" id="cliente_rfc" name="cliente_rfc" class="form-control form-control-sm" placeholder="RFC">
+                                    <input type="text" id="cliente_rfc" name="cliente_rfc" class="form-control form-control-sm" placeholder="RFC" onchange="validaRFC(this.value)" maxlength="13">
                                 </div>
                                 <div class="col-sm-3 mb-1">
                                     <!-- Combo giro -->
@@ -290,6 +290,7 @@
     }
 
     async function comboEstados() {
+        $( '#direccion_estado' ).empty();
         let promise = axios.get( '/api/utiles/comboEstados' );
         let result = await promise;
         result.data.forEach( ( item ) => {
@@ -299,6 +300,7 @@
     comboEstados();
 
     async function comboPaises() {
+        $( '#direccion_pais' ).empty();
         let promise2 = axios.get( '/api/utiles/comboPaises' );
         let result2 = await promise2;
         result2.data.forEach( ( item ) => {
@@ -306,4 +308,14 @@
         });
     }
     comboPaises();
+
+    async function validaRFC( rfc ) {
+      if( rfc.length == 12 || rfc.length == 13 ) {
+          let promise3 = axios.get( '/api/validaRFC/' + rfc );
+          let result3  = await promise3;
+          if( result3.data > 0 ) {
+
+          }
+      }
+    }
 </script>
