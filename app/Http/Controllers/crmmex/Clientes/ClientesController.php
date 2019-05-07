@@ -32,6 +32,7 @@ class ClientesController extends Controller
         $cliente->ejecutivo     = 1;
         $cliente->fechaAlta     = date( 'Y-m-d H:i:s' );
         $cliente->tipo          = $request->cliente_tipo;
+        $cliente->grupo         = $request->cliente_grupo;
         $cliente->observaciones = $request->cliente_observaciones;
         $cliente->status        = 1;
         $gCliente               = $cliente->save();
@@ -129,6 +130,7 @@ class ClientesController extends Controller
           'categoria'     => $cliente->categoria,
           'observaciones' => $cliente->observaciones,
           'tipo'          => $cliente->tipo,
+          'grupo'         => $cliente->grupo,
           'subcategoria'  => $cliente->subcategoria
       );
       $clienteID = $cliente->id;
@@ -180,6 +182,7 @@ class ClientesController extends Controller
         $cliente->ejecutivo         = 1;
         $cliente->fechaModificacion = date( 'Y-m-d H:i:s' );
         $cliente->tipo              = $request->cliente_tipo;
+        $cliente->grupo             = $request->cliente_grupo;
         $cliente->observaciones     = $request->cliente_observaciones;
         $cliente->status            = 1;
         $gCliente                   = $cliente->save();

@@ -16,6 +16,9 @@
     axios( path )
         .then( datos => {
             // Direccion
+            /*$( '#direccion_estado' ).empty();
+            comboEstados();
+            comboPaises();*/
             d = datos.data;
             direccion = d[ 'direccion' ];
             document.getElementById( 'direccion_calle' ).value       = direccion[ 'calle' ];
@@ -37,6 +40,7 @@
             document.getElementById( 'catalogo_2' ).value            = cliente[ 'subcategoria' ];
             document.getElementById( 'cliente_observaciones' ).value = cliente[ 'observaciones' ];
             document.getElementById( 'cliente_tipo' ).value          = cliente[ 'tipo' ];
+            document.getElementById( 'cliente_grupo' ).value         = cliente[ 'grupo' ];
             // Contactos
             contactos = d[ 'contactos' ];
             $.each( contactos , function( a , b ) {

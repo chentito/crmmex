@@ -46,7 +46,7 @@
                 { data: 'ejecutivo' },
                 { data: 'fechaAlta' },
                 { data: 'tipo' },
-                { data: 'opciones',align: 'center',ordering:false }
+                { data: 'opciones',align: 'center', "width": "50px", }
             ],
             responsive: true
         });

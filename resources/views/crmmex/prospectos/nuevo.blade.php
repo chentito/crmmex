@@ -143,6 +143,14 @@
                                         <option value="1">Cliente</option>
                                     </select>
                                 </div>
+                                <div class="col-sm-3 mb-1">
+                                    <label for="catalogo_11">Grupo</label>
+                                    <select id="cliente_grupo" name="cliente_grupo" class="custom-select custom-select-sm">
+                                        <option value="1">Ocasional</option>
+                                        <option value="2">Frecuente</option>
+                                        <option value="3">VIP</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -187,21 +195,11 @@
                                 <div class="col-sm-3 mb-1">
                                     <label for="direccion_pais">País</label>
                                     <select id="direccion_pais" name="direccion_pais" class="custom-select custom-select-sm">
-                                        <option value="1">M&eacute;xico</option>
-                                        <option value="2">Estados Unidos</option>
-                                        <option value="3">Espa&ntilde;a</option>
-                                        <option value="4">Argentina</option>
-                                        <option value="5">Inglaterra</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-3 mb-1">
                                     <label for="direccion_estado">Estado</label>
                                     <select id="direccion_estado" name="direccion_estado" class="custom-select custom-select-sm">
-                                        <option value="1">Aguascalientes</option>
-                                        <option value="2">Baja California</option>
-                                        <option value="3">Baja California Sur</option>
-                                        <option value="4">Chiapas</option>
-                                        <option value="5">Estado de Mexico</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-3 mb-1"></div>
@@ -217,6 +215,7 @@
 
 <script>
     $(function () {
+
         cargaDatosComboCatalogo();
 
         $('#myTab a').on( 'click', function ( e ) {
@@ -232,7 +231,7 @@
         $( '#btnAgregaEstructuraCliente' ).button().click( function( e ) {
             e.preventDefault();
             agregaEstructuraContacto();
-        });
+          });
     });
 
     function guardaInfoExpediente() {
@@ -289,4 +288,22 @@
             error : function() { }
         });
     }
+
+    async function comboEstados() {
+        let promise = axios.get( '/api/utiles/comboEstados' );
+        let result = await promise;
+        result.data.forEach( ( item ) => {
+            $( '#direccion_estado' ).append( '<option value="'+item.id+'">'+item.entidad+'</option>' );
+        });
+    }
+    comboEstados();
+
+    async function comboPaises() {
+        let promise2 = axios.get( '/api/utiles/comboPaises' );
+        let result2 = await promise2;
+        result2.data.forEach( ( item ) => {
+            $( '#direccion_pais' ).append( '<option value="'+item.id+'">'+item.nombre+'</option>' );
+        });
+    }
+    comboPaises();
 </script>

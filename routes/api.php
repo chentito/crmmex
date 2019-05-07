@@ -29,21 +29,24 @@ Route::post( '/guardaSeguimiento' , 'crmmex\Clientes\SeguimientoController@guard
 Route::get ( '/obtieneSeguimiento/{id}' , 'crmmex\Clientes\SeguimientoController@obtieneSeguimiento' );
 Route::post( '/actualizaSeguimiento' , 'crmmex\Clientes\SeguimientoController@actualizaSeguimiento' );
 
+/* Modulo Ventas */
+Route::get( '/listadoFacturas' , 'crmmex\Ventas\VentasController@listadoFacturas' );
 
-
-
+/* Acciones utiles */
+Route::get( '/utiles/comboEstados/{pais?}' , 'crmmex\Utils\UtilsController@estados' );
+Route::get( '/utiles/comboPaises'  , 'crmmex\Utils\UtilsController@paises' );
 
 
 
 Route::get( 'listadoProspectos' , 'Prospectos@listado' );
 Route::get( 'listadoContactos' , 'ContactosController@listadoContactos' );
-//Route::get( 'listadoSeguimientos' , 'SeguimientosController@listadoSeguimientos' );
 Route::get( 'listadoProductos' , 'Productos@listadoProductos' );
 Route::get( 'listadoEjecutivos' , 'Administradores@listaAdmin' );
 Route::get( 'listadoPropuestas' , 'VentasController@propuestas' );
 Route::get( 'listadoCampanias' , 'mercadotecnia\CampaniasController@listadoCampanias' );
 Route::get( '/opcionesCombos/{id}' , 'CatalogoController@catalogo' );
 Route::get( '/opcionesCombosPorId/{id}' , 'CatalogoController@catalogoPorId' );
+
 Route::get( '/listadoCatalogos' , 'configuraciones\CatalogosController@catalogosConf' )->middleware( 'cors' );
 Route::get( '/agregaOpcionCatalogo' , 'configuraciones\CatalogosController@agregarOpcionCatalogo' );
 Route::get( '/eliminaOpcionCatalogo' , 'configuraciones\CatalogosController@eliminarOpcionCatalogo' );

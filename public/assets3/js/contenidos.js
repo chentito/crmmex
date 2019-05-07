@@ -1,4 +1,4 @@
-/* 
+/*
  * Funciones utiles para la carga de contenidos sobre la plataforma
  * Solicita la vista a traves de una llamada ajax y la asigna al contenedor principal
  * @Autor Mexagon.net / Carlos Reyes
@@ -34,6 +34,12 @@ function cargaDatosComboCatalogo() {
             });
         }
     });
+}
+
+async function utiles( accion ) {
+    let promise = axios.get( '/api/utiles/' + accion );
+    let result = await promise;
+    return result.data;
 }
 
 function abreModal() {

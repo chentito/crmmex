@@ -16,6 +16,14 @@
         </ul>
     </li>
     <li>
+      <a href="#ventas" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-shopping-cart fa-lg"></i>  Ventas</a>
+      <ul class="collapse list-unstyled" id="ventas">
+          <li><a href="javascript:void(0)" onclick="return contenidos('ventas_facturas');">Facturas</a></li>
+          <!--li><a href="javascript:void(0)" onclick="return contenidos('clientes_listado');">Listado</a></li-->
+          <!--li><a href="javascript:void(0)" onclick="return contenidos('clientes_seguimiento');">Seguimientos</a></li-->
+      </ul>
+    </li>
+    <li>
         <a href="#mercadotecnia" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-lightbulb fa-lg"></i>  Mercadotecnia</a>
         <ul class="collapse list-unstyled" id="mercadotecnia">
             <li><a href="javascript:void(0)" onclick="return contenidos('mercadotecnia_listado');">Campañas</a></li>
