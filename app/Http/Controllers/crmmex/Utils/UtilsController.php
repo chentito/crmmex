@@ -9,6 +9,7 @@ namespace App\Http\Controllers\crmmex\Utils;
 
 use App\Models\crmmex\Utils\Estados AS Estados;
 use App\Models\crmmex\Utils\Paises AS Paises;
+use App\Models\crmmex\Utils\Catalogo AS Catalogo;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -49,5 +50,47 @@ class UtilsController extends Controller
 
         return response()->json( $datos );
      }
+
+     /*
+      * Obtiene las opciones de catalogos utiles
+      */
+      public function opcionesCatalogos( $catalogoID ) {
+          $catalogo = array();
+          $opciones = Catalogo::find( $catalogoID );
+
+          foreach( $opciones->opciones AS $opcion ) {
+              $catalogo[] = array(
+                  'id'     => $opcion->id,
+                  'nombre' => $opcion->opcion,
+                  'params' => $opcion->parametros
+              );
+          }
+
+          return response()->json( $catalogo );
+      }
+
+      /*
+       * Obtiene los catalogos y sus opciones
+       */
+      public function catalogo( $id ) {
+          $catalogo = array();
+          $opciones = Catalogo::find( $id );
+
+          $catalogo[] = array(
+              'id'     => 0,
+              'nombre' => $opciones->nombre,
+              'params' => ''
+          );
+
+          foreach( $opciones->opciones AS $opcion ) {
+              $catalogo[] = array (
+                  'id'     => $opcion->id,
+                  'nombre' => $opcion->opcion,
+                  'params' => $opcion->parametros
+              );
+          }
+
+          return response()->json( $catalogo );
+      }
 
 }

@@ -25,20 +25,25 @@
         </table>
     </div>
 </div>
+<div class="row">
+  <div class="col-sm-12 text-center">
+    <button class="btn btn-sm {{$btn}}" onclick="contenidos('configuraciones_catalogos_nuevoProducto')"><i class="fa fa-plus fa-sm"></i> Agregar Producto/Servicio</button>
+  </div>
+</div>
 
 <script>
     $(document).ready( function() {
         $('#listadoProductos').DataTable({
             ajax   :{
                 url: '/api/listadoProductos',
-                dataSrc: 'productos'
+                dataSrc: 'Productos'
             },
             columns: [
-                { data: 'nombreProducto' },
-                { data: 'categoriaProducto' },
+                { data: 'nombre' },
+                { data: 'categoria' },
                 { data: 'periodicidad' },
                 { data: 'tipo' },
-                { data: 'costo' },
+                { data: 'precio' },
                 { data: 'configuracion' }
             ],
             responsive: true

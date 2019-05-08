@@ -36,6 +36,11 @@ Route::get( '/listadoFacturas' , 'crmmex\Ventas\VentasController@listadoFacturas
 /* Acciones utiles */
 Route::get( '/utiles/comboEstados/{pais?}' , 'crmmex\Utils\UtilsController@estados' );
 Route::get( '/utiles/comboPaises'  , 'crmmex\Utils\UtilsController@paises' );
+Route::get( '/utiles/opcionesCatalogos/{catalogoID}'  , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
+Route::get( '/opcionesCombos/{id}' , 'crmmex\Utils\UtilsController@catalogo' );
+Route::get( '/opcionesCombosPorId/{id}' , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
+
+
 
 
 
@@ -45,8 +50,7 @@ Route::get( 'listadoProductos' , 'Productos@listadoProductos' );
 Route::get( 'listadoEjecutivos' , 'Administradores@listaAdmin' );
 Route::get( 'listadoPropuestas' , 'VentasController@propuestas' );
 Route::get( 'listadoCampanias' , 'mercadotecnia\CampaniasController@listadoCampanias' );
-Route::get( '/opcionesCombos/{id}' , 'CatalogoController@catalogo' );
-Route::get( '/opcionesCombosPorId/{id}' , 'CatalogoController@catalogoPorId' );
+
 
 Route::get( '/listadoCatalogos' , 'configuraciones\CatalogosController@catalogosConf' )->middleware( 'cors' );
 Route::get( '/agregaOpcionCatalogo' , 'configuraciones\CatalogosController@agregarOpcionCatalogo' );
