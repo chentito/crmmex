@@ -1,6 +1,9 @@
-<form id="form_alta_expediente" name="form_alta_expediente">
+<form id="form_alta_productoservicio" name="form_alta_productoservicio">
+
+  <input type="hidden" id="confProductos_id" name="confProductos_id" value="">
 
   <div style="position:absolute; right: 10px; z-index: 900">
+    <button id="btnNvoProdRegresar" class="btn btn-sm {{$btn}}"><i class="fa fa-undo fa-lg"></i><span class="d-none d-sm-inline">  Regresar</span></button>
     <button id="btnGuardaProducto" class="btn btn-sm {{$btn}}"><i class="fa fa-users fa-lg">save</i><span class="d-none d-sm-inline">  Guardar</span></button>
   </div>
 
@@ -62,7 +65,7 @@
             <div class="row">
               <div class="col-sm-3">
                 <label for="confProductos_clave">Precio</label>
-                <input type="text" maxlength="45" placeholder="Precio" class="form-control form-control-sm" id="confProductos_clave" name="confProductos_clave">
+                <input type="text" maxlength="45" placeholder="Precio" class="form-control form-control-sm" id="confProductos_precio" name="confProductos_precio">
               </div>
               <div class="col-sm-3">
                 <label for="confProductos_clave">Impuestos</label>
@@ -93,9 +96,34 @@
 <script>
 
   $(function () {
+      $( '#btnNvoProdRegresar' ).click( function( e ){
+          e.preventDefault();
+          contenidos( 'configuraciones_catalogos_productos' );
+      });
+
+      $( '#btnGuardaProducto' ).click( function( e ){
+          e.preventDefault();
+          guardaProductoNuevo();
+      });
 
       cargaDatosComboCatalogo();
-
   });
+
+  function guardaProductoNuevo() {
+    datos = $( '#form_alta_productoservicio' ).serialize();
+    ruta  = '/api/guardaProducto';
+    $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+    $.ajax({
+        type  : "post",
+        url   : ruta,
+        data  : datos,
+        cache : false,
+        beforeSend : function() {},
+        success : function(d) {
+            contenidos( 'configuraciones_catalogos_productos' );
+        },
+        error : function() {}
+    });
+  }
 
 </script>

@@ -13,44 +13,46 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:api')->get( '/user' , function (Request $request) {
     return $request->user();
 });
 
 /* Modulo Clientes */
 //Route::post( '/altaExpediente' , 'cliente\ExpedienteController@altaExpediente' );
-Route::post( '/altaExpediente'  , 'crmmex\Clientes\ClientesController@guardaCliente' );
-Route::get ( '/listadoClientes' , 'crmmex\Clientes\ClientesController@listadoClientes' );
-Route::get ( '/obtieneExpediente/{id}' , 'crmmex\Clientes\ClientesController@obtieneCliente' );
-Route::post( '/editaExpediente'  , 'crmmex\Clientes\ClientesController@actualizaCliente' );
-Route::get( '/validaRFC/{rfc}' , 'crmmex\Clientes\ClientesController@valRFC' );
+Route::post( '/altaExpediente'                  , 'crmmex\Clientes\ClientesController@guardaCliente' );
+Route::get ( '/listadoClientes'                 , 'crmmex\Clientes\ClientesController@listadoClientes' );
+Route::get ( '/obtieneExpediente/{id}'          , 'crmmex\Clientes\ClientesController@obtieneCliente' );
+Route::post( '/editaExpediente'                 , 'crmmex\Clientes\ClientesController@actualizaCliente' );
+Route::get ( '/validaRFC/{rfc}'                 , 'crmmex\Clientes\ClientesController@valRFC' );
 Route::get ( '/listadoSeguimientos/{clienteID}' , 'crmmex\Clientes\SeguimientoController@listadoSeguimientos' );
-Route::get ( '/listadoContactos/{clienteID}' , 'crmmex\Clientes\SeguimientoController@listadoContactosPorCliente' );
-Route::post( '/guardaSeguimiento' , 'crmmex\Clientes\SeguimientoController@guardaSeguimiento' );
-Route::get ( '/obtieneSeguimiento/{id}' , 'crmmex\Clientes\SeguimientoController@obtieneSeguimiento' );
-Route::post( '/actualizaSeguimiento' , 'crmmex\Clientes\SeguimientoController@actualizaSeguimiento' );
+Route::get ( '/listadoContactos/{clienteID}'    , 'crmmex\Clientes\SeguimientoController@listadoContactosPorCliente' );
+Route::post( '/guardaSeguimiento'               , 'crmmex\Clientes\SeguimientoController@guardaSeguimiento' );
+Route::get ( '/obtieneSeguimiento/{id}'         , 'crmmex\Clientes\SeguimientoController@obtieneSeguimiento' );
+Route::post( '/actualizaSeguimiento'            , 'crmmex\Clientes\SeguimientoController@actualizaSeguimiento' );
 
 /* Modulo Ventas */
-Route::get( '/listadoFacturas' , 'crmmex\Ventas\VentasController@listadoFacturas' );
+Route::get ( '/listadoFacturas' , 'crmmex\Ventas\VentasController@listadoFacturas' );
 
 /* Acciones utiles */
-Route::get( '/utiles/comboEstados/{pais?}' , 'crmmex\Utils\UtilsController@estados' );
-Route::get( '/utiles/comboPaises'  , 'crmmex\Utils\UtilsController@paises' );
-Route::get( '/utiles/opcionesCatalogos/{catalogoID}'  , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
-Route::get( '/opcionesCombos/{id}' , 'crmmex\Utils\UtilsController@catalogo' );
-Route::get( '/opcionesCombosPorId/{id}' , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
+Route::get ( '/utiles/comboEstados/{pais?}'           , 'crmmex\Utils\UtilsController@estados' );
+Route::get ( '/utiles/comboPaises'                    , 'crmmex\Utils\UtilsController@paises' );
+Route::get ( '/utiles/opcionesCatalogos/{catalogoID}' , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
+Route::get ( '/opcionesCombos/{id}'                   , 'crmmex\Utils\UtilsController@catalogo' );
+Route::get ( '/opcionesCombosPorId/{id}'              , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
 
-
+/* Productos */
+Route::get ( '/listadoProductos'             , 'crmmex\Productos\ProductosController@listadoProductos' );
+Route::post( '/guardaProducto'               , 'crmmex\Productos\ProductosController@guardaProducto' );
+Route::post( '/actualizaProducto'            , 'crmmex\Productos\ProductosController@guardaProducto' );
+Route::get ( '/obtieneProducto/{productoID}' , 'crmmex\Productos\ProductosController@obtieneProducto' );
 
 
 
 Route::get( 'listadoProspectos' , 'Prospectos@listado' );
 Route::get( 'listadoContactos' , 'ContactosController@listadoContactos' );
-Route::get( 'listadoProductos' , 'Productos@listadoProductos' );
 Route::get( 'listadoEjecutivos' , 'Administradores@listaAdmin' );
 Route::get( 'listadoPropuestas' , 'VentasController@propuestas' );
 Route::get( 'listadoCampanias' , 'mercadotecnia\CampaniasController@listadoCampanias' );
-
 
 Route::get( '/listadoCatalogos' , 'configuraciones\CatalogosController@catalogosConf' )->middleware( 'cors' );
 Route::get( '/agregaOpcionCatalogo' , 'configuraciones\CatalogosController@agregarOpcionCatalogo' );
