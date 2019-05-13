@@ -23,6 +23,7 @@
           document.getElementById( 'confProductos_precio' ).value      = d.precio;
           document.getElementById( 'catalogo_14' ).value               = d.impuesto;
           document.getElementById( 'catalogo_10' ).value               = d.divisa;
+          document.getElementById( 'confProductos_status' ).value      = d.status;
       });
 
 </script>

@@ -75,6 +75,11 @@
                 <label for="catalogo_10">Divisa</label>
                 <select class="custom-select custom-select-sm" id="catalogo_10" name="catalogo_10"></select>
               </div>
+              <div class="col-sm-3">
+                <label for="confProductos_status">Estatus</label>
+                <select class="custom-select custom-select-sm" id="confProductos_status" name="confProductos_status">
+                </select>
+              </div>
             </div>
           </div>
         </div>
@@ -110,8 +115,15 @@
   });
 
   function guardaProductoNuevo() {
-    datos = $( '#form_alta_productoservicio' ).serialize();
-    ruta  = '/api/guardaProducto';
+    datos      = $( '#form_alta_productoservicio' ).serialize();
+    movimiento = 'alta';
+    if( document.getElementById( 'confProductos_id' ).value != '' ) { // Edita registro
+          ruta       = '/api/actualizaProducto';
+          movimiento = 'actualiza';
+      } else { // Nuevo registro
+          ruta  = '/api/guardaProducto';
+    }
+
     $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
     $.ajax({
         type  : "post",
@@ -120,10 +132,23 @@
         cache : false,
         beforeSend : function() {},
         success : function(d) {
-            contenidos( 'configuraciones_catalogos_productos' );
+          if( movimiento == 'alta' ) {
+                contenidos( 'configuraciones_catalogos_productos' );
+            } else {
+                contenidos( 'configuraciones_catalogos_editaProducto' , document.getElementById( 'confProductos_id' ).value );
+          }
         },
         error : function() {}
     });
   }
 
+  async function comboEstatus() {
+      $( '#confProductos_status' ).empty();
+      let promise = axios.get( '/api/utiles/estatus' );
+      let result = await promise;
+      result.data.forEach( ( item ) => {
+          $( '#confProductos_status' ).append( '<option value="'+item.id+'">'+item.status+'</option>' );
+      });
+  }
+  comboEstatus();
 </script>

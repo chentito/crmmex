@@ -113,7 +113,7 @@ class ClientesController extends Controller
               'tipo'        => ( ( $cliente->tipo == '1' ) ? 'Cliente' : 'Prospecto' ),
               'opciones'    => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')"><i class="fa fa-edit fa-lg"></i></a>'
                              . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Segimiento" onclick="contenidos(\'clientes_seguimiento\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-toolbox fa-lg"></i></a>'
-                             . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Propuesta" onclick="contenidos(\'clientes_propuesta\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-file-alt fa-lg"></i></a>'
+                             . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Propuesta" onclick="contenidos(\'clientes_listadoPropuestas\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-file-alt fa-lg"></i></a>'
           );
       }
 

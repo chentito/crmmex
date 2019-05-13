@@ -17,7 +17,7 @@ class ProductosController extends Controller
     //Listado de productos/servicios
     public function listadoProductos() {
         $datos = array();
-        $productos = Prod::where( 'status' , 1 )->get();
+        $productos = Prod::whereIn( 'status' , array( 2 , 1 ) )->get();
 
         foreach( $productos AS $producto ) {
             $datos[ 'Productos' ][] = array (
@@ -32,6 +32,7 @@ class ProductosController extends Controller
               'precio'        => $this->formatoMoneda( $producto->precio ),
               'impuesto'      => $producto->impuesto,
               'divisa'        => $producto->divisa,
+              'status'        => ( $producto->status == '1' ? 'Activo' : 'Inactivo' ),
               'configuracion' => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Producto" onclick="contenidos(\'configuraciones_catalogos_editaProducto\',\''.$producto->id.'\')"><i class="fa fa-edit fa-lg"></i></a>'
             );
         }
@@ -50,10 +51,10 @@ class ProductosController extends Controller
         $producto->descripcion  = $request->confProductos_descripcion;
         $producto->periodicidad = $request->catalogo_8;
         $producto->categoria    = $request->catalogo_13;
-        $producto->precio       = $request->confProductos_clave;
+        $producto->precio       = $request->confProductos_precio;
         $producto->impuesto     = $request->catalogo_14;
         $producto->divisa       = $request->catalogo_10;
-        $producto->status       = '1';
+        $producto->status       = $request->confProductos_status;
         $gProducto              = $producto->save();
     }
 
@@ -61,7 +62,7 @@ class ProductosController extends Controller
      * Metodo que actualiza un producto en particular
      */
     public function actualizaProducto( Request $request ) {
-        $productoID = $request->id;
+        $productoID = $request->confProductos_id;
         $producto = Prod::find( $productoID );
         $producto->clave        = $request->confProductos_clave;
         $producto->tipo         = $request->catalogo_9;
@@ -70,9 +71,10 @@ class ProductosController extends Controller
         $producto->descripcion  = $request->confProductos_descripcion;
         $producto->periodicidad = $request->catalogo_8;
         $producto->categoria    = $request->catalogo_13;
-        $producto->precio       = $request->confProductos_clave;
+        $producto->precio       = $request->confProductos_precio;
         $producto->impuesto     = $request->catalogo_14;
         $producto->divisa       = $request->catalogo_10;
+        $producto->status       = $request->confProductos_status;
         $gProducto              = $producto->save();
     }
 
@@ -92,7 +94,8 @@ class ProductosController extends Controller
             'categoria'    => $producto->categoria,
             'precio'       => $producto->precio,
             'impuesto'     => $producto->impuesto,
-            'divisa'       => $producto->divisa
+            'divisa'       => $producto->divisa,
+            'status'       => $producto->status
           );
 
           return response()->json( $datos );

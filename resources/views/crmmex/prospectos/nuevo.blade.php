@@ -304,11 +304,11 @@
 
     async function validaRFC( rfc ) {
       if( rfc.length == 12 || rfc.length == 13 ) {
-          let promise3 = axios.get( '/api/validaRFC/' + rfc );
-          let result3  = await promise3;
-          if( result3.data > 0 ) {
-
-          }
+        let promise3 = axios.get( '/api/validaRFC/' + rfc );
+        let result3  = await promise3;
+        if( result3.data > 0 ) {
+          
+        }
       }
     }
 </script>

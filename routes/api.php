@@ -18,7 +18,6 @@ Route::middleware('auth:api')->get( '/user' , function (Request $request) {
 });
 
 /* Modulo Clientes */
-//Route::post( '/altaExpediente' , 'cliente\ExpedienteController@altaExpediente' );
 Route::post( '/altaExpediente'                  , 'crmmex\Clientes\ClientesController@guardaCliente' );
 Route::get ( '/listadoClientes'                 , 'crmmex\Clientes\ClientesController@listadoClientes' );
 Route::get ( '/obtieneExpediente/{id}'          , 'crmmex\Clientes\ClientesController@obtieneCliente' );
@@ -29,6 +28,7 @@ Route::get ( '/listadoContactos/{clienteID}'    , 'crmmex\Clientes\SeguimientoCo
 Route::post( '/guardaSeguimiento'               , 'crmmex\Clientes\SeguimientoController@guardaSeguimiento' );
 Route::get ( '/obtieneSeguimiento/{id}'         , 'crmmex\Clientes\SeguimientoController@obtieneSeguimiento' );
 Route::post( '/actualizaSeguimiento'            , 'crmmex\Clientes\SeguimientoController@actualizaSeguimiento' );
+Route::get ( '/listadoPropuestas/{clienteID}'   , 'crmmex\Clientes\PropuestasController@listadoPropuestas' );
 
 /* Modulo Ventas */
 Route::get ( '/listadoFacturas' , 'crmmex\Ventas\VentasController@listadoFacturas' );
@@ -37,13 +37,15 @@ Route::get ( '/listadoFacturas' , 'crmmex\Ventas\VentasController@listadoFactura
 Route::get ( '/utiles/comboEstados/{pais?}'           , 'crmmex\Utils\UtilsController@estados' );
 Route::get ( '/utiles/comboPaises'                    , 'crmmex\Utils\UtilsController@paises' );
 Route::get ( '/utiles/opcionesCatalogos/{catalogoID}' , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
+Route::get ( '/utiles/estatus'                        , 'crmmex\Utils\UtilsController@estatusRegistro' );
+Route::get ( '/utiles/listadoProductosServicios'      , 'crmmex\Utils\UtilsController@productosServicios' );
 Route::get ( '/opcionesCombos/{id}'                   , 'crmmex\Utils\UtilsController@catalogo' );
 Route::get ( '/opcionesCombosPorId/{id}'              , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
 
 /* Productos */
 Route::get ( '/listadoProductos'             , 'crmmex\Productos\ProductosController@listadoProductos' );
 Route::post( '/guardaProducto'               , 'crmmex\Productos\ProductosController@guardaProducto' );
-Route::post( '/actualizaProducto'            , 'crmmex\Productos\ProductosController@guardaProducto' );
+Route::post( '/actualizaProducto'            , 'crmmex\Productos\ProductosController@actualizaProducto' );
 Route::get ( '/obtieneProducto/{productoID}' , 'crmmex\Productos\ProductosController@obtieneProducto' );
 
 

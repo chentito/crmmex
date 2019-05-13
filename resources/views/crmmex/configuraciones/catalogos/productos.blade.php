@@ -8,6 +8,7 @@
                     <th>Periodicidad Pago</th>
                     <th>Tipo</th>
                     <th>Precio Unitario</th>
+                    <th>Estatus</th>
                     <th>M&aacute;s</th>
                 </tr>
             </thead>
@@ -19,6 +20,7 @@
                     <th>Periodicidad Pago</th>
                     <th>Tipo</th>
                     <th>Precio Unitario</th>
+                    <th>Estatus</th>
                     <th>M&aacute;s</th>
                 </tr>
             </tfoot>
@@ -44,6 +46,7 @@
                 { data: 'periodicidad' },
                 { data: 'tipo' },
                 { data: 'precio' },
+                { data: 'status' },
                 { data: 'configuracion' }
             ],
             responsive: true
