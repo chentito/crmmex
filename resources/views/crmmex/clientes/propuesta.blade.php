@@ -4,13 +4,17 @@ Se va a agregar una propuesta al cliente con id {{$param}}
   <div class="row">
       <div class="col-sm-12">
           <div class="row">
-              <div class="col-sm-6 mb-1">
+              <div class="col-sm-4 mb-1">
                   <label for="catalogo_13">Categor&iacute;a</label>
                   <select class="custom-select custom-select-sm" id="catalogo_13" nombre="catalogo_13"></select>
               </div>
-              <div class="col-sm-6 mb-1">
+              <div class="col-sm-4 mb-1">
                   <label for="catalogo_15">Forma Pago</label>
                   <select class="custom-select custom-select-sm" id="catalogo_15" nombre="catalogo_15"></select>
+              </div>
+              <div class="col-sm-4 mb-1">
+                  <label for="catalogo_15">Contacto</label>
+                  <select class="custom-select custom-select-sm" id="propuesta_contactos" nombre="propuesta_contactos"></select>
               </div>
           </div>
           <div class="row">
@@ -27,7 +31,19 @@ Se va a agregar una propuesta al cliente con id {{$param}}
             <div class="col-sm-12"><hr /></div>
           </div>
           <div class="row">
-              <div class="col-sm-10 mb-1">
+              <div class="col-sm-2 mb-1">
+                    <label for="propuesta_grupoProducto">Grupo</label>
+                    <select class="custom-select custom-select-sm" id="propuesta_grupoProducto" name="propuesta_grupoProducto">
+                        <option>Grupo</option>
+                        <option>Consumibles</option>
+                        <option>Equipos de cómputo</option>
+                        <option>Facturación electrónica</option>
+                        <option>Servicios de internet</option>
+                        <option>Servicios profesionales</option>
+                    </select>
+              </div>
+              <div class="col-sm-8 mb-1">
+                  <label for="listadoProductosPropuestaComercial">Seleccione Producto/Servicio</label>
                   <select class="custom-select custom-select-sm" id="listadoProductosPropuestaComercial" name="listadoProductosPropuestaComercial"></select>
               </div>
               <div class="col-sm-2 mb-1 text-center">
@@ -51,7 +67,7 @@ Se va a agregar una propuesta al cliente con id {{$param}}
                           <label for="propuesta_promocion">Promoci&oacute;n</label>
                           <input class="form-control form-control-sm" placeholder="Cantidad" id="propuesta_promocion[]" name="propuesta_promocion[]">
                       </div>
-                      <div class="col-sm-2">
+                      <div class="col-sm-4">
                           <label for="propuesta_cicloFacturacion">Ciclo de Facturaci&oacute;n</label>
                           <select class="custom-select custom-select-sm" id="propuesta_cicloFacturacion[]" name="propuesta_cicloFacturacion[]">
                               <option>Ciclo de facturación</option>
@@ -63,24 +79,12 @@ Se va a agregar una propuesta al cliente con id {{$param}}
                               <option>Un solo pago</option>
                           </select>
                       </div>
-                      <div class="col-sm-2">
-                          <label for="propuesta_grupoProducto">Grupo</label>
-                          <select class="custom-select custom-select-sm" id="propuesta_grupoProducto[]" name="propuesta_grupoProducto[]">
-                              <option>Grupo</option>
-                              <option>Consumibles</option>
-                              <option>Equipos de cómputo</option>
-                              <option>Facturación electrónica</option>
-                              <option>Servicios de internet</option>
-                              <option>Servicios profesionales</option>
-                          </select>
-                      </div>
                   </div>
               </div>
           </div>
           <div class="text-center mt-3">
-            <button class="btn btn-sm {{$btn}}"><i class="fa fa-plus fa-lg"></i> Agregar Producto</button>
-            <button class="btn btn-sm {{$btn}}"><i class="fa fa-file"></i> Vista Previa</button>
-            <button class="btn btn-sm {{$btn}}"><i class="fa fa-file-pdf"></i> Generar Propuesta</button>
+            <button class="btn btn-sm {{$btn}}" id="btnGeneraVistaPrevia"><i class="fa fa-file"></i> Vista Previa</button>
+            <button class="btn btn-sm {{$btn}}" id="btnGeneraPropuesta"><i class="fa fa-file-pdf"></i> Generar Propuesta</button>
             <button class="btn btn-sm {{$btn}}" id="btnRegresar"><i class="fa fa-undo"></i> Regresar</button>
           </div>
       </div>
@@ -100,6 +104,12 @@ Se va a agregar una propuesta al cliente con id {{$param}}
           $( '#btnAgregaEstructuraProducto' ).click( function( e ) {
               e.preventDefault();
           });
+          $( '#btnGeneraPropuesta' ).click( function( e ){
+              e.preventDefault();alert("genera propuesta");
+          });
+          $( '#btnGeneraVistaPrevia' ).click( function( e ){
+              e.preventDefault();alert("vista previa");
+          });
       });
 
       async function comboProductos() {
@@ -111,4 +121,13 @@ Se va a agregar una propuesta al cliente con id {{$param}}
           });
       }
       comboProductos();
+      async function comboContactos() {
+          $( '#propuesta_contactos' ).empty();
+          let promise = axios.get( '/api/utiles/listadoContactos/'+document.getElementById( 'clienteID' ).value );
+          let result = await promise;
+          result.data.forEach( ( item ) => {
+              $( '#propuesta_contactos' ).append( '<option value="'+item.id+'">'+item.nombre+'</option>' );
+          });
+      }
+      comboContactos();
 </script>

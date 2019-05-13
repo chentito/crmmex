@@ -12,6 +12,7 @@ use App\Models\crmmex\Utils\Paises AS Paises;
 use App\Models\crmmex\Utils\Catalogo AS Catalogo;
 use App\Models\crmmex\Utils\Estatus AS Estatus;
 use App\Models\crmmex\Productos\Productos AS Productos;
+use App\Models\crmmex\Clientes\Contactos AS Contactos;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -128,5 +129,23 @@ class UtilsController extends Controller
 
           return response()->json( $datos );
        }
+
+       /*
+        * Obtiene listado de contactos por cliente
+        */
+        public function listadoContactos( $clienteID ) {
+            $datos = array();
+            $contactos = Contactos::where( 'clienteID' , $clienteID )->where( 'status' , 1 )->get();
+
+            foreach( $contactos AS $contacto ) {
+                $datos[] = array(
+                  'id' => $contacto->id,
+                  'nombre' => $contacto->nombre . ' ' . $contacto->apellidoPaterno . ' ' .
+                              $contacto->apellidoMaterno . ' [' . $contacto->correoElectronico . ']'
+                );
+            }
+
+            return response()->json( $datos );
+        }
 
 }
