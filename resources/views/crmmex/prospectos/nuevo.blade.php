@@ -231,14 +231,19 @@
         var datos = $( '#form_alta_expediente' ).serialize();
         var mov   = '';
         if( $( '#idCargaInfo' ).length == 0 ) {
-          var ruta  = '/api/altaExpediente';
+          var ruta  = '/api/altaExpediente?api_token=' + $('meta[name="csrf-token"]').attr('content');
+          //var ruta  = '/api/altaExpediente';
           mov = 'alta';
         } else {
           var ruta  = '/api/editaExpediente';
           mov = 'edicion';
         }
 
-        $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+        $.ajaxSetup({ headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer xtNJsUtUj2EurvQjC8s2QuMqTj1gBnW5MRVlx6Oa'
+          }
+        });
         $.ajax({
             type  : "post",
             url   : ruta,

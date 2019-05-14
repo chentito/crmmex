@@ -7,6 +7,7 @@
 
 namespace App\Http\Controllers\crmmex\Clientes;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\crmmex\Clientes\Clientes AS Clientes;
 use App\Models\crmmex\Clientes\Contactos AS Contactos;
 use App\Models\crmmex\Clientes\Direccion AS Direccion;
@@ -32,7 +33,7 @@ class ClientesController extends Controller
         $cliente->giro          = $request->catalogo_5;
         $cliente->categoria     = $request->catalogo_1;
         $cliente->subcategoria  = $request->catalogo_2;
-        $cliente->ejecutivo     = 1;
+        $cliente->ejecutivo     = Auth::user()->id;
         $cliente->fechaAlta     = date( 'Y-m-d H:i:s' );
         $cliente->tipo          = $request->cliente_tipo;
         $cliente->grupo         = $request->cliente_grupo;
@@ -176,6 +177,7 @@ class ClientesController extends Controller
     public function actualizaCliente( Request $request ) {
         $idtyCli = $request->expediente_id;
 
+        $this->authorize( 'revisaCliente' , $idtyCli );
         $cliente = Clientes::find( $idtyCli );
         $cliente->razonSocial       = $request->cliente_razon_social;
         $cliente->rfc               = $request->cliente_rfc;
