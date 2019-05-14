@@ -551,7 +551,7 @@ CREATE TABLE `crmmex_ventas_cliente` (
   `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unico` (`rfc`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -560,7 +560,7 @@ CREATE TABLE `crmmex_ventas_cliente` (
 
 LOCK TABLES `crmmex_ventas_cliente` WRITE;
 /*!40000 ALTER TABLE `crmmex_ventas_cliente` DISABLE KEYS */;
-INSERT INTO `crmmex_ventas_cliente` VALUES (26,NULL,'Mexagon S.A. de C.V.','MEX030512V22',22,1,5,1,'2019-04-30 17:49:07','2019-05-07 18:16:26',1,'Pruebas probandoooo',3,1),(27,NULL,'Carlos Vicente Reyes Salazar','RESC840317J72',22,1,5,1,'2019-04-30 18:03:18','2019-05-13 15:26:01',1,'Pruebas mas mas de edición de registro',3,1),(28,NULL,'Razón Social de Pruebas SA de CV','RSP150926H57',22,1,5,1,'2019-04-30 18:16:31','2019-05-07 18:18:43',2,'Medio de contacto',2,1),(44,NULL,'Compañia de Pruebas SA de CV','CPS100505L95',22,1,5,1,'2019-04-30 22:05:30','2019-05-07 17:02:59',1,'Este cliente se editó para agregarle un nuevo contacto.',1,1),(50,NULL,'Linix S.A. de C.V.','LIN090915W96',22,1,5,1,'2019-05-02 16:26:34','2019-05-07 17:43:23',1,NULL,1,1),(51,NULL,'Sistemas Corporativos Independencia S.A de C.V.','SCI190911H57',22,1,5,1,'2019-05-02 17:16:57','2019-05-07 18:29:25',2,'Se tiene pendiente el envio de propuesta comercial.',2,1),(59,NULL,'Empresa SA de CV','EMP630919J90',23,2,60,1,'2019-05-07 19:03:57',NULL,2,NULL,2,1),(60,NULL,'Uniformes Escolares Vera','UEV960503',22,59,60,1,'2019-05-07 19:08:10',NULL,1,NULL,1,1),(61,NULL,'Desisweb SA de CV','DES070915J89',23,3,5,1,'2019-05-07 19:13:51',NULL,2,NULL,1,1),(62,NULL,'Empresa Empresarial SRL de CV','EES180806',27,2,7,1,'2019-05-07 19:17:15',NULL,2,NULL,1,1),(63,NULL,'Ositos Desarrolladores SA de CV','OSO190305K99',30,4,60,1,'2019-05-07 19:19:34',NULL,1,NULL,2,1),(64,NULL,'DevSisTol SA de CV','DST190520K12',23,3,7,1,'2019-05-08 17:24:16',NULL,1,NULL,2,1);
+INSERT INTO `crmmex_ventas_cliente` VALUES (26,NULL,'Mexagon S.A. de C.V.','MEX030512V22',22,1,5,1,'2019-04-30 17:49:07','2019-05-14 15:16:48',1,'Pruebas probandoooo',3,1),(27,NULL,'Carlos Vicente Reyes Salazar','RESC840317J72',22,1,5,1,'2019-04-30 18:03:18','2019-05-13 15:26:01',1,'Pruebas mas mas de edición de registro',3,1),(28,NULL,'Razón Social de Pruebas SA de CV','RSP150926H57',22,1,5,1,'2019-04-30 18:16:31','2019-05-07 18:18:43',2,'Medio de contacto',2,1),(44,NULL,'Compañia de Pruebas SA de CV','CPS100505L95',22,1,5,1,'2019-04-30 22:05:30','2019-05-07 17:02:59',1,'Este cliente se editó para agregarle un nuevo contacto.',1,1),(50,NULL,'Linix S.A. de C.V.','LIN090915W96',22,1,5,1,'2019-05-02 16:26:34','2019-05-07 17:43:23',1,NULL,1,1),(51,NULL,'Sistemas Corporativos Independencia S.A de C.V.','SCI190911H57',22,1,5,1,'2019-05-02 17:16:57','2019-05-07 18:29:25',2,'Se tiene pendiente el envio de propuesta comercial.',2,1),(59,NULL,'Empresa SA de CV','EMP630919J90',23,2,60,1,'2019-05-07 19:03:57',NULL,2,NULL,2,1),(60,NULL,'Uniformes Escolares Vera','UEV960503',22,59,60,1,'2019-05-07 19:08:10',NULL,1,NULL,1,1),(61,NULL,'Desisweb SA de CV','DES070915J89',23,3,5,1,'2019-05-07 19:13:51',NULL,2,NULL,1,1),(62,NULL,'Empresa Empresarial SRL de CV','EES180806',27,2,7,1,'2019-05-07 19:17:15',NULL,2,NULL,1,1),(63,NULL,'Ositos Desarrolladores SA de CV','OSO190305K99',30,4,60,1,'2019-05-07 19:19:34',NULL,1,NULL,2,1),(64,NULL,'DevSisTol SA de CV','DST190520K12',23,3,7,1,'2019-05-08 17:24:16',NULL,1,NULL,2,1),(65,NULL,'Cliente Para Politicas SC','CPP050906K99',22,1,5,NULL,'2019-05-14 15:58:14',NULL,2,'PPPPPP',1,1);
 /*!40000 ALTER TABLE `crmmex_ventas_cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -593,7 +593,7 @@ CREATE TABLE `crmmex_ventas_contacto` (
   UNIQUE KEY `unico` (`correoElectronico`),
   KEY `clienteID_idx` (`clienteID`),
   CONSTRAINT `clienteID` FOREIGN KEY (`clienteID`) REFERENCES `crmmex_ventas_cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -602,7 +602,7 @@ CREATE TABLE `crmmex_ventas_contacto` (
 
 LOCK TABLES `crmmex_ventas_contacto` WRITE;
 /*!40000 ALTER TABLE `crmmex_ventas_contacto` DISABLE KEYS */;
-INSERT INTO `crmmex_ventas_contacto` VALUES (9,26,'Carlos Vicente','Reyes','Salazar','chentito002@gmail.com','5578100961',1,'12055555','310',3,'Desarrollador',1,'2019-05-07 18:16:26','2019-05-07 18:16:26',1,1),(10,26,'José Heliodoro','Gutiérrez','García','jgutierrez@mexagon.net','7226504499',2,'12055555','320',3,'Desarrollador',1,'2019-05-07 18:16:26','2019-05-07 18:16:26',1,1),(11,27,'Lorenzo Job','Reyes','Cuellar','lorenzo@mail.com','5578122961',1,'2370849',NULL,1,'Administrador',1,'2019-05-13 15:26:01','2019-05-13 15:26:01',1,1),(12,28,'Contacto Conocido','Appat','Apmat','correo@mail.com','5578201499',3,'12098844',NULL,1,'Contador',1,'2019-05-07 18:18:43','2019-05-07 18:18:43',1,1),(15,26,'Prueba','Adicional','Contacto','correos@mails.com','5589066699',3,'12055566','30',1,'Recepcion',0,'2019-05-07 18:04:54','2019-05-07 18:04:54',1,1),(16,44,'Claudia','Reyes','Salazar','clau.reyes@yahoo.com.mx','7223504899',2,'2370849','180',1,'Contador',1,'2019-05-07 17:02:59','2019-05-07 17:02:59',1,1),(17,27,'Editando Contacto','Nuevo','Adicional','email.contacto@gmail.com','5523601455',4,'12850066','760',5,'Gerente de RH',0,'2019-05-07 14:39:30','2019-05-07 14:39:30',1,1),(18,44,'Diana','Reyes','Salazar','nenita@gmail.com','7226501455',2,'2370849','190',4,'Gerencia',1,'2019-05-07 17:02:59','2019-05-07 17:02:59',1,1),(19,44,'Luis Fernando','Reyes','Salazar','fer@gmail.com','7225906844',1,'2370849','200',3,'Desarrollador',1,'2019-05-07 17:02:59','2019-05-07 17:02:59',1,1),(20,50,'Juan','Linares','Hernandez','jlinares@linix.com.mx','7226506692',2,'2693044','500',3,'Director General',1,'2019-05-07 17:43:23','2019-05-07 17:43:23',1,1),(21,50,'José Luis','Padilla','Sandoval','jpadilla@linix.com.mx','7225048566',3,'2693044','501',3,'Desarrollador',1,'2019-05-07 17:43:24','2019-05-07 17:43:24',1,1),(22,50,'Carlos','Romero','Gutiérrez','cromero@linix.com.mx','7225698853',2,'2693044','502',3,'Desarrollador',1,'2019-05-07 17:43:24','2019-05-07 17:43:24',1,1),(23,27,'Eli','Cuellar','Vera','elicuellar@hotmail.com','7226985211',2,'2370849','760',3,'Desarrollador',1,'2019-05-13 15:26:02','2019-05-13 15:26:02',1,1),(24,51,'Lorenzo Job','Reyes','Cuellar','ljobreyes@gmail.com','7226930566',1,'2866211','3690',3,'Developer',1,'2019-05-07 18:29:25','2019-05-07 18:29:25',1,1),(25,51,'Vicente','Reyes','Carmona','vreyesc@hotmail.com','7226931488',1,'null','750',1,'Contador',1,'2019-05-07 18:29:25','2019-05-07 18:29:25',1,1),(26,28,'Contacto','Adicional','Razon Social Prueba','contadd@hotmail.com','8569740566',1,'25963384','509',1,'Asistente dirección',0,'2019-05-07 18:17:18','2019-05-07 18:17:18',1,1),(27,50,'Josefino','Padilla','Romero','ositodos@gmail.com','7223695211',2,'2693044','505',3,'Programador',1,'2019-05-07 17:43:24','2019-05-07 17:43:24',1,1),(28,59,'Leticia','Salazar','Jalomo','lety.salazar@empresa.com.mx','7223692448',1,'2378652','66',5,'Nóminas',1,'2019-05-07 19:03:57',NULL,1,1),(29,60,'Ivonne','Cuellar','Vera','richiivonne@gmail.com','7225985411',4,'278699',NULL,4,'Facturación',1,'2019-05-07 19:08:10',NULL,1,1),(30,60,'Empleada','Numero','Uno',NULL,NULL,1,NULL,NULL,1,NULL,1,'2019-05-07 19:08:10',NULL,1,1),(31,61,'Vicente','Reyes','Salazar','cvreyes@mexagon.net','5578201466',1,'45852222',NULL,4,'Presupuestos',1,'2019-05-07 19:13:51',NULL,1,1),(32,62,'Panchito','Pantera','Sanchez','pps@empresarial.com','5545633299',2,'2899655','965',1,'Auxiliar Contable',1,'2019-05-07 19:17:15',NULL,1,1),(33,63,'Josefina','Gutierrez','García','osita@gmail.com','7223695105',2,'2866955','320',3,'Programadora',1,'2019-05-07 19:19:34',NULL,1,1),(34,64,'Lorenzo Job','Reyes','Cuellar','lojorecu@gmail.com','7224509665',1,'7222682611','999',3,'Developer Sr',1,'2019-05-08 17:24:16',NULL,1,1);
+INSERT INTO `crmmex_ventas_contacto` VALUES (9,26,'Carlos Vicente','Reyes','Salazar','chentito002@gmail.com','5578100961',1,'12055555','310',3,'Desarrollador',1,'2019-05-14 15:16:48','2019-05-14 15:16:48',1,1),(10,26,'José Heliodoro','Gutiérrez','García','jgutierrez@mexagon.net','7226504499',2,'12055555','320',3,'Desarrollador',1,'2019-05-14 15:16:48','2019-05-14 15:16:48',1,1),(11,27,'Lorenzo Job','Reyes','Cuellar','lorenzo@mail.com','5578122961',1,'2370849',NULL,1,'Administrador',1,'2019-05-13 15:26:01','2019-05-13 15:26:01',1,1),(12,28,'Contacto Conocido','Appat','Apmat','correo@mail.com','5578201499',3,'12098844',NULL,1,'Contador',1,'2019-05-07 18:18:43','2019-05-07 18:18:43',1,1),(15,26,'Prueba','Adicional','Contacto','correos@mails.com','5589066699',3,'12055566','30',1,'Recepcion',0,'2019-05-07 18:04:54','2019-05-07 18:04:54',1,1),(16,44,'Claudia','Reyes','Salazar','clau.reyes@yahoo.com.mx','7223504899',2,'2370849','180',1,'Contador',1,'2019-05-07 17:02:59','2019-05-07 17:02:59',1,1),(17,27,'Editando Contacto','Nuevo','Adicional','email.contacto@gmail.com','5523601455',4,'12850066','760',5,'Gerente de RH',0,'2019-05-07 14:39:30','2019-05-07 14:39:30',1,1),(18,44,'Diana','Reyes','Salazar','nenita@gmail.com','7226501455',2,'2370849','190',4,'Gerencia',1,'2019-05-07 17:02:59','2019-05-07 17:02:59',1,1),(19,44,'Luis Fernando','Reyes','Salazar','fer@gmail.com','7225906844',1,'2370849','200',3,'Desarrollador',1,'2019-05-07 17:02:59','2019-05-07 17:02:59',1,1),(20,50,'Juan','Linares','Hernandez','jlinares@linix.com.mx','7226506692',2,'2693044','500',3,'Director General',1,'2019-05-07 17:43:23','2019-05-07 17:43:23',1,1),(21,50,'José Luis','Padilla','Sandoval','jpadilla@linix.com.mx','7225048566',3,'2693044','501',3,'Desarrollador',1,'2019-05-07 17:43:24','2019-05-07 17:43:24',1,1),(22,50,'Carlos','Romero','Gutiérrez','cromero@linix.com.mx','7225698853',2,'2693044','502',3,'Desarrollador',1,'2019-05-07 17:43:24','2019-05-07 17:43:24',1,1),(23,27,'Eli','Cuellar','Vera','elicuellar@hotmail.com','7226985211',2,'2370849','760',3,'Desarrollador',1,'2019-05-13 15:26:02','2019-05-13 15:26:02',1,1),(24,51,'Lorenzo Job','Reyes','Cuellar','ljobreyes@gmail.com','7226930566',1,'2866211','3690',3,'Developer',1,'2019-05-07 18:29:25','2019-05-07 18:29:25',1,1),(25,51,'Vicente','Reyes','Carmona','vreyesc@hotmail.com','7226931488',1,'null','750',1,'Contador',1,'2019-05-07 18:29:25','2019-05-07 18:29:25',1,1),(26,28,'Contacto','Adicional','Razon Social Prueba','contadd@hotmail.com','8569740566',1,'25963384','509',1,'Asistente dirección',0,'2019-05-07 18:17:18','2019-05-07 18:17:18',1,1),(27,50,'Josefino','Padilla','Romero','ositodos@gmail.com','7223695211',2,'2693044','505',3,'Programador',1,'2019-05-07 17:43:24','2019-05-07 17:43:24',1,1),(28,59,'Leticia','Salazar','Jalomo','lety.salazar@empresa.com.mx','7223692448',1,'2378652','66',5,'Nóminas',1,'2019-05-07 19:03:57',NULL,1,1),(29,60,'Ivonne','Cuellar','Vera','richiivonne@gmail.com','7225985411',4,'278699',NULL,4,'Facturación',1,'2019-05-07 19:08:10',NULL,1,1),(30,60,'Empleada','Numero','Uno',NULL,NULL,1,NULL,NULL,1,NULL,1,'2019-05-07 19:08:10',NULL,1,1),(31,61,'Vicente','Reyes','Salazar','cvreyes@mexagon.net','5578201466',1,'45852222',NULL,4,'Presupuestos',1,'2019-05-07 19:13:51',NULL,1,1),(32,62,'Panchito','Pantera','Sanchez','pps@empresarial.com','5545633299',2,'2899655','965',1,'Auxiliar Contable',1,'2019-05-07 19:17:15',NULL,1,1),(33,63,'Josefina','Gutierrez','García','osita@gmail.com','7223695105',2,'2866955','320',3,'Programadora',1,'2019-05-07 19:19:34',NULL,1,1),(34,64,'Lorenzo Job','Reyes','Cuellar','lojorecu@gmail.com','7224509665',1,'7222682611','999',3,'Developer Sr',1,'2019-05-08 17:24:16',NULL,1,1),(35,65,'Contacto Agregado','Nuevamente','Probar Politicas','correopolis@gmail.com','5586300155',1,'2387422','20',2,'Ventas',1,'2019-05-14 15:58:14',NULL,1,1);
 /*!40000 ALTER TABLE `crmmex_ventas_contacto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -631,7 +631,7 @@ CREATE TABLE `crmmex_ventas_direccion` (
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `clienteID_idx` (`clienteID`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -640,7 +640,7 @@ CREATE TABLE `crmmex_ventas_direccion` (
 
 LOCK TABLES `crmmex_ventas_direccion` WRITE;
 /*!40000 ALTER TABLE `crmmex_ventas_direccion` DISABLE KEYS */;
-INSERT INTO `crmmex_ventas_direccion` VALUES (5,26,'Clemencia Borja Taboada','59','3','Juriquilla','06700','Juriquilla','Querétaro',33,1,'2019-04-30 17:49:07','2019-05-07 18:16:26',1,1),(6,27,'Limones','12','312','Santa Clara','52004','Lerma','Lerma',11,1,'2019-04-30 18:03:18','2019-05-13 15:26:01',1,1),(7,28,'Jacarandas','859','99','Independencia','52999','San Mateo Atenco','San Mateo Atenco',9,1,'2019-04-30 18:16:32','2019-05-07 18:18:43',1,1),(10,44,'Aguazarca','6',NULL,'S/C','50505','Capulhuac','San Miguel Almaya',12,1,'2019-04-30 22:05:30','2019-05-07 17:02:59',1,1),(32,50,'Calle de los Ingenieros','396','Segundo Piso','Santa Ana Tlapaltitlán','50075','Metepec','Toluca',21,1,NULL,'2019-05-07 17:43:23',1,1),(33,51,'Laguna de Mairán','7',NULL,'Ocho Cedros','50096','Toluca','Toluca',14,1,'2019-05-02 17:16:58','2019-05-07 18:29:25',1,1),(34,59,'Calle de la Alegría','790','55','Juárez','52009','Tenango del Valle','Tenango',11,1,'2019-05-07 19:03:57',NULL,1,1),(35,60,'Juarez Sur','206','33','Centro','50009','Toluca','Toluca',11,1,'2019-05-07 19:08:10',NULL,1,1),(36,61,'Paseo Tollocan','609','55','Jardines','52009','Lerma','Metepec',11,1,'2019-05-07 19:13:51',NULL,1,1),(37,62,'Medellin','26','2','Roma Norte','06700','Cuauhtemoc','CDMX',33,1,'2019-05-07 19:17:15',NULL,1,1),(38,63,'Morelia','66',NULL,'Independencia','50070','Toluca','Toluca',11,1,'2019-05-07 19:19:34',NULL,1,1),(39,64,'Paseo de los Matlazincas','60','Tercer piso','San Pablo','50078','Toluca','Toluca',11,1,'2019-05-08 17:24:16',NULL,1,1);
+INSERT INTO `crmmex_ventas_direccion` VALUES (5,26,'Clemencia Borja Taboada','59','3','Juriquilla','06700','Juriquilla','Querétaro',33,1,'2019-04-30 17:49:07','2019-05-14 15:16:48',1,1),(6,27,'Limones','12','312','Santa Clara','52004','Lerma','Lerma',11,1,'2019-04-30 18:03:18','2019-05-13 15:26:01',1,1),(7,28,'Jacarandas','859','99','Independencia','52999','San Mateo Atenco','San Mateo Atenco',9,1,'2019-04-30 18:16:32','2019-05-07 18:18:43',1,1),(10,44,'Aguazarca','6',NULL,'S/C','50505','Capulhuac','San Miguel Almaya',12,1,'2019-04-30 22:05:30','2019-05-07 17:02:59',1,1),(32,50,'Calle de los Ingenieros','396','Segundo Piso','Santa Ana Tlapaltitlán','50075','Metepec','Toluca',21,1,NULL,'2019-05-07 17:43:23',1,1),(33,51,'Laguna de Mairán','7',NULL,'Ocho Cedros','50096','Toluca','Toluca',14,1,'2019-05-02 17:16:58','2019-05-07 18:29:25',1,1),(34,59,'Calle de la Alegría','790','55','Juárez','52009','Tenango del Valle','Tenango',11,1,'2019-05-07 19:03:57',NULL,1,1),(35,60,'Juarez Sur','206','33','Centro','50009','Toluca','Toluca',11,1,'2019-05-07 19:08:10',NULL,1,1),(36,61,'Paseo Tollocan','609','55','Jardines','52009','Lerma','Metepec',11,1,'2019-05-07 19:13:51',NULL,1,1),(37,62,'Medellin','26','2','Roma Norte','06700','Cuauhtemoc','CDMX',33,1,'2019-05-07 19:17:15',NULL,1,1),(38,63,'Morelia','66',NULL,'Independencia','50070','Toluca','Toluca',11,1,'2019-05-07 19:19:34',NULL,1,1),(39,64,'Paseo de los Matlazincas','60','Tercer piso','San Pablo','50078','Toluca','Toluca',11,1,'2019-05-08 17:24:16',NULL,1,1),(40,65,'Periferico','750','55','Centro','06700','Benito Juarez','CDMX',9,1,'2019-05-14 15:58:14',NULL,1,1);
 /*!40000 ALTER TABLE `crmmex_ventas_direccion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -840,7 +840,7 @@ CREATE TABLE `oauth_clients` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `oauth_clients_user_id_index` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -849,7 +849,7 @@ CREATE TABLE `oauth_clients` (
 
 LOCK TABLES `oauth_clients` WRITE;
 /*!40000 ALTER TABLE `oauth_clients` DISABLE KEYS */;
-INSERT INTO `oauth_clients` VALUES (1,NULL,'CRM Mexagon Personal Access Client','xtNJsUtUj2EurvQjC8s2QuMqTj1gBnW5MRVlx6Oa','http://localhost',1,0,0,'2019-04-16 20:02:24','2019-04-16 20:02:24'),(2,NULL,'CRM Mexagon Password Grant Client','MSTQXVNU3NrRZCRpFL2y581Tqsruhew8lBxLGC37','http://localhost',0,1,0,'2019-04-16 20:02:24','2019-04-16 20:02:24');
+INSERT INTO `oauth_clients` VALUES (1,NULL,'CRM Mexagon Personal Access Client','xtNJsUtUj2EurvQjC8s2QuMqTj1gBnW5MRVlx6Oa','http://localhost',1,0,0,'2019-04-16 20:02:24','2019-04-16 20:02:24'),(2,NULL,'CRM Mexagon Password Grant Client','MSTQXVNU3NrRZCRpFL2y581Tqsruhew8lBxLGC37','http://localhost',0,1,0,'2019-04-16 20:02:24','2019-04-16 20:02:24'),(3,NULL,'CRM Mexagon Personal Access Client','xWjiXBd7fpFVEwgb8MKhhWNEmqN5HaHlO5BNNVMo','http://localhost',1,0,0,'2019-05-14 22:28:25','2019-05-14 22:28:25'),(4,NULL,'CRM Mexagon Password Grant Client','ORa4g8ugTVn1crEbRIjOoBK1xpFxU6MRPV00vcc9','http://localhost',0,1,0,'2019-05-14 22:28:25','2019-05-14 22:28:25'),(5,NULL,'CRM Mexagon Personal Access Client','Ra83LW0YbjDoUFytsT9Owy18wZ45jk3i6JaUltSB','http://localhost',1,0,0,'2019-05-14 22:28:42','2019-05-14 22:28:42'),(6,NULL,'CRM Mexagon Password Grant Client','yoBJnk0PaZlbz37bGrvGitsXu811Vkt5z8qZwesr','http://localhost',0,1,0,'2019-05-14 22:28:42','2019-05-14 22:28:42');
 /*!40000 ALTER TABLE `oauth_clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -867,7 +867,7 @@ CREATE TABLE `oauth_personal_access_clients` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `oauth_personal_access_clients_client_id_index` (`client_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -876,7 +876,7 @@ CREATE TABLE `oauth_personal_access_clients` (
 
 LOCK TABLES `oauth_personal_access_clients` WRITE;
 /*!40000 ALTER TABLE `oauth_personal_access_clients` DISABLE KEYS */;
-INSERT INTO `oauth_personal_access_clients` VALUES (1,1,'2019-04-16 20:02:24','2019-04-16 20:02:24');
+INSERT INTO `oauth_personal_access_clients` VALUES (1,1,'2019-04-16 20:02:24','2019-04-16 20:02:24'),(2,3,'2019-05-14 22:28:25','2019-05-14 22:28:25'),(3,5,'2019-05-14 22:28:42','2019-05-14 22:28:42');
 /*!40000 ALTER TABLE `oauth_personal_access_clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -957,7 +957,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Carlos Reyes','cvreyes@mexagon.net',NULL,'$2y$10$xK3Y2a0gWgCoS0s7pPdo2esGMQ4gFsCecAFU.bBhHHMX8uJ0Yb51y','xTcC5pmbDO11buOH9W9r0Hmw2hsmTtz5hvFru9dNBACAghLHKTFjQVU8FrdF','2019-03-05 22:30:42','2019-03-05 22:30:42'),(2,'Carlos Lam','clam@mexagon.net',NULL,'$2y$10$x0kD3I1PtL3dGGmGKzheXO2ZYdgUzfbfPyoqxpL359Y0TLvHPRPX6','8VTpH9PMmRAGwrMSgwr93Q2e2HIeFJMUupg8vCFkPPri8pENr2wWynkPRVjq','2019-03-12 05:12:22','2019-03-12 05:12:22');
+INSERT INTO `users` VALUES (1,'Carlos Reyes','cvreyes@mexagon.net',NULL,'$2y$10$xK3Y2a0gWgCoS0s7pPdo2esGMQ4gFsCecAFU.bBhHHMX8uJ0Yb51y','oRVwpMdeVs2gXUmcRJGqPqUE7e3esFPrMLR5alXBVBKTQyUEGlkAq9DF9ifO','2019-03-05 22:30:42','2019-03-05 22:30:42'),(2,'Carlos Lam','clam@mexagon.net',NULL,'$2y$10$x0kD3I1PtL3dGGmGKzheXO2ZYdgUzfbfPyoqxpL359Y0TLvHPRPX6','8VTpH9PMmRAGwrMSgwr93Q2e2HIeFJMUupg8vCFkPPri8pENr2wWynkPRVjq','2019-03-12 05:12:22','2019-03-12 05:12:22');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -996,4 +996,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-13 18:55:30
+-- Dump completed on 2019-05-14 18:11:43

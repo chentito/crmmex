@@ -17,12 +17,12 @@ Route::middleware('auth:api')->get( '/user' , function (Request $request) {
     return $request->user();
 });
 
-Route::middleware( 'auth:api' )->post( '/altaExpediente' , 'crmmex\Clientes\ClientesController@guardaCliente' );
-Route::middleware( 'auth:api' )->get( '/listadoClientes' , 'crmmex\Clientes\ClientesController@listadoClientes' );
+#Route::middleware( 'auth:api' )->post( '/altaExpediente' , 'crmmex\Clientes\ClientesController@guardaCliente' );
+#Route::middleware( 'auth:api' )->get( '/listadoClientes' , 'crmmex\Clientes\ClientesController@listadoClientes' );
 
 /* Modulo Clientes */
-//Route::post( '/altaExpediente'                  , 'crmmex\Clientes\ClientesController@guardaCliente' );
-//Route::get ( '/listadoClientes'                 , 'crmmex\Clientes\ClientesController@listadoClientes' );
+Route::post( '/altaExpediente'                  , 'crmmex\Clientes\ClientesController@guardaCliente' );
+Route::get ( '/listadoClientes'                 , 'crmmex\Clientes\ClientesController@listadoClientes' );
 Route::get ( '/obtieneExpediente/{id}'          , 'crmmex\Clientes\ClientesController@obtieneCliente' );
 Route::post( '/editaExpediente'                 , 'crmmex\Clientes\ClientesController@actualizaCliente' );
 Route::get ( '/validaRFC/{rfc}'                 , 'crmmex\Clientes\ClientesController@valRFC' );
