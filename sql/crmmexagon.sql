@@ -551,7 +551,7 @@ CREATE TABLE `crmmex_ventas_cliente` (
   `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unico` (`rfc`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -593,7 +593,7 @@ CREATE TABLE `crmmex_ventas_contacto` (
   UNIQUE KEY `unico` (`correoElectronico`),
   KEY `clienteID_idx` (`clienteID`),
   CONSTRAINT `clienteID` FOREIGN KEY (`clienteID`) REFERENCES `crmmex_ventas_cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -631,7 +631,7 @@ CREATE TABLE `crmmex_ventas_direccion` (
   `status` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `clienteID_idx` (`clienteID`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -957,7 +957,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Carlos Reyes','cvreyes@mexagon.net',NULL,'$2y$10$xK3Y2a0gWgCoS0s7pPdo2esGMQ4gFsCecAFU.bBhHHMX8uJ0Yb51y','oRVwpMdeVs2gXUmcRJGqPqUE7e3esFPrMLR5alXBVBKTQyUEGlkAq9DF9ifO','2019-03-05 22:30:42','2019-03-05 22:30:42'),(2,'Carlos Lam','clam@mexagon.net',NULL,'$2y$10$x0kD3I1PtL3dGGmGKzheXO2ZYdgUzfbfPyoqxpL359Y0TLvHPRPX6','8VTpH9PMmRAGwrMSgwr93Q2e2HIeFJMUupg8vCFkPPri8pENr2wWynkPRVjq','2019-03-12 05:12:22','2019-03-12 05:12:22');
+INSERT INTO `users` VALUES (1,'Carlos Reyes','cvreyes@mexagon.net',NULL,'$2y$10$xK3Y2a0gWgCoS0s7pPdo2esGMQ4gFsCecAFU.bBhHHMX8uJ0Yb51y','WCdtRIusP8SPYkhnsdh10jLWk1kCJBtZCJM7aDQOr3zF9t6ExwQRrObAeJ5K','2019-03-05 22:30:42','2019-03-05 22:30:42'),(2,'Carlos Lam','clam@mexagon.net',NULL,'$2y$10$x0kD3I1PtL3dGGmGKzheXO2ZYdgUzfbfPyoqxpL359Y0TLvHPRPX6','8VTpH9PMmRAGwrMSgwr93Q2e2HIeFJMUupg8vCFkPPri8pENr2wWynkPRVjq','2019-03-12 05:12:22','2019-03-12 05:12:22');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -996,4 +996,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-14 18:11:43
+-- Dump completed on 2019-05-15 14:56:19
