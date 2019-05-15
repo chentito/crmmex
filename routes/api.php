@@ -17,12 +17,13 @@ Route::middleware('auth:api')->get( '/user' , function (Request $request) {
     return $request->user();
 });
 
-#Route::middleware( 'auth:api' )->post( '/altaExpediente' , 'crmmex\Clientes\ClientesController@guardaCliente' );
-#Route::middleware( 'auth:api' )->get( '/listadoClientes' , 'crmmex\Clientes\ClientesController@listadoClientes' );
+/* Api CRM */
 
-/* Modulo Clientes */
-Route::post( '/altaExpediente'                  , 'crmmex\Clientes\ClientesController@guardaCliente' );
-Route::get ( '/listadoClientes'                 , 'crmmex\Clientes\ClientesController@listadoClientes' );
+/******************** Operaciones para el modulo de clientes ********************/
+Route::middleware( 'auth:api' )->post( '/altaExpediente' , 'crmmex\Clientes\ClientesController@guardaCliente' );
+Route::middleware( 'auth:api' )->get( '/listadoClientes' , 'crmmex\Clientes\ClientesController@listadoClientes' );
+#Route::post( '/altaExpediente'                  , 'crmmex\Clientes\ClientesController@guardaCliente' );
+#Route::get ( '/listadoClientes'                 , 'crmmex\Clientes\ClientesController@listadoClientes' );
 Route::get ( '/obtieneExpediente/{id}'          , 'crmmex\Clientes\ClientesController@obtieneCliente' );
 Route::post( '/editaExpediente'                 , 'crmmex\Clientes\ClientesController@actualizaCliente' );
 Route::get ( '/validaRFC/{rfc}'                 , 'crmmex\Clientes\ClientesController@valRFC' );
@@ -33,10 +34,10 @@ Route::get ( '/obtieneSeguimiento/{id}'         , 'crmmex\Clientes\SeguimientoCo
 Route::post( '/actualizaSeguimiento'            , 'crmmex\Clientes\SeguimientoController@actualizaSeguimiento' );
 Route::get ( '/listadoPropuestas/{clienteID}'   , 'crmmex\Clientes\PropuestasController@listadoPropuestas' );
 
-/* Modulo Ventas */
+/******************** Operaciones para el modulo de ventas ********************/
 Route::get ( '/listadoFacturas' , 'crmmex\Ventas\VentasController@listadoFacturas' );
 
-/* Acciones utiles */
+/******************** Acciones utiles en el sistema ********************/
 Route::get ( '/utiles/comboEstados/{pais?}'           , 'crmmex\Utils\UtilsController@estados' );
 Route::get ( '/utiles/comboPaises'                    , 'crmmex\Utils\UtilsController@paises' );
 Route::get ( '/utiles/opcionesCatalogos/{catalogoID}' , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
@@ -46,7 +47,7 @@ Route::get ( '/utiles/listadoContactos/{clienteID}'   , 'crmmex\Utils\UtilsContr
 Route::get ( '/opcionesCombos/{id}'                   , 'crmmex\Utils\UtilsController@catalogo' );
 Route::get ( '/opcionesCombosPorId/{id}'              , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
 
-/* Productos */
+/******************** Operaciones para el modulo de Productos ********************/
 Route::get ( '/listadoProductos'             , 'crmmex\Productos\ProductosController@listadoProductos' );
 Route::post( '/guardaProducto'               , 'crmmex\Productos\ProductosController@guardaProducto' );
 Route::post( '/actualizaProducto'            , 'crmmex\Productos\ProductosController@actualizaProducto' );
@@ -54,13 +55,13 @@ Route::get ( '/obtieneProducto/{productoID}' , 'crmmex\Productos\ProductosContro
 
 
 
-Route::get( 'listadoProspectos' , 'Prospectos@listado' );
+/*Route::get( 'listadoProspectos' , 'Prospectos@listado' );
 Route::get( 'listadoContactos' , 'ContactosController@listadoContactos' );
 Route::get( 'listadoEjecutivos' , 'Administradores@listaAdmin' );
 Route::get( 'listadoPropuestas' , 'VentasController@propuestas' );
-Route::get( 'listadoCampanias' , 'mercadotecnia\CampaniasController@listadoCampanias' );
+Route::get( 'listadoCampanias' , 'mercadotecnia\CampaniasController@listadoCampanias' );*/
 
-Route::get( '/listadoCatalogos' , 'configuraciones\CatalogosController@catalogosConf' )->middleware( 'cors' );
+Route::get( '/listadoCatalogos' , 'configuraciones\CatalogosController@catalogosConf' );
 Route::get( '/agregaOpcionCatalogo' , 'configuraciones\CatalogosController@agregarOpcionCatalogo' );
 Route::get( '/eliminaOpcionCatalogo' , 'configuraciones\CatalogosController@eliminarOpcionCatalogo' );
 Route::get( '/listadoPropuestas/{cliID?}' , 'cliente\PropuestasController@listadoPropuestas' );
