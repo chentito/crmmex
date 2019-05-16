@@ -749,7 +749,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -758,7 +758,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (21,'2014_10_12_000000_create_users_table',1),(22,'2014_10_12_100000_create_password_resets_table',1),(23,'2016_06_01_000001_create_oauth_auth_codes_table',2),(24,'2016_06_01_000002_create_oauth_access_tokens_table',2),(25,'2016_06_01_000003_create_oauth_refresh_tokens_table',2),(26,'2016_06_01_000004_create_oauth_clients_table',2),(27,'2016_06_01_000005_create_oauth_personal_access_clients_table',2);
+INSERT INTO `migrations` VALUES (28,'2014_10_12_000000_create_users_table',1),(29,'2014_10_12_100000_create_password_resets_table',1),(30,'2016_06_01_000001_create_oauth_auth_codes_table',1),(31,'2016_06_01_000002_create_oauth_access_tokens_table',1),(32,'2016_06_01_000003_create_oauth_refresh_tokens_table',1),(33,'2016_06_01_000004_create_oauth_clients_table',1),(34,'2016_06_01_000005_create_oauth_personal_access_clients_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -840,7 +840,7 @@ CREATE TABLE `oauth_clients` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `oauth_clients_user_id_index` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -849,7 +849,6 @@ CREATE TABLE `oauth_clients` (
 
 LOCK TABLES `oauth_clients` WRITE;
 /*!40000 ALTER TABLE `oauth_clients` DISABLE KEYS */;
-INSERT INTO `oauth_clients` VALUES (1,NULL,'CRM Mexagon Personal Access Client','xtNJsUtUj2EurvQjC8s2QuMqTj1gBnW5MRVlx6Oa','http://localhost',1,0,0,'2019-04-16 20:02:24','2019-04-16 20:02:24'),(2,NULL,'CRM Mexagon Password Grant Client','MSTQXVNU3NrRZCRpFL2y581Tqsruhew8lBxLGC37','http://localhost',0,1,0,'2019-04-16 20:02:24','2019-04-16 20:02:24'),(3,NULL,'CRM Mexagon Personal Access Client','xWjiXBd7fpFVEwgb8MKhhWNEmqN5HaHlO5BNNVMo','http://localhost',1,0,0,'2019-05-14 22:28:25','2019-05-14 22:28:25'),(4,NULL,'CRM Mexagon Password Grant Client','ORa4g8ugTVn1crEbRIjOoBK1xpFxU6MRPV00vcc9','http://localhost',0,1,0,'2019-05-14 22:28:25','2019-05-14 22:28:25'),(5,NULL,'CRM Mexagon Personal Access Client','Ra83LW0YbjDoUFytsT9Owy18wZ45jk3i6JaUltSB','http://localhost',1,0,0,'2019-05-14 22:28:42','2019-05-14 22:28:42'),(6,NULL,'CRM Mexagon Password Grant Client','yoBJnk0PaZlbz37bGrvGitsXu811Vkt5z8qZwesr','http://localhost',0,1,0,'2019-05-14 22:28:42','2019-05-14 22:28:42');
 /*!40000 ALTER TABLE `oauth_clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -867,7 +866,7 @@ CREATE TABLE `oauth_personal_access_clients` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `oauth_personal_access_clients_client_id_index` (`client_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -876,7 +875,6 @@ CREATE TABLE `oauth_personal_access_clients` (
 
 LOCK TABLES `oauth_personal_access_clients` WRITE;
 /*!40000 ALTER TABLE `oauth_personal_access_clients` DISABLE KEYS */;
-INSERT INTO `oauth_personal_access_clients` VALUES (1,1,'2019-04-16 20:02:24','2019-04-16 20:02:24'),(2,3,'2019-05-14 22:28:25','2019-05-14 22:28:25'),(3,5,'2019-05-14 22:28:42','2019-05-14 22:28:42');
 /*!40000 ALTER TABLE `oauth_personal_access_clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -943,12 +941,15 @@ CREATE TABLE `users` (
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `activation_token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -957,7 +958,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Carlos Reyes','cvreyes@mexagon.net',NULL,'$2y$10$xK3Y2a0gWgCoS0s7pPdo2esGMQ4gFsCecAFU.bBhHHMX8uJ0Yb51y','WCdtRIusP8SPYkhnsdh10jLWk1kCJBtZCJM7aDQOr3zF9t6ExwQRrObAeJ5K','2019-03-05 22:30:42','2019-03-05 22:30:42'),(2,'Carlos Lam','clam@mexagon.net',NULL,'$2y$10$x0kD3I1PtL3dGGmGKzheXO2ZYdgUzfbfPyoqxpL359Y0TLvHPRPX6','8VTpH9PMmRAGwrMSgwr93Q2e2HIeFJMUupg8vCFkPPri8pENr2wWynkPRVjq','2019-03-12 05:12:22','2019-03-12 05:12:22');
+INSERT INTO `users` VALUES (1,'Luis Reyes','luis@reyesalazar.com',NULL,'$2y$10$jr.CJTsOawtO/04DAXlE5OCr7Acw69jiuQBrmzqv2ZVPdNQx8WML2',0,'yYqQwfHK7HXrQYfaXtEEg21ZHVec1SECrydF4kKzptZcqByHt6AoOhf5NZWV',NULL,'2019-05-16 23:58:32','2019-05-16 23:58:32',NULL),(21,'Carlos Reyes','cvreyes@mexagon.net',NULL,'$2y$10$/cGF3wTwqffHNfaIzPAzHuLY9JNFXh/EZ5osM9zIrP.rhS4RsW1IO',0,'3YDLGjKDjN5cV4VsrbMXyJ5CRHogyzttUz0DVpVro9sELAYpFGfKWz4GsVLQ',NULL,'2019-05-17 03:29:16','2019-05-17 03:29:16',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -996,4 +997,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-15 14:56:19
+-- Dump completed on 2019-05-16 17:39:11
