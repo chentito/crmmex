@@ -15,12 +15,23 @@ use Illuminate\Http\Request;
 
 /* Rutas API protegidas con autenticacion */
 Route::group(['prefix' => 'auth'], function () {
-    Route::post('login', 'AuthController@login');
-    Route::post('signup', 'AuthController@signup');
+    /*
+     * Alta de un nuevo usuario, la accion aun no esta
+     * protegida por el middleware para su uso externo
+     */
+    Route::post( 'addUser' , 'API\APIManage@addUser' );
 
-    Route::group(['middleware' => 'auth:api'], function() {
-        Route::get('logout', 'AuthController@logout');
-        Route::get('user', 'AuthController@user');
+    /*
+     * Accion que genera un token a partir de datos
+     * de acceso validos
+     */
+    Route::post( 'getToken' , 'API\APIManage@getToken' );
+
+    Route::group( [ 'middleware' => 'auth:api' ] , function() {
+        /*
+         * Accion que revoca un token previamente generado
+         */
+        Route::get( 'delToken' , 'API\APIManage@delToken' );
     });
 });
 
