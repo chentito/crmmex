@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Notifications\SignupActivate;
 
 class APIManage extends Controller
 {
@@ -23,17 +24,21 @@ class APIManage extends Controller
     /*
      * Metodo que agrega un nuevo usuario
      */
-    public function addUser( Request $request ) {return response()->json([ 'message' => 'No autorizado'] , 401 );
+    public function addUser( Request $request ) {
+        // No permite el alta de usuarios a traves de api.
+        // return response()->json([ 'message' => 'No autorizado'] , 401 );
         if( !$this->valRequest( $request ) ) {
           $error = $this->errores->messages->all();
           return response()->json( [ 'message' => 'Error en los datos, verifique la especificacion' ] , 200 );
         } else {
           $user = new User([
-              'name'     => $request->name,
-              'email'    => $request->email,
-              'password' => bcrypt( $request->password )
+              'name'             => $request->name,
+              'email'            => $request->email,
+              'password'         => bcrypt( $request->password ),
+              'activation_token' => str_random(60),
           ]);
           $user->save();
+          $user->notify(new SignupActivate($user));
           return response()->json([ 'message' => 'Usuario creado'] , 201 );
         }
     } // Fin metodo
@@ -45,6 +50,9 @@ class APIManage extends Controller
      public function getToken( Request $request ) {
         if( !$this->valRequest( $request ) ) {
             $credentials = request(['email', 'password']);
+            $credentials['active'] = 1;
+            $credentials['deleted_at'] = null;
+
             if (!Auth::attempt($credentials)) {
                 return response()->json( [ 'message' => 'Usuario no autorizado' ] , 401 );
             }
@@ -77,6 +85,23 @@ class APIManage extends Controller
         $request->user()->token()->revoke();
         return response()->json( [ 'message' => 'Token eliminado' ] );
       }// Fin del metodo
+
+      /*
+       * Metodo que activa la cuenta crada
+       */
+       public function signupActivate( $token ) {
+          $user = User::where( 'activation_token' ,  $token )->first();
+
+          if (!$user) {
+              return response()->json(['message' => 'El token de activación es inválido'], 404);
+          }
+
+          $user->active = true;
+          $user->activation_token = '';
+          $user->save();
+
+          return $user;
+       }
 
       /*
        * Validacion de los datos de request
