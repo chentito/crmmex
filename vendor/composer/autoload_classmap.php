@@ -66,6 +66,7 @@ return array(
     'App\\Http\\Middleware\\VerificaPerfil' => $baseDir . '/app/Http/Middleware/VerificaPerfil.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Mail\\EnvioPrueba' => $baseDir . '/app/Mail/EnvioPrueba.php',
+    'App\\Mail\\GmailExample' => $baseDir . '/app/Mail/GmailExample.php',
     'App\\Models\\Ejecutivo' => $baseDir . '/app/Models/Ejecutivo.php',
     'App\\Models\\Modulos' => $baseDir . '/app/Models/Modulos.php',
     'App\\Models\\RolRegla' => $baseDir . '/app/Models/RolRegla.php',

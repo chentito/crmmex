@@ -555,6 +555,7 @@ class ComposerStaticInit3a28bef317f5408e65f71b62f6ecf713
         'App\\Http\\Middleware\\VerificaPerfil' => __DIR__ . '/../..' . '/app/Http/Middleware/VerificaPerfil.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Mail\\EnvioPrueba' => __DIR__ . '/../..' . '/app/Mail/EnvioPrueba.php',
+        'App\\Mail\\GmailExample' => __DIR__ . '/../..' . '/app/Mail/GmailExample.php',
         'App\\Models\\Ejecutivo' => __DIR__ . '/../..' . '/app/Models/Ejecutivo.php',
         'App\\Models\\Modulos' => __DIR__ . '/../..' . '/app/Models/Modulos.php',
         'App\\Models\\RolRegla' => __DIR__ . '/../..' . '/app/Models/RolRegla.php',
