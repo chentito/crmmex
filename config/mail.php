@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.live.com'),
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'dgdramirez@hotmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Pruebas Envios'),
+        'address' => env('MAIL_FROM_ADDRESS', 'chentito002@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'Carlos Reyes'),
     ],
 
     /*
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('dgdramirez@hotmail.com'),
+    'username' => env('chentito002@gmail.com'),
 
-    'password' => env('s@pMxg02'),
+    'password' => env('******'),
 
     /*
     |--------------------------------------------------------------------------

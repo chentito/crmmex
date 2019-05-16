@@ -38,7 +38,7 @@ class APIManage extends Controller
               'activation_token' => str_random(60),
           ]);
           $user->save();
-          $user->notify(new SignupActivate($user));
+          //$user->notify(new SignupActivate($user));
           return response()->json([ 'message' => 'Usuario creado'] , 201 );
         }
     } // Fin metodo

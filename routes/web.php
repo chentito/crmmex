@@ -11,6 +11,18 @@
 |
 */
 use App\Mail\EnvioPrueba AS EP;
+use App\Mail\GmailExample;
+use Illuminate\Support\Facades\Mail;
+
+Route::get('/gmail', function () {
+
+    Mail::to('cvreyes@mexagon.net')->send(new GmailExample());
+
+    return view('/');
+
+});
+
+
 Auth::routes();
 
 Route::get( '/nLogin' , function(){ return view( 'crm.login.login' ); });

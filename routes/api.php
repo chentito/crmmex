@@ -30,7 +30,7 @@ Route::group(['prefix' => 'auth'], function () {
     /*
      * Accion que genera la accion para activar la cuenta generada
      */
-    Route::get('addUser/activate/{token}', 'API\APIManage@signupActivate');
+    Route::get( 'addUser/activate/{token}' , 'API\APIManage@signupActivate' );
 
     Route::group( [ 'middleware' => 'auth:api' ] , function() {
         /*
