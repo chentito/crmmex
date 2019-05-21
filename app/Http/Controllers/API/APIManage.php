@@ -28,7 +28,7 @@ class APIManage extends Controller
         // No permite el alta de usuarios a traves de api.
         // return response()->json([ 'message' => 'No autorizado'] , 401 );
         if( !$this->valRequest( $request ) ) {
-          $error = $this->errores->messages->all();
+          //$error = $this->errores->messages->all();
           return response()->json( [ 'message' => 'Error en los datos, verifique la especificacion' ] , 200 );
         } else {
           $user = new User([

@@ -141,6 +141,7 @@
                 });
             });
             contenidos( 'dashboard' );
+            generaToken();
         </script>
 
     </body>

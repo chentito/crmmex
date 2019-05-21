@@ -40,8 +40,6 @@ Route::group(['prefix' => 'auth'], function () {
     });
 });
 
-
-
 Route::middleware('auth:api')->get( '/user' , function (Request $request) {
     return $request->user();
 });
@@ -82,20 +80,18 @@ Route::post( '/guardaProducto'               , 'crmmex\Productos\ProductosContro
 Route::post( '/actualizaProducto'            , 'crmmex\Productos\ProductosController@actualizaProducto' );
 Route::get ( '/obtieneProducto/{productoID}' , 'crmmex\Productos\ProductosController@obtieneProducto' );
 
-
-
 /*Route::get( 'listadoProspectos' , 'Prospectos@listado' );
 Route::get( 'listadoContactos' , 'ContactosController@listadoContactos' );
 Route::get( 'listadoEjecutivos' , 'Administradores@listaAdmin' );
 Route::get( 'listadoPropuestas' , 'VentasController@propuestas' );
 Route::get( 'listadoCampanias' , 'mercadotecnia\CampaniasController@listadoCampanias' );*/
 
-Route::get( '/listadoCatalogos' , 'configuraciones\CatalogosController@catalogosConf' );
-Route::get( '/agregaOpcionCatalogo' , 'configuraciones\CatalogosController@agregarOpcionCatalogo' );
-Route::get( '/eliminaOpcionCatalogo' , 'configuraciones\CatalogosController@eliminarOpcionCatalogo' );
-Route::get( '/listadoPropuestas/{cliID?}' , 'cliente\PropuestasController@listadoPropuestas' );
-Route::get( '/configuracionRoles/{rolID?}' , 'ejecutivo\RolesController@listadoModulos' );
-Route::get( '/rolesDisponibles' , 'ejecutivo\RolesController@listadoRoles' );
+//Route::get( '/listadoCatalogos' , 'configuraciones\CatalogosController@catalogosConf' );
+//Route::get( '/agregaOpcionCatalogo' , 'configuraciones\CatalogosController@agregarOpcionCatalogo' );
+//Route::get( '/eliminaOpcionCatalogo' , 'configuraciones\CatalogosController@eliminarOpcionCatalogo' );
+//Route::get( '/listadoPropuestas/{cliID?}' , 'cliente\PropuestasController@listadoPropuestas' );
+//Route::get( '/configuracionRoles/{rolID?}' , 'ejecutivo\RolesController@listadoModulos' );
+//Route::get( '/rolesDisponibles' , 'ejecutivo\RolesController@listadoRoles' );
 
 // Api para pruebas con angular
 Route::get   ( '/users'      , 'UsersController@index'   )->middleware( 'cors' );

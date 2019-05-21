@@ -36,6 +36,17 @@ function cargaDatosComboCatalogo() {
     });
 }
 
+function generaToken() {
+  axios
+    .get( '/generaToken' )
+    .then( response => {
+      sessionStorage.setItem( 'apiToken', response.data.apiToken );
+    }).
+    catch( function( e ){
+      console.log( "ERROR TOKEN " + e );
+    });
+}
+
 async function utiles( accion ) {
     let promise = axios.get( '/api/utiles/' + accion );
     let result = await promise;
