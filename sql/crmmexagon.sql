@@ -302,6 +302,33 @@ INSERT INTO `crmmex_sis_admins` VALUES (1,'Carlos','Lam','Santiesteban','clam@me
 UNLOCK TABLES;
 
 --
+-- Table structure for table `crmmex_sis_bitacora`
+--
+
+DROP TABLE IF EXISTS `crmmex_sis_bitacora`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `crmmex_sis_bitacora` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `recurso` varchar(100) DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
+  `accion` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `crmmex_sis_bitacora`
+--
+
+LOCK TABLES `crmmex_sis_bitacora` WRITE;
+/*!40000 ALTER TABLE `crmmex_sis_bitacora` DISABLE KEYS */;
+INSERT INTO `crmmex_sis_bitacora` VALUES (1,1,'BLa bla','2019-05-20 16:31:05','Aqui va la descripcion que se debera registrar'),(2,1,'BLa bla','2019-05-20 16:31:09','Aqui va la descripcion que se debera registrar'),(3,1,'BLa bla','2019-05-20 16:31:11','Aqui va la descripcion que se debera registrar'),(4,1,'BLa bla','2019-05-20 16:31:16','Aqui va la descripcion que se debera registrar'),(5,1,'BLa bla','2019-05-20 16:31:32','Aqui va la descripcion que se debera registrar'),(6,1,'BLa bla','2019-05-20 16:31:34','Aqui va la descripcion que se debera registrar'),(7,1,'BLa bla','2019-05-20 16:31:39','Aqui va la descripcion que se debera registrar'),(8,1,'BLa bla','2019-05-20 16:33:40','Aqui va la descripcion que se debera registrar'),(9,21,'BLa bla','2019-05-20 16:36:17','Aqui va la descripcion que se debera registrar'),(10,21,'BLa bla','2019-05-20 16:36:26','Aqui va la descripcion que se debera registrar'),(11,21,NULL,'2019-05-20 16:38:48','Aqui va la descripcion que se debera registrar'),(12,21,NULL,'2019-05-20 16:38:51','Aqui va la descripcion que se debera registrar'),(13,21,NULL,'2019-05-20 16:39:02','Aqui va la descripcion que se debera registrar'),(14,21,NULL,'2019-05-20 16:39:05','Aqui va la descripcion que se debera registrar'),(15,21,NULL,'2019-05-20 16:39:09','Aqui va la descripcion que se debera registrar'),(16,21,NULL,'2019-05-20 16:42:46','Aqui va la descripcion que se debera registrar'),(17,21,NULL,'2019-05-20 16:47:28','Aqui va la descripcion que se debera registrar'),(18,21,NULL,'2019-05-20 16:50:06','Aqui va la descripcion que se debera registrar'),(19,21,NULL,'2019-05-20 16:50:12','Aqui va la descripcion que se debera registrar'),(20,21,'http://192.168.30.104/contenidos/clientes_alta','2019-05-20 16:55:13','Aqui va la descripcion que se debera registrar'),(21,21,'http://192.168.30.104/contenidos/clientes_listado','2019-05-20 16:55:31','Aqui va la descripcion que se debera registrar'),(22,21,'http://192.168.30.104/contenidos/clientes_alta','2019-05-20 16:55:35','Aqui va la descripcion que se debera registrar'),(23,21,'http://192.168.30.104/contenidos/mercadotecnia_listado','2019-05-20 16:55:58','Aqui va la descripcion que se debera registrar'),(24,21,'http://192.168.30.104/contenidos/ventas_facturas','2019-05-20 16:56:00','Aqui va la descripcion que se debera registrar'),(25,21,'http://192.168.30.104/contenidos/configuraciones_pipeline','2019-05-20 16:56:02','Aqui va la descripcion que se debera registrar'),(26,21,'http://192.168.30.104/contenidos/configuraciones_adicionales','2019-05-20 16:56:05','Aqui va la descripcion que se debera registrar'),(27,21,'http://192.168.30.104/contenidos/configuraciones_smtp','2019-05-20 16:56:06','Aqui va la descripcion que se debera registrar'),(28,21,'http://192.168.30.104/contenidos/configuraciones_branding','2019-05-20 16:56:08','Aqui va la descripcion que se debera registrar'),(29,21,'http://192.168.30.104/contenidos/ejecutivos_perfil','2019-05-20 16:56:10','Aqui va la descripcion que se debera registrar'),(30,21,'http://192.168.30.104/contenidos/ejecutivos_actividades','2019-05-20 16:56:12','Aqui va la descripcion que se debera registrar'),(31,21,'http://192.168.30.104/contenidos/clientes_alta','2019-05-20 16:58:42',''),(32,21,'http://192.168.30.104/logout','2019-05-20 17:23:51',''),(33,21,'http://192.168.30.104/contenidos/dashboard','2019-05-20 17:50:48',''),(34,21,'http://192.168.30.104/contenidos/dashboard','2019-05-20 18:35:59',''),(35,21,'http://192.168.30.104/contenidos/dashboard','2019-05-20 18:53:08',''),(36,21,'http://192.168.30.104/contenidos/dashboard','2019-05-20 18:54:12',''),(37,21,'http://192.168.30.104/contenidos/dashboard','2019-05-20 18:54:43',''),(38,21,'http://192.168.30.104/contenidos/dashboard','2019-05-20 19:00:32',''),(39,21,'http://192.168.30.104/contenidos/dashboard','2019-05-20 19:01:52',''),(40,21,'http://192.168.30.104/contenidos/dashboard','2019-05-20 19:02:52',''),(41,21,'http://192.168.30.104/contenidos/dashboard','2019-05-20 19:08:19',''),(42,21,'http://192.168.30.104/contenidos/dashboard','2019-05-20 19:08:45',''),(43,21,'http://192.168.30.104/contenidos/dashboard','2019-05-20 19:15:22',''),(44,21,'http://192.168.30.104/contenidos/dashboard','2019-05-20 19:15:47',''),(45,21,'http://192.168.30.104/contenidos/dashboard','2019-05-20 19:43:16',''),(46,21,'http://192.168.30.104/contenidos/dashboard','2019-05-20 19:45:01',''),(47,21,'http://192.168.30.104/contenidos/dashboard','2019-05-20 19:45:06',''),(48,21,'http://192.168.30.104/contenidos/dashboard','2019-05-20 19:46:03',''),(49,21,'http://192.168.30.104/contenidos/dashboard','2019-05-20 21:00:42',''),(50,21,'http://192.168.30.104/contenidos/dashboard','2019-05-20 21:17:38',''),(51,22,'http://192.168.30.104/contenidos/dashboard','2019-05-20 21:29:11',''),(52,22,'http://192.168.30.104/contenidos/dashboard','2019-05-20 21:38:43',''),(53,22,'http://192.168.30.104/contenidos/dashboard','2019-05-20 22:43:54',''),(54,22,'http://192.168.30.104/contenidos/dashboard','2019-05-20 22:44:55',''),(55,22,'http://192.168.30.104/contenidos/dashboard','2019-05-21 15:02:08',''),(56,22,'http://192.168.30.104/contenidos/clientes_alta','2019-05-21 15:03:23',''),(57,22,'http://192.168.30.104/contenidos/dashboard','2019-05-21 15:04:19',''),(58,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 15:04:53',''),(59,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 15:21:12',''),(60,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 15:22:10',''),(61,22,'http://192.168.30.104/contenidos/clientes_alta','2019-05-21 15:22:24',''),(62,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 15:22:26',''),(63,22,'http://192.168.30.104/contenidos/dashboard','2019-05-21 15:36:11',''),(64,22,'http://192.168.30.104/contenidos/dashboard','2019-05-21 15:36:39',''),(65,22,'http://192.168.30.104/contenidos/dashboard','2019-05-21 15:37:06',''),(66,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 15:49:58',''),(67,22,'http://192.168.30.104/contenidos/dashboard','2019-05-21 15:50:25',''),(68,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 15:50:27',''),(69,22,'http://192.168.30.104/contenidos/dashboard','2019-05-21 15:50:42',''),(70,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 15:50:45',''),(71,22,'http://192.168.30.104/contenidos/dashboard','2019-05-21 15:51:34',''),(72,22,'http://192.168.30.104/contenidos/dashboard','2019-05-21 15:53:19',''),(73,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 15:53:28',''),(74,22,'http://192.168.30.104/contenidos/dashboard','2019-05-21 15:55:46',''),(75,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 15:55:57',''),(76,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 15:56:22',''),(77,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 15:56:33',''),(78,22,'http://192.168.30.104/contenidos/dashboard','2019-05-21 15:56:40',''),(79,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 15:56:43',''),(80,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 16:01:15',''),(81,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 16:01:35',''),(82,22,'http://192.168.30.104/contenidos/dashboard','2019-05-21 16:01:39',''),(83,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 16:02:02',''),(84,22,'http://192.168.30.104/contenidos/dashboard','2019-05-21 16:02:42',''),(85,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 16:03:03',''),(86,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 16:08:09',''),(87,22,'http://192.168.30.104/contenidos/clientes_alta','2019-05-21 16:08:13',''),(88,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 16:08:15',''),(89,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 16:08:17',''),(90,22,'http://192.168.30.104/contenidos/dashboard','2019-05-21 16:08:58',''),(91,22,'http://192.168.30.104/contenidos/dashboard','2019-05-21 16:09:20',''),(92,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 16:09:48',''),(93,22,'http://192.168.30.104/contenidos/dashboard','2019-05-21 16:10:34',''),(94,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 16:10:37',''),(95,22,'http://192.168.30.104/contenidos/dashboard','2019-05-21 16:19:21',''),(96,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 16:19:39',''),(97,22,'http://192.168.30.104/contenidos/dashboard','2019-05-21 16:20:50',''),(98,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 16:21:00',''),(99,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 16:21:25',''),(100,22,'http://192.168.30.104/contenidos/clientes_alta','2019-05-21 16:21:27',''),(101,22,'http://192.168.30.104/contenidos/clientes_listado','2019-05-21 16:21:30','');
+/*!40000 ALTER TABLE `crmmex_sis_bitacora` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `crmmex_sis_branding`
 --
 
@@ -749,7 +776,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -758,7 +785,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (28,'2014_10_12_000000_create_users_table',1),(29,'2014_10_12_100000_create_password_resets_table',1),(30,'2016_06_01_000001_create_oauth_auth_codes_table',1),(31,'2016_06_01_000002_create_oauth_access_tokens_table',1),(32,'2016_06_01_000003_create_oauth_refresh_tokens_table',1),(33,'2016_06_01_000004_create_oauth_clients_table',1),(34,'2016_06_01_000005_create_oauth_personal_access_clients_table',1);
+INSERT INTO `migrations` VALUES (28,'2014_10_12_000000_create_users_table',1),(29,'2014_10_12_100000_create_password_resets_table',1),(30,'2016_06_01_000001_create_oauth_auth_codes_table',1),(31,'2016_06_01_000002_create_oauth_access_tokens_table',1),(32,'2016_06_01_000003_create_oauth_refresh_tokens_table',1),(33,'2016_06_01_000004_create_oauth_clients_table',1),(34,'2016_06_01_000005_create_oauth_personal_access_clients_table',1),(35,'2019_05_16_233850_create_sessions_table',2);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -790,6 +817,7 @@ CREATE TABLE `oauth_access_tokens` (
 
 LOCK TABLES `oauth_access_tokens` WRITE;
 /*!40000 ALTER TABLE `oauth_access_tokens` DISABLE KEYS */;
+INSERT INTO `oauth_access_tokens` VALUES ('057b7efb4f7c71550efbaaabdd2be541be84cc70e5c33a5f0fd93ef3cc61d3a42d8ba6d1d5c4c1ed',22,1,'Carlos Reyes','[]',0,'2019-05-21 21:10:34','2019-05-21 21:10:34','2019-05-28 16:10:34'),('3c1064713897ff94c28bbaf2b2e1afd1deac5577afa22900ea278330edba4683054c1a5d7d358ee8',22,1,'Carlos Reyes','[]',0,'2019-05-21 21:19:21','2019-05-21 21:19:21','2019-05-28 16:19:21'),('4784f92ab84a7c786b94165be2134379c5ed00ba6ec9b08b5160d456dce42e99266ac70b29ccd6f9',22,1,'Carlos Reyes','[]',0,'2019-05-21 21:09:20','2019-05-21 21:09:20','2019-05-28 16:09:20'),('9d2175845b1aa3a031a11d3fcc661407baa68dc07446ec44572c128e5656d4f9f76f3a9cdd7733bb',22,1,'Carlos Reyes','[]',0,'2019-05-21 21:20:50','2019-05-21 21:20:50','2019-05-28 16:20:50');
 /*!40000 ALTER TABLE `oauth_access_tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -840,7 +868,7 @@ CREATE TABLE `oauth_clients` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `oauth_clients_user_id_index` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -849,6 +877,7 @@ CREATE TABLE `oauth_clients` (
 
 LOCK TABLES `oauth_clients` WRITE;
 /*!40000 ALTER TABLE `oauth_clients` DISABLE KEYS */;
+INSERT INTO `oauth_clients` VALUES (1,NULL,'Mexagon','RxJRcwdubd3onImINKCvyNcqVjCWd0kzgncEeP3p','http://localhost',1,0,0,'2019-05-21 02:47:55','2019-05-21 02:47:55');
 /*!40000 ALTER TABLE `oauth_clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -866,7 +895,7 @@ CREATE TABLE `oauth_personal_access_clients` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `oauth_personal_access_clients_client_id_index` (`client_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -875,6 +904,7 @@ CREATE TABLE `oauth_personal_access_clients` (
 
 LOCK TABLES `oauth_personal_access_clients` WRITE;
 /*!40000 ALTER TABLE `oauth_personal_access_clients` DISABLE KEYS */;
+INSERT INTO `oauth_personal_access_clients` VALUES (2,1,'2019-05-21 02:47:55','2019-05-21 02:47:55');
 /*!40000 ALTER TABLE `oauth_personal_access_clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -929,6 +959,34 @@ LOCK TABLES `password_resets` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sessions`
+--
+
+DROP TABLE IF EXISTS `sessions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sessions` (
+  `id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int(10) unsigned DEFAULT NULL,
+  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text COLLATE utf8mb4_unicode_ci,
+  `payload` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_activity` int(11) NOT NULL,
+  UNIQUE KEY `sessions_id_unique` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sessions`
+--
+
+LOCK TABLES `sessions` WRITE;
+/*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
+INSERT INTO `sessions` VALUES ('RcQ6drwAGoW4rR09XKyR3WX2VlRM7n6bBAdgJ9tg',22,'192.168.30.104','Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0','YTo1OntzOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjY6Il90b2tlbiI7czo0MDoieWF5RjN5MHJkQWJYdWJqazl4V1BjbHAyRk42bUg3V3dMMXVzS0l1TiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xOTIuMTY4LjMwLjEwNC9ob21lIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MjI7czoxMzoicGFzc3dvcmRfaGFzaCI7czo2MDoiJDJ5JDEwJEZ3S2dLRnkzZlpyWmFORXZPbGg4Qk8wNXRITy9MaDh6RnNTalJFQVFsMjhJM2poWXBoSW5LIjt9',1558455690);
+/*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -941,7 +999,7 @@ CREATE TABLE `users` (
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `active` tinyint(1) NOT NULL DEFAULT '1',
   `activation_token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -949,7 +1007,7 @@ CREATE TABLE `users` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -958,7 +1016,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Luis Reyes','luis@reyesalazar.com',NULL,'$2y$10$jr.CJTsOawtO/04DAXlE5OCr7Acw69jiuQBrmzqv2ZVPdNQx8WML2',0,'yYqQwfHK7HXrQYfaXtEEg21ZHVec1SECrydF4kKzptZcqByHt6AoOhf5NZWV',NULL,'2019-05-16 23:58:32','2019-05-16 23:58:32',NULL),(21,'Carlos Reyes','cvreyes@mexagon.net',NULL,'$2y$10$/cGF3wTwqffHNfaIzPAzHuLY9JNFXh/EZ5osM9zIrP.rhS4RsW1IO',0,'3YDLGjKDjN5cV4VsrbMXyJ5CRHogyzttUz0DVpVro9sELAYpFGfKWz4GsVLQ',NULL,'2019-05-17 03:29:16','2019-05-17 03:29:16',NULL);
+INSERT INTO `users` VALUES (22,'Carlos Reyes','cvreyes@mexagon.net',NULL,'$2y$10$FwKgKFy3fZrZaNEvOlh8BO05tHO/Lh8zFsSjREAQl28I3jhYphInK',1,'WaEf1S8mDGjfziiR7lmapf2MfTR2L9Cf2qSeGBgEKYl2a17G90XhCHq9ftUB','Ef3lQ11thTCIIw3Ymotj1oiMpuRb5mwbhkBeqvaVON4TDNWeVylWQQjlrTGv','2019-05-21 02:29:01','2019-05-21 02:29:01',NULL),(23,'Diana Reyes','dianita@reyesalazar.com',NULL,'$2y$10$nFQwGjoJxCvJdD.217V8GOKPazyl3dvrrOJHgkPzGpW4s2WJ4IeCS',1,'w73no69ckIJZ4Hfiij2onAbMxkSeDhn1IuFxbe8vCoP4aWPR4XDvyPPlGCjv',NULL,'2019-05-21 02:50:52','2019-05-21 02:50:52',NULL),(24,'Claudia Reyes','clau@reyesalazar.com',NULL,'$2y$10$r5f904iKL5IsFBIvuLhFrukKOhVueNc40NRumeb6FBYK8AH5uvBFa',1,'LoP1NSRXhQB4By1SYuBH4q4bGlZ95u1ZC6LzOpo7lCsLjw16dFjtVW2YG4Pj',NULL,'2019-05-21 02:55:41','2019-05-21 02:55:41',NULL),(25,'Luis Reyes','guish@reyesalazar.com',NULL,'$2y$10$OsA0a3t.qhSbh7.Y9nl54.q2p4g9.f9OoKswfVr4qUKZkae.3JmuG',1,'b9bsTK1OZUjVDF4ptbylszWIngmoR4rO2WN8Wc42B2ePCYfOgyOHHELbQzpc',NULL,'2019-05-21 02:57:54','2019-05-21 02:57:54',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -997,4 +1055,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-16 17:39:11
+-- Dump completed on 2019-05-21 11:57:49
