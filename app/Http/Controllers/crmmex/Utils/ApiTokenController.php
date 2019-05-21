@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\crmmex\Utils;
 
+use Session;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,6 +20,9 @@ class ApiTokenController extends Controller
        $token       = $tokenResult->token;
        $token->expires_at = Carbon::now()->addWeeks( 1 );
        $token->save();
+
+       session( [ 'apiToken' , $tokenResult->accessToken ] );
+
        return response()->json(
          array( 'apiToken' => $tokenResult->accessToken )
        );
