@@ -10,12 +10,19 @@
 @include( 'crmmex.prospectos.nuevo' )
 
 <script>
-    idContenido = document.getElementById( 'idCargaInfo' ).value;
+    var token = sessionStorage.getItem( 'apiToken' );
+    var idContenido = document.getElementById( 'idCargaInfo' ).value;
     document.getElementById( 'expediente_id' ).value = idContenido;
     comboEstados();
     comboPaises();
-    path  = '/api/obtieneExpediente/' + idContenido;
-    axios( path )
+    var path  = '/api/obtieneExpediente/' + idContenido;
+    var config = {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    };
+    axios( path , config )
         .then( datos => {
             // Direccion
             d = datos.data;

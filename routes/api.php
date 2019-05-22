@@ -40,19 +40,18 @@ Route::group(['prefix' => 'auth'], function () {
     });
 });
 
-Route::middleware('auth:api')->get( '/user' , function (Request $request) {
+Route::middleware( 'auth:api' )->get( '/user' , function (Request $request) {
     return $request->user();
 });
 
 /* Api CRM */
 
 /******************** Operaciones para el modulo de clientes ********************/
-Route::middleware( 'auth:api' )->post( '/altaExpediente' , 'crmmex\Clientes\ClientesController@guardaCliente' );
-Route::middleware( 'auth:api' )->get( '/listadoClientes' , 'crmmex\Clientes\ClientesController@listadoClientes' );
-#Route::post( '/altaExpediente'                  , 'crmmex\Clientes\ClientesController@guardaCliente' );
-#Route::get ( '/listadoClientes'                 , 'crmmex\Clientes\ClientesController@listadoClientes' );
-Route::get ( '/obtieneExpediente/{id}'          , 'crmmex\Clientes\ClientesController@obtieneCliente' );
-Route::post( '/editaExpediente'                 , 'crmmex\Clientes\ClientesController@actualizaCliente' );
+Route::middleware( 'auth:api' )->post( '/altaExpediente'  , 'crmmex\Clientes\ClientesController@guardaCliente' );
+Route::middleware( 'auth:api' )->get(  '/listadoClientes' , 'crmmex\Clientes\ClientesController@listadoClientes' );
+Route::middleware( 'auth:api' )->post( '/editaExpediente' , 'crmmex\Clientes\ClientesController@actualizaCliente' );
+Route::middleware( 'auth:api' )->get ( '/obtieneExpediente/{id}' , 'crmmex\Clientes\ClientesController@obtieneCliente' );
+
 Route::get ( '/validaRFC/{rfc}'                 , 'crmmex\Clientes\ClientesController@valRFC' );
 Route::get ( '/listadoSeguimientos/{clienteID}' , 'crmmex\Clientes\SeguimientoController@listadoSeguimientos' );
 Route::get ( '/listadoContactos/{clienteID}'    , 'crmmex\Clientes\SeguimientoController@listadoContactosPorCliente' );
@@ -93,9 +92,11 @@ Route::get( 'listadoCampanias' , 'mercadotecnia\CampaniasController@listadoCampa
 //Route::get( '/configuracionRoles/{rolID?}' , 'ejecutivo\RolesController@listadoModulos' );
 //Route::get( '/rolesDisponibles' , 'ejecutivo\RolesController@listadoRoles' );
 
-// Api para pruebas con angular
+// Pruebas API consumidas desdee Angular
 Route::get   ( '/users'      , 'UsersController@index'   )->middleware( 'cors' );
 Route::get   ( '/users/{id}' , 'UsersController@show'    )->middleware( 'cors' );
 Route::post  ( '/users'      , 'UsersController@store'   )->middleware( 'cors' );
 Route::post  ( '/users/{id}' , 'UsersController@update'  )->middleware( 'cors' );
 Route::delete( '/users/{id}' , 'UsersController@destroy' )->middleware( 'cors' );
+
+// Pruebas API consumiddas desde angular con uso de token
