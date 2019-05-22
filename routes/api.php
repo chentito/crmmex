@@ -25,7 +25,7 @@ Route::group(['prefix' => 'auth'], function () {
      * Accion que genera un token a partir de datos
      * de acceso validos
      */
-    Route::post( 'getToken' , 'API\APIManage@getToken' );
+    Route::post( 'getToken' , 'API\APIManage@getToken' )->middleware( 'cors' );
 
     /*
      * Accion que genera la accion para activar la cuenta generada
@@ -48,9 +48,11 @@ Route::middleware( 'auth:api' )->get( '/user' , function (Request $request) {
 
 /******************** Operaciones para el modulo de clientes ********************/
 Route::middleware( 'auth:api' )->post( '/altaExpediente'  , 'crmmex\Clientes\ClientesController@guardaCliente' );
-Route::middleware( 'auth:api' )->get(  '/listadoClientes' , 'crmmex\Clientes\ClientesController@listadoClientes' );
 Route::middleware( 'auth:api' )->post( '/editaExpediente' , 'crmmex\Clientes\ClientesController@actualizaCliente' );
+Route::middleware( 'auth:api' )->get(  '/listadoClientes' , 'crmmex\Clientes\ClientesController@listadoClientes' );
 Route::middleware( 'auth:api' )->get ( '/obtieneExpediente/{id}' , 'crmmex\Clientes\ClientesController@obtieneCliente' );
+
+
 
 Route::get ( '/validaRFC/{rfc}'                 , 'crmmex\Clientes\ClientesController@valRFC' );
 Route::get ( '/listadoSeguimientos/{clienteID}' , 'crmmex\Clientes\SeguimientoController@listadoSeguimientos' );

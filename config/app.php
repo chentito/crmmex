@@ -176,7 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\EsPDFServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-
+        Artisaninweb\SoapWrapper\ServiceProvider::class,
     ],
 
     /*
@@ -227,7 +227,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'EsPDF' => App\Facades\EsPDF::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-
+        'SoapWrapper' => Artisaninweb\SoapWrapper\Facade\SoapWrapper::class,  
     ],
 
 ];

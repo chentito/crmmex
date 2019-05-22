@@ -177,7 +177,7 @@ class ClientesController extends Controller
     public function actualizaCliente( Request $request ) {
         $idtyCli = $request->expediente_id;
 
-        $this->authorize( 'revisaCliente' , $idtyCli );
+        //$this->authorize( 'revisaCliente' , $idtyCli );
         $cliente = Clientes::find( $idtyCli );
         $cliente->razonSocial       = $request->cliente_razon_social;
         $cliente->rfc               = $request->cliente_rfc;
