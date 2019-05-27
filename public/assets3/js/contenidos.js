@@ -37,14 +37,19 @@ function cargaDatosComboCatalogo() {
 }
 
 function generaToken() {
-  axios
-    .get( '/generaToken' )
-    .then( response => {
-      sessionStorage.setItem( 'apiToken', response.data.apiToken );
-    }).
-    catch( function( e ){
-      console.log( "ERROR TOKEN " + e );
-    });
+  if( sessionStorage.getItem("apiToken") === null ) {
+    axios
+      .get( '/generaToken' )
+      .then( response => {
+        console.log( 'Token generado...' );
+        sessionStorage.setItem( 'apiToken', response.data.apiToken );
+      }).
+      catch( function( e ){
+        console.log( 'ERROR TOKEN ' + e );
+      });
+  } else {
+      console.log( 'Token previamente generado...' );
+  }
 }
 
 async function utiles( accion ) {
