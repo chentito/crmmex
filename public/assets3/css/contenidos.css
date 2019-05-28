@@ -38,6 +38,10 @@ input{
     font-size: 10px;
 }
 
+.custom-select{
+  font-size: 12px;
+}
+
 ::-webkit-input-placeholder {
    font-style: italic;
    font-size: 10px;
