@@ -63,7 +63,7 @@
         </div>
         <div class="col-sm-3">
           <label for="inlineRadio4">Formula:</label>
-          <input class="form-control form-control-sm" type="text" name="inlineRadioOptions" id="inlineRadio4" size="20" >
+          <input class="form-control form-control-sm" type="text" name="inlineRadioOptions" id="inlineRadio4" size="20">
         </div>
       </div>
     </div>

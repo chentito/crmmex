@@ -40,4 +40,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Agrega la estructura de direcciones
+     */
+     public function direccion() {
+       return $this->hasOne( 'App\UserAddress' , 'userID' );
+     }
+
+     /**
+      * Agrega la estructura para roles
+      */
+      public function rol()
+      {
+        return $this->belongsTo( 'App\Roles' , 'rol' );
+      }
+
 }

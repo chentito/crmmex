@@ -1,13 +1,12 @@
 <div class="row">
     <div class="col-lg-4">
         <div class="card card-small mb-4 pt-3">
-            <div class="card-header border-bottom text-center">
+            <div class="card-body border-bottom text-center">
                 <div class="mb-3 mx-auto">
                     <img class="rounded-circle" src="{{ asset( 'assets2/img/saint.jpg' ) }}" alt="User Avatar" width="110">
                 </div>
-                <h4 class="mb-0">{{ Auth::user()->name }}</h4>
+                <h4 class="mb-0">{{ Auth::user()->name }} {{ Auth::user()->apPat }}</h4>
                 <span class="text-muted d-block mb-2">Ejecutivo comercial</span>
-                <button type="button" class="mb-2 btn btn-sm btn-pill btn-outline-primary mr-2"><i class="material-icons mr-1">person_add</i>Follow</button>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item px-4">
@@ -23,8 +22,9 @@
                 <li class="list-group-item p-4">
                     <strong class="text-muted d-block mb-2">Description</strong>
                     <span>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta 
-                        qui quae minima obcaecati quod dolorum sint alias, possimus illum assumenda eligendi cumque?
+                        {{ Auth::user()->comentarios }}
+                        <br>
+                        {{ Auth::user()->rol }}
                     </span>
                 </li>
             </ul>
@@ -32,58 +32,51 @@
     </div>
     <div class="col-lg-8">
         <div class="card card-small mb-4">
-            <div class="card-header border-bottom">
-                <h6 class="m-0">Datos Cuenta</h6>
-            </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item p-3">
+                    <strong class="text-muted d-block mb-2 mt-2 ml-2">Datos Cuenta</strong>
                     <div class="row">
                         <div class="col">
                             <form>
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
-                                        <input type="text" class="form-control" id="feFirstName" placeholder="Nombre (s)" value="">
+                                        <input type="text" class="form-control form-control-sm" id="feFirstName" placeholder="Nombre (s)" value="{{ Auth::user()->name }}">
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <input type="text" class="form-control" id="feLastName" placeholder="Apellido Paterno" value="">
+                                        <input type="text" class="form-control form-control-sm" id="feLastName" placeholder="Apellido Paterno" value="{{ Auth::user()->apPat }}">
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <input type="text" class="form-control" id="feLastName" placeholder="Apellido Materno" value="">
+                                        <input type="text" class="form-control form-control-sm" id="feLastName" placeholder="Apellido Materno" value="{{ Auth::user()->apMat }}">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <input type="email" class="form-control" id="feEmailAddress" placeholder="Email" value="">
+                                        <input type="email" class="form-control form-control-sm" id="feEmailAddress" placeholder="Email" value="{{ Auth::user()->email }}">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <input type="password" class="form-control" id="fePassword" placeholder="Password">
+                                        <input type="password" class="form-control form-control-sm" id="fePassword" placeholder="Password">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="feInputAddress" placeholder="Direccion">
+                                    <input type="text" class="form-control form-control-sm" id="feInputAddress" placeholder="Direccion"
+                                    value="{{ Auth::user()->direccion->calle }} Int. {{ Auth::user()->direccion->interior }} Ext. {{ Auth::user()->direccion->exterior }}, Col {{ Auth::user()->direccion->colonia }}">
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <input type="text" class="form-control" id="feInputCity" placeholder="Ciudad">
+                                        <input type="text" class="form-control form-control-sm" id="feInputCity" placeholder="Ciudad" value="{{ Auth::user()->direccion->municipio }}">
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <select id="feInputState" class="form-control">
+                                        <select id="feInputState" class="custom-select custom-select-sm">
                                             <option selected>Estado</option>
                                             <option selected>Choose...</option>
                                             <option>...</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <input type="text" class="form-control" id="inputZip" placeholder="CP">
+                                        <input type="text" class="form-control form-control-sm" id="inputZip" placeholder="CP" value="{{ Auth::user()->direccion->cp }}">
                                     </div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <label for="feDescription">Observaciones</label>
-                                        <textarea class="form-control" name="feDescription" rows="4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae minima obcaecati quod dolorum sint alias, possimus illum assumenda eligendi cumque?</textarea>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-accent">Update Account</button>
+                                <button type="submit" class="btn btn-sm {{$btn}}">Update Account</button>
                             </form>
                         </div>
                     </div>
