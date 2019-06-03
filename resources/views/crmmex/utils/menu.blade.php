@@ -10,8 +10,8 @@
     <li>
         <a href="#clientes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users fa-lg"></i>  Clientes</a>
         <ul class="collapse list-unstyled" id="clientes">
-            <li><a href="javascript:void(0)" onclick="return contenidos('clientes_alta');">Alta</a></li>
-            <li><a href="javascript:void(0)" onclick="return contenidos('clientes_listado');">Listado</a></li>
+            <li><a href="javascript:void(0)" onclick="return contenidos('clientes_alta');">Altas</a></li>
+            <li><a href="javascript:void(0)" onclick="return contenidos('clientes_listado');">Listados</a></li>
             <!--li><a href="javascript:void(0)" onclick="return contenidos('clientes_seguimiento');">Seguimientos</a></li-->
         </ul>
     </li>
