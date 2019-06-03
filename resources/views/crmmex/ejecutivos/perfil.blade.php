@@ -23,8 +23,6 @@
                     <strong class="text-muted d-block mb-2">Description</strong>
                     <span>
                         {{ Auth::user()->comentarios }}
-                        <br>
-                        {{ Auth::user()->rol }}
                     </span>
                 </li>
             </ul>

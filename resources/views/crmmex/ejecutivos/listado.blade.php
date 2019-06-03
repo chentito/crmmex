@@ -30,8 +30,20 @@
     </div>
 </div>
 
+<div class="row">
+  <div class="col-sm-12 text-center">
+    <button class="btn btn-sm {{$btn}}" id="altaEjecutivoBtn">Agregar Ejecutivo</button>
+  </div>
+</div>
+
 <script>
     $(document).ready( function() {
+
+        $( '#altaEjecutivoBtn' ).click( function( e ){
+          e.preventDefault();
+          contenidos( 'ejecutivos_alta' );
+        });
+
         $('#administradores').DataTable({
             ajax   :{
                 url: '/api/listadoEjecutivos',

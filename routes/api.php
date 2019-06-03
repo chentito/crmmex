@@ -81,6 +81,11 @@ Route::post( '/guardaProducto'               , 'crmmex\Productos\ProductosContro
 Route::post( '/actualizaProducto'            , 'crmmex\Productos\ProductosController@actualizaProducto' );
 Route::get ( '/obtieneProducto/{productoID}' , 'crmmex\Productos\ProductosController@obtieneProducto' );
 
+Route::get ( '/listadoEjecutivos'            , 'crmmex\Administradores\Administradores@listaAdmin' );
+Route::get ( '/datosEjecutivo/{ejecutivoID}' , 'crmmex\Administradores\Administradores@search' );
+Route::middleware( 'auth:api' )->post( '/altaEjecutivo'  , 'crmmex\Administradores\Administradores@store' );
+Route::middleware( 'auth:api' )->post( '/editaEjecutivo' , 'crmmex\Administradores\Administradores@update' );
+
 /*Route::get( 'listadoProspectos' , 'Prospectos@listado' );
 Route::get( 'listadoContactos' , 'ContactosController@listadoContactos' );
 Route::get( 'listadoEjecutivos' , 'Administradores@listaAdmin' );

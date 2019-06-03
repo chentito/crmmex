@@ -51,9 +51,9 @@ class User extends Authenticatable
      /**
       * Agrega la estructura para roles
       */
-      public function rol()
+      public function privilegios()
       {
-        return $this->belongsTo( 'App\Roles' , 'rol' );
+        return $this->hasMany( 'App\RolRegla' , 'rol' , 'idRol' );
       }
 
 }
