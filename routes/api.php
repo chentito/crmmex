@@ -105,5 +105,4 @@ Route::get   ( '/users/{id}' , 'UsersController@show'    )->middleware( 'cors' )
 Route::post  ( '/users'      , 'UsersController@store'   )->middleware( 'cors' );
 Route::post  ( '/users/{id}' , 'UsersController@update'  )->middleware( 'cors' );
 Route::delete( '/users/{id}' , 'UsersController@destroy' )->middleware( 'cors' );
-
 // Pruebas API consumiddas desde angular con uso de token
