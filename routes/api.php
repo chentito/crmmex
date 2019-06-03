@@ -53,7 +53,7 @@ Route::middleware( 'auth:api' )->get(  '/listadoClientes' , 'crmmex\Clientes\Cli
 Route::middleware( 'auth:api' )->get ( '/obtieneExpediente/{id}' , 'crmmex\Clientes\ClientesController@obtieneCliente' );
 
 
-
+/************************************ Seguimientos ************************************/
 Route::get ( '/validaRFC/{rfc}'                 , 'crmmex\Clientes\ClientesController@valRFC' );
 Route::get ( '/listadoSeguimientos/{clienteID}' , 'crmmex\Clientes\SeguimientoController@listadoSeguimientos' );
 Route::get ( '/listadoContactos/{clienteID}'    , 'crmmex\Clientes\SeguimientoController@listadoContactosPorCliente' );
@@ -65,6 +65,7 @@ Route::get ( '/listadoPropuestas/{clienteID}'   , 'crmmex\Clientes\PropuestasCon
 /******************** Operaciones para el modulo de ventas ********************/
 Route::get ( '/listadoFacturas' , 'crmmex\Ventas\VentasController@listadoFacturas' );
 
+
 /******************** Acciones utiles en el sistema ********************/
 Route::get ( '/utiles/comboEstados/{pais?}'           , 'crmmex\Utils\UtilsController@estados' );
 Route::get ( '/utiles/comboPaises'                    , 'crmmex\Utils\UtilsController@paises' );
@@ -75,29 +76,23 @@ Route::get ( '/utiles/listadoContactos/{clienteID}'   , 'crmmex\Utils\UtilsContr
 Route::get ( '/opcionesCombos/{id}'                   , 'crmmex\Utils\UtilsController@catalogo' );
 Route::get ( '/opcionesCombosPorId/{id}'              , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
 
+
 /******************** Operaciones para el modulo de Productos ********************/
 Route::get ( '/listadoProductos'             , 'crmmex\Productos\ProductosController@listadoProductos' );
 Route::post( '/guardaProducto'               , 'crmmex\Productos\ProductosController@guardaProducto' );
 Route::post( '/actualizaProducto'            , 'crmmex\Productos\ProductosController@actualizaProducto' );
 Route::get ( '/obtieneProducto/{productoID}' , 'crmmex\Productos\ProductosController@obtieneProducto' );
 
+
+/************************************ Control de ejecutivos ************************************/
 Route::get ( '/listadoEjecutivos'            , 'crmmex\Administradores\Administradores@listaAdmin' );
 Route::get ( '/datosEjecutivo/{ejecutivoID}' , 'crmmex\Administradores\Administradores@search' );
-Route::middleware( 'auth:api' )->post( '/altaEjecutivo'  , 'crmmex\Administradores\Administradores@store' );
-Route::middleware( 'auth:api' )->post( '/editaEjecutivo' , 'crmmex\Administradores\Administradores@update' );
+Route::middleware( 'auth:api' )->post( '/altaEjecutivo'    , 'crmmex\Administradores\Administradores@store' );
+Route::middleware( 'auth:api' )->post( '/editaEjecutivo'   , 'crmmex\Administradores\Administradores@update' );
+Route::middleware( 'auth:api' )->post( '/eliminaEjecutivo/{ejecutivoID}' , 'crmmex\Administradores\Administradores@delete' );
 
-/*Route::get( 'listadoProspectos' , 'Prospectos@listado' );
-Route::get( 'listadoContactos' , 'ContactosController@listadoContactos' );
-Route::get( 'listadoEjecutivos' , 'Administradores@listaAdmin' );
-Route::get( 'listadoPropuestas' , 'VentasController@propuestas' );
-Route::get( 'listadoCampanias' , 'mercadotecnia\CampaniasController@listadoCampanias' );*/
 
-//Route::get( '/listadoCatalogos' , 'configuraciones\CatalogosController@catalogosConf' );
-//Route::get( '/agregaOpcionCatalogo' , 'configuraciones\CatalogosController@agregarOpcionCatalogo' );
-//Route::get( '/eliminaOpcionCatalogo' , 'configuraciones\CatalogosController@eliminarOpcionCatalogo' );
-//Route::get( '/listadoPropuestas/{cliID?}' , 'cliente\PropuestasController@listadoPropuestas' );
-//Route::get( '/configuracionRoles/{rolID?}' , 'ejecutivo\RolesController@listadoModulos' );
-//Route::get( '/rolesDisponibles' , 'ejecutivo\RolesController@listadoRoles' );
+
 
 // Pruebas API consumidas desdee Angular
 Route::get   ( '/users'      , 'UsersController@index'   )->middleware( 'cors' );

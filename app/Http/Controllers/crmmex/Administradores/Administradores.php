@@ -27,7 +27,8 @@ class Administradores extends Controller
                 'comentarios' => $administrador->comentarios,
                 'extension' => '',
                 'status'    => $administrador->active,
-                'opciones'  => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Usuario" onclick="contenidos(\'ejecutivos_edicion\',\''.$administrador->id.'\')"><i class="fa fa-edit fa-lg"></i></a>'
+                'opciones'  => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Usuario" onclick="contenidos(\'ejecutivos_edicion\',\''.$administrador->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
+                             . '<a class="ml-1" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Eliminar Usuario" onclick="contenidos(\'ejecutivos_elimina\',\''.$administrador->id.'\')"><i class="fa fa-trash fa-sm"></i></a>'
             );
         }
 
@@ -76,7 +77,6 @@ class Administradores extends Controller
         $administrador->active     = 0;
         $administrador->deleted_at = date('Y-m-d H:i:s');;
         $administrador->save();
-        return redirect( '/ejecutivoListado' );
     }
 
     public function search( $id ) {
@@ -102,25 +102,28 @@ class Administradores extends Controller
     }
 
     public function update(Request $request) {
+        // Actualizacion usuario
         $administrador = Usuarios::find( $request[ 'edicionUsuariosID' ] );
-        $administrador->name                 = $request[ 'edicionUsuariosNombre' ];
-        $administrador->apPat                = $request[ 'edicionUsuariosAPaterno' ];
-        $administrador->apMat                = $request[ 'edicionUsuariosAMaterno' ];
-        $administrador->rol                  = $request[ 'edicionUsuariosRol' ];
-        $administrador->email                = $request[ 'edicionUsuariosEmail' ];
+        $administrador->name         = $request[ 'edicionUsuariosNombre' ];
+        $administrador->apPat        = $request[ 'edicionUsuariosAPaterno' ];
+        $administrador->apMat        = $request[ 'edicionUsuariosAMaterno' ];
+        $administrador->rol          = $request[ 'edicionUsuariosRol' ];
+        $administrador->email        = $request[ 'edicionUsuariosEmail' ];
         if( !empty( $request[ 'edicionUsuariosContrasena' ] ) ) {
-            $administrador->password         = Hash::make( $request[ 'edicionUsuariosContrasena' ] );
+            $administrador->password = Hash::make( $request[ 'edicionUsuariosContrasena' ] );
         }
-        $administrador->active               = $request[ 'edicionUsuariosEstatus' ];
-        $administrador->comentarios          = $request[ 'edicionUsuariosComentarios' ];
-        $administrador->direccion->calle     = $request[ 'edicionUsuariosCalle' ];
-        $administrador->direccion->exterior  = $request[ 'edicionUsuariosExterior' ];
-        $administrador->direccion->interior  = $request[ 'edicionUsuariosInterior' ];
-        $administrador->direccion->colonia   = $request[ 'edicionUsuariosColonia' ];
-        $administrador->direccion->municipio = $request[ 'edicionUsuariosCiudad' ];
-        $administrador->direccion->estado    = $request[ 'edicionUsuariosEstado' ];
-        $administrador->direccion->cp        = $request[ 'edicionUsuariosCP' ];
-        $administrador->direccion->pais      = $request[ 'edicionUsuariosPais' ];
+        $administrador->active       = $request[ 'edicionUsuariosEstatus' ];
+        $administrador->comentarios  = $request[ 'edicionUsuariosComentarios' ];
+        // Actualizacion direccion
+        $direccion = Direccion::where( 'userID' , $request[ 'edicionUsuariosID' ] );
+        $direccion->calle     = $request[ 'edicionUsuariosCalle' ];
+        $direccion->exterior  = $request[ 'edicionUsuariosExterior' ];
+        $direccion->interior  = $request[ 'edicionUsuariosInterior' ];
+        $direccion->colonia   = $request[ 'edicionUsuariosColonia' ];
+        $direccion->municipio = $request[ 'edicionUsuariosCiudad' ];
+        $direccion->estado    = $request[ 'edicionUsuariosEstado' ];
+        $direccion->cp        = $request[ 'edicionUsuariosCP' ];
+        $direccion->pais      = $request[ 'edicionUsuariosPais' ];
 
         if( $administrador->save() ) {
           return "Datos actualizados correctamente.";

@@ -124,6 +124,7 @@
     } else {
         var url = '/api/editaEjecutivo';
     }
+
     var config = {
       headers: {
         'Accept': 'application/json',
