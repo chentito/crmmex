@@ -67,8 +67,15 @@ function cierraModal() {
     $( '#sidebar' ).removeClass( 'active' );
 }
 
-async function solicitud() {
-
-
-
+async function solicitud( metodo, token, url, datos ) {
+  var config  = { headers: { 'Accept': 'application/json', 'Authorization': 'Bearer ' + token } };
+  if( metodo == 'get' ) {
+    let promesa = axios.get;
+    promesa( url, config );
+  } else if( metodo == 'post' ) {
+    let promesa = axios.post;
+    promesa( url, datos , config );
+  }
+  let result  = await promesa;
+  return result;
 }
