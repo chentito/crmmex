@@ -62,6 +62,7 @@ Route::get ( '/obtieneSeguimiento/{id}'         , 'crmmex\Clientes\SeguimientoCo
 Route::post( '/actualizaSeguimiento'            , 'crmmex\Clientes\SeguimientoController@actualizaSeguimiento' );
 Route::get ( '/listadoPropuestas/{clienteID}'   , 'crmmex\Clientes\PropuestasController@listadoPropuestas' );
 
+
 /******************** Operaciones para el modulo de ventas ********************/
 Route::get ( '/listadoFacturas' , 'crmmex\Ventas\VentasController@listadoFacturas' );
 
@@ -85,13 +86,19 @@ Route::get ( '/obtieneProducto/{productoID}' , 'crmmex\Productos\ProductosContro
 
 
 /************************************ Control de ejecutivos ************************************/
-Route::get ( '/listadoEjecutivos'            , 'crmmex\Administradores\Administradores@listaAdmin' );
-Route::get ( '/datosEjecutivo/{ejecutivoID}' , 'crmmex\Administradores\Administradores@search' );
-Route::middleware( 'auth:api' )->post( '/altaEjecutivo'    , 'crmmex\Administradores\Administradores@store' );
-Route::middleware( 'auth:api' )->post( '/editaEjecutivo'   , 'crmmex\Administradores\Administradores@update' );
+Route::middleware( 'auth:api' )->get ( '/listadoEjecutivos'              , 'crmmex\Administradores\Administradores@listaAdmin' );
+Route::middleware( 'auth:api' )->get ( '/datosEjecutivo/{ejecutivoID}'   , 'crmmex\Administradores\Administradores@search' );
+Route::middleware( 'auth:api' )->post( '/altaEjecutivo'                  , 'crmmex\Administradores\Administradores@store' );
+Route::middleware( 'auth:api' )->post( '/editaEjecutivo'                 , 'crmmex\Administradores\Administradores@update' );
 Route::middleware( 'auth:api' )->post( '/eliminaEjecutivo/{ejecutivoID}' , 'crmmex\Administradores\Administradores@delete' );
 
 
+/************************************ Campanias ************************************/
+Route::middleware( 'auth:api' )->get ( '/listadoCampanias'             , 'crmmex\Mercadotecnia\CampaniasController@listadoCampanias' );
+Route::middleware( 'auth:api' )->post( '/guardaCampania'               , 'crmmex\Mercadotecnia\CampaniasController@save' );
+Route::middleware( 'auth:api' )->post( '/actualizaCampania'            , 'crmmex\Mercadotecnia\CampaniasController@update' );
+Route::middleware( 'auth:api' )->post( '/buscaCampania/{campaniaID}'   , 'crmmex\Mercadotecnia\CampaniasController@search' );
+Route::middleware( 'auth:api' )->post( '/eliminaCampania/{campaniaID}' , 'crmmex\Mercadotecnia\CampaniasController@delete' );
 
 
 // Pruebas API consumidas desdee Angular

@@ -15,7 +15,7 @@
       contenidos( 'ejecutivos_listado' );
   });
 
-  $( '#btnEliminaAdminEliminar' ).click( function( e ){
+  $( '#btnEliminaAdminEliminar' ).click( function( e ) {
       e.preventDefault();
       var token  = sessionStorage.getItem( 'apiToken' );
       var id  = document.getElementById( 'eliminaEjecutivoID' ).value;

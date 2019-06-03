@@ -33,10 +33,16 @@
 
 <script>
     $(document).ready( function() {
+        var token = sessionStorage.getItem( 'apiToken' );
+        $.fn.dataTable.ext.errMode = 'throw';
         $('#campanias').DataTable({
             ajax   :{
                 url: '/api/listadoCampanias',
-                dataSrc: 'campanias'
+                dataSrc: 'campanias',
+                beforeSend : function( request ) {
+                    request.setRequestHeader( "Accept" , "application/json" );
+                    request.setRequestHeader( "Authorization" , "Bearer " + token );
+                }
             },
             columns: [
                 { data: 'nombre' },

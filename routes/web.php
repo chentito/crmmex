@@ -40,7 +40,7 @@ Route::middleware('auth')->group( function() {
     );
 });
 
-Route::get( '/', function () { return redirect( '/login' ); });
+Route::get( '/' , function (){ return redirect( '/login' ); } );
 
 /**********************
  * Ejemplos a eliminar
@@ -53,11 +53,13 @@ Route::get( '/imprimir' , function() {
     $pdf = \PDF::loadView( 'crmmex.pdf.ejemplo' , compact( 'nombre' , 'fecha' ) );
     return $pdf->download( 'ejemplo.pdf' );
 });
+
 /* Envio de correo electronico (sin funcionar) */
 Route::get( '/email' , function() {
-    Mail::to( 'cvreyes@mexagon.net' )->send(new EP);
+  Mail::to( 'cvreyes@mexagon.net' )->send(new EP);
 });
-Route::get('/gmail', function () {
-    Mail::to('cvreyes@mexagon.net')->send(new GmailExample());
-    return view('/');
+
+Route::get( '/gmail' , function () {
+  Mail::to( 'cvreyes@mexagon.net' )->send( new GmailExample() );
+  return view('/');
 });

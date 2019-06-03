@@ -53,7 +53,7 @@
         </div>
         <div class="row">
             <div class="col-sm-8 mt-2"></div>
-            <div class="col-sm-4 mt-2"> 
+            <div class="col-sm-4 mt-2">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Activar seguimiento de apertura ?</span>
