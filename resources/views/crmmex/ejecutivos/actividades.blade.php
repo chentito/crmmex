@@ -36,7 +36,7 @@
         $.fn.dataTable.ext.errMode = 'throw';
 
         $('#seguimientos').DataTable({
-            ajax   :{
+            ajax   : {
                 url: '/api/listadoSeguimientos',
                 dataSrc: 'seguimientos',
                 beforeSend: function( request ) {
@@ -45,12 +45,12 @@
                 }
             },
             columns: [
-                { data: 'cliente' },
-                { data: 'contacto' },
-                { data: 'actividad' },
-                { data: 'estado' },
+                { data: 'clienteID' },
+                { data: 'contactoID' },
+                { data: 'nombreActividad' },
+                { data: 'status' },
                 { data: 'fechaAlta' },
-                { data: 'fechaFin' },
+                { data: 'fechaEjecucion' },
                 { data: 'opciones' }
             ],
             responsive: true

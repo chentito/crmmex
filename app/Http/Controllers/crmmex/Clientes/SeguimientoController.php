@@ -7,12 +7,12 @@
 
 namespace App\Http\Controllers\crmmex\Clientes;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\crmmex\Clientes\Seguimiento AS Seguimiento;
 use App\Models\crmmex\Clientes\Contactos AS Contactos;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class SeguimientoController extends Controller
 {
@@ -20,10 +20,15 @@ class SeguimientoController extends Controller
     /*
      * Metodo para obtener el listado de seguimientos
      */
-    public function listadoSeguimientos() {
-        $clienteID    = Auth::user()->id;
+    public function listadoSeguimientos( $clienteID = '' ) {
+        $ejecutivoID  = Auth::user()->id;
         $seguimientos = array();
-        $seg          = Seguimiento::where( 'status' , 1 )->where( 'clienteID' , $clienteID )->get();
+        $seg          = Seguimiento::where( [ 'status' => 1 ] )
+                      ->where( [ 'ejecutivoID' => $ejecutivoID ] )
+                      ->when( $clienteID != '' , function( $cond ) use( $clienteID ) {
+                        return $cond->where( [ 'clienteID' => $clienteID ] );
+                      })
+                      ->get();
 
         foreach ( $seg as $s ) {
           $seguimientos[ 'seguimientos' ][] = array (
@@ -50,14 +55,15 @@ class SeguimientoController extends Controller
         $seguimiento = new Seguimiento();
         $seguimiento->clienteID       = $request->clienteID;
         $seguimiento->contactoID      = $request->prospectos_nuevoseguimiento_involucrados;
+        $seguimiento->ejecutivoID     = Auth::user()->id;
         $seguimiento->tipoActividad   = $request->prospectos_nuevoseguimiento_tipo;
         $seguimiento->nombreActividad = $request->prospectos_nuevoseguimiento_titulo;
         $seguimiento->descripcion     = $request->prospectos_nuevoseguimiento_texto;
         $seguimiento->fechaAlta       = $request->prospectos_nuevoseguimiento_fecha;
         $seguimiento->estado          = $request->prospectos_nuevoseguimiento_estado;
         $seguimiento->status          = 1;
-        $stat      = $seguimiento->save();
-        $respuesta = array( 'status' => $stat );
+        $stat                         = $seguimiento->save();
+        $respuesta                    = array( 'status' => $stat );
         return response()->json( $respuesta );
     }
 
@@ -83,8 +89,8 @@ class SeguimientoController extends Controller
      * Metodo que actualiza un registro en particular
      */
      public function actualizaSeguimiento( Request $request ) {
-        $segID       = $request->seguimiento_idty;
-        $seguimiento = Seguimiento::find( $segID );
+        $segID                        = $request->seguimiento_idty;
+        $seguimiento                  = Seguimiento::find( $segID );
         $seguimiento->contactoID      = $request->prospectos_nuevoseguimiento_involucrados;
         $seguimiento->tipoActividad   = $request->prospectos_nuevoseguimiento_tipo;
         $seguimiento->nombreActividad = $request->prospectos_nuevoseguimiento_titulo;

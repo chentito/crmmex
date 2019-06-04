@@ -40,11 +40,18 @@
 </div>
 <script>
     $( document ).ready( function() {
-        clienteID = document.getElementById( 'clienteID' ).value;
+        var token     = sessionStorage.getItem( 'apiToken' );
+        var clienteID = document.getElementById( 'clienteID' ).value;
+        $.fn.dataTable.ext.errMode = 'throw';
+
         $('#seguimientosCli').DataTable({
             ajax   : {
                 url: '/api/listadoSeguimientos/'+clienteID,
-                dataSrc: 'seguimientos'
+                dataSrc: 'seguimientos',
+                beforeSend: function( request ) {
+                  request.setRequestHeader( "Accept" , "application/json" );
+                  request.setRequestHeader( "Authorization" , "Bearer " + token );
+                }
             },
             columns: [
                 { data: 'clienteID' },

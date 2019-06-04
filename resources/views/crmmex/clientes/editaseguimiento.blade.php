@@ -6,9 +6,16 @@
 
 <script>
     document.getElementById( 'btnGuardaSeguimiento' ).outerHTML = "";
-    segID = document.getElementById( 'seguimientoID' ).value;
-    path  = '/api/obtieneSeguimiento/' + segID;
-    axios( path )
+    var token  = sessionStorage.getItem( 'apiToken' );
+    var segID  = document.getElementById( 'seguimientoID' ).value;
+    var path   = '/api/obtieneSeguimiento/' + segID;
+    var config = {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    };
+    axios( path , config )
       .then( datos => {
           d = datos.data;
           document.getElementById( 'seguimiento_idty' ).value                         = d.segID;

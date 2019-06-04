@@ -54,35 +54,24 @@ Route::middleware( 'auth:api' )->get ( '/obtieneExpediente/{id}' , 'crmmex\Clien
 
 
 /************************************ Seguimientos ************************************/
-Route::get ( '/validaRFC/{rfc}'                 , 'crmmex\Clientes\ClientesController@valRFC' );
-Route::get ( '/listadoSeguimientos'             , 'crmmex\Clientes\SeguimientoController@listadoSeguimientos' );
-Route::get ( '/listadoContactos/{clienteID}'    , 'crmmex\Clientes\SeguimientoController@listadoContactosPorCliente' );
-Route::post( '/guardaSeguimiento'               , 'crmmex\Clientes\SeguimientoController@guardaSeguimiento' );
-Route::get ( '/obtieneSeguimiento/{id}'         , 'crmmex\Clientes\SeguimientoController@obtieneSeguimiento' );
-Route::post( '/actualizaSeguimiento'            , 'crmmex\Clientes\SeguimientoController@actualizaSeguimiento' );
-Route::get ( '/listadoPropuestas/{clienteID}'   , 'crmmex\Clientes\PropuestasController@listadoPropuestas' );
+Route::middleware( 'auth:api' )->get ( '/validaRFC/{rfc}'                  , 'crmmex\Clientes\ClientesController@valRFC' );
+Route::middleware( 'auth:api' )->get ( '/listadoSeguimientos/{clienteID?}' , 'crmmex\Clientes\SeguimientoController@listadoSeguimientos' );
+Route::middleware( 'auth:api' )->get ( '/listadoContactos/{clienteID}'     , 'crmmex\Clientes\SeguimientoController@listadoContactosPorCliente' );
+Route::middleware( 'auth:api' )->post( '/guardaSeguimiento'                , 'crmmex\Clientes\SeguimientoController@guardaSeguimiento' );
+Route::middleware( 'auth:api' )->get ( '/obtieneSeguimiento/{id}'          , 'crmmex\Clientes\SeguimientoController@obtieneSeguimiento' );
+Route::middleware( 'auth:api' )->post( '/actualizaSeguimiento'             , 'crmmex\Clientes\SeguimientoController@actualizaSeguimiento' );
+Route::middleware( 'auth:api' )->get ( '/listadoPropuestas/{clienteID}'    , 'crmmex\Clientes\PropuestasController@listadoPropuestas' );
 
 
 /******************** Operaciones para el modulo de ventas ********************/
-Route::get ( '/listadoFacturas' , 'crmmex\Ventas\VentasController@listadoFacturas' );
-
-
-/******************** Acciones utiles en el sistema ********************/
-Route::get ( '/utiles/comboEstados/{pais?}'           , 'crmmex\Utils\UtilsController@estados' );
-Route::get ( '/utiles/comboPaises'                    , 'crmmex\Utils\UtilsController@paises' );
-Route::get ( '/utiles/opcionesCatalogos/{catalogoID}' , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
-Route::get ( '/utiles/estatus'                        , 'crmmex\Utils\UtilsController@estatusRegistro' );
-Route::get ( '/utiles/listadoProductosServicios'      , 'crmmex\Utils\UtilsController@productosServicios' );
-Route::get ( '/utiles/listadoContactos/{clienteID}'   , 'crmmex\Utils\UtilsController@listadoContactos' );
-Route::get ( '/opcionesCombos/{id}'                   , 'crmmex\Utils\UtilsController@catalogo' );
-Route::get ( '/opcionesCombosPorId/{id}'              , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
+Route::middleware( 'auth:api' )->get ( '/listadoFacturas' , 'crmmex\Ventas\VentasController@listadoFacturas' );
 
 
 /******************** Operaciones para el modulo de Productos ********************/
-Route::get ( '/listadoProductos'             , 'crmmex\Productos\ProductosController@listadoProductos' );
-Route::post( '/guardaProducto'               , 'crmmex\Productos\ProductosController@guardaProducto' );
-Route::post( '/actualizaProducto'            , 'crmmex\Productos\ProductosController@actualizaProducto' );
-Route::get ( '/obtieneProducto/{productoID}' , 'crmmex\Productos\ProductosController@obtieneProducto' );
+Route::middleware( 'auth:api' )->get ( '/listadoProductos'             , 'crmmex\Productos\ProductosController@listadoProductos' );
+Route::middleware( 'auth:api' )->post( '/guardaProducto'               , 'crmmex\Productos\ProductosController@guardaProducto' );
+Route::middleware( 'auth:api' )->post( '/actualizaProducto'            , 'crmmex\Productos\ProductosController@actualizaProducto' );
+Route::middleware( 'auth:api' )->get ( '/obtieneProducto/{productoID}' , 'crmmex\Productos\ProductosController@obtieneProducto' );
 
 
 /************************************ Control de ejecutivos ************************************/
@@ -101,10 +90,20 @@ Route::middleware( 'auth:api' )->post( '/buscaCampania/{campaniaID}'   , 'crmmex
 Route::middleware( 'auth:api' )->post( '/eliminaCampania/{campaniaID}' , 'crmmex\Mercadotecnia\CampaniasController@delete' );
 
 
-// Pruebas API consumidas desdee Angular
+/************************************ Acciones utiles en el sistema ************************************/
+Route::get ( '/utiles/comboEstados/{pais?}'           , 'crmmex\Utils\UtilsController@estados' );
+Route::get ( '/utiles/comboPaises'                    , 'crmmex\Utils\UtilsController@paises' );
+Route::get ( '/utiles/opcionesCatalogos/{catalogoID}' , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
+Route::get ( '/utiles/estatus'                        , 'crmmex\Utils\UtilsController@estatusRegistro' );
+Route::get ( '/utiles/listadoProductosServicios'      , 'crmmex\Utils\UtilsController@productosServicios' );
+Route::get ( '/utiles/listadoContactos/{clienteID}'   , 'crmmex\Utils\UtilsController@listadoContactos' );
+Route::get ( '/opcionesCombos/{id}'                   , 'crmmex\Utils\UtilsController@catalogo' );
+Route::get ( '/opcionesCombosPorId/{id}'              , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
+
+
+/************************************ Pruebas API consumidas desdee Angular ************************************/
 Route::get   ( '/users'      , 'UsersController@index'   )->middleware( 'cors' );
 Route::get   ( '/users/{id}' , 'UsersController@show'    )->middleware( 'cors' );
 Route::post  ( '/users'      , 'UsersController@store'   )->middleware( 'cors' );
 Route::post  ( '/users/{id}' , 'UsersController@update'  )->middleware( 'cors' );
 Route::delete( '/users/{id}' , 'UsersController@destroy' )->middleware( 'cors' );
-// Pruebas API consumiddas desde angular con uso de token
