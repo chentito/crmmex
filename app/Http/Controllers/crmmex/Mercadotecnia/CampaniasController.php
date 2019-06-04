@@ -21,8 +21,9 @@ class CampaniasController extends Controller
                 'fechaEnvio'    => $campania->fechaEnvio,
                 'subject'       => $campania->subject,
                 'destinatarios' => $campania->id_listado_destinatarios,
-                'opciones'      => '<a href="javascript:void(0)" onclick="return contenidos(\'mercadotecnia_estadisticas\');"><i class="fa fa-chart-area fa-lg"></i></a>'
-                                 . '<a href="javascript:void(0)" onclick="return contenidos(\'mercadotecnia_detalle\');" class="ml-1"><i class="fa fa-search fa-lg"></i></a>'
+                'opciones'      => '<a href="javascript:void(0)" onclick="return contenidos(\'mercadotecnia_estadisticas\');"><i class="fa fa-chart-area fa-sm"></i></a>'
+                                 . '<a href="javascript:void(0)" onclick="return contenidos(\'mercadotecnia_detalle\',\''.$campania->id.'\');" class="ml-1"><i class="fa fa-edit fa-sm"></i></a>'
+                                 . '<a href="javascript:void(0)" onclick="return contenidos(\'mercadotecnia_elimina\',\''.$campania->id.'\');" class="ml-1"><i class="fa fa-sm fa-trash"></i></a>'
             );
         }
 
@@ -32,7 +33,18 @@ class CampaniasController extends Controller
     /* Obtiene los datos de un registro en particular */
     public function search( $id ) {
         $campania = Campanias::find( $id );
-        return response()->json( $campania );
+        $camp = array(
+          'nombre'        => $campania->nombre_campania,
+          'url'           => $campania->url,
+          'fechaEnvio'    => $campania->fechaEnvio,
+          'subject'       => $campania->subject,
+          'from'          => $campania->from_nombre,
+          'email'         => $campania->from_email,
+          'destinatarios' => $campania->id_listado_destinatarios,
+          'tipo'          => $campania->tipo,
+          'pieza'         => $campania->pieza
+        );
+        return response()->json( $camp );
     }
 
     /* Guarda un nuevo registro en la tabla de campañas */
@@ -45,6 +57,8 @@ class CampaniasController extends Controller
         $campania->from_nombre              = $request[ 'detalleCampania_remitente' ];
         $campania->from_email               = $request[ 'detalleCampania_remitenteEmail' ];
         $campania->id_listado_destinatarios = $request[ 'detalleCampania_destinatarios' ];
+        $campania->tipo                     = $request[ 'detalleCampania_tipo' ];
+        $campania->pieza                    = $request[ 'detalleCampania_contenidoPieza' ];
         $campania->status                   = 1;
 
         if( $campania->save() ) {
@@ -64,6 +78,8 @@ class CampaniasController extends Controller
         $campania->from_nombre              = $request[ 'detalleCampania_remitente' ];
         $campania->from_email               = $request[ 'detalleCampania_remitenteEmail' ];
         $campania->id_listado_destinatarios = $request[ 'detalleCampania_destinatarios' ];
+        $campania->tipo                     = $request[ 'detalleCampania_tipo' ];
+        $campania->pieza                    = $request[ 'detalleCampania_contenidoPieza' ];
         $campania->status                   = 1;
 
         if( $campania->save() ) {

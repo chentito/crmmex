@@ -8,4 +8,5 @@ class Campanias extends Model
 {
     //
     protected $table = 'crmmex_merc_campanias';
+    public $timestamps = false;
 }

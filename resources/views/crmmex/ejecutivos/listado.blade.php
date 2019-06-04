@@ -44,10 +44,17 @@
           contenidos( 'ejecutivos_alta' );
         });
 
+        var token = sessionStorage.getItem( 'apiToken' );
+        $.fn.dataTable.ext.errMode = 'throw';
+
         $('#administradores').DataTable({
             ajax   :{
                 url: '/api/listadoEjecutivos',
-                dataSrc: 'administradores'
+                dataSrc: 'administradores',
+                beforeSend : function( request ) {
+                    request.setRequestHeader( "Accept" , "application/json" );
+                    request.setRequestHeader( "Authorization" , "Bearer " + token );
+                }
             },
             columns: [
                 { data: 'nombres' },

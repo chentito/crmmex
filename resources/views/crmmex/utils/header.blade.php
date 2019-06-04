@@ -5,7 +5,7 @@
         </li>
         <li class="nav-item dropdown">
             <a href="#" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle">
-                Bienvenido Carlos Reyes
+                Bienvenido(a) {{ Auth::user()->name }} {{ Auth::user()->apPat }}
             </a>
             <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
                 <li><a id="menuHeader" class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('ejecutivos_perfil');">Editar Perfil</a></li>
