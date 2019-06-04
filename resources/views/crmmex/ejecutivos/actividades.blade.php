@@ -32,10 +32,17 @@
 
 <script>
     $(document).ready( function() {
+        var token = sessionStorage.getItem( 'apiToken' );
+        $.fn.dataTable.ext.errMode = 'throw';
+
         $('#seguimientos').DataTable({
             ajax   :{
                 url: '/api/listadoSeguimientos',
-                dataSrc: 'seguimientos'
+                dataSrc: 'seguimientos',
+                beforeSend: function( request ) {
+                  request.setRequestHeader( "Accept" , "application/json" );
+                  request.setRequestHeader( "Authorization" , "Bearer " + token );
+                }
             },
             columns: [
                 { data: 'cliente' },

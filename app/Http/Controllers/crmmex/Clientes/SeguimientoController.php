@@ -12,6 +12,7 @@ use App\Models\crmmex\Clientes\Contactos AS Contactos;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class SeguimientoController extends Controller
 {
@@ -19,7 +20,8 @@ class SeguimientoController extends Controller
     /*
      * Metodo para obtener el listado de seguimientos
      */
-    public function listadoSeguimientos( $clienteID ) {
+    public function listadoSeguimientos() {
+        $clienteID    = Auth::user()->id;
         $seguimientos = array();
         $seg          = Seguimiento::where( 'status' , 1 )->where( 'clienteID' , $clienteID )->get();
 

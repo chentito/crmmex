@@ -55,7 +55,7 @@ Route::middleware( 'auth:api' )->get ( '/obtieneExpediente/{id}' , 'crmmex\Clien
 
 /************************************ Seguimientos ************************************/
 Route::get ( '/validaRFC/{rfc}'                 , 'crmmex\Clientes\ClientesController@valRFC' );
-Route::get ( '/listadoSeguimientos/{clienteID}' , 'crmmex\Clientes\SeguimientoController@listadoSeguimientos' );
+Route::get ( '/listadoSeguimientos'             , 'crmmex\Clientes\SeguimientoController@listadoSeguimientos' );
 Route::get ( '/listadoContactos/{clienteID}'    , 'crmmex\Clientes\SeguimientoController@listadoContactosPorCliente' );
 Route::post( '/guardaSeguimiento'               , 'crmmex\Clientes\SeguimientoController@guardaSeguimiento' );
 Route::get ( '/obtieneSeguimiento/{id}'         , 'crmmex\Clientes\SeguimientoController@obtieneSeguimiento' );

@@ -52,6 +52,24 @@ function generaToken() {
   }
 }
 
+function eliminaToken() {
+  var token  = sessionStorage.getItem( 'apiToken' );
+  var config = {
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + token
+    }
+  };
+  axios.get( '/api/auth/delToken' , config )
+       .then( request => {
+         sessionStorage.removeItem( 'apiToken' );
+         console.log( 'Token eliminado' );
+       })
+       .catch( err => {
+         console.log( 'Error al eliminar token ' + err );
+       });
+}
+
 async function utiles( accion ) {
     let promise = axios.get( '/api/utiles/' + accion );
     let result = await promise;
