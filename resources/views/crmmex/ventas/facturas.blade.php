@@ -31,10 +31,15 @@
 
 <script>
     $(document).ready( function() {
+        var token = sessionStorage.getItem( 'apiToken' );
         $('#clientes22').DataTable({
             ajax   :{
                 url: '/api/listadoFacturas',
-                dataSrc: 'facturas'
+                dataSrc: 'facturas',
+                beforeSend: function( request ) {
+                  request.setRequestHeader( 'Accept' , 'application/json' );
+                  request.setRequestHeader( 'Authorization' , 'Bearer ' + token );
+                }
             },
             columns: [
                 { data: 'facturaID' },

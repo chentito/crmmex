@@ -47,9 +47,9 @@ Route::middleware( 'auth:api' )->get( '/user' , function (Request $request) {
 /* Api CRM */
 
 /******************** Operaciones para el modulo de clientes ********************/
-Route::middleware( 'auth:api' )->post( '/altaExpediente'  , 'crmmex\Clientes\ClientesController@guardaCliente' );
-Route::middleware( 'auth:api' )->post( '/editaExpediente' , 'crmmex\Clientes\ClientesController@actualizaCliente' );
-Route::middleware( 'auth:api' )->get(  '/listadoClientes' , 'crmmex\Clientes\ClientesController@listadoClientes' );
+Route::middleware( 'auth:api' )->post( '/altaExpediente'         , 'crmmex\Clientes\ClientesController@guardaCliente' );
+Route::middleware( 'auth:api' )->post( '/editaExpediente'        , 'crmmex\Clientes\ClientesController@actualizaCliente' );
+Route::middleware( 'auth:api' )->get(  '/listadoClientes'        , 'crmmex\Clientes\ClientesController@listadoClientes' );
 Route::middleware( 'auth:api' )->get ( '/obtieneExpediente/{id}' , 'crmmex\Clientes\ClientesController@obtieneCliente' );
 
 
@@ -79,6 +79,7 @@ Route::middleware( 'auth:api' )->get ( '/listadoEjecutivos'              , 'crmm
 Route::middleware( 'auth:api' )->get ( '/datosEjecutivo/{ejecutivoID}'   , 'crmmex\Administradores\Administradores@search' );
 Route::middleware( 'auth:api' )->post( '/altaEjecutivo'                  , 'crmmex\Administradores\Administradores@store' );
 Route::middleware( 'auth:api' )->post( '/editaEjecutivo'                 , 'crmmex\Administradores\Administradores@update' );
+Route::middleware( 'auth:api' )->post( '/shortEditaEjecutivo'            , 'crmmex\Administradores\Administradores@shortUpdate' );
 Route::middleware( 'auth:api' )->post( '/eliminaEjecutivo/{ejecutivoID}' , 'crmmex\Administradores\Administradores@delete' );
 
 
@@ -91,8 +92,9 @@ Route::middleware( 'auth:api' )->post( '/eliminaCampania/{campaniaID}' , 'crmmex
 
 
 /************************************ Configuraciones ************************************/
-Route::middleware( 'auth:api' )->get ( '/obtieneSMTP' , 'crmmex\Configuraciones\SMTPController@obtieneConfiguracion' );
+Route::middleware( 'auth:api' )->get ( '/obtieneSMTP'   , 'crmmex\Configuraciones\SMTPController@obtieneConfiguracion' );
 Route::middleware( 'auth:api' )->post( '/actualizaSMTP' , 'crmmex\Configuraciones\SMTPController@update' );
+
 
 /************************************ Acciones utiles en el sistema ************************************/
 Route::get ( '/utiles/comboEstados/{pais?}'           , 'crmmex\Utils\UtilsController@estados' );

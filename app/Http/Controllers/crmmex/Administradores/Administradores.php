@@ -4,6 +4,7 @@ namespace App\Http\Controllers\crmmex\Administradores;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\User AS Usuarios;
 use App\UserAddress AS Direccion;
@@ -129,6 +130,24 @@ class Administradores extends Controller
           return "Datos actualizados correctamente.";
         } else {
           return "Error al actualizad datos.";
+        }
+    }
+
+    public function shortUpdate( Request $request ) {
+        $ejecutivo = Usuarios::find( Auth::user()->id );
+        $ejecutivo->name        = $request[ 'perfilNombre' ];
+        $ejecutivo->apPat       = $request[ 'perfilApPat' ];
+        $ejecutivo->apMat       = $request[ 'perfilApMat' ];
+        $ejecutivo->email       = $request[ 'perfilEmail' ];
+        if( $request[ 'perfilPassword' ] != '' ) {
+          $ejecutivo->password  = Hash::make( $request[ 'perfilPassword' ] );
+        }
+
+        if( $ejecutivo->save() ) {
+            Auth::setUser( $ejecutivo );
+            return "Datos actualizados correctamente.";
+          } else {
+            return "Error al actualizad datos.";
         }
     }
 
