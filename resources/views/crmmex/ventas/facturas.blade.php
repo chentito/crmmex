@@ -29,6 +29,38 @@
     </div>
 </div>
 
+<div class="row">
+  <div class="col-sm-12 text-center">
+      <form id="formTest" name="formTest">
+          <label for="field1">Campo no. 1</label>
+          <input type="text" id="field1" name="field1" class="form-control">
+          <br>
+          <label for="field1">Campo no. 2</label>
+          <input type="text" id="field2" name="field2" class="form-control">
+          <br>
+          <label for="field1">Campo no. 3</label>
+          <input type="text" id="field3" name="field3" class="form-control">
+          <br>
+          <button id="botonDeEjemplo" class="btn btn-sm btn-info" >Ejemplo</button>
+      </form>
+  </div>
+</div>
+
+<script>
+    var boton = document.getElementById( 'botonDeEjemplo' );
+    boton.addEventListener( 'click' , function( e ){
+        e.preventDefault();
+        ejecutaFuncion();
+    });
+
+    function ejecutaFuncion() {
+      var data = new FormData( document.getElementById('formTest') );
+      alert(data['field1']);
+      alert(data['field2']);
+      alert(data['field3']);
+    }
+</script>
+
 <script>
     $(document).ready( function() {
         var token = sessionStorage.getItem( 'apiToken' );

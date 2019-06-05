@@ -52,7 +52,7 @@
                     html += '</div>';
                     $( '#rolDetalleContenedor' ).append( html );
                 });
-                
+
                 if( idRol != '' && idRol != 1 ) {
                     btn = '<div class="col-sm-12 text-center"><button class="btn btn-sm {{$btn}}">Guardar rol</button></div>';
                     $( '#rolDetalleContenedor' ).append( btn );
