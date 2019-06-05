@@ -33,7 +33,7 @@ class ProductosController extends Controller
               'impuesto'      => $producto->impuesto,
               'divisa'        => $producto->divisa,
               'status'        => ( $producto->status == '1' ? 'Activo' : 'Inactivo' ),
-              'configuracion' => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Producto" onclick="contenidos(\'configuraciones_catalogos_editaProducto\',\''.$producto->id.'\')"><i class="fa fa-edit fa-lg"></i></a>'
+              'configuracion' => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Producto" onclick="contenidos(\'configuraciones_catalogos_editaProducto\',\''.$producto->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
             );
         }
         return response()->json( $datos );

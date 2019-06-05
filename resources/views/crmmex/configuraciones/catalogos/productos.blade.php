@@ -35,10 +35,15 @@
 
 <script>
     $(document).ready( function() {
+        var token = sessionStorage.getItem( 'apiToken' );
         $('#listadoProductos').DataTable({
             ajax   :{
                 url: '/api/listadoProductos',
-                dataSrc: 'Productos'
+                dataSrc: 'Productos',
+                beforeSend: function( request ) {
+                  request.setRequestHeader( 'Accept' , 'application/json' );
+                  request.setRequestHeader( 'Authorization' , 'Bearer ' + token );
+                }
             },
             columns: [
                 { data: 'nombre' },

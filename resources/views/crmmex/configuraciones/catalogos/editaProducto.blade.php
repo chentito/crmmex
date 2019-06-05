@@ -8,9 +8,16 @@
 <script>
 
     document.getElementById( 'confProductos_id' ).value = document.getElementById( 'idProductoEditar' ).value;
-    productoID = document.getElementById( 'confProductos_id' ).value;
-    path       = '/api/obtieneProducto/' + productoID;
-    axios( path )
+    var token      = sessionStorage.getItem( 'apiToken' );
+    var productoID = document.getElementById( 'confProductos_id' ).value;
+    var path       = '/api/obtieneProducto/' + productoID;
+    var config     = {
+        headers: {
+          'Accept':'application/json',
+          'Authorization': 'Bearer ' + token
+        }
+    };
+    axios( path , config )
       .then( datos => {
           d = datos.data;
           document.getElementById( 'confProductos_clave' ).value       = d.clave;

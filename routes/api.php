@@ -90,6 +90,10 @@ Route::middleware( 'auth:api' )->post( '/buscaCampania/{campaniaID}'   , 'crmmex
 Route::middleware( 'auth:api' )->post( '/eliminaCampania/{campaniaID}' , 'crmmex\Mercadotecnia\CampaniasController@delete' );
 
 
+/************************************ Configuraciones ************************************/
+Route::middleware( 'auth:api' )->get ( '/obtieneSMTP' , 'crmmex\Configuraciones\SMTPController@obtieneConfiguracion' );
+Route::middleware( 'auth:api' )->post( '/actualizaSMTP' , 'crmmex\Configuraciones\SMTPController@update' );
+
 /************************************ Acciones utiles en el sistema ************************************/
 Route::get ( '/utiles/comboEstados/{pais?}'           , 'crmmex\Utils\UtilsController@estados' );
 Route::get ( '/utiles/comboPaises'                    , 'crmmex\Utils\UtilsController@paises' );

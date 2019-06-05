@@ -41,7 +41,7 @@ class SeguimientoController extends Controller
             'fechaAlta'       => $s->fechaAlta,
             'fechaEjecucion'  => $s->fechaEjecucion,
             'status'          => $s->status,
-            'opciones'        => '<a href="javascript:void(0)" onclick="contenidos(\'clientes_editaseguimiento\',\''.$s->id.'\')"><i class="fa fa-edit fa-lg"></i></a>'
+            'opciones'        => '<a href="javascript:void(0)" onclick="contenidos(\'clientes_editaseguimiento\',\''.$s->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
           );
         }
 

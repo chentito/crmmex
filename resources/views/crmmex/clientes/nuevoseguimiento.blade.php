@@ -91,7 +91,14 @@
   }
 
   function guardaSeguimiento() {
+      var token = sessionStorage.getItem( 'apiToken' );
       var datos = $( '#formSeguimiento' ).serialize();
+      var config = {
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + token
+        }
+      };
 
       if( document.getElementById( 'seguimiento_idty' ).value == '' ) {
           var ruta  = '/api/guardaSeguimiento'; // Se da de alta
@@ -99,17 +106,13 @@
           var ruta  = '/api/actualizaSeguimiento'; // Se actualiza
       }
 
-      $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
-      $.ajax({
-          type  : "post",
-          url   : ruta,
-          data  : datos,
-          cache : false,
-          beforeSend : function() {},
-          success : function(d) {
-              contenidos( 'clientes_seguimiento' , $( '#clienteID' ).val() );
-          },
-          error : function() {}
-      });
+      axios.post( ruta , datos , config )
+           .then( response => {
+             contenidos( 'clientes_seguimiento' , $( '#clienteID' ).val() );
+           })
+           .catch( err => {
+              console.log( err );
+           });
+
   }
 </script>

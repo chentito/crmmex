@@ -115,8 +115,9 @@
   });
 
   function guardaProductoNuevo() {
-    datos      = $( '#form_alta_productoservicio' ).serialize();
-    movimiento = 'alta';
+    var token      = sessionStorage.getItem( 'apiToken' );
+    var datos      = $( '#form_alta_productoservicio' ).serialize();
+    var movimiento = 'alta';
     if( document.getElementById( 'confProductos_id' ).value != '' ) { // Edita registro
           ruta       = '/api/actualizaProducto';
           movimiento = 'actualiza';
@@ -124,22 +125,24 @@
           ruta  = '/api/guardaProducto';
     }
 
-    $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
-    $.ajax({
-        type  : "post",
-        url   : ruta,
-        data  : datos,
-        cache : false,
-        beforeSend : function() {},
-        success : function(d) {
-          if( movimiento == 'alta' ) {
-                contenidos( 'configuraciones_catalogos_productos' );
-            } else {
-                contenidos( 'configuraciones_catalogos_editaProducto' , document.getElementById( 'confProductos_id' ).value );
-          }
-        },
-        error : function() {}
-    });
+    var config = {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+    };
+
+    axios.post( ruta , datos , config )
+       .then( response => {
+         if( movimiento == 'alta' ) {
+               contenidos( 'configuraciones_catalogos_productos' );
+           } else {
+               contenidos( 'configuraciones_catalogos_editaProducto' , document.getElementById( 'confProductos_id' ).value );
+         }
+       })
+       .catch( err => {
+         console.log( err );
+       });
   }
 
   async function comboEstatus() {
