@@ -5,7 +5,7 @@
         <table id="seguimientosCli" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
-                    <th>Cliente</th>
+
                     <th>Contacto</th>
                     <th>Actividad</th>
                     <th>Tipo</th>
@@ -19,7 +19,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                  <th>Cliente</th>
+
                   <th>Contacto</th>
                   <th>Actividad</th>
                   <th>Tipo</th>
@@ -55,19 +55,17 @@
                 }
             },
             columns: [
-                { data: 'clienteID' },
+              //  { data: 'clienteID' },
                 { data: 'contactoID' },
                 { data: 'nombreActividad' },
                 { data: 'tipoActividad' },
-                { data: 'status' },
+                { data: 'estado' },
                 { data: 'fechaAlta' },
                 { data: 'fechaEjecucion' },
                 { data: 'opciones' }
             ],
             responsive: true
         });
-
-
     });
 
     function cargaNombre() {
@@ -87,7 +85,6 @@
              .catch( err => {
                console.log( err );
              });
-
     }
 
     document.getElementById( 'abreAltaSeguimiento' ).addEventListener( 'click' , function( e ) {

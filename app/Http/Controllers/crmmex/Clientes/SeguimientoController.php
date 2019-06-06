@@ -10,6 +10,7 @@ namespace App\Http\Controllers\crmmex\Clientes;
 use Illuminate\Support\Facades\Auth;
 use App\Models\crmmex\Clientes\Seguimiento AS Seguimiento;
 use App\Models\crmmex\Clientes\Contactos AS Contactos;
+use App\Http\Controllers\crmmex\Utils\UtilsController AS Utiles;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -33,19 +34,24 @@ class SeguimientoController extends Controller
         foreach ( $seg as $s ) {
           $seguimientos[ 'seguimientos' ][] = array (
             'id'              => $s->id,
-            'clienteID'       => $s->clienteID,
-            'contactoID'      => $s->contactoID,
-            'tipoActividad'   => $s->tipoActividad,
+            'clienteID'       => Utiles::nombreCliente( $s->clienteID ),
+            'contactoID'      => $this->nombreContacto( $s->contactoID ),
+            'tipoActividad'   => Utiles::valorCatalogo( $s->tipoActividad ),
             'nombreActividad' => $s->nombreActividad,
             'descripcion'     => $s->descripcion,
             'fechaAlta'       => $s->fechaAlta,
             'fechaEjecucion'  => $s->fechaEjecucion,
-            'status'          => $s->status,
+            'estado'          => Utiles::valorCatalogo( $s->estado ),
             'opciones'        => '<a href="javascript:void(0)" onclick="contenidos(\'clientes_editaseguimiento\',\''.$s->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
           );
         }
 
         return response()->json( $seguimientos );
+    }
+
+    private function nombreContacto( $contactoID ) {
+        $contacto = Contactos::find( $contactoID );
+        return $contacto->nombre . ' ' . $contacto->apellidoPaterno . ' ' . $contacto->apellidoMaterno;
     }
 
     /*
@@ -56,14 +62,14 @@ class SeguimientoController extends Controller
         $seguimiento->clienteID       = $request->clienteID;
         $seguimiento->contactoID      = $request->prospectos_nuevoseguimiento_involucrados;
         $seguimiento->ejecutivoID     = Auth::user()->id;
-        $seguimiento->tipoActividad   = $request->prospectos_nuevoseguimiento_tipo;
+        $seguimiento->tipoActividad   = $request->catalogo_16;
         $seguimiento->nombreActividad = $request->prospectos_nuevoseguimiento_titulo;
         $seguimiento->descripcion     = $request->prospectos_nuevoseguimiento_texto;
         $seguimiento->fechaAlta       = $request->prospectos_nuevoseguimiento_fecha;
-        $seguimiento->estado          = $request->prospectos_nuevoseguimiento_estado;
+        $seguimiento->estado          = $request->catalogo_17;
         $seguimiento->status          = 1;
         $stat                         = $seguimiento->save();
-        $respuesta                    = array( 'status' => $stat );
+        $respuesta                    = array( 'status' => $stat , 'idty' => $seguimiento->id );
         return response()->json( $respuesta );
     }
 
@@ -92,13 +98,13 @@ class SeguimientoController extends Controller
         $segID                        = $request->seguimiento_idty;
         $seguimiento                  = Seguimiento::find( $segID );
         $seguimiento->contactoID      = $request->prospectos_nuevoseguimiento_involucrados;
-        $seguimiento->tipoActividad   = $request->prospectos_nuevoseguimiento_tipo;
+        $seguimiento->tipoActividad   = $request->catalogo_16;
         $seguimiento->nombreActividad = $request->prospectos_nuevoseguimiento_titulo;
         $seguimiento->descripcion     = $request->prospectos_nuevoseguimiento_texto;
         $seguimiento->fechaEjecucion  = $request->prospectos_nuevoseguimiento_fecha;
-        $seguimiento->estado          = $request->prospectos_nuevoseguimiento_estado;
+        $seguimiento->estado          = $request->catalogo_17;
         $gSeg                         = $seguimiento->save();
-        $resp                         = array( 'stat' => $gSeg );
+        $resp                         = array( 'stat' => $gSeg , 'idty' => $seguimiento->id );
         return response()->json( $resp );
      }
 
@@ -116,5 +122,13 @@ class SeguimientoController extends Controller
         }
         return response()->json( $cont );
     }
+
+    /*
+     * Obtiene el identificador textual del seguimiento
+     */
+     public function seguimientoIdty( $id ) {
+        $seguimiento = Seguimiento::find( $id );
+        return '# ' . $seguimiento->id . ' / ' . $seguimiento->nombreActividad;
+     }
 
 }

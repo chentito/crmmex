@@ -62,6 +62,7 @@ Route::middleware( 'auth:api' )->get ( '/obtieneSeguimiento/{id}'          , 'cr
 Route::middleware( 'auth:api' )->post( '/actualizaSeguimiento'             , 'crmmex\Clientes\SeguimientoController@actualizaSeguimiento' );
 Route::middleware( 'auth:api' )->get ( '/listadoPropuestas/{clienteID}'    , 'crmmex\Clientes\PropuestasController@listadoPropuestas' );
 Route::middleware( 'auth:api' )->post( '/clienteIdty/{clienteID}'          , 'crmmex\Clientes\ClientesController@clienteIdty' );
+Route::middleware( 'auth:api' )->post( '/seguimientoIdty/{seguimientoID}'  , 'crmmex\Clientes\SeguimientoController@seguimientoIdty' );
 
 
 /******************** Operaciones para el modulo de ventas ********************/

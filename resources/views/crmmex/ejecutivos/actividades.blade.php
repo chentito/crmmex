@@ -48,7 +48,7 @@
                 { data: 'clienteID' },
                 { data: 'contactoID' },
                 { data: 'nombreActividad' },
-                { data: 'status' },
+                { data: 'estado' },
                 { data: 'fechaAlta' },
                 { data: 'fechaEjecucion' },
                 { data: 'opciones' }

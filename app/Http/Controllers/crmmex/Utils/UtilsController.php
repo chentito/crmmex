@@ -11,8 +11,11 @@ use App\Models\crmmex\Utils\Estados AS Estados;
 use App\Models\crmmex\Utils\Paises AS Paises;
 use App\Models\crmmex\Utils\Catalogo AS Catalogo;
 use App\Models\crmmex\Utils\Estatus AS Estatus;
+use App\Models\crmmex\Utils\OpcionesCat AS Opciones;
 use App\Models\crmmex\Productos\Productos AS Productos;
 use App\Models\crmmex\Clientes\Contactos AS Contactos;
+use App\Models\crmmex\Clientes\Clientes AS Clientes;
+use App\User AS Ejecutivo;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -112,6 +115,30 @@ class UtilsController extends Controller
 
           return response()->json( $catalogo );
       }
+
+      /*
+       * Obtiene el valor de un parametro del catalogo
+       */
+       public static function valorCatalogo( $valorID ) {
+          $opciones = Opciones::find( $valorID );
+          return $opciones->opcion;
+       }
+
+       /*
+        * Obtiene el nombre de un ejecutivo de acuerdo a su ID
+        */
+        public static function nombreEjecutivo( $ejecutivoID ) {
+            $ejecutivo = Ejecutivo::find( $ejecutivoID );
+            return $ejecutivo->name . ' ' . $ejecutivo->apPat . ' ' . $ejecutivo->apMat;
+        }
+
+        /*
+         * Obtiene razon social de un cliente a partir de su id
+         */
+         public static function nombreCliente( $clienteID ) {
+            $cliente = Clientes::find( $clienteID );
+            return $cliente->razonSocial;
+         }
 
       /*
        * Obtiene el combo de productos

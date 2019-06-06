@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\crmmex\Clientes\Clientes AS Clientes;
 use App\Models\crmmex\Clientes\Contactos AS Contactos;
 use App\Models\crmmex\Clientes\Direccion AS Direccion;
+use App\Http\Controllers\crmmex\Utils\UtilsController AS Utiles;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -61,8 +62,8 @@ class ClientesController extends Controller
                 $contacto->puesto            = $request->contacto_puesto[ $i ];
                 $contacto->status            = 1;
                 $contacto->fechaAlta         = date( 'Y-m-d H:i:s' );
-                $contacto->ejecutivoAlta     = 1;
-                $contacto->ejecutivo         = 1;
+                #$contacto->ejecutivoAlta     = 1;
+                #$contacto->ejecutivo         = 1;
                 $gContacto                   = $contacto->save();
                 $idtyContacto                = $contacto->id;
             }
@@ -108,8 +109,8 @@ class ClientesController extends Controller
               'id'          => $cliente->id,
               'razonSocial' => $cliente->razonSocial,
               'rfc'         => $cliente->rfc,
-              'giro'        => $cliente->giro,
-              'ejecutivo'   => $cliente->ejecutivo,
+              'giro'        => Utiles::valorCatalogo( $cliente->giro ),
+              'ejecutivo'   => Utiles::nombreEjecutivo( $cliente->ejecutivo ),
               'fechaAlta'   => $cliente->fechaAlta,
               'tipo'        => ( ( $cliente->tipo == '1' ) ? 'Cliente' : 'Prospecto' ),
               'opciones'    => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
@@ -184,7 +185,7 @@ class ClientesController extends Controller
         $cliente->giro              = $request->catalogo_5;
         $cliente->categoria         = $request->catalogo_1;
         $cliente->subcategoria      = $request->catalogo_2;
-        $cliente->ejecutivo         = 1;
+        //$cliente->ejecutivo         = 1;
         $cliente->fechaModificacion = date( 'Y-m-d H:i:s' );
         $cliente->tipo              = $request->cliente_tipo;
         $cliente->grupo             = $request->cliente_grupo;
