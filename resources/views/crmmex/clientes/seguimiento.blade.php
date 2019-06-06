@@ -1,5 +1,5 @@
 <div class="card card-small w-100">
-    <h3>Cliente ID {{$param}} <span id="nombreCliente"></span></h3>
+    <h4><span id="clienteIdty"></span></h4>
     <input type="hidden" name="clienteID" id="clienteID" value="{{$param}}">
     <div class="card-body">
         <table id="seguimientosCli" class="table table-striped table-bordered" style="width:100%">
@@ -51,6 +51,7 @@
                 beforeSend: function( request ) {
                   request.setRequestHeader( "Accept" , "application/json" );
                   request.setRequestHeader( "Authorization" , "Bearer " + token );
+                  cargaNombre();
                 }
             },
             columns: [
@@ -66,9 +67,32 @@
             responsive: true
         });
 
-        $( '#abreAltaSeguimiento' ).click(function( e ) {
-            e.preventDefault();
-            contenidos( "clientes_nuevoseguimiento" , clienteID );
-        });
+
     });
+
+    function cargaNombre() {
+        var token  = sessionStorage.getItem( 'apiToken' );
+        var url    = '/api/clienteIdty/' + document.getElementById( 'clienteID' ).value;
+        var config = {
+          headers: {
+            "Accept" : "application/json",
+            "Authorization" : "Bearer " + token
+          }
+        };
+
+        axios.post( url , {} , config )
+             .then( response => {
+                document.getElementById( 'clienteIdty' ).innerHTML = response.data;
+             })
+             .catch( err => {
+               console.log( err );
+             });
+
+    }
+
+    document.getElementById( 'abreAltaSeguimiento' ).addEventListener( 'click' , function( e ) {
+        e.preventDefault();
+        contenidos( "clientes_nuevoseguimiento" , document.getElementById( 'clienteID' ).value );
+    });
+
 </script>

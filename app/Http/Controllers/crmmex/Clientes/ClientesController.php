@@ -246,4 +246,10 @@ class ClientesController extends Controller
 
     }
 
+    /* Identificador del cliente */
+    public function clienteIdty( $clienteID ) {
+        $cliente = Clientes::find( $clienteID );
+        return "# ".$cliente->id . " / " . $cliente->razonSocial;
+    }
+
 }

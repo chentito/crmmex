@@ -39,7 +39,7 @@
   <div class="row">
       <div class="col-sm-6 mb-2">
           <label for="prospectos_nuevoseguimiento_involucrados">Involucrados</label>
-          <select id="prospectos_nuevoseguimiento_involucrados" name="prospectos_nuevoseguimiento_involucrados" class="custom-select custom-select-sm" multiple="multiple">
+          <select id="prospectos_nuevoseguimiento_involucrados" name="prospectos_nuevoseguimiento_involucrados" class="custom-select custom-select-sm" >
           </select>
       </div>
       <div class="col-sm-6 mb-2">
@@ -64,17 +64,17 @@
 
   cargaContactos();
 
-  $( '#btnGuardaSeguimiento' ).click( function( e ) {
+  document.getElementById( 'btnGuardaSeguimiento' ).addEventListener( 'click' , function( e ){
       e.preventDefault();
       guardaSeguimiento();
   });
 
-  $( '#btnRegresaListadoSeguimientosPorCliente' ).click( function( e ) {
-    e.preventDefault();
-    contenidos( 'clientes_seguimiento' , document.getElementById( 'clienteID' ).value );
+  document.getElementById( 'btnRegresaListadoSeguimientosPorCliente' ).addEventListener( 'click' , function( e ){
+      e.preventDefault();
+      contenidos( 'clientes_seguimiento' , document.getElementById( 'clienteID' ).value );
   });
 
-  function cargaContactos() {
+  async function cargaContactos( selected='' ) {
       var token     = sessionStorage.getItem( 'apiToken' );
       var clienteID = document.getElementById( 'clienteID' ).value;
       var path      = '/api/listadoContactos/' + clienteID;
@@ -85,12 +85,12 @@
           }
       };
 
-      axios( path , config )
+      await axios( path , config )
           .then( datos => {
               d         = datos.data;
               contactos = d[ 'contactos' ];
-              $.each( contactos , function( a , b ) {
-                  document.getElementById( 'prospectos_nuevoseguimiento_involucrados' ).add( new Option( b.contacto , b.id ) );
+              contactos.forEach( function( b ) {
+                document.getElementById( 'prospectos_nuevoseguimiento_involucrados' ).add( new Option( b.contacto , b.id , '' , ( ( selected == b.id ) ? true : false ) ) );
               });
           })
           .catch( err => {
@@ -100,7 +100,7 @@
 
   function guardaSeguimiento() {
       var token = sessionStorage.getItem( 'apiToken' );
-      var datos = $( '#formSeguimiento' ).serialize();
+      var datos = new FormData( document.getElementById( 'formSeguimiento' ) );
       var config = {
         headers: {
           'Accept': 'application/json',
