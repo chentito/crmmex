@@ -75,9 +75,17 @@
   });
 
   function cargaContactos() {
-      clienteID = document.getElementById( 'clienteID' ).value;
-      path      = '/api/listadoContactos/' + clienteID;
-      axios( path )
+      var token     = sessionStorage.getItem( 'apiToken' );
+      var clienteID = document.getElementById( 'clienteID' ).value;
+      var path      = '/api/listadoContactos/' + clienteID;
+      var config    = {
+          headers: {
+            'Accept' : 'application/json',
+            'Authorization' : 'Bearer ' + token
+          }
+      };
+
+      axios( path , config )
           .then( datos => {
               d         = datos.data;
               contactos = d[ 'contactos' ];
