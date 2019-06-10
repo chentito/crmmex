@@ -12,6 +12,7 @@ use App\Models\crmmex\Utils\Paises AS Paises;
 use App\Models\crmmex\Utils\Catalogo AS Catalogo;
 use App\Models\crmmex\Utils\Estatus AS Estatus;
 use App\Models\crmmex\Utils\OpcionesCat AS Opciones;
+use App\Models\crmmex\Utils\Promociones AS Promociones;
 use App\Models\crmmex\Productos\Productos AS Productos;
 use App\Models\crmmex\Clientes\Contactos AS Contactos;
 use App\Models\crmmex\Clientes\Clientes AS Clientes;
@@ -132,13 +133,21 @@ class UtilsController extends Controller
             return $ejecutivo->name . ' ' . $ejecutivo->apPat . ' ' . $ejecutivo->apMat;
         }
 
-        /*
-         * Obtiene razon social de un cliente a partir de su id
-         */
-         public static function nombreCliente( $clienteID ) {
-            $cliente = Clientes::find( $clienteID );
-            return $cliente->razonSocial;
-         }
+      /*
+       * Obtiene razon social de un cliente a partir de su id
+       */
+       public static function nombreCliente( $clienteID ) {
+          $cliente = Clientes::find( $clienteID );
+          return $cliente->razonSocial;
+       }
+
+       /*
+        * Obtiene el nombre de algun contacto
+        */
+        public static function nombreContacto( $contactoID ) {
+            $contacto = Contactos::find( $contactoID );
+            return $contacto->nombre . ' ' . $contacto->apellidoPaterno . ' ' . $contacto->apellidoMaterno . ' [' . $contacto->correoElectronico . ']';
+        }
 
       /*
        * Obtiene el combo de productos
@@ -173,6 +182,34 @@ class UtilsController extends Controller
             }
 
             return response()->json( $datos );
+        }
+
+        public static function aplicaPromocion( $promoID , $monto ) {
+            $hoy       = date( 'Y-m-d H:i:s' );
+            $promocion = Promociones::find( $promoID );
+
+            if( $promocion->inicioVigencia > $hoy || $promocion->finVigencia < $hoy ) return $monto;
+
+            if( $promocion->tipoDescuento == 1 ) {
+                  return ( $monto * ( 1 / $promocion->cantidad ) );
+              } elseif( $promocion->tipoDescuento == 2 ) {
+                  return $monto - $promocion->cantidad;
+            }
+
+        }
+
+        public function listadoPromociones() {
+            $promos = array();
+            $promos[] = array( 'id' => '' , 'nombre' => 'Sin promocion' );
+            $promociones = Promociones::where( 'status' , 1 )
+                                      ->where( 'inicioVigencia' , '<' , date( 'Y-m-d H:i:s' ) )
+                                      ->where( 'finVigencia' , '>' , date( 'Y-m-d H:i:s' ) )->get();
+
+            foreach ( $promociones AS $promocion ) {
+                $promos[] = array( 'id' => $promocion->id , 'nombre' => $promocion->nombreDescuento );
+            }
+
+            return response()->json( $promos );
         }
 
 }

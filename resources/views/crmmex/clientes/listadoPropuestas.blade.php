@@ -1,7 +1,6 @@
-Listado de propuestas del cliente {{$param}}
-
-<input type="hidden" id="clienteID" name="clienteID" value="{{$param}}">
 <div class="card card-small w-100">
+    <h4><span id="clienteIdty"></span></h4>
+    <input type="hidden" id="clienteID" name="clienteID" value="{{$param}}">
     <div class="card-body">
         <table id="listadoPropuestas" class="table table-striped table-bordered" style="width:100%">
             <thead>
@@ -45,12 +44,19 @@ Listado de propuestas del cliente {{$param}}
 </div>
 <script>
     $(document).ready( function() {
-        clienteID = document.getElementById( 'clienteID' ).value;
+        var clienteID = document.getElementById( 'clienteID' ).value;
+        var token     = sessionStorage.getItem( 'apiToken' );
+
         $('#listadoPropuestas').DataTable({
             "lengthMenu" : [[8, 16, 24, -1], [8, 16, 24, "All"]],
             ajax   :{
                 url: '/api/listadoPropuestas/' + clienteID,
-                dataSrc: 'propuestas'
+                dataSrc: 'propuestas',
+                beforeSend: function( r ) {
+                    r.setRequestHeader( "Accept" , "application/json" );
+                    r.setRequestHeader( "Authorization" , "Bearer " + token );
+                    cargaNombre();
+                }
             },
             columns: [
                 { data: 'id' },
@@ -68,8 +74,28 @@ Listado de propuestas del cliente {{$param}}
         });
 
         /* Evento para abrir la alta de propuestas */
-        $( '#abreAltaPropuesta' ).click( function(){
+        document.getElementById( 'abreAltaPropuesta' ).addEventListener( 'click' , function( e ){
+            e.preventDefault();
             contenidos( 'clientes_propuesta' , clienteID );
         });
+
+        function cargaNombre() {
+            var token  = sessionStorage.getItem( 'apiToken' );
+            var url    = '/api/clienteIdty/' + document.getElementById( 'clienteID' ).value;
+            var config = {
+              headers: {
+                "Accept" : "application/json",
+                "Authorization" : "Bearer " + token
+              }
+            };
+
+            axios.post( url , {} , config )
+                 .then( response => {
+                    document.getElementById( 'clienteIdty' ).innerHTML = response.data;
+                 })
+                 .catch( err => {
+                   console.log( err );
+                 });
+        }
     });
 </script>

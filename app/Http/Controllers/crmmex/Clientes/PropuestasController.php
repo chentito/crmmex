@@ -6,8 +6,11 @@
  */
 namespace App\Http\Controllers\crmmex\Clientes;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\crmmex\Clientes\Propuestas AS Propuestas;
 use App\Models\crmmex\Productos\Productos AS Productos;
+
+use App\Http\Controllers\crmmex\Utils\UtilsController AS Utils;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,16 +28,16 @@ class PropuestasController extends Controller
         foreach( $propuestas AS $propuesta ) {
             $datos[ 'propuestas' ][] = array (
                 'id'            => $propuesta->id,
-                'ejecutivo'     => $propuesta->ejecutivoID,
-                'cliente'       => $propuesta->clienteID,
-                'contacto'      => $propuesta->contactoID,
+                'ejecutivo'     => Utils::nombreEjecutivo( $propuesta->ejecutivoID ),
+                'cliente'       => Utils::nombreCliente( $propuesta->clienteID ),
+                'contacto'      => Utils::nombreContacto( $propuesta->contactoID ),
                 'fechaEnvio'    => $propuesta->fechaEnvio,
                 'observaciones' => $propuesta->observaciones,
-                'monto'         => $propuesta->monto,
+                'monto'         => number_format( $propuesta->monto , 2 ),
                 'descuento'     => $propuesta->descuento,
                 'promocion'     => $propuesta->promocion,
                 'status'        => $propuesta->status,
-                'opciones'      => ''
+                'opciones'      => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Detalle Propuesta" onclick="contenidos(\'clientes_editapropuesta\',\''.$propuesta->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
             );
         }
 
@@ -45,17 +48,28 @@ class PropuestasController extends Controller
       * Metodo para el alta de una neuva propuesta
       */
       public function altaPropuesta( Request $request ) {
-          $propuesta = new Propuesta();
-          $propuesta->ejecutivoID    = 1;
+          $resp = array();
+          $propuesta = new Propuestas();
+          $propuesta->ejecutivoID    = Auth::user()->id;
           $propuesta->clienteID      = $request->clienteID;
           $propuesta->contactoID     = $request->contactoID;
-          $propuesta->fechaEnvio     = '';
+          $propuesta->fechaEnvio     = date( 'Y-m-d H:i:s' );
           $propuesta->observaciones  = $request->propuesta_observaciones;
           $propuesta->requerimientos = $request->propuesta_requerimientos;
+          $propuesta->categoria      = $request->catalogo_18;
+          $propuesta->formaPago      = $request->catalogo_15;
           $propuesta->monto          = $request->propuesta_monto;
           $propuesta->descuento      = $request->propuesta_descuento;
           $propuesta->promocion      = $request->propuesta_promocion;
-          $propuesta->save();
+
+          if( $propuesta->save() ) {
+              $resp[ 'msj' ] = "Propuesta agregada correctamente";
+              $resp[ 'idty' ] = $propuesta->id;
+          } else {
+              $resp[ 'msj' ] = "Error al agregar propuesta";
+          }
+
+          return response()->json( $resp );
       }
 
       /*
@@ -63,12 +77,13 @@ class PropuestasController extends Controller
        */
        public function editaPropuesta( Request $request ) {
           $propuestaID = $request->propuestaID;
-          $propuesta   = Propuesta::find( $propuestaID );
+          $propuesta   = Propuestas::find( $propuestaID );
           $propuesta->clienteID      = $request->clienteID;
           $propuesta->contactoID     = $request->contactoID;
           $propuesta->fechaEnvio     = "";
           $propuesta->observaciones  = $request->propuesta_observaciones;
           $propuesta->requerimientos = $request->propuesta_requerimientos;
+          $propuesta->formaPago      = $request->propuesta_formaPago;
           $propuesta->monto          = $request->propuesta_monto;
           $propuesta->descuento      = $request->propuesta_descuento;
           $propuesta->promocion      = $request->propuesta_promocion;
@@ -80,18 +95,21 @@ class PropuestasController extends Controller
         */
        public function datosPropuesta( $propuestaID ) {
           $datos     = array();
-          $propuesta = Propuesta::where( 'id' , $propuestaID )->first();
+          $propuesta = Propuestas::find( $propuestaID );
 
           $datos = array (
-              'ejecutivo'     => $propuesta->ejecutivoID,
-              'cliente'       => $propuesta->clienteID,
-              'contacto'      => $propuesta->contactoID,
-              'fechaEnvio'    => $propuesta->fechaEnvio,
-              'observaciones' => $propuesta->observaciones,
-              'monto'         => $propuesta->monto,
-              'descuento'     => $propuesta->descuento,
-              'promocion'     => $propuesta->promocion,
-              'status'        => $propuesta->status
+              'id'             => $propuesta->id,
+              'ejecutivo'      => $propuesta->ejecutivoID,
+              'cliente'        => $propuesta->clienteID,
+              'contacto'       => $propuesta->contactoID,
+              'fechaEnvio'     => $propuesta->fechaEnvio,
+              'observaciones'  => $propuesta->observaciones,
+              'requerimientos' => $propuesta->requerimientos,
+              'formaPago'      => $propuesta->formaPago,
+              'monto'          => $propuesta->monto,
+              'descuento'      => $propuesta->descuento,
+              'promocion'      => $propuesta->promocion,
+              'status'         => $propuesta->status
           );
 
           return response()->json( $datos );

@@ -65,6 +65,11 @@ Route::middleware( 'auth:api' )->post( '/clienteIdty/{clienteID}'          , 'cr
 Route::middleware( 'auth:api' )->post( '/seguimientoIdty/{seguimientoID}'  , 'crmmex\Clientes\SeguimientoController@seguimientoIdty' );
 
 
+/************************************ Propuestas ************************************/
+Route::middleware( 'auth:api' )->get ( '/obtieneDatosPropuesta/{propuestaID}' , 'crmmex\Clientes\PropuestasController@datosPropuesta' );
+Route::middleware( 'auth:api' )->post( '/altaPropuesta'                       , 'crmmex\Clientes\PropuestasController@altaPropuesta' );
+
+
 /******************** Operaciones para el modulo de ventas ********************/
 Route::middleware( 'auth:api' )->get ( '/listadoFacturas' , 'crmmex\Ventas\VentasController@listadoFacturas' );
 
@@ -105,6 +110,8 @@ Route::get ( '/utiles/opcionesCatalogos/{catalogoID}' , 'crmmex\Utils\UtilsContr
 Route::get ( '/utiles/estatus'                        , 'crmmex\Utils\UtilsController@estatusRegistro' );
 Route::get ( '/utiles/listadoProductosServicios'      , 'crmmex\Utils\UtilsController@productosServicios' );
 Route::get ( '/utiles/listadoContactos/{clienteID}'   , 'crmmex\Utils\UtilsController@listadoContactos' );
+Route::post( '/utiles/aplicaPromo/{promoID}/{monto}'  , 'crmmex\Utils\UtilsController@aplicaPromocion' );
+Route::get ( '/utiles/listadoPromociones'             , 'crmmex\Utils\UtilsController@listadoPromociones' );
 Route::get ( '/opcionesCombos/{id}'                   , 'crmmex\Utils\UtilsController@catalogo' );
 Route::get ( '/opcionesCombosPorId/{id}'              , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
 

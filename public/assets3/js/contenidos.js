@@ -97,3 +97,25 @@ async function solicitud( metodo, token, url, datos ) {
   let result  = await promesa;
   return result;
 }
+
+function aplicaPromo( promoID , monto , input ) {
+    if( promoID == '' ) return monton;
+    var token = sessionStorage.getItem( 'apiToken' );
+    var url   = '/api/utiles/aplicaPromo/' + promoID + '/' + monto;
+    var datos = {};
+    var config = {
+      headers: {
+        'Accept' : 'application/json',
+        'Authorization' : 'Bearer ' + token
+      }
+    };
+
+    axios.post( url , datos , config )
+         .then( response => {
+           document.getElementById( input ).value = response.data;
+         })
+         .catch( err => {
+           console.log( err );
+         });
+
+}
