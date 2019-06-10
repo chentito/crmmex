@@ -99,7 +99,7 @@ async function solicitud( metodo, token, url, datos ) {
 }
 
 function aplicaPromo( promoID , monto , input ) {
-    if( promoID == '' ) return monton;
+    if( promoID == '' ) return monto;
     var token = sessionStorage.getItem( 'apiToken' );
     var url   = '/api/utiles/aplicaPromo/' + promoID + '/' + monto;
     var datos = {};

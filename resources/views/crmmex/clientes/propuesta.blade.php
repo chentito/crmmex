@@ -125,7 +125,7 @@
           /*document.getElementById( 'listadoProductosPropuestaComercial' ).addEventListener( 'change' , function( e ) {
               e.preventDefault();
           });*/
-          document.getElementById( 'propuesta_promocion' ).addEventListener( 'change' , function( e ) {
+          document.getElementById( 'propuesta_promocion' ).addEventListener( 'change' , function( e ) {alert(this.value);
               aplicaPromo( this.value , document.getElementById( 'propuesta_monto' ).value , 'propuesta_descuento' );
           });
           document.getElementById( 'btnRegresar' ).addEventListener( 'click' , function( e ) {
