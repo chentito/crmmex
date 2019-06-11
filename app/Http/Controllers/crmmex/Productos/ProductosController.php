@@ -11,6 +11,7 @@ use App\Models\crmmex\Productos\Productos AS Prod;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\crmmex\Utils\UtilsController AS Utils;
 
 class ProductosController extends Controller
 {
@@ -23,12 +24,12 @@ class ProductosController extends Controller
             $datos[ 'Productos' ][] = array (
               'id'            => $producto->id,
               'clave'         => $producto->clave,
-              'tipo'          => $producto->tipo,
-              'grupo'         => $producto->grupo,
+              'tipo'          =>  Utils::valorCatalogo( $producto->tipo ),
+              'grupo'         =>  Utils::valorCatalogo( $producto->grupo ),
               'nombre'        => $producto->nombre,
               'descripcion'   => $producto->descripcion,
-              'periodicidad'  => $producto->periodicidad,
-              'categoria'     => $producto->categoria,
+              'periodicidad'  => Utils::valorCatalogo( $producto->periodicidad ),
+              'categoria'     => Utils::valorCatalogo( $producto->categoria ),
               'precio'        => $this->formatoMoneda( $producto->precio ),
               'impuesto'      => $producto->impuesto,
               'divisa'        => $producto->divisa,
