@@ -125,7 +125,7 @@
           /*document.getElementById( 'listadoProductosPropuestaComercial' ).addEventListener( 'change' , function( e ) {
               e.preventDefault();
           });*/
-          document.getElementById( 'propuesta_promocion' ).addEventListener( 'change' , function( e ) {alert(this.value);
+          document.getElementById( 'propuesta_promocion' ).addEventListener( 'change' , function( e ) {
               aplicaPromo( this.value , document.getElementById( 'propuesta_monto' ).value , 'propuesta_descuento' );
           });
           document.getElementById( 'btnRegresar' ).addEventListener( 'click' , function( e ) {
@@ -141,7 +141,7 @@
           });
           document.getElementById( 'btnGeneraVistaPrevia' ).addEventListener( 'click' , function( e ) {
               e.preventDefault();
-              alert("vista previa");
+              generaVistaPrevia();
           });
       });
 
@@ -208,6 +208,10 @@
              .catch( err => {
                console.log( err );
              });
+      }
+
+      function generaVistaPrevia() {
+          location.replace( '/api/generaPDF/5' );
       }
 
 </script>

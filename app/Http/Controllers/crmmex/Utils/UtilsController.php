@@ -191,9 +191,9 @@ class UtilsController extends Controller
             if( $promocion->inicioVigencia > $hoy || $promocion->finVigencia < $hoy ) return $monto;
 
             if( $promocion->tipoDescuento == 1 ) {
-                  return ( $monto * ( 1 / $promocion->cantidad ) );
+                  return number_format( ( $monto * $promocion->cantidad ) / 100 , 2 );
               } elseif( $promocion->tipoDescuento == 2 ) {
-                  return $monto - $promocion->cantidad;
+                  return number_format( $monto - $promocion->cantidad , 2 );
             }
 
         }
@@ -206,7 +206,7 @@ class UtilsController extends Controller
                                       ->where( 'finVigencia' , '>' , date( 'Y-m-d H:i:s' ) )->get();
 
             foreach ( $promociones AS $promocion ) {
-                $promos[] = array( 'id' => $promocion->id , 'nombre' => $promocion->nombreDescuento );
+                $promos[] = array( 'id' => $promocion->id , 'nombre' => $promocion->nombreDescuento .  ( ( $promocion->tipoDescuento == 1 ) ? ' [' . $promocion->cantidad . '%]' : '' ) );
             }
 
             return response()->json( $promos );

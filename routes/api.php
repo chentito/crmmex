@@ -68,6 +68,7 @@ Route::middleware( 'auth:api' )->post( '/seguimientoIdty/{seguimientoID}'  , 'cr
 /************************************ Propuestas ************************************/
 Route::middleware( 'auth:api' )->get ( '/obtieneDatosPropuesta/{propuestaID}' , 'crmmex\Clientes\PropuestasController@datosPropuesta' );
 Route::middleware( 'auth:api' )->post( '/altaPropuesta'                       , 'crmmex\Clientes\PropuestasController@altaPropuesta' );
+Route::get( '/generaPDF/{propuestaID}'             , 'crmmex\Clientes\PropuestasController@generaPDF' );
 
 
 /******************** Operaciones para el modulo de ventas ********************/

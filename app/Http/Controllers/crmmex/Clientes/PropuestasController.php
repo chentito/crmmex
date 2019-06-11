@@ -124,4 +124,14 @@ class PropuestasController extends Controller
             $propuesta->save();
         }
 
+        /*
+         * Metodo que genera el PDF de la propuesta
+         */
+         public function generaPDF( $propuestaID ) {
+           $nombre = "Mexagon SA de CV";
+           $fecha  = date( 'Y-m-d H:i:s' );
+           $pdf = \PDF::loadView( 'crmmex.pdf.ejemplo' , compact( 'nombre' , 'fecha' ) );
+           return $pdf->download( 'PropuestaComercial.pdf' );
+         }
+
 }
