@@ -7,7 +7,9 @@
                   <th>ID Cliente</th>
                   <th>ID Propuesta</th>
                   <th>Monto</th>
-                  <th>Fecha Emision</th>
+                  <th>Banco</th>
+                  <th>Forma Pago</th>
+                  <th>Fecha Pago</th>
                   <th>Status</th>
                   <th>M&aacute;s</th>
                 </tr>
@@ -20,7 +22,9 @@
                   <th>ID Cliente</th>
                   <th>ID Propuesta</th>
                   <th>Monto</th>
-                  <th>Fecha Emision</th>
+                  <th>Banco</th>
+                  <th>Forma Pago</th>
+                  <th>Fecha Pago</th>
                   <th>Status</th>
                   <th>M&aacute;s</th>
                 </tr>
@@ -46,6 +50,8 @@
                 { data: 'clienteID' },
                 { data: 'propuestaID' },
                 { data: 'monto' },
+                { data: 'banco' },
+                { data: 'formaPago' },
                 { data: 'fechaEmision' },
                 { data: 'status' },
                 { data: 'opciones' }

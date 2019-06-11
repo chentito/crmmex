@@ -11,6 +11,8 @@ use App\Models\crmmex\Ventas\Facturas AS Facturas;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Http\Controllers\crmmex\Utils\UtilsController AS Utils;
+
 class VentasController extends Controller
 {
     /*
@@ -23,12 +25,15 @@ class VentasController extends Controller
           foreach( $facturas AS $factura ) {
             $datos[ 'facturas' ][] = array (
                 'facturaID'    => $factura->facturaID,
-                'clienteID'    => $factura->clienteID,
+                'clienteID'    => Utils::nombreCliente( $factura->clienteID ),
                 'propuestaID'  => $factura->propuestaID,
-                'monto'        => $factura->monto,
+                'monto'        => number_format( $factura->monto , 2 ),
                 'fechaEmision' => $factura->fechaEmision,
-                'status'       => $factura->status,
-                'opciones'     => ''
+                //'banco'        => $factura->banco,
+                'banco'        => 'Santander',
+                'formaPago'    => 'Transferencia Interbancaria',
+                'status'       => ( ( $factura->status == 1 ) ? 'Activa' : 'Cancelada' ),
+                'opciones'     => '<a href="javascript:void(0)" title="Registrar Pago" class="ml-1"><i class="fa fa-sm fa-money-bill"></i></a>'
             );
           }
 
