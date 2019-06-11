@@ -25,8 +25,35 @@
                         <i class="fa fa-address-book fa-sm"></i><span class="d-none d-sm-inline">  Dirección</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="adicionales-tab" data-toggle="tab" href="#adicionales" role="tab" aria-controls="adicionales" aria-selected="false">
+                        <i class="fa fa-paperclip fa-sm"></i><span class="d-none d-sm-inline">  Campos Adicionales</span>
+                    </a>
+                </li>
             </ul>
             <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade" id="adicionales" role="tabpanel" aria-labelledby="adicionales-tab">
+                    <div class="container border-left border-bottom border-right p-1">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label for="altacliente_campo_adicional_1">Campo adicional 1</label>
+                                <input type="text" id="altacliente_campo_adicional_1" name="altacliente_campo_adicional_1" class="form-control form-control-sm" placeholder="Campo adicional 1">
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="altacliente_campo_adicional_2">Campo adicional 2</label>
+                                <input type="text" id="altacliente_campo_adicional_2" name="altacliente_campo_adicional_2" class="form-control form-control-sm" placeholder="Campo adicional 2">
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="altacliente_campo_adicional_3">Campo adicional 3</label>
+                                <input type="text" id="altacliente_campo_adicional_3" name="altacliente_campo_adicional_3" class="form-control form-control-sm" placeholder="Campo adicional 3">
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="altacliente_campo_adicional_4">Campo adicional 4</label>
+                                <input type="text" id="altacliente_campo_adicional_4" name="altacliente_campo_adicional_4" class="form-control form-control-sm" placeholder="Campo adicional 4">
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <div class="container border-left border-bottom border-right p-1" id="contenedorContactos">
                       <div class="row">

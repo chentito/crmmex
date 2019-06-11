@@ -21,9 +21,10 @@ class CampaniasController extends Controller
                 'fechaEnvio'    => $campania->fechaEnvio,
                 'subject'       => $campania->subject,
                 'destinatarios' => $campania->id_listado_destinatarios,
-                'opciones'      => '<a href="javascript:void(0)" onclick="return contenidos(\'mercadotecnia_estadisticas\');"><i class="fa fa-chart-area fa-sm"></i></a>'
-                                 . '<a href="javascript:void(0)" onclick="return contenidos(\'mercadotecnia_detalle\',\''.$campania->id.'\');" class="ml-1"><i class="fa fa-edit fa-sm"></i></a>'
-                                 . '<a href="javascript:void(0)" onclick="return contenidos(\'mercadotecnia_elimina\',\''.$campania->id.'\');" class="ml-1"><i class="fa fa-sm fa-trash"></i></a>'
+                'opciones'      => '<a href="javascript:void(0)" onclick="return contenidos(\'mercadotecnia_estadisticas\');" title="Ver Estadisticas"><i class="fa fa-chart-area fa-sm"></i></a>'
+                                 . '<a href="javascript:void(0)" onclick="return contenidos(\'mercadotecnia_detalle\',\''.$campania->id.'\');" title="Editar Campaña" class="ml-1"><i class="fa fa-edit fa-sm"></i></a>'
+                                 . '<a href="javascript:void(0)" title="Enviar Campaña" class="ml-1"><i class="fa fa-sm fa-paper-plane"></i></a>'
+                                 . '<a href="javascript:void(0)" onclick="return contenidos(\'mercadotecnia_elimina\',\''.$campania->id.'\');" title="Eliminar Campaña" class="ml-1"><i class="fa fa-sm fa-trash"></i></a>'
             );
         }
 

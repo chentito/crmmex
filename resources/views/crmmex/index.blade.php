@@ -23,7 +23,8 @@
         <script src="{{ asset( 'assets2/js/jquery-3.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/jodit.min.js' ) }}"></script>
         <!--script async="" defer="defer" src="{{ asset( 'assets2/js/buttons.js' ) }}"></script-->
-        <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <!--script async defer src="https://buttons.github.io/buttons.js"></script-->
+        <script async defer src="{{ asset( 'assets3/js/buttons.js' ) }}"></script>
         <script type="text/javascript" src="{{ asset( 'assets3/js/loader.js' ) }}"></script>
     </head>
     <body>

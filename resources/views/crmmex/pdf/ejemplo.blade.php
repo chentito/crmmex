@@ -5,35 +5,41 @@
         <title>Document</title>
 
         <style>
-        @font-face {
-          font-family: 'roboto_condensedregular';
-          src: url('robotocondensed-regular-webfont.woff2') format('woff2'),
-               url('robotocondensed-regular-webfont.woff') format('woff'),
-               url('RobotoCondensed-Regular.ttf') format('truetype');
-          font-weight: normal;
-          font-style: normal;
-      }
-        body{
-          font-family: 'roboto_condensedregular';
-        }
-        h1{
-        text-align: center;
-        text-transform: uppercase;
-        }
-        .contenido{
-        font-size: 20px;
-        }
-        #primero{
-        background-color: #ccc;
-        }
-        #segundo{
-        color:blue;
-        }
-        #tercero{
-          text-decoration:line-through;
-          bottom: 5px;
-        }
-    </style>
+          @font-face {
+            font-family: 'roboto_condensedregular';
+            src: url('robotocondensed-regular-webfont.woff2') format('woff2'),
+                 url('robotocondensed-regular-webfont.woff') format('woff'),
+                 url('RobotoCondensed-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+          }
+
+          body{
+            font-family: 'roboto_condensedregular';
+          }
+
+          h1{
+            text-align: center;
+            text-transform: uppercase;
+          }
+
+          .contenido{
+            font-size: 20px;
+          }
+
+          #primero{
+            background-color: #ccc;
+          }
+
+          #segundo{
+            color:blue;
+          }
+
+          #tercero{
+            text-decoration:line-through;
+            bottom: 5px;
+          }
+        </style>
     </head>
     <body>
         <h2><center>Popuesta Comercial <br> Solicitada por {{$nombre}}</center></h2>
