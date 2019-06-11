@@ -33,7 +33,7 @@ class VentasController extends Controller
                 'banco'        => 'Santander',
                 'formaPago'    => 'Transferencia Interbancaria',
                 'status'       => ( ( $factura->status == 1 ) ? 'Activa' : 'Cancelada' ),
-                'opciones'     => '<a href="javascript:void(0)" title="Registrar Pago" class="ml-1"><i class="fa fa-sm fa-money-bill"></i></a>'
+                'opciones'     => '<a href="javascript:void(0)" title="Registrar Pago" onclick="contenidos(\'ventas_altaPago\')" class="ml-1"><i class="fa fa-sm fa-money-bill"></i></a>'
             );
           }
 
