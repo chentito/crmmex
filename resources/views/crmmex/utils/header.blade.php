@@ -10,7 +10,7 @@
             <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
                 <li><a id="menuHeader" class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('ejecutivos_perfil');">Editar Perfil</a></li>
                 <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('ejecutivos_actividades');">Actividades</a></li>
-                <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('ejecutivos_reportes');">Reportes</a></li>
+                <!--li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('ejecutivos_reportes');">Reportes</a></li-->
                 <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('ejecutivos_listado');">Ejecutivos</a></li>
                 <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('ejecutivos_roles');">Roles</a></li>
             </ul>

@@ -4,8 +4,58 @@
       <i class="fa fa-list fa-sm"></i><span class="d-none d-sm-inline">  Catálogos Generales</span>
     </a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pers-tab" data-toggle="tab" href="#pers" role="tab" aria-controls="pers" aria-selected="true">
+      <i class="fa fa-list fa-sm"></i><span class="d-none d-sm-inline">  Catálogos Personalizados</span>
+    </a>
+  </li>
 </ul>
 <div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade" id="pers" role="tabpanel" aria-labelledby="pers-tab">
+      <div class="container border-left border-bottom border-right p-1">
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="card">
+              <div class="card-header">
+                Catalogo Personalizado 1
+              </div>
+              <div class="card-body">
+                <select multiple class="custom-select custom-select-sm">
+                    <option value="1">Opción 1</option>
+                    <option value="1">Opción 1</option>
+                    <option value="1">Opción 1</option>
+                </select>
+              </div>
+              <div class="card-footer text-center">
+                <button class="btn btn-sm btn-info">+</button>
+                <button class="btn btn-sm btn-danger">-</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="card">
+              <div class="card-header">
+                Catalogo Personalizado 2
+              </div>
+              <div class="card-body">
+                <select multiple class="custom-select custom-select-sm">
+                    <option value="1">Opción 1</option>
+                    <option value="1">Opción 1</option>
+                    <option value="1">Opción 1</option>
+                </select>
+              </div>
+              <div class="card-footer text-center">
+                <button class="btn btn-sm btn-info">+</button>
+                <button class="btn btn-sm btn-danger">-</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3 mb-3">
+          <div class="col-sm-12 text-center"><button class="btn btn-sm {{$btn}}">Agregar Catálogo</button></div>
+        </div>
+      </div>
+  </div>
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
     <div class="container border-left border-bottom border-right p-1">
       <div class="row" >
