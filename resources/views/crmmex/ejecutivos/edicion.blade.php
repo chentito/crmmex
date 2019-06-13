@@ -31,6 +31,8 @@
             document.getElementById( 'edicionUsuariosEstado' ).value      = datos.data.estado;
             document.getElementById( 'edicionUsuariosCP' ).value          = datos.data.cp;
             document.getElementById( 'edicionUsuariosPais' ).value        = datos.data.pais;
+            document.getElementById( 'edicionUsuariosRol' ).value         = datos.data.rol;
+            document.getElementById( 'edicionUsuariosExtension' ).value   = datos.data.extension;
         })
         .catch( err => {
             console.log( err );
