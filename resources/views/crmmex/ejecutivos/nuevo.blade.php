@@ -38,15 +38,18 @@
             </div>
             <div class="col-sm-3">
               <label for="edicionUsuariosContrasena">Contrase&ntilde;a:</label>
-              <input type="text" class="form-control form-control-sm" id="edicionUsuariosContrasena" name="edicionUsuariosContrasena" placeholder="Contrase&ntilde;a" />
+              <input type="password" class="form-control form-control-sm" id="edicionUsuariosContrasena" name="edicionUsuariosContrasena" placeholder="Contrase&ntilde;a" />
             </div>
             <div class="col-sm-3">
               <label for="edicionUsuariosRepiteContrasena">Repetir Contrase&ntilde;a:</label>
-              <input type="text" class="form-control form-control-sm" id="edicionUsuariosRepiteContrasena" name="edicionUsuariosRepiteContrasena" placeholder="Repetir Contrase&ntilde;a" />
+              <input type="password" class="form-control form-control-sm" id="edicionUsuariosRepiteContrasena" name="edicionUsuariosRepiteContrasena" placeholder="Repetir Contrase&ntilde;a" />
             </div>
             <div class="col-sm-3">
               <label for="edicionUsuariosRol">Rol:</label>
-              <input type="text" class="form-control form-control-sm" id="edicionUsuariosRol" name="edicionUsuariosRol" placeholder="Repetir Contrase&ntilde;a" />
+              <select id="edicionUsuariosRol" name="edicionUsuariosRol" class="custom-select custom-select-sm">
+                  <option value="1">Administrador</option>
+                  <option value="2">Ejecutivo Comercial</option>
+              </select>
             </div>
           </div>
           <div class="row">

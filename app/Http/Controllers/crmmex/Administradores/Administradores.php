@@ -19,17 +19,17 @@ class Administradores extends Controller
 
         foreach( $administradores AS $administrador ) {
             $arrAdministradores[ 'administradores' ][] = array (
-                'id'        => $administrador->id,
-                'nombres'   => $administrador->name,
-                'appat'     => $administrador->apPat,
-                'apmat'     => $administrador->apMat,
-                'email'     => $administrador->email,
-                'rol'       => $administrador->rol,
+                'id'          => $administrador->id,
+                'nombres'     => $administrador->name,
+                'appat'       => $administrador->apPat,
+                'apmat'       => $administrador->apMat,
+                'email'       => $administrador->email,
+                'rol'         => ( ( $administrador->rol == '1' ) ? "Administrador" : "Ejecutivo Comercial" ),
                 'comentarios' => $administrador->comentarios,
-                'extension' => '',
-                'status'    => $administrador->active,
-                'opciones'  => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Usuario" onclick="contenidos(\'ejecutivos_edicion\',\''.$administrador->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
-                             . '<a class="ml-1" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Eliminar Usuario" onclick="contenidos(\'ejecutivos_elimina\',\''.$administrador->id.'\')"><i class="fa fa-trash fa-sm"></i></a>'
+                'extension'   => '310',
+                'status'      => $administrador->active,
+                'opciones'    => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Usuario" onclick="contenidos(\'ejecutivos_edicion\',\''.$administrador->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
+                               . '<a class="ml-1" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Eliminar Usuario" onclick="contenidos(\'ejecutivos_elimina\',\''.$administrador->id.'\')"><i class="fa fa-trash fa-sm"></i></a>'
             );
         }
 
