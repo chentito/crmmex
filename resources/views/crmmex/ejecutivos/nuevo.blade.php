@@ -51,6 +51,10 @@
                   <option value="2">Ejecutivo Comercial</option>
               </select>
             </div>
+            <div class="col-sm-3">
+              <label for="edicionUsuariosExtension">Extensión:</label>
+              <input type="text" class="form-control form-control-sm" id="edicionUsuariosExtension" name="edicionUsuariosExtension" placeholder="Extension" />
+            </div>
           </div>
           <div class="row">
             <div class="col-sm-12"><hr></div>

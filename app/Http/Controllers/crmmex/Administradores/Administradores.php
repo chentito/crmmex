@@ -26,7 +26,7 @@ class Administradores extends Controller
                 'email'       => $administrador->email,
                 'rol'         => ( ( $administrador->rol == '1' ) ? "Administrador" : "Ejecutivo Comercial" ),
                 'comentarios' => $administrador->comentarios,
-                'extension'   => '310',
+                'extension'   => $administrador->extension,
                 'status'      => $administrador->active,
                 'opciones'    => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Usuario" onclick="contenidos(\'ejecutivos_edicion\',\''.$administrador->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
                                . '<a class="ml-1" href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Eliminar Usuario" onclick="contenidos(\'ejecutivos_elimina\',\''.$administrador->id.'\')"><i class="fa fa-trash fa-sm"></i></a>'
@@ -44,6 +44,7 @@ class Administradores extends Controller
         $administrador->apmat       = $request[ 'edicionUsuariosAMaterno' ];
         $administrador->email       = $request[ 'edicionUsuariosEmail' ];
         $administrador->rol         = $request[ 'edicionUsuariosRol' ];
+        $administrador->extension   = $request[ 'edicionUsuariosExtension' ];
         $administrador->comentarios = $request[ 'edicionUsuariosComentarios' ];
         $administrador->password    = Hash::make( $request[ 'edicionUsuariosContrasena' ] );
         $administrador->active      = 1;
@@ -87,6 +88,7 @@ class Administradores extends Controller
           'apPat'       => $administrador->apPat,
           'apMat'       => $administrador->apMat,
           'rol'         => $administrador->rol,
+          'extension'   => $administrador->extension,
           'email'       => $administrador->email,
           'comentarios' => $administrador->comentarios,
           'calle'       => $administrador->direccion->calle,
@@ -109,6 +111,7 @@ class Administradores extends Controller
         $administrador->apPat        = $request[ 'edicionUsuariosAPaterno' ];
         $administrador->apMat        = $request[ 'edicionUsuariosAMaterno' ];
         $administrador->rol          = $request[ 'edicionUsuariosRol' ];
+        $administrador->extension    = $request[ 'edicionUsuariosExtension' ];
         $administrador->email        = $request[ 'edicionUsuariosEmail' ];
         if( !empty( $request[ 'edicionUsuariosContrasena' ] ) ) {
             $administrador->password = Hash::make( $request[ 'edicionUsuariosContrasena' ] );
