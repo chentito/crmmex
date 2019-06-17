@@ -47,10 +47,12 @@ Route::middleware( 'auth:api' )->get( '/user' , function (Request $request) {
 /* Api CRM */
 
 /******************** Operaciones para el modulo de clientes ********************/
-Route::middleware( 'auth:api' )->post( '/altaExpediente'         , 'crmmex\Clientes\ClientesController@guardaCliente' );
-Route::middleware( 'auth:api' )->post( '/editaExpediente'        , 'crmmex\Clientes\ClientesController@actualizaCliente' );
-Route::middleware( 'auth:api' )->get(  '/listadoClientes'        , 'crmmex\Clientes\ClientesController@listadoClientes' );
-Route::middleware( 'auth:api' )->get ( '/obtieneExpediente/{id}' , 'crmmex\Clientes\ClientesController@obtieneCliente' );
+Route::middleware( 'auth:api' )->post( '/altaExpediente'            , 'crmmex\Clientes\ClientesController@guardaCliente' );
+Route::middleware( 'auth:api' )->post( '/editaExpediente'           , 'crmmex\Clientes\ClientesController@actualizaCliente' );
+Route::middleware( 'auth:api' )->get(  '/listadoClientes'           , 'crmmex\Clientes\ClientesController@listadoClientes' );
+Route::middleware( 'auth:api' )->get ( '/obtieneExpediente/{id}'    , 'crmmex\Clientes\ClientesController@obtieneCliente' );
+Route::middleware( 'auth:api' )->post( '/eliminaCliente/{id}/{mov}' , 'crmmex\Clientes\ClientesController@eliminaCliente' );
+Route::middleware( 'auth:api' )->post( '/habilitaCliente/{id}'      , 'crmmex\Clientes\ClientesController@habilitaCliente' );
 
 
 /************************************ Seguimientos ************************************/

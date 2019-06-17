@@ -102,7 +102,7 @@ class ClientesController extends Controller
     /* Obtiene el listado de clientes */
     public function listadoClientes() {
       $arrClientes = array();
-      $clientes    = Clientes::where( 'status' , '1' )->get();
+      $clientes    = Clientes::whereIn( 'status' , [ 1 , 2 ] )->get();
 
       foreach( $clientes AS $cliente ) {
           $arrClientes[ 'clientes' ][] = array (
@@ -113,9 +113,11 @@ class ClientesController extends Controller
               'ejecutivo'   => Utiles::nombreEjecutivo( $cliente->ejecutivo ),
               'fechaAlta'   => $cliente->fechaAlta,
               'tipo'        => ( ( $cliente->tipo == '1' ) ? 'Cliente' : 'Prospecto' ),
+              'status'      => ( ( $cliente->status == '1' ) ? 'Activo' : 'Deshabilitado' ),
               'opciones'    => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
                              . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Segimiento" onclick="contenidos(\'clientes_seguimiento\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-toolbox fa-sm"></i></a>'
                              . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Propuesta" onclick="contenidos(\'clientes_listadoPropuestas\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-file-alt fa-sm"></i></a>'
+                             . ( ( $cliente->status == '2' ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Habilitar Cliente" onclick="habilitaCliente(\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-check fa-sm"></i></a>' : '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Eliminar Cliente" onclick="contenidos(\'clientes_eliminaCliente\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-trash fa-sm"></i></a>' )
           );
       }
 
@@ -175,6 +177,9 @@ class ClientesController extends Controller
       return response()->json( $expediente );
     }
 
+    /*
+     * Metodo que actualiza los datos de un cliente
+     */
     public function actualizaCliente( Request $request ) {
         $idtyCli = $request->expediente_id;
 
@@ -253,4 +258,17 @@ class ClientesController extends Controller
         return "# ".$cliente->id . " / " . $cliente->razonSocial;
     }
 
+    /* Metodo que elimina un cliente */
+    public function eliminaCliente( $clienteID , $movimiento ) {
+        $cliente = Clientes::find( $clienteID );
+        $cliente->status = $movimiento;
+        $cliente->save();
+    }
+
+    /* Metodo que habilita cliente */
+    public function habilitaCliente( $clienteID ) {
+      $cliente = Clientes::find( $clienteID );
+      $cliente->status = 1;
+      $cliente->save();
+    }
 }
