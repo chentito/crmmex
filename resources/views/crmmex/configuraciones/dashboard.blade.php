@@ -17,9 +17,9 @@
         <div class="row">
 
           <div class="col-sm-2"></div>
-          <div class="col-sm-2 text-center"><h5>Posición</h5></div>
-          <div class="col-sm-3 text-center"><h5>Reporte a graficar</h5></div>
-          <div class="col-sm-3 text-center"><h5>Tipo de gráfica</h5></div>
+          <div class="col-sm-2 text-center"><h6>Posición</h6></div>
+          <div class="col-sm-3 text-center"><h6>Reporte a graficar</h6></div>
+          <div class="col-sm-3 text-center"><h6>Tipo de gráfica</h6></div>
           <div class="col-sm-2"></div>
 
           <div class="col-sm-2"></div>
