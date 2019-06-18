@@ -27,7 +27,7 @@
       <a href="#ventas" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-shopping-cart fa-lg"></i>  Ventas</a>
       <ul class="collapse list-unstyled" id="ventas">
           <li><a href="javascript:void(0)" onclick="return contenidos('reportes_resumen');">Reportes</a></li>
-          <li><a href="javascript:void(0)" onclick="return contenidos('ventas_facturas');">Listado Facturación</a></li>
+          <!--li><a href="javascript:void(0)" onclick="return contenidos('ventas_facturas');">Listado Facturación</a></li-->
           <!--li><a href="javascript:void(0)" onclick="return contenidos('clientes_listado');">Listado</a></li-->
           <!--li><a href="javascript:void(0)" onclick="return contenidos('clientes_seguimiento');">Seguimientos</a></li-->
       </ul>
@@ -76,7 +76,7 @@
             <li>
                 <a href="#configuracionesReportes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Reportes</a>
                 <ul class="collapse list-unstyled" id="configuracionesReportes">
-                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_clientesListado');"> > Diseño Reportes</a></li>
+                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_disenoReportes');"> > Diseño Reportes</a></li>
                 </ul>
             </li>
             <li>
