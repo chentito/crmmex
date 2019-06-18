@@ -42,13 +42,24 @@
           <div class="col-sm-4">
               <label for="conf_datosAdicionales_tipoDato">Tipo de dato</label>
               <select id="conf_datosAdicionales_tipoDato" name="conf_datosAdicionales_tipoDato" class="custom-select custom-select-sm">
-                  <option>Tipo de Dato</option>
-                  <option>Num&eacute;rico entero</option>
-                  <option>Num&eacute;rico flotante</option>
-                  <option>Alfanum&eacute;rico</option>
-                  <option>Alfabetico</option>
-                  <option>Fecha</option>
+                  <option value="1">Tipo de Dato</option>
+                  <option value="2">Num&eacute;rico entero</option>
+                  <option value="3">Alfanum&eacute;rico</option>
+                  <option value="4">Num&eacute;rico flotante</option>
+                  <option value="5">Alfabetico</option>
+                  <option value="6">Fecha</option>
+                  <option value="CP">Catalogo Personalizado</option>
               </select>
+
+              <div id="contenedorCatalogosPersonalizados" style="display:none">
+                <br>
+                <label for="conf_datosAdicionales_catPers">Catálogo Personalizado</label>
+                <select id="conf_datosAdicionales_catPers" name="conf_datosAdicionales_catPers" class="custom-select custom-select-sm">
+                  <option value=""></option>
+                  <option value="1">Catalogo Personalizado 1</option>
+                  <option value="2">Catalogo Personalizado 2</option>
+                </select>
+              </div>
           </div>
           <div class="col-sm-4">
               <label for="conf_datosAdicionales_seccion">Sección</label>
@@ -84,3 +95,16 @@
     </div>
   </div>
 </div>
+
+<script>
+
+  document.getElementById( 'conf_datosAdicionales_tipoDato' ).addEventListener( 'change' , function(){
+      x = document.getElementById( 'contenedorCatalogosPersonalizados' );
+      if ( this.value == 'CP' ) {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+      }
+  });
+
+</script>

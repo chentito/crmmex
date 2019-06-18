@@ -62,8 +62,8 @@
             <li>
                 <a href="#configuracionesVentas" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Ventas</a>
                 <ul class="collapse list-unstyled" id="configuracionesVentas">
-                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_forecast');">Forecast</a></li>
-                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_pipeline');">Pipeline</a></li>
+                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_forecast');"> > Forecast</a></li>
+                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_pipeline');"> > Pipeline</a></li>
                 </ul>
             </li>
             <li>
@@ -90,7 +90,8 @@
             <li>
                 <a href="#configuracionesSistema" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Sistema</a>
                 <ul class="collapse list-unstyled" id="configuracionesSistema">
-                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_branding');">Branding</a></li>
+                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_branding');"> > Branding</a></li>
+                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_dashboard');"> > Dashboard</a></li>
                 </ul>
             </li>
         </ul>
