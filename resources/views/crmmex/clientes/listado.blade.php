@@ -9,7 +9,7 @@
                     <th>Giro</th>
                     <th>Ejecutivo</th>
                     <th>Fecha Alta</th>
-                    <th>Condición</th>
+                    <th>Cuenta</th>
                     <th>Estatus</th>
                     <th>M&aacute;s</th>
                 </tr>
@@ -24,7 +24,7 @@
                     <th>Giro</th>
                     <th>Ejecutivo</th>
                     <th>Fecha Alta</th>
-                    <th>Condición</th>
+                    <th>Cuenta</th>
                     <th>Estatus</th>
                     <th>M&aacute;s</th>
                 </tr>

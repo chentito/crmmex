@@ -102,8 +102,10 @@ Route::middleware( 'auth:api' )->post( '/eliminaCampania/{campaniaID}' , 'crmmex
 
 
 /************************************ Configuraciones ************************************/
-Route::middleware( 'auth:api' )->get ( '/obtieneSMTP'   , 'crmmex\Configuraciones\SMTPController@obtieneConfiguracion' );
-Route::middleware( 'auth:api' )->post( '/actualizaSMTP' , 'crmmex\Configuraciones\SMTPController@update' );
+Route::middleware( 'auth:api' )->get ( '/obtieneSMTP'             , 'crmmex\Configuraciones\SMTPController@obtieneConfiguracion' );
+Route::middleware( 'auth:api' )->post( '/actualizaSMTP'           , 'crmmex\Configuraciones\SMTPController@update' );
+#Route::middleware( 'auth:api' )->get ( '/catalogos/tipo'          , 'crmmex\Configuraciones\CatalogoController@listadoCatalogos' );
+#Route::middleware( 'auth:api' )->get ( '/listadoPorId/catalogoID' , 'crmmex\Configuraciones\CatalogoController@catalogoPorId' );
 
 
 /************************************ Acciones utiles en el sistema ************************************/

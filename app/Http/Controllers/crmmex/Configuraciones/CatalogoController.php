@@ -1,13 +1,30 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\crmmex\Configuraciones;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Catalogo AS Catalogo;
+use App\Models\crmmex\Utils\Catalogo AS Catalogo;
 
 class CatalogoController extends Controller
 {
+
+    public function listadoCatalogos( $tipo ) {
+        $elementos = array();
+        $catalogos = Catalogo::where( 'status' , 1 )
+                             ->where( 'sistema' , $tipo )
+                             ->get();
+
+        foreach( $catalogos AS $catalogo ) {
+          $elementos[] = array(
+            'id'     => $catalogo->id,
+            'nombre' => $catalogo->nombre
+          );
+        }
+
+        return response()->json( $elementos );
+    }
+
     //
     public function catalogo( $id ) {
         $catalogo = array();
@@ -18,7 +35,7 @@ class CatalogoController extends Controller
             'nombre' => $opciones->nombre,
             'params' => ''
         );
-        
+
         foreach( $opciones->opciones AS $opcion ) {
             $catalogo[] = array(
                 'id'     => $opcion->id,
@@ -44,5 +61,5 @@ class CatalogoController extends Controller
 
         return response()->json( $catalogo );
     }
-    
+
 }

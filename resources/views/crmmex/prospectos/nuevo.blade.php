@@ -160,8 +160,10 @@
                               <textarea class="form-control" id="cliente_observaciones" name="cliente_observaciones"></textarea>
                           </div>
                           <div class="col-sm-3 mb-1">
-                              <label for="catalogo_11">Condición</label>
+                              <label for="catalogo_11">Cuenta</label>
                               <select id="cliente_tipo" name="cliente_tipo" class="custom-select custom-select-sm">
+                                  <option value="4">Suspect</option>
+                                  <option value="3">Lead</option>
                                   <option value="2">Prospecto</option>
                                   <option value="1">Cliente</option>
                               </select>
