@@ -2,6 +2,7 @@
 window._ = require('lodash');
 window.dt = require('datatables.net');
 
+
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -13,6 +14,8 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+    require( 'datatables.net-colreorder-dt' );
+
 } catch (e) {}
 
 /**
@@ -37,6 +40,18 @@ if (token) {
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}
+
+ /*
+  * Token de acceso para el consumo de la API Rest
+  */
+let apiToken = sessionStorage.getItem( 'apiToken' );
+
+if( apiToken === null ) {
+  console.error('Mexagon CRM ApiToken not set');
+} else {
+  window.axios.defaults.headers.common['Accept'] = 'application/json';
+  window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + apiToken;
 }
 
 /**

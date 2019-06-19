@@ -2,34 +2,9 @@
     <h4><span id="clienteIdty"></span></h4>
     <input type="hidden" name="clienteID" id="clienteID" value="{{$param}}">
     <div class="card-body">
-        <table id="seguimientosCli" class="table table-striped table-bordered" style="width:100%">
-            <thead>
-                <tr>
-
-                    <th>Contacto</th>
-                    <th>Actividad</th>
-                    <th>Tipo</th>
-                    <th>Estado</th>
-                    <th>Alta</th>
-                    <th>Conclusi&oacute;n</th>
-                    <th>M&aacute;s</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-            <tfoot>
-                <tr>
-
-                  <th>Contacto</th>
-                  <th>Actividad</th>
-                  <th>Tipo</th>
-                  <th>Estado</th>
-                  <th>Alta</th>
-                  <th>Conclusi&oacute;n</th>
-                  <th>M&aacute;s</th>
-                </tr>
-            </tfoot>
-        </table>
+      <div id="listadoSeguimientos_config"></div>
+      <table id="listadoSeguimientos" class="table table-striped table-bordered" style="width:100%">
+      </table>
     </div>
 </div>
 <div class="row mt-1">
@@ -40,32 +15,9 @@
 </div>
 <script>
     $( document ).ready( function() {
-        var token     = sessionStorage.getItem( 'apiToken' );
         var clienteID = document.getElementById( 'clienteID' ).value;
-        $.fn.dataTable.ext.errMode = 'throw';
-
-        $('#seguimientosCli').DataTable({
-            ajax   : {
-                url: '/api/listadoSeguimientos/'+clienteID,
-                dataSrc: 'seguimientos',
-                beforeSend: function( request ) {
-                  request.setRequestHeader( "Accept" , "application/json" );
-                  request.setRequestHeader( "Authorization" , "Bearer " + token );
-                  cargaNombre();
-                }
-            },
-            columns: [
-              //  { data: 'clienteID' },
-                { data: 'contactoID' },
-                { data: 'nombreActividad' },
-                { data: 'tipoActividad' },
-                { data: 'estado' },
-                { data: 'fechaAlta' },
-                { data: 'fechaEjecucion' },
-                { data: 'opciones' }
-            ],
-            responsive: true
-        });
+        generaDataGrid( 'listadoSeguimientos' , clienteID );
+        cargaNombre();
     });
 
     function cargaNombre() {

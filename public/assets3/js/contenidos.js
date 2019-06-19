@@ -114,11 +114,95 @@ function aplicaPromo( promoID , monto , input ) {
     };
 
     axios.post( url , datos , config )
+     .then( response => {
+       document.getElementById( input ).value = response.data;
+     })
+     .catch( err => {
+       console.log( err );
+     });
+}
+
+function generaDataGrid( id , filtro = '' ) {
+    var token = sessionStorage.getItem( 'apiToken' );
+    axios.get( '/api/dataTableConfig/' + id )
          .then( response => {
-           document.getElementById( input ).value = response.data;
-         })
-         .catch( err => {
-           console.log( err );
-         });
+            f = ( filtro.length > 0 ) ? '/' + filtro : '';
+            titulos     = response.data.titulos.split( ',' );
+            campos      = response.data.campos.split( ',' );
+            visibilidad = response.data.visibilidad.split( ',' );
+
+            var header   = document.getElementById( id ).createTHead()
+            var row      = header.insertRow(0);
+            var columnas = [];
+
+            titulos.forEach( function( t , p ) {
+                if( visibilidad[ p ] == "1" ) {
+                  var th = document.createElement('th');
+                  th.innerHTML = t;
+                  row.appendChild(th);
+                  columnas.push( { data:campos[ p ] } );
+                }
+            });
+
+            $.fn.dataTable.ext.errMode = 'throw';
+            $( '#' + id ).DataTable({
+
+                dom        : 'Bfrtip',
+                buttons    : [
+                                {
+                                  text: '<i class="fa fa-cogs fa-sm"></i>',
+                                  className: 'btn btn-sm btn-dark',
+                                  action: function() {
+                                    document.getElementById( id + '_config' ).style.display = "block";
+                                  }
+                                },
+                                {
+                                  extend: 'excel',
+                                  text: '<i class="fa fa-doc fa-sm"></i>',
+                                  className: 'btn btn-sm btn-dark'
+                                }
+                             ],
+                colReorder: true,
+                lengthMenu : [ [8, 16, 24, -1], [8, 16, 24, "All"]],
+                ajax       : {
+                    url: '/api/' + id + f,
+                    dataSrc: response.data.datasource,
+                    beforeSend : function( request ) {
+                        request.setRequestHeader( "Accept" , "application/json" );
+                        request.setRequestHeader( "Authorization" , "Bearer " + token );
+                    }
+                },
+                responsive: true,
+                columns: columnas
+            });
+
+            axios.get( '/api/dataTableConfigView/' + id )
+                 .then( response => {
+                    document.getElementById( id + '_config' ).innerHTML = response.data;
+                    document.getElementById( id + '_config' ).style.display = "none";
+                    document.getElementById( 'btnGdaConfGrid' ).addEventListener( 'click' , function( e ) {
+                        e.preventDefault();
+                        var url = '/api/actualizaGridConfig';
+                        var datos = new FormData( document.getElementById( 'formConfGrid' ) );
+                        axios.post( url , datos )
+                             .then( request => {
+                               contenidos( document.getElementById( 'confGrid_seccion' ).value , f.replace( '/' ) );
+                             })
+                             .catch( err => {
+                               console.log( err );
+                             });
+                    });
+
+                    document.getElementById( 'btnGdaConfGridCierra' ).addEventListener( 'click' , function() {
+                        document.getElementById( id + '_config' ).style.display = "none";
+                    });
+                 })
+                 .catch( err => {
+                    console.log( err );
+                 });
+     })
+     .catch( err => {
+       console.log( err );
+     });
 
 }

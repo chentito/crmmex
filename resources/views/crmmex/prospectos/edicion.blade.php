@@ -16,13 +16,8 @@
     comboEstados();
     comboPaises();
     var path  = '/api/obtieneExpediente/' + idContenido;
-    var config = {
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + token
-      }
-    };
-    axios( path , config )
+  
+    axios( path  )
         .then( datos => {
             // Direccion
             d = datos.data;

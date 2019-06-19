@@ -124,6 +124,7 @@
         <script src="{{ asset( 'assets3/js/dataTables.fixedHeader.min.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/dataTables.responsive.min.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/responsive.bootstrap.min.js' ) }}"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
         <!-- Fonts -->
         <script src="{{ asset( 'assets3/js/solid.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/fontawesome.js' ) }}"></script>

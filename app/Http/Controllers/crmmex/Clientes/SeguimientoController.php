@@ -36,12 +36,14 @@ class SeguimientoController extends Controller
             'id'              => $s->id,
             'clienteID'       => Utiles::nombreCliente( $s->clienteID ),
             'contactoID'      => $this->nombreContacto( $s->contactoID ),
+            'ejecutivoID'     => $s->ejecutivoID,
             'tipoActividad'   => Utiles::valorCatalogo( $s->tipoActividad ),
             'nombreActividad' => $s->nombreActividad,
             'descripcion'     => $s->descripcion,
             'fechaAlta'       => $s->fechaAlta,
             'fechaEjecucion'  => $s->fechaEjecucion,
             'estado'          => Utiles::valorCatalogo( $s->estado ),
+            'status'          => $s->status,
             'opciones'        => '<a href="javascript:void(0)" onclick="contenidos(\'clientes_editaseguimiento\',\''.$s->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
           );
         }

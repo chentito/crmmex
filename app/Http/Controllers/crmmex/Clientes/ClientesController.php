@@ -106,15 +106,20 @@ class ClientesController extends Controller
 
       foreach( $clientes AS $cliente ) {
           $arrClientes[ 'clientes' ][] = array (
-              'id'          => $cliente->id,
-              'razonSocial' => $cliente->razonSocial,
-              'rfc'         => $cliente->rfc,
-              'giro'        => Utiles::valorCatalogo( $cliente->giro ),
-              'ejecutivo'   => Utiles::nombreEjecutivo( $cliente->ejecutivo ),
-              'fechaAlta'   => $cliente->fechaAlta,
-              'tipo'        => ( ( $cliente->tipo == '1' ) ? 'Cliente' : 'Prospecto' ),
-              'status'      => ( ( $cliente->status == '1' ) ? 'Activo' : 'Deshabilitado' ),
-              'opciones'    => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
+              'id'                => $cliente->id,
+              'razonSocial'       => $cliente->razonSocial,
+              'rfc'               => $cliente->rfc,
+              'giro'              => Utiles::valorCatalogo( $cliente->giro ),
+              'categoria'         => $cliente->categoria,
+              'subcategoria'      => $cliente->subcategoria,
+              'ejecutivo'         => Utiles::nombreEjecutivo( $cliente->ejecutivo ),
+              'fechaAlta'         => $cliente->fechaAlta,
+              'fechaModificacion' => $cliente->fechaModificacion,
+              'tipo'              => ( ( $cliente->tipo == '1' ) ? 'Cliente' : 'Prospecto' ),
+              'observaciones'     => $cliente->observaciones,
+              'grupo'             => $cliente->grupo,
+              'status'            => ( ( $cliente->status == '1' ) ? 'Activo' : 'Deshabilitado' ),
+              'opciones'          => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
                              . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Segimiento" onclick="contenidos(\'clientes_seguimiento\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-toolbox fa-sm"></i></a>'
                              . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Propuesta" onclick="contenidos(\'clientes_listadoPropuestas\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-file-alt fa-sm"></i></a>'
                              . ( ( $cliente->status == '2' ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Habilitar Cliente" onclick="habilitaCliente(\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-check fa-sm"></i></a>' : '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Eliminar Cliente" onclick="contenidos(\'clientes_eliminaCliente\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-trash fa-sm"></i></a>' )
