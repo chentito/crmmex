@@ -5,7 +5,7 @@ namespace App\Http\Controllers\crmmex\Utils;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Models\crmmex\Utils\DataTable;
+use App\Models\crmmex\Utils\Datatable;
 
 class DatatableController extends Controller
 {
