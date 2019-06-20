@@ -27,17 +27,20 @@ class PropuestasController extends Controller
 
         foreach( $propuestas AS $propuesta ) {
             $datos[ 'propuestas' ][] = array (
-                'id'            => $propuesta->id,
-                'ejecutivo'     => Utils::nombreEjecutivo( $propuesta->ejecutivoID ),
-                'cliente'       => Utils::nombreCliente( $propuesta->clienteID ),
-                'contacto'      => Utils::nombreContacto( $propuesta->contactoID ),
-                'fechaEnvio'    => $propuesta->fechaEnvio,
-                'observaciones' => $propuesta->observaciones,
-                'monto'         => number_format( $propuesta->monto , 2 ),
-                'descuento'     => $propuesta->descuento,
-                'promocion'     => $propuesta->promocion,
-                'status'        => $propuesta->status,
-                'opciones'      => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Detalle Propuesta" onclick="contenidos(\'clientes_editapropuesta\',\''.$propuesta->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
+                'id'             => $propuesta->id,
+                'ejecutivoID'    => Utils::nombreEjecutivo( $propuesta->ejecutivoID ),
+                'clienteID'      => Utils::nombreCliente( $propuesta->clienteID ),
+                'contactoID'     => Utils::nombreContacto( $propuesta->contactoID ),
+                'categoria'      => $propuesta->categoria,
+                'fechaEnvio'     => $propuesta->fechaEnvio,
+                'observaciones'  => $propuesta->observaciones,
+                'requerimientos' => $propuesta->requerimientos,
+                'formaPago'      => $propuesta->formaPago,
+                'monto'          => number_format( $propuesta->monto , 2 ),
+                'descuento'      => $propuesta->descuento,
+                'promocion'      => $propuesta->promocion,
+                'status'         => $propuesta->status,
+                'opciones'       => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Detalle Propuesta" onclick="contenidos(\'clientes_editapropuesta\',\''.$propuesta->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
             );
         }
 

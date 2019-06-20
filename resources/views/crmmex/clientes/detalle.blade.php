@@ -150,7 +150,7 @@
         <div class="card card-sm">
             <div class="card-header">Seguimientos</div>
             <div class="card-body">
-
+              <div id="contenedorSeguimientos"></div>
             </div>
         </div>
     </div>
@@ -158,7 +158,7 @@
         <div class="card card-sm">
             <div class="card-header">Propuestas</div>
             <div class="card-body">
-
+              <div id="contenedorPropuestas"></div>
             </div>
         </div>
     </div>
@@ -227,6 +227,16 @@
               document.getElementById( 'detalleCliente_pais' ).innerHTML                       = direccion[ 'pais' ];
               document.getElementById( 'detalleCliente_fechaAltaDireccion' ).innerHTML         = direccion[ 'fechaAlta' ];
               document.getElementById( 'detalleCliente_fechaModificacionDireccion' ).innerHTML = direccion[ 'fechaModificacion' ];
+              // seguimientos
+              var seguimientos  = '<ul class="list-group">';
+              response.data.seguimientos.forEach( function( e , p ){
+                seguimientos += '<li class="list-group-item">';
+                seguimientos += e['nombreActividad'] + ' Alta:'.e['fechaAlta'];
+                seguimientos += '<br>'+e['estado'];
+                seguimientos += '</li>';
+              });
+              seguimientos += '</ul>';
+              document.getElementById( 'contenedorSeguimientos' ).innerHTML = seguimientos;
            })
            .catch( err => {
              console.log( err );

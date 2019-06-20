@@ -1,14 +1,9 @@
-<div class="card card-small w-100">
-    <div class="card-body">
-        <div id="listadoClientes_config"></div>
-        <table id="listadoClientes" class="table table-striped table-bordered" style="width:100%"></table>
-    </div>
-</div>
+
+<div id="listadoClientes_config"></div>
+<table id="listadoClientes" class="table table-striped table-bordered display responsive nowrap" style="width:100%"></table>
 
 <script>
-    $(document).ready( function() {
-        generaDataGrid( 'listadoClientes' );
-    });
+    generaDataGrid( 'listadoClientes' );
 
     function habilitaCliente( clienteID ) {
         var token = sessionStorage.getItem( 'apiToken' );

@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\crmmex\Clientes\Clientes AS Clientes;
 use App\Models\crmmex\Clientes\Contactos AS Contactos;
 use App\Models\crmmex\Clientes\Direccion AS Direccion;
+use App\Models\crmmex\Clientes\Seguimiento AS Seguimiento;
+use App\Models\crmmex\Clientes\Propuestas AS Propuestas;
+
 use App\Http\Controllers\crmmex\Utils\UtilsController AS Utiles;
 
 use Illuminate\Http\Request;
@@ -186,6 +189,40 @@ class ClientesController extends Controller
           'fechaAlta'         => $direccion->fechaAlta,
           'fechaModificacion' => $direccion->fechaModificacion
       );
+
+      /* Busca Seguimientos */
+      $seguimientos = Segimiento::where( 'clienteID' , $clienteID )->get();
+      foreach( $seguimientos AS $seguimiento ) {
+        $expediente[ 'seguimientos' ][] = array(
+          'clienteID'       => $seguimiento->clienteID,
+          'contactoID'      => $seguimiento->contactoID,
+          'ejecutivoID'     => $seguimiento->ejecutivoID,
+          'tipoActividad'   => $seguimiento->tipoActividad,
+          'nombreActividad' => $seguimiento->nombreActividad,
+          'descripcion'     => $seguimiento->descripcion,
+          'fechaAlta'       => $seguimiento->fechaAlta,
+          'fechaEjecucion'  => $seguimiento->fechaEjecucion,
+          'estado'          => $seguimiento->estado
+        );
+      }
+
+      /* Busca propuestas */
+      $propuestas = Propuesta::where( 'clienteID' , $clienteID )->where( 'status' , 1 )->get();
+      foreach( $propuestas AS $propuesta ) {
+        $expediente[ 'propuestas' ][] = array (
+          'ejecutivoID'    => $propuesta->ejecutivoID,
+          'clienteID'      => $propuesta->clienteID,
+          'contactoID'     => $propuesta->contactoID,
+          'categoria'      => $propuesta->categoria,
+          'fechaEnvio'     => $propuesta->fechaEnvio,
+          'observaciones'  => $propuesta->observaciones,
+          'requerimientos' => $propuesta->requerimientos,
+          'formaPago'      => $propuesta->formaPago,
+          'monto'          => $propuesta->monto,
+          'descuento'      => $propuesta->descuento,
+          'promocion'      => $propuesta->promocion,
+        );
+      }
 
       return response()->json( $expediente );
     }

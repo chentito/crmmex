@@ -124,9 +124,9 @@ function aplicaPromo( promoID , monto , input ) {
 
 function generaDataGrid( id , filtro = '' ) {
     var token = sessionStorage.getItem( 'apiToken' );
+    f = ( filtro.length > 0 ) ? '/' + filtro : '';
     axios.get( '/api/dataTableConfig/' + id )
          .then( response => {
-            f = ( filtro.length > 0 ) ? '/' + filtro : '';
             titulos     = response.data.titulos.split( ',' );
             campos      = response.data.campos.split( ',' );
             visibilidad = response.data.visibilidad.split( ',' );
@@ -176,7 +176,7 @@ function generaDataGrid( id , filtro = '' ) {
                         var datos = new FormData( document.getElementById( 'formConfGrid' ) );
                         axios.post( url , datos )
                              .then( request => {
-                               contenidos( document.getElementById( 'confGrid_seccion' ).value , f.replace( '/' ) );
+                               contenidos( document.getElementById( 'confGrid_seccion' ).value , f.replace( '/' , '' ) );
                              })
                              .catch( err => {
                                console.log( err );

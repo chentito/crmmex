@@ -22,8 +22,6 @@
         <link href="{{ asset( 'assets3/css/contenidos.css' ) }}" rel="stylesheet">
         <script src="{{ asset( 'assets2/js/jquery-3.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/jodit.min.js' ) }}"></script>
-        <!--script async="" defer="defer" src="{{ asset( 'assets2/js/buttons.js' ) }}"></script-->
-        <!--script async defer src="https://buttons.github.io/buttons.js"></script-->
         <script async defer src="{{ asset( 'assets3/js/buttons.js' ) }}"></script>
         <script type="text/javascript" src="{{ asset( 'assets3/js/loader.js' ) }}"></script>
     </head>
@@ -114,18 +112,13 @@
         <!-- SCRIPTS -->
         <script src="{{ asset( 'js/app.js' ) }}" ></script>
         <script src="{{ asset( 'assets2/js/popper.js' ) }}"></script>
-        <script src="{{ asset( 'assets2/js/jquery.js' ) }}"></script>
-        <script src="{{ asset( 'assets2/js/mdb.js' ) }}"></script>
+        <!--script src="{{ asset( 'assets2/js/jquery.js' ) }}"></script-->
+        <!--script src="{{ asset( 'assets2/js/mdb.js' ) }}"></script-->
         <script src="{{ asset( 'assets3/js/feather.min.js' ) }}"></script>
-        <script src="{{ asset( 'assets3/js/responsive-calendar.js' ) }}"></script>
         <!-- Grid -->
-        <script src="{{ asset( 'js/jquery/jquery.dataTables.min.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/dataTables.bootstrap4.min.js' ) }}"></script>
-        <script src="{{ asset( 'assets3/js/dataTables.fixedHeader.min.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/dataTables.responsive.min.js' ) }}"></script>
-        <script src="{{ asset( 'assets3/js/responsive.bootstrap.min.js' ) }}"></script>
-        <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
-        <!-- Fonts -->
+        <!-- Fonts e iconos -->
         <script src="{{ asset( 'assets3/js/solid.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/fontawesome.js' ) }}"></script>
         <!-- Funcionalidades -->

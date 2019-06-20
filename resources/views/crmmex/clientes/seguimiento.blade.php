@@ -1,12 +1,10 @@
-<div class="card card-small w-100">
-    <h4><span id="clienteIdty"></span></h4>
-    <input type="hidden" name="clienteID" id="clienteID" value="{{$param}}">
-    <div class="card-body">
-      <div id="listadoSeguimientos_config"></div>
-      <table id="listadoSeguimientos" class="table table-striped table-bordered" style="width:100%">
-      </table>
-    </div>
-</div>
+
+<h4><span id="clienteIdty"></span></h4>
+<input type="hidden" name="clienteID" id="clienteID" value="{{$param}}">
+
+<div id="listadoSeguimientos_config"></div>
+<table id="listadoSeguimientos" class="table table-striped table-bordered" style="width:100%"></table>
+
 <div class="row mt-1">
   <div class="col-sm-12 text-center">
     <button class="btn btn-sm {{$btn}}" onclick="javascript:contenidos('clientes_listado')"><i class="fa fa-undo-alt fa-lg"></i> Regresar</button>

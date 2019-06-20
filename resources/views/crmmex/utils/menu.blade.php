@@ -17,7 +17,7 @@
         <a href="#clientes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users fa-lg"></i>  Clientes</a>
         <ul class="collapse list-unstyled" id="clientes">
             <li><a href="javascript:void(0)" onclick="return contenidos('clientes_alta');">Alta</a></li>
-            <li><a href="javascript:void(0)" onclick="return contenidos('clientes_listado');"> > Clientes</a></li>
+            <li><a href="javascript:void(0)" onclick="return contenidos('clientes_listado');">Clientes</a></li>
         </ul>
     </li>
     <li>

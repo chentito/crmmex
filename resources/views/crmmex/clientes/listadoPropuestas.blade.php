@@ -1,41 +1,10 @@
-<div class="card card-small w-100">
-    <h4><span id="clienteIdty"></span></h4>
-    <input type="hidden" id="clienteID" name="clienteID" value="{{$param}}">
-    <div class="card-body">
-        <table id="listadoPropuestas" class="table table-striped table-bordered" style="width:100%">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Ejecutivo</th>
-                    <th>Cliente</th>
-                    <th>Contacto</th>
-                    <th>Fecha Envio</th>
-                    <th>Observaciones</th>
-                    <th>Monto</th>
-                    <th>Descuento</th>
-                    <th>Promoción</th>
-                    <th>M&aacute;s</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-            <tfoot>
-                <tr>
-                  <th>ID</th>
-                  <th>Ejecutivo</th>
-                  <th>Cliente</th>
-                  <th>Contacto</th>
-                  <th>Fecha Envio</th>
-                  <th>Observaciones</th>
-                  <th>Monto</th>
-                  <th>Descuento</th>
-                  <th>Promoción</th>
-                  <th>M&aacute;s</th>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-</div>
+
+<h4><span id="clienteIdty"></span></h4>
+<input type="hidden" id="clienteID" name="clienteID" value="{{$param}}">
+
+<div id="listadoPropuestas_config"></div>
+<table id="listadoPropuestas" class="table table-striped table-bordered display responsive nowrap" style="width:100%"></table>
+
 <div class="row mt-1">
   <div class="col-sm-12 text-center">
     <button class="btn btn-sm {{$btn}}" onclick="javascript:contenidos('clientes_listado')"><i class="fa fa-undo-alt fa-lg"></i> Regresar</button>
@@ -45,33 +14,8 @@
 <script>
     $(document).ready( function() {
         var clienteID = document.getElementById( 'clienteID' ).value;
-        var token     = sessionStorage.getItem( 'apiToken' );
-
-        $('#listadoPropuestas').DataTable({
-            "lengthMenu" : [[8, 16, 24, -1], [8, 16, 24, "All"]],
-            ajax   :{
-                url: '/api/listadoPropuestas/' + clienteID,
-                dataSrc: 'propuestas',
-                beforeSend: function( r ) {
-                    r.setRequestHeader( "Accept" , "application/json" );
-                    r.setRequestHeader( "Authorization" , "Bearer " + token );
-                    cargaNombre();
-                }
-            },
-            columns: [
-                { data: 'id' },
-                { data: 'ejecutivo' },
-                { data: 'cliente' },
-                { data: 'contacto' },
-                { data: 'fechaEnvio' },
-                { data: 'observaciones' },
-                { data: 'monto' },
-                { data: 'descuento' },
-                { data: 'promocion' },
-                { data: 'opciones',align: 'center', "width": "50px", }
-            ],
-            responsive: true
-        });
+        generaDataGrid( 'listadoPropuestas' , clienteID );
+        cargaNombre();
 
         /* Evento para abrir la alta de propuestas */
         document.getElementById( 'abreAltaPropuesta' ).addEventListener( 'click' , function( e ){
