@@ -171,6 +171,8 @@ class ClientesController extends Controller
               'grupo'             => $prospecto->grupo,
               'status'            => ( ( $prospecto->status == '1' ) ? 'Activo' : 'Deshabilitado' ),
               'opciones'          => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$prospecto->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
+                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Segimiento" onclick="contenidos(\'clientes_seguimiento\',\''.$prospecto->id.'\')" class="ml-2"><i class="fa fa-toolbox fa-sm"></i></a>'
+                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Propuesta" onclick="contenidos(\'clientes_listadoPropuestas\',\''.$prospecto->id.'\')" class="ml-2"><i class="fa fa-file-alt fa-sm"></i></a>'
             );
         }
 
