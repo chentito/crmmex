@@ -8,6 +8,7 @@
 namespace App\Http\Controllers\crmmex\Clientes;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\crmmex\Clientes\Clientes AS Clientes;
 use App\Models\crmmex\Clientes\Contactos AS Contactos;
 use App\Models\crmmex\Clientes\Direccion AS Direccion;
@@ -103,9 +104,13 @@ class ClientesController extends Controller
     }
 
     /* Obtiene el listado de clientes */
-    public function listadoClientes() {
+    public function listadoClientes( $tipo = '' ) {
       $arrClientes = array();
-      $clientes    = Clientes::whereIn( 'status' , [ 1 , 2 ] )->get();
+      $clientes    = Clientes::whereIn( 'status' , [ 1 , 2 ] )
+                             ->when(  $tipo != '' , function( $q ) use ( $tipo ) {
+                               return $q->where( 'tipo' , $tipo );
+                             })
+                             ->get();
 
       foreach( $clientes AS $cliente ) {
           $arrClientes[ 'clientes' ][] = array (
@@ -131,6 +136,45 @@ class ClientesController extends Controller
       }
 
       return response()->json( $arrClientes );
+    }
+
+    /* Obtiene el listado de prospectos */
+    public function listadoProspectos() {
+        $datos      = array();
+        $prospectos = DB::table( 'crmmex_ventas_contacto' )
+                    ->leftJoin( 'crmmex_ventas_cliente' , 'crmmex_ventas_contacto.clienteID' , '=' , 'crmmex_ventas_cliente.id' )
+                    ->where( 'crmmex_ventas_cliente.tipo' , 2)
+                    ->where( 'crmmex_ventas_contacto.status' , 1 )
+                    //->groupBy( 'crmmex_ventas_contacto.id' )
+                    ->orderBy( 'crmmex_ventas_cliente.id' , 'ASC' )
+                    ->get();
+
+        foreach( $prospectos AS $prospecto ) {
+            $datos[ 'prospectos' ][] = array(
+              'id'                => $prospecto->id,
+              'nombre'            => $prospecto->nombre,
+              'apellidoPaterno'   => $prospecto->apellidoPaterno,
+              'apellidoMaterno'   => $prospecto->apellidoMaterno,
+              'correoElectronico' => $prospecto->correoElectronico,
+              'celular'           => $prospecto->celular,
+              'telefono'          => $prospecto->telefono,
+              'razonSocial'       => $prospecto->razonSocial,
+              'rfc'               => $prospecto->rfc,
+              'giro'              => Utiles::valorCatalogo( $prospecto->giro ),
+              'categoria'         => $prospecto->categoria,
+              'subcategoria'      => $prospecto->subcategoria,
+              'ejecutivo'         => Utiles::nombreEjecutivo( $prospecto->ejecutivo ),
+              'fechaAlta'         => $prospecto->fechaAlta,
+              'fechaModificacion' => $prospecto->fechaModificacion,
+              'tipo'              => ( ( $prospecto->tipo == '1' ) ? 'Cliente' : 'Prospecto' ),
+              'observaciones'     => $prospecto->observaciones,
+              'grupo'             => $prospecto->grupo,
+              'status'            => ( ( $prospecto->status == '1' ) ? 'Activo' : 'Deshabilitado' ),
+              'opciones'          => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$prospecto->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
+            );
+        }
+
+        return response()->json( $datos );
     }
 
     /* Consulta de cliente por ID */

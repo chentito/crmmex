@@ -5,8 +5,6 @@
 </style>
 
 <script type="text/javascript">
-
-
     google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback( drawChart2 );
     function drawChart2() {
@@ -61,10 +59,6 @@
         drawChart4();
     });
 </script>
-
-<div class="row">
-    <div class="col-sm-12 text-center mx-lg-n5">Datos Rápidos<br><br><br></div>
-</div>
 
 <div class="row">
     <div class="col-sm-4">

@@ -3,7 +3,7 @@
 <table id="listadoClientes" class="table table-striped table-bordered display responsive nowrap" style="width:100%"></table>
 
 <script>
-    generaDataGrid( 'listadoClientes' );
+    generaDataGrid( 'listadoClientes' , '1' );
 
     function habilitaCliente( clienteID ) {
         var token = sessionStorage.getItem( 'apiToken' );
