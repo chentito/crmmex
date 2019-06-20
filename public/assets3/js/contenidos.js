@@ -132,37 +132,27 @@ function generaDataGrid( id , filtro = '' ) {
             visibilidad = response.data.visibilidad.split( ',' );
 
             var header   = document.getElementById( id ).createTHead()
+            var titulo = document.createElement( 'th' );
+            titulo.setAttribute( 'colspan', visibilidad.length );
+            titulo.innerHTML = '<table width="100%"><tr><td style="height:8px;" align="center" width="95%">'+response.data.titulo
+                             + '</td><td><button class="btn btn-sm btn-dark" id="abreConfiguracionGrid"><i class="fa fa-cogs fa-sm"></i></button></td></tr></table>';
+            header.appendChild( titulo );
+
             var row      = header.insertRow(0);
             var columnas = [];
 
             titulos.forEach( function( t , p ) {
                 if( visibilidad[ p ] == "1" ) {
-                  var th = document.createElement('th');
+                  var th       = document.createElement( 'th' );
                   th.innerHTML = t;
-                  row.appendChild(th);
+                  row.appendChild( th );
                   columnas.push( { data:campos[ p ] } );
                 }
             });
 
             $.fn.dataTable.ext.errMode = 'throw';
             $( '#' + id ).DataTable({
-
-                dom        : 'Bfrtip',
-                buttons    : [
-                                {
-                                  text: '<i class="fa fa-cogs fa-sm"></i>',
-                                  className: 'btn btn-sm btn-dark',
-                                  action: function() {
-                                    document.getElementById( id + '_config' ).style.display = "block";
-                                  }
-                                },
-                                {
-                                  extend: 'excel',
-                                  text: '<i class="fa fa-doc fa-sm"></i>',
-                                  className: 'btn btn-sm btn-dark'
-                                }
-                             ],
-                colReorder: true,
+                colReorder : true,
                 lengthMenu : [ [8, 16, 24, -1], [8, 16, 24, "All"]],
                 ajax       : {
                     url: '/api/' + id + f,
@@ -196,10 +186,16 @@ function generaDataGrid( id , filtro = '' ) {
                     document.getElementById( 'btnGdaConfGridCierra' ).addEventListener( 'click' , function() {
                         document.getElementById( id + '_config' ).style.display = "none";
                     });
+
                  })
                  .catch( err => {
                     console.log( err );
                  });
+
+           document.getElementById( 'abreConfiguracionGrid' ).addEventListener( 'click' , function(){
+              document.getElementById( id + '_config' ).style.display = 'block';
+           });
+
      })
      .catch( err => {
        console.log( err );

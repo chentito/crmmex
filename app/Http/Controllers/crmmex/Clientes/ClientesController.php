@@ -137,15 +137,19 @@ class ClientesController extends Controller
       /* Busca datos del cliente */
       $cliente = Clientes::find( $clienteID );
       $expediente[ 'cliente' ] = array(
-          'id'            => $cliente->id,
-          'razonSocial'   => $cliente->razonSocial,
-          'rfc'           => $cliente->rfc,
-          'giro'          => $cliente->giro,
-          'categoria'     => $cliente->categoria,
-          'observaciones' => $cliente->observaciones,
-          'tipo'          => $cliente->tipo,
-          'grupo'         => $cliente->grupo,
-          'subcategoria'  => $cliente->subcategoria
+          'id'                => $cliente->id,
+          'razonSocial'       => $cliente->razonSocial,
+          'rfc'               => $cliente->rfc,
+          'giro'              => $cliente->giro,
+          'categoria'         => $cliente->categoria,
+          'subcategoria'      => $cliente->subcategoria,
+          'ejecutivo'         => $cliente->ejecutivo,
+          'fechaAlta'         => $cliente->fechaAlta,
+          'fechaModificacion' => $cliente->fechaModificacion,
+          'observaciones'     => $cliente->observaciones,
+          'tipo'              => $cliente->tipo,
+          'grupo'             => $cliente->grupo,
+          'subcategoria'      => $cliente->subcategoria
       );
       $clienteID = $cliente->id;
 
@@ -170,15 +174,17 @@ class ClientesController extends Controller
       /* Busca datos de direccion */
       $direccion = Direccion::where( 'clienteID' , $clienteID )->first();
       $expediente[ 'direccion' ] = array(
-          'calle'      => $direccion->calle,
-          'noExterior' => $direccion->noExterior,
-          'noInterior' => $direccion->noInterior,
-          'colonia'    => $direccion->colonia,
-          'cp'         => $direccion->cp,
-          'delegacion' => $direccion->delegacion,
-          'ciudad'     => $direccion->ciudad,
-          'estado'     => $direccion->estado,
-          'pais'       => $direccion->pais
+          'calle'             => $direccion->calle,
+          'noExterior'        => $direccion->noExterior,
+          'noInterior'        => $direccion->noInterior,
+          'colonia'           => $direccion->colonia,
+          'cp'                => $direccion->cp,
+          'delegacion'        => $direccion->delegacion,
+          'ciudad'            => $direccion->ciudad,
+          'estado'            => $direccion->estado,
+          'pais'              => $direccion->pais,
+          'fechaAlta'         => $direccion->fechaAlta,
+          'fechaModificacion' => $direccion->fechaModificacion
       );
 
       return response()->json( $expediente );

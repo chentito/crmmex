@@ -13,6 +13,7 @@ class DatatableController extends Controller
     public function dataTableConfig( $idty ) {
         $datatable = DataTable::where( 'idty' , $idty )->first();
         $config = array(
+          'titulo'      => $datatable->titulo,
           'titulos'     => $datatable->colnames,
           'campos'      => $datatable->fieldnames,
           'datasource'  => $datatable->datasource,
