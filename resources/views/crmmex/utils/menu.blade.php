@@ -8,6 +8,12 @@
         </ul>
     </li-->
     <li>
+        <a href="#prospectos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users fa-lg"></i>  Prospectos</a>
+        <ul class="collapse list-unstyled" id="prospectos">
+            <li><a href="javascript:void(0)" onclick="return contenidos('prospectos_listado');">Listado</a></li>
+        </ul>
+    </li>
+    <li>
         <a href="#clientes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users fa-lg"></i>  Clientes</a>
         <ul class="collapse list-unstyled" id="clientes">
             <li><a href="javascript:void(0)" onclick="return contenidos('clientes_alta');">Alta</a></li>

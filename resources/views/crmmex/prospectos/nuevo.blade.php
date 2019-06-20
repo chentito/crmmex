@@ -57,6 +57,14 @@
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <div class="container border-left border-bottom border-right p-1" id="contenedorContactos">
                       <div class="row">
+                          <div class="col-sm-2">
+                            <b>Contacto Principal</b>
+                          </div>
+                          <div class="col-sm-10">
+                              <hr>
+                          </div>
+                      </div>
+                      <div class="row">
                           <div class="col-sm-3 mb-1">
                               <label for="contacto_nombre">Nombre(s)</label>
                               <input type="text" id="contacto_nombre" name="contacto_nombre[]" class="form-control form-control-sm" value="" placeholder="Nombre(s)">
