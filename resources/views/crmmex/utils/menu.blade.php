@@ -1,12 +1,4 @@
 <ul class="list-unstyled components">
-    <!--li>
-        <a href="#prospectos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users-cog fa-lg"></i>  Prospectos</a>
-        <ul class="collapse list-unstyled" id="prospectos">
-            <li><a href="javascript:void(0)" onclick="return contenidos('prospectos_listado');">Listado</a></li>
-            <li><a href="javascript:void(0)" onclick="return contenidos('prospectos_nuevo');">Nuevo Prospecto</a></li>
-            <li><a href="javascript:void(0)" onclick="return contenidos('prospectos_seguimiento');">Seguimientos</a></li>
-        </ul>
-    </li-->
     <li>
         <a href="#prospectos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users fa-lg"></i>  Prospectos</a>
         <ul class="collapse list-unstyled" id="prospectos">
@@ -25,16 +17,12 @@
       <ul class="collapse list-unstyled" id="usuarios">
           <li><a href="javascript:void(0)" onclick="return contenidos('ejecutivos_alta');">Alta</a></li>
           <li><a href="javascript:void(0)" onclick="return contenidos('ejecutivos_listado');">Listado</a></li>
-          <!--li><a href="javascript:void(0)" onclick="return contenidos('clientes_seguimiento');">Seguimientos</a></li-->
       </ul>
     </li>
     <li>
       <a href="#ventas" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-shopping-cart fa-lg"></i>  Ventas</a>
       <ul class="collapse list-unstyled" id="ventas">
           <li><a href="javascript:void(0)" onclick="return contenidos('reportes_resumen');">Reportes</a></li>
-          <!--li><a href="javascript:void(0)" onclick="return contenidos('ventas_facturas');">Listado Facturación</a></li-->
-          <!--li><a href="javascript:void(0)" onclick="return contenidos('clientes_listado');">Listado</a></li-->
-          <!--li><a href="javascript:void(0)" onclick="return contenidos('clientes_seguimiento');">Seguimientos</a></li-->
       </ul>
     </li>
     <li>

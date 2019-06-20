@@ -231,8 +231,11 @@
               var seguimientos  = '<ul class="list-group">';
               response.data.seguimientos.forEach( function( e , p ){
                 seguimientos += '<li class="list-group-item">';
-                seguimientos += e['nombreActividad'] + ' Alta:'.e['fechaAlta'];
-                seguimientos += '<br>'+e['estado'];
+                seguimientos += '['+e['fechaAlta']+'] ' + e['nombreActividad'] + ' / ' + e['estado'];
+                seguimientos += '<br>' + ' Contacto '+e[ 'contactoID' ];
+                seguimientos += '<span class="float-right">'
+                seguimientos += '<button class="btn btn-sm btn-info ml-1"><i class="fa fa-search fa-sm"></i></button>';
+                seguimientos += '</span>';
                 seguimientos += '</li>';
               });
               seguimientos += '</ul>';

@@ -5,24 +5,7 @@
 </style>
 
 <script type="text/javascript">
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback( drawChart );
-    function drawChart() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows([
-            ['Diciembre', 19],
-            ['Enero'    , 10],
-            ['Febrero'  , 11],
-            ['Marzo'    , 16],
-            ['Abril'    , 9]
-        ]);
 
-        var options = {'title':'Propuestas enviadas por mes' };
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-    }
 
     google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback( drawChart2 );
@@ -39,38 +22,6 @@
         var options = { title: 'Alta de clientes', pieHole: 0.4 };
         var chart = new google.visualization.PieChart(document.getElementById('chart_div_2'));
         chart.draw( data , options );
-    }
-
-    google.charts.load("current", {packages:["timeline"]});
-    google.charts.setOnLoadCallback(drawChart3);
-    function drawChart3() {
-        var container = document.getElementById('timeline');
-        var chart = new google.visualization.Timeline(container);
-        var dataTable = new google.visualization.DataTable();
-        dataTable.addColumn({ type: 'string', id: 'Position' });
-        dataTable.addColumn({ type: 'string', id: 'Name' });
-        dataTable.addColumn({ type: 'date', id: 'Start' });
-        dataTable.addColumn({ type: 'date', id: 'End' });
-        dataTable.addRows([
-          [ 'Alta de datos'     , 'Mexagon SA de CV'            , new Date(2018, 12, 19), new Date(2019, 04, 16)],
-          [ 'Alta de datos'     , 'Carlos Reyes Salazar'        , new Date(2019, 01, 07), new Date(2019, 04, 16)],
-          [ 'Alta de datos'     , 'José Gutierrez'              , new Date(2019, 01, 19), new Date(2019, 04, 16)],
-          [ 'Envio de propuesta', 'Audatex SA de CV'            , new Date(2019, 03, 06), new Date(2019, 04, 16)],
-          [ 'Envio de propuesta', 'Autoonline AS de CV'         , new Date(2019, 03, 06), new Date(2019, 04, 16)],
-          [ 'Envio de propuesta', 'Marmoles Ponzanelli SA de CV', new Date(2019, 03, 19), new Date(2019, 04, 16)],
-          [ 'Envio de propuesta', 'Grupo Polak SA de CV'        , new Date(2019, 03, 15), new Date(2019, 04, 16)],
-          [ 'Envio de Factura'  , 'John Jay'                    , new Date(2019, 03, 10), new Date(2019, 04, 16)],
-          [ 'Envio de Factura'  , 'Thomas Jefferson'            , new Date(2019, 02, 22), new Date(2019, 04, 16)],
-          [ 'Envio de Factura'  , 'Edmund Randolph'             , new Date(2019, 02, 02), new Date(2019, 04, 16)],
-          [ 'Envio de Factura'  , 'Timothy Pickering'           , new Date(2019, 03, 09), new Date(2019, 04, 16)],
-          [ 'Alta de servicio'  , 'Charles Lee'                 , new Date(2019, 03, 13), new Date(2019, 04, 16)],
-          [ 'Alta de servicio'  , 'John Marshall'               , new Date(2019, 04, 01), new Date(2019, 04, 16)],
-          [ 'Alta de servicio'  , 'Levi Lincoln'                , new Date(2019, 04, 02), new Date(2019, 04, 16)],
-          [ 'Alta de servicio'  , 'James Madison'               , new Date(2019, 04, 06), new Date(2019, 04, 16)]
-        ]);
-
-        var options = { height: '400' };
-        chart.draw(dataTable,options);
     }
 
     google.charts.load('current', {packages: ['corechart', 'bar']});
@@ -107,7 +58,6 @@
     $(window).resize( function() {
         drawChart();
         drawChart2();
-        drawChart3();
         drawChart4();
     });
 </script>
@@ -118,23 +68,45 @@
 
 <div class="row">
     <div class="col-sm-4">
-        <div id="chart_div"></div>
+      <div class="card card-sm">
+          <div class="card-header">Propuestas enviadas por mes</div>
+          <div class="card-body">
+              <script>
+                  google.charts.load('current', {'packages':['corechart']});
+                  google.charts.setOnLoadCallback( drawChart );
+                  function drawChart() {
+                      var data = new google.visualization.DataTable();
+                      data.addColumn('string', 'Topping');
+                      data.addColumn('number', 'Slices');
+                      data.addRows([
+                          ['Diciembre', 19],
+                          ['Enero'    , 10],
+                          ['Febrero'  , 11],
+                          ['Marzo'    , 16],
+                          ['Abril'    , 9]
+                      ]);
+                      var options = {};
+                      var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+                      chart.draw(data, options);
+                  }
+              </script>
+              <div id="chart_div"></div>
+          </div>
+          <div class="card-footer">Cantidad de propuestas enviadas los últimos seis meses</div>
+      </div>
     </div>
     <div class="col-sm-4">
-        <div id="chart_div_2"></div>
+      <div class="card card-sm">
+          <div class="card-header">Otro widget</div>
+          <div class="card-body"><div id="chart_div_2"></div></div>
+          <div class="card-footer">Otra descripción de widgets</div>
+      </div>
     </div>
     <div class="col-sm-4">
-        <div id="chart_div_3"></div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-2">Seguimientos</div>
-    <div class="col-sm-10"><hr /></div>
-</div>
-
-<div class="row">
-    <div class="col-sm-12">
-        <div id="timeline"></div>
+        <div class="card card-sm">
+          <div class="card-header">Un widget masss</div>
+          <div class="card-body"><div id="chart_div_3"></div></div>
+          <div class="card-footer">Desde aqui se podra configurar</div>
+        </div>
     </div>
 </div>

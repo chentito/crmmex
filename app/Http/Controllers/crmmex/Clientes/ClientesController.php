@@ -1,7 +1,7 @@
 <?php
 /*
  * Controlador para el manejo y administracion del modulo de clienteSeguimiento
- * @AUtor Mexagon.net / Carlos cvreyes
+ * @AUtor Mexagon.net / Carlos Reyes
  * @Fecha Abril 2019
  */
 
@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\crmmex\Clientes\Clientes AS Clientes;
 use App\Models\crmmex\Clientes\Contactos AS Contactos;
 use App\Models\crmmex\Clientes\Direccion AS Direccion;
-use App\Models\crmmex\Clientes\Seguimiento AS Seguimiento;
-use App\Models\crmmex\Clientes\Propuestas AS Propuestas;
+use App\Models\crmmex\Clientes\Seguimiento AS Seg;
+use App\Models\crmmex\Clientes\Propuestas AS Prop;
 
 use App\Http\Controllers\crmmex\Utils\UtilsController AS Utiles;
 
@@ -191,23 +191,23 @@ class ClientesController extends Controller
       );
 
       /* Busca Seguimientos */
-      $seguimientos = Segimiento::where( 'clienteID' , $clienteID )->get();
+      $seguimientos = Seg::where( 'clienteID' , $clienteID )->get();
       foreach( $seguimientos AS $seguimiento ) {
         $expediente[ 'seguimientos' ][] = array(
           'clienteID'       => $seguimiento->clienteID,
-          'contactoID'      => $seguimiento->contactoID,
+          'contactoID'      => Utiles::nombreContacto( $seguimiento->contactoID ),
           'ejecutivoID'     => $seguimiento->ejecutivoID,
           'tipoActividad'   => $seguimiento->tipoActividad,
           'nombreActividad' => $seguimiento->nombreActividad,
           'descripcion'     => $seguimiento->descripcion,
           'fechaAlta'       => $seguimiento->fechaAlta,
           'fechaEjecucion'  => $seguimiento->fechaEjecucion,
-          'estado'          => $seguimiento->estado
+          'estado'          => Utiles::valorCatalogo( $seguimiento->estado )
         );
       }
 
       /* Busca propuestas */
-      $propuestas = Propuesta::where( 'clienteID' , $clienteID )->where( 'status' , 1 )->get();
+      $propuestas = Prop::where( 'clienteID' , $clienteID )->where( 'status' , 1 )->get();
       foreach( $propuestas AS $propuesta ) {
         $expediente[ 'propuestas' ][] = array (
           'ejecutivoID'    => $propuesta->ejecutivoID,
