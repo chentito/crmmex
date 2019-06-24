@@ -16,6 +16,7 @@ use App\Models\crmmex\Clientes\Seguimiento AS Seg;
 use App\Models\crmmex\Clientes\Propuestas AS Prop;
 
 use App\Http\Controllers\crmmex\Utils\UtilsController AS Utiles;
+use App\Http\Controllers\crmmex\Utils\CamposAdicionalesController AS CamposAdicionales;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -92,6 +93,9 @@ class ClientesController extends Controller
             }
         }
 
+        /* Guarda los campos adicionales asignados al cliente */
+        CamposAdicionales::almacenaDatosAdicionales( $request , $idtyCli );
+
         $status = false;
         $msj    = "Error al agregar cliente";
         if( $gDireccion && $gContacto && $gCliente ) {
@@ -110,6 +114,7 @@ class ClientesController extends Controller
                              ->when(  $tipo != '' , function( $q ) use ( $tipo ) {
                                return $q->where( 'tipo' , $tipo );
                              })
+                             ->orderBy( 'id' , 'DESC' )
                              ->get();
 
       foreach( $clientes AS $cliente ) {
@@ -346,6 +351,8 @@ class ClientesController extends Controller
             Contactos::where( 'id' , $eliminado )->update( [ 'status' => 0 ] );
         }
 
+        /* Guarda los campos adicionales asignados al cliente */
+        CamposAdicionales::almacenaDatosAdicionales( $request , $idtyCli );
     }
 
     /* Identificador del cliente */

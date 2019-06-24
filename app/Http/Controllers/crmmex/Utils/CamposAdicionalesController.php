@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\crmmex\Utils\CamposAdicionales AS CamposAdicionales;
+use App\Models\crmmex\Utils\CamposAdicionalesValores AS CamposAdicionalesValores;
 
 class CamposAdicionalesController extends Controller
 {
@@ -104,8 +105,22 @@ class CamposAdicionalesController extends Controller
 
         return response()->json([
             'campo' => view( 'crmmex.utils.estructuraCampoAdicional' , $data )->render()
-          ]
-        );
+        ]);
+    }
+
+    // Proceso que guarda los campos Adicionales
+    public static function almacenaDatosAdicionales( Request $request , $registroID ) {
+        foreach( $request AS $ll => $v ) {
+            if( substr( $ll , 0 , 22 ) == 'edicionCampoAdicional_' ){
+                $campoAdicionalID    = str_replace( 'edicionCampoAdicional_' , '' , $ll );
+                $campoAdicionalValor = new CamposAdicionalesValores();
+                $campoAdicionalValor->campoAdicionalID = $campoAdicionalID;
+                $campoAdicionalValor->registroID       = $registroID;
+                $campoAdicionalValor->valor            = $v;
+                $campoAdicionalValor->status           = 1;
+                $campoAdicionalValor->save();
+            }
+        }
     }
 
 }

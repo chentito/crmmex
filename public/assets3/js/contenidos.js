@@ -152,7 +152,7 @@ function generaDataGrid( id , filtro = '' ) {
 
             $.fn.dataTable.ext.errMode = 'throw';
             $( '#' + id ).DataTable({
-                colReorder : true,
+                order      : [[ 0, "desc" ]],
                 lengthMenu : [ [8, 16, 24, -1], [8, 16, 24, "All"]],
                 ajax       : {
                     url: '/api/' + id + f,
