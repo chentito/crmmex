@@ -176,7 +176,8 @@ function generaDataGrid( id , filtro = '' ) {
                         var datos = new FormData( document.getElementById( 'formConfGrid' ) );
                         axios.post( url , datos )
                              .then( request => {
-                               contenidos( document.getElementById( 'confGrid_seccion' ).value , f.replace( '/' , '' ) );
+                               seccion = document.getElementById(  ( document.getElementById( 'confGrid_seccion' ).value == "" ) ? 'nombreSeccionRecargar' : 'confGrid_seccion' ).value;
+                               contenidos( seccion , f.replace( '/' , '' ) );
                              })
                              .catch( err => {
                                console.log( err );

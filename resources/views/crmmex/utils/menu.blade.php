@@ -9,7 +9,7 @@
         <a href="#clientes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users fa-lg"></i>  Clientes</a>
         <ul class="collapse list-unstyled" id="clientes">
             <li><a href="javascript:void(0)" onclick="return contenidos('clientes_alta');">Alta</a></li>
-            <li><a href="javascript:void(0)" onclick="return contenidos('clientes_listado');">Clientes</a></li>
+            <li><a href="javascript:void(0)" onclick="return contenidos('clientes_listado');">Listado</a></li>
         </ul>
     </li>
     <li>
@@ -41,9 +41,15 @@
         <a href="#configuraciones" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cogs fa-lg"></i>  Configuraciones</a>
         <ul class="collapse list-unstyled" id="configuraciones">
             <li>
+                <a href="#configuracionesProspectos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Prospectos</a>
+                <ul class="collapse list-unstyled" id="configuracionesProspectos">
+                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_clientesListado');"> > Listado</a></li>
+                </ul>
+            </li>
+            <li>
                 <a href="#configuracionesClientes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Clientes</a>
                 <ul class="collapse list-unstyled" id="configuracionesClientes">
-                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_clientesListado');"> > Listado</a></li>
+                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_clientesListado');"> > Campos Adicionales</a></li>
                 </ul>
             </li>
             <li>

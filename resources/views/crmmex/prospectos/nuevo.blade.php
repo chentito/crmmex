@@ -34,23 +34,7 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade" id="adicionales" role="tabpanel" aria-labelledby="adicionales-tab">
                     <div class="container border-left border-bottom border-right p-1">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <label for="altacliente_campo_adicional_1">Campo adicional 1</label>
-                                <input type="text" id="altacliente_campo_adicional_1" name="altacliente_campo_adicional_1" class="form-control form-control-sm" placeholder="Campo adicional 1">
-                            </div>
-                            <div class="col-sm-3">
-                                <label for="altacliente_campo_adicional_2">Campo adicional 2</label>
-                                <input type="text" id="altacliente_campo_adicional_2" name="altacliente_campo_adicional_2" class="form-control form-control-sm" placeholder="Campo adicional 2">
-                            </div>
-                            <div class="col-sm-3">
-                                <label for="altacliente_campo_adicional_3">Campo adicional 3</label>
-                                <input type="text" id="altacliente_campo_adicional_3" name="altacliente_campo_adicional_3" class="form-control form-control-sm" placeholder="Campo adicional 3">
-                            </div>
-                            <div class="col-sm-3">
-                                <label for="altacliente_campo_adicional_4">Campo adicional 4</label>
-                                <input type="text" id="altacliente_campo_adicional_4" name="altacliente_campo_adicional_4" class="form-control form-control-sm" placeholder="Campo adicional 4">
-                            </div>
+                        <div class="row" id="camposAdicionalesContainer">
                         </div>
                     </div>
                 </div>
@@ -247,6 +231,7 @@
     $(function () {
 
         cargaDatosComboCatalogo();
+        cargaCamposAdicionales();
 
         $('#myTab a').on( 'click', function ( e ) {
             e.preventDefault();
@@ -263,6 +248,28 @@
             agregaEstructuraContacto();
           });
     });
+
+    function cargaCamposAdicionales() {
+        var container = document.getElementById( 'camposAdicionalesContainer' );
+        var url = '/api/listadoCamposAdicionales/1';
+        axios.get( url )
+             .then( response => {
+                response.data[ 'camposAdicionales' ].forEach( function( e , v ){
+                  var urlHTML = '/api/htmlCampoAdicional/' + e.id;
+                  axios.get( urlHTML , {} )
+                       .then( response => {
+                          var x = document.getElementById( 'camposAdicionalesContainer' ).innerHTML;
+                          container.innerHTML = x + response.data[ 'campo' ];
+                       })
+                       .catch( err => {
+                         console.log( err );
+                       });
+                })
+             })
+             .catch(
+               err => {console.log( err );}
+             );
+    }
 
     function guardaInfoExpediente() {
         var token = sessionStorage.getItem( 'apiToken' );
