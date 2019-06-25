@@ -4,107 +4,57 @@
       Widgets
     </a>
   </li>
-  <li class="nav-item">
-      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-          <i class="fa fa-list fa-sm"></i><span class="d-none d-sm-inline">  Reportes y Tipos</span>
-      </a>
-  </li>
 </ul>
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-      <div class="container border-left border-right border-bottom p-1">
-        <div class="row">
-        </div>
-      </div>
-  </div>
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
       <div class="container border-left border-right border-bottom p-1">
-            <div class="row ml-1 mr-1">
-                <div class="col-sm-3 pl-1 pt-1 text-center border">
-                    <h6>Reporte de ventas</h6>
-                    <p>Podrá ver el estadístico de ventas contra el objetivo de cada mes de los últimos meses</p>
-
-                </div>
-                <div class="col-sm-3 pl-1 pt-1 text-center border">
-                    <h6>Ventas por ejecutivo</h6>
-                    <p>Podrá ver el estadístico de ventas contra el objetivo de cada mes de los últimos meses</p>
-                </div>
-                <div class="col-sm-3 pl-1 pt-1 text-center border">
-                    <h6>Propuestas generadas</h6>
-                    <p>Podrá ver el estadístico de ventas contra el objetivo de cada mes de los últimos meses</p>
-                </div>
-                <div class="col-sm-3 pl-1 pt-1 text-center border">
-                    <h6>Ventas por producto/Servicio</h6>
-                    <p>Podrá ver el estadístico de ventas contra el objetivo de cada mes de los últimos meses</p>
-                </div>
-                <div class="col-sm-3 pl-1 pt-1 text-center border">
-                    <h6>Altas</h6>
-                    <p>Podrá ver el estadístico de ventas contra el objetivo de cada mes de los últimos meses</p>
-                </div>
-                <div class="col-sm-3 pl-1 pt-1 text-center border">
-                    <h6>Reporte de ventas</h6>
-                    <p>Podrá ver el estadístico de ventas contra el objetivo de cada mes de los últimos meses</p>
-                </div>
-            </div>
-
+        <form id="frmWidgets" name="frmWidgets">
+          <div class="row ml-1 mr-1" id="contenedorWidgets">
+          </div>
+          <div class="row">
+              <div class="col-sm-12 text-center"><button class="btn btn-sm {{$btn}}" id="btnGuardaConfigWidgets">Guardar</button></div>
+          </div>
+        </form>
       </div>
-
   </div>
 </div>
 
 <script>
+  var url = '/api/listadoWidgets';
+  axios.get( url )
+       .then( response => {
+          response.data.forEach( function( e , i ) {
+              var nuevoDiv = document.createElement( 'div' );
+              nuevoDiv.classList.add( 'col-sm-3', 'pl-1', 'pt-1', 'border' );
+              var contenido  = '<h6>' + e.titulo + '</h6><br /><p>' + e.descripcion + '</p>';
+                  contenido += '<label for="widget_'+e.id+'">Habilitar widget?</label>  ';
+                  contenido += '<input type="checkbox" name="widget_'+e.id+'" id="widget_'+e.id+'" '+( ( e.estado=='1' ) ? 'checked' : '' )+'>';
+                  contenido += '<input type="hidden" name="idty_'+e.id+'" id="idty_'+e.id+'" value="'+e.id+'">';
+                  contenido += '<input type="hidden" name="conf_'+e.id+'" id="conf_'+e.id+'" value="">';
+              nuevoDiv.innerHTML = contenido;
+              document.getElementById( 'contenedorWidgets' ).appendChild( nuevoDiv );
+          });
+       })
+       .catch( err => {
+         console.log( err );
+       });
 
-  opcionesReporte( 'template1_psi' );
-  opcionesReporte( 'template1_psc' );
-  opcionesReporte( 'template1_psd' );
-  opcionesReporte( 'template1_pic' );
-  opcionesGrafica( 'g_template1_psi' );
-  opcionesGrafica( 'g_template1_psc' );
-  opcionesGrafica( 'g_template1_psd' );
-  opcionesGrafica( 'g_template1_pic' );
+    document.getElementById( 'btnGuardaConfigWidgets' ).addEventListener( 'click' , function( e ){
+        e.preventDefault();
+        guardaConfiguracionWidgets();
+    });
 
-  opcionesReporte( 'template2_psi' );
-  opcionesReporte( 'template2_psci' );
-  opcionesReporte( 'template2_pscd' );
-  opcionesReporte( 'template2_psd' );
-  opcionesReporte( 'template2_pii' );
-  opcionesReporte( 'template2_pid' );
-  opcionesGrafica( 'g_template2_psi' );
-  opcionesGrafica( 'g_template2_psci' );
-  opcionesGrafica( 'g_template2_pscd' );
-  opcionesGrafica( 'g_template2_psd' );
-  opcionesGrafica( 'g_template2_pii' );
-  opcionesGrafica( 'g_template2_pid' );
+    function guardaConfiguracionWidgets() {
+        var datos = new FormData( document.getElementById( 'frmWidgets' ) );
+        var url = '/api/guardaConfWidgets';
+        axios.post( url , datos )
+             .then( response => {
+                contenidos( 'configuraciones_dashboard' );
+             })
+             .catch( err => {
+               console.log( err );
+             });
+    }
 
-  opcionesReporte( 'template3_psi' );
-  opcionesReporte( 'template3_psd' );
-  opcionesReporte( 'template3_pii' );
-  opcionesReporte( 'template3_pid' );
-  opcionesGrafica( 'g_template3_psi' );
-  opcionesGrafica( 'g_template3_psd' );
-  opcionesGrafica( 'g_template3_pii' );
-  opcionesGrafica( 'g_template3_pid' );
-
-  function opcionesReporte( contenedor ) {
-    html  = '<select class="custom-select custom-select-sm">';
-    html += '<option value="1">Reporte predefinido 1</option>';
-    html += '<option value="2">Reporte predefinido 1</option>';
-    html += '<option value="3">Reporte predefinido 1</option>';
-    html += '<option value="4">Reporte predefinido 1</option>';
-    html += '<option value="5">Reporte predefinido 1</option>';
-    html += '<option value="6">Reporte predefinido 1</option>';
-    html += '</select>';
-    document.getElementById( contenedor ).innerHTML=html;
-    return html;
-  }
-
-  function opcionesGrafica( contenedor ) {
-    html  = '<select class="custom-select custom-select-sm">';
-    html += '<option value="1">Grafica Barras</option>';
-    html += '<option value="2">Grafica Pie</option>';
-    html += '</select>';
-    document.getElementById( contenedor ).innerHTML=html;
-    return html;
-  }
 
 </script>

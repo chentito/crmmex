@@ -114,6 +114,12 @@ Route::middleware( 'auth:api' )->get ( '/datosCampoAdicional/{campoAdicionalID}'
 Route::middleware( 'auth:api' )->get ( '/htmlCampoAdicional/{campoAdicionalID}'    , 'crmmex\Utils\CamposAdicionalesController@campoAdicionalHTML' );
 
 
+/************************************ Dashboard ************************************/
+Route::middleware( 'auth:api' )->get ( '/listadoWidgets'       , 'crmmex\Dashboard\DashboardController@listadoWidgets' );
+Route::middleware( 'auth:api' )->post( '/guardaConfWidgets'    , 'crmmex\Dashboard\DashboardController@guardaConfWidgets' );
+Route::middleware( 'auth:api' )->get ( '/listadoEstadoWidgets' , 'crmmex\Dashboard\DashboardController@listadoStatusWidgets' );
+
+
 /************************************ Acciones utiles en el sistema ************************************/
 Route::get ( '/utiles/comboEstados/{pais?}'           , 'crmmex\Utils\UtilsController@estados' );
 Route::get ( '/utiles/comboPaises'                    , 'crmmex\Utils\UtilsController@paises' );
