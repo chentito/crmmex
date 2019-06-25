@@ -80,7 +80,7 @@ class CamposAdicionalesController extends Controller
     }
 
     // Genera el campo adicional en html
-    public function campoAdicionalHTML( $campoAdicionalID ) {
+    public function campoAdicionalHTML( $campoAdicionalID , $val = '' ) {
         $datos   = CamposAdicionales::find( $campoAdicionalID );
         $valores = explode( ';' , $datos->valores );
         $v       = array();
@@ -100,6 +100,7 @@ class CamposAdicionalesController extends Controller
           'nombre'         => $datos->nombre,
           'tipo'           => $datos->tipo,
           'valores'        => $v,
+          'datoValor'      => $val,
           'obligatoriedad' => $datos->obligatoriedad
         );
 
@@ -109,18 +110,24 @@ class CamposAdicionalesController extends Controller
     }
 
     // Proceso que guarda los campos Adicionales
-    public static function almacenaDatosAdicionales( Request $request , $registroID ) {
-        foreach( $request AS $ll => $v ) {
+    public static function almacenaDatosAdicionales( Request $request , $registroID , $seccion ) {
+        foreach( $request->all() AS $ll => $v ) {
             if( substr( $ll , 0 , 22 ) == 'edicionCampoAdicional_' ){
                 $campoAdicionalID    = str_replace( 'edicionCampoAdicional_' , '' , $ll );
-                $campoAdicionalValor = new CamposAdicionalesValores();
-                $campoAdicionalValor->campoAdicionalID = $campoAdicionalID;
-                $campoAdicionalValor->registroID       = $registroID;
-                $campoAdicionalValor->valor            = $v;
-                $campoAdicionalValor->status           = 1;
-                $campoAdicionalValor->save();
+                $campo = CamposAdicionalesValores::updateOrCreate(
+                  [ 'campoAdicionalID' => $campoAdicionalID , 'registroID' => $registroID , 'seccion' => $seccion ],
+                  [ 'valor' => $v , 'status' => '1' ]
+                );
             }
         }
+    }
+
+    // Busca los datos adicionales almacenados para un registro y una seccion
+    public static function obtieneDatosAdicionales( $seccion , $registroID ) {
+          $camposAdicionales = CamposAdicionalesValores::where( [ 'seccion' => $seccion ] )
+                                                       ->where( [ 'registroID' => $registroID ] )
+                                                       ->get();
+          return $camposAdicionales;
     }
 
 }

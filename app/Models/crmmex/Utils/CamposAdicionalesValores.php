@@ -12,4 +12,7 @@ class CamposAdicionalesValores extends Model
     // Timestamps
     public $timestamps = false;
 
+    // Fillables
+    protected $fillable = ['campoAdicionalID','registroID','seccion','valor','status'];
+
 }

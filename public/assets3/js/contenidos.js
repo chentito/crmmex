@@ -203,3 +203,29 @@ function generaDataGrid( id , filtro = '' ) {
      });
 
 }
+
+// COntrol de campos Adicionales
+function cargaCamposAdicionales( seccion , valores=[] ) {
+    document.getElementById( 'camposAdicionalesContainer' ).innerHTML = '';
+    var container = document.getElementById( 'camposAdicionalesContainer' );
+    var url       = '/api/listadoCamposAdicionales/'+seccion;
+    axios.get( url )
+         .then( response => {
+            response.data[ 'camposAdicionales' ].forEach( function( e , v ) {
+              var urlHTML  = '/api/htmlCampoAdicional/' + e.id;
+                  urlHTML += ( typeof valores[ e.id ] === "undefined" ) ? '' : '/' + valores[ e.id ];
+
+              axios.get( urlHTML , {} )
+                   .then( response => {
+                      var x = document.getElementById( 'camposAdicionalesContainer' ).innerHTML;
+                      container.innerHTML = x + response.data[ 'campo' ];
+                   })
+                   .catch( err => {
+                     console.log( err );
+                   });
+            })
+         })
+         .catch(
+           err => {console.log( err );}
+         );
+}

@@ -229,7 +229,9 @@
     $(function () {
 
         cargaDatosComboCatalogo();
-        cargaCamposAdicionales();
+        if( $( '#idCargaInfo' ).length == 0 ) {
+            cargaCamposAdicionales( '1' );
+        }
 
         $('#myTab a').on( 'click', function ( e ) {
             e.preventDefault();
@@ -246,28 +248,6 @@
             agregaEstructuraContacto();
           });
     });
-
-    function cargaCamposAdicionales() {
-        var container = document.getElementById( 'camposAdicionalesContainer' );
-        var url = '/api/listadoCamposAdicionales/1';
-        axios.get( url )
-             .then( response => {
-                response.data[ 'camposAdicionales' ].forEach( function( e , v ){
-                  var urlHTML = '/api/htmlCampoAdicional/' + e.id;
-                  axios.get( urlHTML , {} )
-                       .then( response => {
-                          var x = document.getElementById( 'camposAdicionalesContainer' ).innerHTML;
-                          container.innerHTML = x + response.data[ 'campo' ];
-                       })
-                       .catch( err => {
-                         console.log( err );
-                       });
-                })
-             })
-             .catch(
-               err => {console.log( err );}
-             );
-    }
 
     function guardaInfoExpediente() {
         var token = sessionStorage.getItem( 'apiToken' );

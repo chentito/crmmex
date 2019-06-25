@@ -16,7 +16,7 @@
     comboEstados();
     comboPaises();
     var path  = '/api/obtieneExpediente/' + idContenido;
-  
+
     axios( path  )
         .then( datos => {
             // Direccion
@@ -62,6 +62,9 @@
                   document.getElementById( 'contacto_puesto' ).value           = b.puesto;
                 }
             });
+
+            adicionales = d[ 'adicionales' ];
+            cargaCamposAdicionales( '1' , adicionales );
         })
         .catch( err => {
             console.error( err );

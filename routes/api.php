@@ -104,14 +104,14 @@ Route::middleware( 'auth:api' )->post( '/eliminaCampania/{campaniaID}' , 'crmmex
 
 
 /************************************ Configuraciones ************************************/
-Route::middleware( 'auth:api' )->get ( '/obtieneSMTP'                              , 'crmmex\Configuraciones\SMTPController@obtieneConfiguracion' );
-Route::middleware( 'auth:api' )->post( '/actualizaSMTP'                            , 'crmmex\Configuraciones\SMTPController@update' );
-Route::middleware( 'auth:api' )->get ( '/listadoCamposAdicionales/{seccion?}'      , 'crmmex\Utils\CamposAdicionalesController@listado' );
-Route::middleware( 'auth:api' )->post( '/nuevoCampoAdicional'                      , 'crmmex\Utils\CamposAdicionalesController@agregaCampo' );
-Route::middleware( 'auth:api' )->post( '/editaCampoAdicional'                      , 'crmmex\Utils\CamposAdicionalesController@editaCampoAdicional' );
-Route::middleware( 'auth:api' )->post( '/eliminaCampoAdicional/{campoAdicionalID}' , 'crmmex\Utils\CamposAdicionalesController@eliminaCampoAdicional' );
-Route::middleware( 'auth:api' )->get ( '/datosCampoAdicional/{campoAdicionalID}'   , 'crmmex\Utils\CamposAdicionalesController@datosCampoAdicional' );
-Route::middleware( 'auth:api' )->get ( '/htmlCampoAdicional/{campoAdicionalID}'    , 'crmmex\Utils\CamposAdicionalesController@campoAdicionalHTML' );
+Route::middleware( 'auth:api' )->get ( '/obtieneSMTP'                                                    , 'crmmex\Configuraciones\SMTPController@obtieneConfiguracion' );
+Route::middleware( 'auth:api' )->post( '/actualizaSMTP'                                                  , 'crmmex\Configuraciones\SMTPController@update' );
+Route::middleware( 'auth:api' )->get ( '/listadoCamposAdicionales/{seccion?}'                            , 'crmmex\Utils\CamposAdicionalesController@listado' );
+Route::middleware( 'auth:api' )->post( '/nuevoCampoAdicional'                                            , 'crmmex\Utils\CamposAdicionalesController@agregaCampo' );
+Route::middleware( 'auth:api' )->post( '/editaCampoAdicional'                                            , 'crmmex\Utils\CamposAdicionalesController@editaCampoAdicional' );
+Route::middleware( 'auth:api' )->post( '/eliminaCampoAdicional/{campoAdicionalID}'                       , 'crmmex\Utils\CamposAdicionalesController@eliminaCampoAdicional' );
+Route::middleware( 'auth:api' )->get ( '/datosCampoAdicional/{campoAdicionalID}'                         , 'crmmex\Utils\CamposAdicionalesController@datosCampoAdicional' );
+Route::middleware( 'auth:api' )->get ( '/htmlCampoAdicional/{campoAdicionalID}/{campoAdicionalIDValor?}' , 'crmmex\Utils\CamposAdicionalesController@campoAdicionalHTML' );
 
 
 /************************************ Dashboard ************************************/

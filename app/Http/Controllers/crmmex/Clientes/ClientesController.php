@@ -275,6 +275,12 @@ class ClientesController extends Controller
         );
       }
 
+      // Busca en datos adicionales
+      $adicionales = CamposAdicionales::obtieneDatosAdicionales( '1' , $clienteID );
+      foreach( $adicionales AS $adicional ) {
+          $expediente[ 'adicionales' ][ $adicional->campoAdicionalID ] = $adicional->valor;
+      }
+
       return response()->json( $expediente );
     }
 
@@ -352,7 +358,7 @@ class ClientesController extends Controller
         }
 
         /* Guarda los campos adicionales asignados al cliente */
-        CamposAdicionales::almacenaDatosAdicionales( $request , $idtyCli );
+        CamposAdicionales::almacenaDatosAdicionales( $request , $idtyCli , '1' );
     }
 
     /* Identificador del cliente */
