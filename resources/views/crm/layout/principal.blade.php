@@ -10,21 +10,11 @@
         <link href="{{ asset( 'assets2/css/all.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets2/css/icon.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets2/css/bootstrap.css' ) }}" rel="stylesheet">
-        <!--link href="{{ asset( 'assets2/css/shards-dashboards.css' ) }}" rel="stylesheet">
-        <link href="{{ asset( 'assets2/css/extras.css' ) }}" rel="stylesheet"-->
         <link href="{{ asset( 'styles/shards-dashboards.1.1.0.min.css' ) }}" id="main-stylesheet" data-version="1.1.0" rel="stylesheet">
         <link href="{{ asset( 'styles/extras.1.1.0.min.css' ) }}" rel="stylesheet">
-        <link href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css" rel="stylesheet">
-        
-        <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-        
-        <script src="{{ asset( 'assets2/js/jquery-3.js' ) }}"></script>
-        <!--script async="" defer="defer" src="{{ asset( 'assets2/js/buttons.js' ) }}"></script-->
         <script async defer src="https://buttons.github.io/buttons.js"></script>
     </head>
-    
-    
+
     <body class="h-100">
         <div class="color-switcher animated">
       <h5>Colores Disponibles</h5>
@@ -139,10 +129,10 @@
                                             <a class="dropdown-item" href="/ejecutivoActividades"><i class="material-icons">local_activity</i> Actividades</a>
                                             <a class="dropdown-item" href="/ejecutivoListado"><i class="material-icons">supervisor_account</i> Ejecutivos</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item text-danger" href="{{ route('logout') }}" 
+                                            <a class="dropdown-item text-danger" href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
         document.getElementById('logout-form').submit();">
-                                                <i class="material-icons text-danger"></i> Cerrar Sesi&oacute;n 
+                                                <i class="material-icons text-danger"></i> Cerrar Sesi&oacute;n
                                             </a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> @csrf </form>
                                         </div>
@@ -163,19 +153,18 @@
 
                             @yield( 'seccionContenido' )
 
-                        </div> 
+                        </div>
 
                         @yield( 'seccionFooter' )
 
                     </main>
                 </div>
         </div>
-        
-        <script src="{{ asset( 'js/app.js' ) }}" ></script> 
+
+        <script src="{{ asset( 'js/app.js' ) }}" ></script>
         <script src="{{ asset( 'assets2/js/popper.js' ) }}"></script>
         <script src="{{ asset( 'assets2/js/bootstrap.js' ) }}"></script>
-        
-        
+
         <script src="{{ asset( 'assets2/js/jquery.js' ) }}"></script>
         <script src="{{ asset( 'assets2/js/Chart.js' ) }}"></script>
         <script src="{{ asset( 'assets2/js/shards.js' ) }}"></script>
@@ -184,7 +173,7 @@
         <script src="scripts/extras.1.1.0.min.js"></script>
         <script src="scripts/shards-dashboards.1.1.0.min.js"></script>
         <script src="scripts/app/app-blog-overview.1.1.0.js"></script>
-        
+
         <script src="{{ asset( 'js/jquery/jquery.dataTables.min.js' ) }}"></script>
         <script src="{{ asset( 'js/datepicker/bootstrap-datepicker.min.js' ) }}"></script>
         <script src="{{ asset( 'js/datepicker/bootstrap-datepicker.es.min.js' ) }}"></script>
@@ -192,6 +181,6 @@
         <script src="https://cdn.datatables.net/fixedheader/3.1.5/js/dataTables.fixedHeader.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
-        
+
     </body>
 </html>

@@ -15,6 +15,9 @@ try {
 
     require('bootstrap');
     require( 'datatables.net-colreorder-dt' );
+    var Highcharts = require('highcharts/highstock');
+    window.Highcharts = Highcharts;
+    require('highcharts/modules/exporting')(Highcharts);
 
 } catch (e) {}
 

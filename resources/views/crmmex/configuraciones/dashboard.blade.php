@@ -1,7 +1,7 @@
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
-      Layout
+      Widgets
     </a>
   </li>
   <li class="nav-item">
@@ -13,195 +13,37 @@
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
       <div class="container border-left border-right border-bottom p-1">
-
         <div class="row">
-
-          <div class="col-sm-2"></div>
-          <div class="col-sm-2 text-center"><h6>Posición</h6></div>
-          <div class="col-sm-3 text-center"><h6>Reporte a graficar</h6></div>
-          <div class="col-sm-3 text-center"><h6>Tipo de gráfica</h6></div>
-          <div class="col-sm-2"></div>
-
-          <div class="col-sm-2"></div>
-          <div class="col-sm-2">Posición Superior Izquierda</div>
-          <div class="col-sm-3 text-center"><div id="template1_psi"></div></div>
-          <div class="col-sm-3 text-center"><div id="g_template1_psi"></div></div>
-          <div class="col-sm-2"></div>
-
-          <div class="col-sm-2"></div>
-          <div class="col-sm-2">Posición Superior Central</div>
-          <div class="col-sm-3 text-center"><div id="template1_psc"></div></div>
-          <div class="col-sm-3 text-center"><div id="g_template1_psc"></div></div>
-          <div class="col-sm-2"></div>
-
-          <div class="col-sm-2"></div>
-          <div class="col-sm-2">Posición Superior Derecha</div>
-          <div class="col-sm-3 text-center"><div id="template1_psd"></div></div>
-          <div class="col-sm-3 text-center"><div id="g_template1_psd"></div></div>
-          <div class="col-sm-2"></div>
-
-          <div class="col-sm-2"></div>
-          <div class="col-sm-2">Posición Inferior Completa</div>
-          <div class="col-sm-3 text-center"><div id="template1_pic"></div></div>
-          <div class="col-sm-3 text-center"><div id="g_template1_pic"></div></div>
-          <div class="col-sm-2"></div>
-
-          <div class="col-sm-12"><hr></div>
-
-          <div class="col-sm-2"></div>
-          <div class="col-sm-2">Posición Superior Izquierda</div>
-          <div class="col-sm-3 text-center"><div id="template2_psi"></div></div>
-          <div class="col-sm-3 text-center"><div id="g_template2_psi"></div></div>
-          <div class="col-sm-2"></div>
-
-          <div class="col-sm-2"></div>
-          <div class="col-sm-2">Posición Superior Central Izquierda</div>
-          <div class="col-sm-3 text-center"><div id="template2_psci"></div></div>
-          <div class="col-sm-3 text-center"><div id="g_template2_psci"></div></div>
-          <div class="col-sm-2"></div>
-
-          <div class="col-sm-2"></div>
-          <div class="col-sm-2">Posición Superior Central Derecha</div>
-          <div class="col-sm-3 text-center"><div id="template2_pscd"></div></div>
-          <div class="col-sm-3 text-center"><div id="g_template2_pscd"></div></div>
-          <div class="col-sm-2"></div>
-
-          <div class="col-sm-2"></div>
-          <div class="col-sm-2">Posición Superior Derecha</div>
-          <div class="col-sm-3 text-center"><div id="template2_psd"></div></div>
-          <div class="col-sm-3 text-center"><div id="g_template2_psd"></div></div>
-          <div class="col-sm-2"></div>
-
-          <div class="col-sm-2"></div>
-          <div class="col-sm-2">Posición Inferior Izquierda</div>
-          <div class="col-sm-3 text-center"><div id="template2_pii"></div></div>
-          <div class="col-sm-3 text-center"><div id="g_template2_pii"></div></div>
-          <div class="col-sm-2"></div>
-
-          <div class="col-sm-2"></div>
-          <div class="col-sm-2">Posición Inferior Derecha</div>
-          <div class="col-sm-3 text-center"><div id="template2_pid"></div></div>
-          <div class="col-sm-3 text-center"><div id="g_template2_pid"></div></div>
-          <div class="col-sm-2"></div>
-
-          <div class="col-sm-12"><hr></div>
-
-          <div class="col-sm-2"></div>
-          <div class="col-sm-2">Posición Superor Izquierda</div>
-          <div class="col-sm-3 text-center"><div id="template3_psi"></div></div>
-          <div class="col-sm-3 text-center"><div id="g_template3_psi"></div></div>
-          <div class="col-sm-2"></div>
-
-          <div class="col-sm-2"></div>
-          <div class="col-sm-2">Posición Superior Derecha</div>
-          <div class="col-sm-3 text-center"><div id="template3_psd"></div></div>
-          <div class="col-sm-3 text-center"><div id="g_template3_psd"></div></div>
-          <div class="col-sm-2"></div>
-
-          <div class="col-sm-2"></div>
-          <div class="col-sm-2">Posición Inferior Izquierda</div>
-          <div class="col-sm-3 text-center"><div id="template3_pii"></div></div>
-          <div class="col-sm-3 text-center"><div id="g_template3_pii"></div></div>
-          <div class="col-sm-2"></div>
-
-          <div class="col-sm-2"></div>
-          <div class="col-sm-2">Posición Inferior Derecha</div>
-          <div class="col-sm-3 text-center"><div id="template3_pid"></div></div>
-          <div class="col-sm-3 text-center"><div id="g_template3_pid"></div></div>
-          <div class="col-sm-2"></div>
-
         </div>
-
       </div>
   </div>
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
       <div class="container border-left border-right border-bottom p-1">
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                  Template 1 <input type="radio" name="idTemplateSeleccionado" value="1" checked>
-                </div>
-                <div class="col-sm-4 text-center">
-                  Posición Superior Izquierda
-                  <img width="120px" src="{{asset('/imgs/graficas/images.png')}}">
-                </div>
-                <div class="col-sm-4 text-center">
-                  Posición Superior Central
-                  <img width="120px" src="{{asset('/imgs/graficas/images.png')}}">
-                </div>
-                <div class="col-sm-4 text-center">
-                  Posición Superior Derecha
-                  <img width="120px" src="{{asset('/imgs/graficas/images.png')}}">
-                </div>
-                <div class="col-sm-12 text-center">
-                  Posición Inferior Completa
-                  <img width="120px" src="{{asset('/imgs/graficas/images.png')}}">
-                </div>
-                <div class="col-sm-12 text-center">
-                  <hr>
-                </div>
-            </div>
+            <div class="row ml-1 mr-1">
+                <div class="col-sm-3 pl-1 pt-1 text-center border">
+                    <h6>Reporte de ventas</h6>
+                    <p>Podrá ver el estadístico de ventas contra el objetivo de cada mes de los últimos meses</p>
 
-            <div class="row ">
-                <div class="col-sm-12 text-center">
-                  Template 2 <input type="radio" name="idTemplateSeleccionado" value="2">
                 </div>
-                <div class="col-sm-3 text-center">
-                  Posición Superior Izquierda
-                  <img width="120px" src="{{asset('/imgs/graficas/images.png')}}">
+                <div class="col-sm-3 pl-1 pt-1 text-center border">
+                    <h6>Ventas por ejecutivo</h6>
+                    <p>Podrá ver el estadístico de ventas contra el objetivo de cada mes de los últimos meses</p>
                 </div>
-                <div class="col-sm-3 text-center">
-                  Posición Superior Central Izquierda
-                  <img width="120px" src="{{asset('/imgs/graficas/images.png')}}">
+                <div class="col-sm-3 pl-1 pt-1 text-center border">
+                    <h6>Propuestas generadas</h6>
+                    <p>Podrá ver el estadístico de ventas contra el objetivo de cada mes de los últimos meses</p>
                 </div>
-                <div class="col-sm-3 text-center">
-                  Posición Superior Central Derecha
-                  <img width="120px" src="{{asset('/imgs/graficas/images.png')}}">
+                <div class="col-sm-3 pl-1 pt-1 text-center border">
+                    <h6>Ventas por producto/Servicio</h6>
+                    <p>Podrá ver el estadístico de ventas contra el objetivo de cada mes de los últimos meses</p>
                 </div>
-                <div class="col-sm-3 text-center">
-                  Posición Superior Derecha
-                  <img width="120px" src="{{asset('/imgs/graficas/images.png')}}">
+                <div class="col-sm-3 pl-1 pt-1 text-center border">
+                    <h6>Altas</h6>
+                    <p>Podrá ver el estadístico de ventas contra el objetivo de cada mes de los últimos meses</p>
                 </div>
-                <div class="col-sm-6 text-center">
-                  Posición Inferior Izquierda
-                  <img width="120px" src="{{asset('/imgs/graficas/images.png')}}">
-                </div>
-                <div class="col-sm-6 text-center">
-                  Posición Inferior Derecha
-                  <img width="120px" src="{{asset('/imgs/graficas/images.png')}}">
-                </div>
-                <div class="col-sm-12 text-center">
-                  <hr>
-                </div>
-            </div>
-
-            <div class="row ">
-                <div class="col-sm-12 text-center">
-                  Template 3 <input type="radio" name="idTemplateSeleccionado" value="3">
-                </div>
-                <div class="col-sm-6 text-center">
-                  Posición Superior Izquierda
-                  <img width="120px" src="{{asset('/imgs/graficas/images.png')}}">
-                </div>
-                <div class="col-sm-6 text-center">
-                  Posición Superior Derecha
-                  <img width="120px" src="{{asset('/imgs/graficas/images.png')}}">
-                </div>
-                <div class="col-sm-6 text-center">
-                  Posición Inferior Izquierda
-                  <img width="120px" src="{{asset('/imgs/graficas/images.png')}}">
-                </div>
-                <div class="col-sm-6 text-center">
-                  Posición Inferior Derecha
-                  <img width="120px" src="{{asset('/imgs/graficas/images.png')}}">
-                </div>
-                <div class="col-sm-12 text-center">
-                  <hr>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <button class="btn btn-sm {{$btn}}">Guardar</button>
+                <div class="col-sm-3 pl-1 pt-1 text-center border">
+                    <h6>Reporte de ventas</h6>
+                    <p>Podrá ver el estadístico de ventas contra el objetivo de cada mes de los últimos meses</p>
                 </div>
             </div>
 

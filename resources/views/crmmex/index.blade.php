@@ -20,16 +20,12 @@
         <link href="/assets3/css/themes/{{$css}}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/generales.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/contenidos.css' ) }}" rel="stylesheet">
-        <script src="{{ asset( 'assets2/js/jquery-3.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/jodit.min.js' ) }}"></script>
-        <script async defer src="{{ asset( 'assets3/js/buttons.js' ) }}"></script>
-        <script type="text/javascript" src="{{ asset( 'assets3/js/loader.js' ) }}"></script>
     </head>
     <body>
         <style>
             .fondo {
                 background: url("{{asset('/imgs/background/'.$back)}}") no-repeat center center fixed;
-                /*background: url("/imgs/background/salajuntas.jpg") no-repeat center center fixed;*/
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;
@@ -84,18 +80,6 @@
                         </div>
                     </div>
                     <div id="app"></div>
-                    <!--div id="app">
-                        <div class="row">
-                            <div class="col-sm-3"><componente></componente></div>
-                            <div class="col-sm-3"><componente></componente></div>
-                            <div class="col-sm-3"><componente></componente></div>
-                            <div class="col-sm-3"><componente></componente></div>
-                        </div>
-                        <div class="row">
-                            <select class="custom-select"></select>
-                            <ejemplo-vue></ejemplo-vue>
-                        </div>
-                    </div-->
                 </div>
             </div>
         </div>
@@ -111,10 +95,6 @@
 
         <!-- SCRIPTS -->
         <script src="{{ asset( 'js/app.js' ) }}" ></script>
-        <script src="{{ asset( 'assets2/js/popper.js' ) }}"></script>
-        <!--script src="{{ asset( 'assets2/js/jquery.js' ) }}"></script-->
-        <!--script src="{{ asset( 'assets2/js/mdb.js' ) }}"></script-->
-        <script src="{{ asset( 'assets3/js/feather.min.js' ) }}"></script>
         <!-- Grid -->
         <script src="{{ asset( 'assets3/js/dataTables.bootstrap4.min.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/dataTables.responsive.min.js' ) }}"></script>
@@ -138,6 +118,5 @@
             contenidos( 'dashboard' );
             generaToken();
         </script>
-
     </body>
 </html>
