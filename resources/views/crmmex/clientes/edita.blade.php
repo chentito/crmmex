@@ -1,13 +1,13 @@
 
 <input type="hidden" id="idCargaInfo" name="idCargaInfo" value="{{$param}}" />
 
-<h3>Prospecto ID {{$param}} <span id="nombreCliente"></span></h3>
+<h3>Cliente ID {{$param}} <span id="nombreCliente"></span></h3>
 
 <div style="position:absolute; right: 90px; z-index: 900">
-  <button class="btn btn-sm {{$btn}}" onclick="javascript:contenidos('prospectos_listado')"><i class="fa fa-undo-alt fa-lg">undo</i><span class="d-none d-sm-inline">  Regresar</span></button>
+  <button class="btn btn-sm {{$btn}}" onclick="javascript:contenidos('clientes_listado')"><i class="fa fa-undo-alt fa-lg">undo</i><span class="d-none d-sm-inline">  Regresar</span></button>
 </div>
 
-@include( 'crmmex.prospectos.nuevo' )
+@include( 'crmmex.clientes.alta' )
 
 <script>
     var token = sessionStorage.getItem( 'apiToken' );
@@ -64,7 +64,7 @@
             });
 
             adicionales = d[ 'adicionales' ];
-            cargaCamposAdicionales( '2' , adicionales );
+            cargaCamposAdicionales( '1' , adicionales );
         })
         .catch( err => {
             console.error( err );

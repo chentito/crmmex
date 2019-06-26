@@ -65,7 +65,7 @@
             <div class="card card-sm">
                 <div class="card-header">Informacion Adicional</div>
                 <div class="card-body">
-
+                    <div id="contenedorAdicionales"></div>
                 </div>
             </div>
         </div>
@@ -240,6 +240,16 @@
               });
               seguimientos += '</ul>';
               document.getElementById( 'contenedorSeguimientos' ).innerHTML = seguimientos;
+              // adicionales
+              var adicionales = '<ul class="list-group">';
+              response.data.adicionalesEdicion.forEach( function( k , v ){
+                adicionales += '<li class="list-group-item">';
+                adicionales += k[ 'id' ] + ": " + k[ 'valor' ];
+                adicionales += '</li>';
+              });
+              adicionales += '</ul>';
+              document.getElementById( 'contenedorAdicionales' ).innerHTML = adicionales;
+
            })
            .catch( err => {
              console.log( err );

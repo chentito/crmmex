@@ -200,7 +200,7 @@ class UtilsController extends Controller
 
         public function listadoPromociones() {
             $promos   = array();
-            $promos[] = array( 'id' => '' , 'nombre' => 'Sin promocion' );
+            $promos[] = array( 'id' => '0' , 'nombre' => 'Sin promocion' );
             $promociones = Promociones::where( 'status' , 1 )
                                       ->where( 'inicioVigencia' , '<' , date( 'Y-m-d H:i:s' ) )
                                       ->where( 'finVigencia' , '>' , date( 'Y-m-d H:i:s' ) )->get();

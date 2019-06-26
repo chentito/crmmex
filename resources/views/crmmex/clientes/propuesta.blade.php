@@ -10,21 +10,21 @@
     <div class="container border-left border-bottom border-right p-1">
       <form id="form_altaPropuestaComercial" name="form_altaPropuestaComercial">
         <input type="hidden" id="clienteID" name="clienteID" value="{{$param}}">
-        <input type="hidden" id="propuestaIdty" name="propuestaIdty" value="0">
+        <input type="hidden" id="pID" name="pID" value="">
         <div class="row">
             <div class="col-sm-12">
                 <div class="row">
                     <div class="col-sm-4 mb-1">
                         <label for="catalogo_18">Categor&iacute;a</label>
-                        <select class="custom-select custom-select-sm" id="catalogo_18" nombre="catalogo_18"></select>
+                        <select class="custom-select custom-select-sm" id="catalogo_18" name="catalogo_18"></select>
                     </div>
                     <div class="col-sm-4 mb-1">
                         <label for="catalogo_15">Forma Pago</label>
-                        <select class="custom-select custom-select-sm" id="catalogo_15" nombre="catalogo_15"></select>
+                        <select class="custom-select custom-select-sm" id="catalogo_15" name="catalogo_15"></select>
                     </div>
                     <div class="col-sm-4 mb-1">
                         <label for="catalogo_15">Contacto</label>
-                        <select class="custom-select custom-select-sm" id="propuesta_contactos" nombre="propuesta_contactos"></select>
+                        <select class="custom-select custom-select-sm" id="propuesta_contactos" name="propuesta_contactos"></select>
                     </div>
                 </div>
                 <div class="row">
@@ -105,7 +105,7 @@
                 </div>
                 <div class="text-center mt-3">
                   <button class="btn btn-sm {{$btn}}" id="btnGeneraVistaPrevia"><i class="fa fa-file"></i> Vista Previa</button>
-                  <button class="btn btn-sm {{$btn}}" id="btnGeneraPropuesta"><i class="fa fa-file-pdf"></i> Generar Propuesta</button>
+                  <button class="btn btn-sm {{$btn}}" id="btnGeneraPropuesta"><i class="fa fa-file-pdf"></i> Guardar Propuesta</button>
                   <button class="btn btn-sm {{$btn}}" id="btnRegresar" name="btnRegresar"><i class="fa fa-undo"></i> Regresar</button>
                 </div>
             </div>
@@ -168,7 +168,13 @@
 
       function guardaDatosPropuesta() {
         var token  = sessionStorage.getItem( 'apiToken' );
-        var url    = '/api/altaPropuesta';
+
+        if( document.getElementById( 'propuestaID' ) == null ) {
+              var url = '/api/altaPropuesta';
+          } else {
+              var url = '/api/editaPropuesta';
+        }
+
         var datos  = new FormData( document.getElementById( 'form_altaPropuestaComercial' ) );
         var config = {
             headers:{

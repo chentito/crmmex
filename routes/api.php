@@ -72,6 +72,7 @@ Route::middleware( 'auth:api' )->post( '/seguimientoIdty/{seguimientoID}'  , 'cr
 /************************************ Propuestas ************************************/
 Route::middleware( 'auth:api' )->get ( '/obtieneDatosPropuesta/{propuestaID}' , 'crmmex\Clientes\PropuestasController@datosPropuesta' );
 Route::middleware( 'auth:api' )->post( '/altaPropuesta'                       , 'crmmex\Clientes\PropuestasController@altaPropuesta' );
+Route::middleware( 'auth:api' )->post( '/editaPropuesta'                      , 'crmmex\Clientes\PropuestasController@editaPropuesta' );
 Route::get( '/generaPDF/{propuestaID}'             , 'crmmex\Clientes\PropuestasController@generaPDF' );
 
 
@@ -112,6 +113,7 @@ Route::middleware( 'auth:api' )->post( '/editaCampoAdicional'                   
 Route::middleware( 'auth:api' )->post( '/eliminaCampoAdicional/{campoAdicionalID}'                       , 'crmmex\Utils\CamposAdicionalesController@eliminaCampoAdicional' );
 Route::middleware( 'auth:api' )->get ( '/datosCampoAdicional/{campoAdicionalID}'                         , 'crmmex\Utils\CamposAdicionalesController@datosCampoAdicional' );
 Route::middleware( 'auth:api' )->get ( '/htmlCampoAdicional/{campoAdicionalID}/{campoAdicionalIDValor?}' , 'crmmex\Utils\CamposAdicionalesController@campoAdicionalHTML' );
+Route::middleware( 'auth:api' )->get ( '/nombreSeccionCampoAdicional/{seccionID}'                        , 'crmmex\Utils\CamposAdicionalesController@nombreSeccion' );
 
 
 /************************************ Dashboard ************************************/

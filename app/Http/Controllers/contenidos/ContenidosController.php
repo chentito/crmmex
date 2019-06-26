@@ -1,5 +1,10 @@
 <?php
-
+/*
+ * Controlador que maneja la carga de contenidos de acuerdo al nombreCliente
+ * de la seccion solicitada, pasa un parametro para su procesamiento
+ * @Autor Mexagon.net / Carlos Reyes
+ * @Fecha Marzo 2019
+ */
 namespace App\Http\Controllers\contenidos;
 
 use Illuminate\Http\Request;
@@ -31,5 +36,4 @@ class ContenidosController extends Controller
                                     )->render()
             ]);
     }
-
 }

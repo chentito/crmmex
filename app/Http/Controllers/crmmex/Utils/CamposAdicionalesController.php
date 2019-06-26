@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\crmmex\Utils\CamposAdicionales AS CamposAdicionales;
 use App\Models\crmmex\Utils\CamposAdicionalesValores AS CamposAdicionalesValores;
+use App\Models\crmmex\Utils\CamposAdicionalesSecciones AS CamposAdicionalesSecciones;
 
 class CamposAdicionalesController extends Controller
 {
@@ -14,12 +15,11 @@ class CamposAdicionalesController extends Controller
     // Listado de campos Adicionales
     public function listado( $seccion='' ) {
         $campos = array();
-        array_push( $campos , 'camposAdicionales' );
         $camposAdicionales = CamposAdicionales::where( 'status' , '1' )
                                 ->when( $seccion != "" , function( $q ) use( $seccion ) {
                                     return $q->where( 'seccion' , $seccion );
                                 })
-                                ->orderBy( 'id' )
+                                ->orderBy( 'id' , 'desc' )
                                 ->get();
 
         foreach( $camposAdicionales AS $campoAdicional ) {
@@ -128,6 +128,18 @@ class CamposAdicionalesController extends Controller
                                                        ->where( [ 'registroID' => $registroID ] )
                                                        ->get();
           return $camposAdicionales;
+    }
+
+    // Nombre del campo adicional
+    public static function nombreDatoAdicional( $campoAdicionalID ) {
+        $nombre = CamposAdicionales::find( $campoAdicionalID );
+        return $nombre->nombre;
+    }
+
+    // Obtiene el nombre de la seccion a la que se le agregaran campos Adicionales
+    public function nombreSeccion( $seccionID ) {
+        $nombre = CamposAdicionalesSecciones::find( $seccionID );
+        return response()->json( $nombre );
     }
 
 }

@@ -55,8 +55,8 @@ class PropuestasController extends Controller
           $propuesta = new Propuestas();
           $propuesta->ejecutivoID    = Auth::user()->id;
           $propuesta->clienteID      = $request->clienteID;
-          $propuesta->contactoID     = $request->contactoID;
-          $propuesta->fechaEnvio     = date( 'Y-m-d H:i:s' );
+          $propuesta->contactoID     = $request->propuesta_contactos;
+          $propuesta->fechaCreacion  = date( 'Y-m-d H:i:s' );
           $propuesta->observaciones  = $request->propuesta_observaciones;
           $propuesta->requerimientos = $request->propuesta_requerimientos;
           $propuesta->categoria      = $request->catalogo_18;
@@ -64,6 +64,7 @@ class PropuestasController extends Controller
           $propuesta->monto          = $request->propuesta_monto;
           $propuesta->descuento      = $request->propuesta_descuento;
           $propuesta->promocion      = $request->propuesta_promocion;
+          $propuesta->status         = 1;
 
           if( $propuesta->save() ) {
               $resp[ 'msj' ] = "Propuesta agregada correctamente";
@@ -79,18 +80,26 @@ class PropuestasController extends Controller
        * Metodo para la actualizacion de registro de una propuesta
        */
        public function editaPropuesta( Request $request ) {
-          $propuestaID = $request->propuestaID;
+          $propuestaID = $request->pID;
           $propuesta   = Propuestas::find( $propuestaID );
           $propuesta->clienteID      = $request->clienteID;
-          $propuesta->contactoID     = $request->contactoID;
-          $propuesta->fechaEnvio     = "";
+          $propuesta->contactoID     = $request->propuesta_contactos;
           $propuesta->observaciones  = $request->propuesta_observaciones;
           $propuesta->requerimientos = $request->propuesta_requerimientos;
-          $propuesta->formaPago      = $request->propuesta_formaPago;
+          $propuesta->categoria      = $request->catalogo_18;
+          $propuesta->formaPago      = $request->catalogo_15;
           $propuesta->monto          = $request->propuesta_monto;
           $propuesta->descuento      = $request->propuesta_descuento;
           $propuesta->promocion      = $request->propuesta_promocion;
-          $propuesta->save();
+
+          if( $propuesta->save() ) {
+              $resp[ 'msj' ] = "Propuesta actualizada correctamente";
+              $resp[ 'idty' ] = $propuesta->id;
+          } else {
+              $resp[ 'msj' ] = "Error al actualizar propuesta";
+          }
+
+          return response()->json( $resp );
        }
 
        /*
@@ -109,6 +118,7 @@ class PropuestasController extends Controller
               'observaciones'  => $propuesta->observaciones,
               'requerimientos' => $propuesta->requerimientos,
               'formaPago'      => $propuesta->formaPago,
+              'categoria'      => $propuesta->categoria,
               'monto'          => $propuesta->monto,
               'descuento'      => $propuesta->descuento,
               'promocion'      => $propuesta->promocion,

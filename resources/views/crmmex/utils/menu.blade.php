@@ -2,6 +2,7 @@
     <li>
         <a href="#prospectos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users fa-lg"></i>  Prospectos</a>
         <ul class="collapse list-unstyled" id="prospectos">
+            <li><a href="javascript:void(0)" onclick="return contenidos('prospectos_nuevo' );">Alta</a></li>
             <li><a href="javascript:void(0)" onclick="return contenidos('prospectos_listado');">Listado</a></li>
         </ul>
     </li>
@@ -43,14 +44,20 @@
             <li>
                 <a href="#configuracionesProspectos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Prospectos</a>
                 <ul class="collapse list-unstyled" id="configuracionesProspectos">
-                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_clientesListado');"> > Listado</a></li>
+                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_camposAdicionales','2');"> > Campos Adicionales</a></li>
                 </ul>
             </li>
             <li>
                 <a href="#configuracionesClientes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Clientes</a>
                 <ul class="collapse list-unstyled" id="configuracionesClientes">
-                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_clientesListado');"> > Campos Adicionales</a></li>
+                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_camposAdicionales','1');"> > Campos Adicionales</a></li>
                 </ul>
+            </li>
+            <li>
+              <a href="#configuracionesPropuestas" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Propuestas</a>
+              <ul class="collapse list-unstyled" id="configuracionesPropuestas">
+                  <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_propuestas','1');"> > Envio de propuestas</a></li>
+              </ul>
             </li>
             <li>
                 <a href="#configuracionesUsuarios" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Usuarios</a>

@@ -124,7 +124,7 @@ function aplicaPromo( promoID , monto , input ) {
 
 function generaDataGrid( id , filtro = '' ) {
     var token = sessionStorage.getItem( 'apiToken' );
-    f = ( filtro.length > 0 ) ? '/' + filtro : '';
+    f = ( filtro != '' ) ? '/' + filtro : '';
     axios.get( '/api/dataTableConfig/' + id )
          .then( response => {
             titulos     = response.data.titulos.split( ',' );
@@ -211,19 +211,22 @@ function cargaCamposAdicionales( seccion , valores=[] ) {
     var url       = '/api/listadoCamposAdicionales/'+seccion;
     axios.get( url )
          .then( response => {
-            response.data[ 'camposAdicionales' ].forEach( function( e , v ) {
-              var urlHTML  = '/api/htmlCampoAdicional/' + e.id;
-                  urlHTML += ( typeof valores[ e.id ] === "undefined" ) ? '' : '/' + valores[ e.id ];
+           if( typeof response.data[ 'camposAdicionales' ] === 'undefined' ) {
+           }else{
+              response.data[ 'camposAdicionales' ].forEach( function( e , v ) {
+                var urlHTML  = '/api/htmlCampoAdicional/' + e.id;
+                    urlHTML += ( typeof valores[ e.id ] === "undefined" ) ? '' : '/' + valores[ e.id ];
 
-              axios.get( urlHTML , {} )
-                   .then( response => {
-                      var x = document.getElementById( 'camposAdicionalesContainer' ).innerHTML;
-                      container.innerHTML = x + response.data[ 'campo' ];
-                   })
-                   .catch( err => {
-                     console.log( err );
-                   });
-            })
+                axios.get( urlHTML , {} )
+                     .then( response => {
+                        var x = document.getElementById( 'camposAdicionalesContainer' ).innerHTML;
+                        container.innerHTML = x + response.data[ 'campo' ];
+                     })
+                     .catch( err => {
+                       console.log( err );
+                     });
+              });
+            }
          })
          .catch(
            err => {console.log( err );}

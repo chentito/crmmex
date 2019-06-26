@@ -94,7 +94,7 @@ class ClientesController extends Controller
         }
 
         /* Guarda los campos adicionales asignados al cliente */
-        CamposAdicionales::almacenaDatosAdicionales( $request , $idtyCli );
+        CamposAdicionales::almacenaDatosAdicionales( $request , $idtyCli , $cliente->tipo );
 
         $status = false;
         $msj    = "Error al agregar cliente";
@@ -175,7 +175,7 @@ class ClientesController extends Controller
               'observaciones'     => $prospecto->observaciones,
               'grupo'             => $prospecto->grupo,
               'status'            => ( ( $prospecto->status == '1' ) ? 'Activo' : 'Deshabilitado' ),
-              'opciones'          => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$prospecto->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
+              'opciones'          => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Cliente" onclick="contenidos(\'prospectos_edicion\',\''.$prospecto->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
                                    . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Segimiento" onclick="contenidos(\'clientes_seguimiento\',\''.$prospecto->id.'\')" class="ml-2"><i class="fa fa-toolbox fa-sm"></i></a>'
                                    . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Propuesta" onclick="contenidos(\'clientes_listadoPropuestas\',\''.$prospecto->id.'\')" class="ml-2"><i class="fa fa-file-alt fa-sm"></i></a>'
             );
@@ -276,9 +276,13 @@ class ClientesController extends Controller
       }
 
       // Busca en datos adicionales
-      $adicionales = CamposAdicionales::obtieneDatosAdicionales( '1' , $clienteID );
+      $adicionales = CamposAdicionales::obtieneDatosAdicionales( $expediente[ 'cliente' ][ 'tipo' ] , $clienteID );
       foreach( $adicionales AS $adicional ) {
           $expediente[ 'adicionales' ][ $adicional->campoAdicionalID ] = $adicional->valor;
+          $expediente[ 'adicionalesEdicion' ][] = array(
+            'id'    => CamposAdicionales::nombreDatoAdicional( $adicional->campoAdicionalID ),
+            'valor' => $adicional->valor
+          );
       }
 
       return response()->json( $expediente );
@@ -358,7 +362,7 @@ class ClientesController extends Controller
         }
 
         /* Guarda los campos adicionales asignados al cliente */
-        CamposAdicionales::almacenaDatosAdicionales( $request , $idtyCli , '1' );
+        CamposAdicionales::almacenaDatosAdicionales( $request , $idtyCli , $cliente->tipo );
     }
 
     /* Identificador del cliente */

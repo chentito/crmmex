@@ -4,6 +4,7 @@
 @include( 'crmmex.clientes.propuesta' )
 
 <script>
+
   datosPropuesta();
   function datosPropuesta() {
     var token       = sessionStorage.getItem( 'apiToken' );
@@ -26,11 +27,11 @@
            document.getElementById( 'propuesta_requerimientos' ).value = response.data.requerimientos;
            document.getElementById( 'propuesta_observaciones' ).value  = response.data.observaciones;
            document.getElementById( 'catalogo_18' ).value              = response.data.categoria;
-           document.getElementById( 'propuestaIdty' ).value            = response.data.id;
            document.getElementById( 'propuesta_monto' ).value          = response.data.monto;
            document.getElementById( 'propuesta_descuento' ).value      = response.data.descuento;
            document.getElementById( 'propuesta_promocion' ).value      = response.data.promocion;
-           document.getElementById( 'propuestaIdty' ).innerHTML        = 'Edicion propuesta comercial # ' + response.data.id;
+           document.getElementById( 'propuestaIdty' ).innerHTML        = 'Propuesta comercial # ' + response.data.id;
+           document.getElementById( 'pID' ).value                      = document.getElementById( 'propuestaID' ).value;
          })
          .catch( err => {
            console.log( err );

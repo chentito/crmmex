@@ -1,4 +1,5 @@
-<input type="hidden" name="nombreSeccionRecargar" id="nombreSeccionRecargar" value="configuraciones_clientesListado">
+
+<input type="hidden" name="idSeccionConsultar" id="idSeccionConsultar" value="{{$param}}">
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="field-tab" data-toggle="tab" href="#field" role="tab" aria-controls="field" aria-selected="true">
@@ -16,7 +17,12 @@
       <div class="container border-left border-right border-bottom p-1">
         <form id="formAltaCampoAdicional" name="formAltaCampoAdicional">
           <input type="hidden" id="adicional_clientes_id" name="adicional_clientes_id" value="">
-          <input type="hidden" id="adicional_clientes_seccion" name="adicional_clientes_seccion" value="1">
+          <input type="hidden" id="adicional_clientes_seccion" name="adicional_clientes_seccion" value="">
+          <div class="row">
+              <div class="col-sm-12">
+                  <h6 id="nombreSeccionAdicionales"></h6>
+              </div>
+          </div>
           <div class="row">
             <div class="col-sm-3 mt-1">
               <label for="adicional_clientes_nombre">Nombre del campo:</label>
@@ -74,7 +80,13 @@
 </div>
 
 <script>
-  generaDataGrid( 'listadoCamposAdicionales' , '1' );
+
+  if( typeof document.getElementById( 'campoAdicionalID' ) === 'undefined' || document.getElementById( 'campoAdicionalID' ) == null ) {
+      generaDataGrid( 'listadoCamposAdicionales' , document.getElementById( 'idSeccionConsultar' ).value );
+  }
+
+  document.getElementById( 'adicional_clientes_seccion' ).value=document.getElementById( 'idSeccionConsultar' ).value;
+  nombreSeccion();
 
   document.getElementById( 'btnGuardaCampoAdicional' ).addEventListener( 'click' , function( e ){
     e.preventDefault();
@@ -87,12 +99,26 @@
 
     axios.post( url , datos )
          .then( response => {
-            contenidos( 'configuraciones_clientesListado' , '1' );
+            contenidos( 'configuraciones_camposAdicionales' , document.getElementById( 'idSeccionConsultar' ).value );
          })
          .catch( err => {
            console.log( err );
          });
 
   });
+
+  function nombreSeccion() {
+      axios.get( '/api/nombreSeccionCampoAdicional/' + document.getElementById( 'idSeccionConsultar' ).value )
+           .then( response => {
+              if( typeof response.data.nombreSeccion === 'undefined' ){
+                  document.getElementById( 'nombreSeccionAdicionales' ).innerHTML = '';
+              } else {
+                  document.getElementById( 'nombreSeccionAdicionales' ).innerHTML = response.data.nombreSeccion;
+              }
+           })
+           .catch( err => {
+              console.log( err );
+         });
+  }
 
 </script>

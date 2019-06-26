@@ -155,7 +155,7 @@
                               <label for="catalogo_11">Cuenta</label>
                               <select id="cliente_tipo" name="cliente_tipo" class="custom-select custom-select-sm">
                                   <option value="2">Prospecto</option>
-                                  <option value="1">Cliente</option>
+                                  <!--option value="1">Cliente</option-->
                               </select>
                           </div>
                           <div class="col-sm-3 mb-1">
@@ -230,7 +230,7 @@
 
         cargaDatosComboCatalogo();
         if( $( '#idCargaInfo' ).length == 0 ) {
-            cargaCamposAdicionales( '1' );
+            cargaCamposAdicionales( '2' );
         }
 
         $('#myTab a').on( 'click', function ( e ) {
@@ -274,9 +274,9 @@
             beforeSend : function() {},
             success : function(d) {
                 if( mov == 'alta' ) {
-                    contenidos( 'clientes_listado' );
+                    contenidos( 'prospectos_listado' );
                 } else {
-                    contenidos( 'clientes_edicion' , $( '#idCargaInfo' ).val() );
+                    contenidos( 'prospectos_listado' , $( '#idCargaInfo' ).val() );
                 }
             },
             error : function() {}
