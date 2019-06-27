@@ -14,19 +14,19 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="row">
-                    <div class="col-sm-3 mb-1">
+                    <div class="col-sm-4 mb-1">
                         <label for="catalogo_18">Identificador</label>
                         <input type="text" id="propuesta_identificador" name="propuesta_identificador" class="form-control form-control-sm" placeholder="Identificador">
                     </div>
-                    <div class="col-sm-3 mb-1">
+                    <div class="col-sm-4 mb-1">
                         <label for="catalogo_18">Categor&iacute;a</label>
                         <select class="custom-select custom-select-sm" id="catalogo_18" name="catalogo_18"></select>
                     </div>
-                    <div class="col-sm-3 mb-1">
+                    <!--div class="col-sm-3 mb-1">
                         <label for="catalogo_15">Forma Pago</label>
                         <select class="custom-select custom-select-sm" id="catalogo_15" name="catalogo_15"></select>
-                    </div>
-                    <div class="col-sm-3 mb-1">
+                    </div-->
+                    <div class="col-sm-4 mb-1">
                         <label for="catalogo_15">Contacto</label>
                         <select class="custom-select custom-select-sm" id="propuesta_contactos" name="propuesta_contactos"></select>
                     </div>
@@ -65,6 +65,7 @@
                             <div class="col-sm-2">
                                 <label for="propuesta_cantidad">Cantidad</label>
                                 <input class="form-control form-control-sm" placeholder="Cantidad" id="propuesta_cantidad" name="propuesta_cantidad" value="1" type="number">
+                                <input type="hidden" id="productoID" name="productoID">
                             </div>
                             <div class="col-sm-2">
                                 <label for="propuesta_precio">Precio</label>
@@ -96,11 +97,11 @@
                     </div>
                     <div class="col-sm-2">
                         <label for="propuesta_descuento">Descuento:</label>
-                        <input type="text" class="form-control form-control-sm" id="propuesta_descuento" name="propuesta_descuento" readonly>
+                        <input type="text" class="form-control form-control-sm" id="propuesta_descuento" name="propuesta_descuento" value="0.00" readonly>
                     </div>
                     <div class="col-sm-2">
                         <label for="propuesta_promocion">Total:</label>
-                        <input id="propuesta_total" name="propuesta_total" class="form-control form-control-sm" readonly>
+                        <input type="text" class="form-control form-control-sm" id="propuesta_total" name="propuesta_total" value="0.00" readonly>
                     </div>
                     <div class="col-sm-3">
                         <label for="propuesta_descuento">Fecha Vigencia:</label>
@@ -170,6 +171,7 @@
                 document.getElementById( 'propuesta_cantidad' ).value = 1;
                 document.getElementById( 'propuesta_precio' ).value = "";
                 document.getElementById( 'catalogo_8' ).value = "";
+                document.getElementById( 'productoID' ).value = "";
                 document.getElementById( 'propuesta_observaciones_producto' ).value = "";
                 setMonto( 0 );
                 comboProductos( this.value );
@@ -177,28 +179,34 @@
           });
       });
 
-      async function comboProductos( grupo='' ) {
+      async function comboProductos( grupo='' , producto='' ) {
           $( '#listadoProductosPropuestaComercial' ).empty();
           document.getElementById( 'listadoProductosPropuestaComercial' ).add( new Option( '-' , '' ) );
           var filtro = ( grupo != '' ) ? '/' + grupo : '';
           let promise = axios.get( '/api/utiles/listadoProductosServicios' + filtro );
           let result = await promise;
           result.data.forEach( ( item ) => {
-              document.getElementById( 'listadoProductosPropuestaComercial' ).add( new Option( item.nombre , item.id ) );
+              var selected = ( ( producto != '' ) ? ( ( producto == item.id ) ? true : false ) : false );
+              document.getElementById( 'listadoProductosPropuestaComercial' ).add( new Option( item.nombre , item.id , false , selected ) );
           });
       }
       //comboProductos();
 
-      async function comboContactos( clienteID = '' ) {
-          $( '#propuesta_contactos' ).empty();
+      async function comboContactos( clienteID = '' , contactoID = '' ) {
+          //$( '#propuesta_contactos' ).empty();
+          document.getElementById( "propuesta_contactos" ).innerHTML = "";
           var cliente = ( clienteID == '' ? document.getElementById( 'clienteID' ).value : clienteID );
           let promise = axios.get( '/api/utiles/listadoContactos/' + cliente );
           let result = await promise;
           result.data.forEach( ( item ) => {
-              document.getElementById( 'propuesta_contactos' ).add( new Option( item.nombre , item.id ) );
+              var selected = ( ( contactoID != '' ) ? ( ( contactoID == item.id ) ? true : false ) : false );
+              document.getElementById( 'propuesta_contactos' ).add( new Option( item.nombre , item.id , false , selected ) );
           });
       }
-      comboContactos();
+
+      if( document.getElementById( 'propuestaID' ) == null ) {
+          comboContactos();
+      }
 
       function guardaDatosPropuesta() {
         var token  = sessionStorage.getItem( 'apiToken' );
@@ -262,6 +270,7 @@
         var cant = cantidad();
         var importe = cant * precio;
         document.getElementById( 'propuesta_monto' ).value = importe.toFixed(2);
+        document.getElementById( 'propuesta_total' ).value = importe.toFixed(2);
       }
 
       function obtieneDatosProducto( productoID ) {
@@ -277,8 +286,9 @@
           axios.get( url , conf )
                .then( response => {
                   var datos = response.data;
-                  document.getElementById( 'propuesta_precio' ).value = datos.precio;
-                  document.getElementById( 'catalogo_8' ).value = datos.periodicidad;
+                  document.getElementById( 'productoID' ).value                       = datos.id;
+                  document.getElementById( 'propuesta_precio' ).value                 = datos.precio;
+                  document.getElementById( 'catalogo_8' ).value                       = datos.periodicidad;
                   document.getElementById( 'propuesta_observaciones_producto' ).value = datos.descripcion;
                   setMonto( datos.precio );
                })

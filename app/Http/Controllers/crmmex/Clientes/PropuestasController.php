@@ -9,6 +9,7 @@ namespace App\Http\Controllers\crmmex\Clientes;
 use Illuminate\Support\Facades\Auth;
 use App\Models\crmmex\Clientes\Propuestas AS Propuestas;
 use App\Models\crmmex\Productos\Productos AS Productos;
+use App\Models\crmmex\Clientes\PropuestasDetalle AS PropuestasDetalle;
 
 use App\Http\Controllers\crmmex\Utils\UtilsController AS Utils;
 
@@ -40,6 +41,7 @@ class PropuestasController extends Controller
                 'requerimientos' => $propuesta->requerimientos,
                 'formaPago'      => $propuesta->formaPago,
                 'monto'          => number_format( $propuesta->monto , 2 ),
+                'total'          => number_format( $propuesta->total , 2 ),
                 'descuento'      => $propuesta->descuento,
                 'promocion'      => $propuesta->promocion,
                 'status'         => $propuesta->status,
@@ -56,22 +58,35 @@ class PropuestasController extends Controller
       public function altaPropuesta( Request $request ) {
           $resp = array();
           $propuesta = new Propuestas();
-          $propuesta->propuestaIDTY  = $request->propuesta_identificador;
-          $propuesta->ejecutivoID    = Auth::user()->id;
-          $propuesta->clienteID      = $request->clienteID;
-          $propuesta->contactoID     = $request->propuesta_contactos;
-          $propuesta->fechaCreacion  = date( 'Y-m-d H:i:s' );
-          $propuesta->fechaVigencia  = $request->propuesta_fechaVigencia;
-          $propuesta->observaciones  = $request->propuesta_observaciones;
-          $propuesta->requerimientos = $request->propuesta_requerimientos;
-          $propuesta->categoria      = $request->catalogo_18;
-          $propuesta->formaPago      = $request->catalogo_15;
-          $propuesta->monto          = $request->propuesta_monto;
-          $propuesta->descuento      = $request->propuesta_descuento;
-          $propuesta->promocion      = $request->propuesta_promocion;
-          $propuesta->status         = 1;
+          $propuesta->propuestaIDTY   = $request->propuesta_identificador;
+          $propuesta->ejecutivoID     = Auth::user()->id;
+          $propuesta->clienteID       = $request->clienteID;
+          $propuesta->contactoID      = $request->propuesta_contactos;
+          $propuesta->fechaCreacion   = date( 'Y-m-d H:i:s' );
+          $propuesta->fechaVigencia   = $request->propuesta_fechaVigencia;
+          $propuesta->observaciones   = $request->propuesta_observaciones;
+          $propuesta->requerimientos  = $request->propuesta_requerimientos;
+          $propuesta->categoria       = $request->catalogo_18;
+          //$propuesta->formaPago      = $request->catalogo_15;
+          $propuesta->monto           = $request->propuesta_monto;
+          $propuesta->total           = $request->propuesta_total;
+          $propuesta->descuento       = $request->propuesta_descuento;
+          $propuesta->promocion       = $request->propuesta_promocion;
+          $propuesta->estadoPropuesta = 0;
+          $propuesta->status          = 1;
 
           if( $propuesta->save() ) {
+              $detalle = new PropuestasDetalle();
+              $detalle->idPropuesta = $propuesta->id;
+              $detalle->idProducto  = $request->productoID;
+              $detalle->cantidad    = $request->propuesta_cantidad;
+              $detalle->unitario    = $request->propuesta_precio;
+              $detalle->comentarios = $request->propuesta_observaciones_producto;
+              $detalle->descuento   = "0.00";
+              $detalle->promocion   = "0";
+              $detalle->status      = "1";
+              $detalle->save();
+
               $resp[ 'msj' ] = "Propuesta agregada correctamente";
               $resp[ 'idty' ] = $propuesta->id;
           } else {
@@ -87,17 +102,19 @@ class PropuestasController extends Controller
        public function editaPropuesta( Request $request ) {
           $propuestaID = $request->pID;
           $propuesta   = Propuestas::find( $propuestaID );
-          $propuesta->clienteID      = $request->clienteID;
-          $propuesta->contactoID     = $request->propuesta_contactos;
-          $propuesta->observaciones  = $request->propuesta_observaciones;
-          $propuesta->requerimientos = $request->propuesta_requerimientos;
-          $propuesta->categoria      = $request->catalogo_18;
-          $propuesta->formaPago      = $request->catalogo_15;
-          $propuesta->monto          = $request->propuesta_monto;
-          $propuesta->descuento      = $request->propuesta_descuento;
-          $propuesta->promocion      = $request->propuesta_promocion;
-          $propuesta->fechaVigencia  = $request->propuesta_fechaVigencia;
-          $propuesta->propuestaIDTY  = $request->propuesta_identificador;
+          $propuesta->clienteID       = $request->clienteID;
+          $propuesta->contactoID      = $request->propuesta_contactos;
+          $propuesta->observaciones   = $request->propuesta_observaciones;
+          $propuesta->requerimientos  = $request->propuesta_requerimientos;
+          $propuesta->categoria       = $request->catalogo_18;
+          //$propuesta->formaPago      = $request->catalogo_15;
+          $propuesta->monto           = $request->propuesta_monto;
+          $propuesta->total           = $request->propuesta_total;
+          $propuesta->descuento       = $request->propuesta_descuento;
+          $propuesta->promocion       = $request->propuesta_promocion;
+          $propuesta->fechaVigencia   = $request->propuesta_fechaVigencia;
+          $propuesta->propuestaIDTY   = $request->propuesta_identificador;
+          $propuesta->estadoPropuesta = 0;
 
           if( $propuesta->save() ) {
               $resp[ 'msj' ] = "Propuesta actualizada correctamente";
@@ -130,10 +147,30 @@ class PropuestasController extends Controller
               'formaPago'      => $propuesta->formaPago,
               'categoria'      => $propuesta->categoria,
               'monto'          => $propuesta->monto,
+              'total'          => $propuesta->total,
               'descuento'      => $propuesta->descuento,
               'promocion'      => $propuesta->promocion,
+              'estado'         => $propuesta->estadoPropuesta,
               'status'         => $propuesta->status
           );
+
+          $productos = PropuestasDetalle::where( 'idPropuesta' , $propuesta->id )
+                                        ->where( 'status' , '1' )
+                                        ->get();
+
+          foreach( $productos AS $producto ) {
+              $productoDetalle = Utils::datosProducto( $producto->idProducto );
+              $datos[ 'detalle' ][] = array(
+                'productoID'  => $producto->idProducto,
+                'grupoID'     => $productoDetalle[ 'grupo' ],
+                'comentarios' => $producto->comentarios,
+                'cantidad'    => $producto->cantidad,
+                'unitario'    => $producto->unitario,
+                'descuento'   => $producto->descuento,
+                'estatus'     => $producto->status,
+                'promocion'   => $producto->promocion
+              );
+          }
 
           return response()->json( $datos );
        }

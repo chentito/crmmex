@@ -216,4 +216,9 @@ class UtilsController extends Controller
             return response()->json( $promos );
         }
 
+        public static function datosProducto( $productoID ) {
+            $producto = Productos::find( $productoID );
+            return $producto;
+        }
+
 }
