@@ -209,7 +209,13 @@ function cargaCamposAdicionales( seccion , valores=[] ) {
     document.getElementById( 'camposAdicionalesContainer' ).innerHTML = '';
     var container = document.getElementById( 'camposAdicionalesContainer' );
     var url       = '/api/listadoCamposAdicionales/'+seccion;
-    axios.get( url )
+    var config    ={
+      headers: {
+        'Accept' : 'application/json',
+        'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' );
+      }
+    };
+    axios.get( url , config )
          .then( response => {
            if( typeof response.data[ 'camposAdicionales' ] === 'undefined' ) {
            }else{
