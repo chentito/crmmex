@@ -36,9 +36,9 @@ function cargaDatosComboCatalogo() {
     });
 }
 
-function generaToken() {
+async function generaToken() {
   if( sessionStorage.getItem("apiToken") === null ) {
-    axios
+    await axios
       .get( '/generaToken' )
       .then( response => {
         console.log( 'Token generado...' );

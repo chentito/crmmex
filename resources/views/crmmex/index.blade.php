@@ -94,8 +94,8 @@
         </div>
 
         <!-- SCRIPTS -->
-        <script src="{{ asset( 'assets3/js/contenidos.js' ) }}"></script>
         <script src="{{ asset( 'js/app.js' ) }}" ></script>
+        <script src="{{ asset( 'assets3/js/contenidos.js' ) }}"></script>
         <!-- Grid -->
         <script src="{{ asset( 'assets3/js/dataTables.bootstrap4.min.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/dataTables.responsive.min.js' ) }}"></script>
@@ -107,6 +107,7 @@
 
         <script type="text/javascript">
             $( document ).ready( function() {
+                generaToken();
                 $( '[data-toggle="tooltip"]' ).tooltip();
                 $( '#sidebarCollapse' ).on( 'click' , function () {
                     $( '#sidebar' ).toggleClass( 'active' );
@@ -116,7 +117,6 @@
                 });
             });
             contenidos( 'dashboard' );
-            generaToken();
         </script>
     </body>
 </html>

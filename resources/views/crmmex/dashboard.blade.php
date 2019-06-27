@@ -494,7 +494,14 @@
 
 <script>
   var url = '/api/listadoEstadoWidgets';
-  axios.get( url )
+  var token = sessionStorage.getItem( 'apiToken' );
+  var config = {
+      headers:{
+        'Accept'       :'application/json',
+        'Authorization': 'Bearer ' + token
+      }
+  };
+  axios.get( url , config )
        .then( response => {
           response.data.forEach( function( e , i ) {
               if( e.estado == '0' ) {

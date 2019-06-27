@@ -13,8 +13,9 @@ try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
 
-    require('bootstrap');
+    require( 'bootstrap' );
     require( 'datatables.net-colreorder-dt' );
+    require( 'layout-grid' );
     var Highcharts = require('highcharts/highstock');
     window.Highcharts = Highcharts;
     require('highcharts/modules/exporting')(Highcharts);
