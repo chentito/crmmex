@@ -90,7 +90,7 @@ class CamposAdicionalesController extends Controller
             $elementos = explode( ',' , $valor );
             $v[] = array(
               'valor' => $elementos[ 0 ],
-              'texto' => $elementos[ 1 ]
+              'texto' => if( isset( $elementos[ 1 ] ) ? $elementos[ 1 ] : '' )
             );
           }
         }
