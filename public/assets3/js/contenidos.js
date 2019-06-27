@@ -212,7 +212,7 @@ function cargaCamposAdicionales( seccion , valores=[] ) {
     var config    ={
       headers: {
         'Accept' : 'application/json',
-        'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' );
+        'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' )
       }
     };
     axios.get( url , config )
