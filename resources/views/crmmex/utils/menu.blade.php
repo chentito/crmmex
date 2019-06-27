@@ -21,12 +21,6 @@
       </ul>
     </li>
     <li>
-      <a href="#ventas" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-shopping-cart fa-lg"></i>  Ventas</a>
-      <ul class="collapse list-unstyled" id="ventas">
-          <li><a href="javascript:void(0)" onclick="return contenidos('reportes_resumen');">Reportes</a></li>
-      </ul>
-    </li>
-    <li>
         <a href="#mercadotecnia" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-lightbulb fa-lg"></i>  Mercadotecnia</a>
         <ul class="collapse list-unstyled" id="mercadotecnia">
             <li><a href="javascript:void(0)" onclick="return contenidos('mercadotecnia_listado');">Campañas</a></li>
@@ -36,6 +30,7 @@
         <a href="#reportes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-chart-pie fa-lg"></i>  Reportes</a>
         <ul class="collapse list-unstyled" id="reportes">
             <li><a href="javascript:void(0)" onclick="return contenidos('reportes_resumen');">Resumen</a></li>
+            <li><a href="javascript:void(0)" onclick="return contenidos('reportes_resumen');">Ventas</a></li>
         </ul>
     </li>
     <li>
@@ -51,6 +46,12 @@
                 <a href="#configuracionesClientes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Clientes</a>
                 <ul class="collapse list-unstyled" id="configuracionesClientes">
                     <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_camposAdicionales','1');"> > Campos Adicionales</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#configuracionesProductos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Productos</a>
+                <ul class="collapse list-unstyled" id="configuracionesProductos">
+                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_camposAdicionales','3');"> > Campos Adicionales</a></li>
                 </ul>
             </li>
             <li>
@@ -90,7 +91,7 @@
                 <ul class="collapse list-unstyled" id="configuracionesCatalogos">
                     <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_catalogos_generales');"> > Catálogos Generales</a></li>
                     <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_catalogos_productos');"> > Productos/Servicios</a></li>
-                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_adicionales');"> > Campos Adicionales</a></li>
+                    <!--li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_adicionales');"> > Campos Adicionales</a></li-->
                 </ul>
             </li>
             <li>

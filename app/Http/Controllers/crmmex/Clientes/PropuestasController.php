@@ -28,10 +28,13 @@ class PropuestasController extends Controller
         foreach( $propuestas AS $propuesta ) {
             $datos[ 'propuestas' ][] = array (
                 'id'             => $propuesta->id,
+                'propuestaIDTY'  => $propuesta->propuestaIDTY,
                 'ejecutivoID'    => Utils::nombreEjecutivo( $propuesta->ejecutivoID ),
                 'clienteID'      => Utils::nombreCliente( $propuesta->clienteID ),
                 'contactoID'     => Utils::nombreContacto( $propuesta->contactoID ),
                 'categoria'      => $propuesta->categoria,
+                'fechaCreacion'  => $propuesta->fechaCreacion,
+                'fechaVigencia'  => $propuesta->fechaVigencia,
                 'fechaEnvio'     => $propuesta->fechaEnvio,
                 'observaciones'  => $propuesta->observaciones,
                 'requerimientos' => $propuesta->requerimientos,
@@ -53,10 +56,12 @@ class PropuestasController extends Controller
       public function altaPropuesta( Request $request ) {
           $resp = array();
           $propuesta = new Propuestas();
+          $propuesta->propuestaIDTY  = $request->propuesta_identificador;
           $propuesta->ejecutivoID    = Auth::user()->id;
           $propuesta->clienteID      = $request->clienteID;
           $propuesta->contactoID     = $request->propuesta_contactos;
           $propuesta->fechaCreacion  = date( 'Y-m-d H:i:s' );
+          $propuesta->fechaVigencia  = $request->propuesta_fechaVigencia;
           $propuesta->observaciones  = $request->propuesta_observaciones;
           $propuesta->requerimientos = $request->propuesta_requerimientos;
           $propuesta->categoria      = $request->catalogo_18;
@@ -91,6 +96,8 @@ class PropuestasController extends Controller
           $propuesta->monto          = $request->propuesta_monto;
           $propuesta->descuento      = $request->propuesta_descuento;
           $propuesta->promocion      = $request->propuesta_promocion;
+          $propuesta->fechaVigencia  = $request->propuesta_fechaVigencia;
+          $propuesta->propuestaIDTY  = $request->propuesta_identificador;
 
           if( $propuesta->save() ) {
               $resp[ 'msj' ] = "Propuesta actualizada correctamente";
@@ -111,9 +118,12 @@ class PropuestasController extends Controller
 
           $datos = array (
               'id'             => $propuesta->id,
+              'propuestaIDTY'  => $propuesta->propuestaIDTY,
               'ejecutivo'      => $propuesta->ejecutivoID,
               'cliente'        => $propuesta->clienteID,
               'contacto'       => $propuesta->contactoID,
+              'fechaCreacion'  => $propuesta->fechaCreacion,
+              'fechaVigencia'  => $propuesta->fechaVigencia,
               'fechaEnvio'     => $propuesta->fechaEnvio,
               'observaciones'  => $propuesta->observaciones,
               'requerimientos' => $propuesta->requerimientos,

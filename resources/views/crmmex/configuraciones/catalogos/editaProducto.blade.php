@@ -6,7 +6,6 @@
 @include( 'crmmex.configuraciones.catalogos.nuevoProducto' )
 
 <script>
-
     document.getElementById( 'confProductos_id' ).value = document.getElementById( 'idProductoEditar' ).value;
     var token      = sessionStorage.getItem( 'apiToken' );
     var productoID = document.getElementById( 'confProductos_id' ).value;
@@ -31,6 +30,9 @@
           document.getElementById( 'catalogo_14' ).value               = d.impuesto;
           document.getElementById( 'catalogo_10' ).value               = d.divisa;
           document.getElementById( 'confProductos_status' ).value      = d.status;
+
+          adicionales = datos.data.adicionales;
+          cargaCamposAdicionales( '3' , adicionales );
       });
 
 </script>

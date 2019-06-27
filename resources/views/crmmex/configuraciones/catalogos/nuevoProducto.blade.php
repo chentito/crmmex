@@ -46,7 +46,7 @@
             </div>
             <div class="row">
               <div class="col-sm-3">
-                <label for="catalogo_8">Periodicidad</label>
+                <label for="catalogo_8">Ciclo de Facturación</label>
                 <select class="custom-select custom-select-sm" id="catalogo_8" name="catalogo_8"></select>
               </div>
               <div class="col-sm-3">
@@ -90,7 +90,8 @@
         </div>
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
           <div class="container border-left border-bottom border-right p-1">
-            adicionales
+            <div class="row" id="camposAdicionalesContainer">
+            </div>
           </div>
         </div>
       </div>
@@ -154,4 +155,7 @@
       });
   }
   comboEstatus();
+  if( document.getElementById( 'idProductoEditar' ) === null ) {
+      cargaCamposAdicionales( '3' );
+  }
 </script>

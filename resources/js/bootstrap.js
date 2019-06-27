@@ -16,6 +16,7 @@ try {
     require( 'bootstrap' );
     require( 'datatables.net-colreorder-dt' );
     require( 'layout-grid' );
+    require( 'bootstrap-datepicker' );
     var Highcharts = require('highcharts/highstock');
     window.Highcharts = Highcharts;
     require('highcharts/modules/exporting')(Highcharts);

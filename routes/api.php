@@ -123,19 +123,19 @@ Route::middleware( 'auth:api' )->get ( '/listadoEstadoWidgets' , 'crmmex\Dashboa
 
 
 /************************************ Acciones utiles en el sistema ************************************/
-Route::get ( '/utiles/comboEstados/{pais?}'           , 'crmmex\Utils\UtilsController@estados' );
-Route::get ( '/utiles/comboPaises'                    , 'crmmex\Utils\UtilsController@paises' );
-Route::get ( '/utiles/opcionesCatalogos/{catalogoID}' , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
-Route::get ( '/utiles/estatus'                        , 'crmmex\Utils\UtilsController@estatusRegistro' );
-Route::get ( '/utiles/listadoProductosServicios'      , 'crmmex\Utils\UtilsController@productosServicios' );
-Route::get ( '/utiles/listadoContactos/{clienteID}'   , 'crmmex\Utils\UtilsController@listadoContactos' );
-Route::post( '/utiles/aplicaPromo/{promoID}/{monto}'  , 'crmmex\Utils\UtilsController@aplicaPromocion' );
-Route::get ( '/utiles/listadoPromociones'             , 'crmmex\Utils\UtilsController@listadoPromociones' );
-Route::get ( '/opcionesCombos/{id}'                   , 'crmmex\Utils\UtilsController@catalogo' );
-Route::get ( '/opcionesCombosPorId/{id}'              , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
-Route::get ( '/dataTableConfig/{idty}'                , 'crmmex\Utils\DatatableController@dataTableConfig' );
-Route::get ( '/dataTableConfigView/{idty}'            , 'crmmex\Utils\DatatableController@dataTableConfigView' );
-Route::post( '/actualizaGridConfig'                   , 'crmmex\Utils\DatatableController@actualizaGridConfig' );
+Route::get ( '/utiles/comboEstados/{pais?}'                 , 'crmmex\Utils\UtilsController@estados' );
+Route::get ( '/utiles/comboPaises'                          , 'crmmex\Utils\UtilsController@paises' );
+Route::get ( '/utiles/opcionesCatalogos/{catalogoID}'       , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
+Route::get ( '/utiles/estatus'                              , 'crmmex\Utils\UtilsController@estatusRegistro' );
+Route::get ( '/utiles/listadoProductosServicios/{grupoID?}' , 'crmmex\Utils\UtilsController@productosServicios' );
+Route::get ( '/utiles/listadoContactos/{clienteID}'         , 'crmmex\Utils\UtilsController@listadoContactos' );
+Route::post( '/utiles/aplicaPromo/{promoID}/{monto}'        , 'crmmex\Utils\UtilsController@aplicaPromocion' );
+Route::get ( '/utiles/listadoPromociones'                   , 'crmmex\Utils\UtilsController@listadoPromociones' );
+Route::get ( '/opcionesCombos/{id}'                         , 'crmmex\Utils\UtilsController@catalogo' );
+Route::get ( '/opcionesCombosPorId/{id}'                    , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
+Route::get ( '/dataTableConfig/{idty}'                      , 'crmmex\Utils\DatatableController@dataTableConfig' );
+Route::get ( '/dataTableConfigView/{idty}'                  , 'crmmex\Utils\DatatableController@dataTableConfigView' );
+Route::post( '/actualizaGridConfig'                         , 'crmmex\Utils\DatatableController@actualizaGridConfig' );
 
 
 /************************************ Pruebas API consumidas desdee Angular ************************************/

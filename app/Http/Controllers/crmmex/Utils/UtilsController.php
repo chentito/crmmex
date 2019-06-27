@@ -152,9 +152,13 @@ class UtilsController extends Controller
       /*
        * Obtiene el combo de productos
        */
-       public function productosServicios() {
+       public function productosServicios( $grupo='' ) {
           $datos = array();
-          $productos = Productos::where( 'status' , 1 )->get();
+          $productos = Productos::where( 'status' , 1 )
+                                ->when( $grupo!='' , function( $q ) use( $grupo ) {
+                                    $q->where( 'grupo' , $grupo );
+                                })
+                                ->get();
 
           foreach( $productos AS $producto ) {
               $datos[] = array(

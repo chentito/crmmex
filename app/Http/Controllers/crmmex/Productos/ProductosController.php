@@ -12,6 +12,7 @@ use App\Models\crmmex\Productos\Productos AS Prod;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\crmmex\Utils\UtilsController AS Utils;
+use App\Http\Controllers\crmmex\Utils\CamposAdicionalesController AS CamposAdicionales;
 
 class ProductosController extends Controller
 {
@@ -21,7 +22,7 @@ class ProductosController extends Controller
         $productos = Prod::whereIn( 'status' , array( 2 , 1 ) )->get();
 
         foreach( $productos AS $producto ) {
-            $datos[ 'Productos' ][] = array (
+            $datos[ 'productos' ][] = array (
               'id'            => $producto->id,
               'clave'         => $producto->clave,
               'tipo'          =>  Utils::valorCatalogo( $producto->tipo ),
@@ -34,7 +35,7 @@ class ProductosController extends Controller
               'impuesto'      => $producto->impuesto,
               'divisa'        => $producto->divisa,
               'status'        => ( $producto->status == '1' ? 'Activo' : 'Inactivo' ),
-              'configuracion' => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Producto" onclick="contenidos(\'configuraciones_catalogos_editaProducto\',\''.$producto->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
+              'opciones'      => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Producto" onclick="contenidos(\'configuraciones_catalogos_editaProducto\',\''.$producto->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
             );
         }
         return response()->json( $datos );
@@ -57,6 +58,9 @@ class ProductosController extends Controller
         $producto->divisa       = $request->catalogo_10;
         $producto->status       = $request->confProductos_status;
         $gProducto              = $producto->save();
+
+        /* Guarda los campos adicionales asignados al cliente */
+        CamposAdicionales::almacenaDatosAdicionales( $request , $producto->id , '3' );
     }
 
     /*
@@ -77,6 +81,9 @@ class ProductosController extends Controller
         $producto->divisa       = $request->catalogo_10;
         $producto->status       = $request->confProductos_status;
         $gProducto              = $producto->save();
+
+        /* Guarda los campos adicionales asignados al cliente */
+        CamposAdicionales::almacenaDatosAdicionales( $request , $producto->id , '3' );
     }
 
     /*
@@ -98,6 +105,16 @@ class ProductosController extends Controller
             'divisa'       => $producto->divisa,
             'status'       => $producto->status
           );
+
+          // Busca en datos adicionales
+          $adicionales = CamposAdicionales::obtieneDatosAdicionales( '3' , $producto->id );
+          foreach( $adicionales AS $adicional ) {
+              $datos[ 'adicionales' ][ $adicional->campoAdicionalID ] = $adicional->valor;
+              $datos[ 'adicionalesEdicion' ][] = array(
+                'id'    => CamposAdicionales::nombreDatoAdicional( $adicional->campoAdicionalID ),
+                'valor' => $adicional->valor
+              );
+          }
 
           return response()->json( $datos );
      }

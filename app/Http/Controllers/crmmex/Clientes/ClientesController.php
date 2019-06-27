@@ -132,9 +132,9 @@ class ClientesController extends Controller
               'observaciones'     => $cliente->observaciones,
               'grupo'             => $cliente->grupo,
               'status'            => ( ( $cliente->status == '1' ) ? 'Activo' : 'Deshabilitado' ),
-              'opciones'          => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
+              'opciones'          => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Detalle Cliente" onclick="contenidos(\'clientes_detalle\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-id-card fa-sm"></i></a>'
-                                  . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Segimiento" onclick="contenidos(\'clientes_seguimiento\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-toolbox fa-sm"></i></a>'
+                                  . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Seguimiento" onclick="contenidos(\'clientes_seguimiento\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-toolbox fa-sm"></i></a>'
                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Propuesta" onclick="contenidos(\'clientes_listadoPropuestas\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-file-alt fa-sm"></i></a>'
                                   . ( ( $cliente->status == '2' ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Habilitar Cliente" onclick="habilitaCliente(\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-check fa-sm"></i></a>' : '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Eliminar Cliente" onclick="contenidos(\'clientes_eliminaCliente\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-trash fa-sm"></i></a>' )
           );
@@ -175,8 +175,8 @@ class ClientesController extends Controller
               'observaciones'     => $prospecto->observaciones,
               'grupo'             => $prospecto->grupo,
               'status'            => ( ( $prospecto->status == '1' ) ? 'Activo' : 'Deshabilitado' ),
-              'opciones'          => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Cliente" onclick="contenidos(\'prospectos_edicion\',\''.$prospecto->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
-                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Segimiento" onclick="contenidos(\'clientes_seguimiento\',\''.$prospecto->id.'\')" class="ml-2"><i class="fa fa-toolbox fa-sm"></i></a>'
+              'opciones'          => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Prospecto" onclick="contenidos(\'prospectos_edicion\',\''.$prospecto->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
+                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Seguimiento" onclick="contenidos(\'clientes_seguimiento\',\''.$prospecto->id.'\')" class="ml-2"><i class="fa fa-toolbox fa-sm"></i></a>'
                                    . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Propuesta" onclick="contenidos(\'clientes_listadoPropuestas\',\''.$prospecto->id.'\')" class="ml-2"><i class="fa fa-file-alt fa-sm"></i></a>'
             );
         }

@@ -20,7 +20,9 @@
         <link href="/assets3/css/themes/{{$css}}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/generales.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/contenidos.css' ) }}" rel="stylesheet">
+        <link href="{{ asset( 'assets3/css/bootstrap-datepicker.standalone.css' ) }}" rel="stylesheet">
         <script src="{{ asset( 'assets3/js/jodit.min.js' ) }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/es.js"></script>
     </head>
     <body>
         <style>
