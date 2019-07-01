@@ -25,6 +25,11 @@ use App\Http\Controllers\Controller;
 class UtilsController extends Controller
 {
 
+    protected static $meses = array(
+        '01' => 'Ene', '02' => 'Feb', '03' => 'Mar', '04' => 'Abr', '05' => 'May', '06' => 'Jun',
+        '07' => 'Jul', '08' => 'Ago', '09' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dic'
+    );
+
     /*
      * Regresa el listado de estados
      */
@@ -150,6 +155,14 @@ class UtilsController extends Controller
             return $contacto->nombre . ' ' . $contacto->apellidoPaterno . ' ' . $contacto->apellidoMaterno . ' [' . $contacto->correoElectronico . ']';
         }
 
+        /*
+         * Obtiene el nombre del producto
+         */
+         public static function nombreProducto( $productoID ) {
+            $producto = Productos::find( $productoID );
+            return $producto->clave . ' ' . $producto->nombre . ( strlen( $producto->descripcion > 0 ) ? ' / ' . $producto->descripcion : '' );
+         }
+
       /*
        * Obtiene el combo de productos
        */
@@ -237,6 +250,18 @@ class UtilsController extends Controller
         public static function detallePredefinido( $predefinidoID ) {
             $predefinido = Predefinidos::find( $predefinidoID );
             return $predefinido;
+        }
+
+        public static function formatoFecha( $f ) {return $f;
+            list( $fecha , $hora )      = explode( ' ' , $f );
+            list( $anio , $mes , $dia ) = explode( '-' , $fecha );
+            //$formato = $dias[ 2 ] . ' de ' . self::$meses[ $dias[ 1 ] ] . ', ' .$dias[ 0 ];
+            $formato = $anio;
+            if( isset( $hora ) ) {
+                $formato .= ' ' . $fecha;
+            }
+
+            return $formato;
         }
 
 }

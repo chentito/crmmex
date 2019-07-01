@@ -42,4 +42,29 @@
                  });
         }
     });
+
+    function generaPDF( propuestaID , propuestaIDTY ) {
+        var token  = sessionStorage.getItem( 'apiToken' );
+        var url    = '/api/generaPDF/' + propuestaID;
+        var config = {
+          headers: {
+            "Accept" : "application/json",
+            "Authorization" : "Bearer " + token
+          }
+        };
+
+        axios({ url: url, method: 'GET', responseType: 'blob'}, config )
+            .then((response) => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute( 'download' , propuestaIDTY );
+                document.body.appendChild(link);
+                link.click();
+            })
+            .catch( err => {
+              console.log( err );
+            });
+
+    }
 </script>

@@ -45,7 +45,9 @@ class PropuestasController extends Controller
                 'descuento'      => $propuesta->descuento,
                 'promocion'      => $propuesta->promocion,
                 'status'         => $propuesta->status,
-                'opciones'       => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Detalle Propuesta" onclick="contenidos(\'clientes_editapropuesta\',\''.$propuesta->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
+                'opciones'       => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Propuesta" onclick="contenidos(\'clientes_editapropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-edit fa-sm"></i></a>'
+                                  . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Visualizar Propuesta" onclick="generaPDF(\''.$propuesta->id.'\',\''.$propuesta->propuestaIDTY.'.pdf\')" class="mr-2"><i class="fa fa-file-pdf fa-sm"></i></a>'
+                                  . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Enviar Propuesta" onclick="contenidos(\'clientes_enviaPropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-paper-plane fa-sm"></i></a>'
             );
         }
 
@@ -135,7 +137,7 @@ class PropuestasController extends Controller
        /*
         * Metodo que busca los datos de un registro en particular
         */
-       public function datosPropuesta( $propuestaID ) {
+       public function datosPropuesta( $propuestaID , $modo = '') {
           $datos     = array();
           $propuesta = Propuestas::find( $propuestaID );
 
@@ -143,11 +145,13 @@ class PropuestasController extends Controller
               'id'             => $propuesta->id,
               'propuestaIDTY'  => $propuesta->propuestaIDTY,
               'ejecutivo'      => $propuesta->ejecutivoID,
+              'ejecutivoTxt'   => Utils::nombreEjecutivo( $propuesta->ejecutivoID ),
               'cliente'        => $propuesta->clienteID,
               'contacto'       => $propuesta->contactoID,
-              'fechaCreacion'  => $propuesta->fechaCreacion,
-              'fechaVigencia'  => $propuesta->fechaVigencia,
-              'fechaEnvio'     => $propuesta->fechaEnvio,
+              'contactoTxt'    => Utils::nombreContacto( $propuesta->contactoID ),
+              'fechaCreacion'  => Utils::formatoFecha( $propuesta->fechaCreacion ),
+              'fechaVigencia'  => Utils::formatoFecha( $propuesta->fechaVigencia ),
+              'fechaEnvio'     => Utils::formatoFecha( $propuesta->fechaEnvio ),
               'observaciones'  => $propuesta->observaciones,
               'requerimientos' => $propuesta->requerimientos,
               'formaPago'      => $propuesta->formaPago,
@@ -168,6 +172,7 @@ class PropuestasController extends Controller
               $productoDetalle = Utils::datosProducto( $producto->idProducto );
               $datos[ 'detalle' ][] = array(
                 'productoID'  => $producto->idProducto,
+                'productoTxt' => Utils::nombreProducto( $producto->idProducto ),
                 'grupoID'     => $productoDetalle[ 'grupo' ],
                 'comentarios' => $producto->comentarios,
                 'cantidad'    => $producto->cantidad,
@@ -178,7 +183,11 @@ class PropuestasController extends Controller
               );
           }
 
-          return response()->json( $datos );
+          if( $modo == 'arreglo' ) {
+              return $datos;
+          } else {
+              return response()->json( $datos );
+          }
        }
 
        /*
@@ -194,9 +203,8 @@ class PropuestasController extends Controller
          * Metodo que genera el PDF de la propuesta
          */
          public function generaPDF( $propuestaID ) {
-           $nombre = "Mexagon SA de CV";
-           $fecha  = date( 'Y-m-d H:i:s' );
-           $pdf = \PDF::loadView( 'crmmex.pdf.ejemplo' , compact( 'nombre' , 'fecha' ) );
+           $datos  = $this->datosPropuesta( $propuestaID , 'arreglo' );
+           $pdf = \PDF::loadView( 'crmmex.pdf.propuesta' , compact( 'datos' ) );
            return $pdf->download( 'PropuestaComercial.pdf' );
          }
 

@@ -30,6 +30,7 @@
            document.getElementById( 'catalogo_18' ).value              = response.data.categoria;
            document.getElementById( 'propuesta_fechaVigencia' ).value  = response.data.fechaVigencia;
            document.getElementById( 'propuesta_monto' ).value          = response.data.monto;
+           document.getElementById( 'propuesta_total' ).value          = response.data.total;
            document.getElementById( 'propuesta_descuento' ).value      = response.data.descuento;
            document.getElementById( 'propuesta_promocion' ).value      = response.data.promocion;
            document.getElementById( 'propuestaIdty' ).innerHTML        = 'Propuesta comercial # ' + response.data.id;
