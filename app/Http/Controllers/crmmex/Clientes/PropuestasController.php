@@ -58,7 +58,8 @@ class PropuestasController extends Controller
       public function altaPropuesta( Request $request ) {
           $resp = array();
           $propuesta = new Propuestas();
-          $propuesta->propuestaIDTY   = $request->propuesta_identificador;
+          //$propuesta->propuestaIDTY   = $request->propuesta_identificador;
+          $propuesta->propuestaIDTY   = '';
           $propuesta->ejecutivoID     = Auth::user()->id;
           $propuesta->clienteID       = $request->clienteID;
           $propuesta->contactoID      = $request->propuesta_contactos;
@@ -87,6 +88,11 @@ class PropuestasController extends Controller
               $detalle->status      = "1";
               $detalle->save();
 
+              // Actualiza IDTY de la propuesta
+              $propUpdate = Propuestas::find( $propuesta->id );
+              $propUpdate->propuestaIDTY = str_replace( '{autoincremento}' , $propuesta->id , str_replace( '{valorcategoria}' , Utils::valorCatalogo( $request->catalogo_18 ) , $request->propuesta_identificador ) );
+              $propUpdate->save();
+
               $resp[ 'msj' ] = "Propuesta agregada correctamente";
               $resp[ 'idty' ] = $propuesta->id;
           } else {
@@ -113,7 +119,7 @@ class PropuestasController extends Controller
           $propuesta->descuento       = $request->propuesta_descuento;
           $propuesta->promocion       = $request->propuesta_promocion;
           $propuesta->fechaVigencia   = $request->propuesta_fechaVigencia;
-          $propuesta->propuestaIDTY   = $request->propuesta_identificador;
+          //$propuesta->propuestaIDTY   = $request->propuesta_identificador;
           $propuesta->estadoPropuesta = 0;
 
           if( $propuesta->save() ) {
@@ -193,5 +199,31 @@ class PropuestasController extends Controller
            $pdf = \PDF::loadView( 'crmmex.pdf.ejemplo' , compact( 'nombre' , 'fecha' ) );
            return $pdf->download( 'PropuestaComercial.pdf' );
          }
+
+         /*
+          * Genera preview identificador de la propuesta
+          */
+          public function generaIdPropuesta() {
+              $predefinido = Utils::detallePredefinido( 1 );
+              $elementos = explode( '_' , $predefinido->valor );
+              $val = '';
+
+              switch( $elementos[ 1 ] ) {
+                  case 'inicialesEjecutivo':
+                    $name  = ucwords( Auth::user()->name );
+                    $appat = ucwords( Auth::user()->apPat );
+                    $apmat = ucwords( Auth::user()->apMat );
+                    $val   = substr( $name , 0 , 1 ).substr( $appat , 0 , 1 ).substr( $apmat , 0 , 1 );
+                  break;
+                  case 'fechaCreacion'     :
+                    $val = date( 'Ymd' );
+                  break;
+                  case 'categoria'         :
+                    $val = '{valorcategoria}';
+                  break;
+              }
+
+              return $elementos[ 0 ].'_'.$val.'_{autoincremento}';
+          }
 
 }

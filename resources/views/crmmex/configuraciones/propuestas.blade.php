@@ -19,33 +19,30 @@
           </div>
           <div class="row mt-3">
               <div class="col-sm-12 text-center">
+                <form id="frmPropNom" name="frmPropNom">
+                  <input type="hidden" id="nomenclatura_id" name="nomenclatura_id" value="1">
                   <table width="100%">
                       <tr>
                           <td>
-                            <input class="form-control form-control-sm" type="text" id="nomenclatura_prefijo" name="nomenclatura_prefijo" max="15" value="PROPUESTA" placeholder="Prefijo para el nombre de la propuesta">
+                            <input class="form-control form-control-sm" type="text" id="nomenclatura_prefijo" name="nomenclatura_prefijo" max="15" value="" placeholder="Prefijo para el nombre de la propuesta">
                           </td>
                           <td>_</td>
                           <td>
-                            <select class="custom-select custom-select-sm" id="nomenclatura_identificador" name="nomenclatura_identificador">
-                                <option value="1">Iniciales ejecutivo comercial</option>
-                                <option value="2">Fecha de creación</option>
-                                <option value="3">Categoría de la propuesta</option>
-                            </select>
+                            <select class="custom-select custom-select-sm" id="nomenclatura_variable" name="nomenclatura_variable"></select>
                           </td>
                           <td>_</td>
                           <td>
-                            <select class="custom-select custom-select-sm" id="nomenclatura_identificador" name="nomenclatura_identificador">
-                                <option value="1">Autoincremento</option>
-                            </select>
+                            <select class="custom-select custom-select-sm" id="nomenclatura_identificador" name="nomenclatura_identificador"></select>
                           </td>
                           <td>.pdf</td>
                       </tr>
                   </table>
+                </form>
               </div>
           </div>
           <div class="row mt-3">
               <div class="col-sm-12 text-center">
-                  <button class="btn btn-sm {{$btn}}"><i class="fa fa-save fa-sm"></i> Guardar</button>
+                  <button class="btn btn-sm {{$btn}}" id="btnGdaNomenclatura"><i class="fa fa-save fa-sm"></i> Guardar</button>
               </div>
           </div>
       </div>
@@ -57,3 +54,51 @@
   </div>
   <!--div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div-->
 </div>
+
+<script>
+    var config = {
+        headers: {
+          'Accept' : 'application/json',
+          'Authorization' : 'Bearer ' + token
+        }
+    };
+
+    document.getElementById( 'btnGdaNomenclatura' ).addEventListener( 'click' , function( e ){
+        e.preventDefault();
+        var valor = new FormData( document.getElementById( 'frmPropNom' ) );
+        var url = '/api/setPredefinido';
+        axios.post( url , valor , config )
+             .then( response => {
+                contenidos( 'configuraciones_propuestas' );
+             })
+             .catch( err => {
+               console.log( err );
+             });
+    });
+
+    var token = sessionStorage.getItem( 'apiToken' );
+    var url   = '/api/getPredefinido/1';
+    axios.get( url , config )
+         .then( response => {
+             valor = response.data.valor.split( '_' );
+             document.getElementById( 'nomenclatura_prefijo' ).value       = valor[ 0 ];
+             document.getElementById( 'nomenclatura_variable' ).value      = valor[ 1 ];
+             document.getElementById( 'nomenclatura_identificador' ).value = valor[ 2 ];
+
+             var opciones = [ 'inicialesEjecutivo' , 'fechaCreacion' , 'categoria' ];
+             var select1  = document.getElementById( 'nomenclatura_variable' );
+             opciones.forEach( function( e , ll ) {
+                select1.appendChild( new Option( e , e , false , ( ( valor[ 1 ] == e ) ? true : false ) ) );
+             });
+
+             var opciones2 = [ 'autoincremento' ];
+             var select2   = document.getElementById( 'nomenclatura_identificador' );
+             opciones2.forEach( function( e , ll ){
+                select2.appendChild( new Option( e , e , false , ( ( valor[ 2 ] == e ) ? true : false ) ) );
+             });
+
+         })
+         .catch( err => {
+           console.log( err );
+         });
+</script>

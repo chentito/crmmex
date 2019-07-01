@@ -16,6 +16,7 @@ use App\Models\crmmex\Utils\Promociones AS Promociones;
 use App\Models\crmmex\Productos\Productos AS Productos;
 use App\Models\crmmex\Clientes\Contactos AS Contactos;
 use App\Models\crmmex\Clientes\Clientes AS Clientes;
+use App\Models\crmmex\Utils\Predefinidos AS Predefinidos;
 use App\User AS Ejecutivo;
 
 use Illuminate\Http\Request;
@@ -219,6 +220,23 @@ class UtilsController extends Controller
         public static function datosProducto( $productoID ) {
             $producto = Productos::find( $productoID );
             return $producto;
+        }
+
+        public function getPredefinido( $predefinidoID ) {
+            $predefinido = Predefinidos::find( $predefinidoID );
+            return $predefinido;
+        }
+
+        public function setPredefinido( Request $request) {
+            $valor = $request->nomenclatura_prefijo . '_' . $request->nomenclatura_variable . '_' . $request->nomenclatura_identificador;
+            $predefinido = Predefinidos::find( $request->nomenclatura_id );
+            $predefinido->valor = $valor;
+            $predefinido->save();
+        }
+
+        public static function detallePredefinido( $predefinidoID ) {
+            $predefinido = Predefinidos::find( $predefinidoID );
+            return $predefinido;
         }
 
 }

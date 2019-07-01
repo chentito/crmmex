@@ -73,6 +73,7 @@ Route::middleware( 'auth:api' )->post( '/seguimientoIdty/{seguimientoID}'  , 'cr
 Route::middleware( 'auth:api' )->get ( '/obtieneDatosPropuesta/{propuestaID}' , 'crmmex\Clientes\PropuestasController@datosPropuesta' );
 Route::middleware( 'auth:api' )->post( '/altaPropuesta'                       , 'crmmex\Clientes\PropuestasController@altaPropuesta' );
 Route::middleware( 'auth:api' )->post( '/editaPropuesta'                      , 'crmmex\Clientes\PropuestasController@editaPropuesta' );
+Route::middleware( 'auth:api' )->get ( '/idtyPropuesta'                       , 'crmmex\Clientes\PropuestasController@generaIdPropuesta' );
 Route::get( '/generaPDF/{propuestaID}'             , 'crmmex\Clientes\PropuestasController@generaPDF' );
 
 
@@ -123,6 +124,8 @@ Route::middleware( 'auth:api' )->get ( '/listadoEstadoWidgets' , 'crmmex\Dashboa
 
 
 /************************************ Acciones utiles en el sistema ************************************/
+Route::middleware( 'auth:api' )->post( '/setPredefinido'                 , 'crmmex\Utils\UtilsController@setPredefinido' );
+Route::middleware( 'auth:api' )->get ( '/getPredefinido/{predefinidoID}' , 'crmmex\Utils\UtilsController@getPredefinido' );
 Route::get ( '/utiles/comboEstados/{pais?}'                 , 'crmmex\Utils\UtilsController@estados' );
 Route::get ( '/utiles/comboPaises'                          , 'crmmex\Utils\UtilsController@paises' );
 Route::get ( '/utiles/opcionesCatalogos/{catalogoID}'       , 'crmmex\Utils\UtilsController@opcionesCatalogos' );

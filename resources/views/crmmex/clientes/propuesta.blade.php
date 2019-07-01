@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-sm-4 mb-1">
                         <label for="catalogo_18">Identificador</label>
-                        <input type="text" id="propuesta_identificador" name="propuesta_identificador" class="form-control form-control-sm" placeholder="Identificador">
+                        <input type="text" id="propuesta_identificador" name="propuesta_identificador" class="form-control form-control-sm" placeholder="Identificador" readonly>
                     </div>
                     <div class="col-sm-4 mb-1">
                         <label for="catalogo_18">Categor&iacute;a</label>
@@ -109,7 +109,7 @@
                     </div>
                 </div>
                 <div class="text-center mt-3">
-                  <button class="btn btn-sm {{$btn}}" id="btnGeneraVistaPrevia"><i class="fa fa-file"></i> Vista Previa</button>
+                  <!--button class="btn btn-sm {{$btn}}" id="btnGeneraVistaPrevia"><i class="fa fa-file"></i> Vista Previa</button-->
                   <button class="btn btn-sm {{$btn}}" id="btnGeneraPropuesta"><i class="fa fa-file-pdf"></i> Guardar Propuesta</button>
                   <button class="btn btn-sm {{$btn}}" id="btnRegresar" name="btnRegresar"><i class="fa fa-undo"></i> Regresar</button>
                 </div>
@@ -161,10 +161,10 @@
               e.preventDefault();
               guardaDatosPropuesta();
           });
-          document.getElementById( 'btnGeneraVistaPrevia' ).addEventListener( 'click' , function( e ) {
+          /*document.getElementById( 'btnGeneraVistaPrevia' ).addEventListener( 'click' , function( e ) {
               e.preventDefault();
               generaVistaPrevia();
-          });
+          });*/
           document.getElementById( 'catalogo_12' ).addEventListener( 'change' , function( e ) {
               e.preventDefault();
               if( this.value != '' ) {
@@ -206,6 +206,7 @@
 
       if( document.getElementById( 'propuestaID' ) == null ) {
           comboContactos();
+          cargaIdtyPropuesta();
       }
 
       function guardaDatosPropuesta() {
@@ -295,7 +296,24 @@
                .catch( err => {
                  console.log( err );
                });
-
       }
 
+      function cargaIdtyPropuesta() {
+          var token = sessionStorage.getItem( 'apiToken' );
+          var url   = '/api/idtyPropuesta/';
+          var conf  = {
+              headers: {
+                'Accept' : 'application/json',
+                'Authorization' : 'Bearer ' + token
+              }
+          };
+
+          axios.get( url , conf )
+               .then( response => {
+                    document.getElementById( 'propuesta_identificador' ).value = response.data;
+               })
+               .catch( err => {
+                  console.log( err );
+          });
+      }
 </script>
