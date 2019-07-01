@@ -75,6 +75,7 @@ Route::middleware( 'auth:api' )->post( '/altaPropuesta'                       , 
 Route::middleware( 'auth:api' )->post( '/editaPropuesta'                      , 'crmmex\Clientes\PropuestasController@editaPropuesta' );
 Route::middleware( 'auth:api' )->get ( '/idtyPropuesta'                       , 'crmmex\Clientes\PropuestasController@generaIdPropuesta' );
 Route::middleware( 'auth:api' )->get ( '/generaPDF/{propuestaID}'             , 'crmmex\Clientes\PropuestasController@generaPDF' );
+Route::middleware( 'auth:api' )->get ( '/enviaPropuesta/{propuestaID}'        , 'crmmex\Clientes\PropuestasController@enviaPropuesta' );
 
 
 /******************** Operaciones para el modulo de ventas ********************/
@@ -124,7 +125,7 @@ Route::middleware( 'auth:api' )->get ( '/listadoEstadoWidgets' , 'crmmex\Dashboa
 
 
 /************************************ Acciones utiles en el sistema ************************************/
-Route::middleware( 'auth:api' )->post( '/setPredefinido'                 , 'crmmex\Utils\UtilsController@setPredefinido' );
+Route::middleware( 'auth:api' )->post( '/setPredefinido/{predefinidoID}' , 'crmmex\Utils\UtilsController@setPredefinido' );
 Route::middleware( 'auth:api' )->get ( '/getPredefinido/{predefinidoID}' , 'crmmex\Utils\UtilsController@getPredefinido' );
 Route::get ( '/utiles/comboEstados/{pais?}'                 , 'crmmex\Utils\UtilsController@estados' );
 Route::get ( '/utiles/comboPaises'                          , 'crmmex\Utils\UtilsController@paises' );

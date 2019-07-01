@@ -28,26 +28,28 @@ class PropuestasController extends Controller
 
         foreach( $propuestas AS $propuesta ) {
             $datos[ 'propuestas' ][] = array (
-                'id'             => $propuesta->id,
-                'propuestaIDTY'  => $propuesta->propuestaIDTY,
-                'ejecutivoID'    => Utils::nombreEjecutivo( $propuesta->ejecutivoID ),
-                'clienteID'      => Utils::nombreCliente( $propuesta->clienteID ),
-                'contactoID'     => Utils::nombreContacto( $propuesta->contactoID ),
-                'categoria'      => $propuesta->categoria,
-                'fechaCreacion'  => $propuesta->fechaCreacion,
-                'fechaVigencia'  => $propuesta->fechaVigencia,
-                'fechaEnvio'     => $propuesta->fechaEnvio,
-                'observaciones'  => $propuesta->observaciones,
-                'requerimientos' => $propuesta->requerimientos,
-                'formaPago'      => $propuesta->formaPago,
-                'monto'          => number_format( $propuesta->monto , 2 ),
-                'total'          => number_format( $propuesta->total , 2 ),
-                'descuento'      => $propuesta->descuento,
-                'promocion'      => $propuesta->promocion,
-                'status'         => $propuesta->status,
-                'opciones'       => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Propuesta" onclick="contenidos(\'clientes_editapropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-edit fa-sm"></i></a>'
-                                  . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Visualizar Propuesta" onclick="generaPDF(\''.$propuesta->id.'\',\''.$propuesta->propuestaIDTY.'.pdf\')" class="mr-2"><i class="fa fa-file-pdf fa-sm"></i></a>'
-                                  . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Enviar Propuesta" onclick="contenidos(\'clientes_enviaPropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-paper-plane fa-sm"></i></a>'
+                'id'              => $propuesta->id,
+                'propuestaIDTY'   => $propuesta->propuestaIDTY,
+                'ejecutivoID'     => Utils::nombreEjecutivo( $propuesta->ejecutivoID ),
+                'clienteID'       => Utils::nombreCliente( $propuesta->clienteID ),
+                'contactoID'      => Utils::nombreContacto( $propuesta->contactoID ),
+                'categoria'       => $propuesta->categoria,
+                'fechaCreacion'   => $propuesta->fechaCreacion,
+                'fechaVigencia'   => $propuesta->fechaVigencia,
+                'fechaEnvio'      => $propuesta->fechaEnvio,
+                'observaciones'   => $propuesta->observaciones,
+                'requerimientos'  => $propuesta->requerimientos,
+                'formaPago'       => $propuesta->formaPago,
+                'monto'           => number_format( $propuesta->monto , 2 ),
+                'total'           => number_format( $propuesta->total , 2 ),
+                'descuento'       => $propuesta->descuento,
+                'promocion'       => $propuesta->promocion,
+                'estadoPropuesta' => ( ( $propuesta->estadoPropuesta == 0 ) ? 'Sin enviar' : 'Enviado'  ),
+                'pagoPropuesta'   => ( ( $propuesta->pagoPropuesta == "0" ) ? 'No pagada' : ( (  $propuesta->pagoPropuesta == "1" ) ? 'Parcial' : 'Pagada' ) ),
+                'status'          => ( ( $propuesta->status == 0 ) ? 'Deshabilitada' : 'Habilitada' ),
+                'opciones'        => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Propuesta" onclick="contenidos(\'clientes_editapropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-edit fa-sm"></i></a>'
+                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Visualizar Propuesta" onclick="generaPDF(\''.$propuesta->id.'\',\''.$propuesta->propuestaIDTY.'.pdf\')" class="mr-2"><i class="fa fa-file-pdf fa-sm"></i></a>'
+                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Enviar Propuesta" onclick="contenidos(\'clientes_enviaPropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-paper-plane fa-sm"></i></a>'
             );
         }
 
@@ -160,8 +162,9 @@ class PropuestasController extends Controller
               'total'          => $propuesta->total,
               'descuento'      => $propuesta->descuento,
               'promocion'      => $propuesta->promocion,
-              'estado'         => $propuesta->estadoPropuesta,
-              'status'         => $propuesta->status
+              'estado'         => ( ( $propuesta->estadoPropuesta == 0 ) ? 'Sin enviar' : 'Enviado'  ),
+              'pagoPropuesta'  => ( ( $propuesta->pagoPropuesta == 0 ) ? 'No pagada' : (  $propuesta->pagoPropuesta == 1 ) ? 'Parcial' : 'Pagada'  ),
+              'status'         => ( ( $propuesta->status == 0 ? 'Deshabilitada' : 'Habilitada' ) )
           );
 
           $productos = PropuestasDetalle::where( 'idPropuesta' , $propuesta->id )
@@ -182,6 +185,8 @@ class PropuestasController extends Controller
                 'promocion'   => $producto->promocion
               );
           }
+
+          $datos[ 'condiciones' ] = Utils::detallePredefinido( 2 )->valor;
 
           if( $modo == 'arreglo' ) {
               return $datos;
@@ -233,5 +238,20 @@ class PropuestasController extends Controller
 
               return $elementos[ 0 ].'_'.$val.'_{autoincremento}';
           }
+
+          /*
+           * Metodo para enviar una propuesta
+           */
+           public function enviaPropuesta( $propuestaID ) {
+              $envio = false;
+              $datos = $this->datosPropuesta( $propuestaID );
+
+
+              if( $envio ) {
+                  $propuesta = Propuestas::find( $propuestaID );
+                  $propuesta->estadoPropuesta = 1;
+                  $propuesta->save();
+              }
+           }
 
 }

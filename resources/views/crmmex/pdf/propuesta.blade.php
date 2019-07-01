@@ -106,6 +106,8 @@
                   </table>
               </td>
           </tr>
+          <tr><td>Políticas y Condiciones:</td></tr>
+          <tr><td colspan="4" align="justify">{{$datos[ 'condiciones' ]}}</td></tr>
       </table>
     </body>
 </html>

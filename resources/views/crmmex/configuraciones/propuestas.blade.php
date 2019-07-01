@@ -3,11 +3,11 @@
     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Nombre Propuesta</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Template Envio</a>
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Políticas/Condiciones</a>
   </li>
-  <!--li class="nav-item">
-    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-  </li-->
+  <li class="nav-item">
+    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Template Envio</a>
+  </li>
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -49,10 +49,26 @@
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
       <div class="container border-left border-right border-bottom p-1">
-          template envio
+          <form id="frmPoliticasCondiciones" name="frmPoliticasCondiciones">
+              <input type="hidden" id="politicasCondiciones_id" name="politicasCondiciones_id" value="2">
+              <div class="row">
+                  <div class="col-sm-12">
+                      <label for="propuesta_politicasCondiciones">Texto de condiciones:</label>
+                      <textarea rows="6" class="form-control form-control-sm" id="propuesta_politicasCondiciones" name="propuesta_politicasCondiciones"></textarea>
+                      <br />
+                  </div>
+                  <div class="col-sm-12 text-center">
+                      <button class="btn btn-sm {{$btn}}" id="btnGdaPoliticasCondiciones"><i class="fa fa-save fa-sm"></i> Guardar</button>
+                  </div>
+              </div>
+          </form>
       </div>
   </div>
-  <!--div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div-->
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+    <div class="container border-left border-right border-bottom p-1">
+        template envio
+    </div>
+  </div>
 </div>
 
 <script>
@@ -63,11 +79,27 @@
         }
     };
 
+    document.getElementById( 'btnGdaPoliticasCondiciones' ).addEventListener( 'click' , function( e ){
+        e.preventDefault();
+        //var valor = new FormData( document.getElementById( 'frmPoliticasCondiciones' ) );
+        var url = '/api/setPredefinido/' + document.getElementById( 'politicasCondiciones_id' ).value;
+        axios.post( url , {valorPredefinido_2:document.getElementById( 'propuesta_politicasCondiciones' ).value} , config )
+             .then( response => {
+                contenidos( 'configuraciones_propuestas' );
+             })
+             .catch( err => {
+               console.log( err );
+             });
+    });
+
     document.getElementById( 'btnGdaNomenclatura' ).addEventListener( 'click' , function( e ){
         e.preventDefault();
-        var valor = new FormData( document.getElementById( 'frmPropNom' ) );
-        var url = '/api/setPredefinido';
-        axios.post( url , valor , config )
+        //var valor = new FormData( document.getElementById( 'frmPropNom' ) );
+        var valor = document.getElementById( 'nomenclatura_prefijo' ).value + '_'
+                  + document.getElementById( 'nomenclatura_variable' ).value + '_'
+                  + document.getElementById( 'nomenclatura_identificador' ).value;
+        var url = '/api/setPredefinido/' + document.getElementById( 'nomenclatura_id' ).value;
+        axios.post( url , {valorPredefinido_1:valor} , config )
              .then( response => {
                 contenidos( 'configuraciones_propuestas' );
              })
@@ -101,4 +133,15 @@
          .catch( err => {
            console.log( err );
          });
+
+     var url2 = '/api/getPredefinido/2';
+     axios.get( url2 , config )
+          .then( response => {
+              document.getElementById( 'propuesta_politicasCondiciones' ).value=response.data.valor;
+          })
+          .catch( err => {
+            console.log( err );
+          });
+
+
 </script>

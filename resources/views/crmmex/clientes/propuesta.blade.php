@@ -100,7 +100,7 @@
                         <input type="text" class="form-control form-control-sm" id="propuesta_descuento" name="propuesta_descuento" value="0.00" readonly>
                     </div>
                     <div class="col-sm-2">
-                        <label for="propuesta_promocion">Total:</label>
+                        <label for="propuesta_total">Total:</label>
                         <input type="text" class="form-control form-control-sm" id="propuesta_total" name="propuesta_total" value="0.00" readonly>
                     </div>
                     <div class="col-sm-3">

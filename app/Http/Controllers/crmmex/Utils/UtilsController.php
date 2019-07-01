@@ -240,10 +240,11 @@ class UtilsController extends Controller
             return $predefinido;
         }
 
-        public function setPredefinido( Request $request) {
-            $valor = $request->nomenclatura_prefijo . '_' . $request->nomenclatura_variable . '_' . $request->nomenclatura_identificador;
-            $predefinido = Predefinidos::find( $request->nomenclatura_id );
-            $predefinido->valor = $valor;
+        public function setPredefinido( $predefinidoID , Request $request ) {
+            //$valor = $request->nomenclatura_prefijo . '_' . $request->nomenclatura_variable . '_' . $request->nomenclatura_identificador;
+            $identificador = 'valorPredefinido_' . $predefinidoID;
+            $predefinido = Predefinidos::find( $predefinidoID );
+            $predefinido->valor = $request->$identificador;
             $predefinido->save();
         }
 
@@ -255,12 +256,10 @@ class UtilsController extends Controller
         public static function formatoFecha( $f ) {return $f;
             list( $fecha , $hora )      = explode( ' ' , $f );
             list( $anio , $mes , $dia ) = explode( '-' , $fecha );
-            //$formato = $dias[ 2 ] . ' de ' . self::$meses[ $dias[ 1 ] ] . ', ' .$dias[ 0 ];
             $formato = $anio;
             if( isset( $hora ) ) {
                 $formato .= ' ' . $fecha;
             }
-
             return $formato;
         }
 
