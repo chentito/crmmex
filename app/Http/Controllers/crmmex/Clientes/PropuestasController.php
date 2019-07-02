@@ -7,6 +7,7 @@
 namespace App\Http\Controllers\crmmex\Clientes;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use App\Models\crmmex\Clientes\Propuestas AS Propuestas;
 use App\Models\crmmex\Productos\Productos AS Productos;
 use App\Models\crmmex\Clientes\PropuestasDetalle AS PropuestasDetalle;
@@ -253,5 +254,54 @@ class PropuestasController extends Controller
                   $propuesta->save();
               }
            }
+
+           /*
+            * Metodo que lleva el control del carrito para la propuesta
+            */
+            public function carrito( Request $request ) {
+
+                if( Session::has( 'carrito' ) ) {
+                      //$carrito = Session::get( 'carrito' );
+                  } else {
+                      //$carrito = array();
+                      Session::put( 'carrito' , array() );
+                }
+
+                $datos = array(
+                    'id'          => $request->propuestaProducto_productoID,
+                    'comentarios' => $request->propuestaProducto_observaciones,
+                    'cantidad'    => $request->propuestaProducto_cantidad,
+                    'unitario'    => $request->propuestaProducto_precio,
+                    'descuento'   => $request->propuestaProducto_descuento,
+                    'promocion'   => $request->propuestaProducto_promocion,
+                    'traslados'   => $request->propuestaProducto_traslados,
+                    'retenciones' => $request->propuestaProducto_retencion
+                );
+
+                //$carrito[ $request->propuestaProducto_productoID ] = $datos;
+                Session::push( 'carrito.' . $request->propuestaProducto_productoID , $datos );
+
+                $totales   = array(
+                    'subtotal'    => 0,
+                    'traslados'   => 0,
+                    'retenciones' => 0,
+                    'total'       => 0
+                );
+
+                /*foreach( Session::get( 'carrito' ) AS $k => $v ) {
+                    $importe = $v[ 'cantidad' ] * $v[ 'unitario' ];
+                    $totales[ 'subtotal' ]    = $totales[ 'subtotal' ] + $importe;
+
+                    $montoTraslados = number_format( ( $v[ 'traslados' ] / 100 ) * $importe , 2 );
+                    $totales[ 'traslados' ]   = $totales[ 'traslados' ] + $montoTraslados;
+
+                    $montoRetenciones = number_format( ( $v[ 'retenciones' ] / 100 ) * $importe , 2 );
+                    $totales[ 'retenciones' ] = $totales[ 'retenciones' ] + $montoRetenciones;
+
+                    $totales[ 'total' ] = $totales[ 'subtotal' ] + $totales[ 'traslados' ] - $totales[ 'retenciones' ];
+                }*/
+                $c = Session::get( 'carrito' );
+                return response()->json( $c );
+            }
 
 }

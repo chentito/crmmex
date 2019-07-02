@@ -112,7 +112,7 @@ async function solicitud( metodo, token, url, datos ) {
 }
 
 function aplicaPromo( promoID , monto , input ) {
-    if( promoID == '' ) {
+    if( promoID == '0' ) {
       document.getElementById( input ).value = '0.00';
       return monto;
     }
@@ -128,7 +128,7 @@ function aplicaPromo( promoID , monto , input ) {
 
     axios.post( url , datos , config )
      .then( response => {
-       document.getElementById( input ).value = response.data;
+       document.getElementById( input ).value = response.data.toFixed( 2 );
      })
      .catch( err => {
        console.log( err );

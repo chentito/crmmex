@@ -67,10 +67,10 @@
                 <label for="confProductos_clave">Precio</label>
                 <input type="text" maxlength="45" placeholder="Precio" class="form-control form-control-sm" id="confProductos_precio" name="confProductos_precio">
               </div>
-              <div class="col-sm-3">
+              <!--div class="col-sm-3">
                 <label for="confProductos_clave">Impuestos</label>
                 <select class="custom-select custom-select-sm" id="catalogo_14" name="catalogo_14"></select>
-              </div>
+              </div-->
               <div class="col-sm-3">
                 <label for="catalogo_10">Divisa</label>
                 <select class="custom-select custom-select-sm" id="catalogo_10" name="catalogo_10"></select>
@@ -80,12 +80,32 @@
                 <select class="custom-select custom-select-sm" id="confProductos_status" name="confProductos_status">
                 </select>
               </div>
+              <div class="col-sm-12"><hr></div>
+              <div class="col-sm-3">
+                  Usa traslados:
+              </div>
+              <div class="col-sm-3">
+                  <select class="custom-select custom-select-sm" id="confProductos_tasaTraslados" name="confProductos_tasaTraslados">
+                      <option value="0">-</option>
+                      <option value="16">IVA 16%</option>
+                      <option value="8">IVA 8%</option>
+                  </select>
+                  <br>
+                  O usar otra tasa:
+                  <input type="number" class="form-control form-control-sm" id="confProductos_tasaTrasladosOtra" name="confProductos_tasaTrasladosOtra" placeholder="Tasa traslados">
+              </div>
+              <div class="col-sm-3">
+                  Retenciones:
+              </div>
+              <div class="col-sm-3">
+                  <input type="number" class="form-control form-control-sm" id="confProductos_tasaRetencionesOtra" name="confProductos_tasaRetencionesOtra" placeholder="Tasa retenciones">
+              </div>
             </div>
           </div>
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
           <div class="container border-left border-bottom border-right p-1">
-            configuraciones
+
           </div>
         </div>
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -136,9 +156,11 @@
     axios.post( ruta , datos , config )
        .then( response => {
          if( movimiento == 'alta' ) {
-               contenidos( 'configuraciones_catalogos_productos' );
+              aviso( 'Producto agregado correctamente' );
+              contenidos( 'configuraciones_catalogos_productos' );
            } else {
-               contenidos( 'configuraciones_catalogos_editaProducto' , document.getElementById( 'confProductos_id' ).value );
+              aviso( 'Producto actualizado correctamente' );
+              contenidos( 'configuraciones_catalogos_editaProducto' , document.getElementById( 'confProductos_id' ).value );
          }
        })
        .catch( err => {
