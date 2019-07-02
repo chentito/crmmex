@@ -81,10 +81,10 @@
 
     document.getElementById( 'btnGdaPoliticasCondiciones' ).addEventListener( 'click' , function( e ){
         e.preventDefault();
-        //var valor = new FormData( document.getElementById( 'frmPoliticasCondiciones' ) );
         var url = '/api/setPredefinido/' + document.getElementById( 'politicasCondiciones_id' ).value;
         axios.post( url , {valorPredefinido_2:document.getElementById( 'propuesta_politicasCondiciones' ).value} , config )
              .then( response => {
+                aviso( 'Politicas actualizadas correctamente' );
                 contenidos( 'configuraciones_propuestas' );
              })
              .catch( err => {
@@ -101,6 +101,7 @@
         var url = '/api/setPredefinido/' + document.getElementById( 'nomenclatura_id' ).value;
         axios.post( url , {valorPredefinido_1:valor} , config )
              .then( response => {
+                aviso( 'Nomenclatura actualizada correctamente' );
                 contenidos( 'configuraciones_propuestas' );
              })
              .catch( err => {

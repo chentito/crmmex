@@ -273,6 +273,7 @@
             cache : false,
             beforeSend : function() {},
             success : function(d) {
+                aviso( 'Cliente actualizado correctamente' );
                 if( mov == 'alta' ) {
                     contenidos( 'clientes_listado' );
                 } else {

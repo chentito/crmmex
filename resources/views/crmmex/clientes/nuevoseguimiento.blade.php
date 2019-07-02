@@ -19,7 +19,7 @@
               </div>
               <div class="col-sm-3">
                   <label for="prospectos_nuevoseguimiento_fecha">Fecha Ejecución</label>
-                  <input class="form-control form-control-sm" id="prospectos_nuevoseguimiento_fecha" name="prospectos_nuevoseguimiento_fecha">
+                  <input class="form-control form-control-sm" id="prospectos_nuevoseguimiento_fecha" name="prospectos_nuevoseguimiento_fecha" readonly>
               </div>
               <div class="col-sm-3">
                   <label for="catalogo_16">Tipo</label>
@@ -57,6 +57,16 @@
 </div>
 
 <script>
+
+  $( '#prospectos_nuevoseguimiento_fecha' ).datepicker({
+      format: "yyyy-mm-dd",
+      language: "es",
+      todayBtn: "linked",
+      clearBtn: true,
+      startDate: "today",
+      daysOfWeekDisabled: "0,6",
+      daysOfWeekHighlighted: "0,6"
+  });
 
   cargaDatosComboCatalogo();
 
@@ -118,6 +128,7 @@
 
       axios.post( ruta , datos , config )
            .then( response => {
+             aviso( 'Seguimiento agregado correctamente' );+
              contenidos( 'clientes_editaseguimiento' , response.data.idty );
            })
            .catch( err => {

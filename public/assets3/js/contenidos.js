@@ -189,6 +189,7 @@ function generaDataGrid( id , filtro = '' ) {
                         var datos = new FormData( document.getElementById( 'formConfGrid' ) );
                         axios.post( url , datos )
                              .then( request => {
+                               aviso( 'Listado actualizado correctamente' );
                                seccion = document.getElementById(  ( document.getElementById( 'confGrid_seccion' ).value == "" ) ? 'nombreSeccionRecargar' : 'confGrid_seccion' ).value;
                                contenidos( seccion , f.replace( '/' , '' ) );
                              })
@@ -250,4 +251,49 @@ function cargaCamposAdicionales( seccion , valores=[] ) {
          .catch(
            err => {console.log( err );}
          );
+}
+
+// Alertas y avisos
+function aviso( mensaje , exito=true ) {
+
+    tipo = ( exito == true ) ? 'success' : 'danger';
+
+    $.notify({
+      	// options
+      	icon: 'glyphicon glyphicon-warning-sign',
+      	message: mensaje,
+      },{
+      	// settings
+      	element: 'body',
+      	position: null,
+      	type: tipo,
+      	allow_dismiss: false,
+      	newest_on_top: false,
+      	showProgressbar: false,
+      	placement: {
+      		from: "top",
+      		align: "center"
+      	},
+      	offset: 20,
+      	spacing: 10,
+      	z_index: 1500,
+      	delay: 4000,
+      	timer: 1000,
+      	url_target: '_blank',
+      	mouse_over: null,
+      	animate: {
+      		enter: 'animated fadeInDown',
+      		exit: 'animated fadeOutUp'
+      	},
+      	onShow: null,
+      	onShown: null,
+      	onClose: null,
+      	onClosed: null,
+      	icon_type: 'class',
+      	template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+      		        '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+  		            '<span data-notify="message"><b><center>{2}</center></b></span>' +
+      	          '</div>'
+      });
+
 }

@@ -16,6 +16,7 @@
         };
         axios.post( url , {} , config )
              .then( response => {
+               aviso( 'Cliente habilitado correctamente' );
                contenidos( 'clientes_listado' );
              })
              .catch( err => {

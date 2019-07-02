@@ -228,6 +228,7 @@
 
         axios.post( url , datos , config )
              .then( response => {
+                aviso( 'Propuesta guardada correctamente' );
                 contenidos( 'clientes_editapropuesta' , response.data.idty );
              })
              .catch( err => {

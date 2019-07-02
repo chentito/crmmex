@@ -273,6 +273,7 @@
             cache : false,
             beforeSend : function() {},
             success : function(d) {
+                aviso( 'Prospecto ' + ( ( mov == 'alta' ) ? 'agregado' : 'actualizado' ) + ' correctamente' );
                 if( mov == 'alta' ) {
                     contenidos( 'prospectos_listado' );
                 } else {

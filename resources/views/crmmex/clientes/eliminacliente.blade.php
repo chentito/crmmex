@@ -49,6 +49,7 @@
 
       axios.post( url , {} , config )
            .then( response => {
+             aviso( 'Cliente ' + ( ( mov==2 ) ? 'deshabilitado' : 'eliminado' ) + ' correctamente' );
              contenidos( 'clientes_listado' );
            })
            .catch( err => {

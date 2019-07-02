@@ -93,18 +93,20 @@
     var datos = new FormData( document.getElementById( 'formAltaCampoAdicional' ) );
     if( document.getElementById( 'adicional_clientes_id' ).value == '' ) {
         var url = '/api/nuevoCampoAdicional';// Alta
+        var msj = 'Campo agregado correctamente';
     } else {
         var url = '/api/editaCampoAdicional';// Edita
+        var msj = 'Campo actualizado correctamente';
     }
 
     axios.post( url , datos )
          .then( response => {
+            aviso( msj );
             contenidos( 'configuraciones_camposAdicionales' , document.getElementById( 'idSeccionConsultar' ).value );
          })
          .catch( err => {
            console.log( err );
          });
-
   });
 
   function nombreSeccion() {
