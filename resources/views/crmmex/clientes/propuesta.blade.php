@@ -164,6 +164,8 @@
 <script>
       $( function () {
 
+          axios.post( '/api/carritoElimina' , {} , {headers:{'Accept':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' ) }} );
+
           $( '#propuesta_fechaVigencia' ).datepicker({
               format: "yyyy-mm-dd",
               language: "es",
@@ -201,9 +203,10 @@
               };
 
               axios.post( '/api/carrito' , datos , conf )
-                   .then( response => {alert(JSON.stringify(response.data));
+                   .then( response => {
                        var tabla   = document.getElementById( 'containerProductosPropuesta' ).getElementsByTagName( 'tbody' )[ 0 ];
                        var renglon = tabla.insertRow();
+                       var idProd  = document.getElementById( 'propuestaProducto_productoID' ).value;
                        var sel     = document.getElementById( 'listadoProductosPropuestaComercial' );
                        var text    = sel.options[ sel.selectedIndex ].text;
                        renglon.insertCell(0).appendChild( document.createTextNode( text ) );
@@ -212,14 +215,12 @@
                        renglon.insertCell(2).appendChild( document.createTextNode( unitario ) );
                        var importe = document.getElementById( 'propuestaProducto_precio' ).value*document.getElementById( 'propuestaProducto_cantidad' ).value;
                        renglon.insertCell(3).appendChild( document.createTextNode( importe ) );
-                       renglon.insertCell(4).innerHTML = '<button class="btn btn-sm mr-1"><i class="fa fa-edit fa-sm"></i></button>'
-                                                       + '<button class="btn btn-sm" onclick="eliminaRenglon(\''+renglon+'\')"><i class="fa fa-trash fa-sm"></i></button>';
-
+                       renglon.insertCell(4).innerHTML = '<button type="button" class="btn btn-sm" onclick="return eliminaRenglon(event,this,\''+idProd+'\');return false;"><i class="fa fa-trash fa-sm"></i></button>';
                        var datos = response.data;
-                       document.getElementById( 'propuesta_monto' ).value       = datos.subtotal;
-                       document.getElementById( 'propuesta_traslados' ).value   = datos.traslados;
-                       document.getElementById( 'propuesta_retenciones' ).value = datos.retenciones;
-                       document.getElementById( 'propuesta_total' ).value       = datos.total;
+                       document.getElementById( 'propuesta_monto' ).value       = datos.subtotal.toFixed( 2 );
+                       document.getElementById( 'propuesta_traslados' ).value   = datos.traslados.toFixed( 2 );
+                       document.getElementById( 'propuesta_retenciones' ).value = datos.retenciones.toFixed( 2 );
+                       document.getElementById( 'propuesta_total' ).value       = datos.total.toFixed( 2 );
 
                        aviso( 'Producto agregado correctamente' );
                        resetFormProductos();
@@ -245,10 +246,10 @@
               e.preventDefault();
               setMonto( document.getElementById( 'propuestaProducto_precio' ).value );
           });*/
-          document.getElementById( 'propuestaProducto_precio' ).addEventListener( 'change' , function( e ) {
+          /*document.getElementById( 'propuestaProducto_precio' ).addEventListener( 'change' , function( e ) {
               e.preventDefault();
               setMonto( this.value );
-          });
+          });*/
           document.getElementById( 'btnGeneraPropuesta' ).addEventListener( 'click' , function( e ) {
               e.preventDefault();
               guardaDatosPropuesta();
@@ -422,7 +423,24 @@
           });
       }
 
-      function eliminaRenglon( indice ) {
-          document.getElementById( 'containerProductosPropuesta' ).deleteRow( indice );
+      function eliminaRenglon( e , elemento , idProd ) {
+          axios.post( '/api/carritoEliminaProd/' + idProd , {} , {headers:{'Accept':'application/json','Authorization':'Bearer ' + sessionStorage.getItem('apiToken')}} )
+               .then( response => {
+                   e.preventDefault();
+                   var row = elemento.parentNode.parentNode;
+                   row.parentNode.removeChild(row);
+
+                   var datos = response.data;
+                   document.getElementById( 'propuesta_monto' ).value       = datos.subtotal.toFixed( 2 );
+                   document.getElementById( 'propuesta_traslados' ).value   = datos.traslados.toFixed( 2 );
+                   document.getElementById( 'propuesta_retenciones' ).value = datos.retenciones.toFixed( 2 );
+                   document.getElementById( 'propuesta_total' ).value       = datos.total.toFixed( 2 );
+
+                   aviso( 'Producto eliminado correctamente' );
+
+               })
+               .catch( err => {
+                 console.log( err );
+               });
       }
 </script>

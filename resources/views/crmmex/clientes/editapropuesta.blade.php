@@ -37,14 +37,21 @@
            document.getElementById( 'pID' ).value                      = document.getElementById( 'propuestaID' ).value;
            comboContactos( response.data.cliente , response.data.contactoID );
 
+           var tabla = document.getElementById( 'containerProductosPropuesta' ).getElementsByTagName( 'tbody' )[ 0 ];
            response.data.detalle.forEach( function( e , i ){
-              $( '#formIndividual' ).show( 'slow' );
-              document.getElementById( 'propuesta_cantidad' ).value                 = e.cantidad;
-              document.getElementById( 'propuesta_precio' ).value                   = e.unitario;
-              document.getElementById( 'propuesta_observaciones_producto' ).value   = e.comentarios;
-              document.getElementById( 'catalogo_12' ).value                        = e.grupoID;
-              comboProductos( e.grupoID , e.productoID );
-              document.getElementById( 'listadoProductosPropuestaComercial' ).value = e.productoID;
+              var renglon = tabla.insertRow();
+              renglon.insertCell(0).appendChild( document.createTextNode( e.productoTxt ) );
+              renglon.insertCell(1).appendChild( document.createTextNode( e.cantidad ) );
+              renglon.insertCell(2).appendChild( document.createTextNode( e.unitario ) );
+              var importe = ( e.unitario * e.cantidad );
+              renglon.insertCell(3).appendChild( document.createTextNode( importe.toFixed( 2 ) ) );
+              renglon.insertCell(4).innerHTML = '<button type="button" class="btn btn-sm" onclick="eliminaRenglon(event,this,\''+e.productoID+'\')"><i class="fa fa-trash fa-sm"></i></button>';
+
+              var porcTraslado = ( e.traslados / 100 ) * importe;
+              document.getElementById( 'propuesta_traslados' ).value   = parseInt( document.getElementById( 'propuesta_traslados' ).value ) + porcTraslado;
+              var porcRet = ( e.retenciones / 100 ) * importe;
+              document.getElementById( 'propuesta_retenciones' ).value = parseInt( document.getElementById( 'propuesta_retenciones' ).value ) + porcRet;
+              axios.post( '/api/carritoCarga/' + propuestaID , {} , {headers:{'Accept':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' ) }} );
            });
 
          })

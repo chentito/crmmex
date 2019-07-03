@@ -8,6 +8,7 @@ namespace App\Http\Controllers\crmmex\Clientes;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 use App\Models\crmmex\Clientes\Propuestas AS Propuestas;
 use App\Models\crmmex\Productos\Productos AS Productos;
 use App\Models\crmmex\Clientes\PropuestasDetalle AS PropuestasDetalle;
@@ -78,20 +79,27 @@ class PropuestasController extends Controller
           $propuesta->total           = $request->propuesta_total;
           $propuesta->descuento       = $request->propuesta_descuento;
           $propuesta->promocion       = $request->propuesta_promocion;
+          $propuesta->pagoPropuesta   = 0;
           $propuesta->estadoPropuesta = 0;
           $propuesta->status          = 1;
 
           if( $propuesta->save() ) {
-              $detalle = new PropuestasDetalle();
-              $detalle->idPropuesta = $propuesta->id;
-              $detalle->idProducto  = $request->productoID;
-              $detalle->cantidad    = $request->propuesta_cantidad;
-              $detalle->unitario    = $request->propuesta_precio;
-              $detalle->comentarios = $request->propuesta_observaciones_producto;
-              $detalle->descuento   = "0.00";
-              $detalle->promocion   = "0";
-              $detalle->status      = "1";
-              $detalle->save();
+
+              $productos = Session::get( 'carrito' );
+              foreach( $productos AS $prod ) {
+                $detalle = new PropuestasDetalle();
+                $detalle->idPropuesta = $propuesta->id;
+                $detalle->idProducto  = $prod[ 'id' ];
+                $detalle->comentarios = $prod[ 'comentarios' ];
+                $detalle->cantidad    = $prod[ 'cantidad' ];
+                $detalle->unitario    = $prod[ 'unitario' ];
+                $detalle->descuento   = $prod[ 'descuento' ];
+                $detalle->promocion   = $prod[ 'promocion' ];
+                $detalle->traslados   = $prod[ 'traslados' ];
+                $detalle->retenciones = $prod[ 'retenciones' ];
+                $detalle->status      = "1";
+                $detalle->save();
+              }
 
               // Actualiza IDTY de la propuesta
               $propUpdate = Propuestas::find( $propuesta->id );
@@ -128,6 +136,23 @@ class PropuestasController extends Controller
           $propuesta->estadoPropuesta = 0;
 
           if( $propuesta->save() ) {
+              DB::table( 'crmmex_ventas_propuestacomercial_detalle' )->where( 'idPropuesta' , $propuestaID )->update( [ 'status' => 0 ] );
+              $productos = Session::get( 'carrito' );
+              foreach( $productos AS $prod ) {
+                $detalle = new PropuestasDetalle();
+                $detalle->idPropuesta = $propuestaID;
+                $detalle->idProducto  = $prod[ 'id' ];
+                $detalle->comentarios = $prod[ 'comentarios' ];
+                $detalle->cantidad    = $prod[ 'cantidad' ];
+                $detalle->unitario    = $prod[ 'unitario' ];
+                $detalle->descuento   = $prod[ 'descuento' ];
+                $detalle->promocion   = $prod[ 'promocion' ];
+                $detalle->traslados   = $prod[ 'traslados' ];
+                $detalle->retenciones = $prod[ 'retenciones' ];
+                $detalle->status      = "1";
+                $detalle->save();
+              }
+
               $resp[ 'msj' ] = "Propuesta actualizada correctamente";
               $resp[ 'idty' ] = $propuesta->id;
           } else {
@@ -181,6 +206,8 @@ class PropuestasController extends Controller
                 'comentarios' => $producto->comentarios,
                 'cantidad'    => $producto->cantidad,
                 'unitario'    => $producto->unitario,
+                'traslados'   => $producto->traslados,
+                'retenciones' => $producto->retenciones,
                 'descuento'   => $producto->descuento,
                 'estatus'     => $producto->status,
                 'promocion'   => $producto->promocion
@@ -260,11 +287,11 @@ class PropuestasController extends Controller
             */
             public function carrito( Request $request ) {
 
-                if( Session::has( 'carrito' ) ) {
-                      //$carrito = Session::get( 'carrito' );
-                  } else {
-                      //$carrito = array();
-                      Session::put( 'carrito' , array() );
+                if( !Session::has( 'carrito' ) || Session::get( 'carrito' ) == null ) {
+                    Session::put( 'carrito' , [] );
+                    //$carrito = Session::get( 'carrito' );
+                } else {
+                    //$carrito = array();
                 }
 
                 $datos = array(
@@ -278,17 +305,19 @@ class PropuestasController extends Controller
                     'retenciones' => $request->propuestaProducto_retencion
                 );
 
-                //$carrito[ $request->propuestaProducto_productoID ] = $datos;
-                Session::push( 'carrito.' . $request->propuestaProducto_productoID , $datos );
+                //$carrito[] = $datos;
+                Session::push( 'carrito' , $datos );
+                Session::save();
 
-                $totales   = array(
+                $totales = array(
                     'subtotal'    => 0,
                     'traslados'   => 0,
                     'retenciones' => 0,
                     'total'       => 0
                 );
 
-                /*foreach( Session::get( 'carrito' ) AS $k => $v ) {
+                $productos = Session::get( 'carrito' );
+                foreach( $productos AS $v) {
                     $importe = $v[ 'cantidad' ] * $v[ 'unitario' ];
                     $totales[ 'subtotal' ]    = $totales[ 'subtotal' ] + $importe;
 
@@ -299,9 +328,82 @@ class PropuestasController extends Controller
                     $totales[ 'retenciones' ] = $totales[ 'retenciones' ] + $montoRetenciones;
 
                     $totales[ 'total' ] = $totales[ 'subtotal' ] + $totales[ 'traslados' ] - $totales[ 'retenciones' ];
-                }*/
-                $c = Session::get( 'carrito' );
-                return response()->json( $c );
+                }
+
+                return response()->json( $totales );
             }
+
+            /*
+             * Carga variable de sesion para editar propuesta
+             */
+             public function cargaCarrito( $propuestaID ) {
+                  $productos = PropuestasDetalle::where( 'idPropuesta' , $propuestaID )
+                                                ->where( 'status' , "1" )
+                                                ->get();
+                  Session::get( 'carrito' );
+                  foreach( $productos AS $producto ) {
+                      $prod = array(
+                        'id'          => $producto->idProducto,
+                        'comentarios' => $producto->comentarios,
+                        'cantidad'    => $producto->cantidad,
+                        'unitario'    => $producto->unitario,
+                        'descuento'   => $producto->descuento,
+                        'promocion'   => $producto->promocion,
+                        'traslados'   => $producto->traslados,
+                        'retenciones' => $producto->retenciones
+                      );
+                      Session::push( 'carrito' , $prod );
+                      Session::save();
+                  }
+             }
+
+             /*
+              * Elimina elemento del carrito
+              */
+              public function eliminaElementoCarrito( $productoID ) {
+                  $productos = Session::get( 'carrito' );
+                  $indice    = 0;
+                  foreach( $productos AS $producto ) {
+                      if( $producto[ 'id' ] == $productoID ){
+                          unset( $productos[ $indice ] );
+                      } else {
+                          $indice ++;
+                      }
+                  }
+                  Session::put( 'carrito' , $productos );
+                  Session::save();
+
+                  $totales = array(
+                      'subtotal'    => 0,
+                      'traslados'   => 0,
+                      'retenciones' => 0,
+                      'total'       => 0
+                  );
+
+                  $prods = Session::get( 'carrito' );
+                  foreach( $prods AS $v) {
+                      $importe = $v[ 'cantidad' ] * $v[ 'unitario' ];
+                      $totales[ 'subtotal' ]    = $totales[ 'subtotal' ] + $importe;
+
+                      $montoTraslados = number_format( ( $v[ 'traslados' ] / 100 ) * $importe , 2 );
+                      $totales[ 'traslados' ]   = $totales[ 'traslados' ] + $montoTraslados;
+
+                      $montoRetenciones = number_format( ( $v[ 'retenciones' ] / 100 ) * $importe , 2 );
+                      $totales[ 'retenciones' ] = $totales[ 'retenciones' ] + $montoRetenciones;
+
+                      $totales[ 'total' ] = $totales[ 'subtotal' ] + $totales[ 'traslados' ] - $totales[ 'retenciones' ];
+                  }
+
+                  return response()->json( $totales );
+              }
+
+            /*
+             * Elimina carrito
+             */
+             public function eliminaCarrito() {
+                Session::forget( 'carrito' );
+                Session::put( 'carrito' , [] );
+                Session::save();
+             }
 
 }

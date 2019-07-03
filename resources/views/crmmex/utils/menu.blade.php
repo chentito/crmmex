@@ -52,6 +52,7 @@
                 <a href="#configuracionesProductos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Productos</a>
                 <ul class="collapse list-unstyled" id="configuracionesProductos">
                     <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_camposAdicionales','3');"> > Campos Adicionales</a></li>
+                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_promociones');"> > Alta de Promociones</a></li>
                 </ul>
             </li>
             <li>

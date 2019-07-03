@@ -77,6 +77,17 @@ Route::middleware( 'auth:api' )->get ( '/idtyPropuesta'                       , 
 Route::middleware( 'auth:api' )->get ( '/generaPDF/{propuestaID}'             , 'crmmex\Clientes\PropuestasController@generaPDF' );
 Route::middleware( 'auth:api' )->get ( '/enviaPropuesta/{propuestaID}'        , 'crmmex\Clientes\PropuestasController@enviaPropuesta' );
 Route::middleware( 'auth:api' )->post( '/carrito'                             , 'crmmex\Clientes\PropuestasController@carrito' );
+Route::middleware( 'auth:api' )->post( '/carritoElimina'                      , 'crmmex\Clientes\PropuestasController@eliminaCarrito' );
+Route::middleware( 'auth:api' )->post( '/carritoEliminaProd/{productoID}'     , 'crmmex\Clientes\PropuestasController@eliminaElementoCarrito' );
+Route::middleware( 'auth:api' )->post( '/carritoCarga/{propuestaID}'          , 'crmmex\Clientes\PropuestasController@cargaCarrito' );
+
+
+/************************************ Promociones ************************************/
+Route::middleware( 'auth:api' )->get ( '/listadoPromociones'               , 'crmmex\Productos\PromocionesController@listadoPromociones' );
+Route::middleware( 'auth:api' )->post( '/guardaPromocion'                  , 'crmmex\Productos\PromocionesController@guardaPromocion' );
+Route::middleware( 'auth:api' )->get ( '/detallePromocion/{promocionID}'   , 'crmmex\Productos\PromocionesController@detallePromocion' );
+Route::middleware( 'auth:api' )->post( '/actualizaPromocion'               , 'crmmex\Productos\PromocionesController@actualizaPromocion' );
+Route::middleware( 'auth:api' )->post( '/eliminaPromocion/{promocionID}'   , 'crmmex\Productos\PromocionesController@eliminaPromocion' );
 
 
 /******************** Operaciones para el modulo de ventas ********************/
