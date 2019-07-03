@@ -69,17 +69,18 @@ Route::middleware( 'auth:api' )->post( '/clienteIdty/{clienteID}'          , 'cr
 Route::middleware( 'auth:api' )->post( '/seguimientoIdty/{seguimientoID}'  , 'crmmex\Clientes\SeguimientoController@seguimientoIdty' );
 
 
-/************************************ Propuestas ************************************/
+/************************************ Propuestas ***********************************
 Route::middleware( 'auth:api' )->get ( '/obtieneDatosPropuesta/{propuestaID}' , 'crmmex\Clientes\PropuestasController@datosPropuesta' );
 Route::middleware( 'auth:api' )->post( '/altaPropuesta'                       , 'crmmex\Clientes\PropuestasController@altaPropuesta' );
 Route::middleware( 'auth:api' )->post( '/editaPropuesta'                      , 'crmmex\Clientes\PropuestasController@editaPropuesta' );
+Route::middleware( 'auth:api' )->post( '/eliminaPropuesta/{propuestaID}'      , 'crmmex\Clientes\PropuestasController@eliminaPropuesta' );
 Route::middleware( 'auth:api' )->get ( '/idtyPropuesta'                       , 'crmmex\Clientes\PropuestasController@generaIdPropuesta' );
 Route::middleware( 'auth:api' )->get ( '/generaPDF/{propuestaID}'             , 'crmmex\Clientes\PropuestasController@generaPDF' );
 Route::middleware( 'auth:api' )->get ( '/enviaPropuesta/{propuestaID}'        , 'crmmex\Clientes\PropuestasController@enviaPropuesta' );
 Route::middleware( 'auth:api' )->post( '/carrito'                             , 'crmmex\Clientes\PropuestasController@carrito' );
 Route::middleware( 'auth:api' )->post( '/carritoElimina'                      , 'crmmex\Clientes\PropuestasController@eliminaCarrito' );
 Route::middleware( 'auth:api' )->post( '/carritoEliminaProd/{productoID}'     , 'crmmex\Clientes\PropuestasController@eliminaElementoCarrito' );
-Route::middleware( 'auth:api' )->post( '/carritoCarga/{propuestaID}'          , 'crmmex\Clientes\PropuestasController@cargaCarrito' );
+Route::middleware( 'auth:api' )->post( '/carritoCarga/{propuestaID}'          , 'crmmex\Clientes\PropuestasController@cargaCarrito' ); */
 
 
 /************************************ Promociones ************************************/

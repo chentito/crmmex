@@ -40,11 +40,24 @@ Route::middleware('auth')->group( function() {
     );
 });
 
+// Rutas utiles para el carrito de la propuesta
+Route::middleware( 'web' )->group( function(){
+
+  Route::get ( '/obtieneDatosPropuesta/{propuestaID}' , 'crmmex\Clientes\PropuestasController@datosPropuesta' );
+  Route::post( '/altaPropuesta'                       , 'crmmex\Clientes\PropuestasController@altaPropuesta' );
+  Route::post( '/editaPropuesta'                      , 'crmmex\Clientes\PropuestasController@editaPropuesta' );
+  Route::post( '/eliminaPropuesta/{propuestaID}'      , 'crmmex\Clientes\PropuestasController@eliminaPropuesta' );
+  Route::get ( '/idtyPropuesta'                       , 'crmmex\Clientes\PropuestasController@generaIdPropuesta' );
+  Route::get ( '/generaPDF/{propuestaID}'             , 'crmmex\Clientes\PropuestasController@generaPDF' );
+  Route::get ( '/enviaPropuesta/{propuestaID}'        , 'crmmex\Clientes\PropuestasController@enviaPropuesta' );
+  Route::post( '/carrito'                             , 'crmmex\Clientes\PropuestasController@carrito' );
+  Route::post( '/carritoElimina'                      , 'crmmex\Clientes\PropuestasController@eliminaCarrito' );
+  Route::post( '/carritoEliminaProd/{productoID}'     , 'crmmex\Clientes\PropuestasController@eliminaElementoCarrito' );
+  Route::post( '/carritoCarga/{propuestaID}'          , 'crmmex\Clientes\PropuestasController@cargaCarrito' );
+
+});
+
 Route::get( '/' , function (){ return redirect( '/login' ); } );
-
-
-
-
 
 
 /**********************

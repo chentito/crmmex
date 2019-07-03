@@ -164,7 +164,8 @@
 <script>
       $( function () {
 
-          axios.post( '/api/carritoElimina' , {} , {headers:{'Accept':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' ) }} );
+          //axios.post( '/api/carritoElimina' , {} , {headers:{'Accept':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' ) }} );
+          axios.post( '/carritoElimina' , {} , {headers:{'Accept':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' ) }} );
 
           $( '#propuesta_fechaVigencia' ).datepicker({
               format: "yyyy-mm-dd",
@@ -202,7 +203,8 @@
                   }
               };
 
-              axios.post( '/api/carrito' , datos , conf )
+              //axios.post( '/api/carrito' , datos , conf )
+              axios.post( '/carrito' , datos , conf )
                    .then( response => {
                        var tabla   = document.getElementById( 'containerProductosPropuesta' ).getElementsByTagName( 'tbody' )[ 0 ];
                        var renglon = tabla.insertRow();
@@ -316,9 +318,11 @@
         var token  = sessionStorage.getItem( 'apiToken' );
 
         if( document.getElementById( 'propuestaID' ) == null ) {
-              var url = '/api/altaPropuesta';
+              //var url = '/api/altaPropuesta';
+              var url = '/altaPropuesta';
           } else {
-              var url = '/api/editaPropuesta';
+              //var url = '/api/editaPropuesta';
+              var url = '/editaPropuesta';
         }
 
         var datos  = new FormData( document.getElementById( 'form_altaPropuestaComercial' ) );
@@ -406,7 +410,8 @@
 
       function cargaIdtyPropuesta() {
           var token = sessionStorage.getItem( 'apiToken' );
-          var url   = '/api/idtyPropuesta/';
+          //var url   = '/api/idtyPropuesta/';
+          var url   = '/idtyPropuesta/';
           var conf  = {
               headers: {
                 'Accept' : 'application/json',
@@ -424,7 +429,8 @@
       }
 
       function eliminaRenglon( e , elemento , idProd ) {
-          axios.post( '/api/carritoEliminaProd/' + idProd , {} , {headers:{'Accept':'application/json','Authorization':'Bearer ' + sessionStorage.getItem('apiToken')}} )
+          //axios.post( '/api/carritoEliminaProd/' + idProd , {} , {headers:{'Accept':'application/json','Authorization':'Bearer ' + sessionStorage.getItem('apiToken')}} )
+          axios.post( '/carritoEliminaProd/' + idProd , {} , {headers:{'Accept':'application/json','Authorization':'Bearer ' + sessionStorage.getItem('apiToken')}} )
                .then( response => {
                    e.preventDefault();
                    var row = elemento.parentNode.parentNode;

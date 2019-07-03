@@ -19,7 +19,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
-        //\Illuminate\Session\Middleware\StartSession::class,// SE AGREGÓ PARA HACER FUNCIONAR LAS SESIONES
+        //\Illuminate\Session\Middleware\StartSession::class, \App\Http\Middleware\VerifyCsrfToken::class, // SE AGREGÓ PARA HACER FUNCIONAR LAS SESIONES
     ];
 
     /**

@@ -9,7 +9,8 @@
   function datosPropuesta() {
     var token       = sessionStorage.getItem( 'apiToken' );
     var propuestaID = document.getElementById( 'propuestaID' ).value;
-    var url         = '/api/obtieneDatosPropuesta/' + propuestaID;
+    //var url         = '/api/obtieneDatosPropuesta/' + propuestaID;
+    var url         = '/obtieneDatosPropuesta/' + propuestaID;
     var config      = {
         headers: {
           "Accept" : "application/json",
@@ -51,7 +52,8 @@
               document.getElementById( 'propuesta_traslados' ).value   = parseInt( document.getElementById( 'propuesta_traslados' ).value ) + porcTraslado;
               var porcRet = ( e.retenciones / 100 ) * importe;
               document.getElementById( 'propuesta_retenciones' ).value = parseInt( document.getElementById( 'propuesta_retenciones' ).value ) + porcRet;
-              axios.post( '/api/carritoCarga/' + propuestaID , {} , {headers:{'Accept':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' ) }} );
+              //axios.post( '/api/carritoCarga/' + propuestaID , {} , {headers:{'Accept':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' ) }} );
+              axios.post( '/carritoCarga/' + propuestaID , {} , {headers:{'Accept':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' ) }} );
            });
 
          })

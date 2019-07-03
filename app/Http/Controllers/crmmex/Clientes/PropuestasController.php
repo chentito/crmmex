@@ -52,6 +52,7 @@ class PropuestasController extends Controller
                 'opciones'        => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Propuesta" onclick="contenidos(\'clientes_editapropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-edit fa-sm"></i></a>'
                                    . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Visualizar Propuesta" onclick="generaPDF(\''.$propuesta->id.'\',\''.$propuesta->propuestaIDTY.'.pdf\')" class="mr-2"><i class="fa fa-file-pdf fa-sm"></i></a>'
                                    . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Enviar Propuesta" onclick="contenidos(\'clientes_enviaPropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-paper-plane fa-sm"></i></a>'
+                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Elimina Propuesta" onclick="contenidos(\'clientes_eliminaPropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-trash fa-sm"></i></a>'
             );
         }
 
@@ -227,7 +228,7 @@ class PropuestasController extends Controller
         * Elimina un registro a traves de su ID
         */
         public function eliminaPropuesta( $propuestaID ) {
-            $propuesta = Propuesta::find( $propuestaID );
+            $propuesta = Propuestas::find( $propuestaID );
             $propuesta->status = 3;
             $propuesta->save();
         }

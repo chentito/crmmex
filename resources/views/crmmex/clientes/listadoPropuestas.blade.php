@@ -45,7 +45,8 @@
 
     function generaPDF( propuestaID , propuestaIDTY ) {
         var token  = sessionStorage.getItem( 'apiToken' );
-        var url    = '/api/generaPDF/' + propuestaID;
+        //var url    = '/api/generaPDF/' + propuestaID;
+        var url    = '/generaPDF/' + propuestaID;
         var config = {
           headers: {
             "Accept" : "application/json",

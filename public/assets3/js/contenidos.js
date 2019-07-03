@@ -128,7 +128,8 @@ function aplicaPromo( promoID , monto , input ) {
 
     axios.post( url , datos , config )
      .then( response => {
-       document.getElementById( input ).value = response.data.toFixed( 2 );
+       document.getElementById( input ).value       = response.data.toFixed( 2 );
+       document.getElementById( 'propuesta_total' ) = parseInt( document.getElementById( 'propuesta_total' ).value ) - parseInt( response.data );
      })
      .catch( err => {
        console.log( err );
