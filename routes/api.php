@@ -58,15 +58,16 @@ Route::middleware( 'auth:api' )->post( '/habilitaCliente/{id}'      , 'crmmex\Cl
 
 
 /************************************ Seguimientos ************************************/
-Route::middleware( 'auth:api' )->get ( '/validaRFC/{rfc}'                  , 'crmmex\Clientes\ClientesController@valRFC' );
-Route::middleware( 'auth:api' )->get ( '/listadoSeguimientos/{clienteID?}' , 'crmmex\Clientes\SeguimientoController@listadoSeguimientos' );
-Route::middleware( 'auth:api' )->get ( '/listadoContactos/{clienteID}'     , 'crmmex\Clientes\SeguimientoController@listadoContactosPorCliente' );
-Route::middleware( 'auth:api' )->post( '/guardaSeguimiento'                , 'crmmex\Clientes\SeguimientoController@guardaSeguimiento' );
-Route::middleware( 'auth:api' )->get ( '/obtieneSeguimiento/{id}'          , 'crmmex\Clientes\SeguimientoController@obtieneSeguimiento' );
-Route::middleware( 'auth:api' )->post( '/actualizaSeguimiento'             , 'crmmex\Clientes\SeguimientoController@actualizaSeguimiento' );
-Route::middleware( 'auth:api' )->get ( '/listadoPropuestas/{clienteID}'    , 'crmmex\Clientes\PropuestasController@listadoPropuestas' );
-Route::middleware( 'auth:api' )->post( '/clienteIdty/{clienteID}'          , 'crmmex\Clientes\ClientesController@clienteIdty' );
-Route::middleware( 'auth:api' )->post( '/seguimientoIdty/{seguimientoID}'  , 'crmmex\Clientes\SeguimientoController@seguimientoIdty' );
+Route::middleware( 'auth:api' )->get ( '/validaRFC/{rfc}'                    , 'crmmex\Clientes\ClientesController@valRFC' );
+Route::middleware( 'auth:api' )->get ( '/listadoSeguimientos/{clienteID?}'   , 'crmmex\Clientes\SeguimientoController@listadoSeguimientos' );
+Route::middleware( 'auth:api' )->get ( '/listadoContactos/{clienteID}'       , 'crmmex\Clientes\SeguimientoController@listadoContactosPorCliente' );
+Route::middleware( 'auth:api' )->post( '/guardaSeguimiento'                  , 'crmmex\Clientes\SeguimientoController@guardaSeguimiento' );
+Route::middleware( 'auth:api' )->get ( '/obtieneSeguimiento/{id}'            , 'crmmex\Clientes\SeguimientoController@obtieneSeguimiento' );
+Route::middleware( 'auth:api' )->post( '/actualizaSeguimiento'               , 'crmmex\Clientes\SeguimientoController@actualizaSeguimiento' );
+Route::middleware( 'auth:api' )->get ( '/listadoPropuestas/{clienteID}'      , 'crmmex\Clientes\PropuestasController@listadoPropuestas' );
+Route::middleware( 'auth:api' )->post( '/clienteIdty/{clienteID}'            , 'crmmex\Clientes\ClientesController@clienteIdty' );
+Route::middleware( 'auth:api' )->post( '/seguimientoIdty/{seguimientoID}'    , 'crmmex\Clientes\SeguimientoController@seguimientoIdty' );
+Route::middleware( 'auth:api' )->post( '/eliminaSeguimiento/{seguimientoID}' , 'crmmex\Clientes\SeguimientoController@eliminaSeguimiento' );
 
 
 /************************************ Propuestas ***********************************

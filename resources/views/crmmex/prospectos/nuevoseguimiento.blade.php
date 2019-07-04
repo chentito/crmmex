@@ -83,7 +83,7 @@
 
   document.getElementById( 'btnRegresaListadoSeguimientosPorCliente' ).addEventListener( 'click' , function( e ){
       e.preventDefault();
-      contenidos( 'clientes_seguimiento' , document.getElementById( 'clienteID' ).value );
+      contenidos( 'prospectos_seguimiento' , document.getElementById( 'clienteID' ).value );
   });
 
   async function cargaContactos( selected='' ) {
@@ -134,7 +134,7 @@
         axios.post( ruta , datos , config )
              .then( response => {
                aviso( 'Seguimiento agregado correctamente' );+
-               contenidos( 'clientes_editaseguimiento' , response.data.idty );
+               contenidos( 'prospectos_editaseguimiento' , response.data.idty );
              })
              .catch( err => {
                 console.log( err );

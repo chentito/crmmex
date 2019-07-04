@@ -1,58 +1,45 @@
-<div class="card card-small w-100">
-    <div class="card-body">
-        <table id="seguimientos" class="table table-striped table-bordered" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Prospecto/Cliente</th>
-                    <th>Contacto</th>
-                    <th>Actividad</th>
-                    <th>Estado</th>
-                    <th>Alta</th>
-                    <th>Conclusi&oacute;n</th>
-                    <th>M&aacute;s</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>Prospecto/Cliente</th>
-                    <th>Contacto</th>
-                    <th>Actividad</th>
-                    <th>Estado</th>
-                    <th>Fecha Alta</th>
-                    <th>Fecha Conclusi&oacute;n</th>
-                    <th>M&aacute;s</th>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-    <div class="card-footer">
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                <botton class="btn btn-sm {{$btn}}" onclick="javascript:contenidos('prospectos_nuevoseguimiento');">Agregar Seguimiento</botton>
-            </div>
-        </div>
-    </div>
-</div>
 
+<h4><span id="clienteIdty"></span></h4>
+<input type="hidden" name="clienteID" id="clienteID" value="{{$param}}">
+
+<div id="listadoSeguimientos_config"></div>
+<table id="listadoSeguimientos" class="table table-striped table-bordered" style="width:100%"></table>
+
+<div class="row mt-1">
+  <div class="col-sm-12 text-center">
+    <button class="btn btn-sm {{$btn}}" onclick="javascript:contenidos('prospectos_listado')"><i class="fa fa-undo-alt fa-lg"></i> Regresar</button>
+    <button class="btn btn-sm {{$btn}}" id="abreAltaSeguimiento"><i class="fa fa-plus fa-lg"></i> Agregar Seguimiento</button>
+  </div>
+</div>
 <script>
-    $(document).ready( function() {
-        $('#seguimientos').DataTable({
-            ajax   :{
-                url: '/api/listadoSeguimientos',
-                dataSrc: 'seguimientos'
-            },
-            columns: [
-                { data: 'cliente' },
-                { data: 'contacto' },
-                { data: 'actividad' },
-                { data: 'estado' },
-                { data: 'fechaAlta' },
-                { data: 'fechaFin' },
-                { data: 'opciones' }
-            ],
-            responsive: true
-        });
+    $( document ).ready( function() {
+        var clienteID = document.getElementById( 'clienteID' ).value;
+        generaDataGrid( 'listadoSeguimientos' , clienteID );
+        cargaNombre();
     });
+
+    function cargaNombre() {
+        var token  = sessionStorage.getItem( 'apiToken' );
+        var url    = '/api/clienteIdty/' + document.getElementById( 'clienteID' ).value;
+        var config = {
+          headers: {
+            "Accept" : "application/json",
+            "Authorization" : "Bearer " + token
+          }
+        };
+
+        axios.post( url , {} , config )
+             .then( response => {
+                document.getElementById( 'clienteIdty' ).innerHTML = response.data;
+             })
+             .catch( err => {
+               console.log( err );
+             });
+    }
+
+    document.getElementById( 'abreAltaSeguimiento' ).addEventListener( 'click' , function( e ) {
+        e.preventDefault();
+        contenidos( "prospectos_nuevoseguimiento" , document.getElementById( 'clienteID' ).value );
+    });
+
 </script>

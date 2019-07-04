@@ -261,27 +261,33 @@
           mov = 'edicion';
         }
 
-        $.ajaxSetup({ headers: {
-            'Accept': 'application/json',
-            'Authorization': 'Bearer ' + token
-          }
-        });
-        $.ajax({
-            type  : "post",
-            url   : ruta,
-            data  : datos,
-            cache : false,
-            beforeSend : function() {},
-            success : function(d) {
-                aviso( 'Prospecto ' + ( ( mov == 'alta' ) ? 'agregado' : 'actualizado' ) + ' correctamente' );
-                if( mov == 'alta' ) {
-                    contenidos( 'prospectos_listado' );
-                } else {
-                    contenidos( 'prospectos_listado' , $( '#idCargaInfo' ).val() );
+        if( document.getElementById( 'contacto_nombre' ).value == '' ) {
+            aviso( 'No ha proporcionado el nombre del contacto' , false );
+        } else if( document.getElementById( 'contacto_email' ).value == '' ) {
+            aviso( 'No ha proporcionado el correo electrónico del contacto' , false );
+        } else {
+              $.ajaxSetup({ headers: {
+                  'Accept': 'application/json',
+                  'Authorization': 'Bearer ' + token
                 }
-            },
-            error : function() {}
-        });
+              });
+              $.ajax({
+                  type  : "post",
+                  url   : ruta,
+                  data  : datos,
+                  cache : false,
+                  beforeSend : function() {},
+                  success : function(d) {
+                      aviso( 'Prospecto ' + ( ( mov == 'alta' ) ? 'agregado' : 'actualizado' ) + ' correctamente' );
+                      if( mov == 'alta' ) {
+                          contenidos( 'prospectos_listado' );
+                      } else {
+                          contenidos( 'prospectos_listado' , $( '#idCargaInfo' ).val() );
+                      }
+                  },
+                  error : function() {}
+              });
+        }
     }
 
     function agregaEstructuraContacto(nom='',idty='',appat='',apmat='',correo='',celular='',compania='',tel='',ext='',area='',puesto='') {

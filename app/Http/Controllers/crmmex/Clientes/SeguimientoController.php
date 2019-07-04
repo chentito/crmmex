@@ -10,6 +10,7 @@ namespace App\Http\Controllers\crmmex\Clientes;
 use Illuminate\Support\Facades\Auth;
 use App\Models\crmmex\Clientes\Seguimiento AS Seguimiento;
 use App\Models\crmmex\Clientes\Contactos AS Contactos;
+use App\Models\crmmex\Clientes\Clientes AS Clientes;
 use App\Http\Controllers\crmmex\Utils\UtilsController AS Utiles;
 
 use Illuminate\Http\Request;
@@ -44,13 +45,38 @@ class SeguimientoController extends Controller
             'fechaEjecucion'  => $s->fechaEjecucion,
             'estado'          => Utiles::valorCatalogo( $s->estado ),
             'status'          => $s->status,
-            'opciones'        => '<a href="javascript:void(0)" onclick="contenidos(\'clientes_editaseguimiento\',\''.$s->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
+            'opciones'        => ( $this->tipoCliente( $s->clienteID ) == 1 ) ?
+                                '<a href="javascript:void(0)" onclick="contenidos(\'clientes_editaseguimiento\',\''.$s->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
+                              . '<a href="javascript:void(0)" onclick="contenidos(\'clientes_eliminaSeguimiento\',\''.$s->id.'\')"><i class="fa fa-trash fa-sm ml-2"></i></a>'
+                                :
+                                '<a href="javascript:void(0)" onclick="contenidos(\'prospectos_editaseguimiento\',\''.$s->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
+                              . '<a href="javascript:void(0)" onclick="contenidos(\'prospectos_eliminaSeguimiento\',\''.$s->id.'\')"><i class="fa fa-trash fa-sm ml-2"></i></a>'
           );
         }
 
         return response()->json( $seguimientos );
     }
 
+    /*
+     * Elimina un seguimiento
+     */
+     public function eliminaSeguimiento( $seguimientoID ) {
+        $seguimiento = Seguimiento::find( $seguimientoID );
+        $seguimiento->status = 0;
+        $seguimiento->save();
+     }
+
+    /*
+     * Obtiene el tipo de cliente
+     */
+    private function tipoCliente( $clienteID ) {
+        $cliente = Clientes::find( $clienteID );
+        return $cliente->tipo;
+    }
+
+    /*
+     * Obtiene el nombre del contacto
+     */
     private function nombreContacto( $contactoID ) {
         $contacto = Contactos::find( $contactoID );
         return $contacto->nombre . ' ' . $contacto->apellidoPaterno . ' ' . $contacto->apellidoMaterno;
@@ -67,7 +93,8 @@ class SeguimientoController extends Controller
         $seguimiento->tipoActividad   = $request->catalogo_16;
         $seguimiento->nombreActividad = $request->prospectos_nuevoseguimiento_titulo;
         $seguimiento->descripcion     = $request->prospectos_nuevoseguimiento_texto;
-        $seguimiento->fechaAlta       = $request->prospectos_nuevoseguimiento_fecha;
+        $seguimiento->fechaAlta       = date( 'Y-m-d H:i:s' );
+        $seguimiento->fechaEjecucion  = $request->prospectos_nuevoseguimiento_fecha;
         $seguimiento->estado          = $request->catalogo_17;
         $seguimiento->status          = 1;
         $stat                         = $seguimiento->save();

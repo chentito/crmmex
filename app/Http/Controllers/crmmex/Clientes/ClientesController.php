@@ -151,6 +151,7 @@ class ClientesController extends Controller
         $prospectos = DB::table( 'crmmex_ventas_contacto' )
                     ->leftJoin( 'crmmex_ventas_cliente' , 'crmmex_ventas_contacto.clienteID' , '=' , 'crmmex_ventas_cliente.id' )
                     ->where( 'crmmex_ventas_cliente.tipo' , 2)
+                    ->whereIn( 'crmmex_ventas_cliente.status' , [ 1,2 ] )
                     ->where( 'crmmex_ventas_contacto.status' , 1 )
                     //->groupBy( 'crmmex_ventas_contacto.id' )
                     ->orderBy( 'crmmex_ventas_cliente.id' , 'ASC' )
@@ -177,9 +178,11 @@ class ClientesController extends Controller
               'observaciones'     => $prospecto->observaciones,
               'grupo'             => $prospecto->grupo,
               'status'            => ( ( $prospecto->status == '1' ) ? 'Activo' : 'Deshabilitado' ),
-              'opciones'          => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Prospecto" onclick="contenidos(\'prospectos_edicion\',\''.$prospecto->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
-                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Seguimiento" onclick="contenidos(\'clientes_seguimiento\',\''.$prospecto->id.'\')" class="ml-2"><i class="fa fa-toolbox fa-sm"></i></a>'
+              'opciones'          => ( ( $prospecto->status == '2' ) ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Habilitar Prospecto" onclick="habilitaProspecto(\''.$prospecto->id.'\')"><i class="fa fa-check fa-sm"></i></a>' :
+                                     '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Prospecto" onclick="contenidos(\'prospectos_edicion\',\''.$prospecto->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
+                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Seguimiento" onclick="contenidos(\'prospectos_seguimiento\',\''.$prospecto->id.'\')" class="ml-2"><i class="fa fa-toolbox fa-sm"></i></a>'
                                    . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Propuesta" onclick="contenidos(\'clientes_listadoPropuestas\',\''.$prospecto->id.'\')" class="ml-2"><i class="fa fa-file-alt fa-sm"></i></a>'
+                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Elimina Prospecto" onclick="contenidos(\'prospectos_elimina\',\''.$prospecto->id.'\')" class="ml-2"><i class="fa fa-trash fa-sm"></i></a>'
             );
         }
 
