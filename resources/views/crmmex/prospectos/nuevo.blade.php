@@ -155,7 +155,7 @@
                               <label for="catalogo_11">Cuenta</label>
                               <select id="cliente_tipo" name="cliente_tipo" class="custom-select custom-select-sm">
                                   <option value="2">Prospecto</option>
-                                  <!--option value="1">Cliente</option-->
+                                  <option value="1">Cliente</option>
                               </select>
                           </div>
                           <div class="col-sm-3 mb-1">

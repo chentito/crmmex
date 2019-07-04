@@ -247,7 +247,7 @@ class ClientesController extends Controller
       );
 
       /* Busca Seguimientos */
-      $seguimientos = Seg::where( 'clienteID' , $clienteID )->get();
+      $seguimientos = Seg::where( 'clienteID' , $clienteID )->where( 'status' , 1 )->get();
       foreach( $seguimientos AS $seguimiento ) {
         $expediente[ 'seguimientos' ][] = array(
           'id'              => $seguimiento->id,
