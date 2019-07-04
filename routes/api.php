@@ -154,6 +154,9 @@ Route::get ( '/opcionesCombosPorId/{id}'                    , 'crmmex\Utils\Util
 Route::get ( '/dataTableConfig/{idty}'                      , 'crmmex\Utils\DatatableController@dataTableConfig' );
 Route::get ( '/dataTableConfigView/{idty}'                  , 'crmmex\Utils\DatatableController@dataTableConfigView' );
 Route::post( '/actualizaGridConfig'                         , 'crmmex\Utils\DatatableController@actualizaGridConfig' );
+Route::post( '/actualizaOptCat/{optID}/{optNombre}'         , 'crmmex\Utils\UtilsController@actualizaOpcionCatalogo' );
+Route::post( '/agregaOptCat/{catID}/{optNombre}'            , 'crmmex\Utils\UtilsController@agregaOpcionCatalogo' );
+Route::post( '/eliminaOptCat/{optID}'                       , 'crmmex\Utils\UtilsController@eliminaOpcionCatalogo' );
 
 
 /************************************ Pruebas API consumidas desdee Angular ************************************/

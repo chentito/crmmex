@@ -89,11 +89,13 @@ class UtilsController extends Controller
           $opciones = Catalogo::find( $catalogoID );
 
           foreach( $opciones->opciones AS $opcion ) {
+            if( $opcion->status == 1 ) {
               $catalogo[] = array(
                   'id'     => $opcion->id,
                   'nombre' => $opcion->opcion,
                   'params' => $opcion->parametros
               );
+            }
           }
 
           return response()->json( $catalogo );
@@ -132,11 +134,12 @@ class UtilsController extends Controller
 
             foreach ( $catalogos  as $catalogo ) {
                 $opts = array();
-
                 foreach( $catalogo->opciones AS $opcion ) {
-                    $opts[] = $opcion->opcion;
+                    $opts[] = array(
+                        'idOpt'     => $opcion->id,
+                        'nombreOpt' => $opcion->opcion
+                    );
                 }
-
                 $cat[] = array(
                     'id'       => $catalogo->id,
                     'nombre'   => $catalogo->nombre,
@@ -307,5 +310,37 @@ class UtilsController extends Controller
             }
             return $formato;
         }
+
+        /*
+         * Edita opcion del catalogo
+         */
+         public function actualizaOpcionCatalogo( $optID , $optNombre ) {
+            $opcion         = Opciones::find( $optID );
+            $opcion->opcion = $optNombre;
+            $opcion->save();
+            $cat = array( 'catID' , $opcion->idCat );
+
+            return response()->json( $cat );
+         }
+
+         /*
+          * Agrega una nueva opcion al catalogo
+          */
+          public function agregaOpcionCatalogo( $catalogoID , $nombre ) {
+              $opcion = new Opciones();
+              $opcion->idCat  = $catalogoID;
+              $opcion->opcion = $nombre;
+              $opcion->status = 1;
+              $opcion->save();
+          }
+
+          /*
+           * Elimina una opcion del catalogo
+           */
+           public function eliminaOpcionCatalogo( $opcionID ) {
+              $opcion = Opciones::find( $opcionID );
+              $opcion->status = 0;
+              $opcion->save();
+           }
 
 }
