@@ -17,7 +17,7 @@
     comboPaises();
     var path  = '/api/obtieneExpediente/' + idContenido;
 
-    axios( path  )
+    axios( path , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
         .then( datos => {
             // Direccion
             d = datos.data;
