@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\Models\crmmex\Clientes\Propuestas AS Propuestas;
 use App\Models\crmmex\Productos\Productos AS Productos;
+use App\Models\crmmex\Clientes\Clientes AS Clientes;
 use App\Models\crmmex\Clientes\PropuestasDetalle AS PropuestasDetalle;
 
 use App\Http\Controllers\crmmex\Utils\UtilsController AS Utils;
@@ -49,14 +50,28 @@ class PropuestasController extends Controller
                 'estadoPropuesta' => ( ( $propuesta->estadoPropuesta == 0 ) ? 'Sin enviar' : 'Enviado'  ),
                 'pagoPropuesta'   => ( ( $propuesta->pagoPropuesta == "0" ) ? 'No pagada' : ( (  $propuesta->pagoPropuesta == "1" ) ? 'Parcial' : 'Pagada' ) ),
                 'status'          => ( ( $propuesta->status == 0 ) ? 'Deshabilitada' : 'Habilitada' ),
-                'opciones'        => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Propuesta" onclick="contenidos(\'clientes_editapropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-edit fa-sm"></i></a>'
+                'opciones'        => ( $this->tipoCliente( $propuesta->clienteID ) == 1 ) ?
+                                    '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Propuesta" onclick="contenidos(\'clientes_editapropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-edit fa-sm"></i></a>'
                                    . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Visualizar Propuesta" onclick="generaPDF(\''.$propuesta->id.'\',\''.$propuesta->propuestaIDTY.'.pdf\')" class="mr-2"><i class="fa fa-file-pdf fa-sm"></i></a>'
                                    . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Enviar Propuesta" onclick="contenidos(\'clientes_enviaPropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-paper-plane fa-sm"></i></a>'
                                    . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Elimina Propuesta" onclick="contenidos(\'clientes_eliminaPropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-trash fa-sm"></i></a>'
+                                   :
+                                     '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Propuesta" onclick="contenidos(\'prospectos_editaPropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-edit fa-sm"></i></a>'
+                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Visualizar Propuesta" onclick="generaPDF(\''.$propuesta->id.'\',\''.$propuesta->propuestaIDTY.'.pdf\')" class="mr-2"><i class="fa fa-file-pdf fa-sm"></i></a>'
+                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Enviar Propuesta" onclick="contenidos(\'clientes_enviaPropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-paper-plane fa-sm"></i></a>'
+                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Elimina Propuesta" onclick="contenidos(\'prospectos_eliminaPropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-trash fa-sm"></i></a>'
             );
         }
 
         return response()->json( $datos );
+     }
+
+     /*
+      * Obtiene el tipo de cliente
+      */
+     private function tipoCliente( $clienteID ) {
+         $cliente = Clientes::find( $clienteID );
+         return $cliente->tipo;
      }
 
      /*

@@ -242,7 +242,7 @@
           });
           document.getElementById( 'btnRegresar' ).addEventListener( 'click' , function( e ) {
               e.preventDefault();
-              contenidos( 'clientes_listadoPropuestas' , document.getElementById( 'clienteID' ).value );
+              contenidos( 'prospectos_listadoPropuestas' , document.getElementById( 'clienteID' ).value );
           });
           /*document.getElementById( 'propuestaProducto_cantidad' ).addEventListener( 'change' , function( e ) {
               e.preventDefault();
@@ -341,7 +341,7 @@
             axios.post( url , datos , config )
                  .then( response => {
                     aviso( 'Propuesta guardada correctamente' );
-                    contenidos( 'clientes_editapropuesta' , response.data.idty );
+                    contenidos( 'prospectos_editapropuesta' , response.data.idty );
                  })
                  .catch( err => {
                    console.log( err );

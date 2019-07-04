@@ -181,7 +181,7 @@ class ClientesController extends Controller
               'opciones'          => ( ( $prospecto->status == '2' ) ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Habilitar Prospecto" onclick="habilitaProspecto(\''.$prospecto->id.'\')"><i class="fa fa-check fa-sm"></i></a>' :
                                      '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Prospecto" onclick="contenidos(\'prospectos_edicion\',\''.$prospecto->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
                                    . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Seguimiento" onclick="contenidos(\'prospectos_seguimiento\',\''.$prospecto->id.'\')" class="ml-2"><i class="fa fa-toolbox fa-sm"></i></a>'
-                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Propuesta" onclick="contenidos(\'clientes_listadoPropuestas\',\''.$prospecto->id.'\')" class="ml-2"><i class="fa fa-file-alt fa-sm"></i></a>'
+                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Propuesta" onclick="contenidos(\'prospectos_listadoPropuestas\',\''.$prospecto->id.'\')" class="ml-2"><i class="fa fa-file-alt fa-sm"></i></a>'
                                    . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Elimina Prospecto" onclick="contenidos(\'prospectos_elimina\',\''.$prospecto->id.'\')" class="ml-2"><i class="fa fa-trash fa-sm"></i></a>'
             );
         }
