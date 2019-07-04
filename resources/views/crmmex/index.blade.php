@@ -121,6 +121,7 @@
                 });
             });
             contenidos( 'dashboard' );
+            notificacionesIniciales();
         </script>
     </body>
 </html>

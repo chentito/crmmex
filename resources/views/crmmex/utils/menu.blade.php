@@ -51,6 +51,7 @@
             <li>
                 <a href="#configuracionesProductos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Productos</a>
                 <ul class="collapse list-unstyled" id="configuracionesProductos">
+                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_catalogos_productos');"> > Productos/Servicios</a></li>
                     <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_camposAdicionales','3');"> > Campos Adicionales</a></li>
                     <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_promociones');"> > Alta de Promociones</a></li>
                 </ul>
@@ -90,7 +91,7 @@
                 <a href="#configuracionesCatalogos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Catálogos</a>
                 <ul class="collapse list-unstyled" id="configuracionesCatalogos">
                     <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_catalogos_generales');"> > Catálogos Generales</a></li>
-                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_catalogos_productos');"> > Productos/Servicios</a></li>
+
                     <!--li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_adicionales');"> > Campos Adicionales</a></li-->
                 </ul>
             </li>

@@ -160,4 +160,28 @@ class SeguimientoController extends Controller
         return '# ' . $seguimiento->id . ' / ' . $seguimiento->nombreActividad;
      }
 
+     /*
+      * Obtiene los ultimos seguimientos
+      */
+      public function proximosSeguimientos() {
+          $seguimientos = Seguimiento::where( 'status' , 1 )
+                                     ->where( 'ejecutivoID' , Auth::user()->id )
+                                     ->orderBy( 'fechaEjecucion' , 'ASC' )
+                                     ->limit( 5 )
+                                     ->get();
+
+         $segs = array();
+         foreach( $seguimientos AS $seguimiento ) {
+            $segs[] = array(
+                'id'             => $seguimiento->id,
+                'titulo'         => $seguimiento->nombreActividad,
+                'fechaEjecucion' => $seguimiento->fechaEjecucion,
+                'cliente'        => Utiles::nombreCliente( $seguimiento->clienteID ),
+                'clienteID'      => $seguimiento->clienteID
+            );
+         }
+
+         return response()->json( $segs );
+      }
+
 }

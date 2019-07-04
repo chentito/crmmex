@@ -68,6 +68,7 @@ Route::middleware( 'auth:api' )->get ( '/listadoPropuestas/{clienteID}'      , '
 Route::middleware( 'auth:api' )->post( '/clienteIdty/{clienteID}'            , 'crmmex\Clientes\ClientesController@clienteIdty' );
 Route::middleware( 'auth:api' )->post( '/seguimientoIdty/{seguimientoID}'    , 'crmmex\Clientes\SeguimientoController@seguimientoIdty' );
 Route::middleware( 'auth:api' )->post( '/eliminaSeguimiento/{seguimientoID}' , 'crmmex\Clientes\SeguimientoController@eliminaSeguimiento' );
+Route::middleware( 'auth:api' )->get ( '/proximosSeguimientos'               , 'crmmex\Clientes\SeguimientoController@proximosSeguimientos' );
 
 
 /************************************ Propuestas ***********************************
