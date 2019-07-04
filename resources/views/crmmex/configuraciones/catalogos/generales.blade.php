@@ -9,13 +9,13 @@
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
     <div class="container border-left border-bottom border-right p-1">
       <div class="row">
-        <div class="col-sm-3">Catalogo</div>
-        <div class="col-sm-3">Opciones</div>
-        <div class="col-sm-6"></div>
-        <div class="col-sm-3">
+        <div class="col-sm-3 mt-2"><h6>Catalogos:</h6></div>
+        <div class="col-sm-3 mt-2"><h6>Opciones:</h6></div>
+        <div class="col-sm-6 mt-2"></div>
+        <div class="col-sm-3 mt-2">
           <select class="custom-select custom-select-sm" id="confGenerales_listadoCatalogos" name="confGenerales_listadoCatalogos" multiple style="height:280px"></select>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-3 mt-2">
           <select class="custom-select custom-select-sm" id="confGenerales_listadoOpciones" name="confGenerales_listadoOpciones" multiple style="height:280px"></select>
         </div>
         <div class="col-sm-6">
@@ -69,8 +69,7 @@
             aviso( 'No ha proporcionado el nombre de la opción' , false );
         } else {
             actualizaOpcion( document.getElementById( 'confGenerales_opcionCatalogoNombreEditaID' ).value , document.getElementById( 'confGenerales_opcionCatalogoNombreEdita' ).value );
-            document.getElementById( 'confGenerales_opcionCatalogoNombreEditaID' ).value = '';
-            document.getElementById( 'confGenerales_opcionCatalogoNombreEdita' ).value = '';
+            limpiaForms();
         }
     });
 
@@ -83,7 +82,7 @@
             aviso( 'No ha proporcionado el nombre de la opción' , false );
         } else {
             agregaOpcion( document.getElementById( 'confGenerales_listadoCatalogos' ).value , document.getElementById( 'confGenerales_opcionCatalogoNombre' ).value );
-            document.getElementById( 'confGenerales_opcionCatalogoNombre' ).value = '';
+            limpiaForms();
         }
     });
 
@@ -96,6 +95,7 @@
             aviso( 'No ha seleccionado una opción' , false );
         } else {
             eliminaOpcion( document.getElementById( 'confGenerales_listadoOpciones' ).value );
+            limpiaForms();
         }
     });
 
