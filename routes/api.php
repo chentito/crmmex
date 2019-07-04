@@ -149,6 +149,7 @@ Route::get ( '/utiles/listadoContactos/{clienteID}'         , 'crmmex\Utils\Util
 Route::post( '/utiles/aplicaPromo/{promoID}/{monto}'        , 'crmmex\Utils\UtilsController@aplicaPromocion' );
 Route::get ( '/utiles/listadoPromociones'                   , 'crmmex\Utils\UtilsController@listadoPromociones' );
 Route::get ( '/opcionesCombos/{id}'                         , 'crmmex\Utils\UtilsController@catalogo' );
+Route::get ( '/catalogos'                                   , 'crmmex\Utils\UtilsController@catalogosOpciones' );
 Route::get ( '/opcionesCombosPorId/{id}'                    , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
 Route::get ( '/dataTableConfig/{idty}'                      , 'crmmex\Utils\DatatableController@dataTableConfig' );
 Route::get ( '/dataTableConfigView/{idty}'                  , 'crmmex\Utils\DatatableController@dataTableConfigView' );

@@ -124,6 +124,30 @@ class UtilsController extends Controller
       }
 
       /*
+       * Listado de catalogos y sus opciones
+       */
+       public function catalogosOpciones() {
+            $cat       = array();
+            $catalogos = Catalogo::where( 'status' , 1 )->get();
+
+            foreach ( $catalogos  as $catalogo ) {
+                $opts = array();
+
+                foreach( $catalogo->opciones AS $opcion ) {
+                    $opts[] = $opcion->opcion;
+                }
+
+                $cat[] = array(
+                    'id'       => $catalogo->id,
+                    'nombre'   => $catalogo->nombre,
+                    'opciones' => $opts
+                );
+            }
+
+            return response()->json( $cat );
+       }
+
+      /*
        * Obtiene el valor de un parametro del catalogo
        */
        public static function valorCatalogo( $valorID ) {
@@ -202,6 +226,9 @@ class UtilsController extends Controller
             return response()->json( $datos );
         }
 
+        /*
+         * Realiza el calculo para la promocion seleccionada
+         */
         public static function aplicaPromocion( $promoID , $monto ) {
             $hoy       = date( 'Y-m-d H:i:s' );
             $promocion = Promociones::find( $promoID );
@@ -216,6 +243,9 @@ class UtilsController extends Controller
 
         }
 
+        /*
+         * Regresa el listado de promociones activas
+         */
         public function listadoPromociones() {
             $promos   = array();
             $promos[] = array( 'id' => '0' , 'nombre' => 'Sin promocion' );
@@ -230,16 +260,25 @@ class UtilsController extends Controller
             return response()->json( $promos );
         }
 
+        /*
+         * Regresa el detalle de un producto
+         */
         public static function datosProducto( $productoID ) {
             $producto = Productos::find( $productoID );
             return $producto;
         }
 
+        /*
+         * Regresa un valor predefinido de acuerdo a su id
+         */
         public function getPredefinido( $predefinidoID ) {
             $predefinido = Predefinidos::find( $predefinidoID );
             return $predefinido;
         }
 
+        /*
+         * Establece un valor predefinido de acuerdo a su id
+         */
         public function setPredefinido( $predefinidoID , Request $request ) {
             //$valor = $request->nomenclatura_prefijo . '_' . $request->nomenclatura_variable . '_' . $request->nomenclatura_identificador;
             $identificador = 'valorPredefinido_' . $predefinidoID;
@@ -248,11 +287,17 @@ class UtilsController extends Controller
             $predefinido->save();
         }
 
+        /*
+         * Regresa el registro de un predefinido de acuerdo a su id
+         */
         public static function detallePredefinido( $predefinidoID ) {
             $predefinido = Predefinidos::find( $predefinidoID );
             return $predefinido;
         }
 
+        /*
+         * Establece el formato de una fecha
+         */
         public static function formatoFecha( $f ) {return $f;
             list( $fecha , $hora )      = explode( ' ' , $f );
             list( $anio , $mes , $dia ) = explode( '-' , $fecha );

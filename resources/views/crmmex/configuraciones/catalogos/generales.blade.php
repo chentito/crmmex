@@ -4,97 +4,13 @@
       <i class="fa fa-list fa-sm"></i><span class="d-none d-sm-inline">  Catálogos Generales</span>
     </a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" id="pers-tab" data-toggle="tab" href="#pers" role="tab" aria-controls="pers" aria-selected="true">
-      <i class="fa fa-list fa-sm"></i><span class="d-none d-sm-inline">  Catálogos Personalizados</span>
-    </a>
-  </li>
+
 </ul>
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade" id="pers" role="tabpanel" aria-labelledby="pers-tab">
-      <div class="container border-left border-bottom border-right p-1">
-        <div class="row">
-          <div class="col-sm-3">
-            <div class="card">
-              <div class="card-header">
-                Catalogo Personalizado 1
-              </div>
-              <div class="card-body">
-                <select multiple class="custom-select custom-select-sm">
-                    <option value="1">Opción 1</option>
-                    <option value="1">Opción 1</option>
-                    <option value="1">Opción 1</option>
-                </select>
-              </div>
-              <div class="card-footer text-center">
-                <button class="btn btn-sm btn-info">+</button>
-                <button class="btn btn-sm btn-danger">-</button>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="card">
-              <div class="card-header">
-                Catalogo Personalizado 2
-              </div>
-              <div class="card-body">
-                <select multiple class="custom-select custom-select-sm">
-                    <option value="1">Opción 1</option>
-                    <option value="1">Opción 1</option>
-                    <option value="1">Opción 1</option>
-                </select>
-              </div>
-              <div class="card-footer text-center">
-                <button class="btn btn-sm btn-info">+</button>
-                <button class="btn btn-sm btn-danger">-</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row mt-3 mb-3">
-          <div class="col-sm-12 text-center"><button class="btn btn-sm {{$btn}}">Agregar Catálogo</button></div>
-        </div>
-      </div>
-  </div>
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
     <div class="container border-left border-bottom border-right p-1">
-      <div class="row" >
-          <div class="col-sm-3">
-            <div class="card">
-              <div class="card-header">
-                Categorías
-              </div>
-              <div class="card-body">
-                <select multiple class="custom-select custom-select-sm">
-                    <option value="1">Opción 1</option>
-                    <option value="1">Opción 1</option>
-                    <option value="1">Opción 1</option>
-                </select>
-              </div>
-              <div class="card-footer text-center">
-                <button class="btn btn-sm btn-info">+</button>
-                <button class="btn btn-sm btn-danger">-</button>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="card">
-              <div class="card-header">
-                Sub Categorías
-              </div>
-              <div class="card-body">
-                <select multiple class="custom-select custom-select-sm">
-                    <option value="1">Opción 1</option>
-                    <option value="1">Opción 1</option>
-                    <option value="1">Opción 1</option>
-                </select>
-              </div>
-              <div class="card-footer text-center">
-                <button class="btn btn-sm btn-info">+</button>
-                <button class="btn btn-sm btn-danger">-</button>
-              </div>
-            </div>
-          </div>
+      <div class="row" id="contenedorCatalogosSistema">
+
           <div class="col-sm-3">
             <div class="card">
               <div class="card-header">
@@ -113,98 +29,7 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-3">
-            <div class="card">
-              <div class="card-header">
-                Empleados
-              </div>
-              <div class="card-body">
-                <select multiple class="custom-select custom-select-sm">
-                    <option value="1">Opción 1</option>
-                    <option value="1">Opción 1</option>
-                    <option value="1">Opción 1</option>
-                </select>
-              </div>
-              <div class="card-footer text-center">
-                <button class="btn btn-sm btn-info">+</button>
-                <button class="btn btn-sm btn-danger">-</button>
-              </div>
-            </div>
-          </div>
-      </div>
-      <div class="row mt-3" >
-          <div class="col-sm-3">
-            <div class="card">
-              <div class="card-header">
-                Giro
-              </div>
-              <div class="card-body">
-                <select multiple class="custom-select custom-select-sm">
-                    <option value="1">Opción 1</option>
-                    <option value="1">Opción 1</option>
-                    <option value="1">Opción 1</option>
-                </select>
-              </div>
-              <div class="card-footer text-center">
-                <button class="btn btn-sm btn-info">+</button>
-                <button class="btn btn-sm btn-danger">-</button>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="card">
-              <div class="card-header">
-                Grupo
-              </div>
-              <div class="card-body">
-                <select multiple class="custom-select custom-select-sm">
-                    <option value="1">Opción 1</option>
-                    <option value="1">Opción 1</option>
-                    <option value="1">Opción 1</option>
-                </select>
-              </div>
-              <div class="card-footer text-center">
-                <button class="btn btn-sm btn-info">+</button>
-                <button class="btn btn-sm btn-danger">-</button>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="card">
-              <div class="card-header">
-                Area
-              </div>
-              <div class="card-body">
-                <select multiple class="custom-select custom-select-sm">
-                    <option value="1">Opción 1</option>
-                    <option value="1">Opción 1</option>
-                    <option value="1">Opción 1</option>
-                </select>
-              </div>
-              <div class="card-footer text-center">
-                <button class="btn btn-sm btn-info">+</button>
-                <button class="btn btn-sm btn-danger">-</button>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="card">
-              <div class="card-header">
-                Ciclo Facturación
-              </div>
-              <div class="card-body">
-                <select multiple class="custom-select custom-select-sm">
-                    <option value="1">Opción 1</option>
-                    <option value="1">Opción 1</option>
-                    <option value="1">Opción 1</option>
-                </select>
-              </div>
-              <div class="card-footer text-center">
-                <button class="btn btn-sm btn-info">+</button>
-                <button class="btn btn-sm btn-danger">-</button>
-              </div>
-            </div>
-          </div>
+
       </div>
     </div>
   </div>
@@ -213,4 +38,28 @@
 <script>
     //cargaCatalogosAdmin();
     //configuracionesGenerales();
+
+    axios.get( '/api/catalogos' , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
+         .then( response => {
+            var html = '';
+
+            response.data.forEach( function( e , v ){
+                    html += '<div class="col-sm-3"><div class="card"><div class="card-header">';
+                    html += e.nombre;
+                    html += '</div><div class="card-body">';
+                    html += '<select multiple class="custom-select custom-select-sm">';
+                    e.opciones.forEach( function( el , vl ){
+                        html += '<option value="1">'+el+'</option>';
+                    });
+                    html += '</select>';
+                    html += '</div><div class="card-footer text-center"><button class="btn btn-sm btn-info">+</button><button class="btn btn-sm btn-danger">-</button></div></div></div>';
+            });
+
+            document.getElementById( 'contenedorCatalogosSistema' ).innerHTML = document.getElementById( 'contenedorCatalogosSistema' ).value + html;
+         })
+         .catch( err => {
+           console.log( err );
+         });
+
+
 </script>
