@@ -182,7 +182,7 @@
       var clienteID = document.getElementById( 'clienteID' ).value
       var url = '/api/obtieneExpediente/' + clienteID;
 
-      axios.get( url )
+      axios.get( url , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
            .then( response => {
 
              var razonSocial = response.data.cliente;
