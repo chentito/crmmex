@@ -37,7 +37,7 @@ class SeguimientoController extends Controller
             'id'              => $s->id,
             'clienteID'       => Utiles::nombreCliente( $s->clienteID ),
             'contactoID'      => $this->nombreContacto( $s->contactoID ),
-            'ejecutivoID'     => $s->ejecutivoID,
+            'ejecutivoID'     => Utiles::nombreEjecutivo( $s->ejecutivoID ),
             'tipoActividad'   => Utiles::valorCatalogo( $s->tipoActividad ),
             'nombreActividad' => $s->nombreActividad,
             'descripcion'     => $s->descripcion,

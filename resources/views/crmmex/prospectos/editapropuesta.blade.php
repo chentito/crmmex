@@ -1,4 +1,4 @@
-<h4><span id="propuestaIdty"></span></h4>
+<h5><span id="propuestaIdty"></span></h5>
 <input type="hidden" id="propuestaID" name="propuestaID" value="{{$param}}">
 
 @include( 'crmmex.prospectos.propuesta' )

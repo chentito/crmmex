@@ -208,8 +208,8 @@
                   contactos += '<br> Email: <a href="mailto:'+e['correoElectronico']+'">' + e['correoElectronico']+'</a>';
                   contactos += ' Tel: <a href="tel:'+e['celular']+'">' +e['celular']+'</a> / <a href="tel:'+e['telefono']+'">'+e['telefono']+'</a>';
                   contactos += '<span class="float-right">'
-                  contactos += '<button class="btn btn-sm btn-info ml-1"><i class="fa fa-cogs fa-sm"></i></button>';
-                  contactos += '<button class="btn btn-sm btn-info ml-1"><i class="fa fa-user fa-sm"></i></button>';
+                  contactos += '<button class="btn btn-sm btn-info ml-1" onclick="contenidos(\'clientes_edicion\',\''+clienteID+'\')"><i class="fa fa-edit fa-sm"></i></button>';
+                  //contactos += '<button class="btn btn-sm btn-info ml-1"><i class="fa fa-user fa-sm"></i></button>';
                   contactos += '</span>';
                   contactos += '</li>';
               });
@@ -234,12 +234,25 @@
                 seguimientos += '['+e['fechaAlta']+'] ' + e['nombreActividad'] + ' / ' + e['estado'];
                 seguimientos += '<br>' + ' Contacto '+e[ 'contactoID' ];
                 seguimientos += '<span class="float-right">'
-                seguimientos += '<button class="btn btn-sm btn-info ml-1"><i class="fa fa-search fa-sm"></i></button>';
+                seguimientos += '<button class="btn btn-sm btn-info ml-1" onclick="contenidos(\'clientes_editaseguimiento\',\''+e['id']+'\')"><i class="fa fa-search fa-sm"></i></button>';
                 seguimientos += '</span>';
                 seguimientos += '</li>';
               });
               seguimientos += '</ul>';
               document.getElementById( 'contenedorSeguimientos' ).innerHTML = seguimientos;
+              // Propuestas
+              var propuestas = '<ul class="list-group">';
+              response.data.propuestas.forEach( function( e , p ){
+                  propuestas += '<li class="list-group-item">';
+                  propuestas += '[Vigencia '+ e[ 'fechaVigencia' ] +'] ' + e[ 'contactoID' ];
+                  propuestas += '<br>' + 'ID ' + e[ 'idty' ];
+                  propuestas += '<span class="float-right">';
+                  propuestas += '<button class="btn btn-sm btn-info ml-1" onclick="contenidos(\'clientes_editapropuesta\',\''+e['id']+'\')"><i class="fa fa-edit fa-sm"></i></button>';
+                  propuestas += '</span>';
+                  propuestas += '</li>';
+              });
+              propuestas += '</ul>';
+              document.getElementById( 'contenedorPropuestas' ).innerHTML = propuestas;
               // adicionales
               var adicionales = '<ul class="list-group">';
               response.data.adicionalesEdicion.forEach( function( k , v ){

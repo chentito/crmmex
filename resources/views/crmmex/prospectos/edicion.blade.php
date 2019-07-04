@@ -1,7 +1,7 @@
 
 <input type="hidden" id="idCargaInfo" name="idCargaInfo" value="{{$param}}" />
 
-<h3>Prospecto ID {{$param}} <span id="nombreCliente"></span></h3>
+<h5>Prospecto ID {{$param}} <span id="nombreCliente"></span></h5>
 
 <div style="position:absolute; right: 90px; z-index: 900">
   <button class="btn btn-sm {{$btn}}" onclick="javascript:contenidos('prospectos_listado')"><i class="fa fa-undo-alt fa-lg">undo</i><span class="d-none d-sm-inline">  Regresar</span></button>

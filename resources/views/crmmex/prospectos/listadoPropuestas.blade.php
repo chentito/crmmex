@@ -1,5 +1,5 @@
 
-<h4><span id="clienteIdty"></span></h4>
+<h5><span id="clienteIdty"></span></h5>
 <input type="hidden" id="clienteID" name="clienteID" value="{{$param}}">
 
 <div id="listadoPropuestas_config"></div>

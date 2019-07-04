@@ -13,7 +13,7 @@
 </div>
 
 <script>
-    axios.get( '/api/obtieneDatosPropuesta/' + document.getElementById( 'propuestaEliminarID' ).value , {headers:{'Accept':'application/json','Authorization':'Bearer ' + sessionStorage.getItem( 'apiToken' )}} )
+    axios.get( '/obtieneDatosPropuesta/' + document.getElementById( 'propuestaEliminarID' ).value , {headers:{'Accept':'application/json','Authorization':'Bearer ' + sessionStorage.getItem( 'apiToken' )}} )
          .then( response => {
             document.getElementById( 'clienteID' ).value = response.data.cliente;
          })
@@ -29,7 +29,7 @@
     document.getElementById( 'btnEliminaPropuestaEliminarPropuesta' ).addEventListener( 'click' , function( e ){
         e.preventDefault();
         var propuestaID = document.getElementById( 'propuestaEliminarID' ).value;
-        axios.post( '/api/eliminaPropuesta/' + propuestaID )
+        axios.post( '/eliminaPropuesta/' + propuestaID )
              .then( response => {
                contenidos( 'clientes_listadoPropuestas' , document.getElementById( 'clienteID' ).value )
                aviso( 'Propuesta eliminada correctamente' );

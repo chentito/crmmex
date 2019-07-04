@@ -1,4 +1,4 @@
-<h4><span id="nombreSeguimiento"></span></h4>
+<h5><span id="nombreSeguimiento"></span></h5>
 <input type="hidden" name="seguimientoID" id="seguimientoID" value="{{$param}}">
 <input type="hidden" name="edicionSeguimiento" id="edicionSeguimiento" value="edicion">
 

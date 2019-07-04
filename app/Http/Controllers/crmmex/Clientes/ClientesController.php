@@ -250,6 +250,7 @@ class ClientesController extends Controller
       $seguimientos = Seg::where( 'clienteID' , $clienteID )->get();
       foreach( $seguimientos AS $seguimiento ) {
         $expediente[ 'seguimientos' ][] = array(
+          'id'              => $seguimiento->id,
           'clienteID'       => $seguimiento->clienteID,
           'contactoID'      => Utiles::nombreContacto( $seguimiento->contactoID ),
           'ejecutivoID'     => $seguimiento->ejecutivoID,
@@ -266,17 +267,20 @@ class ClientesController extends Controller
       $propuestas = Prop::where( 'clienteID' , $clienteID )->where( 'status' , 1 )->get();
       foreach( $propuestas AS $propuesta ) {
         $expediente[ 'propuestas' ][] = array (
+          'id'             => $propuesta->id,
           'ejecutivoID'    => $propuesta->ejecutivoID,
           'clienteID'      => $propuesta->clienteID,
-          'contactoID'     => $propuesta->contactoID,
+          'contactoID'     => Utiles::nombreContacto( $propuesta->contactoID ),
           'categoria'      => $propuesta->categoria,
           'fechaEnvio'     => $propuesta->fechaEnvio,
+          'fechaVigencia'  => $propuesta->fechaVigencia,
           'observaciones'  => $propuesta->observaciones,
           'requerimientos' => $propuesta->requerimientos,
           'formaPago'      => $propuesta->formaPago,
           'monto'          => $propuesta->monto,
           'descuento'      => $propuesta->descuento,
           'promocion'      => $propuesta->promocion,
+          'idty'           => $propuesta->propuestaIDTY,
         );
       }
 
