@@ -14,7 +14,7 @@ class PHPMailerController extends Controller
     public $status = false;
 
     // Metodo para el envio de propuestas
-    public function envioPropuesta( $propuestaID , $adjuntos ) {
+    public function envioPropuesta( $propuestaID , $adjuntos=array() ) {
         $destinatarios = array( 'cvreyes@mexagon.net' );
         $this->envio( 'Propuesta Comercial :: CRM Mexagon' , 'Se enviará la propuesta con id '.$propuestaID , $destinatarios , $adjuntos );
     }
@@ -46,7 +46,7 @@ class PHPMailerController extends Controller
 
         // Adjuntos
         foreach( $adjuntos AS $adjunto ) {
-            $mail->AddStringAttachment( base64_decode( $adjunto[ 'archivo' ] ) , $adjunto[ 'nombre' ] , $adjunto[ 'mime' ] , $adjunto[ 'mime' ] );
+            $mail->AddStringAttachment( ( $adjunto[ 'archivo' ] ) , $adjunto[ 'nombre' ] , $adjunto[ 'encoding' ] , $adjunto[ 'mime' ] );
         }
 
         // Destinatarios
