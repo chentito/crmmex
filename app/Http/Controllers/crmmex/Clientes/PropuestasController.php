@@ -13,6 +13,7 @@ use App\Models\crmmex\Clientes\Propuestas AS Propuestas;
 use App\Models\crmmex\Productos\Productos AS Productos;
 use App\Models\crmmex\Clientes\Clientes AS Clientes;
 use App\Models\crmmex\Clientes\PropuestasDetalle AS PropuestasDetalle;
+use App\Models\crmmex\Clientes\Pagos AS Pagos;
 
 use App\Http\Controllers\crmmex\Utils\UtilsController AS Utils;
 
@@ -48,12 +49,13 @@ class PropuestasController extends Controller
                 'descuento'       => $propuesta->descuento,
                 'promocion'       => $propuesta->promocion,
                 'estadoPropuesta' => ( ( $propuesta->estadoPropuesta == 0 ) ? 'Sin enviar' : 'Enviado'  ),
-                'pagoPropuesta'   => ( ( $propuesta->pagoPropuesta == "0" ) ? 'No pagada' : ( (  $propuesta->pagoPropuesta == "1" ) ? 'Parcial' : 'Pagada' ) ),
+                'pagoPropuesta'   => ( ( $this->statusPago( $propuesta->id ) == 0 ) ? 'No pagada' : ( ( $this->statusPago( $propuesta->id ) < $propuesta->total ) ? 'Parcial' : 'Pagada' ) ),
                 'status'          => ( ( $propuesta->status == 0 ) ? 'Deshabilitada' : 'Habilitada' ),
                 'opciones'        => ( $this->tipoCliente( $propuesta->clienteID ) == 1 ) ?
                                     '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Propuesta" onclick="contenidos(\'clientes_editapropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-edit fa-sm"></i></a>'
                                    . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Visualizar Propuesta" onclick="generaPDF(\''.$propuesta->id.'\',\''.$propuesta->propuestaIDTY.'.pdf\')" class="mr-2"><i class="fa fa-file-pdf fa-sm"></i></a>'
                                    . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Enviar Propuesta" onclick="contenidos(\'clientes_enviaPropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-paper-plane fa-sm"></i></a>'
+                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Pago" onclick="contenidos(\'clientes_pagos\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-money-bill-wave fa-sm"></i></a>'
                                    . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Elimina Propuesta" onclick="contenidos(\'clientes_eliminaPropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-trash fa-sm"></i></a>'
                                    :
                                      '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Propuesta" onclick="contenidos(\'prospectos_editaPropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-edit fa-sm"></i></a>'
@@ -205,7 +207,7 @@ class PropuestasController extends Controller
               'descuento'      => $propuesta->descuento,
               'promocion'      => $propuesta->promocion,
               'estado'         => ( ( $propuesta->estadoPropuesta == 0 ) ? 'Sin enviar' : 'Enviado'  ),
-              'pagoPropuesta'  => ( ( $propuesta->pagoPropuesta == 0 ) ? 'No pagada' : (  $propuesta->pagoPropuesta == 1 ) ? 'Parcial' : 'Pagada'  ),
+              'pagoPropuesta'  => ( ( $this->statusPago( $propuesta->id ) == 0 ) ? 'No pagada' : ( ( $this->statusPago( $propuesta->id ) < $propuesta->total ) ? 'Parcial' : 'Pagada' ) ),
               'status'         => ( ( $propuesta->status == 0 ? 'Deshabilitada' : 'Habilitada' ) )
           );
 
@@ -238,6 +240,22 @@ class PropuestasController extends Controller
               return response()->json( $datos );
           }
        }
+
+       /*
+        * Estatus de pago de la propuesta
+        */
+        public function statusPago( $propuestaID ) {
+            $monto  = 0;
+            $pagos = Pagos::where( 'propuestaID' , $propuestaID )
+                          ->where( 'status' , 1 )
+                          ->get();
+
+            foreach( $pagos AS $pago ) {
+                $monto = $monto + $pago->monto;
+            }
+
+            return $monto;
+        }
 
        /*
         * Elimina un registro a traves de su ID

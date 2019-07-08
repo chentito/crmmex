@@ -16,6 +16,7 @@ use App\Models\crmmex\Utils\Promociones AS Promociones;
 use App\Models\crmmex\Productos\Productos AS Productos;
 use App\Models\crmmex\Clientes\Contactos AS Contactos;
 use App\Models\crmmex\Clientes\Clientes AS Clientes;
+use App\Models\crmmex\Clientes\Propuestas AS Propuestas;
 use App\Models\crmmex\Utils\Predefinidos AS Predefinidos;
 use App\User AS Ejecutivo;
 
@@ -189,6 +190,14 @@ class UtilsController extends Controller
             $producto = Productos::find( $productoID );
             return $producto->clave . ' ' . $producto->nombre . ( strlen( $producto->descripcion > 0 ) ? ' / ' . $producto->descripcion : '' );
          }
+
+         /*
+          * Identificador de la propuesta
+          */
+          public static function propuestaIDTY( $propuestaID ) {
+              $propuesta = Propuestas::find( $propuestaID );
+              return $propuesta->propuestaIDTY;
+          }
 
       /*
        * Obtiene el combo de productos
