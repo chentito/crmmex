@@ -58,6 +58,10 @@ Route::middleware( 'web' )->group( function(){
 });
 
 Route::get( '/' , function (){ return redirect( '/login' ); } );
+Route::get( '/envioCorreo/{propuestaID}' , 'crmmex\Sistema\PHPMailerController@envioPropuesta' );
+Route::get( '/phpconf' , function(){
+  phpinfo();
+});
 
 
 /**********************

@@ -36,7 +36,7 @@
         <div class="row">
             <div class="col-sm-3">
               <label for="pagoPropuesta_monto">Monto:</label>
-              <input type="number" id="pagoPropuesta_monto" name="pagoPropuesta_monto" class="form-control form-control-sm">
+              <input type="number" min="0.00" max="1000000000.00" step="0.01" id="pagoPropuesta_monto" name="pagoPropuesta_monto" class="form-control form-control-sm">
             </div>
             <div class="col-sm-3">
               <label for="catalogo_19">Banco:</label>
@@ -119,9 +119,9 @@
                 document.getElementById( 'pagoPropuesta_totalActual' ).value = total;
                 axios.get( '/api/statusPago/' + document.getElementById( 'propuestaID' ).value , config )
                      .then( response => {
-                        document.getElementById( 'pagoPropuesta_pagado' ).value = parseInt( response.data );
-                        document.getElementById( 'pagoPropuesta_monto' ).value = parseInt( total ) - parseInt( response.data );
-                        document.getElementById( 'pagoPropuesta_restante' ).value = parseInt( total ) - parseInt( response.data );
+                        document.getElementById( 'pagoPropuesta_pagado' ).value = parseFloat( response.data );
+                        document.getElementById( 'pagoPropuesta_monto' ).value = parseFloat( total ) - parseFloat( response.data );
+                        document.getElementById( 'pagoPropuesta_restante' ).value = parseFloat( total ) - parseFloat( response.data );
                      })
                      .catch( err => {
                         console.log( err );

@@ -16,6 +16,7 @@ use App\Models\crmmex\Clientes\PropuestasDetalle AS PropuestasDetalle;
 use App\Models\crmmex\Clientes\Pagos AS Pagos;
 
 use App\Http\Controllers\crmmex\Utils\UtilsController AS Utils;
+use App\Http\Controllers\crmmex\Sistema\PHPMailerController AS Envio;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -54,13 +55,13 @@ class PropuestasController extends Controller
                 'opciones'        => ( $this->tipoCliente( $propuesta->clienteID ) == 1 ) ?
                                     '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Propuesta" onclick="contenidos(\'clientes_editapropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-edit fa-sm"></i></a>'
                                    . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Visualizar Propuesta" onclick="generaPDF(\''.$propuesta->id.'\',\''.$propuesta->propuestaIDTY.'.pdf\')" class="mr-2"><i class="fa fa-file-pdf fa-sm"></i></a>'
-                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Enviar Propuesta" onclick="contenidos(\'clientes_enviaPropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-paper-plane fa-sm"></i></a>'
+                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Enviar Propuesta" onclick="envioPropuesta(\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-paper-plane fa-sm"></i></a>'
                                    . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Pago" onclick="contenidos(\'clientes_pagos\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-money-bill-wave fa-sm"></i></a>'
                                    . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Elimina Propuesta" onclick="contenidos(\'clientes_eliminaPropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-trash fa-sm"></i></a>'
                                    :
                                      '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Propuesta" onclick="contenidos(\'prospectos_editaPropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-edit fa-sm"></i></a>'
                                    . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Visualizar Propuesta" onclick="generaPDF(\''.$propuesta->id.'\',\''.$propuesta->propuestaIDTY.'.pdf\')" class="mr-2"><i class="fa fa-file-pdf fa-sm"></i></a>'
-                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Enviar Propuesta" onclick="contenidos(\'clientes_enviaPropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-paper-plane fa-sm"></i></a>'
+                                   . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Enviar Propuesta" onclick="envioPropuesta(\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-paper-plane fa-sm"></i></a>'
                                    . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Elimina Propuesta" onclick="contenidos(\'prospectos_eliminaPropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-trash fa-sm"></i></a>'
             );
         }
@@ -269,10 +270,15 @@ class PropuestasController extends Controller
         /*
          * Metodo que genera el PDF de la propuesta
          */
-         public function generaPDF( $propuestaID ) {
+         public function generaPDF( $propuestaID , $envio = false ) {
            $datos  = $this->datosPropuesta( $propuestaID , 'arreglo' );
            $pdf = \PDF::loadView( 'crmmex.pdf.propuesta' , compact( 'datos' ) );
-           return $pdf->download( 'PropuestaComercial.pdf' );
+           if( $envio ) {
+               return $pdf->output();
+             } else {
+                return $pdf->download( 'PropuestaComercial.pdf' );
+           }
+
          }
 
          /*
@@ -300,21 +306,6 @@ class PropuestasController extends Controller
 
               return $elementos[ 0 ].'_'.$val.'_{autoincremento}';
           }
-
-          /*
-           * Metodo para enviar una propuesta
-           */
-           public function enviaPropuesta( $propuestaID ) {
-              $envio = false;
-              $datos = $this->datosPropuesta( $propuestaID );
-
-
-              if( $envio ) {
-                  $propuesta = Propuestas::find( $propuestaID );
-                  $propuesta->estadoPropuesta = 1;
-                  $propuesta->save();
-              }
-           }
 
            /*
             * Metodo que lleva el control del carrito para la propuesta
@@ -439,5 +430,30 @@ class PropuestasController extends Controller
                 Session::put( 'carrito' , [] );
                 Session::save();
              }
+
+             /*
+              * Envio de la propuesta
+              */
+              public function enviaPropuesta( $propuestaID ) {
+                  $doc     = $this->generaPDF( $propuestaID , true );
+                  $adjunto = array( array(
+                    'archivo'  => $doc,
+                    'nombre'   => Utils::propuestaIDTY( $propuestaID ) . '.pdf',
+                    'encoding' => 'base64',
+                    'mime'     => 'application/pdf'
+                  ));
+
+                  $propuesta = new Envio();
+                  $propuesta->envioPropuesta( $propuestaID , $adjunto );
+                  if( $propuesta->status ) {
+                      $enviado = Propuestas::find( $propuestaID );
+                      $enviado->estadoPropuesta = 1;
+                      $enviado->fechaEnvio      = date( 'Y-m-d H:i:s' );
+                      $enviado->save();
+                      return response()->json( array( 'Enviado correctamente' ) );
+                  } else {
+                      return response()->json( array( 'Error al enviar' ) );
+                  }
+              }
 
 }

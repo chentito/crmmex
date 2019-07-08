@@ -47,18 +47,19 @@ Route::middleware( 'auth:api' )->get( '/user' , function (Request $request) {
 /* Api CRM */
 
 /******************** Operaciones para el modulo de clientes ********************/
-Route::middleware( 'auth:api' )->post( '/altaExpediente'             , 'crmmex\Clientes\ClientesController@guardaCliente' );
-Route::middleware( 'auth:api' )->post( '/editaExpediente'            , 'crmmex\Clientes\ClientesController@actualizaCliente' );
-Route::middleware( 'auth:api' )->get ( '/listadoClientes/{tipo?}'    , 'crmmex\Clientes\ClientesController@listadoClientes' );
+Route::middleware( 'auth:api' )->post( '/altaExpediente'               , 'crmmex\Clientes\ClientesController@guardaCliente' );
+Route::middleware( 'auth:api' )->post( '/editaExpediente'              , 'crmmex\Clientes\ClientesController@actualizaCliente' );
+Route::middleware( 'auth:api' )->get ( '/listadoClientes/{tipo?}'      , 'crmmex\Clientes\ClientesController@listadoClientes' );
 //Route::middleware( 'auth:api' )->get ( '/listadoProspectos/{tipo}'  , 'crmmex\Clientes\ClientesController@listadoClientes' );
-Route::middleware( 'auth:api' )->get ( '/listadoProspectos'          , 'crmmex\Clientes\ClientesController@listadoProspectos' );
-Route::middleware( 'auth:api' )->get ( '/obtieneExpediente/{id}'     , 'crmmex\Clientes\ClientesController@obtieneCliente' );
-Route::middleware( 'auth:api' )->post( '/eliminaCliente/{id}/{mov}'  , 'crmmex\Clientes\ClientesController@eliminaCliente' );
-Route::middleware( 'auth:api' )->post( '/habilitaCliente/{id}'       , 'crmmex\Clientes\ClientesController@habilitaCliente' );
-Route::middleware( 'auth:api' )->get ( '/listadoPagos/{propuestaID}' , 'crmmex\Clientes\PagosController@listadoPagos' );
-Route::middleware( 'auth:api' )->post( '/altaPago'                   , 'crmmex\Clientes\PagosController@altaPago' );
-Route::middleware( 'auth:api' )->post( '/eliminaPago/{pagoID}'       , 'crmmex\Clientes\PagosController@eliminaPago' );
-Route::middleware( 'auth:api' )->get ( '/statusPago/{propuestaID}'   , 'crmmex\Clientes\PropuestasController@statusPago' );
+Route::middleware( 'auth:api' )->get ( '/listadoProspectos'            , 'crmmex\Clientes\ClientesController@listadoProspectos' );
+Route::middleware( 'auth:api' )->get ( '/obtieneExpediente/{id}'       , 'crmmex\Clientes\ClientesController@obtieneCliente' );
+Route::middleware( 'auth:api' )->post( '/eliminaCliente/{id}/{mov}'    , 'crmmex\Clientes\ClientesController@eliminaCliente' );
+Route::middleware( 'auth:api' )->post( '/habilitaCliente/{id}'         , 'crmmex\Clientes\ClientesController@habilitaCliente' );
+Route::middleware( 'auth:api' )->get ( '/listadoPagos/{propuestaID}'   , 'crmmex\Clientes\PagosController@listadoPagos' );
+Route::middleware( 'auth:api' )->post( '/altaPago'                     , 'crmmex\Clientes\PagosController@altaPago' );
+Route::middleware( 'auth:api' )->post( '/eliminaPago/{pagoID}'         , 'crmmex\Clientes\PagosController@eliminaPago' );
+Route::middleware( 'auth:api' )->get ( '/statusPago/{propuestaID}'     , 'crmmex\Clientes\PropuestasController@statusPago' );
+Route::middleware( 'auth:api' )->get ( '/enviaPropuesta/{propuestaID}' , 'crmmex\Clientes\PropuestasController@enviaPropuesta' );
 
 
 /************************************ Seguimientos ************************************/
