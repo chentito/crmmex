@@ -435,16 +435,26 @@ class PropuestasController extends Controller
               * Envio de la propuesta
               */
               public function enviaPropuesta( $propuestaID ) {
+                  $datos   = $this->datosPropuesta( $propuestaID , 'arreglo' );
                   $doc     = $this->generaPDF( $propuestaID , true );
+
                   $adjunto = array( array(
                     'archivo'  => $doc,
-                    'nombre'   => Utils::propuestaIDTY( $propuestaID ) . '.pdf',
+                    'nombre'   => $datos[ 'propuestaIDTY' ] . '.pdf',
                     'encoding' => 'base64',
                     'mime'     => 'application/pdf'
                   ));
 
+                  $destinatarios = array( 'cvreyes@mexagon.net' , 'clam@mexagon.net' );
+                  $reservadas = array(
+                    'cliente'        => $datos[ 'contactoTxt' ],
+                    'fechaSolicitud' => $datos[ 'fechaCreacion' ],
+                    'fechaVigencia'  => $datos[ 'fechaVigencia' ],
+                    'propuestaIDTY'  => $datos[ 'propuestaIDTY' ]
+                  );
+
                   $propuesta = new Envio();
-                  $propuesta->envioPropuesta( $propuestaID , $adjunto );
+                  $propuesta->envioPropuesta( $propuestaID , $destinatarios , $reservadas , $adjunto );
                   if( $propuesta->status ) {
                       $enviado = Propuestas::find( $propuestaID );
                       $enviado->estadoPropuesta = 1;

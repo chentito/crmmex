@@ -166,6 +166,11 @@ Route::post( '/agregaOptCat/{catID}/{optNombre}'            , 'crmmex\Utils\Util
 Route::post( '/eliminaOptCat/{optID}'                       , 'crmmex\Utils\UtilsController@eliminaOpcionCatalogo' );
 
 
+/************************************ Acciones utiles para templates de envio de correo ************************************/
+Route::get ( '/obtieneDatosTemplate/{templateID}' , 'crmmex\Sistema\TemplatesController@obtieneDatosTemplate' );
+Route::post( '/actualizaDatosTemplate'            , 'crmmex\Sistema\TemplatesController@actualizaDatosTemplate' );
+
+
 /************************************ Pruebas API consumidas desdee Angular ************************************/
 Route::get   ( '/users'      , 'UsersController@index'   )->middleware( 'cors' );
 Route::get   ( '/users/{id}' , 'UsersController@show'    )->middleware( 'cors' );

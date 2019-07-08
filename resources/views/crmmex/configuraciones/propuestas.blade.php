@@ -66,18 +66,54 @@
   </div>
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
     <div class="container border-left border-right border-bottom p-1">
-        template envio
+      <form id="formTemplateEnvioPropuesta" name="formTemplateEnvioPropuesta">
+        <input type="hidden" id="template_id" name="template_id" value="1" >
+        <div class="row">
+            <div class="col-sm-8">
+              <label for="template_subject">Asunto:</label>
+              <input type="text" id="template_subject" name="template_subject" placeholder="Asunto" class="form-control form-control-sm">
+            </div>
+            <div class="col-sm-8 mt-1">
+              <label for="template_body">Mensaje:</label>
+              <textarea class="form-control form-control-sm" id="template_body" name="template_body"></textarea>
+              <script>var editor = new Jodit('#template_body');</script>
+              <input type="hidden" id="detalleTemplate_contenidoPieza" name="detalleTemplate_contenidoPieza" value="" >
+            </div>
+            <div class="col-sm-4 mt-1">
+                Palabras reservadas
+                <ul class="list-group">
+                  <li class="list-group-item"><b>{cliente}</b> Nombre del cliente/contacto</li>
+                  <li class="list-group-item"><b>{propuestaIDTY}</b> Identificador de la propuesta</li>
+                  <li class="list-group-item"><b>{fechaSolicitud}</b> Fecha en que solicitó la propuesta</li>
+                  <li class="list-group-item"><b>{fechaVigencia}</b> Fecha de vigencia de la propuesta</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 mt-3 text-center">
+              <button class="btn btn-sm {{$btn}}" id="btnGuardaTemplateEnvio" name="btnGuardaTemplateEnvio">Guardar template</button>
+            </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>
 
 <script>
-    var config = {
-        headers: {
-          'Accept' : 'application/json',
-          'Authorization' : 'Bearer ' + token
-        }
-    };
+    var config = {headers: {'Accept' : 'application/json','Authorization' : 'Bearer ' + token}};
+
+    document.getElementById( 'btnGuardaTemplateEnvio' ).addEventListener( 'click' , function( e ){
+        e.preventDefault();
+        document.getElementById('detalleTemplate_contenidoPieza').value = editor.getEditorValue();
+        axios.post( '/api/actualizaDatosTemplate' , new FormData( document.getElementById( 'formTemplateEnvioPropuesta' ) )  , config)
+             .then( response => {
+                aviso( 'Template actualizado correctamente' );
+                contenidos( 'configuraciones_propuestas' );
+             })
+             .catch( err => {
+               console.log( err );
+             });
+    });
 
     document.getElementById( 'btnGdaPoliticasCondiciones' ).addEventListener( 'click' , function( e ){
         e.preventDefault();
@@ -144,5 +180,14 @@
             console.log( err );
           });
 
+     var url3 = '/api/obtieneDatosTemplate/1';
+     axios.get( url3 , config )
+          .then( response => {
+              document.getElementById( 'template_subject' ).value = response.data.asunto;
+              editor.setEditorValue( response.data.cuerpo );
+          })
+          .catch( err => {
+            console.log( err );
+          });
 
 </script>

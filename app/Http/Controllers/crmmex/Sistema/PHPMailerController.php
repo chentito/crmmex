@@ -5,6 +5,7 @@ namespace App\Http\Controllers\crmmex\Sistema;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\crmmex\Configuraciones\SMTP AS SMTP;
+use App\Models\crmmex\Sistema\Templates As Templates;
 
 use PHPMailer\PHPMailer;
 
@@ -14,9 +15,9 @@ class PHPMailerController extends Controller
     public $status = false;
 
     // Metodo para el envio de propuestas
-    public function envioPropuesta( $propuestaID , $adjuntos=array() ) {
-        $destinatarios = array( 'cvreyes@mexagon.net' );
-        $this->envio( 'Propuesta Comercial :: CRM Mexagon' , 'Se enviará la propuesta con id '.$propuestaID , $destinatarios , $adjuntos );
+    public function envioPropuesta( $propuestaID , $destinatarios , $reservadas=array() , $adjuntos=array() ) {
+        $msj = $this->piezaCorreo( 1 , $reservadas );
+        $this->envio( $msj[ 'Asunto' ] , $msj[ 'Body' ] , $destinatarios , $adjuntos );
     }
 
     // Proceso de envio de correo electronico
@@ -75,6 +76,25 @@ class PHPMailerController extends Controller
           'copia'     => $smtp->copia
         );
         return $conexion;
+    }
+
+    // Obtiene la pieza de correo a utilizar
+    private function piezaCorreo( $id , $reservadas ) {
+        $template = Templates::find( $id );
+        $body     = $template->cuerpo;
+
+        foreach( $reservadas AS $reservada ){
+            $busca[]     = '{$'.$reservada[ 0 ].'}';
+            $reemplaza[] = $reservada[ 1 ];
+        }
+
+        $body = str_replace( $busca , $reemplaza , $body );
+        $datos = array(
+          'Asunto' => $template->asunto,
+          'Body'   => $body
+        );
+
+        return $datos;
     }
 
 }
