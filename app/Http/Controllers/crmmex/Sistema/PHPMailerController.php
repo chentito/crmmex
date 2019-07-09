@@ -84,7 +84,7 @@ class PHPMailerController extends Controller
         $body     = $template->cuerpo;
 
         foreach( $reservadas AS $reservada ){
-            $busca[]     = '{$'.$reservada[ 0 ].'}';
+            $busca[]     = '{'.$reservada[ 0 ].'}';
             $reemplaza[] = $reservada[ 1 ];
         }
 

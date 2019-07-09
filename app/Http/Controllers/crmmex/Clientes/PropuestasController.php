@@ -447,10 +447,10 @@ class PropuestasController extends Controller
 
                   $destinatarios = array( 'cvreyes@mexagon.net' , 'clam@mexagon.net' );
                   $reservadas = array(
-                    'cliente'        => $datos[ 'contactoTxt' ],
-                    'fechaSolicitud' => $datos[ 'fechaCreacion' ],
-                    'fechaVigencia'  => $datos[ 'fechaVigencia' ],
-                    'propuestaIDTY'  => $datos[ 'propuestaIDTY' ]
+                    array( 'cliente'        , $datos[ 'contactoTxt' ] ),
+                    array( 'fechaSolicitud' , $datos[ 'fechaCreacion' ] ),
+                    array( 'fechaVigencia'  , $datos[ 'fechaVigencia' ] ),
+                    array( 'propuestaIDTY'  , $datos[ 'propuestaIDTY' ] )
                   );
 
                   $propuesta = new Envio();
