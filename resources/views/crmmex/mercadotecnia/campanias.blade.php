@@ -21,7 +21,7 @@
             </div>
             <div class="col-sm-4 mb-1">
                 <label for="detalleCampania_fechaEnvio">Fecha de env&iacute;o</label>
-                <input id="detalleCampania_fechaEnvio" name="detalleCampania_fechaEnvio" type="text" placeholder="Fecha de Envío" class="form-control form-control-sm" value="">
+                <input id="detalleCampania_fechaEnvio" name="detalleCampania_fechaEnvio" type="text" placeholder="Fecha de Envío" class="form-control form-control-sm" value="" readonly>
             </div>
         </div>
         <div class="row">
@@ -46,7 +46,6 @@
             <div class="col-sm-4 mb-1">
                 <label for="detalleCampania_destinatarios">Destinatarios</label>
                 <select id="detalleCampania_destinatarios" name="detalleCampania_destinatarios" class="custom-select custom-select-sm">
-                    <option selected="selected" value="1">Clientes Facturación</option>
                 </select>
             </div>
             <div class="col-sm-4 mb-1"></div>
@@ -72,7 +71,19 @@
 </div>
 
 <script>
+
+    $( '#detalleCampania_fechaEnvio' ).datepicker({
+        format: "yyyy-mm-dd",
+        language: "es",
+        todayBtn: "linked",
+        clearBtn: true,
+        startDate: "today",
+        daysOfWeekDisabled: "0,6",
+        daysOfWeekHighlighted: "0,6"
+    });
+
     $( '#btnGuardaCampania' ).click( function() {
+
       document.getElementById('detalleCampania_contenidoPieza').value = editor.getEditorValue();
       var datos  = $( '#detalleCampania_Form' ).serialize();
       var token  = sessionStorage.getItem( 'apiToken' );
@@ -100,4 +111,15 @@
              console.log( err );
            });
     });
+
+    axios.get( '/api/listadoListas' , config )
+         .then( response => {
+            response.data.forEach( function( e , i ){
+                document.getElementById( 'detalleCampania_destinatarios' ).add( new Option( e.nombre , e.id, false, false ) );
+            });
+         })
+         .catch( err => {
+           console.log( err );
+         });
+
 </script>

@@ -18,6 +18,7 @@ use App\Models\crmmex\Clientes\Contactos AS Contactos;
 use App\Models\crmmex\Clientes\Clientes AS Clientes;
 use App\Models\crmmex\Clientes\Propuestas AS Propuestas;
 use App\Models\crmmex\Utils\Predefinidos AS Predefinidos;
+use App\Models\crmmex\Mercadotecnia\Listas AS Listados;
 use App\User AS Ejecutivo;
 
 use Illuminate\Http\Request;
@@ -198,6 +199,14 @@ class UtilsController extends Controller
               $propuesta = Propuestas::find( $propuestaID );
               return $propuesta->propuestaIDTY;
           }
+
+          /*
+           * Obtiene nombre de un listado de audiencias
+           */
+           public static function nombreAudiencia( $audienciaID ) {
+              $listado = Listados::find( $audienciaID );
+              return $listado->nombre;
+           }
 
       /*
        * Obtiene el combo de productos

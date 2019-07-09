@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\mercadotecnia\Campanias AS Campanias;
 
+use App\Http\Controllers\crmmex\Utils\UtilsController AS Utils;
+
 class CampaniasController extends Controller
 {
 
@@ -16,15 +18,18 @@ class CampaniasController extends Controller
 
         foreach( $campanias AS $campania ) {
             $campaniasD[ 'campanias' ][] = array (
-                'nombre'        => $campania->nombre_campania,
-                'url'           => '<a href="'.$campania->url.'" target="_blank">'.$campania->url.'</a>',
-                'fechaEnvio'    => $campania->fechaEnvio,
-                'subject'       => $campania->subject,
-                'destinatarios' => $campania->id_listado_destinatarios,
-                'opciones'      => '<a href="javascript:void(0)" onclick="return contenidos(\'mercadotecnia_estadisticas\');" title="Ver Estadisticas"><i class="fa fa-chart-area fa-sm"></i></a>'
-                                 . '<a href="javascript:void(0)" onclick="return contenidos(\'mercadotecnia_detalle\',\''.$campania->id.'\');" title="Editar Campaña" class="ml-1"><i class="fa fa-edit fa-sm"></i></a>'
-                                 . '<a href="javascript:void(0)" title="Enviar Campaña" class="ml-1"><i class="fa fa-sm fa-paper-plane"></i></a>'
-                                 . '<a href="javascript:void(0)" onclick="return contenidos(\'mercadotecnia_elimina\',\''.$campania->id.'\');" title="Eliminar Campaña" class="ml-1"><i class="fa fa-sm fa-trash"></i></a>'
+                'id'                       => $campania->id,
+                'nombre_campania'          => $campania->nombre_campania,
+                'fechaEnvio'               => $campania->fechaEnvio,
+                'subject'                  => $campania->subject,
+                'id_listado_destinatarios' => Utils::nombreAudiencia( $campania->id_listado_destinatarios ),
+                'pieza'                    => $campania->pieza,
+                'status'                   => ( ( $campania->status == 1 ) ? 'Activa' : 'Inactiva' ),
+                'opciones'                 => ( $campania->fechaEnvio > date( 'Y-m-d H:i:s' ) ) ?
+                                              '<a href="javascript:void(0)" onclick="return contenidos(\'mercadotecnia_estadisticas\');" title="Ver Estadisticas"><i class="fa fa-chart-area fa-sm"></i></a>'
+                                             . '<a href="javascript:void(0)" onclick="return contenidos(\'mercadotecnia_detalle\',\''.$campania->id.'\');" title="Editar Campaña" class="ml-1"><i class="fa fa-edit fa-sm"></i></a>'
+                                             . '<a href="javascript:void(0)" onclick="return contenidos(\'mercadotecnia_elimina\',\''.$campania->id.'\');" title="Eliminar Campaña" class="ml-1"><i class="fa fa-sm fa-trash"></i></a>'
+                                             : '<a href="javascript:void(0)" onclick="return contenidos(\'mercadotecnia_estadisticas\');" title="Ver Estadisticas"><i class="fa fa-chart-area fa-sm"></i></a>'
             );
         }
 

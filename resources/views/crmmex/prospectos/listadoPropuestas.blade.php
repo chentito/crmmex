@@ -68,4 +68,17 @@
             });
 
     }
+
+    function envioPropuestaProspecto( propuestaID ) {
+        abreModal();
+        var config = {headers: {"Accept" : "application/json","Authorization" : "Bearer " + sessionStorage.getItem( 'apiToken' )}};
+        axios.get( '/api/enviaPropuesta/' + propuestaID , config )
+             .then( response => {
+                contenidos( 'prospectos_listadoPropuestas' , document.getElementById( 'clienteID' ).value );
+                aviso( 'Propuesta enviada correctamente' );
+             })
+             .catch( err => {
+               console.log( err );
+             });
+    }
 </script>

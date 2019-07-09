@@ -1,12 +1,18 @@
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
-    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Nombre Propuesta</a>
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+      <i class="fa fa-user fa-sm"></i><span class="d-none d-sm-inline">  Nombre Propuesta</span>
+    </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Políticas/Condiciones</a>
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+      <i class="fa fa-handshake fa-sm"></i><span class="d-none d-sm-inline">  Políticas/Condiciones</span>
+    </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Template Envio</a>
+    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">
+      <i class="fa fa-inbox fa-sm"></i><span class="d-none d-sm-inline">  Template Envio</span>
+    </a>
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
@@ -91,7 +97,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12 mt-3 text-center">
-              <button class="btn btn-sm {{$btn}}" id="btnGuardaTemplateEnvio" name="btnGuardaTemplateEnvio">Guardar template</button>
+              <button class="btn btn-sm {{$btn}}" id="btnGuardaTemplateEnvio" name="btnGuardaTemplateEnvio"><i class="fa fa-save fa-sm"></i> Guardar</button>
             </div>
         </div>
       </form>

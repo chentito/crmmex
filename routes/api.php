@@ -136,6 +136,12 @@ Route::middleware( 'auth:api' )->post( '/eliminaCampoAdicional/{campoAdicionalID
 Route::middleware( 'auth:api' )->get ( '/datosCampoAdicional/{campoAdicionalID}'                         , 'crmmex\Utils\CamposAdicionalesController@datosCampoAdicional' );
 Route::middleware( 'auth:api' )->get ( '/htmlCampoAdicional/{campoAdicionalID}/{campoAdicionalIDValor?}' , 'crmmex\Utils\CamposAdicionalesController@campoAdicionalHTML' );
 Route::middleware( 'auth:api' )->get ( '/nombreSeccionCampoAdicional/{seccionID}'                        , 'crmmex\Utils\CamposAdicionalesController@nombreSeccion' );
+Route::middleware( 'auth:api' )->get ( '/listadoListas'                                                  , 'crmmex\Mercadotecnia\ListasController@listadoListas' );
+Route::middleware( 'auth:api' )->get ( '/listadoContactosAudiencia/{audienciaID}'                        , 'crmmex\Mercadotecnia\ListasController@listadoContactos' );
+Route::middleware( 'auth:api' )->post( '/altaAudiencia'                                                  , 'crmmex\Mercadotecnia\ListasController@altaListado' );
+Route::middleware( 'auth:api' )->get ( '/listadoPiezasDisponibles'                                       , 'crmmex\Mercadotecnia\PiezasController@listadoPiezas' );
+Route::middleware( 'auth:api' )->post( '/altaPiezaTemplate'                                              , 'crmmex\Mercadotecnia\PiezasController@nuevaPieza' );
+Route::middleware( 'auth:api' )->get ( '/detallePiezaTemplate/{piezaID}'                                 , 'crmmex\Mercadotecnia\PiezasController@detallePieza' );
 
 
 /************************************ Dashboard ************************************/
