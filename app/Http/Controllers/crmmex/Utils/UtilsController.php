@@ -19,6 +19,7 @@ use App\Models\crmmex\Clientes\Clientes AS Clientes;
 use App\Models\crmmex\Clientes\Propuestas AS Propuestas;
 use App\Models\crmmex\Utils\Predefinidos AS Predefinidos;
 use App\Models\crmmex\Mercadotecnia\Listas AS Listados;
+use App\Models\crmmex\Mercadotecnia\Piezas AS Pieza;
 use App\User AS Ejecutivo;
 
 use Illuminate\Http\Request;
@@ -207,6 +208,14 @@ class UtilsController extends Controller
               $listado = Listados::find( $audienciaID );
               return $listado->nombre;
            }
+
+           /*
+            * Nombre de la pieza de correo
+            */
+            public static function nombrePieza( $piezaID ) {
+                $pieza = Pieza::find( $piezaID );
+                return $pieza->nombrePieza;
+            }
 
       /*
        * Obtiene el combo de productos

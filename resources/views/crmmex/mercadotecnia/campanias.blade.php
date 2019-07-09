@@ -10,52 +10,28 @@
         <div class="row">
             <div class="col-sm-4 mb-1">
                 <input type="hidden" id="detalleCampania_id" name="detalleCampania_id" value="">
-                <label for="detalleCampania_nombre">Nombre de la campa&ntilde;a</label>
+                <label for="detalleCampania_nombre">Nombre de la campa&ntilde;a:</label>
                 <input id="detalleCampania_nombre" name="detalleCampania_nombre" type="text" placeholder="Nombre de campaña" class="form-control form-control-sm" value="">
             </div>
             <div class="col-sm-4 mb-1">
-                <label for="detalleCampania_tipo">Tipo de Campa&ntilde;a</label>
-                <select id="detalleCampania_tipo" name="detalleCampania_tipo" class="custom-select custom-select-sm">
-                    <option selected="selected" value="1">Envio Email</option>
-                </select>
-            </div>
-            <div class="col-sm-4 mb-1">
-                <label for="detalleCampania_fechaEnvio">Fecha de env&iacute;o</label>
+                <label for="detalleCampania_fechaEnvio">Fecha de env&iacute;o:</label>
                 <input id="detalleCampania_fechaEnvio" name="detalleCampania_fechaEnvio" type="text" placeholder="Fecha de Envío" class="form-control form-control-sm" value="" readonly>
             </div>
-        </div>
-        <div class="row">
             <div class="col-sm-4 mb-1">
-                <label for="detalleCampania_landingPage">Landing Page</label>
-                <input id="detalleCampania_landingPage" name="detalleCampania_landingPage" type="text" placeholder="URL (Landing Page)" class="form-control form-control-sm" value="">
-            </div>
-            <div class="col-sm-4 mb-1">
-                <label for="detalleCampania_remitente">Nombre Remitente</label>
-                <input id="detalleCampania_remitente" name="detalleCampania_remitente" type="text" placeholder="Nombre de quien envía" class="form-control form-control-sm" value="">
-            </div>
-            <div class="col-sm-4 mb-1">
-                <label for="detalleCampania_remitenteEmail">Email Remitente</label>
-                <input id="detalleCampania_remitenteEmail" name="detalleCampania_remitenteEmail" type="text" placeholder="Correo de quien envia" class="form-control form-control-sm" value="">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4 mb-1">
-                <label for="detalleCampania_asunto">Asunto</label>
+                <label for="detalleCampania_asunto">Asunto:</label>
                 <input id="detalleCampania_asunto" name="detalleCampania_asunto" type="text" placeholder="Asunto" class="form-control form-control-sm" value="">
             </div>
-            <div class="col-sm-4 mb-1">
-                <label for="detalleCampania_destinatarios">Destinatarios</label>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 mb-1">
+                <label for="detalleCampania_destinatarios">Destinatarios:</label>
                 <select id="detalleCampania_destinatarios" name="detalleCampania_destinatarios" class="custom-select custom-select-sm">
                 </select>
             </div>
-            <div class="col-sm-4 mb-1"></div>
-        </div>
-        <div class="row text-center">
-            <div class="col-sm-12 mb-1">
-              <label>Pieza de correo</label>
-              <div id="editorN"></div>
-              <script>var editor = new Jodit('#editorN');</script>
-              <input type="hidden" id="detalleCampania_contenidoPieza" name="detalleCampania_contenidoPieza" value="" >
+            <div class="col-sm-4 mb-1">
+                <label for="detalleCampania_templates">Piezas de correo:</label>
+                <select id="detalleCampania_templates" name="detalleCampania_templates" class="custom-select custom-select-sm">
+                </select>
             </div>
         </div>
       </form>
@@ -84,38 +60,58 @@
 
     $( '#btnGuardaCampania' ).click( function() {
 
-      document.getElementById('detalleCampania_contenidoPieza').value = editor.getEditorValue();
-      var datos  = $( '#detalleCampania_Form' ).serialize();
-      var token  = sessionStorage.getItem( 'apiToken' );
+        var datos  = $( '#detalleCampania_Form' ).serialize();
+        var token  = sessionStorage.getItem( 'apiToken' );
 
-      if( document.getElementById( 'detalleCampania_id' ).value != '' ) {
-          // Edita registro
-          var url    = '/api/actualizaCampania';
-        } else {
-          // Nuevo registro
-          var url    = '/api/guardaCampania';
-      }
-
-      var config = {
-        headers: {
-          'Accept': 'application/json',
-          'Authorization': 'Bearer ' + token
+        if( document.getElementById( 'detalleCampania_id' ).value != '' ) {
+            // Edita registro
+            var url = '/api/actualizaCampania';
+            var msj = 'actualizado';
+          } else {
+            // Nuevo registro
+            var url = '/api/guardaCampania';
+            var msj = 'agregado';
         }
-      };
 
-      axios.post( url , datos , config )
-           .then( response => {
-              contenidos( 'mercadotecnia_listado' );
-           })
-           .catch( err => {
-             console.log( err );
-           });
-    });
+        var config = {
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + token
+          }
+        };
+
+        if( document.getElementById( 'detalleCampania_fechaEnvio' ).value == '' ) {
+            aviso( "No ha proporcionado una fecha de envío para la campaña" , false );
+        } else if( document.getElementById( 'detalleCampania_nombre' ).value == '' ) {
+            aviso( "No ha proporcionado un nombre para la campaña" , false );
+        } else if( document.getElementById( 'detalleCampania_asunto' ).value == '' ) {
+            aviso( "No ha proporcionado un asunto para el correo electrónico de la campaña" , false );
+        } else {
+            axios.post( url , datos , config )
+                 .then( response => {
+                    aviso( 'La campaña se ha '+msj+' correctamente' );
+                    contenidos( 'mercadotecnia_listado' );
+                 })
+                 .catch( err => {
+                   console.log( err );
+                 });
+       }
+   });
 
     axios.get( '/api/listadoListas' , config )
          .then( response => {
             response.data.forEach( function( e , i ){
                 document.getElementById( 'detalleCampania_destinatarios' ).add( new Option( e.nombre , e.id, false, false ) );
+            });
+         })
+         .catch( err => {
+           console.log( err );
+         });
+
+    axios.get( '/api/listadoPiezasDisponibles' , config )
+         .then( response => {
+            response.data.forEach( function( e , i ){
+                document.getElementById( 'detalleCampania_templates' ).add( new Option( e.nombrePieza , e.id, false, false ) );
             });
          })
          .catch( err => {

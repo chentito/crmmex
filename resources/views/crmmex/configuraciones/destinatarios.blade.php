@@ -1,9 +1,3 @@
-<style>
-  $custom-file-text: (
-    en: "Browse",
-    es: "Elegir"
-  );
-</style>
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
@@ -14,6 +8,11 @@
   <li class="nav-item">
     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
       <i class="fa fa-list fa-sm"></i><span class="d-none d-sm-inline">  Listas de envío</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="multimedia-tab" data-toggle="tab" href="#multimedia" role="tab" aria-controls="multimedia" aria-selected="false">
+      <i class="fa fa-images fa-sm"></i><span class="d-none d-sm-inline">  Multimedia</span>
     </a>
   </li>
   <li class="nav-item">
@@ -52,9 +51,14 @@
               </div>
               <div class="col-sm-12 mt-2">
                 <textarea name="disenoTemplate" id="disenoTemplate" rows="8" cols="80" class="form-control form-control-sm"></textarea>
-                <script>var editorTemplate = new Jodit('#disenoTemplate');</script>
+                <script>
+                  var editorTemplate = new Jodit('#disenoTemplate',{
+                                        enableDragAndDropFileToEditor: true
+                                      });
+                </script>
               </div>
               <div class="col-sm-12 mt-2 text-center">
+                <button class="btn btn-sm {{$btn}}" id="cancelaEdicionTemplate"><i class="fa fa-save fa-sm"></i> Cancelar Edición</button>
                 <button class="btn btn-sm {{$btn}}" id="guardaTemplateEditado"><i class="fa fa-save fa-sm"></i> Guardar</button>
               </div>
           </div>
@@ -65,15 +69,11 @@
     <div class="container border-left border-right border-bottom p-1">
         <div class="row">
             <div class="col-sm-4">
-              Listados
-            </div>
-            <div class="col-sm-8">
-              Contactos
-            </div>
-            <div class="col-sm-4">
+              <label for="listadoAudiencias">Listados</label>
               <select class="custom-select custom-select-sm" id="listadoAudiencias" name="listadoAudiencias" multiple style="height:200px"></select>
             </div>
             <div class="col-sm-8">
+              <label for="listadoContactos">Contactos</label>
               <select class="custom-select custom-select-sm" id="listadoContactos" name="listadoContactos" multiple style="height:200px"></select>
             </div>
         </div>
@@ -137,6 +137,11 @@
       </form>
     </div>
   </div>
+  <div class="tab-pane fade" id="multimedia" role="tabpanel" aria-labelledby="multimedia-tab">
+    <div class="container border-left border-right border-bottom p-1">
+        Multimedia
+    </div>
+  </div>
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
     <div class="container border-left border-right border-bottom p-1">
         Conexiones
@@ -149,22 +154,33 @@
     cargaListados();
     listadoPiezas();
 
-    document.getElementById( 'guardaTemplateEditado' ).addEventListener( 'click' , function( e ){
+    document.getElementById( 'cancelaEdicionTemplate' ).addEventListener( 'click' , function( e ){
         e.preventDefault();
-        var datos = new FormData( document.getElementById( 'editaDisenoTemplate_form' ) );
-        datos.append( 'diseno_template_editor' , editorTemplate.getEditorValue() );
+        listadoPiezas();
+        document.getElementById( 'nombreNuevoTemplate' ).value = "";
+        document.getElementById( 'idTemplateEditado' ).value = "0";
+        editorTemplate.setEditorValue( "" );
+    });
 
-        abreModal();
-        axios.post( '/api/altaPiezaTemplate' , datos , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
-             .then( response => {
-               aviso( 'Template agregado correctamente' );
-               listadoPiezas();
-               cierraModal();
-             })
-             .catch( err => {
-               cierraModal();
-               console.log( err );
-             });
+    document.getElementById( 'guardaTemplateEditado' ).addEventListener( 'click' , function( e ) {
+        e.preventDefault();
+        if( document.getElementById( 'nombreNuevoTemplate' ).value == '' ) {
+            aviso( 'No ha proporcionado un nombre para la pieza de correo' , false );
+        } else {
+            var datos = new FormData( document.getElementById( 'editaDisenoTemplate_form' ) );
+            datos.append( 'diseno_template_editor' , editorTemplate.getEditorValue() );
+
+            axios.post( '/api/altaPiezaTemplate' , datos , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
+                 .then( response => {
+                   if( document.getElementById( 'idTemplateEditado' ).value != 0 ){ mov = 'actualizado';} else { mov = 'agregado'; }
+                   aviso( 'Template '+mov+' correctamente' );
+                   contenidos( 'configuraciones_destinatarios' );
+                   listadoPiezas();
+                 })
+                 .catch( err => {console.log( err );
+                 });
+
+        }
     });
 
     document.getElementById( 'btnEditaTemplateSeleccionado' ).addEventListener( 'click' , function( e ){
@@ -172,7 +188,7 @@
         var piezaID = document.getElementById( 'listaTemplatesDisponibles' ).value;
         if( piezaID == 0 ) {
           document.getElementById( 'nombreNuevoTemplate' ).value = "";
-          document.getElementById( 'idTemplateEditado' ).value = "";
+          document.getElementById( 'idTemplateEditado' ).value = "0";
           editorTemplate.setEditorValue( "" );
         } else {
           axios.get( '/api/detallePiezaTemplate/' + piezaID , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
@@ -199,6 +215,7 @@
     });
 
     function listadoPiezas() {
+        document.getElementById( 'listaTemplatesDisponibles' ).innerHTML = "";
         axios.get( '/api/listadoPiezasDisponibles/' , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
              .then( response => {
                 document.getElementById( 'listaTemplatesDisponibles' ).add( new Option( '-' , '0' , false, false ) );

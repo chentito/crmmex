@@ -17,11 +17,19 @@ class PiezasController extends Controller
 
     // Metodo que agrega una nueva pieza
     public function nuevaPieza( Request $request ) {
-        $pieza = new Piezas();
-        $pieza->nombrePieza = $request->nombreNuevoTemplate;
-        $pieza->pieza       = $request->diseno_template_editor;
-        $pieza->status      = 1;
-        $pieza->save();
+        if( $request->idTemplateEditado == 0 ) {
+              $pieza = new Piezas();
+              $pieza->nombrePieza = $request->nombreNuevoTemplate;
+              $pieza->pieza       = $request->diseno_template_editor;
+              $pieza->status      = 1;
+              $pieza->save();
+          } else {
+              $pieza = Piezas::find( $request->idTemplateEditado );
+              $pieza->nombrePieza = $request->nombreNuevoTemplate;
+              $pieza->pieza       = $request->diseno_template_editor;
+              $pieza->status      = 1;
+              $pieza->save();
+        }
     }
 
     // Metodo que obtiene el detalle de una pieza
