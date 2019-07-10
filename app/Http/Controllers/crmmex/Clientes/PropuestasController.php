@@ -453,9 +453,8 @@ class PropuestasController extends Controller
                     array( 'propuestaIDTY'  , $datos[ 'propuestaIDTY' ] )
                   );
 
-                  $propuesta = new Envio();
-                  $propuesta->envioPropuesta( $propuestaID , $destinatarios , $reservadas , $adjunto );
-                  if( $propuesta->status ) {
+                  $propuesta = Envio::envioPropuesta( $propuestaID , $destinatarios , $reservadas , $adjunto );
+                  if( Envio::$status ) {
                       $enviado = Propuestas::find( $propuestaID );
                       $enviado->estadoPropuesta = 1;
                       $enviado->fechaEnvio      = date( 'Y-m-d H:i:s' );

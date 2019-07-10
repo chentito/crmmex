@@ -5,6 +5,8 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+use App\Http\Controllers\crmmex\Tareas\EjemploController AS Ejemplo;
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -26,6 +28,11 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+        $schedule->call(function () {
+            Ejemplo::envioTest();
+        })->everyMinute();
+
     }
 
     /**

@@ -12,17 +12,23 @@ use PHPMailer\PHPMailer;
 class PHPMailerController extends Controller
 {
 
-    public $status = false;
+    public static $status = false;
 
     // Metodo para el envio de propuestas
-    public function envioPropuesta( $propuestaID , $destinatarios , $reservadas=array() , $adjuntos=array() ) {
-        $msj = $this->piezaCorreo( 1 , $reservadas );
-        $this->envio( $msj[ 'Asunto' ] , $msj[ 'Body' ] , $destinatarios , $adjuntos );
+    public static function envioPropuesta( $propuestaID , $destinatarios , $reservadas=array() , $adjuntos=array() ) {
+        $msj = self::piezaCorreo( 1 , $reservadas );
+        self::envio( $msj[ 'Asunto' ] , $msj[ 'Body' ] , $destinatarios , $adjuntos );
+    }
+
+    // Metodo para el envio de Campanias
+    public static function envioCalendarizado() {
+      $destinatario = array( "cvreyes@mexagon.net" );
+      self::envio( 'Prueba envio' , 'probando calendarizados' , $destinatario );
     }
 
     // Proceso de envio de correo electronico
-    private function envio( $subject , $text , $destinatarios , $adjuntos ) {
-        $datos = $this->datosConexion();
+    private static function envio( $subject , $text , $destinatarios , $adjuntos=array() ) {
+        $datos = self::datosConexion();
         $mail = new PHPMailer\PHPMailer();
         $mail->SMTPOptions = array(
             'ssl' => array(
@@ -56,14 +62,14 @@ class PHPMailerController extends Controller
         }
 
         if( $mail->Send() ) {
-              $this->status = true;
+              self::$status = true;
           } else {
-              $this->status = false;
+              self::$status = false;
         }
     }
 
     // Obtiene los datos de la cuenta smtp configurada
-    private function datosConexion() {
+    private static function datosConexion() {
         $conexion = array();
         $smtp = SMTP::find( 1 );
         $conexion = array(
@@ -79,7 +85,7 @@ class PHPMailerController extends Controller
     }
 
     // Obtiene la pieza de correo a utilizar
-    private function piezaCorreo( $id , $reservadas ) {
+    private static function piezaCorreo( $id , $reservadas ) {
         $template = Templates::find( $id );
         $body     = $template->cuerpo;
 

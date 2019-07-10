@@ -52,9 +52,7 @@
                 <div class="col-sm-12 mt-2">
                   <textarea name="disenoTemplate" id="disenoTemplate" rows="8" cols="80" class="form-control form-control-sm"></textarea>
                   <script>
-                    var editorTemplate = new Jodit('#disenoTemplate', {
-                                          enableDragAndDropFileToEditor: true
-                                        });
+                    var editorTemplate = new Jodit('#disenoTemplate', {enableDragAndDropFileToEditor: true });
                   </script>
                 </div>
                 <div class="col-sm-12 mt-2 text-center">
@@ -113,24 +111,6 @@
               <label for="altaAudiencia_nombreListado">Nombre Listado:</label>
               <input type="text" class="form-control form-control-sm" name="altaAudiencia_nombreListado" id="altaAudiencia_nombreListado" placeholder="Nombre Listado">
             </div>
-            <!--div class="col-sm-4 mt-3">
-              <label for="altaAudiencia_delimitador">Delimitador de campos:</label>
-              <select id="altaAudiencia_delimitador" name="altaAudiencia_delimitador" class="custom-select custom-select-sm">
-                <option value="\t">{tabulador}</option>
-                <option value="\s">{espacios}</option>
-                <option value=",">,</option>
-                <option value=";">;</option>
-                <option value=":">:</option>
-              </select>
-            </div>
-            <div class="col-sm-4 mt-3">
-              <label for="altaAudiencia_delimitadorCadena">Delimitador de cadena:</label>
-              <select id="altaAudiencia_delimitadorCadena" name="altaAudiencia_delimitadorCadena" class="custom-select custom-select-sm">
-                <option value="">Sin delimitador</option>
-                <option value='"'>"</option>
-                <option value="'">'</option>
-              </select>
-            </div-->
             <div class="col-sm-12 text-center mt-3">
               <button type="button" name="altaAudiencia_btnGuarda" id="altaAudiencia_btnGuarda" class="btn btn-sm {{$btn}}"><i class="fa fa-save fa-sm"></i> Guardar</button>
             </div>
@@ -148,9 +128,11 @@
           </div>
           <div class="col-sm-12 mt-1">
               <label for="altaNuevoTemplate_pieza">Contenido:</label>
-              <textarea name="altaNuevoTemplate_pieza" id="altaNuevoTemplate_pieza" rows="8" cols="80" class="form-control form-control-sm"></textarea>
+              <textarea name="altaNuevoTemplate_pieza" id="altaNuevoTemplate_pieza" rows="16" cols="80" class="form-control form-control-sm"></textarea>
               <script>
-                var nuevaPieza = new Jodit('#altaNuevoTemplate_pieza');
+                var nuevaPieza = new Jodit('#altaNuevoTemplate_pieza',{
+                  height: 400
+                });
               </script>
           </div>
         </div>
