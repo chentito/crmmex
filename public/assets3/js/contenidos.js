@@ -296,7 +296,6 @@ function aviso( mensaje , exito=true ) {
   		            '<span data-notify="message"><b><center>{2}</center></b></span>' +
       	          '</div>'
       });
-
 }
 
 function notificacionesInicio( mensaje ) {

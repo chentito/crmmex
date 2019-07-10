@@ -55,6 +55,8 @@ Route::middleware( 'web' )->group( function(){
   Route::post( '/carritoEliminaProd/{productoID}'     , 'crmmex\Clientes\PropuestasController@eliminaElementoCarrito' );
   Route::post( '/carritoCarga/{propuestaID}'          , 'crmmex\Clientes\PropuestasController@cargaCarrito' );
 
+  Route::get( '/imagenPropietario'                   , 'crmmex\Sistema\PropietarioController@imagenPropietario');
+
 });
 
 Route::get( '/' , function (){ return redirect( '/login' ); } );

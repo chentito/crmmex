@@ -4,7 +4,7 @@ namespace App\Http\Controllers\crmmex\Mercadotecnia;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\mercadotecnia\Campanias AS Campanias;
+use App\Models\crmmex\Mercadotecnia\Campanias AS Campanias;
 use Illuminate\Support\Facades\URL;
 
 use App\Http\Controllers\crmmex\Utils\UtilsController AS Utils;

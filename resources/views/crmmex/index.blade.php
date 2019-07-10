@@ -41,7 +41,7 @@
             <!-- Barra lateral, contiene menu e imagen corporativa -->
             <nav id="sidebar" class="{{$estilo}} shadow" style="opacity: {{$trans}}">
                 <div id="logoBranding" class="sidebar-header sticky-top" >
-                    <img src="{{ asset( 'imgs/logo/crm.png' ) }}" width="200px">
+                    <img src="{{ asset( '/imagenPropietario' ) }}" width="200px">
                 </div>
                 <button type="button" id="sidebarCollapse2" class="btn {{$btn}} mt-2" style="width: 100%">
                     <i class="fas fa-angle-left"></i>

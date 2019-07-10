@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\crmmex\Mercadotecnia\Piezas AS Piezas;
+use App\Models\crmmex\Mercadotecnia\Campanias AS Campanias;
 
 class PiezasController extends Controller
 {
@@ -32,10 +33,39 @@ class PiezasController extends Controller
         }
     }
 
+    // Metodo que agrega una neuva pieza para las campañas
+    public function altaPiezaCampania( Request $request ) {
+        $piezaCampania = new Piezas();
+        $piezaCampania->nombrePieza = $request->altaNuevoTemplate_nombre;
+        $piezaCampania->pieza       = $request->contPieza;
+        $piezaCampania->status      = 1;
+        $piezaCampania->save();
+        return response()->json( array( 'mensaje' => 'Pieza agregada correctamente' ) );
+    }
+
     // Metodo que obtiene el detalle de una pieza
     public function detallePieza( $piezaID ) {
         $pieza = Piezas::find( $piezaID );
         return response()->json( $pieza );
+    }
+
+    // Metodo que elimina una pieza
+    public function eliminaPieza( $piezaID ) {
+        $enUso = Campanias::where( 'status' , 1 )
+                          ->where( 'pieza' , $piezaID )
+                          ->where( 'fechaEnvio' , '>' , date( 'Y-m-d H:i:s' ) )
+                          ->count();
+
+        if( $enUso > 0 ) {
+          $mensaje = 'La pieza se encuentra asignada a una campaña vigente';
+        } else {
+          $pieza = Piezas::find( $piezaID );
+          $pieza->status = 0;
+          $pieza->save();
+          $mensaje = 'Pieza eliminada correctamente';
+        }
+
+        return response()->json( array( 'mensaje' => $mensaje ) );
     }
 
 }

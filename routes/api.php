@@ -141,7 +141,17 @@ Route::middleware( 'auth:api' )->get ( '/listadoContactosAudiencia/{audienciaID}
 Route::middleware( 'auth:api' )->post( '/altaAudiencia'                                                  , 'crmmex\Mercadotecnia\ListasController@altaListado' );
 Route::middleware( 'auth:api' )->get ( '/listadoPiezasDisponibles'                                       , 'crmmex\Mercadotecnia\PiezasController@listadoPiezas' );
 Route::middleware( 'auth:api' )->post( '/altaPiezaTemplate'                                              , 'crmmex\Mercadotecnia\PiezasController@nuevaPieza' );
+Route::middleware( 'auth:api' )->post( '/altaPiezaCampana'                                              , 'crmmex\Mercadotecnia\PiezasController@altaPiezaCampania' );
+Route::middleware( 'auth:api' )->post( '/eliminaPiezaTemplate/{piezaID}'                                 , 'crmmex\Mercadotecnia\PiezasController@eliminaPieza' );
 Route::middleware( 'auth:api' )->get ( '/detallePiezaTemplate/{piezaID}'                                 , 'crmmex\Mercadotecnia\PiezasController@detallePieza' );
+
+
+/************************************ Multimedia ************************************/
+Route::middleware( 'auth:api' )->get ( '/listadoMultimedia'                             , 'crmmex\Sistema\MultimediaController@listadoMultimedia' );
+Route::middleware( 'auth:api' )->post( '/nuevoMultimedia'                               , 'crmmex\Sistema\MultimediaController@nuevoElemento' );
+Route::middleware( 'auth:api' )->post( '/editaMultimedia'                               , 'crmmex\Sistema\MultimediaController@actualizaElemento' );
+Route::middleware( 'auth:api' )->post( '/eliminaMultimedia/{multimediaID}/{movimiento}' , 'crmmex\Sistema\MultimediaController@eliminaElemento' );
+Route::middleware( 'auth:api' )->post( '/habilitaMultimedia/{multimediaID}'             , 'crmmex\Sistema\MultimediaController@habilitaElemento' );
 
 
 /************************************ Dashboard ************************************/
@@ -175,6 +185,12 @@ Route::post( '/eliminaOptCat/{optID}'                       , 'crmmex\Utils\Util
 /************************************ Acciones utiles para templates de envio de correo ************************************/
 Route::get ( '/obtieneDatosTemplate/{templateID}' , 'crmmex\Sistema\TemplatesController@obtieneDatosTemplate' );
 Route::post( '/actualizaDatosTemplate'            , 'crmmex\Sistema\TemplatesController@actualizaDatosTemplate' );
+
+
+/************************************ Branding ************************************/
+Route::middleware( 'auth:api' )->get ( '/obtieneDatosPropietario'   , 'crmmex\Sistema\PropietarioController@propietario' );
+Route::middleware( 'auth:api' )->post( '/actualizaDatosPropietario' , 'crmmex\Sistema\PropietarioController@actualiza' );
+Route::middleware( 'auth:api' )->post( '/imagenPropietario'         , 'crmmex\Sistema\PropietarioController@imagenPropietario' );
 
 
 /************************************ Pruebas API consumidas desdee Angular ************************************/

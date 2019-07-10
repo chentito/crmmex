@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\mercadotecnia;
+namespace App\Models\crmmex\Mercadotecnia;
 
 use Illuminate\Database\Eloquent\Model;
 

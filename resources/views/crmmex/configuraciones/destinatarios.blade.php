@@ -6,13 +6,13 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-      <i class="fa fa-list fa-sm"></i><span class="d-none d-sm-inline">  Listas de envío</span>
+    <a class="nav-link" id="edit-tab" data-toggle="tab" href="#edit" role="tab" aria-controls="edit" aria-selected="false">
+      <i class="fa fa-edit fa-sm"></i><span class="d-none d-sm-inline">  Crear Template</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="multimedia-tab" data-toggle="tab" href="#multimedia" role="tab" aria-controls="multimedia" aria-selected="false">
-      <i class="fa fa-images fa-sm"></i><span class="d-none d-sm-inline">  Multimedia</span>
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+      <i class="fa fa-list fa-sm"></i><span class="d-none d-sm-inline">  Listas de envío</span>
     </a>
   </li>
   <li class="nav-item">
@@ -43,25 +43,26 @@
               </div>
           </div>
           <form id="editaDisenoTemplate_form" name="editaDisenoTemplate_form">
-          <div class="row">
-              <div class="col-sm-3 mt-1">
-                  <label for="nombreNuevoTemplate">Nombre del template:</label>
-                  <input type="text" name="nombreNuevoTemplate" id="nombreNuevoTemplate" value="" placeholder="Nombre Template" class="form-control form-control-sm">
-                  <input type="hidden" name="idTemplateEditado" id="idTemplateEditado" value="0" >
-              </div>
-              <div class="col-sm-12 mt-2">
-                <textarea name="disenoTemplate" id="disenoTemplate" rows="8" cols="80" class="form-control form-control-sm"></textarea>
-                <script>
-                  var editorTemplate = new Jodit('#disenoTemplate',{
-                                        enableDragAndDropFileToEditor: true
-                                      });
-                </script>
-              </div>
-              <div class="col-sm-12 mt-2 text-center">
-                <button class="btn btn-sm {{$btn}}" id="cancelaEdicionTemplate"><i class="fa fa-save fa-sm"></i> Cancelar Edición</button>
-                <button class="btn btn-sm {{$btn}}" id="guardaTemplateEditado"><i class="fa fa-save fa-sm"></i> Guardar</button>
-              </div>
-          </div>
+            <div class="row">
+                <div class="col-sm-3 mt-1">
+                    <label for="nombreNuevoTemplate">Nombre del template:</label>
+                    <input type="text" name="nombreNuevoTemplate" id="nombreNuevoTemplate" value="" placeholder="Nombre Template" class="form-control form-control-sm">
+                    <input type="hidden" name="idTemplateEditado" id="idTemplateEditado" value="0" >
+                </div>
+                <div class="col-sm-12 mt-2">
+                  <textarea name="disenoTemplate" id="disenoTemplate" rows="8" cols="80" class="form-control form-control-sm"></textarea>
+                  <script>
+                    var editorTemplate = new Jodit('#disenoTemplate', {
+                                          enableDragAndDropFileToEditor: true
+                                        });
+                  </script>
+                </div>
+                <div class="col-sm-12 mt-2 text-center">
+                  <button class="btn btn-sm {{$btn}}" id="cancelaEdicionTemplate"><i class="fa fa-save fa-sm"></i> Cancelar Edición</button>
+                  <button class="btn btn-sm {{$btn}}" id="guardaTemplateEditado"><i class="fa fa-save fa-sm"></i> Guardar</button>
+                  <button class="btn btn-sm {{$btn}}" id="eliminaTemplateEditado"><i class="fa fa-trash fa-sm"></i> Eliminar</button>
+                </div>
+            </div>
           </form>
       </div>
   </div>
@@ -137,9 +138,28 @@
       </form>
     </div>
   </div>
-  <div class="tab-pane fade" id="multimedia" role="tabpanel" aria-labelledby="multimedia-tab">
+  <div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="edit-tab">
     <div class="container border-left border-right border-bottom p-1">
-        Multimedia
+      <form id="altaNuevoTemplate_form" name="altaNuevoTemplate_form">
+        <div class="row">
+          <div class="col-sm-4 mt-3">
+              <label for="">Nombre:</label>
+              <input type="text" name="altaNuevoTemplate_nombre" id="altaNuevoTemplate_nombre" value="" placeholder="Nombre de la pieza" class="form-control form-control-sm">
+          </div>
+          <div class="col-sm-12 mt-1">
+              <label for="altaNuevoTemplate_pieza">Contenido:</label>
+              <textarea name="altaNuevoTemplate_pieza" id="altaNuevoTemplate_pieza" rows="8" cols="80" class="form-control form-control-sm"></textarea>
+              <script>
+                var nuevaPieza = new Jodit('#altaNuevoTemplate_pieza');
+              </script>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-sm-12 text-center">
+            <button type="button" name="altaNuevoTemplate_btn" id="altaNuevoTemplate_btn" class="btn btn-sm {{$btn}}"><i class="fa fa-save fa-sm"></i> Guardar</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -150,11 +170,31 @@
 </div>
 
 <script>
-
     cargaListados();
     listadoPiezas();
 
-    document.getElementById( 'cancelaEdicionTemplate' ).addEventListener( 'click' , function( e ){
+    document.getElementById( 'altaNuevoTemplate_btn' ).addEventListener( 'click' , function( e ) {
+        e.preventDefault();
+        var datos = new FormData( document.getElementById( 'altaNuevoTemplate_form' ) );
+        datos.append( 'contPieza' , nuevaPieza.getEditorValue() );
+
+        if( document.getElementById( 'altaNuevoTemplate_nombre' ).value == '' ) {
+            aviso( 'No ha proporcionado un nombre para identificar el template' , false );
+          } else if( nuevaPieza.getEditorValue() == '' ) {
+            aviso( 'El contenido está vacío' , false );
+        } else {
+          axios.post( '/api/altaPiezaCampana' , datos , { headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
+               .then( response => {
+                  aviso( response.data.mensaje );
+                  contenidos( 'configuraciones_destinatarios' );
+               })
+               .catch( err => {
+                 console.log( err );
+               });
+        }
+    });
+
+    document.getElementById( 'cancelaEdicionTemplate' ).addEventListener( 'click' , function( e ) {
         e.preventDefault();
         listadoPiezas();
         document.getElementById( 'nombreNuevoTemplate' ).value = "";
@@ -179,7 +219,24 @@
                  })
                  .catch( err => {console.log( err );
                  });
+        }
+    });
 
+    document.getElementById( 'eliminaTemplateEditado' ).addEventListener( 'click' , function( e ){
+        e.preventDefault();
+
+        if( document.getElementById('idTemplateEditado').value == 0 ) {
+            aviso( "No ha seleccionado algun template a eliminar" , false );
+        } else {
+          axios.post( '/api/eliminaPiezaTemplate/' + document.getElementById('idTemplateEditado').value , {} ,
+                      {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
+               .then( response => {
+                  aviso( response.data.mensaje );
+                  listadoPiezas();
+               })
+               .catch( err => {
+                 console.log( err );
+               });
         }
     });
 
