@@ -28,9 +28,7 @@
               var fecha = response.data.fechaEnvio.split( ' ' );
               var hora  = fecha[ 1 ].split( ':' );
               document.getElementById( 'detalleCampania_horaEnvio' ).value     = hora[ 0 ];
-              document.querySelector( '#detalleCampania_horaEnvio' ).value     = hora[ 0 ];
-              document.getElementById( 'detalleCampania_minutoEnvio' ).value   = hora[ 1 ];
-              document.querySelector( '#detalleCampania_minutoEnvio' ).value   = hora[ 1 ];
+              document.getElementById( 'detalleCampania_minutoEnvio' ).value   = hora[ 1 ];              
            })
            .catch( err => {
              console.log( err );
