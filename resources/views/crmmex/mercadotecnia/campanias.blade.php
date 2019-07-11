@@ -17,12 +17,28 @@
                 <label for="detalleCampania_fechaEnvio">Fecha de env&iacute;o:</label>
                 <input id="detalleCampania_fechaEnvio" name="detalleCampania_fechaEnvio" type="text" placeholder="Fecha de Envío" class="form-control form-control-sm" value="" readonly>
             </div>
-            <div class="col-sm-4 mb-1">
-                <label for="detalleCampania_asunto">Asunto:</label>
-                <input id="detalleCampania_asunto" name="detalleCampania_asunto" type="text" placeholder="Asunto" class="form-control form-control-sm" value="">
+            <div class="col-sm-2 mb-1">
+              <label for="detalleCampania_horaEnvio">Hora:</label>
+              <select class="custom-select custom-select-sm" id="detalleCampania_horaEnvio" name="detalleCampania_horaEnvio">
+                @for ($i = 0; $i <= 23; $i++)
+                    <option value="@if(strlen($i)===1) {{ '0'.$i }} @else {{$i}} @endif">@if(strlen($i)===1) {{ '0'.$i }} @else {{$i}} @endif</option>
+                @endfor
+              </select>
+            </div>
+            <div class="col-sm-2 mb-1">
+              <label for="detalleCampania_minutoEnvio">Minuto:</label>
+              <select class="custom-select custom-select-sm" id="detalleCampania_minutoEnvio" name="detalleCampania_minutoEnvio">
+                @for ($i = 0; $i <= 59; $i++)
+                    <option value="@if(strlen($i)===1) {{ '0'.$i }} @else {{$i}} @endif">@if(strlen($i)===1) {{ '0'.$i }} @else {{$i}} @endif</option>
+                @endfor
+              </select>
             </div>
         </div>
         <div class="row">
+          <div class="col-sm-4 mb-1">
+              <label for="detalleCampania_asunto">Asunto:</label>
+              <input id="detalleCampania_asunto" name="detalleCampania_asunto" type="text" placeholder="Asunto" class="form-control form-control-sm" value="">
+          </div>
           <div class="col-sm-4 mb-1">
                 <label for="detalleCampania_destinatarios">Destinatarios:</label>
                 <select id="detalleCampania_destinatarios" name="detalleCampania_destinatarios" class="custom-select custom-select-sm">

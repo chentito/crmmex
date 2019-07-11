@@ -39,10 +39,11 @@ class CampaniasController extends Controller
 
     /* Obtiene los datos de un registro en particular */
     public function search( $id ) {
-        $campania = Campanias::find( $id );
-        $camp = array(
+        $campania  = Campanias::find( $id );
+        $soloFecha = explode( ' ' , $campania->fechaEnvio );
+        $camp      = array(
           'nombre'        => $campania->nombre_campania,
-          'fechaEnvio'    => $campania->fechaEnvio,
+          'fechaEnvio'    => $soloFecha[ 0 ],
           'subject'       => $campania->subject,
           'destinatarios' => $campania->id_listado_destinatarios,
           'pieza'         => $campania->detalleCampania_templates
@@ -54,13 +55,9 @@ class CampaniasController extends Controller
     public function save( Request $request ) {
         $campania = new Campanias();
         $campania->nombre_campania          = $request[ 'detalleCampania_nombre' ];
-        //$campania->url                      = $request[ 'detalleCampania_landingPage' ];
-        $campania->fechaEnvio               = $request[ 'detalleCampania_fechaEnvio' ];
+        $campania->fechaEnvio               = $request[ 'detalleCampania_fechaEnvio' ]. ' ' . $request[ 'detalleCampania_horaEnvio' ] . ':' . $request[ 'detalleCampania_minutoEnvio' ] . ':00';
         $campania->subject                  = $request[ 'detalleCampania_asunto' ];
-        //$campania->from_nombre              = $request[ 'detalleCampania_remitente' ];
-        //$campania->from_email               = $request[ 'detalleCampania_remitenteEmail' ];
         $campania->id_listado_destinatarios = $request[ 'detalleCampania_destinatarios' ];
-        //$campania->tipo                     = $request[ 'detalleCampania_tipo' ];
         $campania->pieza                    = $request[ 'detalleCampania_templates' ];
         $campania->status                   = 1;
 
@@ -79,13 +76,9 @@ class CampaniasController extends Controller
     public function update( Request $request ) {
         $campania = Campanias::find( $request[ 'detalleCampania_id' ] );
         $campania->nombre_campania          = $request[ 'detalleCampania_nombre' ];
-        //$campania->url                      = $request[ 'detalleCampania_landingPage' ];
-        $campania->fechaEnvio               = $request[ 'detalleCampania_fechaEnvio' ];
+        $campania->fechaEnvio               = $request[ 'detalleCampania_fechaEnvio' ]. ' ' . $request[ 'detalleCampania_horaEnvio' ] . ':' . $request[ 'detalleCampania_minutoEnvio' ] . ':00';
         $campania->subject                  = $request[ 'detalleCampania_asunto' ];
-        //$campania->from_nombre              = $request[ 'detalleCampania_remitente' ];
-        //$campania->from_email               = $request[ 'detalleCampania_remitenteEmail' ];
         $campania->id_listado_destinatarios = $request[ 'detalleCampania_destinatarios' ];
-        //$campania->tipo                     = $request[ 'detalleCampania_tipo' ];
         $campania->pieza                    = $request[ 'detalleCampania_templates' ];
         $campania->status                   = 1;
 

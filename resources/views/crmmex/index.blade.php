@@ -23,7 +23,6 @@
         <link href="{{ asset( 'assets3/css/bootstrap-datepicker.standalone.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/animate.css' ) }}" rel="stylesheet">
         <script src="{{ asset( 'assets3/js/jodit.min.js' ) }}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/es.js"></script>
     </head>
     <body>
         <style>
@@ -98,6 +97,8 @@
 
         <!-- SCRIPTS -->
         <script src="{{ asset( 'js/app.js' ) }}" ></script>
+        <script src="https://momentjs.com/downloads/moment.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/es.js"></script>
         <script src="{{ asset( 'assets3/js/notify.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/contenidos.js' ) }}"></script>
         <!-- Grid -->

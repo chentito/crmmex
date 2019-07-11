@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Mexico_City',
 
     /*
     |--------------------------------------------------------------------------
@@ -227,7 +227,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'EsPDF' => App\Facades\EsPDF::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        'SoapWrapper' => Artisaninweb\SoapWrapper\Facade\SoapWrapper::class,  
+        'SoapWrapper' => Artisaninweb\SoapWrapper\Facade\SoapWrapper::class,
     ],
 
 ];

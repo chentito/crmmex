@@ -21,9 +21,8 @@ class PHPMailerController extends Controller
     }
 
     // Metodo para el envio de Campanias
-    public static function envioCalendarizado() {
-      $destinatario = array( "cvreyes@mexagon.net" );
-      self::envio( 'Prueba envio' , 'probando calendarizados' , $destinatario );
+    public static function envioCalendarizado( $subject , $piezaMail , $destinatario ) {
+      self::envio( $subject , $piezaMail , $destinatario );
     }
 
     // Proceso de envio de correo electronico

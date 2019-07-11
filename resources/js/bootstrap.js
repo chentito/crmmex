@@ -20,6 +20,7 @@ try {
     var Highcharts = require('highcharts/highstock');
     window.Highcharts = Highcharts;
     require('highcharts/modules/exporting')(Highcharts);
+    require( 'moment' );
 
 } catch (e) {}
 
