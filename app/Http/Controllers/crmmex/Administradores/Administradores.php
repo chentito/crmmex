@@ -1,5 +1,9 @@
 <?php
-
+/*
+ * Controlador para la administracion de usuarios (ejecutivos)
+ * @Autor Mexagon.net / Carlos Reyes
+ * @Fecha Abril 2019
+ */
 namespace App\Http\Controllers\crmmex\Administradores;
 
 use Illuminate\Http\Request;

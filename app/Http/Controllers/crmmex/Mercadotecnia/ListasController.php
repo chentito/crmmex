@@ -1,5 +1,9 @@
 <?php
-
+/*
+ * Controlador para el alta de lista de destinatarios para campañas
+ * @Autor Mexagon.net / Carlos Reyes
+ * @Fecha Julio 2019
+ */
 namespace App\Http\Controllers\crmmex\Mercadotecnia;
 
 use Illuminate\Http\Request;

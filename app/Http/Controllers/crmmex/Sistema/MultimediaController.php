@@ -1,5 +1,9 @@
 <?php
-
+/*
+ * Controlador para los archivos multimedia a incluir en las piezas de correo
+ * @Autor Mexagon.net / Carlos Reyes
+ * @Fecha Julio 2019
+ */
 namespace App\Http\Controllers\crmmex\Sistema;
 
 use Illuminate\Http\Request;

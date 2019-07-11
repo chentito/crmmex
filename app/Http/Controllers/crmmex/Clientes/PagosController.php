@@ -1,5 +1,9 @@
 <?php
-
+/*
+ * Controlador para el proceso de pagos de propuestas
+ * @Autor Mexagon.net / Carlos Reyes
+ * @Fecha Junio 2019
+ */
 namespace App\Http\Controllers\crmmex\Clientes;
 
 use Illuminate\Http\Request;

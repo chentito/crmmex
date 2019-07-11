@@ -1,5 +1,9 @@
 <?php
-
+/*
+ * Controlador para la administracion de promociones
+ * @Autor Mexagon.net / Carlos Reyes
+ * @Fecha Junio 2019
+ */
 namespace App\Http\Controllers\crmmex\Productos;
 
 use Illuminate\Http\Request;

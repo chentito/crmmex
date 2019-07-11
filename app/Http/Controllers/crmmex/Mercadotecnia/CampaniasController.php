@@ -1,5 +1,9 @@
 <?php
-
+/*
+ * Controlador para la administracion de campañas
+ * @Autor Mexagon.net / Carlos Reyes
+ * @Fecha Junio 2019
+ */
 namespace App\Http\Controllers\crmmex\Mercadotecnia;
 
 use Illuminate\Http\Request;
@@ -15,7 +19,7 @@ class CampaniasController extends Controller
     // Obtiene el listado de campanias
     public function listadoCampanias() {
         $campaniasD = array();
-        $campanias  = Campanias::where( 'status' , '1' )->orderBy( 'id' , 'desc' )->get();
+        $campanias  = Campanias::whereIn( 'status' , [ 1 , 2 ] )->orderBy( 'id' , 'desc' )->get();
 
         foreach( $campanias AS $campania ) {
             $campaniasD[ 'campanias' ][] = array (
@@ -25,6 +29,7 @@ class CampaniasController extends Controller
                 'subject'                  => $campania->subject,
                 'id_listado_destinatarios' => Utils::nombreAudiencia( $campania->id_listado_destinatarios ),
                 'pieza'                    => Utils::nombrePieza( $campania->pieza ),
+                'enviado'                  => ( ( $campania->enviado == 1 ) ? 'Enviada' : 'Sin enviar' ),
                 'status'                   => ( ( $campania->status == 1 ) ? 'Activa' : 'Inactiva' ),
                 'opciones'                 => ( $campania->fechaEnvio > date( 'Y-m-d H:i:s' ) ) ?
                                               '<a href="javascript:void(0)" onclick="return contenidos(\'mercadotecnia_estadisticas\');" title="Ver Estadisticas"><i class="fa fa-chart-area fa-sm"></i></a>'
@@ -40,10 +45,9 @@ class CampaniasController extends Controller
     /* Obtiene los datos de un registro en particular */
     public function search( $id ) {
         $campania  = Campanias::find( $id );
-        $soloFecha = explode( ' ' , $campania->fechaEnvio );
         $camp      = array(
           'nombre'        => $campania->nombre_campania,
-          'fechaEnvio'    => $soloFecha[ 0 ],
+          'fechaEnvio'    => $campania->fechaEnvio,
           'subject'       => $campania->subject,
           'destinatarios' => $campania->id_listado_destinatarios,
           'pieza'         => $campania->detalleCampania_templates

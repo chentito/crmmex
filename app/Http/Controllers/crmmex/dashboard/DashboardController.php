@@ -1,5 +1,9 @@
 <?php
-
+/*
+ * Controlador del dashboard, widgets
+ * @Autor Mexagon.net / Carlos Reyes
+ * @Fecha Junio 2019
+ */
 namespace App\Http\Controllers\crmmex\dashboard;
 
 use Illuminate\Http\Request;

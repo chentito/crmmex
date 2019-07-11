@@ -1,5 +1,9 @@
 <?php
-
+/*
+ * Controlador para la funcionalidad de campos adicionales
+ * @Autor Mexagon.net / Carlos Reyes
+ * @Fecha Julio 2019
+ */
 namespace App\Http\Controllers\crmmex\Utils;
 
 use Illuminate\Http\Request;

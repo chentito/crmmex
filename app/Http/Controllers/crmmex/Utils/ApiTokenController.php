@@ -1,5 +1,9 @@
 <?php
-
+/*
+ * Controlador para la creacion de token para uso de la api desde el sistema
+ * @Autor Mexagon.net / Carlos Reyes
+ * @Fecha Julio 2019
+ */
 namespace App\Http\Controllers\crmmex\Utils;
 
 use Session;

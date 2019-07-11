@@ -1,4 +1,10 @@
 <?php
+/*
+ * Controlador para los templates de correos electronicos enviados a través
+ * de la plataforma
+ * @Autor Mexagon.net / Carlos Reyes
+ * @Fecha Junio 2019
+ */
 
 namespace App\Http\Controllers\crmmex\Sistema;
 

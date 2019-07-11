@@ -1,5 +1,10 @@
 <?php
-
+/*
+ * Controlador para la administracion de las piezas de correo a enviar en
+ * las campañas configuradas
+ * @Autor Mexagon.net / Carlos Reyes
+ * @Fecha Julio 2019
+ */
 namespace App\Http\Controllers\crmmex\Mercadotecnia;
 
 use Illuminate\Http\Request;

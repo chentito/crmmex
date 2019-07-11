@@ -1,5 +1,9 @@
 <?php
-
+/*
+ * Controlador para los envias de correo electronico
+ * @Autor Mexagon.net / Carlos Reyes
+ * @Fecha Julio 2019
+ */
 namespace App\Http\Controllers\crmmex\Sistema;
 
 use Illuminate\Http\Request;

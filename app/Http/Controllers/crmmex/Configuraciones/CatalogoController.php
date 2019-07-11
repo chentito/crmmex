@@ -1,5 +1,9 @@
 <?php
-
+/*
+ * Controlador para los catalogos del sistema
+ * @Autor Mexagon.net / Carlos Reyes
+ * @Fecha Abril 2019
+ */
 namespace App\Http\Controllers\crmmex\Configuraciones;
 
 use Illuminate\Http\Request;

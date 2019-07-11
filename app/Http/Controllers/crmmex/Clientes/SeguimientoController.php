@@ -1,7 +1,7 @@
 <?php
 /*
  * Controlador para el seguimiento de clientes
- * @Autor Mexagon.net / Carlos cvreyes
+ * @Autor Mexagon.net / Carlos Reyes
  * @Fecha Mayo 2019
  */
 
