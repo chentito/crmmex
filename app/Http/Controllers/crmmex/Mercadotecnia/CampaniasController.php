@@ -108,3 +108,5 @@ class CampaniasController extends Controller
        $html = '<img src="'.URL::to('/').'/campaniatracking/'.$campaniaID.'/{contactoID}" width="0" height="0">';
        return $html;
      }
+
+}
