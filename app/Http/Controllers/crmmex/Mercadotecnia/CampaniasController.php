@@ -63,6 +63,7 @@ class CampaniasController extends Controller
         $campania->subject                  = $request[ 'detalleCampania_asunto' ];
         $campania->id_listado_destinatarios = $request[ 'detalleCampania_destinatarios' ];
         $campania->pieza                    = $request[ 'detalleCampania_templates' ];
+        $campania->enviado                  = 0;
         $campania->status                   = 1;
 
         if( $campania->save() ) {
