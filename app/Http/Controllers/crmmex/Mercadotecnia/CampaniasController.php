@@ -105,8 +105,6 @@ class CampaniasController extends Controller
      * Elemnto util para el seguimiento sobre las piezas de correo
      */
      private function tracking( $campaniaID ) {
-       $html = '<img src="'.URL::to('/').'/campaniatracking/'.$campaniaID.'" width="0" height="0">';
+       $html = '<img src="'.URL::to('/').'/campaniatracking/'.$campaniaID.'/{contactoID}" width="0" height="0">';
        return $html;
      }
-
-}

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\crmmex\Configuraciones\SMTP AS SMTP;
 use App\Models\crmmex\Sistema\Templates As Templates;
+use App\Models\crmmex\Mercadotecnia\Piezas AS Pieza;
 
 use PHPMailer\PHPMailer;
 
@@ -21,8 +22,9 @@ class PHPMailerController extends Controller
     }
 
     // Metodo para el envio de Campanias
-    public static function envioCalendarizado( $subject , $piezaMail , $destinatario ) {
-      self::envio( $subject , $piezaMail , $destinatario );
+    public static function envioCalendarizado( $subject , $piezaMail , $tracking , $destinatario , $personalizacion=array() ) {
+        $msj = self::piezaCorreoCampania( $piezaMail , $personalizacion , $tracking );
+        self::envio( $subject , $msj , $destinatario );
     }
 
     // Proceso de envio de correo electronico
@@ -100,6 +102,23 @@ class PHPMailerController extends Controller
         );
 
         return $datos;
+    }
+
+    // Obtiene la pieza de correo de la campaña
+    private static function piezaCorreoCampania( $idPieza , $personalizacion , $tracking ) {
+        $pieza = Pieza::find( $idPieza );
+        $body  = $pieza->pieza . $tracking;
+        $reservadas = array( 'contactoID' , 'nombre' , 'email' , 'telefono' , 'empresa' );
+
+        foreach( $reservadas AS $reservada ){
+            if( isset( $personalizacion[ $reservada ] ) ) {
+                $busca[]     = '{'.$reservada.'}';
+                $reemplaza[] = $personalizacion[ $reservada ];
+            }
+        }
+
+        $body = str_replace( $busca , $reemplaza , $body );
+        return $body;
     }
 
 }

@@ -43,6 +43,7 @@ class ListasController extends Controller
                   $contactos->email       = $datos[ $request->altaAudiencia_posEmail ];
                   $contactos->telefono    = $datos[ $request->altaAudiencia_posTel ];
                   $contactos->empresa     = $datos[ $request->altaAudiencia_posEmpresa ];
+                  $contactos->idty        = md5( $datos[ $request->altaAudiencia_posEmail ].microtime() );
                   $contactos->status      = 1;
                   $contactos->save();
               }

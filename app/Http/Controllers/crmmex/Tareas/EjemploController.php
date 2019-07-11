@@ -29,10 +29,9 @@ class EjemploController extends Controller
 
         foreach( $campanias AS $campania ) { // Verifica la campaña a ejecutar
           foreach( self::destinatarios( $campania->id_listado_destinatarios ) AS $destino ) { // Recorre el listado de destinatarios
-            Mail::envioCalendarizado( $campania->subject , self::pieza( $campania->pieza , $campania->tracking ) , array( $destino ) );
+            Mail::envioCalendarizado( $campania->subject , $campania->pieza , $campania->tracking , array( $destino[ 'email' ] ) , $destino );
           }
         }
-
     }
 
     // Obtiene listado de contactos
@@ -43,7 +42,13 @@ class EjemploController extends Controller
                               ->get();
 
         foreach( $contactos AS $contacto ) {
-          $lista[] = $contacto->email;
+          $lista[] = array(
+            'contactoID' => $contacto->idty,
+            'nombre'     => $contacto->nombre,
+            'telefono'   => $contacto->telefono,
+            'email'      => $contacto->email,
+            'empresa'    => $contacto->empresa
+          );
         }
 
         return $lista;

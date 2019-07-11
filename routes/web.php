@@ -59,6 +59,8 @@ Route::middleware( 'web' )->group( function(){
 
 });
 
+Route::get( '/campaniatracking/{campaniaID}/{contactoID}' , 'crmmex\Sistema\TrackingController@registro' );
+
 Route::get( '/' , function (){ return redirect( '/login' ); } );
 Route::get( '/envioCorreo/{propuestaID}' , 'crmmex\Sistema\PHPMailerController@envioPropuesta' );
 Route::get( '/phpconf' , function(){

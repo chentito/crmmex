@@ -49,6 +49,15 @@
                     <input type="text" name="nombreNuevoTemplate" id="nombreNuevoTemplate" value="" placeholder="Nombre Template" class="form-control form-control-sm">
                     <input type="hidden" name="idTemplateEditado" id="idTemplateEditado" value="0" >
                 </div>
+                <div class="col-sm-9 mt-1">
+                    Palabras reservadas
+                    <ul>
+                      <li><b>{nombre}</b> Nombre del destinatario</li>
+                      <li><b>{email}</b> Correo del destinatario</li>
+                      <li><b>{telefono}</b> Teléfono del destinatario</li>
+                      <li><b>{empresa}</b> Empresa donde labora el destinatario</li>
+                    </ul>
+                </div>
                 <div class="col-sm-12 mt-2">
                   <textarea name="disenoTemplate" id="disenoTemplate" rows="8" cols="80" class="form-control form-control-sm"></textarea>
                   <script>
@@ -125,6 +134,15 @@
           <div class="col-sm-4 mt-3">
               <label for="">Nombre:</label>
               <input type="text" name="altaNuevoTemplate_nombre" id="altaNuevoTemplate_nombre" value="" placeholder="Nombre de la pieza" class="form-control form-control-sm">
+          </div>
+          <div class="col-sm-8 mt-3">
+            Palabras reservadas
+            <ul>
+              <li><b>{nombre}</b> Nombre del destinatario</li>
+              <li><b>{email}</b> Correo del destinatario</li>
+              <li><b>{telefono}</b> Teléfono del destinatario</li>
+              <li><b>{empresa}</b> Empresa donde labora el destinatario</li>
+            </ul>
           </div>
           <div class="col-sm-12 mt-1">
               <label for="altaNuevoTemplate_pieza">Contenido:</label>
