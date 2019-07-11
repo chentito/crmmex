@@ -315,13 +315,12 @@
                .then( response => {
                   cierraModal();
                   aviso( response.data.msj );
-                  limpiaForm();
                })
                .catch( err => {
                  cierraModal();
                  console.log( err );
                });
-
+           limpiaForm();
         }
     }
 
