@@ -16,6 +16,11 @@
     </a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" id="formularios-tab" data-toggle="tab" href="#formularios" role="tab" aria-controls="formularios" aria-selected="false">
+      <i class="fa fa-align-justify fa-sm"></i><span class="d-none d-sm-inline">  Formularios</span>
+    </a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">
       <i class="fa fa-cogs fa-sm"></i><span class="d-none d-sm-inline">  Servicios Externos</span>
     </a>
@@ -162,6 +167,51 @@
       </form>
     </div>
   </div>
+  <div class="tab-pane fade" id="formularios" role="tabpanel" aria-labelledby="formularios-tab">
+    <div class="container border-left border-right border-bottom p-1">
+      <form id="formularios_form" name="formularios_form">
+        <div class="row">
+            <div class="col-sm-4">
+                <label for="">Nombre formulario:</label>
+                <input type="text" name="formularios_nombreForm" id="formularios_nombreForm" value="" class="form-control form-control-sm" placeholder="Nombre del formulario">
+            </div>
+            <div class="col-sm-4">
+                <button type="button" name="formularios_AgregarCampo" id="formularios_AgregarCampo" class="btn btn-sm {{$btn}}"><i class="fa fa-plus fa-sm"></i> Otro campo</button>
+            </div>
+        </div>
+        <div class="row" id="contenedorCamporFormulario">
+            <div class="col-sm-12 mt-1">
+              <div class="row">
+                <div class="col-sm-3">
+                  <input type="text" name="formularios_nombreCampo[]" id="formularios_nombreCampo" value="" class="form-control form-control-sm" placeholder="Nombre del campo" maxlength="50">
+                </div>
+                <div class="col-sm-3">
+                  <select class="custom-select custom-select-sm" name="formularios_tipoCampo[]" id="formularios_tipoCampo">
+                      <option value="1">Texto libre</option>
+                      <option value="2">Listado</option>
+                      <option value="3">Multiples opciones</option>
+                  </select>
+                </div>
+                <div class="col-sm-3">
+                  <select class="custom-select custom-select-sm" name="formularios_oblCampo[]" id="formularios_oblCampo">
+                    <option value="1">Opcional</option>
+                    <option value="2">Obligatorio</option>
+                  </select>
+                </div>
+                <div class="col-sm-3 text-center">
+                    <input type="text" value="Valores" name="formularios_valoresCampo" id="formularios_valoresCampo" class="form-control form-control-sm">
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-sm-12 text-center">
+            <button class="btn btn-sm {{$btn}}" id="formulario_btnGuardaCamposForm" name="formulario_btnGuardaCamposForm"><i class="fa fa-save fa-sm"></i> Guardar</button
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
     <div class="container border-left border-right border-bottom p-1">
         Conexiones
@@ -172,6 +222,32 @@
 <script>
     cargaListados();
     listadoPiezas();
+
+    document.getElementById( 'formularios_AgregarCampo' ).addEventListener( 'click' , function( e ){
+        e.preventDefault();
+        axios.get( '/api/formsNuevoCampo' , { headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
+             .then( response => {
+               var contenido = document.getElementById( 'contenedorCamporFormulario' ).innerHTML;
+               document.getElementById( 'contenedorCamporFormulario' ).innerHTML = contenido + response.data.contenido;
+             })
+             .catch( err => {
+               console.log( err );
+             });
+
+    });
+
+    document.getElementById( 'formulario_btnGuardaCamposForm' ).addEventListener( 'click' , function( e ) {
+        e.preventDefault();
+        var datos = new FormData( document.getElementById( 'formularios_form' ) );
+        axios.post( '/api/guardaFormulario' , datos , { headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
+             .then( response => {
+               aviso( 'Formulario agregado correctamente' );
+               contenidos( 'configuraciones_destinatarios' );
+             })
+             .catch( err => {
+               console.log( err );
+             });
+    });
 
     document.getElementById( 'altaNuevoTemplate_btn' ).addEventListener( 'click' , function( e ) {
         e.preventDefault();

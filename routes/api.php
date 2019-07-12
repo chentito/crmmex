@@ -141,9 +141,11 @@ Route::middleware( 'auth:api' )->get ( '/listadoContactosAudiencia/{audienciaID}
 Route::middleware( 'auth:api' )->post( '/altaAudiencia'                                                  , 'crmmex\Mercadotecnia\ListasController@altaListado' );
 Route::middleware( 'auth:api' )->get ( '/listadoPiezasDisponibles'                                       , 'crmmex\Mercadotecnia\PiezasController@listadoPiezas' );
 Route::middleware( 'auth:api' )->post( '/altaPiezaTemplate'                                              , 'crmmex\Mercadotecnia\PiezasController@nuevaPieza' );
-Route::middleware( 'auth:api' )->post( '/altaPiezaCampana'                                              , 'crmmex\Mercadotecnia\PiezasController@altaPiezaCampania' );
+Route::middleware( 'auth:api' )->post( '/altaPiezaCampana'                                               , 'crmmex\Mercadotecnia\PiezasController@altaPiezaCampania' );
 Route::middleware( 'auth:api' )->post( '/eliminaPiezaTemplate/{piezaID}'                                 , 'crmmex\Mercadotecnia\PiezasController@eliminaPieza' );
 Route::middleware( 'auth:api' )->get ( '/detallePiezaTemplate/{piezaID}'                                 , 'crmmex\Mercadotecnia\PiezasController@detallePieza' );
+Route::middleware( 'auth:api' )->get ( '/formsNuevoCampo'                                                , 'crmmex\Configuraciones\FormController@agregaCampoForm' );
+Route::middleware( 'auth:api' )->post( '/guardaFormulario'                                               , 'crmmex\Configuraciones\FormController@guardaFormulario' );
 
 
 /************************************ Multimedia ************************************/
