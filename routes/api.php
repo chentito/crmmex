@@ -146,6 +146,7 @@ Route::middleware( 'auth:api' )->post( '/eliminaPiezaTemplate/{piezaID}'        
 Route::middleware( 'auth:api' )->get ( '/detallePiezaTemplate/{piezaID}'                                 , 'crmmex\Mercadotecnia\PiezasController@detallePieza' );
 Route::middleware( 'auth:api' )->get ( '/formsNuevoCampo'                                                , 'crmmex\Configuraciones\FormController@agregaCampoForm' );
 Route::middleware( 'auth:api' )->post( '/guardaFormulario'                                               , 'crmmex\Configuraciones\FormController@guardaFormulario' );
+Route::middleware( 'auth:api' )->get ( '/listadoFormularios'                                             , 'crmmex\Configuraciones\FormController@listadoFormularios' );
 
 
 /************************************ Multimedia ************************************/

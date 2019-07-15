@@ -54,14 +54,20 @@
                     <input type="text" name="nombreNuevoTemplate" id="nombreNuevoTemplate" value="" placeholder="Nombre Template" class="form-control form-control-sm">
                     <input type="hidden" name="idTemplateEditado" id="idTemplateEditado" value="0" >
                 </div>
-                <div class="col-sm-9 mt-1">
+                <div class="col-sm-6 mt-1">
                     Palabras reservadas
                     <ul>
                       <li><b>{nombre}</b> Nombre del destinatario</li>
                       <li><b>{email}</b> Correo del destinatario</li>
                       <li><b>{telefono}</b> Teléfono del destinatario</li>
                       <li><b>{empresa}</b> Empresa donde labora el destinatario</li>
+                      <li><b>{formulario}</b> Formulario</li>
                     </ul>
+                </div>
+                <div class="col-sm-3 mt-1">
+                    <label for="nuevoTemplateForm">Formulario:</label>
+                    <select id="nuevoTemplateForm" id="nuevoTemplateForm" class="custom-select custom-select-sm">
+                    </select>
                 </div>
                 <div class="col-sm-12 mt-2">
                   <textarea name="disenoTemplate" id="disenoTemplate" rows="8" cols="80" class="form-control form-control-sm"></textarea>
@@ -140,14 +146,20 @@
               <label for="">Nombre:</label>
               <input type="text" name="altaNuevoTemplate_nombre" id="altaNuevoTemplate_nombre" value="" placeholder="Nombre de la pieza" class="form-control form-control-sm">
           </div>
-          <div class="col-sm-8 mt-3">
+          <div class="col-sm-5 mt-3">
             Palabras reservadas
             <ul>
               <li><b>{nombre}</b> Nombre del destinatario</li>
               <li><b>{email}</b> Correo del destinatario</li>
               <li><b>{telefono}</b> Teléfono del destinatario</li>
               <li><b>{empresa}</b> Empresa donde labora el destinatario</li>
+              <li><b>{formulario}</b> Formulario</li>
             </ul>
+          </div>
+          <div class="col-sm-3 mt-1">
+              <label for="altaNuevoTemplate_formOpciones">Formulario:</label>
+              <select id="altaNuevoTemplate_formOpciones" id="altaNuevoTemplate_formOpciones" class="custom-select custom-select-sm">
+              </select>
           </div>
           <div class="col-sm-12 mt-1">
               <label for="altaNuevoTemplate_pieza">Contenido:</label>
@@ -175,38 +187,44 @@
                 <label for="">Nombre formulario:</label>
                 <input type="text" name="formularios_nombreForm" id="formularios_nombreForm" value="" class="form-control form-control-sm" placeholder="Nombre del formulario">
             </div>
-            <div class="col-sm-4">
-                <button type="button" name="formularios_AgregarCampo" id="formularios_AgregarCampo" class="btn btn-sm {{$btn}}"><i class="fa fa-plus fa-sm"></i> Otro campo</button>
+            <div class="col-sm-6"></div>
+            <div class="col-sm-2">
+              <button type="button" name="formularios_AgregarCampo" id="formularios_AgregarCampo" class="btn btn-sm {{$btn}}"><i class="fa fa-plus fa-sm"></i> Agregar otro campo</button>
             </div>
         </div>
         <div class="row" id="contenedorCamporFormulario">
             <div class="col-sm-12 mt-1">
               <div class="row">
                 <div class="col-sm-3">
-                  <input type="text" name="formularios_nombreCampo[]" id="formularios_nombreCampo" value="" class="form-control form-control-sm" placeholder="Nombre del campo" maxlength="50">
+                  <label for="formularios_nombreCampo">Nombre del campo:</label>
+                  <input type="text" name="formularios_nombreCampo[]" id="formularios_nombreCampo" value="" class="form-control form-control-sm formularios_nombreCampo_dinamico" placeholder="Nombre del campo" maxlength="50">
                 </div>
-                <div class="col-sm-3">
-                  <select class="custom-select custom-select-sm" name="formularios_tipoCampo[]" id="formularios_tipoCampo">
+                <div class="col-sm-2">
+                  <label for="formularios_tipoCampo">Tipo:</label>
+                  <select class="custom-select custom-select-sm formularios_tipoCampo_dinamico" name="formularios_tipoCampo[]" id="formularios_tipoCampo">
                       <option value="1">Texto libre</option>
                       <option value="2">Listado</option>
                       <option value="3">Multiples opciones</option>
                   </select>
                 </div>
-                <div class="col-sm-3">
-                  <select class="custom-select custom-select-sm" name="formularios_oblCampo[]" id="formularios_oblCampo">
+                <div class="col-sm-2">
+                  <label for="formularios_oblCampo">Obligatoriedad:</label>
+                  <select class="custom-select custom-select-sm formularios_oblCampo_dinamico" name="formularios_oblCampo[]" id="formularios_oblCampo">
                     <option value="1">Opcional</option>
                     <option value="2">Obligatorio</option>
                   </select>
                 </div>
-                <div class="col-sm-3 text-center">
-                    <input type="text" value="Valores" name="formularios_valoresCampo" id="formularios_valoresCampo" class="form-control form-control-sm">
+                <div class="col-sm-4 text-center">
+                  <label for="formularios_valoresCampo">Valores</label>
+                  <input type="text" placeholder="Valores" name="formularios_valoresCampo[]" id="formularios_valoresCampo" class="form-control form-control-sm formularios_valoresCampo_dinamico" value="">
                 </div>
+                <div class="col-sm-1"></div>
               </div>
             </div>
         </div>
         <div class="row mt-3">
           <div class="col-sm-12 text-center">
-            <button class="btn btn-sm {{$btn}}" id="formulario_btnGuardaCamposForm" name="formulario_btnGuardaCamposForm"><i class="fa fa-save fa-sm"></i> Guardar</button
+            <button class="btn btn-sm {{$btn}}" id="formulario_btnGuardaCamposForm" name="formulario_btnGuardaCamposForm"><i class="fa fa-save fa-sm"></i> Guardar</button>
           </div>
         </div>
       </form>
@@ -221,14 +239,14 @@
 
 <script>
     cargaListados();
+    cargaFormularios();
     listadoPiezas();
 
     document.getElementById( 'formularios_AgregarCampo' ).addEventListener( 'click' , function( e ){
         e.preventDefault();
         axios.get( '/api/formsNuevoCampo' , { headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
              .then( response => {
-               var contenido = document.getElementById( 'contenedorCamporFormulario' ).innerHTML;
-               document.getElementById( 'contenedorCamporFormulario' ).innerHTML = contenido + response.data.contenido;
+               $( '#contenedorCamporFormulario' ).append( response.data.contenido );
              })
              .catch( err => {
                console.log( err );
@@ -238,15 +256,42 @@
 
     document.getElementById( 'formulario_btnGuardaCamposForm' ).addEventListener( 'click' , function( e ) {
         e.preventDefault();
-        var datos = new FormData( document.getElementById( 'formularios_form' ) );
-        axios.post( '/api/guardaFormulario' , datos , { headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
-             .then( response => {
-               aviso( 'Formulario agregado correctamente' );
-               contenidos( 'configuraciones_destinatarios' );
-             })
-             .catch( err => {
-               console.log( err );
-             });
+        var datos   = new FormData( document.getElementById( 'formularios_form' ) );
+        var nombres = document.getElementsByClassName( 'formularios_nombreCampo_dinamico' );
+        var valores = document.getElementsByClassName( 'formularios_valoresCampo_dinamico' );
+        var tipos   = document.getElementsByClassName( 'formularios_tipoCampo_dinamico' );
+        var oblig   = document.getElementsByClassName( 'formularios_oblCampo_dinamico' );
+
+        if( document.getElementById( 'formularios_nombreForm' ).value == '' ) {
+             aviso( 'No ha proporcionado el nombre del formulario' , false );
+           } else {
+             var err = 0;
+             for( var n = 0 ; n < nombres.length ; n ++ ) {
+               if( nombres[ n ].value == '' ) {
+                   aviso( 'El nombre del campo no puede ser vacio' , false );
+                   err ++;
+               }
+             }
+
+             for( var n2 = 0 ; n2 < valores.length ; n2 ++ ) {
+                 if( valores[ n2 ].value == "" && ( tipos[ n2 ].value == '2' || tipos[ n2 ].value == '3' ) ) {
+                     aviso( 'El valor del campo no puede ser vacio si es un listado o multiples opciones' , false );
+                     err ++;
+                 }
+             }
+
+             if( err == 0 ) {
+                axios.post( '/api/guardaFormulario' , datos , { headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
+                   .then( response => {
+                     aviso( 'Formulario agregado correctamente' );
+                     contenidos( 'configuraciones_destinatarios' );
+                })
+                   .catch( err => {
+                     console.log( err );
+                });
+             }
+
+        }
     });
 
     document.getElementById( 'altaNuevoTemplate_btn' ).addEventListener( 'click' , function( e ) {
@@ -425,6 +470,25 @@
             .catch( err => {
               console.log( err );
             });
+     }
+
+     function cargaFormularios() {
+        document.getElementById( 'altaNuevoTemplate_formOpciones' ).innerHTML = '';
+        document.getElementById( 'nuevoTemplateForm' ).innerHTML = '';
+        document.getElementById( 'altaNuevoTemplate_formOpciones' ).add( new Option( 'No usa formulario' , '0' , false , false ) );
+        document.getElementById( 'nuevoTemplateForm' ).add( new Option( 'No usa formulario' , '0' , false , false ) );
+
+        var config = {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}};
+        axios.get( '/api/listadoFormularios' , config )
+             .then( response => {
+               response.data.forEach( function( e , i ) {
+                  document.getElementById( 'altaNuevoTemplate_formOpciones' ).add( new Option( e.nombreForm , e.id , false , false ) );
+                  document.getElementById( 'nuevoTemplateForm' ).add( new Option( e.nombreForm , e.id , false , false ) );
+               });
+             })
+             .catch( err => {
+               console.log( err );
+             });
      }
 
 </script>

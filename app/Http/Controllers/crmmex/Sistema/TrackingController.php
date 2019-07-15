@@ -22,4 +22,10 @@ class TrackingController extends Controller
         $tracking->status        = 1;
         $tracking->save();
     }
+
+    // Registro de respuestas de formularios
+    public function formAnswering( Request $request ) {
+        echo "Gracias!";
+    }
+
 }

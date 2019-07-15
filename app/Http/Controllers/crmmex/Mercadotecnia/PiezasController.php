@@ -27,12 +27,14 @@ class PiezasController extends Controller
               $pieza = new Piezas();
               $pieza->nombrePieza = $request->nombreNuevoTemplate;
               $pieza->pieza       = $request->diseno_template_editor;
+              $pieza->formID      = $request->nuevoTemplateForm;
               $pieza->status      = 1;
               $pieza->save();
           } else {
               $pieza = Piezas::find( $request->idTemplateEditado );
               $pieza->nombrePieza = $request->nombreNuevoTemplate;
               $pieza->pieza       = $request->diseno_template_editor;
+              $pieza->formID      = $request->nuevoTemplateForm;
               $pieza->status      = 1;
               $pieza->save();
         }
@@ -43,6 +45,7 @@ class PiezasController extends Controller
         $piezaCampania = new Piezas();
         $piezaCampania->nombrePieza = $request->altaNuevoTemplate_nombre;
         $piezaCampania->pieza       = $request->contPieza;
+        $piezaCampania->formID      = $request->altaNuevoTemplate_formOpciones;
         $piezaCampania->status      = 1;
         $piezaCampania->save();
         return response()->json( array( 'mensaje' => 'Pieza agregada correctamente' ) );

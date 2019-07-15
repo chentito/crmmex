@@ -54,16 +54,15 @@ Route::middleware( 'web' )->group( function(){
   Route::post( '/carritoElimina'                      , 'crmmex\Clientes\PropuestasController@eliminaCarrito' );
   Route::post( '/carritoEliminaProd/{productoID}'     , 'crmmex\Clientes\PropuestasController@eliminaElementoCarrito' );
   Route::post( '/carritoCarga/{propuestaID}'          , 'crmmex\Clientes\PropuestasController@cargaCarrito' );
-
-  Route::get( '/imagenPropietario'                   , 'crmmex\Sistema\PropietarioController@imagenPropietario');
-
+  Route::get( '/imagenPropietario'                    , 'crmmex\Sistema\PropietarioController@imagenPropietario' );
 });
 
-Route::get( '/campaniatracking/{campaniaID}/{contactoID}' , 'crmmex\Sistema\TrackingController@registro' );
+Route::get ( '/campaniatracking/{campaniaID}/{contactoID}' , 'crmmex\Sistema\TrackingController@registro' );
+Route::post( '/forms/{contactoID}'                         , 'crmmex\Sistema\TrackingController@formAnswering' );
 
 Route::get( '/' , function (){ return redirect( '/login' ); } );
 Route::get( '/envioCorreo/{propuestaID}' , 'crmmex\Sistema\PHPMailerController@envioPropuesta' );
-Route::get( '/phpconf' , function(){
+Route::get( '/phpconf' , function() {
   phpinfo();
 });
 

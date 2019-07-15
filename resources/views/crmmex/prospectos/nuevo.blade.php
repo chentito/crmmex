@@ -107,7 +107,7 @@
                           </div>
                           <div class="col-sm-3 mb-1"></div>
                           <div class="col-sm-3 mb-1 text-center my-auto">
-                            <button class="btn btn-sm {{$btn}}" id="btnAgregaEstructuraCliente"><i class="fa fa-user-plus fa-lg"></i><span class="d-none d-sm-inline"> Agregar contacto</span></button>
+                            <button class="btn btn-sm {{$btn}}" id="btnAgregaEstructuraCliente"><i class="fa fa-user-plus fa-lg"></i><span class="d-none d-sm-inline"> Agregar otro contacto</span></button>
                           </div>
                       </div>
                     </div>
