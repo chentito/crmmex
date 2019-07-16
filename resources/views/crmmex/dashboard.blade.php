@@ -7,60 +7,54 @@
         <div class="card-body">
             <div id="container" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
             <script type="text/javascript">
-              Highcharts.chart('container', {
-                  chart: {
-                      type: 'column'
-                  },
-                  title: {
-                      text: 'Objetivo vs Cumplimiento'
-                  },
-                  xAxis: {
-                      categories: [
-                          'Jul 2018',
-                          'Ago 2018',
-                          'Sep 2018',
-                          'Oct 2019',
-                          'Nov 2018',
-                          'Dic 2018',
-                          'Ene 2019',
-                          'Feb 2019',
-                          'Mar 2019',
-                          'Abr 2019',
-                          'May 2019',
-                          'Jun 2019'
-                      ],
-                      crosshair: true
-                  },
-                  yAxis: {
-                      min: 0,
-                      title: {
-                          text: 'Ventas'
-                      }
-                  },
-                  tooltip: {
-                      headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                      pointFormat: '<tr><td style="color:{series.color};padding:0">$ {series.name}: </td>' +
-                          '<td style="padding:0"><b>$ {point.y:.1f} </b></td></tr>',
-                      footerFormat: '</table>',
-                      shared: true,
-                      useHTML: true
-                  },
-                  plotOptions: {
-                      column: {
-                          pointPadding: 0.2,
-                          borderWidth: 0
-                      }
-                  },
-                  series: [{
-                      name: 'Objetivo',
-                      data: [350000.00, 300000.00, 380000.0, 440000.00, 420000.00, 400000.00, 380500.00, 420000.00, 420000.00, 390000.00, 420000.00, 405000.00]
 
-                  }, {
-                      name: 'Cumplimiento',
-                      data: [322490.31, 316782.80, 345790.56, 380905.56, 395005.36,318690.56, 395000.00, 442085.65, 418680.45, 399596.00, 380675.56, 195078.77]
+              axios.get( '/api/datosWidget/1' , { headers: { 'Accept' : 'application\json' , 'Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
+                   .then( response => {
+                      var datos = response.data;
+                      //alert( JSON.stringify( datos ) );
+                      Highcharts.chart('container', {
+                          chart: { type: 'column' },
+                          title: { text: 'Objetivo vs Cumplimiento' },
+                          xAxis: {
+                              categories: datos[ 'categorias' ],
+                              crosshair: true
+                          },
+                          yAxis: {
+                              min: 0,
+                              title: { text: 'Ventas' }
+                          },
+                          tooltip: {
+                              headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                              pointFormat: '<tr><td style="color:{series.color};padding:0">$ {series.name}: </td>' +
+                                  '<td style="padding:0"><b>$ {point.y:.1f} </b></td></tr>',
+                              footerFormat: '</table>',
+                              shared: true,
+                              useHTML: true
+                          },
+                          plotOptions: {
+                              column: {
+                                  pointPadding: 0.2,
+                                  borderWidth: 0
+                              }
+                          },
+                          series: [{
+                              name: 'Objetivo',
+                              //data: [350000.00, 300000.00, 380000.0, 440000.00, 420000.00, 400000.00, 380500.00, 420000.00, 420000.00, 390000.00, 420000.00, 405000.00]
+                              data: datos[ 'objetivos' ]
 
-                  }]
-              });
+                          }, {
+                              name: 'Cumplimiento',
+                              //data: [322490.31, 316782.80, 345790.56, 380905.56, 395005.36,318690.56, 395000.00, 442085.65, 418680.45, 399596.00, 380675.56, 195078.77]
+                              data: datos[ 'cumplimiento' ]
+
+                          }]
+                      });
+
+
+                   })
+                   .catch( err => {
+                     console.log( err );
+                   });
             </script>
         </div>
     </div>
