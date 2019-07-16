@@ -164,6 +164,21 @@
                     <div class="col-sm-9 mt-1">
                       <hr>
                     </div>
+                    <div class="col-sm-12">
+                        <label for="calculoPomedio_meses">Promedio de</label>
+                        <select class="custom-select custom-select-sm" id="calculoPomedio_meses" name="calculoPomedio_meses">
+                            <option value="-">-</option>
+                            <option value="3">3 últimos meses</option>
+                            <option value="6">6 últimos meses</option>
+                            <option value="12">12 últimos meses</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 mt-1">
+                      <input type="text" name="calculoPomedio_promedioCalculado" id="calculoPomedio_promedioCalculado" value="" placeholder="Pronóstico" class="form-control form-control-sm" readonly>
+                    </div>
+                    <div class="col-sm-6 mt-1 text-center">
+                      <button type="button" name="guardaPronosticoProducto" class="btn btn-sm {{$btn}}"><i class="fa fa-sm fa-save"></i> Guardar pronóstico</button>
+                    </div>
                   </div>
                 </div>
 
@@ -218,6 +233,25 @@
              });
       }
   });
+
+  document.getElementById( 'calculoPomedio_meses' ).addEventListener( 'change' , function( e ){
+      if( this.value == '0' ){
+            document.getElementById( 'calculoPomedio_promedioCalculado' ).value = '';
+        } else {
+            calculoPronosticoPromedio( this.value , document.getElementById( 'idProductoEditar' ).value );
+      }
+  });
+
+  function calculoPronosticoPromedio( meses , productoID ) {
+      var config     = {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}};
+      axios.get( '/api/obtienePromedioHistoricos/' + productoID + '/' + meses , config )
+           .then( response => {alert(JSON.stringify( response.data ));
+              document.getElementById( 'calculoPomedio_promedioCalculado' ).value = response.data.promedio;
+           })
+           .catch( err => {
+             console.log( err );
+           });
+  }
 
   function cargaDatosHistoricos() {
     var productoID = document.getElementById( 'idProductoEditar' ).value;

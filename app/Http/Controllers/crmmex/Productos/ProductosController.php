@@ -10,6 +10,7 @@ namespace App\Http\Controllers\crmmex\Productos;
 use App\Models\crmmex\Productos\Productos AS Prod;
 use App\Models\crmmex\Productos\Historicos AS Historicos;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\crmmex\Utils\UtilsController AS Utils;
@@ -178,5 +179,23 @@ class ProductosController extends Controller
                                   ->get();
           return response()->json( $historicos );
       }
+
+      /*
+       * Metodo que obtiene el promedio de ventas historico
+       */
+       public function obtienePromedioHistorico( $productoID , $meses ) {DB::enableQueryLog();
+          $prom       = array();
+          $fecha      = date( 'Y-m' , strtotime( '- '.$meses.' months' ) );
+          $historicos = Historicos::select( DB::raw( "AVG(monto) AS promedio" ) )
+                                  ->whereRaw( DB::raw( "productoID = '$productoID' AND status=1 AND STR_TO_DATE( concat( anio , '-' , mes ) , '%Y-%m' ) >= '$fecha'" ) )
+                                  ->first();
+
+
+          //$prom[ 'promedio' ] =DB::getQueryLog();
+          $prom[ 'promedio' ] =$historicos->promedio;
+
+
+          return response()->json( $prom );
+       }
 
 }

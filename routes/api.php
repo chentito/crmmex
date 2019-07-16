@@ -103,12 +103,13 @@ Route::middleware( 'auth:api' )->get ( '/listadoFacturas' , 'crmmex\Ventas\Venta
 
 
 /******************** Operaciones para el modulo de Productos ********************/
-Route::middleware( 'auth:api' )->get ( '/listadoProductos'               , 'crmmex\Productos\ProductosController@listadoProductos' );
-Route::middleware( 'auth:api' )->post( '/guardaProducto'                 , 'crmmex\Productos\ProductosController@guardaProducto' );
-Route::middleware( 'auth:api' )->post( '/actualizaProducto'              , 'crmmex\Productos\ProductosController@actualizaProducto' );
-Route::middleware( 'auth:api' )->get ( '/obtieneProducto/{productoID}'   , 'crmmex\Productos\ProductosController@obtieneProducto' );
-Route::middleware( 'auth:api' )->post( '/cargaHistoricosProducto'        , 'crmmex\Productos\ProductosController@cargaHistoricosProducto' );
-Route::middleware( 'auth:api' )->get ( '/obtieneHistoricos/{productoID}' , 'crmmex\Productos\ProductosController@obtieneHistoricos' );
+Route::middleware( 'auth:api' )->get ( '/listadoProductos'                               , 'crmmex\Productos\ProductosController@listadoProductos' );
+Route::middleware( 'auth:api' )->post( '/guardaProducto'                                 , 'crmmex\Productos\ProductosController@guardaProducto' );
+Route::middleware( 'auth:api' )->post( '/actualizaProducto'                              , 'crmmex\Productos\ProductosController@actualizaProducto' );
+Route::middleware( 'auth:api' )->get ( '/obtieneProducto/{productoID}'                   , 'crmmex\Productos\ProductosController@obtieneProducto' );
+Route::middleware( 'auth:api' )->post( '/cargaHistoricosProducto'                        , 'crmmex\Productos\ProductosController@cargaHistoricosProducto' );
+Route::middleware( 'auth:api' )->get ( '/obtieneHistoricos/{productoID}'                 , 'crmmex\Productos\ProductosController@obtieneHistoricos' );
+Route::middleware( 'auth:api' )->get ( '/obtienePromedioHistoricos/{productoID}/{meses}' , 'crmmex\Productos\ProductosController@obtienePromedioHistorico' );
 
 
 /************************************ Control de ejecutivos ************************************/
