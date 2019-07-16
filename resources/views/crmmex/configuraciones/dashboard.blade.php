@@ -21,7 +21,7 @@
 
 <script>
   var url = '/api/listadoWidgets';
-  axios.get( url )
+  axios.get( url , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
        .then( response => {
           response.data.forEach( function( e , i ) {
               var nuevoDiv = document.createElement( 'div' );
@@ -47,7 +47,7 @@
     function guardaConfiguracionWidgets() {
         var datos = new FormData( document.getElementById( 'frmWidgets' ) );
         var url = '/api/guardaConfWidgets';
-        axios.post( url , datos )
+        axios.post( url , datos , { headers:{ 'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
              .then( response => {
                 contenidos( 'configuraciones_dashboard' );
              })

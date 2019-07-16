@@ -245,7 +245,7 @@
   function calculoPronosticoPromedio( meses , productoID ) {
       var config     = {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}};
       axios.get( '/api/obtienePromedioHistoricos/' + productoID + '/' + meses , config )
-           .then( response => {alert(JSON.stringify( response.data ));
+           .then( response => {
               document.getElementById( 'calculoPomedio_promedioCalculado' ).value = response.data.promedio;
            })
            .catch( err => {

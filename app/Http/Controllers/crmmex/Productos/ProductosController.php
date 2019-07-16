@@ -183,18 +183,14 @@ class ProductosController extends Controller
       /*
        * Metodo que obtiene el promedio de ventas historico
        */
-       public function obtienePromedioHistorico( $productoID , $meses ) {DB::enableQueryLog();
+       public function obtienePromedioHistorico( $productoID , $meses ) {
           $prom       = array();
           $fecha      = date( 'Y-m' , strtotime( '- '.$meses.' months' ) );
           $historicos = Historicos::select( DB::raw( "AVG(monto) AS promedio" ) )
                                   ->whereRaw( DB::raw( "productoID = '$productoID' AND status=1 AND STR_TO_DATE( concat( anio , '-' , mes ) , '%Y-%m' ) >= '$fecha'" ) )
                                   ->first();
 
-
-          //$prom[ 'promedio' ] =DB::getQueryLog();
-          $prom[ 'promedio' ] =$historicos->promedio;
-
-
+          $prom[ 'promedio' ] = $historicos->promedio;
           return response()->json( $prom );
        }
 
