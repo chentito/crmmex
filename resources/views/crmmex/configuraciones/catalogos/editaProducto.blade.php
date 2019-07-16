@@ -1,5 +1,5 @@
 
-<h3>Producto ID {{$param}} <span id="nombreProducto"></span></h3>
+<h4>Producto ID {{$param}} <span id="nombreProducto"></span></h4>
 
 <input type="hidden" id="idProductoEditar" name="idProductoEditar" value="{{$param}}">
 

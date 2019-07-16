@@ -105,7 +105,69 @@
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
           <div class="container border-left border-bottom border-right p-1">
+            <div class="row">
+                <div class="col-sm-12 mt-2">
+                  <b>Carga históricos:</b>
+                </div>
+                <div class="col-sm-3 mt-2">
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input custom-file-input-sm" id="confHistoricosProducto_file" name="confHistoricosProducto_file" aria-describedby="inputGroupFileAddon01" accept=".csv">
+                      <label class="custom-file-label" for="confHistoricosProducto_file">Seleccione archivo (.csv)</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <label for="confHistoricosProducto_mes">Posición columna mes:</label>
+                  <input type="number" name="confHistoricosProducto_mes" id="confHistoricosProducto_mes" class="form-control form-control-sm" value="0">
+                </div>
+                <div class="col-sm-3">
+                  <label for="confHistoricosProducto_mes">Posición columna año:</label>
+                  <input type="number" name="confHistoricosProducto_anio" id="confHistoricosProducto_anio" class="form-control form-control-sm" value="1">
+                </div>
+                <div class="col-sm-3">
+                  <label for="confHistoricosProducto_mes">Posición columna monto vendido:</label>
+                  <input type="number" name="confHistoricosProducto_monto" id="confHistoricosProducto_monto" class="form-control form-control-sm" value="2">
+                </div>
 
+                <div class="col-sm-12 text-center mt-2 mb-2">
+                  <button type="submit" name="confHistoricosProducto_btn" id="confHistoricosProducto_btn" class="btn btn-sm {{$btn}}"><i class="fa fa-sm fa-upload"></i> Cargar históricos</button>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="row">
+                      <div class="col-sm-3 mt-1">
+                        <b>Datos Históricos:</b>
+                      </div>
+                      <div class="col-sm-9 mt-1">
+                        <hr>
+                      </div>
+                      <div class="col-sm-12">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Año</th>
+                                <th>Mes</th>
+                                <th>Monto</th>
+                              </tr>
+                            </thead>
+                            <tbody id="contenedorInfoHistoricosProducto"></tbody>
+                          </table>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="col-sm-3 mt-1">
+                      <b>Pronósticos:</b>
+                    </div>
+                    <div class="col-sm-9 mt-1">
+                      <hr>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
           </div>
         </div>
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -133,7 +195,51 @@
       });
 
       cargaDatosComboCatalogo();
+      cargaDatosHistoricos();
   });
+
+  document.getElementById( 'confHistoricosProducto_btn' ).addEventListener( 'click' , function( e ) {
+      e.preventDefault();
+      var config = {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ),'content-type': 'multipart/form-data'}};
+
+      if( document.getElementById( 'confHistoricosProducto_file' ).value == '' ) {
+        aviso( 'No ha proporcionado un layout' , false );
+      } else {
+        var datos  = new FormData( document.getElementById( 'form_alta_productoservicio' ) );
+        datos.append( 'productoID' , document.getElementById( 'idProductoEditar' ).value );
+
+        axios.post( '/api/cargaHistoricosProducto' , datos , config )
+             .then( response => {
+                aviso( response.data.msj );
+                cargaDatosHistoricos();
+             })
+             .catch( err => {
+               console.log( err );
+             });
+      }
+  });
+
+  function cargaDatosHistoricos() {
+    var productoID = document.getElementById( 'idProductoEditar' ).value;
+    var config     = {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}};
+
+    axios.get( '/api/obtieneHistoricos/' + productoID , config )
+        .then( response => {
+            var contenedor = document.getElementById( 'contenedorInfoHistoricosProducto' );
+            response.data.forEach( function( e , i ){
+              var row = contenedor.insertRow( 0 );
+              var cell1 = row.insertCell( 0 );
+              var cell2 = row.insertCell( 1 );
+              var cell3 = row.insertCell( 2 );
+              cell1.innerHTML = e.anio;
+              cell2.innerHTML = e.mes;
+              cell3.innerHTML = e.monto;
+            });
+        })
+        .catch( err => {
+          console.log( err );
+        });
+  }
 
   function guardaProductoNuevo() {
     var token      = sessionStorage.getItem( 'apiToken' );

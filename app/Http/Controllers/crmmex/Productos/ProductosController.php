@@ -8,6 +8,7 @@
 namespace App\Http\Controllers\crmmex\Productos;
 
 use App\Models\crmmex\Productos\Productos AS Prod;
+use App\Models\crmmex\Productos\Historicos AS Historicos;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -141,5 +142,41 @@ class ProductosController extends Controller
             return $amount;
         }
     }
+
+    /*
+     * Metodo que carga los historicos de cada producto
+     */
+     public function cargaHistoricosProducto( Request $request ) {
+          if( $request->file( 'confHistoricosProducto_file' )->isValid() ) {
+              // Recorre los elementos del archivo
+              $recurso = fopen( $request->confHistoricosProducto_file->path() , 'r' );
+              while ( ( $datos = fgetcsv( $recurso , 0 , "\t" , "'" ) ) !== FALSE ) {
+                  $historicos = new Historicos();
+                  $historicos->productoID = $request->productoID;
+                  $historicos->mes        = $datos[ $request->confHistoricosProducto_mes ];
+                  $historicos->anio       = $datos[ $request->confHistoricosProducto_anio ];
+                  $historicos->monto      = $datos[ $request->confHistoricosProducto_monto ];
+                  $historicos->status     = 1;
+                  $historicos->save();
+              }
+              $msj = array( 'msj' => 'Archivo procesado correctamente' );
+          } else {
+            $msj = array( 'msj' => 'Error al procesar archivo' );
+          }
+
+          return response()->json( $msj );
+     }
+
+     /*
+      * Metodo que obtiene los datos historicos de un producto
+      */
+      public function obtieneHistoricos( $productoID ) {
+          $historicos = Historicos::where( 'productoID' , $productoID )
+                                  ->where( 'status' , 1 )
+                                  ->orderBy( 'anio' , 'ASC' )
+                                  ->orderBy( 'mes' , 'ASC' )
+                                  ->get();
+          return response()->json( $historicos );
+      }
 
 }
