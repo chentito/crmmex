@@ -157,6 +157,7 @@ class ProductosController extends Controller
                   $historicos->mes        = $datos[ $request->confHistoricosProducto_mes ];
                   $historicos->anio       = $datos[ $request->confHistoricosProducto_anio ];
                   $historicos->monto      = $datos[ $request->confHistoricosProducto_monto ];
+                  $historicos->unidades   = $datos[ $request->confHistoricosProducto_unidades ];
                   $historicos->status     = 1;
                   $historicos->save();
               }

@@ -63,6 +63,10 @@
               </ul>
             </li>
             <li>
+              <a href="javascript:void(0)" onclick="return contenidos('configuraciones_pronosticos','1');">Pronosticos</a>
+              
+            </li>
+            <li>
                 <a href="#configuracionesUsuarios" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Usuarios</a>
                 <ul class="collapse list-unstyled" id="configuracionesUsuarios">
                     <li><a href="javascript:void(0)" onclick="return contenidos('ejecutivos_roles');"> > Roles</a></li>

@@ -109,7 +109,7 @@
                 <div class="col-sm-12 mt-2">
                   <b>Carga históricos:</b>
                 </div>
-                <div class="col-sm-3 mt-2">
+                <div class="col-sm-4 mt-2">
                   <div class="input-group">
                     <div class="custom-file">
                       <input type="file" class="custom-file-input custom-file-input-sm" id="confHistoricosProducto_file" name="confHistoricosProducto_file" aria-describedby="inputGroupFileAddon01" accept=".csv">
@@ -117,17 +117,21 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-3">
-                  <label for="confHistoricosProducto_mes">Posición columna mes:</label>
+                <div class="col-sm-2">
+                  <label for="confHistoricosProducto_mes">Columna mes:</label>
                   <input type="number" name="confHistoricosProducto_mes" id="confHistoricosProducto_mes" class="form-control form-control-sm" value="0">
                 </div>
-                <div class="col-sm-3">
-                  <label for="confHistoricosProducto_mes">Posición columna año:</label>
+                <div class="col-sm-2">
+                  <label for="confHistoricosProducto_mes">Columna año:</label>
                   <input type="number" name="confHistoricosProducto_anio" id="confHistoricosProducto_anio" class="form-control form-control-sm" value="1">
                 </div>
-                <div class="col-sm-3">
-                  <label for="confHistoricosProducto_mes">Posición columna monto vendido:</label>
+                <div class="col-sm-2">
+                  <label for="confHistoricosProducto_mes">Columna importe vendido:</label>
                   <input type="number" name="confHistoricosProducto_monto" id="confHistoricosProducto_monto" class="form-control form-control-sm" value="2">
+                </div>
+                <div class="col-sm-2">
+                  <label for="confHistoricosProducto_unidades">Columna unidades vendidas:</label>
+                  <input type="number" name="confHistoricosProducto_unidades" id="confHistoricosProducto_unidades" class="form-control form-control-sm" value="3">
                 </div>
 
                 <div class="col-sm-12 text-center mt-2 mb-2">
@@ -148,7 +152,8 @@
                               <tr>
                                 <th>Año</th>
                                 <th>Mes</th>
-                                <th>Monto</th>
+                                <th>Importe Vendido</th>
+                                <th>Unidades Vendidas</th>
                               </tr>
                             </thead>
                             <tbody id="contenedorInfoHistoricosProducto"></tbody>
@@ -265,9 +270,11 @@
               var cell1 = row.insertCell( 0 );
               var cell2 = row.insertCell( 1 );
               var cell3 = row.insertCell( 2 );
+              var cell4 = row.insertCell( 3 );
               cell1.innerHTML = e.anio;
               cell2.innerHTML = e.mes;
               cell3.innerHTML = e.monto;
+              cell4.innerHTML = e.unidades;
             });
         })
         .catch( err => {

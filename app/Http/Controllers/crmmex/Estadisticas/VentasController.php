@@ -1,5 +1,9 @@
 <?php
-
+/*
+ * Controlador para obtener las estadísticas de ventas
+ * @Autor Mexagon.net / Carlos Reyes
+ * @Fecha Junio 2019
+ */
 namespace App\Http\Controllers\crmmex\Estadisticas;
 
 use Illuminate\Support\Facades\DB;

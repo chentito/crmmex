@@ -25,21 +25,20 @@
                         <i class="fa fa-address-book fa-sm"></i><span class="d-none d-sm-inline">  Dirección</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!--li class="nav-item">
                     <a class="nav-link" id="adicionales-tab" data-toggle="tab" href="#adicionales" role="tab" aria-controls="adicionales" aria-selected="false">
                         <i class="fa fa-paperclip fa-sm"></i><span class="d-none d-sm-inline">  Campos Adicionales</span>
                     </a>
-                </li>
+                </li-->
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade" id="adicionales" role="tabpanel" aria-labelledby="adicionales-tab">
                     <div class="container border-left border-bottom border-right p-1">
-                        <div class="row" id="camposAdicionalesContainer">
-                        </div>
+
                     </div>
                 </div>
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="container border-left border-bottom border-right p-1" id="contenedorContactos">
+                    <div class="container border-left border-bottom border-right p-1" >
                       <div class="row">
                           <div class="col-sm-2">
                             <b>Contacto Principal</b>
@@ -109,6 +108,18 @@
                           <div class="col-sm-3 mb-1 text-center my-auto">
                             <button class="btn btn-sm {{$btn}}" id="btnAgregaEstructuraCliente"><i class="fa fa-user-plus fa-lg"></i><span class="d-none d-sm-inline"> Agregar otro contacto</span></button>
                           </div>
+                      </div>
+                      <div class="row" id="contenedorContactos">
+                      </div>
+                      <div class="row mt-3">
+                        <div class="col-sm-2">
+                          <b>Campos Adicionales</b>
+                        </div>
+                        <div class="col-sm-10">
+                          <hr>
+                        </div>
+                      </div>
+                      <div class="row" id="camposAdicionalesContainer">
                       </div>
                     </div>
                 </div>

@@ -7,12 +7,10 @@
         <div class="card-body">
             <div id="container" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
             <script type="text/javascript">
-
               axios.get( '/api/datosWidget/1' , { headers: { 'Accept' : 'application\json' , 'Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
                    .then( response => {
                       var datos = response.data;
-                      //alert( JSON.stringify( datos ) );
-                      Highcharts.chart('container', {
+                      Highcharts.chart( 'container' , {
                           chart: { type: 'column' },
                           title: { text: 'Objetivo vs Cumplimiento' },
                           xAxis: {
@@ -37,20 +35,17 @@
                                   borderWidth: 0
                               }
                           },
+                          credits: {
+                              enabled: false
+                          },
                           series: [{
                               name: 'Objetivo',
-                              //data: [350000.00, 300000.00, 380000.0, 440000.00, 420000.00, 400000.00, 380500.00, 420000.00, 420000.00, 390000.00, 420000.00, 405000.00]
                               data: datos[ 'objetivos' ]
-
                           }, {
                               name: 'Cumplimiento',
-                              //data: [322490.31, 316782.80, 345790.56, 380905.56, 395005.36,318690.56, 395000.00, 442085.65, 418680.45, 399596.00, 380675.56, 195078.77]
                               data: datos[ 'cumplimiento' ]
-
                           }]
                       });
-
-
                    })
                    .catch( err => {
                      console.log( err );
@@ -67,29 +62,23 @@
               <div id="container2" style="min-width: 310px; height: 250px; margin: 0 auto"></div>
               <script type="text/javascript">
                 Highcharts.chart('container2', {
-                    title: {
-                        text: 'Ventas por ejecutivo'
-                    },
-                    yAxis: {
-                        title: {
-                            text: 'Ventas'
-                        }
-                    },
+                    title: { text: 'Ventas por ejecutivo' },
+                    yAxis: { title: { text: 'Ventas' } },
                     legend: {
                         layout: 'vertical',
                         align: 'right',
                         verticalAlign: 'middle'
                     },
-
+                    credits: {
+                        enabled: false
+                    },
                     plotOptions: {
                         series: {
-                            label: {
-                                connectorAllowed: false
-                            },
-                            pointStart: 2010
+                            //label: { connectorAllowed: false },
+                            //pointStart: 2011,
+                            data: [ 'Dic 2019' , 'Ene 2019' , 'Feb 2019' , 'Mar 2019' , 'Abr 2019' , 'May 2019' , 'Jun 2019' , 'Jul 2019' ]
                         }
                     },
-
                     series: [{
                         name: 'Carlos Reyes',
                         data: [43934.90, 52503.18, 57177.66, 69658.98, 97031.26, 119931.69, 137133.11, 154175.18]
@@ -102,19 +91,12 @@
                     }],
                     responsive: {
                         rules: [{
-                            condition: {
-                                maxWidth: 500
-                            },
+                            condition: { maxWidth: 500 },
                             chartOptions: {
-                                legend: {
-                                    layout: 'horizontal',
-                                    align: 'center',
-                                    verticalAlign: 'bottom'
-                                }
+                                legend: { layout: 'horizontal', align: 'center', verticalAlign: 'bottom' }
                             }
                         }]
                     }
-
                 });
           		</script>
           </div>
@@ -127,46 +109,51 @@
           <div class="card-body">
               <div id="container3" style="min-width: 200px; height: 250px; margin: 0 auto"></div>
               <script>
-                  Highcharts.chart('container3', {
-                    chart: {
-                        plotBackgroundColor: null,
-                        plotBorderWidth: null,
-                        plotShadow: false,
-                        type: 'pie'
-                    },
-                    title: {
-                        text: 'Estatus'
-                    },
-                    tooltip: {
-                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            dataLabels: {
+                  axios.get( '/api/datosWidget/3' , { headers: { 'Accept' : 'application\json' , 'Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
+                       .then( response => {
+                          var datos = response.data;
+                          Highcharts.chart('container3', {
+                            chart: {
+                                plotBackgroundColor: null,
+                                plotBorderWidth: null,
+                                plotShadow: false,
+                                type: 'pie'
+                            },
+                            title: { text: 'Estatus' },
+                            tooltip: { pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>' },
+                            credits: {
                                 enabled: false
                             },
-                            showInLegend: true
-                        }
-                    },
-                    series: [{
-                        name: 'Brands',
-                        colorByPoint: true,
-                        data: [{
-                            name: 'Aceptadas',
-                            y: 39,
-                            sliced: true,
-                            selected: true
-                        }, {
-                            name: 'Rechazadas',
-                            y: 16
-                        }, {
-                            name: 'En proceso',
-                            y: 25
-                        }]
-                    }]
-                  });
+                            plotOptions: {
+                                pie: {
+                                    allowPointSelect: true,
+                                    cursor: 'pointer',
+                                    dataLabels: { enabled: false },
+                                    showInLegend: true
+                                }
+                            },
+                            series: [{
+                                name: 'Total ',
+                                colorByPoint: true,
+                                data: [{
+                                    name: 'Aceptadas: '+ datos.aceptadas,
+                                    y: datos.aceptadas,
+                                    sliced: false,
+                                    selected: true
+                                }, {
+                                    name: 'Rechazadas:  '+ datos.rechazadas,
+                                    y: datos.rechazadas
+                                }, {
+                                    name: 'En proceso:  '+ datos.proceso,
+                                    y: datos.proceso
+                                }]
+                            }]
+                          });
+
+                       })
+                       .catch( err => {
+                          console.log( err );
+                       });
               </script>
           </div>
       </div>
@@ -193,12 +180,13 @@
                           }
                       }
                   },
-
                   tooltip: {
                       headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
                       pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
                   },
-
+                  credits: {
+                      enabled: false
+                  },
                   series: [
                       {
                           name: "Browsers",
@@ -424,82 +412,66 @@
           <div class="card-body">
               <div id="container5" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
               <script type="text/javascript">
-                Highcharts.chart('container5', {
-                    chart: {
-                        type: 'bar'
-                    },
-                    title: {
-                        text: 'Clientes/Prospectos'
-                    },
-                    xAxis: {
-                        categories: ['Enero','Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
-                        title: {
-                            text: null
-                        }
-                    },
-                    yAxis: {
-                        min: 0,
-                        title: {
-                            text: 'Alta de registros',
-                            align: 'high'
-                        },
-                        labels: {
-                            overflow: 'justify'
-                        }
-                    },
-                    tooltip: {
-                        valueSuffix: ' '
-                    },
-                    plotOptions: {
-                        bar: {
-                            dataLabels: {
-                                enabled: true
-                            }
-                        }
-                    },
-                    legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'top',
-                        x: -40,
-                        y: 80,
-                        floating: true,
-                        borderWidth: 1,
-                        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-                        shadow: true
-                    },
-                    credits: {
-                        enabled: false
-                    },
-                    series: [{
-                        name: 'Clientes',
-                        data: [19,33,30,28,25,14]
-                    }, {
-                        name: 'Prospectos',
-                        data: [25,42,18,29,33,16]
-                    }]
-                });
+
+                axios.get( '/api/datosWidget/5' , { headers: { 'Accept' : 'application\json' , 'Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
+                     .then( response => {
+                        var datos = response.data;
+
+                        Highcharts.chart('container5', {
+                            chart: { type: 'bar' },
+                            title: { text: 'Clientes/Prospectos' },
+                            xAxis: {
+                                categories: datos.periodos,
+                                title: { text: null }
+                            },
+                            yAxis: {
+                                min: 0,
+                                title: { text: 'Alta de registros', align: 'high' },
+                                labels: { overflow: 'justify' }
+                            },
+                            tooltip: { valueSuffix: ' ' },
+                            plotOptions: {
+                                bar: { dataLabels: { enabled: true } }
+                            },
+                            legend: {
+                                layout: 'vertical',
+                                align: 'right',
+                                verticalAlign: 'top',
+                                x: -40,
+                                y: 80,
+                                floating: true,
+                                borderWidth: 1,
+                                backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                                shadow: true
+                            },
+                            credits: {
+                                enabled: false
+                            },
+                            series: [{
+                                name: 'Clientes',
+                                data: datos.clientes
+                            }, {
+                                name: 'Prospectos',
+                                data: datos.prospectos
+                            }]
+                        });
+
+                     })
+                     .catch( err => {
+                        console.log( err );
+                     });
+
           		</script>
           </div>
       </div>
   </div>
-
 </div>
 
 <script>
-  var url = '/api/listadoEstadoWidgets';
-  var token = sessionStorage.getItem( 'apiToken' );
-  var config = {
-      headers:{
-        'Accept'       :'application/json',
-        'Authorization': 'Bearer ' + token
-      }
-  };
-  axios.get( url , config )
+  axios.get( '/api/listadoEstadoWidgets' , { headers:{ 'Accept' : 'application/json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
        .then( response => {
           response.data.forEach( function( e , i ) {
               if( e.estado == '0' ) {
-                    //document.getElementById( 'contWidget_' + e.id ).style.display = 'none';
                     document.getElementById( 'contWidget_' + e.id ).remove();
                   } else {
                     document.getElementById( 'contWidget_' + e.id ).style.display = 'block';
