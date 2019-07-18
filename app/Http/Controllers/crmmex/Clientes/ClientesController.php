@@ -44,6 +44,7 @@ class ClientesController extends Controller
         $cliente->tipo          = $request->cliente_tipo;
         $cliente->grupo         = $request->cliente_grupo;
         $cliente->observaciones = $request->cliente_observaciones;
+        $cliente->productoID    = $request->cliente_producto_interes;
         $cliente->status        = 1;
         $gCliente               = $cliente->save();
         $idtyCli                = $cliente->id;
@@ -131,6 +132,7 @@ class ClientesController extends Controller
               'tipo'              => ( ( $cliente->tipo == '1' ) ? 'Cliente' : 'Prospecto' ),
               'observaciones'     => $cliente->observaciones,
               'grupo'             => $cliente->grupo,
+              'producto'          => $cliente->productoID,
               'status'            => ( ( $cliente->status == '1' ) ? 'Activo' : 'Deshabilitado' ),
               'opciones'          => ( ( $cliente->status == '2' ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Habilitar Cliente" onclick="habilitaCliente(\''.$cliente->id.'\')"><i class="fa fa-check fa-sm"></i></a>' :
                                           '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
@@ -208,6 +210,7 @@ class ClientesController extends Controller
           'observaciones'     => $cliente->observaciones,
           'tipo'              => $cliente->tipo,
           'grupo'             => $cliente->grupo,
+          'producto'          => $cliente->productoID,
           'subcategoria'      => $cliente->subcategoria
       );
       $clienteID = $cliente->id;
@@ -314,6 +317,7 @@ class ClientesController extends Controller
         $cliente->fechaModificacion = date( 'Y-m-d H:i:s' );
         $cliente->tipo              = $request->cliente_tipo;
         $cliente->grupo             = $request->cliente_grupo;
+        $cliente->productoID        = $request->cliente_producto_interes;
         $cliente->observaciones     = $request->cliente_observaciones;
         $cliente->status            = 1;
         $gCliente                   = $cliente->save();

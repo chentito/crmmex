@@ -176,6 +176,17 @@
                               </select>
                           </div>
                       </div>
+                      <div class="row">
+                        <div class="col-sm-2">
+                          <b>Producto de interés</b>
+                        </div>
+                        <div class="col-sm-10">
+                          <hr>
+                        </div>
+                        <div class="col-sm-12">
+                            <select class="custom-select custom-select-sm" name="cliente_producto_interes" id="cliente_producto_interes"></select>
+                        </div>
+                      </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -274,6 +285,8 @@
             aviso( 'No ha proporcionado el nombre del contacto' , false );
         } else if( document.getElementById( 'contacto_email' ).value == '' ) {
             aviso( 'No ha proporcionado el correo electrónico del contacto' , false );
+        } else if( document.getElementById( 'cliente_producto_interes' ).value == '' ) {
+            aviso( 'No ha proporcionado el producto de interes para el prospecto' , false );
         } else {
               $.ajaxSetup({ headers: {
                   'Accept': 'application/json',
@@ -344,6 +357,19 @@
         });
     }
     comboPaises();
+
+    async function comboProductos( grupo='' , producto='' ) {
+        $( '#cliente_producto_interes' ).empty();
+        document.getElementById( 'cliente_producto_interes' ).add( new Option( '-' , '' ) );
+        var filtro = ( grupo != '' ) ? '/' + grupo : '';
+        let promise = axios.get( '/api/utiles/listadoProductosServicios' + filtro );
+        let result = await promise;
+        result.data.forEach( ( item ) => {
+            var selected = ( ( producto != '' ) ? ( ( producto == item.id ) ? true : false ) : false );
+            document.getElementById( 'cliente_producto_interes' ).add( new Option( item.nombre , item.id , false , selected ) );
+        });
+    }
+    comboProductos();
 
     async function validaRFC( rfc ) {
       if( rfc.length == 12 || rfc.length == 13 ) {
