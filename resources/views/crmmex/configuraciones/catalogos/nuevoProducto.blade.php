@@ -283,7 +283,6 @@
   }
 
   function guardaProductoNuevo() {
-    var token      = sessionStorage.getItem( 'apiToken' );
     var datos      = $( '#form_alta_productoservicio' ).serialize();
     var movimiento = 'alta';
     if( document.getElementById( 'confProductos_id' ).value != '' ) { // Edita registro
@@ -293,14 +292,7 @@
           ruta  = '/api/guardaProducto';
     }
 
-    var config = {
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + token
-      }
-    };
-
-    axios.post( ruta , datos , config )
+    axios.post( ruta , datos , { headers: {'Accept': 'application/json', 'Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
        .then( response => {
          if( movimiento == 'alta' ) {
               aviso( 'Producto agregado correctamente' );
@@ -323,6 +315,7 @@
           $( '#confProductos_status' ).append( '<option value="'+item.id+'">'+item.status+'</option>' );
       });
   }
+
   comboEstatus();
   if( document.getElementById( 'idProductoEditar' ) === null ) {
       cargaCamposAdicionales( '3' );
