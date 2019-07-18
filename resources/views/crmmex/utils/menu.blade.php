@@ -64,7 +64,9 @@
             </li>
             <li>
               <a href="javascript:void(0)" onclick="return contenidos('configuraciones_pronosticos','1');">Pronosticos</a>
-              
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="return contenidos('configuraciones_pipeline','1');">Pipeline</a>
             </li>
             <li>
                 <a href="#configuracionesUsuarios" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Usuarios</a>
