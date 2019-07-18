@@ -150,6 +150,9 @@ Route::middleware( 'auth:api' )->get ( '/detallePiezaTemplate/{piezaID}'        
 Route::middleware( 'auth:api' )->get ( '/formsNuevoCampo'                                                , 'crmmex\Configuraciones\FormController@agregaCampoForm' );
 Route::middleware( 'auth:api' )->post( '/guardaFormulario'                                               , 'crmmex\Configuraciones\FormController@guardaFormulario' );
 Route::middleware( 'auth:api' )->get ( '/listadoFormularios'                                             , 'crmmex\Configuraciones\FormController@listadoFormularios' );
+Route::middleware( 'auth:api' )->post( '/cargaHistoricosLayout'                                          , 'crmmex\Sistema\HistoricosController@cargaHistoricos' );
+Route::middleware( 'auth:api' )->get ( '/listadoHistoricos'                                              , 'crmmex\Sistema\HistoricosController@listadoHistoricos' );
+Route::middleware( 'auth:api' )->get ( '/generaLayoutHistoricos/{fechainicial}/{fechaFinal}'             , 'crmmex\Sistema\HistoricosController@exportarCSV' );
 
 
 /************************************ Multimedia ************************************/
