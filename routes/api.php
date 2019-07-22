@@ -110,6 +110,7 @@ Route::middleware( 'auth:api' )->get ( '/obtieneProducto/{productoID}'          
 Route::middleware( 'auth:api' )->post( '/cargaHistoricosProducto'                        , 'crmmex\Productos\ProductosController@cargaHistoricosProducto' );
 Route::middleware( 'auth:api' )->get ( '/obtieneHistoricos/{productoID}'                 , 'crmmex\Productos\ProductosController@obtieneHistoricos' );
 Route::middleware( 'auth:api' )->get ( '/obtienePromedioHistoricos/{productoID}/{meses}' , 'crmmex\Productos\ProductosController@obtienePromedioHistorico' );
+Route::middleware( 'auth:api' )->get ( '/obtieneListadoProductos/{catalogoID}'           , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
 
 
 /************************************ Control de ejecutivos ************************************/
@@ -202,6 +203,11 @@ Route::middleware( 'auth:api' )->get ( '/obtieneDatosPropietario'   , 'crmmex\Si
 Route::middleware( 'auth:api' )->post( '/actualizaDatosPropietario' , 'crmmex\Sistema\PropietarioController@actualiza' );
 Route::middleware( 'auth:api' )->post( '/imagenPropietario'         , 'crmmex\Sistema\PropietarioController@imagenPropietario' );
 
+
+/************************************ Pipeline ************************************/
+Route::middleware( 'auth:api' )->get ( '/listadoIndicadores'     , 'crmmex\Pipeline\PipelineController@listadoIndicadores' );
+Route::middleware( 'auth:api' )->post( '/guardaIndicador'        , 'crmmex\Pipeline\PipelineController@altaIndicador' );
+Route::middleware( 'auth:api' )->get ( '/obtieneProcesosSistema' , 'crmmex\Pipeline\PipelineController@obtieneProcesosSistema' );
 
 /************************************ Pruebas API consumidas desdee Angular ************************************/
 Route::get   ( '/users'      , 'UsersController@index'   )->middleware( 'cors' );

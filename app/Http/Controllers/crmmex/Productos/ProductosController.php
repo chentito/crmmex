@@ -195,4 +195,5 @@ class ProductosController extends Controller
           return response()->json( $prom );
        }
 
+
 }
