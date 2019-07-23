@@ -25,15 +25,21 @@
                         <i class="fa fa-address-book fa-sm"></i><span class="d-none d-sm-inline">  Dirección</span>
                     </a>
                 </li>
-                <!--li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" id="adicionales-tab" data-toggle="tab" href="#adicionales" role="tab" aria-controls="adicionales" aria-selected="false">
-                        <i class="fa fa-paperclip fa-sm"></i><span class="d-none d-sm-inline">  Campos Adicionales</span>
+                        <i class="fa fa-chart-line fa-sm"></i><span class="d-none d-sm-inline">  Pipeline</span>
                     </a>
-                </li-->
+                </li>
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade" id="adicionales" role="tabpanel" aria-labelledby="adicionales-tab">
                     <div class="container border-left border-bottom border-right p-1">
+                        <!--div class="col-sm-12" id="pipelineContainer" name="pipelineContainer">
+                          <h6 class="mt-3">Avance en el proceso de seguimiento:</h6>
+                          <div class="progress mt-2" id="graficaPipeline" style="height:50px"></div>
+                        </div-->
+                        <br>
+                        <div id="graficaPipeline"></div>
                     </div>
                 </div>
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -380,4 +386,7 @@
         }
       }
     }
+
+
+
 </script>

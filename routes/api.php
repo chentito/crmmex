@@ -60,6 +60,7 @@ Route::middleware( 'auth:api' )->post( '/altaPago'                     , 'crmmex
 Route::middleware( 'auth:api' )->post( '/eliminaPago/{pagoID}'         , 'crmmex\Clientes\PagosController@eliminaPago' );
 Route::middleware( 'auth:api' )->get ( '/statusPago/{propuestaID}'     , 'crmmex\Clientes\PropuestasController@statusPago' );
 Route::middleware( 'auth:api' )->get ( '/enviaPropuesta/{propuestaID}' , 'crmmex\Clientes\PropuestasController@enviaPropuesta' );
+Route::middleware( 'auth:api' )->get ( '/obtienePipeline/{clienteID}'  , 'crmmex\Pipeline\AnalisisPipelineController@analisisPiepeline' );
 
 
 /************************************ Seguimientos ************************************/

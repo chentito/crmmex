@@ -68,6 +68,8 @@ class PipelineController extends Controller
                 $d->faseID        = $this->faseID( $detalle[ 'valor' ][ 'fase' ] , $indicador->id );
                 $d->tituloDetalle = $detalle[ 'valor' ][ 'detalle' ];
                 $d->peso          = $detalle[ 'valor' ][ 'peso' ];
+                $d->procesoID     = $detalle[ 'valor' ][ 'proceso' ];
+                $d->status        = 1;
                 $d->save();
             }
         }

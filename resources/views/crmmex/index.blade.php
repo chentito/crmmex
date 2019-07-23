@@ -99,7 +99,9 @@
         <script src="{{ asset( 'js/app.js' ) }}" ></script>
         <script src="https://momentjs.com/downloads/moment.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/es.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/es.js"></script>
         <script src="{{ asset( 'assets3/js/notify.js' ) }}"></script>
+        <script src="{{ asset( 'assets3/js/timeline.js' ) }}"></script>        
         <script src="{{ asset( 'assets3/js/contenidos.js' ) }}"></script>
         <!-- Grid -->
         <script src="{{ asset( 'assets3/js/dataTables.bootstrap4.min.js' ) }}"></script>

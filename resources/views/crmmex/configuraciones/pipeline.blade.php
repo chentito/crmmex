@@ -96,14 +96,18 @@
       datos.append( 'fases'    , sessionStorage.getItem( 'fases' ) );
       datos.append( 'detalles' , sessionStorage.getItem( 'detalles' ) );
 
-      axios.post( '/api/guardaIndicador' , datos , { headers:{ 'Accept' : 'application\json' , 'Authorization' : 'Bearer '+ sessionStorage.getItem( 'apiToken' ) } } )
-           .then( response => {
-              aviso( 'Indicador agregado correctamente' );
-              contenidos( 'configuraciones_pipeline' );
-           })
-           .catch( err => {
-             console.log( err );
-           });
+      if( document.getElementById( 'nuevoIndicdor_nombre' ).value == '' ) {
+          aviso( 'No ha proporcionado un nombre para el indicador' , false );
+      } else {
+          axios.post( '/api/guardaIndicador' , datos , { headers:{ 'Accept' : 'application\json' , 'Authorization' : 'Bearer '+ sessionStorage.getItem( 'apiToken' ) } } )
+             .then( response => {
+                aviso( 'Indicador agregado correctamente' );
+                contenidos( 'configuraciones_pipeline' );
+             })
+             .catch( err => {
+               console.log( err );
+             });
+      }
   });
 
   document.getElementById( 'nuevoIndicador_fases' ).addEventListener( 'click' , function( e ){
@@ -126,14 +130,18 @@
   });
 
   document.getElementById( 'agregaDetalle' ).addEventListener( 'click' , function( e ) {
-      var fase = document.getElementById( 'nuevoIndicador_fases' ).value;
+      var fase    = document.getElementById( 'nuevoIndicador_fases' ).value;
+      var detalle = document.getElementById( 'detalleFase' ).value;
+      var peso    = document.getElementById( 'detalleFase_peso' ).value;
+      var proceso = document.getElementById( 'procesoSistemaADetalleFase' ).value;
+
       if( fase == "" ) {
             aviso( 'No ha seleccionado una fase' ,  false );
+        } else if( detalle == "" ) {
+            aviso( 'No ha asignado el nombre del detalle' ,  false );
         } else {
-            var detalle = document.getElementById( 'detalleFase' ).value;
-            var peso    = document.getElementById( 'detalleFase_peso' ).value;
             document.getElementById( 'nuevoIndicador_detalleFase' ).add( new Option( detalle + ' (' + peso + ' %)' , detalle , false , false ) );
-            var nuevo = {fase:fase, detalle:detalle, peso:peso};
+            var nuevo = {fase:fase, detalle:detalle, peso:peso, proceso:proceso};
             guardaArraySesion( 'detalles' , nuevo );
 
             document.getElementById( 'detalleFase_peso' ).value = '1';

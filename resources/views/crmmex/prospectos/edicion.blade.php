@@ -13,6 +13,7 @@
     var token = sessionStorage.getItem( 'apiToken' );
     var idContenido = document.getElementById( 'idCargaInfo' ).value;
     document.getElementById( 'expediente_id' ).value = idContenido;
+    cargaPipeline( idContenido );
     comboEstados();
     comboPaises();
     var path  = '/api/obtieneExpediente/' + idContenido;
@@ -70,4 +71,35 @@
         .catch( err => {
             console.error( err );
         });
+
+      function cargaPipeline( clienteID ) {
+          var colores = new Array('bg-success','bg-primary','bg-secondary','bg-danger','bg-info','bg-warning','bg-withe');
+
+          axios.get( '/api/obtienePipeline/' + clienteID , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
+               .then( response => {
+
+                  var datos   = new Array();
+                  var colores = new Array();
+
+                  response.data.detalles.forEach( function( e , i ) {
+                      colores.push( ( ( e.estado == true ) ? '#3E5A8E' : '#d1d1d1' ) );
+                      var estado = ( e.estado == true ) ? 'Finalizado' : 'Pendiente';
+                      datos.push( { name: e.tituloDetalle , label:estado , description: e.descripcion } );
+                  });
+
+                  Highcharts.chart('graficaPipeline', {
+                      chart: { type: 'timeline' },
+                      xAxis: { visible: false },
+                      yAxis: { visible: false },
+                      title: { text: 'Pipeline' },
+                      colors: colores,
+                      credits: { enabled: false },
+                      series: [{ data: datos }]
+                  });
+
+               })
+               .catch( err => {
+                 console.log( err );
+               });
+      }
 </script>
