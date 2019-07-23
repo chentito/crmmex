@@ -33,7 +33,7 @@ class PipelineController extends Controller
                 'fechaAlta'         => $indicador->fechaAlta,
                 'fechaModificacion' => $indicador->fechaModificacion,
                 'fechaEliminacion'  => $indicador->fechaEliminacion,
-                'grupoID'           => Utils::valorCatalogo( $indicador->grupoID ),
+                'grupoID'           => ( $indicador->grupoID == 0 ) ? 'Todos' : Utils::valorCatalogo( $indicador->grupoID ),
                 'status'            => ( $indicador->status == 1 ? 'Activo' : 'Inactivo' ),
                 'opciones'          => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Edita Indicador" onclick="contenidos(\'configuraciones_editaIndicador\',\''.$indicador->id.'\')" class="ml-2"><i class="fa fa-edit fa-sm"></i></a>'
             );

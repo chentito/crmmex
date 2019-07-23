@@ -29,9 +29,11 @@ class AnalisisPipelineController extends Controller
     // Obtiene el indicador correspondiente
     public function getIndicador( $grupo , $clienteID ) {
         $pipeline  = array();
-        $indicador = Indicadores::where( 'grupoID' , $grupo )
-                                ->where( 'status' , 1 )
-                                ->first();
+
+        // Verifica si hay un indicador de proposito general
+        $propGral  = Indicadores::where( 'grupoID' , '0' )->where( 'status' , 1 )->count();
+        $gpo       = ( $propGral > 0 ) ? '0' : $grupo;
+        $indicador = Indicadores::where( 'grupoID' , $gpo )->where( 'status' , 1 )->first();
 
         if( $indicador ) {
             $fases = Fases::where( 'indicadorID' , $indicador->id )

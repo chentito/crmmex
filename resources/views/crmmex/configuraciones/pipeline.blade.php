@@ -168,6 +168,7 @@
   function grupoPorductos() {
       axios.get( '/api/obtieneListadoProductos/12' , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
            .then( response => {
+              document.getElementById( 'grupoProductosPerteneceIndicador' ).add( new Option( 'Todos' , '0' , false , false ) );
               response.data.forEach( function( e , i ){
                   document.getElementById( 'grupoProductosPerteneceIndicador' ).add( new Option( e.nombre , e.id , false , false ) );
               });

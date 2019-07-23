@@ -73,17 +73,14 @@
         });
 
       function cargaPipeline( clienteID ) {
-          var colores = new Array('bg-success','bg-primary','bg-secondary','bg-danger','bg-info','bg-warning','bg-withe');
-
           axios.get( '/api/obtienePipeline/' + clienteID , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
                .then( response => {
-
                   var datos   = new Array();
                   var colores = new Array();
 
                   response.data.detalles.forEach( function( e , i ) {
                       colores.push( ( ( e.estado == true ) ? '#3E5A8E' : '#d1d1d1' ) );
-                      var estado = ( e.estado == true ) ? 'Finalizado' : 'Pendiente';
+                      var estado = ( e.estado == true ) ? '('+e.peso+'%) Finalizado' : '('+e.peso+'%) Pendiente';
                       datos.push( { name: e.tituloDetalle , label:estado , description: e.descripcion } );
                   });
 
