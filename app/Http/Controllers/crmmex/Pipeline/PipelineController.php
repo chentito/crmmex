@@ -27,7 +27,7 @@ class PipelineController extends Controller
         $indicadores = Indicadores::where( 'status' , 1 )->get();
 
         foreach ( $indicadores AS $indicador ) {
-            $datos[ 'indicadores' ][] = array(
+            $datos[ 'indicadores' ][] = array (
                 'id'                => $indicador->id,
                 'nombreIndicador'   => $indicador->nombreIndicador,
                 'fechaAlta'         => $indicador->fechaAlta,
@@ -35,7 +35,8 @@ class PipelineController extends Controller
                 'fechaEliminacion'  => $indicador->fechaEliminacion,
                 'grupoID'           => ( $indicador->grupoID == 0 ) ? 'Todos' : Utils::valorCatalogo( $indicador->grupoID ),
                 'status'            => ( $indicador->status == 1 ? 'Activo' : 'Inactivo' ),
-                'opciones'          => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Edita Indicador" onclick="contenidos(\'configuraciones_editaIndicador\',\''.$indicador->id.'\')" class="ml-2"><i class="fa fa-edit fa-sm"></i></a>'
+                'opciones'          => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Edita Indicador" '
+                                     . 'onclick="contenidos(\'configuraciones_edicionPipeline\',\''.$indicador->id.'\')" class="ml-2"><i class="fa fa-edit fa-sm"></i></a>'
             );
         }
 
@@ -57,7 +58,7 @@ class PipelineController extends Controller
             foreach( $fases AS $fase ) {
                 $f = new Fases();
                 $f->indicadorID = $indicador->id;
-                $f->nombreFase  = $fase[ 'valor' ];
+                $f->nombreFase  = $fase[ 'valor' ][ 'fase' ];
                 $f->status      = 1;
                 $f->save();
             }
@@ -75,6 +76,109 @@ class PipelineController extends Controller
         }
     }
 
+    // Metodo para la actualizacion del inidicador seleccionado
+    public function actualizaIndicador( Request $request ) {
+        $fases    = json_decode( $request->fases , true );
+        $detalles = json_decode( $request->detalles , true );
+
+        $indicador = Indicadores::find( $request->indicadorID );
+        $indicador->nombreIndicador   = $request->nuevoIndicdor_nombre;
+        $indicador->fechaModificacion = date( 'Y-m-d' );
+        $indicador->grupoID           = $request->grupoProductosPerteneceIndicador;
+
+        if( $indicador->save() ) {
+            $indices  = array();
+            $indicesD = array();
+
+            // Fases
+            foreach ( $fases AS $fase ) {
+                if( $fase[ 'valor' ][ 'idty' ] == 0 ) {
+                    $f = new Fase();
+                    $f->indicadorID = $request->indicadorID;
+                    $f->nombreFase  = $fase[ 'valor' ][ 'fase' ];
+                    $f->status      = 1;
+                    $f->save();
+                    $indices[]      = $f->id;
+                  } else {
+                    $f = Fase::find( $fase[ 'valor' ][ 'idty' ] );
+                    $f->indicadorID = $request->indicadorID;
+                    $f->nombreFase  = $fase[ 'valor' ][ 'fase' ];
+                    $f->save();
+                    $indices[]      = $fase[ 'valor' ][ 'idty' ];
+                }
+            }
+
+            DB::table( 'crmmex_pipeline_fases' )
+              ->where( 'indicadorID' , $request->indicadorID )
+              ->whereNotIn( 'id' , $indices )
+              ->update( 'status' , 0 );
+
+            // Detalles
+            foreach ( $detalles AS $detalle ) {
+                if( $detalle[ 'valor' ][ 'idty' ] == 0 ) {
+                    $d = new Detalles();
+                    $d->indicadorID   = $request->indicadorID;
+                    $d->faseID        = $this->faseID( $detalle[ 'valor' ][ 'fase' ] , $request->indicadorID );
+                    $d->tituloDetalle = $detalle[ 'valor' ][ 'detalle' ];
+                    $d->peso          = $detalle[ 'valor' ][ 'peso' ];
+                    $d->procesoID     = $detalle[ 'valor' ][ 'proceso' ];
+                    $d->status        = 1;
+                    $d->save();
+                    $indicesD[]       = $d->id;
+                } else {
+                  $d = Detalles::find( $detalle[ 'valor' ][ 'idty' ] );
+                  $d->indicadorID   = $request->indicadorID;
+                  $d->faseID        = $this->faseID( $detalle[ 'valor' ][ 'fase' ] , $request->indicadorID );
+                  $d->tituloDetalle = $detalle[ 'valor' ][ 'detalle' ];
+                  $d->peso          = $detalle[ 'valor' ][ 'peso' ];
+                  $d->procesoID     = $detalle[ 'valor' ][ 'proceso' ];
+                  $d->save();
+                  $indicesD[]       = $detalle[ 'valor' ][ 'idty' ];
+                }
+            }
+
+            DB::table( 'crmmex_pipeline_detalleindicador' )
+              ->where( 'indicadorID' , $request->indicadorID )
+              ->whereNotIn( 'id' , $indicesD )
+              ->update( 'status' , 0 );
+        }
+
+    }
+
+    // Obtiene el detalle de un indicador por su ID
+    public function detalleIndicador( $indicadorID ) {
+        $datos = array();
+        $ind   = Indicadores::find( $indicadorID );
+
+        $datos[ 'nombreIndicador' ] = $ind->nombreIndicador;
+        $datos[ 'grupoID' ]         = $ind->grupoID;
+
+        $fases = Fases::where( 'indicadorID' , $ind->id )
+                      ->where( 'status' , 1 )
+                      ->get();
+
+        foreach( $fases AS $fase ) {
+            $detalles = Detalles::where( 'faseID' , $fase->id )
+                                ->where( 'indicadorID' , $ind->id )
+                                ->where( 'status' , 1 )
+                                ->get();
+
+            foreach( $detalles AS $detalle ) {
+                $datos[ 'detalle' ][] = array (
+                  'faseID'  => $fase->id,
+                  'idty'    => $detalle->id,
+                  'fase'    => $fase->nombreFase,
+                  'detalle' => $detalle->tituloDetalle,
+                  'peso'    => $detalle->peso,
+                  'proceso' => $detalle->procesoID
+                );
+            }
+        }
+
+        return response()->json( $datos );
+    }
+
+    // Obtiene el identificador de la fase
     private function faseID( $nombreFase , $indicadorID ) {
         $fase = Fases::where( 'nombreFase' , $nombreFase )
                      ->where( 'indicadorID' , $indicadorID )
@@ -82,9 +186,21 @@ class PipelineController extends Controller
        return $fase->id;
     }
 
+    // Obtiene los procesos predefinidos del sistema
     public function obtieneProcesosSistema() {
         $procesos = Procesos::where( 'status' , 1 )->get();
         return response()->json( $procesos );
+    }
+
+    // Actualiza las descripciones de los procesos del sistema
+    public function actualizaDescripcionProcesos( Request $request ) {
+        $procesos = Procesos::where( 'status' , 1 )->get();
+        foreach( $procesos AS $proceso ) {
+            $update = Procesos::find( $proceso->id );
+            $fieldName = 'descripcion_proceso_' . $proceso->id;
+            $update->descripcionProceso = $request->$fieldName;
+            $update->save();
+        }
     }
 
 }
