@@ -19,7 +19,7 @@
 
       axios.post( url , {} )
            .then( response => {
-             contenidos( 'configuraciones_clientesListado' );
+             contenidos( 'configuraciones_camposAdicionales' );
            })
            .catch( err => {
              console.log( err );

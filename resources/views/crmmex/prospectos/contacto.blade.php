@@ -27,7 +27,7 @@
             <label for="contacto_celular">No. Celular</label>
             <input type="text" id="contacto_celular" name="contacto_celular[]" class="form-control form-control-sm" value="{{$celular}}" placeholder="Celular">
         </div>
-        <div class="col-sm-3 mb-1">
+        <!--div class="col-sm-3 mb-1">
             <label for="contacto_celular_compania">Compañia</label>
             <select id="contacto_celular_compania" name="contacto_celular_compania[]" class="custom-select custom-select-sm">
                 <option value="1" @if($compania=="1")selected="selected"@endif>AT&T</option>
@@ -35,7 +35,8 @@
                 <option value="3" @if($compania=="3")selected="selected"@endif>Unefon</option>
                 <option value="4" @if($compania=="4")selected="selected"@endif>Movistar</option>
             </select>
-        </div>
+        </div-->
+        <input type="hidden" id="contacto_celular_compania" name="contacto_celular_compania[]" value="">
         <div class="col-sm-3 mb-1">
             <label for="contacto_telefono">Teléfono</label>
             <input type="text" id="contacto_telefono" name="contacto_telefono[]" class="form-control form-control-sm" value="{{$tel}}" placeholder="Tel&eacute;fono">
@@ -44,9 +45,10 @@
             <label for="contacto_extension">Extensión</label>
             <input type="text" id="contacto_extension" name="contacto_extension[]" class="form-control form-control-sm" value="{{$ext}}" placeholder="Extensi&oacute;n">
         </div>
+        <div class="col-sm-3 mb-1 text-center my-auto"><button class="btn btn-sm {{$btn}}" id="btnEliminaContacto_{{$rand}}"><i class="fa fa-sm fa-trash"></i></button></div>
     </div>
     <div class="row">
-        <div class="col-sm-3 mb-1">
+        <!--div class="col-sm-3 mb-1">
             <label for="contacto_area">Área</label>
             <select id="contacto_area" name="contacto_area[]" class="custom-select custom-select-sm">
                 <option value="1" @if($area=="1")selected="selected"@endif>Finanzas</option>
@@ -55,13 +57,15 @@
                 <option value="4" @if($area=="4")selected="selected"@endif>Administraci&oacute;n</option>
                 <option value="5" @if($area=="5")selected="selected"@endif>Recursos Humanos</option>
             </select>
-        </div>
-        <div class="col-sm-3 mb-1">
+        </div-->
+        <input type="hidden" id="contacto_area" name="contacto_area[]" value="">
+        <!--div class="col-sm-3 mb-1">
             <label for="contacto_puesto">Puesto</label>
             <input type="text" id="contacto_puesto" name="contacto_puesto[]" class="form-control form-control-sm" value="{{$puesto}}" placeholder="Puesto">
-        </div>
+        </div-->
+        <input type="hidden" id="contacto_puesto" name="contacto_puesto[]" value="">
         <div class="col-sm-3 mb-1"></div>
-        <div class="col-sm-3 mb-1 text-center my-auto"><button class="btn btn-sm {{$btn}}" id="btnEliminaContacto_{{$rand}}"><i class="fa fa-sm fa-trash"></i></button></div>
+
     </div>
 </div>
 

@@ -29,7 +29,7 @@
     <li>
         <a href="#reportes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-chart-pie fa-lg"></i>  Reportes</a>
         <ul class="collapse list-unstyled" id="reportes">
-            <li><a href="javascript:void(0)" onclick="return contenidos('reportes_resumen');">Resumen</a></li>
+            <li><a href="javascript:void(0)" onclick="return contenidos('reportes_pipeline');">Pipeline</a></li>
             <li><a href="javascript:void(0)" onclick="return contenidos('reportes_resumen');">Ventas</a></li>
         </ul>
     </li>

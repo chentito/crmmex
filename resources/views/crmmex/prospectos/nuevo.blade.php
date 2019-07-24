@@ -20,11 +20,11 @@
                         <i class="fa fa-briefcase fa-sm"></i><span class="d-none d-sm-inline">  Razón Social</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!--li class="nav-item">
                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">
                         <i class="fa fa-address-book fa-sm"></i><span class="d-none d-sm-inline">  Dirección</span>
                     </a>
-                </li>
+                </li-->
                 <li class="nav-item">
                     <a class="nav-link" id="adicionales-tab" data-toggle="tab" href="#adicionales" role="tab" aria-controls="adicionales" aria-selected="false">
                         <i class="fa fa-chart-line fa-sm"></i><span class="d-none d-sm-inline">  Pipeline</span>
@@ -76,7 +76,7 @@
                               <label for="contacto_celular">No. Celular</label>
                               <input type="text" id="contacto_celular" name="contacto_celular[]" class="form-control form-control-sm" value="" placeholder="Celular" maxlength="10">
                           </div>
-                          <div class="col-sm-3 mb-1">
+                          <!--div class="col-sm-3 mb-1">
                               <label for="contacto_celular_compania">Compañia</label>
                               <select id="contacto_celular_compania" name="contacto_celular_compania[]" class="custom-select custom-select-sm">
                                   <option value="1">AT&T</option>
@@ -84,7 +84,8 @@
                                   <option value="3">Unefon</option>
                                   <option value="4">Movistar</option>
                               </select>
-                          </div>
+                          </div-->
+                          <input type="hidden" id="contacto_celular_compania" name="contacto_celular_compania[]" value="">
                           <div class="col-sm-3 mb-1">
                               <label for="contacto_telefono">Teléfono</label>
                               <input type="text" id="contacto_telefono" name="contacto_telefono[]" class="form-control form-control-sm" value="" placeholder="Tel&eacute;fono" maxlength="10">
@@ -93,9 +94,12 @@
                               <label for="contacto_extension">Extensión</label>
                               <input type="text" id="contacto_extension" name="contacto_extension[]" class="form-control form-control-sm" value="" placeholder="Extensi&oacute;n">
                           </div>
+                          <div class="col-sm-3 mb-1 text-center my-auto">
+                            <button class="btn btn-sm {{$btn}}" id="btnAgregaEstructuraCliente"><i class="fa fa-user-plus fa-lg"></i><span class="d-none d-sm-inline"> Agregar otro contacto</span></button>
+                          </div>
                       </div>
                       <div class="row">
-                          <div class="col-sm-3 mb-1">
+                          <!--div class="col-sm-3 mb-1">
                               <label for="contacto_area">Área</label>
                               <select id="contacto_area" name="contacto_area[]" class="custom-select custom-select-sm">
                                   <option value="1">Finanzas</option>
@@ -104,17 +108,27 @@
                                   <option value="4">Administraci&oacute;n</option>
                                   <option value="5">Recursos Humanos</option>
                               </select>
-                          </div>
-                          <div class="col-sm-3 mb-1">
+                          </div-->
+                          <input type="hidden" id="contacto_area" name="contacto_area[]" value="">
+                          <!--div class="col-sm-3 mb-1">
                               <label for="contacto_puesto">Puesto</label>
                               <input type="text" id="contacto_puesto" name="contacto_puesto[]" class="form-control form-control-sm" value="" placeholder="Puesto">
-                          </div>
+                          </div-->
+                          <input type="hidden" id="contacto_puesto" name="contacto_puesto[]" value="">
                           <div class="col-sm-3 mb-1"></div>
-                          <div class="col-sm-3 mb-1 text-center my-auto">
-                            <button class="btn btn-sm {{$btn}}" id="btnAgregaEstructuraCliente"><i class="fa fa-user-plus fa-lg"></i><span class="d-none d-sm-inline"> Agregar otro contacto</span></button>
-                          </div>
                       </div>
                       <div class="row" id="contenedorContactos"></div>
+                      <div class="row mt-2">
+                        <div class="col-sm-2">
+                          <b>Producto de interés</b>
+                        </div>
+                        <div class="col-sm-10">
+                          <hr>
+                        </div>
+                        <div class="col-sm-12">
+                            <select class="custom-select custom-select-sm" name="cliente_producto_interes" id="cliente_producto_interes"></select>
+                        </div>
+                      </div>
                       <div class="row mt-3">
                         <div class="col-sm-2">
                           <b>Campos Adicionales</b>
@@ -182,69 +196,59 @@
                               </select>
                           </div>
                       </div>
-                      <div class="row">
+                      <div class="row mt-2">
                         <div class="col-sm-2">
-                          <b>Producto de interés</b>
+                          <b>Dirección</b>
                         </div>
                         <div class="col-sm-10">
                           <hr>
                         </div>
-                        <div class="col-sm-12">
-                            <select class="custom-select custom-select-sm" name="cliente_producto_interes" id="cliente_producto_interes"></select>
+                        <div class="col-sm-3 mb-1">
+                            <label for="direccion_calle">Calle</label>
+                            <input type="text" id="direccion_calle" name="direccion_calle" class="form-control form-control-sm" placeholder="Calle">
                         </div>
+                        <div class="col-sm-3 mb-1">
+                            <label for="direccion_no_exterior">No. Exterior</label>
+                            <input type="text" id="direccion_no_exterior" name="direccion_no_exterior" class="form-control form-control-sm" placeholder="No.Exterior">
+                        </div>
+                        <div class="col-sm-3 mb-1">
+                            <label for="direccion_no_interior">No. Interior</label>
+                            <input type="text" id="direccion_no_interior" name="direccion_no_interior" class="form-control form-control-sm" placeholder="No.Interior">
+                        </div>
+                        <div class="col-sm-3 mb-1">
+                            <label for="direccion_colonia">Colonia</label>
+                            <input type="text" id="direccion_colonia" name="direccion_colonia" class="form-control form-control-sm" placeholder="Colonia">
+                        </div>
+                        <div class="col-sm-3 mb-1">
+                            <label for="direccion_cp">CP</label>
+                            <input type="text" id="direccion_cp" name="direccion_cp" class="form-control form-control-sm" placeholder="Codigo Postal">
+                        </div>
+                        <div class="col-sm-3 mb-1">
+                            <label for="direccion_delegacion">Delegación</label>
+                            <input type="text" id="direccion_delegacion" name="direccion_delegacion" class="form-control form-control-sm" placeholder="Delegacion/Municipio">
+                        </div>
+                        <div class="col-sm-3 mb-1">
+                            <label for="direccion_ciudad">Ciudad</label>
+                            <input type="text" id="direccion_ciudad" name="direccion_ciudad" class="form-control form-control-sm" placeholder="Ciudad">
+                        </div>
+                        <div class="col-sm-3 mb-1"></div>
+                        <div class="col-sm-3 mb-1">
+                            <label for="direccion_pais">País</label>
+                            <select id="direccion_pais" name="direccion_pais" class="custom-select custom-select-sm">
+                            </select>
+                        </div>
+                        <div class="col-sm-3 mb-1">
+                            <label for="direccion_estado">Estado</label>
+                            <select id="direccion_estado" name="direccion_estado" class="custom-select custom-select-sm">
+                            </select>
+                        </div>
+                        <div class="col-sm-3 mb-1"></div>
+                        <div class="col-sm-3 mb-1"></div>
                       </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                    <div class="container border-left border-bottom border-right p-1">
-                      <div class="row">
-                          <div class="col-sm-3 mb-1">
-                              <label for="direccion_calle">Calle</label>
-                              <input type="text" id="direccion_calle" name="direccion_calle" class="form-control form-control-sm" placeholder="Calle">
-                          </div>
-                          <div class="col-sm-3 mb-1">
-                              <label for="direccion_no_exterior">No. Exterior</label>
-                              <input type="text" id="direccion_no_exterior" name="direccion_no_exterior" class="form-control form-control-sm" placeholder="No.Exterior">
-                          </div>
-                          <div class="col-sm-3 mb-1">
-                              <label for="direccion_no_interior">No. Interior</label>
-                              <input type="text" id="direccion_no_interior" name="direccion_no_interior" class="form-control form-control-sm" placeholder="No.Interior">
-                          </div>
-                          <div class="col-sm-3 mb-1">
-                              <label for="direccion_colonia">Colonia</label>
-                              <input type="text" id="direccion_colonia" name="direccion_colonia" class="form-control form-control-sm" placeholder="Colonia">
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col-sm-3 mb-1">
-                              <label for="direccion_cp">CP</label>
-                              <input type="text" id="direccion_cp" name="direccion_cp" class="form-control form-control-sm" placeholder="Codigo Postal">
-                          </div>
-                          <div class="col-sm-3 mb-1">
-                              <label for="direccion_delegacion">Delegación</label>
-                              <input type="text" id="direccion_delegacion" name="direccion_delegacion" class="form-control form-control-sm" placeholder="Delegacion/Municipio">
-                          </div>
-                          <div class="col-sm-3 mb-1">
-                              <label for="direccion_ciudad">Ciudad</label>
-                              <input type="text" id="direccion_ciudad" name="direccion_ciudad" class="form-control form-control-sm" placeholder="Ciudad">
-                          </div>
-                          <div class="col-sm-3 mb-1"></div>
-                      </div>
-                      <div class="row">
-                          <div class="col-sm-3 mb-1">
-                              <label for="direccion_pais">País</label>
-                              <select id="direccion_pais" name="direccion_pais" class="custom-select custom-select-sm">
-                              </select>
-                          </div>
-                          <div class="col-sm-3 mb-1">
-                              <label for="direccion_estado">Estado</label>
-                              <select id="direccion_estado" name="direccion_estado" class="custom-select custom-select-sm">
-                              </select>
-                          </div>
-                          <div class="col-sm-3 mb-1"></div>
-                          <div class="col-sm-3 mb-1"></div>
-                      </div>
-                    </div>
+                    <div class="container border-left border-bottom border-right p-1"></div>
                 </div>
             </div>
         </div>

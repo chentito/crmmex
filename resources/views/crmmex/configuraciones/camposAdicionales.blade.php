@@ -52,7 +52,7 @@
               <input type="text" id="adicional_clientes_valores" name="adicional_clientes_valores" placeholder="Valores" class="form-control form-control-sm">
             </div>
             <div class="col-sm-3 mt-1">
-              <label for="adicional_clientes_validacion">Validación (Expresión regular):</label>
+              <label for="adicional_clientes_validacion">Tipo de validación:</label>
               <select id="adicional_clientes_validacion" name="adicional_clientes_validacion" class="custom-select custom-select-sm">
                   <option value="1">Sin validación</option>
                   <option value="2">Correo electrónico</option>

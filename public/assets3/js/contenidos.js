@@ -177,7 +177,31 @@ function generaDataGrid( id , filtro = '' ) {
                     }
                 },
                 responsive: true,
-                columns: columnas
+                columns: columnas,
+                "language": {
+                    "decimal":        "",
+                    "emptyTable":     "No se encontraron datos",
+                    "info":           "Mostrando _START_ de _END_ de _TOTAL_ resultados",
+                    "infoEmpty":      "Mostrando 0 de 0 de 0 resultados",
+                    "infoFiltered":   "(filtered from _MAX_ total entries)",
+                    "infoPostFix":    "",
+                    "thousands":      ",",
+                    "lengthMenu":     "Mostrando _MENU_ resultados",
+                    "loadingRecords": "Cargando...",
+                    "processing":     "Procesando...",
+                    "search":         "Buscar:",
+                    "zeroRecords":    "No se han encontrado coincidencias",
+                    "paginate": {
+                        "first":      "Primero",
+                        "last":       "Untimo",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                    "aria": {
+                        "sortAscending":  ": orden ascendente",
+                        "sortDescending": ": orden descendente"
+                    }
+                }
             });
 
             axios.get( '/api/dataTableConfigView/' + id )

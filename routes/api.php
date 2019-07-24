@@ -217,6 +217,10 @@ Route::middleware( 'auth:api' )->get ( '/obtieneProcesosSistema'             , '
 Route::middleware( 'auth:api' )->post( '/actualizaDescripcionProcesos'       , 'crmmex\Pipeline\PipelineController@actualizaDescripcionProcesos' );
 
 
+/************************************ Reportes ************************************/
+Route::middleware( 'auth:api' )->get ( '/reporteIndicadores' , 'crmmex\Reportes\IndicadoresController@listadoIndicadores' );
+
+
 /************************************ Pruebas API consumidas desdee Angular ************************************/
 Route::get   ( '/users'      , 'UsersController@index'   )->middleware( 'cors' );
 Route::get   ( '/users/{id}' , 'UsersController@show'    )->middleware( 'cors' );

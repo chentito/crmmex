@@ -34,12 +34,12 @@
           </div>
           <div class="row">
               <div class="col-sm-6 mb-2">
-                  <label for="prospectos_nuevoseguimiento_involucrados">Involucrados</label>
+                  <label for="prospectos_nuevoseguimiento_involucrados">Contactos:</label>
                   <select id="prospectos_nuevoseguimiento_involucrados" name="prospectos_nuevoseguimiento_involucrados" class="custom-select custom-select-sm" >
                   </select>
               </div>
               <div class="col-sm-6 mb-2">
-                  <label for="prospectos_nuevoseguimiento_texto">Texto</label>
+                  <label for="prospectos_nuevoseguimiento_texto">Descripción:</label>
                   <textarea id="prospectos_nuevoseguimiento_texto" name="prospectos_nuevoseguimiento_texto" class="form-control form-control-sm" cols="3"></textarea>
               </div>
           </div>

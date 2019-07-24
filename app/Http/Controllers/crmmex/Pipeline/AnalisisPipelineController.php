@@ -1,5 +1,12 @@
 <?php
-
+/*******************************************************************************
+ * Controlador que realiza el analisis de pipeline de un cliente de acuerdo
+ * al grupo del producto de su interes, si existen indicadores de uso general
+ * se le da prioridad
+ * de pipeline
+ * @Autor Mexagon.net / Carlos Reyes
+ * @Fecha Julio 2019
+ ******************************************************************************/
 namespace App\Http\Controllers\crmmex\Pipeline;
 
 use Illuminate\Http\Request;
@@ -22,12 +29,12 @@ class AnalisisPipelineController extends Controller
     // Metodo que genera el analisis pipeline de cada cliente/prospecto
     public function analisisPiepeline( $clienteID ) {
         $cliente = Cliente::find( $clienteID );
-        $grupo   = $this->getGrupo( $cliente->productoID );
-        return response()->json( $this->getIndicador( $grupo , $clienteID ) );
+        $grupo   = self::getGrupo( $cliente->productoID );
+        return response()->json( self::getIndicador( $grupo , $clienteID ) );
     }
 
     // Obtiene el indicador correspondiente
-    public function getIndicador( $grupo , $clienteID ) {
+    public static function getIndicador( $grupo , $clienteID ) {
         $pipeline  = array();
 
         // Verifica si hay un indicador de proposito general
@@ -52,8 +59,8 @@ class AnalisisPipelineController extends Controller
                       'faseID'        => $detalle->faseID,
                       'tituloDetalle' => $detalle->tituloDetalle,
                       'peso'          => $detalle->peso,
-                      'estado'        => $this->estadoProceso( $detalle->procesoID , $clienteID ),
-                      'descripcion'   => $this->descripcionEstado( $detalle->procesoID ),
+                      'estado'        => self::estadoProceso( $detalle->procesoID , $clienteID ),
+                      'descripcion'   => self::descripcionEstado( $detalle->procesoID ),
                       'procesoID'     => $detalle->procesoID
                     );
                 }
@@ -65,14 +72,14 @@ class AnalisisPipelineController extends Controller
     }
 
     // Obtiene el grupo de producto de interes del prospectos_listado
-    private function getGrupo( $productoID ) {
+    private static function getGrupo( $productoID ) {
         $producto = Producto::find( $productoID );
         return $producto->grupo;
     }
 
     // Obtiene el estado de ejecución de algun proceso dentro de la
     // plataforma para un prospecto/cliente en particular
-    private function estadoProceso( $procesoID , $clienteID ) {
+    private static function estadoProceso( $procesoID , $clienteID ) {
         switch( $procesoID ) {
           case '1':return true; break;
           case '2':return ( Seguimiento::where( 'clienteID' , $clienteID )->where( 'status' , 1 )->count() > 0 ) ? true : false; break;
@@ -98,7 +105,7 @@ class AnalisisPipelineController extends Controller
     }
 
     // Obtiene el detalle del proceso
-    private function descripcionEstado( $procesoID ) {
+    private static function descripcionEstado( $procesoID ) {
         $procesos = Procesos::find( $procesoID );
         return $procesos->descripcionProceso;
     }

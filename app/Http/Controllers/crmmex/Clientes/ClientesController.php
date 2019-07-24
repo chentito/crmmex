@@ -120,9 +120,9 @@ class ClientesController extends Controller
 
       foreach( $clientes AS $cliente ) {
           $arrClientes[ 'clientes' ][] = array (
-              'id'                => $cliente->id,
-              'razonSocial'       => $cliente->razonSocial,
-              'rfc'               => $cliente->rfc,
+              'id'                => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')">'.$cliente->id.'</a>',
+              'razonSocial'       => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')">'.$cliente->razonSocial.'</a>',
+              'rfc'               => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')">'.$cliente->rfc.'</a>',
               'giro'              => Utiles::valorCatalogo( $cliente->giro ),
               'categoria'         => $cliente->categoria,
               'subcategoria'      => $cliente->subcategoria,
@@ -161,8 +161,8 @@ class ClientesController extends Controller
 
         foreach( $prospectos AS $prospecto ) {
             $datos[ 'prospectos' ][] = array(
-              'id'                => $prospecto->id,
-              'nombre'            => $prospecto->nombre,
+              'id'                => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Prospecto" onclick="contenidos(\'prospectos_edicion\',\''.$prospecto->id.'\')">'.$prospecto->id.'</a>',
+              'nombre'            => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Prospecto" onclick="contenidos(\'prospectos_edicion\',\''.$prospecto->id.'\')">'.$prospecto->nombre.'</a>',
               'apellidoPaterno'   => $prospecto->apellidoPaterno,
               'apellidoMaterno'   => $prospecto->apellidoMaterno,
               'correoElectronico' => $prospecto->correoElectronico,

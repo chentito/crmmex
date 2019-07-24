@@ -104,7 +104,7 @@ class CamposAdicionalesController extends Controller
           'nombre'         => $datos->nombre,
           'tipo'           => $datos->tipo,
           'valores'        => $v,
-          'datoValor'      => $val,
+          'datoValor'      => ( ( $val == 'null' ) ? '' : $val ),
           'obligatoriedad' => $datos->obligatoriedad
         );
 

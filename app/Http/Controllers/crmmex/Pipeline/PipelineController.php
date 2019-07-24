@@ -34,6 +34,7 @@ class PipelineController extends Controller
                 'fechaAlta'         => $indicador->fechaAlta,
                 'fechaModificacion' => $indicador->fechaModificacion,
                 'fechaEliminacion'  => $indicador->fechaEliminacion,
+                'grupoIDidty'       => $indicador->grupoID,
                 'grupoID'           => ( $indicador->grupoID == 0 ) ? 'Todos' : Utils::valorCatalogo( $indicador->grupoID ),
                 'status'            => ( $indicador->status == 1 ? 'Activo' : 'Deshabilitado' ),
                 'opciones'          => ( $indicador->status == 1 ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Edita Indicador" '
