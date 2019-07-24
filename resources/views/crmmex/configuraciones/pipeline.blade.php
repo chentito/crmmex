@@ -68,11 +68,10 @@
                   <div class="col-sm-12 text-center" style="display: none; float: right" id="contenedorEdicionFase">
                     <button type="button" name="actualizaFase" id="actualizaFase" class="btn btn-sm btn-info mt-1"><i class="fa fa-sm fa-edit"></i></button>
                     <button type="button" name="eliminaFase" id="eliminaFase" class="btn btn-sm btn-danger mt-1"><i class="fa fa-sm fa-trash"></i></button>
+                    <button type="button" name="cancelaEdicionFase" id="cancelaEdicionFase" class="btn btn-sm btn-warning mt-1"><i class="fa fa-sm fa-times"></i></button>
                     <input type="hidden" name="nombreFaseOriginal" id="nombreFaseOriginal" value="">
                   </div>
                 </div>
-
-
               </div>
             </div>
           </div>
@@ -91,7 +90,19 @@
                 <input type="number" id="detalleFase_peso" name="detalleFase_peso" placeholder="Peso" class="form-control form-control-sm" value="1">
               </div>
               <div class="col-sm-3 mt-3 text-center">
-                  <button type="button" name="agregaDetalle" id="agregaDetalle" class="btn btn-sm {{$btn}}"><i class="fa fa-sm fa-plus"></i> Agregar</button>
+                <div class="row">
+                  <div class="col-sm-12">
+                      <button type="button" name="agregaDetalle" id="agregaDetalle" class="btn btn-sm {{$btn}}"><i class="fa fa-sm fa-plus"></i> Agregar</button>
+                  </div>
+                  <div class="col-sm-12 text-center" style="display: none; float: right" id="contenedorEdicionDetalle">
+                    <button type="button" name="actualizaDetalle" id="actualizaDetalle" class="btn btn-sm btn-info mt-1"><i class="fa fa-sm fa-edit"></i></button>
+                    <button type="button" name="eliminaDetalle" id="eliminaDetalle" class="btn btn-sm btn-danger mt-1"><i class="fa fa-sm fa-trash"></i></button>
+                    <button type="button" name="cancelaEdicionDetalle" id="cancelaEdicionDetalle" class="btn btn-sm btn-warning mt-1"><i class="fa fa-sm fa-times"></i></button>
+                    <input type="hidden" name="detalleFaseOriginal" id="detalleFaseOriginal" value="">
+                    <input type="hidden" name="detalleFase_pesoOriginal" id="detalleFase_pesoOriginal" value="">
+                    <input type="hidden" name="procesoSistemaADetalleFaseOriginal" id="procesoSistemaADetalleFaseOriginal" value="">
+                  </div>
+                </div>
               </div>
               <div class="col-sm-12 mt-2">
                   <label for="procesoSistemaADetalleFase">Al ejecutar el proceso:</label>
@@ -104,9 +115,11 @@
           </div>
         </div>
         <div class="row mb-1">
-            <div class="col-sm-12 text-center">
-                <button type="button" name="btnAgregaIndicador" id="btnAgregaIndicador" class="btn btn-sm {{$btn}}"><i class="fa fa-sm fa-plus"></i> Agregar indicador</button>
-            </div>
+          <div class="col-sm-12 text-center">
+            <button type="button" name="btnAgregaIndicador" id="btnAgregaIndicador" class="btn btn-sm {{$btn}}">
+              <i class="fa fa-sm fa-plus"></i> <div style="display: inline" id="textoBotonCambiosIndicador"></div>
+            </button>
+          </div>
         </div>
       </form>
     </div>
@@ -123,7 +136,82 @@
   var detalles = [];
   sessionStorage.setItem( 'detalles' , JSON.stringify( detalles ) );
 
-  document.getElementById( 'actualizaFase' ).addEventListener( 'click' , function( e ){
+  if( document.getElementById( 'indicadorID' ) == null ) {
+      document.getElementById( 'textoBotonCambiosIndicador' ).innerHTML = 'Agregar Indicador';
+    } else {
+      document.getElementById( 'textoBotonCambiosIndicador' ).innerHTML = 'Actualizar indicador';
+  }
+
+  document.getElementById( 'nuevoIndicador_detalleFase' ).addEventListener( 'click' , function(){
+      var detalle = this.value;
+      var detalles = JSON.parse( sessionStorage.getItem( 'detalles' ) );
+
+      detalles.forEach( function( e , i ){
+          if( e.valor.detalle == detalle ) {
+                document.getElementById( 'detalleFase' ).value                        = e.valor.detalle;
+                document.getElementById( 'detalleFase_peso' ).value                   = e.valor.peso;
+                document.getElementById( 'procesoSistemaADetalleFase' ).value         = e.valor.proceso;
+                document.getElementById( 'detalleFaseOriginal' ).value                = e.valor.detalle;
+                document.getElementById( 'detalleFase_pesoOriginal' ).value           = e.valor.peso;
+                document.getElementById( 'procesoSistemaADetalleFaseOriginal' ).value = e.valor.proceso;
+
+                document.getElementById( 'contenedorEdicionDetalle' ).style.display = 'table';
+                document.getElementById( 'agregaDetalle' ).disabled                 = true;
+
+          }
+      });
+  });
+
+  document.getElementById( 'actualizaDetalle' ).addEventListener( 'click' , function(){
+      var detalle         = document.getElementById( 'detalleFase' ).value;
+      var peso            = document.getElementById( 'detalleFase_peso' ).value;
+      var proceso         = document.getElementById( 'procesoSistemaADetalleFase' ).value;
+      var detalleOriginal = document.getElementById( 'detalleFaseOriginal' ).value;
+      var pesoOriginal    = document.getElementById( 'detalleFase_pesoOriginal' ).value;
+      var procesoOriginal = document.getElementById( 'procesoSistemaADetalleFaseOriginal' ).value;
+      var fase            = document.getElementById( 'nuevoIndicador_fases' ).value;
+
+      if( detalle != detalleOriginal || peso != pesoOriginal || proceso != procesoOriginal ) {
+          actualizaArrayDetalle( detalleOriginal , detalle , peso , proceso );
+          llenaDetalleFase( fase );
+      } else {
+          aviso( 'El detalle no ha sido actualizado' , false );
+      }
+
+      document.getElementById( 'detalleFase' ).value                      = '';
+      document.getElementById( 'contenedorEdicionDetalle' ).style.display = 'none';
+      document.getElementById( 'agregaDetalle' ).disabled                 = false;
+  });
+
+  document.getElementById( 'eliminaDetalle' ).addEventListener( 'click' , function( e ) {
+      e.preventDefault();
+      var detalle = document.getElementById( 'detalleFase' ).value;
+      var fase    = document.getElementById( 'nuevoIndicador_fases' ).value;
+      eliminaArraySesionDetalle( detalle );
+      llenaDetalleFase( fase );
+      document.getElementById( 'detalleFase' ).value                        = '';
+      document.getElementById( 'detalleFaseOriginal' ).value                = '';
+      document.getElementById( 'procesoSistemaADetalleFase' ).value         = '';
+      document.getElementById( 'detalleFaseOriginal' ).value                = '';
+      document.getElementById( 'detalleFase_pesoOriginal' ).value           = '';
+      document.getElementById( 'procesoSistemaADetalleFaseOriginal' ).value = '';
+      document.getElementById( 'contenedorEdicionDetalle' ).style.display   = 'none';
+      document.getElementById( 'agregaDetalle' ).disabled                   = false;
+  });
+
+  document.getElementById( 'cancelaEdicionDetalle' ).addEventListener( 'click' , function( e ) {
+      e.preventDefault();
+      document.getElementById( 'detalleFase' ).value                        = '';
+      document.getElementById( 'detalleFase_peso' ).value                   = '1';
+      document.getElementById( 'detalleFaseOriginal' ).value                = '1';
+      document.getElementById( 'detalleFase_pesoOriginal' ).value           = '';
+      document.getElementById( 'procesoSistemaADetalleFaseOriginal' ).value = '';
+      document.getElementById( 'contenedorEdicionDetalle' ).style.display   = 'none';
+      document.getElementById( 'agregaDetalle' ).disabled                   = false;
+      aviso( 'Edición cancelada' );
+  });
+
+  document.getElementById( 'actualizaFase' ).addEventListener( 'click' , function( e ) {
       e.preventDefault();
       var nuevo = document.getElementById( 'nombreFase' ).value;
       var original = document.getElementById( 'nombreFaseOriginal' ).value;
@@ -150,6 +238,16 @@
       document.getElementById( 'contenedorEdicionFase' ).style.display  = 'none';
       document.getElementById( 'nuevoIndicador_detalleFase' ).innerHTML = '';
       document.getElementById( 'agregaFase' ).disabled                  = false;
+  });
+
+  document.getElementById( 'cancelaEdicionFase' ).addEventListener( 'click' , function( e ){
+      e.preventDefault();
+      document.getElementById( 'nombreFase' ).value                     = '';
+      document.getElementById( 'nombreFaseOriginal' ).value             = '';
+      document.getElementById( 'contenedorEdicionFase' ).style.display  = 'none';
+      document.getElementById( 'nuevoIndicador_detalleFase' ).innerHTML = '';
+      document.getElementById( 'agregaFase' ).disabled                  = false;
+      aviso( 'Edición cancelada' );
   });
 
   document.getElementById( 'descripcionProcesosSistema_btnGuarda' ).addEventListener( 'click' , function( e ){
@@ -210,6 +308,7 @@
           document.getElementById( 'nombreFase' ).value = '';
           var nueva = { fase:fase , idty:'0' };
           guardaArraySesion( 'fases' , nueva );
+          aviso( 'Fase agregada correctamente' );
       }
   });
 
@@ -254,14 +353,30 @@
       var detalles = JSON.parse( sessionStorage.getItem( 'detalles' ) );
 
       fases.forEach( function ( elemento ) {
-          elemento.valor.fase = ( elemento.valor.fase == valorOriginal ) ? valorNuevo : elemento.valor.fase
+          elemento.valor.fase = ( elemento.valor.fase == valorOriginal ) ? valorNuevo : elemento.valor.fase;
       });
 
       detalles.forEach( function ( elemento ) {
-          elemento.valor.fase = ( elemento.valor.fase == valorOriginal ) ? valorNuevo : elemento.valor.fase
+          elemento.valor.fase = ( elemento.valor.fase == valorOriginal ) ? valorNuevo : elemento.valor.fase;
       });
 
+      aviso( 'Fase actualizada correctamente' );
       sessionStorage.setItem( 'fases'    , JSON.stringify( fases ) );
+      sessionStorage.setItem( 'detalles' , JSON.stringify( detalles ) );
+  }
+
+  function actualizaArrayDetalle( detalleOld, detalle, peso, proceso ) {
+      var detalles = JSON.parse( sessionStorage.getItem( 'detalles' ) );
+
+      detalles.forEach( function( elemento ){
+          if( elemento.valor.detalle == detalleOld ) {
+            elemento.valor.detalle = detalle;
+            elemento.valor.peso    = peso;
+            elemento.valor.proceso = proceso;
+          }
+      });
+
+      aviso( 'Detalle actualizado correctamente' );
       sessionStorage.setItem( 'detalles' , JSON.stringify( detalles ) );
   }
 
@@ -275,6 +390,15 @@
         detalles     = detalles.filter( elemento => elemento.valor.fase != valor );
         sessionStorage.setItem( 'detalles' , JSON.stringify( detalles ) );
       }
+
+      aviso( ( ( sesion == 'fases' ) ? 'Fase eliminada' : 'Detalle eliminado' ) + ' correctamente' );
+  }
+
+  function eliminaArraySesionDetalle( detalle ) {
+      var detalles = JSON.parse( sessionStorage.getItem( 'detalles' ) );
+      detalles = detalles.filter( elemento => elemento.valor.detalle != detalle );
+      sessionStorage.setItem( 'detalles' , JSON.stringify( detalles ) );
+      aviso( 'Detalle eliminado correctamente' );
   }
 
   function grupoPorductos() {

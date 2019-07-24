@@ -8,6 +8,7 @@
 namespace App\Http\Controllers\crmmex\Pipeline;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 
@@ -37,6 +38,8 @@ class PipelineController extends Controller
                 'status'            => ( $indicador->status == 1 ? 'Activo' : 'Inactivo' ),
                 'opciones'          => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Edita Indicador" '
                                      . 'onclick="contenidos(\'configuraciones_edicionPipeline\',\''.$indicador->id.'\')" class="ml-2"><i class="fa fa-edit fa-sm"></i></a>'
+                                     . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Elimina Indicador" '
+                                     . 'onclick="contenidos(\'configuraciones_eliminaIndicador\',\''.$indicador->id.'\')" class="ml-2"><i class="fa fa-trash fa-sm"></i></a>'
             );
         }
 
@@ -93,14 +96,14 @@ class PipelineController extends Controller
             // Fases
             foreach ( $fases AS $fase ) {
                 if( $fase[ 'valor' ][ 'idty' ] == 0 ) {
-                    $f = new Fase();
+                    $f = new Fases();
                     $f->indicadorID = $request->indicadorID;
                     $f->nombreFase  = $fase[ 'valor' ][ 'fase' ];
                     $f->status      = 1;
                     $f->save();
                     $indices[]      = $f->id;
                   } else {
-                    $f = Fase::find( $fase[ 'valor' ][ 'idty' ] );
+                    $f = Fases::find( $fase[ 'valor' ][ 'idty' ] );
                     $f->indicadorID = $request->indicadorID;
                     $f->nombreFase  = $fase[ 'valor' ][ 'fase' ];
                     $f->save();
@@ -111,7 +114,7 @@ class PipelineController extends Controller
             DB::table( 'crmmex_pipeline_fases' )
               ->where( 'indicadorID' , $request->indicadorID )
               ->whereNotIn( 'id' , $indices )
-              ->update( 'status' , 0 );
+              ->update( [ 'status' => 0 ] );
 
             // Detalles
             foreach ( $detalles AS $detalle ) {
@@ -140,7 +143,7 @@ class PipelineController extends Controller
             DB::table( 'crmmex_pipeline_detalleindicador' )
               ->where( 'indicadorID' , $request->indicadorID )
               ->whereNotIn( 'id' , $indicesD )
-              ->update( 'status' , 0 );
+              ->update( [ 'status' => 0 ] );
         }
 
     }
@@ -201,6 +204,14 @@ class PipelineController extends Controller
             $update->descripcionProceso = $request->$fieldName;
             $update->save();
         }
+    }
+
+    // Metodo para eliminar un indicador seleccionado
+    public function eliminaIndicador( $indicadorID ) {
+        $indicador = Indicadores::find( $indicadorID );
+        $indicador->fechaEliminacion = date( 'Y-m-d' );
+        $indicador->status = 0;
+        $indicador->save();
     }
 
 }

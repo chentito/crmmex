@@ -88,7 +88,8 @@ class AnalisisPipelineController extends Controller
                     $pagos = DB::table( 'crmmex_ventas_pagos' )
                                ->select( DB::raw( "COUNT(*) AS total" ) )
                                ->leftJoin( 'crmmex_ventas_propuestacomercial' , 'crmmex_ventas_pagos.propuestaID' , '=' , 'crmmex_ventas_propuestacomercial.id' )
-                               ->whereRaw( DB::raw( "crmmex_ventas_propuestacomercial.clienteID = '".$clienteID."' AND crmmex_ventas_propuestacomercial.status=1" ) );
+                               ->whereRaw( DB::raw( "crmmex_ventas_propuestacomercial.clienteID = '".$clienteID."' AND crmmex_ventas_propuestacomercial.status=1" ) )
+                               ->first();
                     return ( $pagos->total > 0 ) ? true : false ;
                     break;
           case '7':return ( Cliente::where( 'id' , $clienteID )->where( 'tipo' , 1 )->where( 'status' , 1 )->count() > 0 ) ? true : false ; break;
