@@ -25,7 +25,7 @@ class PipelineController extends Controller
     // Metodo que obtiene el listado de indicadores disponibles
     public function listadoIndicadores() {
         $datos = array();
-        $indicadores = Indicadores::where( 'status' , 1 )->get();
+        $indicadores = Indicadores::whereIn( 'status' , [ 1 , 2 ] )->get();
 
         foreach ( $indicadores AS $indicador ) {
             $datos[ 'indicadores' ][] = array (
@@ -35,11 +35,14 @@ class PipelineController extends Controller
                 'fechaModificacion' => $indicador->fechaModificacion,
                 'fechaEliminacion'  => $indicador->fechaEliminacion,
                 'grupoID'           => ( $indicador->grupoID == 0 ) ? 'Todos' : Utils::valorCatalogo( $indicador->grupoID ),
-                'status'            => ( $indicador->status == 1 ? 'Activo' : 'Inactivo' ),
-                'opciones'          => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Edita Indicador" '
+                'status'            => ( $indicador->status == 1 ? 'Activo' : 'Deshabilitado' ),
+                'opciones'          => ( $indicador->status == 1 ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Edita Indicador" '
                                      . 'onclick="contenidos(\'configuraciones_edicionPipeline\',\''.$indicador->id.'\')" class="ml-2"><i class="fa fa-edit fa-sm"></i></a>'
                                      . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Elimina Indicador" '
-                                     . 'onclick="contenidos(\'configuraciones_eliminaIndicador\',\''.$indicador->id.'\')" class="ml-2"><i class="fa fa-trash fa-sm"></i></a>'
+                                     . 'onclick="contenidos(\'configuraciones_eliminaIndicador\',\''.$indicador->id.'\')" class="ml-2"><i class="fa fa-trash fa-sm"></i></a>' :
+                                      '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Habilitar Indicador" '
+                                     . 'onclick="habilitaIndicador(\''.$indicador->id.'\')" class="ml-2"><i class="fa fa-check fa-sm"></i></a>' )
+
             );
         }
 
@@ -211,6 +214,22 @@ class PipelineController extends Controller
         $indicador = Indicadores::find( $indicadorID );
         $indicador->fechaEliminacion = date( 'Y-m-d' );
         $indicador->status = 0;
+        $indicador->save();
+    }
+
+    // Metodo para eliminar un indicador seleccionado
+    public function deshabilitaIndicador( $indicadorID ) {
+        $indicador = Indicadores::find( $indicadorID );
+        $indicador->fechaEliminacion = date( 'Y-m-d' );
+        $indicador->status = 2;
+        $indicador->save();
+    }
+
+    // Metodo para eliminar un indicador seleccionado
+    public function habilitaIndicador( $indicadorID ) {
+        $indicador = Indicadores::find( $indicadorID );
+        $indicador->fechaEliminacion = date( 'Y-m-d' );
+        $indicador->status = 1;
         $indicador->save();
     }
 

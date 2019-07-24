@@ -154,10 +154,8 @@
                 document.getElementById( 'detalleFaseOriginal' ).value                = e.valor.detalle;
                 document.getElementById( 'detalleFase_pesoOriginal' ).value           = e.valor.peso;
                 document.getElementById( 'procesoSistemaADetalleFaseOriginal' ).value = e.valor.proceso;
-
-                document.getElementById( 'contenedorEdicionDetalle' ).style.display = 'table';
-                document.getElementById( 'agregaDetalle' ).disabled                 = true;
-
+                document.getElementById( 'contenedorEdicionDetalle' ).style.display   = 'table';
+                document.getElementById( 'agregaDetalle' ).disabled                   = true;
           }
       });
   });
@@ -270,8 +268,15 @@
         datos.append( 'indicadorID' , document.getElementById( 'indicadorID' ).value );
       }
 
+      var fases    = JSON.parse( sessionStorage.getItem( 'fases' ) );
+      var detalles = JSON.parse( sessionStorage.getItem( 'detalles' ) );
+
       if( document.getElementById( 'nuevoIndicdor_nombre' ).value == '' ) {
           aviso( 'No ha proporcionado un nombre para el indicador' , false );
+      } else if ( fases.length == 0 ) {
+          aviso( 'No ha agregado fases al indicador' , false );
+      } else if ( detalles.length == 0 ) {
+          aviso( 'Hay fases que no cuentan con detalles para ejecutar el Pipeline' , false );
       } else {
           var movimiento = ( document.getElementById( 'indicadorID' ) != null ) ? 'actualizaIndicador' : 'guardaIndicador';
           var textoMov   = ( document.getElementById( 'indicadorID' ) != null ) ? 'actualizado' : 'agregado';
@@ -326,9 +331,8 @@
             document.getElementById( 'nuevoIndicador_detalleFase' ).add( new Option( detalle + ' (' + peso + ' %)' , detalle , false , false ) );
             var nuevo = {fase:fase, detalle:detalle, peso:peso, proceso:proceso , idty: '0'};
             guardaArraySesion( 'detalles' , nuevo );
-
             document.getElementById( 'detalleFase_peso' ).value = '1';
-            document.getElementById( 'detalleFase' ).value = '';
+            document.getElementById( 'detalleFase' ).value      = '';
       }
   });
 
@@ -368,7 +372,7 @@
   function actualizaArrayDetalle( detalleOld, detalle, peso, proceso ) {
       var detalles = JSON.parse( sessionStorage.getItem( 'detalles' ) );
 
-      detalles.forEach( function( elemento ){
+      detalles.forEach( function( elemento ) {
           if( elemento.valor.detalle == detalleOld ) {
             elemento.valor.detalle = detalle;
             elemento.valor.peso    = peso;
@@ -433,10 +437,20 @@
   function recargaComboFases() {
       document.getElementById( 'nuevoIndicador_fases' ).innerHTML = '';
       var arreglo = JSON.parse( sessionStorage.getItem( 'fases' ) );
-
       arreglo.forEach( function( e , i ){
           document.getElementById( 'nuevoIndicador_fases' ).add( new Option( e.valor.fase, e.valor.fase , false , false ) );
       });
+  }
+
+  function habilitaIndicador( indicadorID ) {
+      axios.post( '/api/habilitaIndicador/' + indicadorID , {} , { headers:{ 'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
+           .then( response => {
+              contenidos( 'configuraciones_pipeline' );
+              aviso( 'Indicador habilitado correctamente' );
+           })
+           .catch( err => {
+              console.log( err );
+           });
   }
 
 </script>

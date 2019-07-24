@@ -6,7 +6,8 @@
     </div>
     <div class="col-sm-12 mt-2 text-center">
         <button type="button" name="eliminaIndicadorRegresar" id="eliminaIndicadorRegresar" class="btn btn-sm {{$btn}}"><i class="fa fa-sm fa-undo"></i> Regresar</button>
-        <button type="button" name="eliminaIndicadorElimina" id="eliminaIndicadorElimina" class="btn btn-sm {{$btn}}"><i class="fa fa-sm fa-undo"></i> Eliminar</button>
+        <button type="button" name="eliminaIndicadorDeshabilita" id="eliminaIndicadorDeshabilita" class="btn btn-sm {{$btn}}"><i class="fa fa-sm fa-trash"></i> Deshabilitar</button>
+        <button type="button" name="eliminaIndicadorElimina" id="eliminaIndicadorElimina" class="btn btn-sm {{$btn}}"><i class="fa fa-sm fa-trash"></i> Eliminar</button>
     </div>
 </div>
 
@@ -14,6 +15,18 @@
     document.getElementById( 'eliminaIndicadorRegresar' ).addEventListener( 'click' , function( e ) {
         e.preventDefault();
         contenidos( 'configuraciones_pipeline' );
+    });
+
+    document.getElementById( 'eliminaIndicadorDeshabilita' ).addEventListener( 'click' , function( e ) {
+        e.preventDefault();
+        axios.post( '/api/deshabilitaIndicador/' + document.getElementById( 'indicadorID' ).value , {} , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
+             .then( response => {
+                aviso( 'Indicador deshabilitado correctamente' );
+                contenidos( 'configuraciones_pipeline' );
+             })
+             .catch( err => {
+                console.log( err );
+             });
     });
 
     document.getElementById( 'eliminaIndicadorElimina' ).addEventListener( 'click' , function( e ) {

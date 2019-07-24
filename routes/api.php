@@ -206,13 +206,15 @@ Route::middleware( 'auth:api' )->post( '/imagenPropietario'         , 'crmmex\Si
 
 
 /************************************ Pipeline ************************************/
-Route::middleware( 'auth:api' )->get ( '/listadoIndicadores'             , 'crmmex\Pipeline\PipelineController@listadoIndicadores' );
-Route::middleware( 'auth:api' )->get ( '/detalleIndicador/{indicadorID}' , 'crmmex\Pipeline\PipelineController@detalleIndicador' );
-Route::middleware( 'auth:api' )->post( '/guardaIndicador'                , 'crmmex\Pipeline\PipelineController@altaIndicador' );
-Route::middleware( 'auth:api' )->post( '/eliminaIndicador/{indicadorID}' , 'crmmex\Pipeline\PipelineController@eliminaIndicador' );
-Route::middleware( 'auth:api' )->post( '/actualizaIndicador'             , 'crmmex\Pipeline\PipelineController@actualizaIndicador' );
-Route::middleware( 'auth:api' )->get ( '/obtieneProcesosSistema'         , 'crmmex\Pipeline\PipelineController@obtieneProcesosSistema' );
-Route::middleware( 'auth:api' )->post( '/actualizaDescripcionProcesos'   , 'crmmex\Pipeline\PipelineController@actualizaDescripcionProcesos' );
+Route::middleware( 'auth:api' )->get ( '/listadoIndicadores'                 , 'crmmex\Pipeline\PipelineController@listadoIndicadores' );
+Route::middleware( 'auth:api' )->get ( '/detalleIndicador/{indicadorID}'     , 'crmmex\Pipeline\PipelineController@detalleIndicador' );
+Route::middleware( 'auth:api' )->post( '/guardaIndicador'                    , 'crmmex\Pipeline\PipelineController@altaIndicador' );
+Route::middleware( 'auth:api' )->post( '/eliminaIndicador/{indicadorID}'     , 'crmmex\Pipeline\PipelineController@eliminaIndicador' );
+Route::middleware( 'auth:api' )->post( '/deshabilitaIndicador/{indicadorID}' , 'crmmex\Pipeline\PipelineController@deshabilitaIndicador' );
+Route::middleware( 'auth:api' )->post( '/habilitaIndicador/{indicadorID}'    , 'crmmex\Pipeline\PipelineController@habilitaIndicador' );
+Route::middleware( 'auth:api' )->post( '/actualizaIndicador'                 , 'crmmex\Pipeline\PipelineController@actualizaIndicador' );
+Route::middleware( 'auth:api' )->get ( '/obtieneProcesosSistema'             , 'crmmex\Pipeline\PipelineController@obtieneProcesosSistema' );
+Route::middleware( 'auth:api' )->post( '/actualizaDescripcionProcesos'       , 'crmmex\Pipeline\PipelineController@actualizaDescripcionProcesos' );
 
 
 /************************************ Pruebas API consumidas desdee Angular ************************************/
