@@ -146,7 +146,7 @@ function generaDataGrid( id , filtro = '' ) {
             visibilidad = response.data.visibilidad.split( ',' );
 
             var titulo = document.getElementById( id ).createCaption();
-            titulo.innerHTML = '<div class="row"><div class="col-sm-12"><h5>'+response.data.titulo+'</h5></div></div>';
+            titulo.innerHTML = '<div class="row"><div class="col-sm-12"><h6><i class="fa fa-sm fa-th-list"></i> '+response.data.titulo+'</h6></div></div>';
 
             var header   = document.getElementById( id ).createTHead();
             var row      = header.insertRow(0);
@@ -203,6 +203,7 @@ function generaDataGrid( id , filtro = '' ) {
                 },
                 responsive: true,
                 columns: columnas,
+                stateSave:  true,
                 "language": {
                     "decimal":        "",
                     "emptyTable":     "No se encontraron datos",
@@ -246,7 +247,8 @@ function generaDataGrid( id , filtro = '' ) {
                         axios.post( url , datos )
                              .then( request => {
                                aviso( 'Listado actualizado correctamente' );
-                               seccion = document.getElementById(  ( document.getElementById( 'confGrid_seccion' ).value == "" ) ? 'nombreSeccionRecargar' : 'confGrid_seccion' ).value;
+                               seccion = document.getElementById(  ( document.getElementById( 'confGrid_seccion' ).value == "" )
+                                      ? 'nombreSeccionRecargar' : 'confGrid_seccion' ).value;
                                contenidos( seccion , f.replace( '/' , '' ) );
                              })
                              .catch( err => {
