@@ -86,15 +86,18 @@ class CamposAdicionalesController extends Controller
     // Genera el campo adicional en html
     public function campoAdicionalHTML( $campoAdicionalID , $val = '' ) {
         $datos   = CamposAdicionales::find( $campoAdicionalID );
-        $valores = explode( ';' , $datos->valores );
+        //$valores = explode( ';' , $datos->valores );
+        $valores = explode( ',' , $datos->valores );
         $v       = array();
 
         if( $datos->tipo == '3' ) {
           foreach( $valores AS $valor ) {
-            $elementos = explode( ',' , $valor );
+            //$elementos = explode( ',' , $valor );
             $v[] = array(
-              'valor' => $elementos[ 0 ],
-              'texto' => ( isset( $elementos[ 1 ] ) ? $elementos[ 1 ] : '' )
+              //'valor' => $elementos[ 0 ],
+              //'texto' => ( isset( $elementos[ 1 ] ) ? $elementos[ 1 ] : '' )
+              'valor' => $valor,
+              'texto' => $valor
             );
           }
         }

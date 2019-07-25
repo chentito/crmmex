@@ -180,7 +180,7 @@
 
              var razonSocial = response.data.cliente;
              var direccion   = response.data.direccion;
-             var titulo = "Cliente # "+razonSocial[ 'id' ] + " " + razonSocial[ 'razonSocial' ];
+             var titulo = '<a style="cursor:pointer" onclick="javascript:contenidos(\'clientes_edicion\',\'' + razonSocial[ 'id' ] + '\')">Cliente # ' + razonSocial[ 'id' ] + ' ' + razonSocial[ 'razonSocial' ] + '</a>';
              document.getElementById( 'tituloCliente' ).innerHTML = titulo;
               // Razon Social
               document.getElementById( 'detalleCliente_razonSocial' ).innerHTML       = razonSocial[ 'razonSocial' ];
@@ -188,7 +188,7 @@
               document.getElementById( 'detalleCliente_ejecutivo' ).innerHTML         = razonSocial[ 'ejecutivo' ];
               document.getElementById( 'detalleCliente_fechaAlta' ).innerHTML         = razonSocial[ 'fechaAlta' ];
               document.getElementById( 'detalleCliente_fechaModificacion' ).innerHTML = razonSocial[ 'fechaModificacion' ];
-              document.getElementById( 'detalleCliente_tipo' ).innerHTML              = razonSocial[ 'tipo' ];
+              document.getElementById( 'detalleCliente_tipo' ).innerHTML              = ( razonSocial[ 'tipo' ] == 1 ) ? 'Cliente' : 'Prospecto';
               document.getElementById( 'detalleCliente_observaciones' ).innerHTML     = razonSocial[ 'observaciones' ];
               // contactos
               var contactos = '<ul class="list-group">';

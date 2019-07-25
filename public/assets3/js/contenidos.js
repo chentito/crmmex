@@ -290,7 +290,7 @@ function cargaCamposAdicionales( seccion , valores=[] ) {
     document.getElementById( 'camposAdicionalesContainer' ).innerHTML = '';
     var container = document.getElementById( 'camposAdicionalesContainer' );
     var url       = '/api/listadoCamposAdicionales/'+seccion;
-    var config    ={
+    var config    = {
       headers: {
         'Accept' : 'application/json',
         'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' )
