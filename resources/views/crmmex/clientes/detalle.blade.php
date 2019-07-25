@@ -20,7 +20,7 @@
                     <td>RFC</td>
                     <td><span id="detalleCliente_rfc"></span></td>
                   </tr>
-                  <tr>
+                  <!--tr>
                     <td>Giro</td>
                     <td><span id="detalleCliente_giro"></span></td>
                   </tr>
@@ -31,7 +31,7 @@
                   <tr>
                     <td>Subcategoría</td>
                     <td><span id="detalleCliente_subcategoria"></span></td>
-                  </tr>
+                  </tr-->
                   <tr>
                     <td>Ejecutivo</td>
                     <td><span id="detalleCliente_ejecutivo"></span></td>
@@ -52,10 +52,10 @@
                     <td>Observaciones</td>
                     <td><span id="detalleCliente_observaciones"></span></td>
                   </tr>
-                  <tr>
+                  <!--tr>
                     <td>Grupo</td>
                     <td><span id="detalleCliente_grupo"></span></td>
-                  </tr>
+                  </tr-->
                 </table>
               </div>
           </div>
@@ -69,16 +69,11 @@
                 </div>
             </div>
         </div>
-
       </div>
-
-
     </div>
 
     <div class="col-sm-6 mt-3">
-
       <div class="row">
-
         <div class="col-sm-12">
             <div class="card card-sm">
                 <div class="card-header">Contactos</div>
@@ -141,9 +136,7 @@
                 </div>
             </div>
         </div>
-
       </div>
-
     </div>
 
     <div class="col-sm-6 mt-3">
@@ -192,15 +185,11 @@
               // Razon Social
               document.getElementById( 'detalleCliente_razonSocial' ).innerHTML       = razonSocial[ 'razonSocial' ];
               document.getElementById( 'detalleCliente_rfc' ).innerHTML               = razonSocial[ 'rfc' ];
-              document.getElementById( 'detalleCliente_giro' ).innerHTML              = razonSocial[ 'giro' ];
-              document.getElementById( 'detalleCliente_categoria' ).innerHTML         = razonSocial[ 'categoria' ];
-              document.getElementById( 'detalleCliente_subcategoria' ).innerHTML      = razonSocial[ 'subcategoria' ];
               document.getElementById( 'detalleCliente_ejecutivo' ).innerHTML         = razonSocial[ 'ejecutivo' ];
               document.getElementById( 'detalleCliente_fechaAlta' ).innerHTML         = razonSocial[ 'fechaAlta' ];
               document.getElementById( 'detalleCliente_fechaModificacion' ).innerHTML = razonSocial[ 'fechaModificacion' ];
               document.getElementById( 'detalleCliente_tipo' ).innerHTML              = razonSocial[ 'tipo' ];
               document.getElementById( 'detalleCliente_observaciones' ).innerHTML     = razonSocial[ 'observaciones' ];
-              document.getElementById( 'detalleCliente_grupo' ).innerHTML             = razonSocial[ 'grupo' ];
               // contactos
               var contactos = '<ul class="list-group">';
               response.data.contactos.forEach( function( e , p ){
@@ -209,7 +198,6 @@
                   contactos += ' Tel: <a href="tel:'+e['celular']+'">' +e['celular']+'</a> / <a href="tel:'+e['telefono']+'">'+e['telefono']+'</a>';
                   contactos += '<span class="float-right">'
                   contactos += '<button class="btn btn-sm btn-info ml-1" onclick="contenidos(\'clientes_edicion\',\''+clienteID+'\')"><i class="fa fa-edit fa-sm"></i></button>';
-                  //contactos += '<button class="btn btn-sm btn-info ml-1"><i class="fa fa-user fa-sm"></i></button>';
                   contactos += '</span>';
                   contactos += '</li>';
               });
@@ -228,41 +216,46 @@
               document.getElementById( 'detalleCliente_fechaAltaDireccion' ).innerHTML         = direccion[ 'fechaAlta' ];
               document.getElementById( 'detalleCliente_fechaModificacionDireccion' ).innerHTML = direccion[ 'fechaModificacion' ];
               // seguimientos
-              var seguimientos  = '<ul class="list-group">';
-              response.data.seguimientos.forEach( function( e , p ){
-                seguimientos += '<li class="list-group-item">';
-                seguimientos += '['+e['fechaAlta']+'] ' + e['nombreActividad'] + ' / ' + e['estado'];
-                seguimientos += '<br>' + ' Contacto '+e[ 'contactoID' ];
-                seguimientos += '<span class="float-right">'
-                seguimientos += '<button class="btn btn-sm btn-info ml-1" onclick="contenidos(\'clientes_editaseguimiento\',\''+e['id']+'\')"><i class="fa fa-search fa-sm"></i></button>';
-                seguimientos += '</span>';
-                seguimientos += '</li>';
-              });
-              seguimientos += '</ul>';
-              document.getElementById( 'contenedorSeguimientos' ).innerHTML = seguimientos;
+              if( Symbol.iterator in Object( response.data.seguimientos ) ) {
+                var seguimientos  = '<ul class="list-group">';
+                response.data.seguimientos.forEach( function( e , p ){
+                  seguimientos += '<li class="list-group-item">';
+                  seguimientos += '['+e['fechaAlta']+'] ' + e['nombreActividad'] + ' / ' + e['estado'];
+                  seguimientos += '<br>' + ' Contacto '+e[ 'contactoID' ];
+                  seguimientos += '<span class="float-right">'
+                  seguimientos += '<button class="btn btn-sm btn-info ml-1" onclick="contenidos(\'clientes_editaseguimiento\',\''+e['id']+'\')"><i class="fa fa-search fa-sm"></i></button>';
+                  seguimientos += '</span>';
+                  seguimientos += '</li>';
+                });
+                seguimientos += '</ul>';
+                document.getElementById( 'contenedorSeguimientos' ).innerHTML = seguimientos;
+              }
               // Propuestas
-              var propuestas = '<ul class="list-group">';
-              response.data.propuestas.forEach( function( e , p ){
-                  propuestas += '<li class="list-group-item">';
-                  propuestas += '[Vigencia '+ e[ 'fechaVigencia' ] +'] ' + e[ 'contactoID' ];
-                  propuestas += '<br>' + 'ID ' + e[ 'idty' ];
-                  propuestas += '<span class="float-right">';
-                  propuestas += '<button class="btn btn-sm btn-info ml-1" onclick="contenidos(\'clientes_editapropuesta\',\''+e['id']+'\')"><i class="fa fa-edit fa-sm"></i></button>';
-                  propuestas += '</span>';
-                  propuestas += '</li>';
-              });
-              propuestas += '</ul>';
-              document.getElementById( 'contenedorPropuestas' ).innerHTML = propuestas;
+              if( Symbol.iterator in Object( response.data.propuestas ) ) {
+                var propuestas = '<ul class="list-group">';
+                response.data.propuestas.forEach( function( e , p ){
+                    propuestas += '<li class="list-group-item">';
+                    propuestas += '[Vigencia '+ e[ 'fechaVigencia' ] +'] ' + e[ 'contactoID' ];
+                    propuestas += '<br>' + 'ID ' + e[ 'idty' ];
+                    propuestas += '<span class="float-right">';
+                    propuestas += '<button class="btn btn-sm btn-info ml-1" onclick="contenidos(\'clientes_editapropuesta\',\''+e['id']+'\')"><i class="fa fa-edit fa-sm"></i></button>';
+                    propuestas += '</span>';
+                    propuestas += '</li>';
+                });
+                propuestas += '</ul>';
+                document.getElementById( 'contenedorPropuestas' ).innerHTML = propuestas;
+              }
               // adicionales
-              var adicionales = '<ul class="list-group">';
-              response.data.adicionalesEdicion.forEach( function( k , v ){
-                adicionales += '<li class="list-group-item">';
-                adicionales += k[ 'id' ] + ": " + k[ 'valor' ];
-                adicionales += '</li>';
-              });
-              adicionales += '</ul>';
-              document.getElementById( 'contenedorAdicionales' ).innerHTML = adicionales;
-
+              if( Symbol.iterator in Object( response.data.adicionalesEdicion ) ) {
+                var adicionales = '<ul class="list-group">';
+                response.data.adicionalesEdicion.forEach( function( k , v ){
+                  adicionales += '<li class="list-group-item">';
+                  adicionales += k[ 'id' ] + ": " + k[ 'valor' ];
+                  adicionales += '</li>';
+                });
+                adicionales += '</ul>';
+                document.getElementById( 'contenedorAdicionales' ).innerHTML = adicionales;
+              }
            })
            .catch( err => {
              console.log( err );

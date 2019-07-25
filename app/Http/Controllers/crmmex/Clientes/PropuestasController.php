@@ -92,8 +92,7 @@ class PropuestasController extends Controller
           $propuesta->fechaVigencia   = $request->propuesta_fechaVigencia;
           $propuesta->observaciones   = $request->propuesta_observaciones;
           $propuesta->requerimientos  = $request->propuesta_requerimientos;
-          $propuesta->categoria       = $request->catalogo_18;
-          //$propuesta->formaPago      = $request->catalogo_15;
+          $propuesta->categoria       = $request->catalogo_12;
           $propuesta->monto           = $request->propuesta_monto;
           $propuesta->total           = $request->propuesta_total;
           $propuesta->descuento       = $request->propuesta_descuento;
@@ -144,8 +143,7 @@ class PropuestasController extends Controller
           $propuesta->contactoID      = $request->propuesta_contactos;
           $propuesta->observaciones   = $request->propuesta_observaciones;
           $propuesta->requerimientos  = $request->propuesta_requerimientos;
-          $propuesta->categoria       = $request->catalogo_18;
-          //$propuesta->formaPago      = $request->catalogo_15;
+          $propuesta->categoria       = $request->catalogo_12;
           $propuesta->monto           = $request->propuesta_monto;
           $propuesta->total           = $request->propuesta_total;
           $propuesta->descuento       = $request->propuesta_descuento;

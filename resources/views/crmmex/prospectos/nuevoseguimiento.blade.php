@@ -13,10 +13,11 @@
           <input type="hidden" name="clienteID" id="clienteID" value="{{$param}}">
           <input type="hidden" name="seguimiento_idty" id="seguimiento_idty" value="">
           <div class="row">
-              <div class="col-sm-3">
+              <!--div class="col-sm-3">
                   <label for="prospectos_nuevoseguimiento_titulo">Título</label>
                   <input class="form-control form-control-sm" id="prospectos_nuevoseguimiento_titulo" name="prospectos_nuevoseguimiento_titulo">
-              </div>
+              </div-->
+              <input type="hidden" id="prospectos_nuevoseguimiento_titulo" name="prospectos_nuevoseguimiento_titulo">
               <div class="col-sm-3">
                   <label for="prospectos_nuevoseguimiento_fecha">Fecha Ejecución</label>
                   <input class="form-control form-control-sm" id="prospectos_nuevoseguimiento_fecha" name="prospectos_nuevoseguimiento_fecha" readonly>
@@ -126,9 +127,7 @@
           var ruta  = '/api/actualizaSeguimiento'; // Se actualiza
       }
 
-      if( document.getElementById( 'prospectos_nuevoseguimiento_titulo' ).value == '' ) {
-          aviso( 'No ha proporcionado un titulo de seguimiento' , false );
-      } else if( document.getElementById( 'prospectos_nuevoseguimiento_fecha' ).value == '' ) {
+      if( document.getElementById( 'prospectos_nuevoseguimiento_fecha' ).value == '' ) {
           aviso( 'No ha proporcionado una fecha de ejecución' , false );
       } else {
         axios.post( ruta , datos , config )

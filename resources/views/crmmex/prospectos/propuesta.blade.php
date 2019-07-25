@@ -19,13 +19,11 @@
                         <input type="text" id="propuesta_identificador" name="propuesta_identificador" class="form-control form-control-sm" placeholder="Identificador" readonly>
                     </div>
                     <div class="col-sm-3 mb-1">
-                        <label for="catalogo_18">Categor&iacute;a</label>
-                        <select class="custom-select custom-select-sm" id="catalogo_18" name="catalogo_18"></select>
+                          <label for="catalogo_12">Grupo</label>
+                          <select class="custom-select custom-select-sm" id="catalogo_12" name="catalogo_12">
+                              <option value="">-</option>
+                          </select>
                     </div>
-                    <!--div class="col-sm-3 mb-1">
-                        <label for="catalogo_15">Forma Pago</label>
-                        <select class="custom-select custom-select-sm" id="catalogo_15" name="catalogo_15"></select>
-                    </div-->
                     <div class="col-sm-3 mb-1">
                         <label for="catalogo_15">Contacto</label>
                         <select class="custom-select custom-select-sm" id="propuesta_contactos" name="propuesta_contactos"></select>
@@ -49,21 +47,14 @@
                   <div class="col-sm-12"><hr /></div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-3 mb-1">
-                          <label for="catalogo_12">Grupo</label>
-                          <select class="custom-select custom-select-sm" id="catalogo_12" name="catalogo_12">
-                              <option value="">-</option>
-                          </select>
-                    </div>
+
                     <div class="col-sm-9 mb-1">
                         <label for="listadoProductosPropuestaComercial">Seleccione Producto/Servicio</label>
                         <select class="custom-select custom-select-sm" id="listadoProductosPropuestaComercial" name="listadoProductosPropuestaComercial">
                             <option value="">-</option>
                         </select>
                     </div>
-                    <div class="col-sm-2 mb-1 text-center">
-                        <!--button class="btn btn-sm {{$btn}}" id="btnAgregaEstructuraProducto">Agregar Producto</button-->
-                    </div>
+                    <div class="col-sm-2 mb-1 text-center"></div>
                     <div class="col-sm-12 mb-1 collapse" id="formIndividual">
                         <div class="row">
                             <div class="col-sm-2">

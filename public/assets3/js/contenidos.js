@@ -205,7 +205,10 @@ function generaDataGrid( id , filtro = '' ) {
                 responsive: true,
                 columns: columnas,
                 stateSave:  true,
-                "language": {
+                stateSaveParams: function (settings, data) {
+                  data.search.search = "";
+                },
+                language: {
                     "decimal":        "",
                     "emptyTable":     "No se encontraron datos",
                     "info":           "Mostrando _START_ de _END_ de _TOTAL_ resultados",

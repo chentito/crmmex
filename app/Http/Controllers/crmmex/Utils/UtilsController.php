@@ -157,6 +157,7 @@ class UtilsController extends Controller
        * Obtiene el valor de un parametro del catalogo
        */
        public static function valorCatalogo( $valorID ) {
+          if( $valorID == '' )return "";
           $opciones = Opciones::find( $valorID );
           return $opciones->opcion;
        }

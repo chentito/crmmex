@@ -23,16 +23,13 @@
             alert( JSON.stringify( response.data[1] ) );
             var DatosClientes   = [];
             var DatosProspectos = [];
-            var clientes = response.data[1];
-            var prospectos = response.data[2];
-
+            var clientes        = response.data[1];
+            var prospectos      = response.data[2];
             clientes.forEach( function( e ){
                 e.detalles.forEach( function( e2 ){
                   alert( e2.tituloDetalle );
                 });
             });
-
-
          })
          .catch( err => {
            console.log( err );

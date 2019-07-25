@@ -19,7 +19,7 @@
   <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
     <div class="container border-left border-bottom border-right p-1">
       <div id="listadoIndicadores_config"></div>
-      <table id="listadoIndicadores" class="table table-striped table-bordered display responsive nowrap" style="width:100%"></table>
+      <table id="listadoIndicadores" class="table table-striped display responsive nowrap" style="width:100%"></table>
     </div>
   </div>
   <div class="tab-pane fade" id="procesos" role="tabpanel" aria-labelledby="home-tab">
