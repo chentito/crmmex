@@ -1,6 +1,6 @@
 
 <div id="listadoProspectos_config"></div>
-<table id="listadoProspectos" class="table table-striped responsive nowrap" style="width:100%"></table>
+<table id="listadoProspectos" class="table table-striped responsive nowrap display" style="width:100%"></table>
 
 <script>
   generaDataGrid( 'listadoProspectos' );

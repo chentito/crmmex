@@ -167,27 +167,28 @@ function generaDataGrid( id , filtro = '' ) {
                 buttons: [
                   {
                     extend: 'csv',
-                    text: 'Exportar a csv',
+                    text: '<i class="fa fa-md fa-file-alt"></i>',
                     title: response.data.titulo.replace( ' ' , '' ),
-                    className: 'btn'
+                    titleAttr: 'Exportar a formato CSV'
                   },
                   {
                     extend: 'excel',
-                    text: 'Exportar a Excel',
+                    text: '<i class="fa fa-md fa-file-excel"></i>',
                     title: response.data.titulo.replace( ' ' , '' ),
-                    className: 'btn'
+                    titleAttr: 'Exportar a Excel'
                   },
                   {
                     extend: 'pdf',
-                    text: 'Exportar a PDF',
+                    text: '<i class="fa fa-md fa-file-pdf"></i>',
                     title: response.data.titulo.replace( ' ' , '' ),
-                    className: 'btn'
+                    titleAttr: 'Exportar a DPF'
                   },
                   {
-                    text: 'Configuracion',
-                    className: 'btn',
+                    text: '<i class="fa fa-md fa-cogs"></i>',
+                    titleAttr: 'Configuracion',
                     action: function(){
-                      document.getElementById( id + '_config' ).style.display = 'block';
+                      //document.getElementById( id + '_config' ).style.display = 'block';
+                      $( '#' + id + '_config' ).show( 'blind' );
                     }
                   }
                 ],
@@ -230,11 +231,9 @@ function generaDataGrid( id , filtro = '' ) {
                 }
             });
 
-            grid.buttons().container().appendTo( '#'+id+'_wrapper .col-md-6:eq(0)' );
+            grid.buttons().container().appendTo( '#'+id+'_wrapper .col-sm-6:eq(0)' );
 
-            new $.fn.dataTable.ColReorder( grid, {
-              // options
-            });
+            new $.fn.dataTable.ColReorder( grid, {});
 
             axios.get( '/api/dataTableConfigView/' + id )
                  .then( response => {
@@ -257,18 +256,25 @@ function generaDataGrid( id , filtro = '' ) {
                     });
 
                     document.getElementById( 'btnGdaConfGridCierra' ).addEventListener( 'click' , function() {
-                        document.getElementById( id + '_config' ).style.display = "none";
+                        //document.getElementById( id + '_config' ).style.display = "none";
+                        $( '#' + id + '_config' ).hide( 'blind' );
+                    });
+
+                    document.getElementById( 'btnSelTodosConfGrid' ).addEventListener( 'click' , function(){
+                        var checkboxes = new Array();
+                        checkboxes = document.getElementById( 'formConfGrid' ).getElementsByTagName('input');
+
+                        for (var i=0; i<checkboxes.length; i++)  {
+                          if (checkboxes[i].type == 'checkbox')   {
+                            checkboxes[i].checked = true;
+                          }
+                        }
                     });
 
                  })
                  .catch( err => {
                     console.log( err );
                  });
-
-           document.getElementById( 'abreConfiguracionGrid' ).addEventListener( 'click' , function(){
-              document.getElementById( id + '_config' ).style.display = 'block';
-           });
-
      })
      .catch( err => {
        console.log( err );

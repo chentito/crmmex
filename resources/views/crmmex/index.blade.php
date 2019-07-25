@@ -98,10 +98,10 @@
         </div>
 
         <!-- SCRIPTS -->
+        <script src="{{ asset( 'assets3/js/popper.min.js' ) }}"></script>
         <script src="{{ asset( 'js/app.js' ) }}" ></script>
-        <script src="https://momentjs.com/downloads/moment.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/es.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/locale/es.js"></script>
+        <script src="{{ asset( 'assets3/js/moment.js' ) }}"></script>
+        <script src="{{ asset( 'assets3/js/es.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/notify.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/timeline.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/contenidos.js' ) }}"></script>
@@ -123,9 +123,11 @@
         <script src="{{ asset( 'assets3/js/funcionalidades.js' ) }}"></script>
 
         <script type="text/javascript">
+            $(function () {
+              $('[data-toggle="tooltip"]').tooltip()
+            })
             $( document ).ready( function() {
                 generaToken();
-                $( '[data-toggle="tooltip"]' ).tooltip();
                 $( '#sidebarCollapse' ).on( 'click' , function () {
                     $( '#sidebar' ).toggleClass( 'active' );
                 });
