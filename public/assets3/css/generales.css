@@ -1,7 +1,7 @@
 /*
 Estilos generales del sitio utilizados a lo largo de la aplicacion
 */
-/* 
+/*
     Created on : 27/03/2019, 06:02:55 PM
     Author     : Carlos
 */
@@ -12,9 +12,12 @@ Estilos generales del sitio utilizados a lo largo de la aplicacion
     margin: 0 auto;
     top: calc(50% - 24px);
 }
-              
+
 .bd-example-modal-lg .modal-dialog .modal-content{
     background-color: transparent;
     border: none;
 }
 
+caption{
+  caption-side: top
+}

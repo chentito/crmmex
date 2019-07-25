@@ -15,6 +15,8 @@
         <link href="{{ asset( 'assets3/css/fixedHeader.bootstrap.min.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/responsive.bootstrap.min.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/dataTables.bootstrap4.min.css' ) }}" rel="stylesheet">
+        <link href="{{ asset( 'assets3/css/buttons.dataTables.min.css' ) }}" rel="stylesheet">
+        <link href="{{ asset( 'assets3/css/buttons.bootstrap4.min.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/jodit.min.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/responsive-calendar.css' ) }}" rel="stylesheet">
         <link href="/assets3/css/themes/{{$css}}" rel="stylesheet">
@@ -106,6 +108,14 @@
         <!-- Grid -->
         <script src="{{ asset( 'assets3/js/dataTables.bootstrap4.min.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/dataTables.responsive.min.js' ) }}"></script>
+        <script src="{{ asset( 'assets3/js/dataTables.buttons.min.js' ) }}" ></script>
+        <script src="{{ asset( 'assets3/js/buttons.bootstrap4.min.js' ) }}" ></script>
+        <script src="{{ asset( 'assets3/js/buttons.flash.min.js' ) }}" ></script>
+        <script src="{{ asset( 'assets3/js/jszip.min.js' ) }}" ></script>
+        <script src="{{ asset( 'assets3/js/pdfmake.min.js' ) }}" ></script>
+        <script src="{{ asset( 'assets3/js/vfs_fonts.js' ) }}" ></script>
+        <script src="{{ asset( 'assets3/js/buttons.html5.min.js' ) }}" ></script>
+        <script src="{{ asset( 'assets3/js/buttons.print.min.js' ) }}" ></script>
         <!-- Fonts e iconos -->
         <script src="{{ asset( 'assets3/js/solid.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/fontawesome.js' ) }}"></script>
@@ -123,7 +133,7 @@
                     $( '#sidebar' ).removeClass( 'active' );
                 });
             });
-            contenidos( 'dashboard' );            
+            contenidos( 'dashboard' );
         </script>
     </body>
 </html>

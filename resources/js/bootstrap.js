@@ -14,6 +14,7 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require( 'bootstrap' );
+    require( 'datatables.net-dt' );
     require( 'datatables.net-colreorder-dt' );
     require( 'layout-grid' );
     require( 'bootstrap-datepicker' );

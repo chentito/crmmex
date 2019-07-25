@@ -88284,6 +88284,8 @@ try {
 
   __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 
+  __webpack_require__(/*! datatables.net-dt */ "./node_modules/datatables.net-dt/js/dataTables.dataTables.js");
+
   __webpack_require__(/*! datatables.net-colreorder-dt */ "./node_modules/datatables.net-colreorder-dt/js/colReorder.dataTables.js");
 
   __webpack_require__(/*! layout-grid */ "./node_modules/layout-grid/dist/js/layout-grid.js");

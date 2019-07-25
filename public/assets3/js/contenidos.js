@@ -145,13 +145,10 @@ function generaDataGrid( id , filtro = '' ) {
             campos      = response.data.campos.split( ',' );
             visibilidad = response.data.visibilidad.split( ',' );
 
-            var header   = document.getElementById( id ).createTHead()
-            var titulo = document.createElement( 'th' );
-            titulo.setAttribute( 'colspan', visibilidad.length );
-            titulo.innerHTML = '<table width="100%"><tr><td style="height:8px;" align="center" width="95%">'+response.data.titulo
-                             + '</td><td><button class="btn btn-sm btn-dark" id="abreConfiguracionGrid"><i class="fa fa-cogs fa-sm"></i></button></td></tr></table>';
-            header.appendChild( titulo );
+            var titulo = document.getElementById( id ).createCaption();
+            titulo.innerHTML = '<div class="row"><div class="col-sm-12"><h5>'+response.data.titulo+'</h5></div></div>';
 
+            var header   = document.getElementById( id ).createTHead();
             var row      = header.insertRow(0);
             var columnas = [];
 
@@ -165,7 +162,35 @@ function generaDataGrid( id , filtro = '' ) {
             });
 
             $.fn.dataTable.ext.errMode = 'throw';
-            $( '#' + id ).DataTable({
+            var grid = $( '#' + id ).DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                  {
+                    extend: 'csv',
+                    text: 'Exportar a csv',
+                    title: response.data.titulo.replace( ' ' , '' ),
+                    className: 'btn'
+                  },
+                  {
+                    extend: 'excel',
+                    text: 'Exportar a Excel',
+                    title: response.data.titulo.replace( ' ' , '' ),
+                    className: 'btn'
+                  },
+                  {
+                    extend: 'pdf',
+                    text: 'Exportar a PDF',
+                    title: response.data.titulo.replace( ' ' , '' ),
+                    className: 'btn'
+                  },
+                  {
+                    text: 'Configuracion',
+                    className: 'btn',
+                    action: function(){
+                      document.getElementById( id + '_config' ).style.display = 'block';
+                    }
+                  }
+                ],
                 order      : [[ 0, "desc" ]],
                 lengthMenu : [ [8, 16, 24, -1], [8, 16, 24, "All"]],
                 ajax       : {
@@ -202,6 +227,12 @@ function generaDataGrid( id , filtro = '' ) {
                         "sortDescending": ": orden descendente"
                     }
                 }
+            });
+
+            grid.buttons().container().appendTo( '#'+id+'_wrapper .col-md-6:eq(0)' );
+
+            new $.fn.dataTable.ColReorder( grid, {
+              // options
             });
 
             axios.get( '/api/dataTableConfigView/' + id )
