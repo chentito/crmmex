@@ -150,11 +150,18 @@
                               <input type="text" id="cliente_rfc" name="cliente_rfc" class="form-control form-control-sm" placeholder="RFC" onchange="validaRFC(this.value)" maxlength="13">
                           </div>
                           <div class="col-sm-3 mb-1">
+                              <label for="catalogo_11">Cuenta</label>
+                              <select id="cliente_tipo" name="cliente_tipo" class="custom-select custom-select-sm">
+                                  <!--option value="2">Prospecto</option-->
+                                  <option value="1">Cliente</option>
+                              </select>
+                          </div>
+                          <!--div class="col-sm-3 mb-1">
                               <label for="catalogo_5">Giro</label>
                               <select id="catalogo_5" name="catalogo_5" class="custom-select custom-select-sm"></select>
-                          </div>
+                          </div-->
                       </div>
-                      <div class="row">
+                      <!--div class="row">
                           <div class="col-sm-3 mb-1">
                               <label for="catalogo_1">Categoría</label>
                               <select id="catalogo_1" name="catalogo_1" class="custom-select custom-select-sm"></select>
@@ -171,27 +178,20 @@
                               <label for="catalogo_4">Empleados</label>
                               <select id="catalogo_4" name="catalogo_4" class="custom-select custom-select-sm"></select>
                           </div>
-                      </div>
+                      </div-->
                       <div class="row">
                           <div class="col-sm-6 mb-1">
                               <label for="catalogo_2">Observaciones</label>
-                              <textarea class="form-control" id="cliente_observaciones" name="cliente_observaciones"></textarea>
+                              <textarea class="form-control" id="cliente_observaciones" name="cliente_observaciones" rows="1"></textarea>
                           </div>
-                          <div class="col-sm-3 mb-1">
-                              <label for="catalogo_11">Cuenta</label>
-                              <select id="cliente_tipo" name="cliente_tipo" class="custom-select custom-select-sm">
-                                  <!--option value="2">Prospecto</option-->
-                                  <option value="1">Cliente</option>
-                              </select>
-                          </div>
-                          <div class="col-sm-3 mb-1">
+                          <!--div class="col-sm-3 mb-1">
                               <label for="catalogo_11">Grupo</label>
                               <select id="cliente_grupo" name="cliente_grupo" class="custom-select custom-select-sm">
                                   <option value="1">Ocasional</option>
                                   <option value="2">Frecuente</option>
                                   <option value="3">VIP</option>
                               </select>
-                          </div>
+                          </div-->
                       </div>
                       <div class="row mt-2">
                         <div class="col-sm-2">
@@ -204,21 +204,21 @@
                             <label for="direccion_calle">Calle</label>
                             <input type="text" id="direccion_calle" name="direccion_calle" class="form-control form-control-sm" placeholder="Calle">
                         </div>
-                        <div class="col-sm-3 mb-1">
+                        <div class="col-sm-2 mb-1">
                             <label for="direccion_no_exterior">No. Exterior</label>
                             <input type="text" id="direccion_no_exterior" name="direccion_no_exterior" class="form-control form-control-sm" placeholder="No.Exterior">
                         </div>
-                        <div class="col-sm-3 mb-1">
+                        <div class="col-sm-2 mb-1">
                             <label for="direccion_no_interior">No. Interior</label>
                             <input type="text" id="direccion_no_interior" name="direccion_no_interior" class="form-control form-control-sm" placeholder="No.Interior">
+                        </div>
+                        <div class="col-sm-2 mb-1">
+                            <label for="direccion_cp">CP</label>
+                            <input type="text" id="direccion_cp" name="direccion_cp" class="form-control form-control-sm" placeholder="Codigo Postal">
                         </div>
                         <div class="col-sm-3 mb-1">
                             <label for="direccion_colonia">Colonia</label>
                             <input type="text" id="direccion_colonia" name="direccion_colonia" class="form-control form-control-sm" placeholder="Colonia">
-                        </div>
-                        <div class="col-sm-3 mb-1">
-                            <label for="direccion_cp">CP</label>
-                            <input type="text" id="direccion_cp" name="direccion_cp" class="form-control form-control-sm" placeholder="Codigo Postal">
                         </div>
                         <div class="col-sm-3 mb-1">
                             <label for="direccion_delegacion">Delegación</label>
@@ -228,19 +228,15 @@
                             <label for="direccion_ciudad">Ciudad</label>
                             <input type="text" id="direccion_ciudad" name="direccion_ciudad" class="form-control form-control-sm" placeholder="Ciudad">
                         </div>
-                        <div class="col-sm-3 mb-1"></div>
+                        <div class="col-sm-3 mb-1">
+                            <label for="direccion_estado">Estado</label>
+                            <select id="direccion_estado" name="direccion_estado" class="custom-select custom-select-sm"></select>
+                        </div>
                         <div class="col-sm-3 mb-1">
                             <label for="direccion_pais">País</label>
                             <select id="direccion_pais" name="direccion_pais" class="custom-select custom-select-sm">
                             </select>
                         </div>
-                        <div class="col-sm-3 mb-1">
-                            <label for="direccion_estado">Estado</label>
-                            <select id="direccion_estado" name="direccion_estado" class="custom-select custom-select-sm">
-                            </select>
-                        </div>
-                        <div class="col-sm-3 mb-1"></div>
-                        <div class="col-sm-3 mb-1"></div>
                       </div>
                     </div>
                 </div>

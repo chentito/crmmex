@@ -32,9 +32,7 @@
               <label for="adicional_clientes_tipoDato">Tipo de dato:</label>
               <select id="adicional_clientes_tipoDato" name="adicional_clientes_tipoDato" class="custom-select custom-select-sm">
                 <option value="1">Texto Libre</option>
-                <!--option value="2">Numérico</option-->
                 <option value="3">Opción múltiple</option>
-                <!--option value="4">Lista</option-->
               </select>
             </div>
             <div class="col-sm-3 mt-1">
@@ -49,7 +47,7 @@
             </div>
             <div class="col-sm-3 mt-1">
               <label for="adicional_clientes_valores">Valores:</label>
-              <input type="text" id="adicional_clientes_valores" name="adicional_clientes_valores" placeholder="Valores" class="form-control form-control-sm">
+              <input type="text" id="adicional_clientes_valores" name="adicional_clientes_valores" placeholder="Valores (Separados por coma)" disabled class="form-control form-control-sm">
             </div>
             <div class="col-sm-3 mt-1">
               <label for="adicional_clientes_validacion">Tipo de validación:</label>
@@ -87,6 +85,15 @@
 
   document.getElementById( 'adicional_clientes_seccion' ).value=document.getElementById( 'idSeccionConsultar' ).value;
   nombreSeccion();
+
+  document.getElementById( 'adicional_clientes_tipoDato' ).addEventListener( 'click' , function( e ){
+      e.preventDefault();
+      if( this.value > 1 ) {
+          document.getElementById( 'adicional_clientes_valores' ).disabled = false;
+      } else {
+          document.getElementById( 'adicional_clientes_valores' ).disabled = true;
+      }
+  });
 
   document.getElementById( 'btnGuardaCampoAdicional' ).addEventListener( 'click' , function( e ){
     e.preventDefault();
