@@ -28,19 +28,41 @@ class AnalisisPipelineController extends Controller
 {
     // Metodo que genera el analisis pipeline de cada cliente/prospecto
     public function analisisPiepeline( $clienteID ) {
-        $cliente = Cliente::find( $clienteID );
-        $grupo   = self::getGrupo( $cliente->productoID );
-        return response()->json( self::getIndicador( $grupo , $clienteID ) );
+        //$cliente = Cliente::find( $clienteID );
+        //$grupo   = self::getGrupo( $cliente->productoID );
+        $indicadores = array();
+
+        // Se buscan todas las propuestas asignadas al cliente
+        $propuestas = Propuestas::where( 'clienteID' , $clienteID )
+                                ->where( 'status' , 1 )
+                                ->get();
+
+        foreach( $propuestas AS $propuesta ) {
+            $categoriaPropuesta = $propuesta->categoria;
+            $indicadores[ 'indicadores' ][] = array(
+              'idty'      =>  $propuesta->propuestaIDTY,
+              'estado' => self::getIndicador( $categoriaPropuesta , $clienteID , $propuesta->id )
+            );
+        }
+
+        return response()->json( $indicadores );
     }
 
     // Obtiene el indicador correspondiente
-    public static function getIndicador( $grupo , $clienteID ) {
+    public static function getIndicador( $grupo , $clienteID , $propuestaID ) {
         $pipeline  = array();
-
-        // Verifica si hay un indicador de proposito general
-        $propGral  = Indicadores::where( 'grupoID' , '0' )->where( 'status' , 1 )->count();
-        $gpo       = ( $propGral > 0 ) ? '0' : $grupo;
-        $indicador = Indicadores::where( 'grupoID' , $gpo )->where( 'status' , 1 )->first();
+        // Verifica si hay un indicador del grupo de la propuesta
+        $indGpo = Indicadores::where( 'grupoID' , $grupo )->where( 'status' , 1 )->count();
+        if( $indGpo > 0 ){
+          $indicador = Indicadores::where( 'grupoID' , $grupo )->where( 'status' , 1 )->first();
+        } else {
+            $propGral  = Indicadores::where( 'grupoID' , '0' )->where( 'status' , 1 )->count();
+            if( $propGral > 0 ) {
+                $propGral  = Indicadores::where( 'grupoID' , '0' )->where( 'status' , 1 )->first();
+            } else {
+                $indicador = false;
+            }
+        }
 
         if( $indicador ) {
             $fases = Fases::where( 'indicadorID' , $indicador->id )

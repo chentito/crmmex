@@ -75,7 +75,10 @@
       function cargaPipeline( clienteID ) {
           axios.get( '/api/obtienePipeline/' + clienteID , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
                .then( response => {
-                  var datos   = new Array();
+
+                  alert( JSON.stringify( response.data ) );
+
+                  /*var datos   = new Array();
                   var colores = new Array();
 
                   response.data.detalles.forEach( function( e , i ) {
@@ -92,7 +95,7 @@
                       colors: colores,
                       credits: { enabled: false },
                       series: [{ data: datos }]
-                  });
+                  });*/
 
                })
                .catch( err => {

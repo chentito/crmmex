@@ -7,12 +7,13 @@
 
 <script>
   buscaDatosCampoAdicional();
-  function buscaDatosCampoAdicional() {
+
+  async function buscaDatosCampoAdicional() {
       var campoAdicionalID = document.getElementById( 'campoAdicionalID' ).value
       document.getElementById( 'adicional_clientes_id' ).value = campoAdicionalID;
       var url = '/api/datosCampoAdicional/' + campoAdicionalID;
 
-      axios.get( url )
+      await axios.get( url )
            .then( response => {
                 datos = response.data;
                 document.getElementById( 'adicional_clientes_seccion' ).value    = datos.seccion;
@@ -29,7 +30,8 @@
                 document.getElementById( 'idSeccionConsultar' ).value = datos.seccion;
                 nombreSeccion();
                 generaDataGrid( 'listadoCamposAdicionales' , datos.seccion );
-
            }).catch( err => {console.log( err );});
   }
+
+  setTimeout( function(){ document.querySelector('a[href="#field"]').click(); } , 1500 );  
 </script>
