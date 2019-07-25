@@ -47,7 +47,7 @@
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
     <div class="container border-left border-bottom border-right p-1">
       <div id="listadoPromociones_config"></div>
-      <table id="listadoPromociones" class="table table-striped table-bordered display responsive nowrap" style="width:100%"></table>
+      <table id="listadoPromociones" class="table table-striped responsive nowrap" style="width:100%"></table>
     </div>
   </div>
 </div>

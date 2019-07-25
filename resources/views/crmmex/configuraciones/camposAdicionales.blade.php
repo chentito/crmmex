@@ -72,7 +72,7 @@
   <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
     <div class="container border-left border-right border-bottom p-1">
       <div id="listadoCamposAdicionales_config"></div>
-      <table id="listadoCamposAdicionales" class="table table-striped table-bordered display responsive nowrap" style="width:100%"></table>
+      <table id="listadoCamposAdicionales" class="table table-striped responsive nowrap" style="width:100%"></table>
     </div>
   </div>
 </div>

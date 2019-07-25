@@ -2,7 +2,7 @@
 <div class="card card-small mb-3">
     <div class="card-body">
       <div id="listadoEjecutivos_config"></div>
-      <table id="listadoEjecutivos" class="table table-striped table-bordered" style="width:100%">
+      <table id="listadoEjecutivos" class="table table-striped responsive nowrap" style="width:100%">
       </table>
     </div>
 </div>

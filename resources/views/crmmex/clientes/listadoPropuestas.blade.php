@@ -3,7 +3,7 @@
 <input type="hidden" id="clienteID" name="clienteID" value="{{$param}}">
 
 <div id="listadoPropuestas_config"></div>
-<table id="listadoPropuestas" class="table table-striped table-bordered display responsive nowrap" style="width:100%"></table>
+<table id="listadoPropuestas" class="table table-striped responsive nowrap" style="width:100%"></table>
 
 <div class="row mt-1">
   <div class="col-sm-12 text-center">

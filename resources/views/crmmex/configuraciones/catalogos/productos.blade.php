@@ -1,6 +1,6 @@
 
 <div id="listadoProductos_config"></div>
-<table id="listadoProductos" class="table table-striped table-bordered display responsive nowrap" style="width:100%"></table>
+<table id="listadoProductos" class="table table-striped responsive nowrap" style="width:100%"></table>
 
 <div class="row">
   <div class="col-sm-12 text-center">

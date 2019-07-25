@@ -14,7 +14,7 @@
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
     <div class="container border-right border-left border-bottom p-1">
       <div id="listadoMultimedia_config"></div>
-      <table id="listadoMultimedia" class="table table-striped table-bordered display responsive nowrap" style="width:100%"></table>
+      <table id="listadoMultimedia" class="table table-striped responsive nowrap" style="width:100%"></table>
     </div>
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
