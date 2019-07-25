@@ -2,18 +2,18 @@
 <input type="hidden" name="idSeccionConsultar" id="idSeccionConsultar" value="{{$param}}">
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
-    <a class="nav-link active" id="field-tab" data-toggle="tab" href="#field" role="tab" aria-controls="field" aria-selected="true">
-      <i class="fa fa-plus fa-sm"></i><span class="d-none d-sm-inline">  Agregar Campo</span>
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+      <i class="fa fa-code fa-sm"></i><span class="d-none d-sm-inline">  Campos Adicionales</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
-      <i class="fa fa-code fa-sm"></i><span class="d-none d-sm-inline">  Campos Adicionales</span>
+    <a class="nav-link" id="field-tab" data-toggle="tab" href="#field" role="tab" aria-controls="field" aria-selected="true">
+      <i class="fa fa-plus fa-sm"></i><span class="d-none d-sm-inline">  Agregar Campo</span>
     </a>
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="field" role="tabpanel" aria-labelledby="field-tab">
+  <div class="tab-pane fade" id="field" role="tabpanel" aria-labelledby="field-tab">
       <div class="container border-left border-right border-bottom p-1">
         <form id="formAltaCampoAdicional" name="formAltaCampoAdicional">
           <input type="hidden" id="adicional_clientes_id" name="adicional_clientes_id" value="">
@@ -69,7 +69,7 @@
         </form>
       </div>
   </div>
-  <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
     <div class="container border-left border-right border-bottom p-1">
       <div id="listadoCamposAdicionales_config"></div>
       <table id="listadoCamposAdicionales" class="table table-striped responsive nowrap" style="width:100%"></table>

@@ -27,12 +27,14 @@ class CamposAdicionalesController extends Controller
                                 ->get();
 
         foreach( $camposAdicionales AS $campoAdicional ) {
+            $detalleSeccion = $this->nombreSeccion( $campoAdicional->seccion , true );
+
             $campos[ 'camposAdicionales' ][] = array (
               'id'             => $campoAdicional->id,
               'nombre'         => $campoAdicional->nombre,
-              'seccion'        => $campoAdicional->seccion,
-              'tipo'           => $campoAdicional->tipo,
-              'expresion'      => $campoAdicional->expresion,
+              'seccion'        => $detalleSeccion[ 'nombreSeccion' ],
+              'tipo'           => ($campoAdicional->tipo == '1' ) ? 'Texto libre' : 'Lista desplegable',
+              'expresion'      => $this->tipoValidacion( $campoAdicional->expresion ),
               'valores'        => $campoAdicional->valores,
               'obligatoriedad' => ( $campoAdicional->obligatoriedad == '1' ? 'Obligatorio' : 'Opcional' ),
               'status'         => ( $campoAdicional->status == '1' ? 'Activo' : 'Inactivo' ),
@@ -45,9 +47,10 @@ class CamposAdicionalesController extends Controller
     }
 
     // Obtiene los datos de un campo adicional
-    public function datosCampoAdicional( $campoAdicionalID ) {
+    public function datosCampoAdicional( $campoAdicionalID , $enarray=false) {
           $datos = CamposAdicionales::find( $campoAdicionalID );
-          return response()->json( $datos );
+          if( $enarray ) return $datos;
+          else return response()->json( $datos );
     }
 
     // Agrega un nuevo campo adicional
@@ -144,9 +147,20 @@ class CamposAdicionalesController extends Controller
     }
 
     // Obtiene el nombre de la seccion a la que se le agregaran campos Adicionales
-    public function nombreSeccion( $seccionID ) {
+    public function nombreSeccion( $seccionID , $enarray=false ) {
         $nombre = CamposAdicionalesSecciones::find( $seccionID );
-        return response()->json( $nombre );
+        if( $enarray ) return $nombre;
+        else return response()->json( $nombre );
+    }
+
+    private function tipoValidacion( $validacionID ) {
+        switch( $validacionID ) {
+            case '1':return 'Sin validación';break;
+            case '2':return 'Correo electrónico';break;
+            case '3':return 'Número telefónico';break;
+            case '4':return 'RFC';break;
+            case '5':return 'Solo números';break;
+        }
     }
 
 }

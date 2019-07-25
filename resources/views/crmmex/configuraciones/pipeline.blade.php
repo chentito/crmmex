@@ -1,12 +1,12 @@
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
-    <a class="nav-link active" id="nuevo-tab" data-toggle="tab" href="#nuevo" role="tab" aria-controls="nuevo" aria-selected="false">
-      <i class="fa fa-plus fa-sm"></i><span class="d-none d-sm-inline">  Nuevo Indicador</span>
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+      <i class="fa fa-ruler fa-sm"></i><span class="d-none d-sm-inline">  Indicadores</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
-      <i class="fa fa-ruler fa-sm"></i><span class="d-none d-sm-inline">  Indicadores</span>
+    <a class="nav-link" id="nuevo-tab" data-toggle="tab" href="#nuevo" role="tab" aria-controls="nuevo" aria-selected="false">
+      <i class="fa fa-plus fa-sm"></i><span class="d-none d-sm-inline">  Nuevo Indicador</span>
     </a>
   </li>
   <li class="nav-item">
@@ -16,7 +16,7 @@
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
     <div class="container border-left border-bottom border-right p-1">
       <div id="listadoIndicadores_config"></div>
       <table id="listadoIndicadores" class="table table-striped display responsive nowrap" style="width:100%"></table>
@@ -36,7 +36,7 @@
       </form>
     </div>
   </div>
-  <div class="tab-pane show active" id="nuevo" role="tabpanel" aria-labelledby="nuevo-tab">
+  <div class="tab-pane fade" id="nuevo" role="tabpanel" aria-labelledby="nuevo-tab">
     <div class="container border-left border-bottom border-right p-1">
       <form id="nuevoIndicador_Form" name="nuevoIndicador_Form">
         <div class="row mt-2">

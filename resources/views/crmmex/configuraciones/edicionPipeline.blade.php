@@ -6,6 +6,7 @@
     cargaDatosIndicador();
 
     function cargaDatosIndicador() {
+        document.querySelector('a[href="#nuevo"]').click();
         var indicadorID = document.getElementById( 'indicadorID' ).value;
         axios.get( '/api/detalleIndicador/' + indicadorID , { headers:{ 'Accept' : 'application\json' , 'Authorization' : 'Bearer '+ sessionStorage.getItem( 'apiToken' ) } } )
              .then( response => {
