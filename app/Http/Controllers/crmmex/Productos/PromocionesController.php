@@ -17,7 +17,8 @@ class PromocionesController extends Controller
      * Listado de promociones
      */
      public function listadoPromociones() {
-        $promos = array();
+        $promos                  = array();
+        $promos[ 'promociones' ] = array();
         $promociones = Promociones::where( 'status' , 1 )->get();
 
         foreach( $promociones AS $promocion ) {

@@ -18,7 +18,8 @@ class CampaniasController extends Controller
 
     // Obtiene el listado de campanias
     public function listadoCampanias() {
-        $campaniasD = array();
+        $campaniasD                = array();
+        $campaniasD[ 'campanias' ] = array();
         $campanias  = Campanias::whereIn( 'status' , [ 1 , 2 ] )->orderBy( 'id' , 'desc' )->get();
 
         foreach( $campanias AS $campania ) {

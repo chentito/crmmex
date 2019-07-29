@@ -110,7 +110,8 @@ class ClientesController extends Controller
 
     /* Obtiene el listado de clientes */
     public function listadoClientes( $tipo = '' ) {
-      $arrClientes = array();
+      $arrClientes               = array();
+      $arrClientes[ 'clientes' ] = array();
       $clientes    = Clientes::whereIn( 'status' , [ 1 , 2 ] )
                              ->when(  $tipo != '' , function( $q ) use ( $tipo ) {
                                return $q->where( 'tipo' , $tipo );
@@ -149,7 +150,8 @@ class ClientesController extends Controller
 
     /* Obtiene el listado de prospectos */
     public function listadoProspectos() {
-        $datos      = array();
+        $datos                 = array();
+        $datos[ 'prospectos' ] = array();
         $prospectos = DB::table( 'crmmex_ventas_contacto' )
                     ->leftJoin( 'crmmex_ventas_cliente' , 'crmmex_ventas_contacto.clienteID' , '=' , 'crmmex_ventas_cliente.id' )
                     ->where( 'crmmex_ventas_cliente.tipo' , 2)

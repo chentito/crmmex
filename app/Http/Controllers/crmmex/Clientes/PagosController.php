@@ -16,7 +16,8 @@ class PagosController extends Controller
 {
     // Listado de Pagos
     public function listadoPagos( $propuestaID ) {
-        $registros = array( 'pagos' );
+        $registros            = array();
+        $registros[ 'pagos' ] = array();
         $pagos = Pagos::where( 'propuestaID' , $propuestaID )
                       ->where( 'status' , 1 )
                       ->get();

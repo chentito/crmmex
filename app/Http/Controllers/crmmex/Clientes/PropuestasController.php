@@ -28,7 +28,8 @@ class PropuestasController extends Controller
      * propuestas de un cliente en particular
      */
      public function listadoPropuestas( $clienteID ) {
-        $datos      = array();
+        $datos                 = array();
+        $datos[ 'propuestas' ] = array();
         $propuestas = Propuestas::where( 'status' , 1 )->where( 'clienteID' , $clienteID )->get();
 
         foreach( $propuestas AS $propuesta ) {

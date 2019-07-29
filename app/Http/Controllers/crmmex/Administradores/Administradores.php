@@ -18,7 +18,8 @@ class Administradores extends Controller
 {
 
     public function listaAdmin() {
-        $arrAdministradores = array();
+        $arrAdministradores                      = array();
+        $arrAdministradores[ 'administradores' ] = array();
         $administradores    = Usuarios::where( 'active' , '1' )->get();
 
         foreach( $administradores AS $administrador ) {

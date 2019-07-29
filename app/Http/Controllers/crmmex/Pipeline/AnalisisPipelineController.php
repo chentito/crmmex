@@ -28,11 +28,8 @@ class AnalisisPipelineController extends Controller
 {
     // Metodo que genera el analisis pipeline de cada cliente/prospecto
     public function analisisPiepeline( $clienteID ) {
-        //$cliente = Cliente::find( $clienteID );
-        //$grupo   = self::getGrupo( $cliente->productoID );
-        $indicadores = array();
-
-        // Se buscan todas las propuestas asignadas al cliente
+        $indicadores                  = array();
+        $indicadores[ 'indicadores' ] = array();
         $propuestas = Propuestas::where( 'clienteID' , $clienteID )
                                 ->where( 'status' , 1 )
                                 ->get();

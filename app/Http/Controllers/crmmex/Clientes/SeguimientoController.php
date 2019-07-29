@@ -23,8 +23,9 @@ class SeguimientoController extends Controller
      * Metodo para obtener el listado de seguimientos
      */
     public function listadoSeguimientos( $clienteID = '' ) {
-        $ejecutivoID  = Auth::user()->id;
-        $seguimientos = array();
+        $ejecutivoID                    = Auth::user()->id;
+        $seguimientos                   = array();
+        $seguimientos[ 'seguimientos' ] = array();
         $seg          = Seguimiento::where( [ 'status' => 1 ] )
                       ->where( [ 'ejecutivoID' => $ejecutivoID ] )
                       ->when( $clienteID != '' , function( $cond ) use( $clienteID ) {

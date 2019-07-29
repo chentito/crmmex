@@ -20,7 +20,8 @@ class ProductosController extends Controller
 {
     //Listado de productos/servicios
     public function listadoProductos() {
-        $datos = array();
+        $datos                = array();
+        $datos[ 'productos' ] = array();
         $productos = Prod::whereIn( 'status' , array( 2 , 1 ) )->get();
 
         foreach( $productos AS $producto ) {

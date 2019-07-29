@@ -24,7 +24,8 @@ class PipelineController extends Controller
 
     // Metodo que obtiene el listado de indicadores disponibles
     public function listadoIndicadores() {
-        $datos = array();
+        $datos                  = array();
+        $datos[ 'indicadores' ] = array();
         $indicadores = Indicadores::whereIn( 'status' , [ 1 , 2 ] )->get();
 
         foreach ( $indicadores AS $indicador ) {
