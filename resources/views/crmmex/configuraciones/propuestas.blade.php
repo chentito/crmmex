@@ -106,12 +106,12 @@
 </div>
 
 <script>
-    var config = {headers: {'Accept' : 'application/json','Authorization' : 'Bearer ' + token}};
+    var config = {headers: {'Accept' : 'application/json','Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) }};
 
     document.getElementById( 'btnGuardaTemplateEnvio' ).addEventListener( 'click' , function( e ){
         e.preventDefault();
         document.getElementById('detalleTemplate_contenidoPieza').value = editor.getEditorValue();
-        axios.post( '/api/actualizaDatosTemplate' , new FormData( document.getElementById( 'formTemplateEnvioPropuesta' ) )  , config)
+        axios.post( '/api/actualizaDatosTemplate' , new FormData( document.getElementById( 'formTemplateEnvioPropuesta' ) )  , config )
              .then( response => {
                 aviso( 'Template actualizado correctamente' );
                 contenidos( 'configuraciones_propuestas' );

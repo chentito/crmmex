@@ -20,11 +20,6 @@
                         <i class="fa fa-briefcase fa-sm"></i><span class="d-none d-sm-inline">  Razón Social</span>
                     </a>
                 </li>
-                <!--li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">
-                        <i class="fa fa-address-book fa-sm"></i><span class="d-none d-sm-inline">  Dirección</span>
-                    </a>
-                </li-->
                 <li class="nav-item">
                     <a class="nav-link" id="adicionales-tab" data-toggle="tab" href="#adicionales" role="tab" aria-controls="adicionales" aria-selected="false">
                         <i class="fa fa-chart-line fa-sm"></i><span class="d-none d-sm-inline">  Pipeline</span>
@@ -137,7 +132,7 @@
                           <div class="col-sm-6 mb-1">
                               <label for="catalogo_2">Observaciones</label>
                               <textarea class="form-control" id="cliente_observaciones" name="cliente_observaciones" rows="1"></textarea>
-                          </div>                    
+                          </div>
                       </div>
                       <div class="row mt-2">
                         <div class="col-sm-2">

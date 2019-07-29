@@ -20,18 +20,6 @@
                     <td>RFC</td>
                     <td><span id="detalleCliente_rfc"></span></td>
                   </tr>
-                  <!--tr>
-                    <td>Giro</td>
-                    <td><span id="detalleCliente_giro"></span></td>
-                  </tr>
-                  <tr>
-                    <td>Categoría</td>
-                    <td><span id="detalleCliente_categoria"></span></td>
-                  </tr>
-                  <tr>
-                    <td>Subcategoría</td>
-                    <td><span id="detalleCliente_subcategoria"></span></td>
-                  </tr-->
                   <tr>
                     <td>Ejecutivo</td>
                     <td><span id="detalleCliente_ejecutivo"></span></td>
@@ -52,10 +40,6 @@
                     <td>Observaciones</td>
                     <td><span id="detalleCliente_observaciones"></span></td>
                   </tr>
-                  <!--tr>
-                    <td>Grupo</td>
-                    <td><span id="detalleCliente_grupo"></span></td>
-                  </tr-->
                 </table>
               </div>
           </div>
@@ -149,7 +133,7 @@
     </div>
     <div class="col-sm-6 mt-3">
         <div class="card card-sm">
-            <div class="card-header">Propuestas</div>
+            <div class="card-header">Propuestas <span class="badge badge-primary float-right"><a href="javascript:void(0)" id="clickVerPipeline">Ver estatus</a></span></div>
             <div class="card-body">
               <div id="contenedorPropuestas"></div>
             </div>
@@ -168,6 +152,11 @@
   document.getElementById( 'btnRegresarListadoClientes' ).addEventListener( 'click' , function( e ){
       e.preventDefault();
       contenidos( "clientes_listado" );
+  });
+
+  document.getElementById( 'clickVerPipeline' ).addEventListener( 'click' , function( e ){
+      e.preventDefault();
+      contenidos( "consulta_cliente_pipeline" , document.getElementById( 'clienteID' ).value );
   });
 
   datosCliente();

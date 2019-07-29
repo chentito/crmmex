@@ -6,6 +6,7 @@
  */
 namespace App\Http\Controllers\crmmex\Utils;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -83,7 +84,9 @@ class CamposAdicionalesController extends Controller
     public function eliminaCampoAdicional( $campoAdicionalID ) {
       $campoAdicional = CamposAdicionales::find( $campoAdicionalID );
       $campoAdicional->status = 0;
-      $campoAdicional->save();
+      if( $campoAdicional->save() ) {
+          DB::table( 'crmmex_sis_camposadicionales_valores' )->where( 'campoAdicionalID' , $campoAdicionalID )->update( [ 'status' => 0 ] );
+      }
     }
 
     // Genera el campo adicional en html
@@ -134,8 +137,9 @@ class CamposAdicionalesController extends Controller
 
     // Busca los datos adicionales almacenados para un registro y una seccion
     public static function obtieneDatosAdicionales( $seccion , $registroID ) {
-          $camposAdicionales = CamposAdicionalesValores::where( [ 'seccion' => $seccion ] )
-                                                       ->where( [ 'registroID' => $registroID ] )
+          $camposAdicionales = CamposAdicionalesValores::where( 'seccion' , $seccion )
+                                                       ->where( 'registroID' , $registroID )
+                                                       ->where( 'status' , 1 )
                                                        ->get();
           return $camposAdicionales;
     }

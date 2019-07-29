@@ -6,15 +6,7 @@
   generaDataGrid( 'listadoProspectos' );
 
   function habilitaProspecto( clienteID ) {
-      var token = sessionStorage.getItem( 'apiToken' );
-      var url = '/api/habilitaCliente/' + clienteID;
-      var config = {
-          headers:{
-            'Accept' : 'application/json',
-            'Authorization' : 'Bearer ' + token
-          }
-      };
-      axios.post( url , {} , config )
+      axios.post( '/api/habilitaCliente/' + clienteID , {} , { headers:{ 'Accept' : 'application/json', 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
            .then( response => {
              aviso( 'Prospecto habilitado correctamente' );
              contenidos( 'prospectos_listado' );
