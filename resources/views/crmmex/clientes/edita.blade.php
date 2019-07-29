@@ -13,6 +13,7 @@
     var token = sessionStorage.getItem( 'apiToken' );
     var idContenido = document.getElementById( 'idCargaInfo' ).value;
     document.getElementById( 'expediente_id' ).value = idContenido;
+    cargaPipeline( idContenido );
     comboEstados();
     comboPaises();
     var path  = '/api/obtieneExpediente/' + idContenido;
@@ -70,4 +71,42 @@
         .catch( err => {
             console.error( err );
         });
+
+        function cargaPipeline( clienteID ) {
+            axios.get( '/api/obtienePipeline/' + clienteID , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
+                 .then( response => {
+                    response.data.indicadores.forEach( function( e , i ){
+                        var datos   = new Array();
+                        var colores = new Array();
+                        var titulo  = e.idty;
+                        var id      = e.id;
+                        var idCont  = 'graficaPipeline_' + i;
+
+                        e.pipeline.detalles.forEach( function( p , indice ) {
+                            colores.push( ( ( p.estado == true ) ? '#3E5A8E' : '#d1d1d1' ) );
+                            var estado = ( p.estado == true ) ? '(' + p.peso + '%) Finalizado' : '(' + p.peso + '%) Pendiente';
+                            datos.push( { name: p.tituloDetalle , label:estado , description: p.descripcion } );
+                        });
+
+                        var grafica = document.createElement( 'div' );
+                        grafica.setAttribute( 'id' , idCont );
+                        document.getElementById( 'contendorPipeline' ).appendChild( grafica );
+                        document.getElementById( idCont ).style.height = '220px';
+                        document.getElementById( idCont ).className    = 'border-bottom';
+
+                        Highcharts.chart( idCont , {
+                            chart: { type: 'timeline' },
+                            xAxis: { visible: false },
+                            yAxis: { visible: false },
+                            title: { text: '<a href="javascript:void(0)" onclick="return contenidos(\'clientes_editapropuesta\','+id+')">' + titulo + '</a>', useHTML: true },
+                            colors: colores,
+                            credits: { enabled: false },
+                            series: [{ data: datos }]
+                        });
+                    });
+                 })
+                 .catch( err => {
+                   console.log( err );
+                 });
+        }
 </script>

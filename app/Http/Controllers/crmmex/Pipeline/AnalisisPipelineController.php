@@ -40,8 +40,9 @@ class AnalisisPipelineController extends Controller
         foreach( $propuestas AS $propuesta ) {
             $categoriaPropuesta = $propuesta->categoria;
             $indicadores[ 'indicadores' ][] = array(
-              'idty'      =>  $propuesta->propuestaIDTY,
-              'estado' => self::getIndicador( $categoriaPropuesta , $clienteID , $propuesta->id )
+              'id'       => $propuesta->id,
+              'idty'     => $propuesta->propuestaIDTY,
+              'pipeline' => self::getIndicador( $categoriaPropuesta , $clienteID , $propuesta->id )
             );
         }
 

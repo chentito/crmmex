@@ -27,6 +27,7 @@
   <div class="row">
     <div class="col-sm-12 text-center">
       <button class="btn btn-sm btn-info" id="btnSelTodosConfGrid" name="btnSelTodosConfGrid">Seleccionar todos</button>
+      <button class="btn btn-sm btn-info" id="btnDesSelTodosConfGrid" name="btnDesSelTodosConfGrid">Quitar todos</button>
       <button class="btn btn-sm btn-success" id="btnGdaConfGrid" name="btnGdaConfGrid">Guardar</button>
       <button class="btn btn-sm btn-warning" id="btnGdaConfGridCierra" name="btnGdaConfGridCierra">Cancelar</button>
     </div>

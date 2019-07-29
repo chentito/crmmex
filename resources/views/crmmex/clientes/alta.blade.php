@@ -25,16 +25,16 @@
                         <i class="fa fa-address-book fa-sm"></i><span class="d-none d-sm-inline">  Dirección</span>
                     </a>
                 </li-->
-                <!--li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" id="adicionales-tab" data-toggle="tab" href="#adicionales" role="tab" aria-controls="adicionales" aria-selected="false">
-                        <i class="fa fa-paperclip fa-sm"></i><span class="d-none d-sm-inline">  Campos Adicionales</span>
+                        <i class="fa fa-chart-line fa-sm"></i><span class="d-none d-sm-inline">  Pipeline</span>
                     </a>
-                </li-->
+                </li>
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade" id="adicionales" role="tabpanel" aria-labelledby="adicionales-tab">
                     <div class="container border-left border-bottom border-right p-1">
-
+                        <div id="contendorPipeline"></div>
                     </div>
                 </div>
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -71,15 +71,6 @@
                               <label for="contacto_celular">No. Celular</label>
                               <input type="text" id="contacto_celular" name="contacto_celular[]" class="form-control form-control-sm" value="" placeholder="Celular" maxlength="10">
                           </div>
-                          <!--div class="col-sm-3 mb-1">
-                              <label for="contacto_celular_compania">Compañia</label>
-                              <select id="contacto_celular_compania" name="contacto_celular_compania[]" class="custom-select custom-select-sm">
-                                  <option value="1">AT&T</option>
-                                  <option value="2">Telcel</option>
-                                  <option value="3">Unefon</option>
-                                  <option value="4">Movistar</option>
-                              </select>
-                          </div-->
                           <input type="hidden" id="contacto_celular_compania" name="contacto_celular_compania[]" value="">
                           <div class="col-sm-3 mb-1">
                               <label for="contacto_telefono">Teléfono</label>
@@ -94,24 +85,9 @@
                           </div>
                       </div>
                       <div class="row">
-                          <!--div class="col-sm-3 mb-1">
-                              <label for="contacto_area">Área</label>
-                              <select id="contacto_area" name="contacto_area[]" class="custom-select custom-select-sm">
-                                  <option value="1">Finanzas</option>
-                                  <option value="2">Ventas</option>
-                                  <option value="3">TI</option>
-                                  <option value="4">Administraci&oacute;n</option>
-                                  <option value="5">Recursos Humanos</option>
-                              </select>
-                          </div-->
                           <input type="hidden" id="contacto_area" name="contacto_area[]" value="">
-                          <!--div class="col-sm-3 mb-1">
-                              <label for="contacto_puesto">Puesto</label>
-                              <input type="text" id="contacto_puesto" name="contacto_puesto[]" class="form-control form-control-sm" value="" placeholder="Puesto">
-                          </div-->
                           <input type="hidden" id="contacto_puesto" name="contacto_puesto[]" value="">
                           <div class="col-sm-3 mb-1"></div>
-
                       </div>
                       <div class="row" id="contenedorContactos">
                       </div>
@@ -156,42 +132,12 @@
                                   <option value="1">Cliente</option>
                               </select>
                           </div>
-                          <!--div class="col-sm-3 mb-1">
-                              <label for="catalogo_5">Giro</label>
-                              <select id="catalogo_5" name="catalogo_5" class="custom-select custom-select-sm"></select>
-                          </div-->
                       </div>
-                      <!--div class="row">
-                          <div class="col-sm-3 mb-1">
-                              <label for="catalogo_1">Categoría</label>
-                              <select id="catalogo_1" name="catalogo_1" class="custom-select custom-select-sm"></select>
-                          </div>
-                          <div class="col-sm-3 mb-1">
-                              <label for="catalogo_2">Sub-Categoría</label>
-                              <select id="catalogo_2" name="catalogo_2" class="custom-select custom-select-sm"></select>
-                          </div>
-                          <div class="col-sm-3 mb-1">
-                              <label for="catalogo_3">Medio de Contacto</label>
-                              <select id="catalogo_3" name="catalogo_3" class="custom-select custom-select-sm"></select>
-                          </div>
-                          <div class="col-sm-3 mb-1">
-                              <label for="catalogo_4">Empleados</label>
-                              <select id="catalogo_4" name="catalogo_4" class="custom-select custom-select-sm"></select>
-                          </div>
-                      </div-->
                       <div class="row">
                           <div class="col-sm-6 mb-1">
                               <label for="catalogo_2">Observaciones</label>
                               <textarea class="form-control" id="cliente_observaciones" name="cliente_observaciones" rows="1"></textarea>
-                          </div>
-                          <!--div class="col-sm-3 mb-1">
-                              <label for="catalogo_11">Grupo</label>
-                              <select id="cliente_grupo" name="cliente_grupo" class="custom-select custom-select-sm">
-                                  <option value="1">Ocasional</option>
-                                  <option value="2">Frecuente</option>
-                                  <option value="3">VIP</option>
-                              </select>
-                          </div-->
+                          </div>                    
                       </div>
                       <div class="row mt-2">
                         <div class="col-sm-2">

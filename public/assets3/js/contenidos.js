@@ -246,16 +246,23 @@ function generaDataGrid( id , filtro = '' ) {
                         e.preventDefault();
                         var url = '/api/actualizaGridConfig';
                         var datos = new FormData( document.getElementById( 'formConfGrid' ) );
-                        axios.post( url , datos )
-                             .then( request => {
-                               aviso( 'Listado actualizado correctamente' );
-                               seccion = document.getElementById(  ( document.getElementById( 'confGrid_seccion' ).value == "" )
-                                      ? 'nombreSeccionRecargar' : 'confGrid_seccion' ).value;
-                               contenidos( seccion , f.replace( '/' , '' ) );
-                             })
-                             .catch( err => {
-                               console.log( err );
-                             });
+                        var fields = 0;
+                        for ( var [key, value] of datos.entries() ) { fields ++; }
+
+                        if( fields <= 2 ) {
+                          aviso( 'Debe seleccionar al menos una columna para mostrar' , false );
+                        } else {
+                          axios.post( url , datos )
+                               .then( request => {
+                                 aviso( 'Listado actualizado correctamente' );
+                                 seccion = document.getElementById(  ( document.getElementById( 'confGrid_seccion' ).value == "" )
+                                        ? 'nombreSeccionRecargar' : 'confGrid_seccion' ).value;
+                                 contenidos( seccion , f.replace( '/' , '' ) );
+                               })
+                               .catch( err => {
+                                 console.log( err );
+                               });
+                        }
                     });
 
                     document.getElementById( 'btnGdaConfGridCierra' ).addEventListener( 'click' , function() {
@@ -266,10 +273,19 @@ function generaDataGrid( id , filtro = '' ) {
                     document.getElementById( 'btnSelTodosConfGrid' ).addEventListener( 'click' , function(){
                         var checkboxes = new Array();
                         checkboxes = document.getElementById( 'formConfGrid' ).getElementsByTagName('input');
-
                         for (var i=0; i<checkboxes.length; i++)  {
                           if (checkboxes[i].type == 'checkbox')   {
                             checkboxes[i].checked = true;
+                          }
+                        }
+                    });
+
+                    document.getElementById( 'btnDesSelTodosConfGrid' ).addEventListener( 'click' , function(){
+                        var checkboxes = new Array();
+                        checkboxes = document.getElementById( 'formConfGrid' ).getElementsByTagName('input');
+                        for (var i=0; i<checkboxes.length; i++)  {
+                          if (checkboxes[i].type == 'checkbox')   {
+                            checkboxes[i].checked = false;
                           }
                         }
                     });
