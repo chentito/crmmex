@@ -16,7 +16,7 @@
     <li>
       <a href="#usuarios" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user-tie fa-lg"></i>  Usuarios</a>
       <ul class="collapse list-unstyled" id="usuarios">
-          <li><a href="javascript:void(0)" onclick="return contenidos('ejecutivos_alta');">Alta</a></li>
+          <!--li><a href="javascript:void(0)" onclick="return contenidos('ejecutivos_alta');">Alta</a></li-->
           <li><a href="javascript:void(0)" onclick="return contenidos('ejecutivos_listado');">Listado</a></li>
       </ul>
     </li>
@@ -73,7 +73,7 @@
                 <ul class="collapse list-unstyled" id="configuracionesUsuarios">
                     <li><a href="javascript:void(0)" onclick="return contenidos('ejecutivos_roles');"> > Perfiles</a></li>
                 </ul>
-            </li>           
+            </li>
             <li>
                 <a href="#configuracionesMercadotecnia" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Mercadotecnia</a>
                 <ul class="collapse list-unstyled" id="configuracionesMercadotecnia">

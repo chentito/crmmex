@@ -20,6 +20,7 @@ use App\Models\crmmex\Clientes\Propuestas AS Propuestas;
 use App\Models\crmmex\Utils\Predefinidos AS Predefinidos;
 use App\Models\crmmex\Mercadotecnia\Listas AS Listados;
 use App\Models\crmmex\Mercadotecnia\Piezas AS Pieza;
+use App\Models\crmmex\Sistema\Perfiles AS Perfiles;
 use App\User AS Ejecutivo;
 
 use Illuminate\Http\Request;
@@ -370,5 +371,13 @@ class UtilsController extends Controller
               $opcion->status = 0;
               $opcion->save();
            }
+
+         /*
+          * Obtiene el nombre del perfil asignado a un usuario
+          */
+          public static function nombrePerfil( $perfilID ) {
+              $perfil = Perfiles::find( $perfilID );
+              return $perfil->rol;
+          }
 
 }
