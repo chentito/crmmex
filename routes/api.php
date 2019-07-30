@@ -226,6 +226,13 @@ Route::middleware( 'auth:api' )->post( '/actualizaDescripcionProcesos'       , '
 Route::middleware( 'auth:api' )->get ( '/reporteIndicadores' , 'crmmex\Reportes\IndicadoresController@listadoIndicadores' );
 
 
+/************************************ Privilegios y permisos ************************************/
+Route::middleware( 'auth:api' )->get ( '/listadoModulos'                , 'crmmex\Sistema\ModulosController@listadoModulos' );
+Route::middleware( 'auth:api' )->get ( '/listadoSecciones/{moduloID?}'  , 'crmmex\Sistema\SeccionesController@listadoSecciones' );
+Route::middleware( 'auth:api' )->get ( '/listadoPrivilegios/{perfilID}' , 'crmmex\Sistema\PrivilegiosController@listadoPrivilegios' );
+Route::middleware( 'auth:api' )->post( '/guardaPrivilegios'             , 'crmmex\Sistema\PrivilegiosController@guardaPrivilegios' );
+
+
 /************************************ Pruebas API consumidas desdee Angular ************************************/
 Route::get   ( '/users'      , 'UsersController@index'   )->middleware( 'cors' );
 Route::get   ( '/users/{id}' , 'UsersController@show'    )->middleware( 'cors' );

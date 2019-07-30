@@ -48,85 +48,19 @@
                 <option value="-">Seleccione Perfil</option>
             </select>
           </div>
-          <div class="col-sm-9"></div>
-        </div>
-        <hr>
-        <div class="row mt-3">
-          <div class="col-sm-3 mt-2">
-              <div class="card card-sm">
-                  <div class="card-header">Clientes</div>
-                  <div class="card-body">
-                      <ul>
-                        <li><input type="checkbox" id="1_1_privilegio" name="1_1_privilegio" class="mr-2"><label for="1_1_privilegio">Alta</label></li>
-                        <li><input type="checkbox" id="1_2_privilegio" name="1_2_privilegio" class="mr-2"><label for="1_2_privilegio">Listado</label></li>
-                        <li><input type="checkbox" id="1_3_privilegio" name="1_3_privilegio" class="mr-2"><label for="1_3_privilegio">Edicion de registro</label></li>
-                        <li><input type="checkbox" id="1_4_privilegio" name="1_4_privilegio" class="mr-2"><label for="1_4_privilegio">Seguimientos</label></li>
-                        <li><input type="checkbox" id="1_5_privilegio" name="1_5_privilegio" class="mr-2"><label for="1_5_privilegio">Propuestas</label></li>
-                      </ul>
-                  </div>
-              </div>
+          <div class="col-sm-9 text-right">
+              <button class="btn btn-sm {{$btn}}" disabled onclick="estadoCheckBoxes(true)" id="configuracionPrivilegios_btnSelTodos" name="configuracionPrivilegios_btnSelTodos"><i class="fa fa-sm fa-check-square"></i> Todos</button>
+              <button class="btn btn-sm {{$btn}}" disabled onclick="estadoCheckBoxes(false)" id="configuracionPrivilegios_btnSelNinguno" name="configuracionPrivilegios_btnSelNinguno"><i class="fa fa-sm fa-square"></i> Ninguno</button>
+              <button class="btn btn-sm {{$btn}}" disabled id="configuracionPrivilegios_btnGuarda" name="configuracionPrivilegios_btnGuarda"><i class="fa fa-sm fa-save"></i> Guardar</button>
           </div>
-          <div class="col-sm-3 mt-2">
-              <div class="card card-sm">
-                  <div class="card-header">Ventas</div>
-                  <div class="card-body">
-                      <ul>
-                        <li><input type="checkbox" id="1_1_privilegio" name="1_1_privilegio" class="mr-2"><label for="1_1_privilegio">Reportes</label></li>
-                        <li><input type="checkbox" id="1_2_privilegio" name="1_2_privilegio" class="mr-2"><label for="1_2_privilegio">Listado facturas</label></li>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-          <div class="col-sm-3 mt-2">
-              <div class="card card-sm">
-                  <div class="card-header">Mercadotecnia</div>
-                  <div class="card-body">
-                      <ul>
-                        <li><input type="checkbox" id="1_1_privilegio" name="1_1_privilegio" class="mr-2"><label for="1_1_privilegio">Campañas</label></li>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-          <div class="col-sm-3 mt-2">
-              <div class="card card-sm">
-                  <div class="card-header">Reportes</div>
-                  <div class="card-body">
-                      <ul>
-                        <li><input type="checkbox" id="1_1_privilegio" name="1_1_privilegio" class="mr-2"><label for="1_1_privilegio">Resumen</label></li>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-          <div class="col-sm-3 mt-2">
-              <div class="card card-sm">
-                  <div class="card-header">Configuraciones</div>
-                  <div class="card-body">
-                      <ul>
-                        <li><input type="checkbox" id="1_1_privilegio" name="1_1_privilegio" class="mr-2"><label for="1_1_privilegio">Catalogos Generales</label></li>
-                        <li><input type="checkbox" id="1_2_privilegio" name="1_2_privilegio" class="mr-2"><label for="1_2_privilegio">Productos/Servicios</label></li>
-                        <li><input type="checkbox" id="1_3_privilegio" name="1_3_privilegio" class="mr-2"><label for="1_3_privilegio">Forecast</label></li>
-                        <li><input type="checkbox" id="1_4_privilegio" name="1_4_privilegio" class="mr-2"><label for="1_4_privilegio">Pipeline</label></li>
-                        <li><input type="checkbox" id="1_5_privilegio" name="1_5_privilegio" class="mr-2"><label for="1_5_privilegio">Campos Adicionales</label></li>
-                        <li><input type="checkbox" id="1_5_privilegio" name="1_5_privilegio" class="mr-2"><label for="1_5_privilegio">SMTP</label></li>
-                        <li><input type="checkbox" id="1_5_privilegio" name="1_5_privilegio" class="mr-2"><label for="1_5_privilegio">Branding</label></li>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-          <div class="col-sm-3 mt-2">
-              <div class="card card-sm">
-                  <div class="card-header">Ejecutivos</div>
-                  <div class="card-body">
-                      <ul>
-                        <li><input type="checkbox" id="1_1_privilegio" name="1_1_privilegio" class="mr-2"><label for="1_1_privilegio">Perfil</label></li>
-                        <li><input type="checkbox" id="1_2_privilegio" name="1_2_privilegio" class="mr-2"><label for="1_2_privilegio">Actividades</label></li>
-                        <li><input type="checkbox" id="1_3_privilegio" name="1_3_privilegio" class="mr-2"><label for="1_3_privilegio">Listado Ejecutivos</label></li>
-                        <li><input type="checkbox" id="1_4_privilegio" name="1_4_privilegio" class="mr-2"><label for="1_4_privilegio">Roles</label></li>
-                      </ul>
-                  </div>
-              </div>
+          <div class="col-sm-12">
+              <hr>
           </div>
         </div>
+        <form id="configuracionPrivilegios_form" name="configuracionPrivilegios_form">
+            <input type="hidden" id="perfilIDConf" name="perfilIDConf" value="">
+            <div class="row" id="contenedorCajasModulosSecciones"></div>
+        </form>
       </div>
   </div>
 </div>
@@ -134,8 +68,41 @@
 <script>
     generaDataGrid( 'listadoPerfiles' );
     cargaRoles();
+    cargaSeccionesPorModulo();
+    estadoCheckBoxes( false , false );
 
-    document.getElementById( 'btnGuardaPerfil' ).addEventListener( 'click' , function( e ){
+    document.getElementById( 'configuracionPrivilegios_btnGuarda' ).addEventListener( 'click' , function( e ) {
+        e.preventDefault();
+        var datos = new FormData( document.getElementById( 'configuracionPrivilegios_form' ) );
+        var conf  = {headers:{ 'Accept':'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } };
+        axios.post( '/api/guardaPrivilegios' , datos , conf )
+             .then( response => {
+                aviso( 'Privilegio actualizado correctamente' );
+                contenidos( 'ejecutivos_roles' );
+             })
+             .catch( err => {
+                  console.log( err );
+             });
+    });
+
+    document.getElementById( 'roles_listadoPerfiles' ).addEventListener( 'change' , function( e ) {
+        e.preventDefault();
+        var perfilID = this.value;
+        if( perfilID != '-' ) {
+            cargaPrivilegiosPorPerfil( this.value );
+            document.getElementById( 'configuracionPrivilegios_btnSelTodos' ).disabled = false;
+            document.getElementById( 'configuracionPrivilegios_btnSelNinguno' ).disabled = false;
+            document.getElementById( 'configuracionPrivilegios_btnGuarda' ).disabled = false;
+            document.getElementById( 'perfilIDConf' ).value = this.value;
+        } else {
+           estadoCheckBoxes(false);
+           document.getElementById( 'configuracionPrivilegios_btnSelTodos' ).disabled = true;
+           document.getElementById( 'configuracionPrivilegios_btnSelNinguno' ).disabled = true;
+           document.getElementById( 'configuracionPrivilegios_btnGuarda' ).disabled = true;
+        }
+    });
+
+    document.getElementById( 'btnGuardaPerfil' ).addEventListener( 'click' , function( e ) {
         e.preventDefault();
         var datos = new FormData( document.getElementById( 'roles_form' ) );
         if( document.getElementById( 'roles_idPerfil' ).value == '0' ) {
@@ -167,4 +134,85 @@
                 console.log( err );
              });
     }
+
+    function cargaPrivilegiosPorPerfil( perfilID ) {
+        estadoCheckBoxes( false );
+        var header = {headers:{ 'Accept':'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } };
+        axios.get( '/api/listadoPrivilegios/' + perfilID , header )
+             .then( response => {
+                response.data.forEach( function( e , i ){
+                    document.getElementById( 'seccion_' + e.idSeccion ).checked = true;
+                });
+             })
+             .catch( err => {
+                console.log( err );
+             });
+    }
+
+    function estadoCheckBoxes( estado , deshabilitado=false) {
+        var checkboxes = new Array();
+        checkboxes = document.getElementById( 'configuracionPrivilegios_form' ).getElementsByTagName( 'input' );
+        for (var i=0; i<checkboxes.length; i++)  {
+            if ( checkboxes[ i ].type == 'checkbox' ) {
+                checkboxes[ i ].checked = estado;
+                checkboxes[ i ].disabled = deshabilitado;
+            }
+        }
+    }
+
+    function cargaSeccionesPorModulo() {
+        var header = {headers:{ 'Accept':'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } };
+        axios.get( '/api/listadoModulos' , header )
+             .then( response => {
+                  response.data.forEach( function( e , i ){
+                      var div = document.createElement( 'div' );
+                      div.className = 'col-sm-4 mt-2';
+                      var card = document.createElement( 'div' );
+                      card.className = 'card card-sm';
+                      var header = document.createElement( 'div' );
+                      header.className = 'card-header';
+                      header.innerHTML = e.nombre;
+                      var body = document.createElement( 'div' );
+                      body.className = 'card-body';
+                      var ul = document.createElement( 'ul' );
+
+                      axios.get( '/api/listadoSecciones/' + e.id , header )
+                           .then( response => {
+                                response.data.forEach( function( el , il ) {
+                                    var li = document.createElement( 'li' );
+                                    var x = document.createElement( 'input' );
+                                    x.className = 'ml-2 mr-2';
+                                    x.setAttribute( 'value' , el.id );
+                                    x.setAttribute( 'type'  , 'checkbox' );
+                                    x.setAttribute( 'name'  , 'seccion_' + el.id );
+                                    x.setAttribute( 'id'    , 'seccion_' + el.id );
+                                    x.setAttribute( 'title' , el.descripcion );
+
+                                    var label = document.createElement( 'label' );
+                                    label.setAttribute( 'for'   , 'seccion_' + el.id );
+                                    label.setAttribute( 'title' , el.descripcion );
+                                    label.innerHTML = el.nombre;
+
+                                    li.appendChild( x );
+                                    li.appendChild( label );
+                                    ul.appendChild( li );
+                                });
+                           })
+                           .catch( err => {
+                              console.log( err );
+                           });
+                      body.appendChild( ul ) ;
+
+                      card.appendChild( header );
+                      card.appendChild( body );
+                      div.appendChild( card );
+
+                      document.getElementById( 'contenedorCajasModulosSecciones' ).appendChild( div );
+                  });
+             })
+             .catch( err => {
+                  console.log( err );
+             });
+    }
+
 </script>
