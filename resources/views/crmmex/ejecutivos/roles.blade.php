@@ -146,7 +146,7 @@
               var msj = 'modificado';
         }
 
-        axios.post( url , datos , {header:{ 'Accept':'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
+        axios.post( url , datos , {headers:{ 'Accept':'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
              .then( response => {
                   aviso( 'El perfil se ha ' + msj + ' correctamente' );
                   contenidos( 'ejecutivos_roles' );
@@ -157,7 +157,7 @@
     });
 
     function cargaRoles() {
-        axios.get( '/api/listadoPerfiles' , {header:{ 'Accept':'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
+        axios.get( '/api/listadoPerfiles' , {headers:{ 'Accept':'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
              .then( response => {
                 response.data.perfiles.forEach( function( e , i ){
                     document.getElementById( 'roles_listadoPerfiles' ).add( new Option( e.nombre , e.id , false , false ) );
