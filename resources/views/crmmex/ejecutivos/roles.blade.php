@@ -161,8 +161,8 @@
     }
 
     function cargaSeccionesPorModulo() {
-        var header = {headers:{ 'Accept':'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } };
-        axios.get( '/api/listadoModulos' , header )
+        var headers = {headers:{ 'Accept':'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } };
+        axios.get( '/api/listadoModulos' , headers )
              .then( response => {
                   response.data.forEach( function( e , i ){
                       var div = document.createElement( 'div' );
@@ -176,7 +176,7 @@
                       body.className = 'card-body';
                       var ul = document.createElement( 'ul' );
 
-                      axios.get( '/api/listadoSecciones/' + e.id , header )
+                      axios.get( '/api/listadoSecciones/' + e.id , headers )
                            .then( response => {
                                 response.data.forEach( function( el , il ) {
                                     var li = document.createElement( 'li' );
