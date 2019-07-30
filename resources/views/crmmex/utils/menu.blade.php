@@ -71,16 +71,9 @@
             <li>
                 <a href="#configuracionesUsuarios" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Usuarios</a>
                 <ul class="collapse list-unstyled" id="configuracionesUsuarios">
-                    <li><a href="javascript:void(0)" onclick="return contenidos('ejecutivos_roles');"> > Roles</a></li>
+                    <li><a href="javascript:void(0)" onclick="return contenidos('ejecutivos_roles');"> > Perfiles</a></li>
                 </ul>
-            </li>
-            <!--li>
-                <a href="#configuracionesVentas" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Ventas</a>
-                <ul class="collapse list-unstyled" id="configuracionesVentas">
-                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_forecast');"> > Forecast</a></li>
-                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_pipeline');"> > Pipeline</a></li>
-                </ul>
-            </li-->
+            </li>           
             <li>
                 <a href="#configuracionesMercadotecnia" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Mercadotecnia</a>
                 <ul class="collapse list-unstyled" id="configuracionesMercadotecnia">

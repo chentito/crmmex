@@ -155,6 +155,11 @@ Route::middleware( 'auth:api' )->get ( '/listadoFormularios'                    
 Route::middleware( 'auth:api' )->post( '/cargaHistoricosLayout'                                          , 'crmmex\Sistema\HistoricosController@cargaHistoricos' );
 Route::middleware( 'auth:api' )->get ( '/listadoHistoricos'                                              , 'crmmex\Sistema\HistoricosController@listadoHistoricos' );
 Route::middleware( 'auth:api' )->get ( '/generaLayoutHistoricos/{fechainicial}/{fechaFinal}'             , 'crmmex\Sistema\HistoricosController@exportarCSV' );
+Route::middleware( 'auth:api' )->get ( '/listadoPerfiles'                                                , 'crmmex\Sistema\PerfilesController@listadoPerfiles' );
+Route::middleware( 'auth:api' )->get ( '/detallePerfil/{perfilID}'                                       , 'crmmex\Sistema\PerfilesController@consultaPerfil' );
+Route::middleware( 'auth:api' )->post( '/actualizaPerfil'                                                , 'crmmex\Sistema\PerfilesController@editaPerfil' );
+Route::middleware( 'auth:api' )->post( '/altaPerfil'                                                     , 'crmmex\Sistema\PerfilesController@altaPerfil' );
+Route::middleware( 'auth:api' )->post( '/eliminaPerfil/{perfilID}'                                       , 'crmmex\Sistema\PerfilesController@eliminaPerfil' );
 
 
 /************************************ Multimedia ************************************/
