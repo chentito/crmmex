@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\crmmex\Sistema\Privilegios AS Privilegios;
+use App\Models\crmmex\Sistema\PrivilegiosModulos AS PrivilegiosModulos;
+use App\Models\crmmex\Sistema\Modulos AS Modulos;
 
 class AccesoController extends Controller
 {
@@ -19,6 +21,22 @@ class AccesoController extends Controller
                                ->where( 'idSeccion' , $seccionID )
                                ->first();
         return ( $acceso->status == 1 ) ? true : false ;
+    }
+
+    // Verifica privilegios para el listado de modulos del menu
+    public function verModulos( $perfilID ) {
+        $modulos = Modulos::where( 'status' , 1 )->get();
+        $accesos = array();
+
+        foreach( $modulos AS $modulo ) {
+            $acceso    = PrivilegiosModulos::where( 'moduloID' , $modulo->id )->where( 'perfilID' , $perfilID )->where( 'status' , 1 )->first();
+            $accesos[] = array(
+                'modulo' => $modulo->id,
+                'acceso' => ( ( $acceso ) ? '1' : '0' )
+            );
+        }
+
+        return response()->json( $accesos );
     }
 
 }

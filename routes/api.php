@@ -231,6 +231,7 @@ Route::middleware( 'auth:api' )->get ( '/listadoModulos'                , 'crmme
 Route::middleware( 'auth:api' )->get ( '/listadoSecciones/{moduloID?}'  , 'crmmex\Sistema\SeccionesController@listadoSecciones' );
 Route::middleware( 'auth:api' )->get ( '/listadoPrivilegios/{perfilID}' , 'crmmex\Sistema\PrivilegiosController@listadoPrivilegios' );
 Route::middleware( 'auth:api' )->post( '/guardaPrivilegios'             , 'crmmex\Sistema\PrivilegiosController@guardaPrivilegios' );
+Route::middleware( 'auth:api' )->post( '/verificaModulos/{perfilID}'    , 'crmmex\Sistema\AccesoController@verModulos' );
 
 
 /************************************ Pruebas API consumidas desdee Angular ************************************/

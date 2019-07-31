@@ -1,40 +1,39 @@
-<ul class="list-unstyled components">
-    <li>
-        <a href="#prospectos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users fa-lg"></i>  Prospectos</a>
+<ul class="list-unstyled components" id="menuNavegacionModulos">
+    <li id="moduloMenu_1">
+      <a href="#usuarios" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-sm fa-user-tie"></i>  Usuarios</a>
+      <ul class="collapse list-unstyled" id="usuarios">
+          <li><a href="javascript:void(0)" onclick="return contenidos('ejecutivos_listado');">Listado</a></li>
+      </ul>
+    </li>
+    <li id="moduloMenu_2">
+        <a href="#prospectos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-sm fa-users"></i>  Prospectos</a>
         <ul class="collapse list-unstyled" id="prospectos">
             <li><a href="javascript:void(0)" onclick="return contenidos('prospectos_nuevo' );">Alta</a></li>
             <li><a href="javascript:void(0)" onclick="return contenidos('prospectos_listado');">Listado</a></li>
         </ul>
     </li>
-    <li>
-        <a href="#clientes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-users fa-lg"></i>  Clientes</a>
+    <li id="moduloMenu_3">
+        <a href="#clientes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-sm fa-users"></i>  Clientes</a>
         <ul class="collapse list-unstyled" id="clientes">
             <li><a href="javascript:void(0)" onclick="return contenidos('clientes_alta');">Alta</a></li>
             <li><a href="javascript:void(0)" onclick="return contenidos('clientes_listado');">Listado</a></li>
         </ul>
     </li>
-    <li>
-      <a href="#usuarios" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user-tie fa-lg"></i>  Usuarios</a>
-      <ul class="collapse list-unstyled" id="usuarios">
-          <!--li><a href="javascript:void(0)" onclick="return contenidos('ejecutivos_alta');">Alta</a></li-->
-          <li><a href="javascript:void(0)" onclick="return contenidos('ejecutivos_listado');">Listado</a></li>
-      </ul>
-    </li>
-    <li>
-        <a href="#mercadotecnia" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-lightbulb fa-lg"></i>  Mercadotecnia</a>
+    <li id="moduloMenu_6">
+        <a href="#mercadotecnia" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-sm fa-lightbulb"></i>  Mercadotecnia</a>
         <ul class="collapse list-unstyled" id="mercadotecnia">
             <li><a href="javascript:void(0)" onclick="return contenidos('mercadotecnia_listado');">Campañas</a></li>
         </ul>
     </li>
-    <li>
-        <a href="#reportes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-chart-pie fa-lg"></i>  Reportes</a>
+    <li id="moduloMenu_7">
+        <a href="#reportes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-sm fa-chart-pie"></i>  Reportes</a>
         <ul class="collapse list-unstyled" id="reportes">
             <li><a href="javascript:void(0)" onclick="return contenidos('reportes_pipeline');">Pipeline</a></li>
             <li><a href="javascript:void(0)" onclick="return contenidos('reportes_resumen');">Ventas</a></li>
         </ul>
     </li>
-    <li>
-        <a href="#configuraciones" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-cogs fa-lg"></i>  Configuraciones</a>
+    <li id="moduloMenu_8">
+        <a href="#configuraciones" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-sm fa-cogs"></i>  Configuraciones</a>
         <ul class="collapse list-unstyled" id="configuraciones">
             <li>
                 <a href="#configuracionesProspectos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Prospectos</a>
@@ -106,3 +105,4 @@
         </ul>
     </li>
 </ul>
+<input type="hidden" id="log_perfilID" name="log_perfilID" value="{{ Auth::user()->rol }}">
