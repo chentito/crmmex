@@ -56,7 +56,7 @@ class AnalisisPipelineController extends Controller
         } else {
             $propGral  = Indicadores::where( 'grupoID' , '0' )->where( 'status' , 1 )->count();
             if( $propGral > 0 ) {
-                $propGral  = Indicadores::where( 'grupoID' , '0' )->where( 'status' , 1 )->first();
+                $indicador  = Indicadores::where( 'grupoID' , '0' )->where( 'status' , 1 )->first();
             } else {
                 $indicador = false;
             }
