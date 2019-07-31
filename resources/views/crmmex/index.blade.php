@@ -75,10 +75,9 @@
                 <!-- Contenido Principal -->
                 <div class="container">
                     <div class="row">
-                        <div class="col-12 mt-3 mb-3">
+                        <div class="col-12 mt-2 mb-3 pl-2 pr-2">
                             <div class="card card-small shadow {{$borde}}" style="opacity: {{$trans}}">
                                 <div class="card-body" id="contenidosPrincipales">
-                                    @yield( 'contenidos' )
                                 </div>
                             </div>
                         </div>

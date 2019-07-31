@@ -69,7 +69,6 @@
     generaDataGrid( 'listadoPerfiles' );
     cargaRoles();
     cargaSeccionesPorModulo();
-    estadoCheckBoxes( false , false );
 
     document.getElementById( 'configuracionPrivilegios_btnGuarda' ).addEventListener( 'click' , function( e ) {
         e.preventDefault();
@@ -95,7 +94,7 @@
             document.getElementById( 'configuracionPrivilegios_btnGuarda' ).disabled = false;
             document.getElementById( 'perfilIDConf' ).value = this.value;
         } else {
-           estadoCheckBoxes(false);
+           estadoCheckBoxes( false , true );
            document.getElementById( 'configuracionPrivilegios_btnSelTodos' ).disabled = true;
            document.getElementById( 'configuracionPrivilegios_btnSelNinguno' ).disabled = true;
            document.getElementById( 'configuracionPrivilegios_btnGuarda' ).disabled = true;
@@ -140,8 +139,11 @@
         var header = {headers:{ 'Accept':'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } };
         axios.get( '/api/listadoPrivilegios/' + perfilID , header )
              .then( response => {
-                response.data.forEach( function( e , i ){
+                response.data.secciones.forEach( function( e , i ){
                     document.getElementById( 'seccion_' + e.idSeccion ).checked = true;
+                });
+                response.data.modulos.forEach( function( e , i ){
+                    document.getElementById( 'modulo_' + e.moduloID ).checked = true;
                 });
              })
              .catch( err => {
@@ -154,8 +156,8 @@
         checkboxes = document.getElementById( 'configuracionPrivilegios_form' ).getElementsByTagName( 'input' );
         for (var i=0; i<checkboxes.length; i++)  {
             if ( checkboxes[ i ].type == 'checkbox' ) {
-                checkboxes[ i ].checked = estado;
-                checkboxes[ i ].disabled = deshabilitado;
+                 checkboxes[ i ].checked  = estado;
+                 checkboxes[ i ].disabled = deshabilitado;
             }
         }
     }
@@ -171,7 +173,7 @@
                       card.className = 'card card-sm';
                       var header = document.createElement( 'div' );
                       header.className = 'card-header';
-                      header.innerHTML = e.nombre;
+                      header.innerHTML = e.nombre + '<div class="float-right"><input type="checkbox" id="modulo_'+e.id+'" name="modulo_'+e.id+'" onclick="privilegiosPorSeccion(\'modulo_'+e.id+'\')"></div>';
                       var body = document.createElement( 'div' );
                       body.className = 'card-body';
                       var ul = document.createElement( 'ul' );
@@ -182,11 +184,12 @@
                                     var li = document.createElement( 'li' );
                                     var x = document.createElement( 'input' );
                                     x.className = 'ml-2 mr-2';
-                                    x.setAttribute( 'value' , el.id );
-                                    x.setAttribute( 'type'  , 'checkbox' );
-                                    x.setAttribute( 'name'  , 'seccion_' + el.id );
-                                    x.setAttribute( 'id'    , 'seccion_' + el.id );
-                                    x.setAttribute( 'title' , el.descripcion );
+                                    x.setAttribute( 'value'    , el.id );
+                                    x.setAttribute( 'type'     , 'checkbox' );
+                                    x.setAttribute( 'disabled' , true );
+                                    x.setAttribute( 'name'     , 'seccion_' + el.id );
+                                    x.setAttribute( 'id'       , 'seccion_' + el.id );
+                                    x.setAttribute( 'title'    , el.descripcion );
 
                                     var label = document.createElement( 'label' );
                                     label.setAttribute( 'for'   , 'seccion_' + el.id );
@@ -206,12 +209,27 @@
                       card.appendChild( header );
                       card.appendChild( body );
                       div.appendChild( card );
-
                       document.getElementById( 'contenedorCajasModulosSecciones' ).appendChild( div );
                   });
+
+                  estadoCheckBoxes( false , true );
              })
              .catch( err => {
                   console.log( err );
+             });
+    }
+
+    function privilegiosPorSeccion( moduloID ) {
+        var id     = moduloID.split( '_' );
+        var header = {headers:{ 'Accept':'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } };
+        axios.get( '/api/listadoSecciones/' + id[ 1 ] , header )
+             .then( response => {
+                  response.data.forEach( function( e , i ){
+                      document.getElementById( 'seccion_' + e.id ).checked = document.getElementById( moduloID ).checked;
+                  });
+             })
+             .catch( err => {
+                console.log( err );
              });
     }
 
