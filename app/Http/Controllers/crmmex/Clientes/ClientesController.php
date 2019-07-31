@@ -17,6 +17,7 @@ use App\Models\crmmex\Clientes\Propuestas AS Prop;
 
 use App\Http\Controllers\crmmex\Utils\UtilsController AS Utiles;
 use App\Http\Controllers\crmmex\Utils\CamposAdicionalesController AS CamposAdicionales;
+use App\Http\Controllers\crmmex\Sistema\AccesoController AS Acceso;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -121,9 +122,9 @@ class ClientesController extends Controller
 
       foreach( $clientes AS $cliente ) {
           $arrClientes[ 'clientes' ][] = array (
-              'id'                => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')">'.$cliente->id.'</a>',
-              'razonSocial'       => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')">'.$cliente->razonSocial.'</a>',
-              'rfc'               => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')">'.$cliente->rfc.'</a>',
+              'id'                => ( Acceso::ver( 29 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')">'.$cliente->id.'</a>' : $cliente->id ),
+              'razonSocial'       => ( Acceso::ver( 29 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')">'.$cliente->razonSocial.'</a>' : $cliente->razonSocial ),
+              'rfc'               => ( Acceso::ver( 29 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')">'.$cliente->rfc.'</a>' : $cliente->rfc ),
               'giro'              => Utiles::valorCatalogo( $cliente->giro ),
               'categoria'         => $cliente->categoria,
               'subcategoria'      => $cliente->subcategoria,
@@ -135,12 +136,14 @@ class ClientesController extends Controller
               'grupo'             => $cliente->grupo,
               'producto'          => $cliente->productoID,
               'status'            => ( ( $cliente->status == '1' ) ? 'Activo' : 'Deshabilitado' ),
-              'opciones'          => ( ( $cliente->status == '2' ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Habilitar Cliente" onclick="habilitaCliente(\''.$cliente->id.'\')"><i class="fa fa-check fa-sm"></i></a>' :
-                                          '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
-                                        . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Detalle Cliente" onclick="contenidos(\'clientes_detalle\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-id-card fa-sm"></i></a>'
-                                        . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Seguimiento" onclick="contenidos(\'clientes_seguimiento\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-toolbox fa-sm"></i></a>'
-                                        . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Propuesta" onclick="contenidos(\'clientes_listadoPropuestas\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-file-alt fa-sm"></i></a>'
-                                        . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Eliminar Cliente" onclick="contenidos(\'clientes_eliminaCliente\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-trash fa-sm"></i></a>'
+              'opciones'          => ( ( $cliente->status == '2' ) ?
+                                          ( Acceso::ver( 40 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Habilitar Cliente" onclick="habilitaCliente(\''.$cliente->id.'\')"><i class="fa fa-check fa-sm"></i></a>' : '' )
+                                          :
+                                          ( Acceso::ver( 29 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')"><i class="fa fa-edit fa-sm"></i></a>' : '' )
+                                        . ( Acceso::ver( 45 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Detalle Cliente" onclick="contenidos(\'clientes_detalle\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-id-card fa-sm"></i></a>' : '' )
+                                        . ( Acceso::ver( 27 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Seguimiento" onclick="contenidos(\'clientes_seguimiento\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-toolbox fa-sm"></i></a>' : '' )
+                                        . ( Acceso::ver( 33 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Propuesta" onclick="contenidos(\'clientes_listadoPropuestas\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-file-alt fa-sm"></i></a>' : '' )
+                                        . ( Acceso::ver( 40 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Eliminar Cliente" onclick="contenidos(\'clientes_eliminaCliente\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-trash fa-sm"></i></a>' : '' )
                                      )
           );
       }
