@@ -28,6 +28,7 @@
            document.getElementById( 'propuesta_observaciones' ).value  = response.data.observaciones;
            document.getElementById( 'catalogo_12' ).value              = response.data.categoria;
            document.getElementById( 'propuesta_fechaVigencia' ).value  = response.data.fechaVigencia;
+           document.getElementById( 'propuesta_ordenCompra' ).value    = response.data.ordenCompra;
            document.getElementById( 'propuesta_monto' ).value          = response.data.monto;
            document.getElementById( 'propuesta_total' ).value          = response.data.total;
            document.getElementById( 'propuesta_descuento' ).value      = response.data.descuento;

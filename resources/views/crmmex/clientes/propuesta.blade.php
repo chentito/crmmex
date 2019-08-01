@@ -19,18 +19,22 @@
                         <input type="text" id="propuesta_identificador" name="propuesta_identificador" class="form-control form-control-sm" placeholder="Identificador" readonly>
                     </div>
                     <div class="col-sm-3 mb-1">
+                        <label for="catalogo_15">Contacto</label>
+                        <select class="custom-select custom-select-sm" id="propuesta_contactos" name="propuesta_contactos"></select>
+                    </div>
+                    <div class="col-sm-2 mb-1">
                           <label for="catalogo_12">Grupo</label>
                           <select class="custom-select custom-select-sm" id="catalogo_12" name="catalogo_12">
                               <option value="">-</option>
                           </select>
                     </div>
-                    <div class="col-sm-3 mb-1">
-                        <label for="catalogo_15">Contacto</label>
-                        <select class="custom-select custom-select-sm" id="propuesta_contactos" name="propuesta_contactos"></select>
-                    </div>
-                    <div class="col-sm-3 mb-1">
+                    <div class="col-sm-2 mb-1">
                         <label for="propuesta_descuento">Fecha Vigencia:</label>
                         <input type="text" class="form-control form-control-sm" id="propuesta_fechaVigencia" name="propuesta_fechaVigencia" placeholder="Fecha de Vigencia" readonly>
+                    </div>
+                    <div class="col-sm-2 mb-1">
+                        <label for="propuesta_cotizacion">Orden de compra:</label>
+                        <input type="text" class="form-control form-control-sm" id="propuesta_ordenCompra" name="propuesta_ordenCompra" placeholder="Orden de compra">
                     </div>
                 </div>
                 <div class="row">

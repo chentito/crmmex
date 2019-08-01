@@ -367,7 +367,7 @@ function setSelectedIndex( s , v) {
 // Alertas y avisos
 function aviso( mensaje , exito=true ) {
 
-    tipo = ( exito == true ) ? 'success' : 'danger';
+    tipo = ( exito == true ) ? 'info' : 'danger';
 
     $.notify({
       	// options

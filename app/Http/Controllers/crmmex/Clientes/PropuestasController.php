@@ -42,6 +42,7 @@ class PropuestasController extends Controller
                 'categoria'       => $propuesta->categoria,
                 'fechaCreacion'   => $propuesta->fechaCreacion,
                 'fechaVigencia'   => $propuesta->fechaVigencia,
+                'ordenCompra'     => $propuesta->ordenCompra,
                 'fechaEnvio'      => $propuesta->fechaEnvio,
                 'observaciones'   => $propuesta->observaciones,
                 'requerimientos'  => $propuesta->requerimientos,
@@ -91,6 +92,7 @@ class PropuestasController extends Controller
           $propuesta->contactoID      = $request->propuesta_contactos;
           $propuesta->fechaCreacion   = date( 'Y-m-d H:i:s' );
           $propuesta->fechaVigencia   = $request->propuesta_fechaVigencia;
+          $propuesta->ordenCompra     = $request->propuesta_ordenCompra;
           $propuesta->observaciones   = $request->propuesta_observaciones;
           $propuesta->requerimientos  = $request->propuesta_requerimientos;
           $propuesta->categoria       = $request->catalogo_12;
@@ -150,7 +152,7 @@ class PropuestasController extends Controller
           $propuesta->descuento       = $request->propuesta_descuento;
           $propuesta->promocion       = $request->propuesta_promocion;
           $propuesta->fechaVigencia   = $request->propuesta_fechaVigencia;
-          //$propuesta->propuestaIDTY   = $request->propuesta_identificador;
+          $propuesta->ordenCompra     = $request->propuesta_ordenCompra;
           $propuesta->estadoPropuesta = 0;
 
           if( $propuesta->save() ) {
@@ -197,6 +199,7 @@ class PropuestasController extends Controller
               'contactoTxt'    => Utils::nombreContacto( $propuesta->contactoID ),
               'fechaCreacion'  => Utils::formatoFecha( $propuesta->fechaCreacion ),
               'fechaVigencia'  => Utils::formatoFecha( $propuesta->fechaVigencia ),
+              'ordenCompra'    => $propuesta->ordenCompra,
               'fechaEnvio'     => Utils::formatoFecha( $propuesta->fechaEnvio ),
               'observaciones'  => $propuesta->observaciones,
               'requerimientos' => $propuesta->requerimientos,
