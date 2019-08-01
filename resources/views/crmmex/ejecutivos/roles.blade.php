@@ -49,9 +49,9 @@
             </select>
           </div>
           <div class="col-sm-9 text-right">
-              <button class="btn btn-sm {{$btn}}" disabled onclick="estadoCheckBoxes(true)" id="configuracionPrivilegios_btnSelTodos" name="configuracionPrivilegios_btnSelTodos"><i class="fa fa-sm fa-check-square"></i> Todos</button>
-              <button class="btn btn-sm {{$btn}}" disabled onclick="estadoCheckBoxes(false)" id="configuracionPrivilegios_btnSelNinguno" name="configuracionPrivilegios_btnSelNinguno"><i class="fa fa-sm fa-square"></i> Ninguno</button>
-              <button class="btn btn-sm {{$btn}}" disabled id="configuracionPrivilegios_btnGuarda" name="configuracionPrivilegios_btnGuarda"><i class="fa fa-sm fa-save"></i> Guardar</button>
+              <input type="checkbox" name="configuracionPrivilegios_btnSelTodos" id="configuracionPrivilegios_btnSelTodos" disabled>
+              <label for="configuracionPrivilegios_btnSelTodos">Todos</label>
+              <button class="btn btn-sm {{$btn}} ml-3" disabled id="configuracionPrivilegios_btnGuarda" name="configuracionPrivilegios_btnGuarda"><i class="fa fa-sm fa-save"></i> Guardar</button>
           </div>
           <div class="col-sm-12">
               <hr>
@@ -84,19 +84,22 @@
              });
     });
 
+    document.getElementById( 'configuracionPrivilegios_btnSelTodos' ).addEventListener( 'click' , function( e ){
+        estadoCheckBoxes( document.getElementById( 'configuracionPrivilegios_btnSelTodos' ).checked );
+    });
+
     document.getElementById( 'roles_listadoPerfiles' ).addEventListener( 'change' , function( e ) {
+        document.getElementById( 'configuracionPrivilegios_btnSelTodos' ).checked=false;
         e.preventDefault();
         var perfilID = this.value;
         if( perfilID != '-' ) {
             cargaPrivilegiosPorPerfil( this.value );
             document.getElementById( 'configuracionPrivilegios_btnSelTodos' ).disabled = false;
-            document.getElementById( 'configuracionPrivilegios_btnSelNinguno' ).disabled = false;
             document.getElementById( 'configuracionPrivilegios_btnGuarda' ).disabled = false;
             document.getElementById( 'perfilIDConf' ).value = this.value;
         } else {
            estadoCheckBoxes( false , true );
            document.getElementById( 'configuracionPrivilegios_btnSelTodos' ).disabled = true;
-           document.getElementById( 'configuracionPrivilegios_btnSelNinguno' ).disabled = true;
            document.getElementById( 'configuracionPrivilegios_btnGuarda' ).disabled = true;
         }
     });
