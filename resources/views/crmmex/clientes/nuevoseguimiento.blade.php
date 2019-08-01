@@ -10,17 +10,34 @@
 
       <div class="container border-left border-bottom border-right p-1">
         <form id="formSeguimiento" name="formSeguimiento">
-          <input type="hidden" name="clienteID" id="clienteID" value="{{$param}}">
+          <input type="text" name="clienteID" id="clienteID" value="{{$param}}">
           <input type="hidden" name="seguimiento_idty" id="seguimiento_idty" value="">
           <div class="row">
-              <!--div class="col-sm-3">
-                  <label for="prospectos_nuevoseguimiento_titulo">Título</label>
-                  <input class="form-control form-control-sm" id="prospectos_nuevoseguimiento_titulo" name="prospectos_nuevoseguimiento_titulo">
-              </div-->
               <input type="hidden" id="prospectos_nuevoseguimiento_titulo" name="prospectos_nuevoseguimiento_titulo">
               <div class="col-sm-3">
-                  <label for="prospectos_nuevoseguimiento_fecha">Fecha Ejecución</label>
+                  <label for="prospectos_nuevoseguimiento_fecha">Fecha Ejecución:</label>
                   <input class="form-control form-control-sm" id="prospectos_nuevoseguimiento_fecha" name="prospectos_nuevoseguimiento_fecha" readonly>
+              </div>
+              <div class="col-sm-3">
+                  <div class="row">
+                      <div class="col-sm-6">
+                          <label for="prospectos_nuevoseguimiento_hora">Hora:</label>
+                          <select class="custom-select custom-select-sm" name="prospectos_nuevoseguimiento_hora" id="prospectos_nuevoseguimiento_hora">
+                            @for ($i = 7; $i <= 20; $i++)
+                                <option value="@if(strlen($i)===1) {{ '0'.$i }} @else {{$i}} @endif">@if(strlen($i)===1) {{ '0'.$i }} @else {{$i}} @endif</option>
+                            @endfor
+                          </select>
+                      </div>
+                      <div class="col-sm-6">
+                        <label for="prospectos_nuevoseguimiento_minutos">Minuto:</label>
+                        <select class="custom-select custom-select-sm" name="prospectos_nuevoseguimiento_minutos" id="prospectos_nuevoseguimiento_minutos">
+                            <option value="00">00</option>
+                            <option value="15">15</option>
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                        </select>
+                      </div>
+                  </div>
               </div>
               <div class="col-sm-3">
                   <label for="catalogo_16">Tipo</label>
@@ -101,10 +118,12 @@
       await axios( path , config )
           .then( datos => {
               d         = datos.data;
-              contactos = d[ 'contactos' ];
-              contactos.forEach( function( b ) {
-                document.getElementById( 'prospectos_nuevoseguimiento_involucrados' ).add( new Option( b.contacto , b.id , '' , ( ( selected == b.id ) ? true : false ) ) );
-              });
+              if(typeof d[ 'contactos' ] != 'undefined') {
+                  contactos = d[ 'contactos' ];
+                  contactos.forEach( function( b ) {
+                    document.getElementById( 'prospectos_nuevoseguimiento_involucrados' ).add( new Option( b.contacto , b.id , '' , ( ( selected == b.id ) ? true : false ) ) );
+                  });
+              }
           })
           .catch( err => {
               console.error( err );

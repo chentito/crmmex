@@ -114,7 +114,7 @@
        }
    });
 
-    axios.get( '/api/listadoListas' , config )
+    axios.get( '/api/listadoListas' , { headers: { 'Accept': 'application/json', 'Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
          .then( response => {
             response.data.forEach( function( e , i ){
                 document.getElementById( 'detalleCampania_destinatarios' ).add( new Option( e.nombre , e.id, false, false ) );
@@ -124,7 +124,7 @@
            console.log( err );
          });
 
-    axios.get( '/api/listadoPiezasDisponibles' , config )
+    axios.get( '/api/listadoPiezasDisponibles' , { headers: { 'Accept': 'application/json', 'Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
          .then( response => {
             response.data.forEach( function( e , i ){
                 document.getElementById( 'detalleCampania_templates' ).add( new Option( e.nombrePieza , e.id, false, false ) );

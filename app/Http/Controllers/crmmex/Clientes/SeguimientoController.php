@@ -87,6 +87,7 @@ class SeguimientoController extends Controller
      * Metodo que guarda los datos de un nuevo seguimiento
      */
     public function guardaSeguimiento( Request $request ) {
+        $fecha = explode( ' ' , $request->prospectos_nuevoseguimiento_fecha );
         $seguimiento = new Seguimiento();
         $seguimiento->clienteID       = $request->clienteID;
         $seguimiento->contactoID      = $request->prospectos_nuevoseguimiento_involucrados;
@@ -95,7 +96,9 @@ class SeguimientoController extends Controller
         $seguimiento->nombreActividad = $request->prospectos_nuevoseguimiento_titulo;
         $seguimiento->descripcion     = $request->prospectos_nuevoseguimiento_texto;
         $seguimiento->fechaAlta       = date( 'Y-m-d H:i:s' );
-        $seguimiento->fechaEjecucion  = $request->prospectos_nuevoseguimiento_fecha;
+        $seguimiento->fechaEjecucion  = $fecha[ 0 ] . ' '
+                                      . $request->prospectos_nuevoseguimiento_hora . ':'
+                                      . $request->prospectos_nuevoseguimiento_minutos . ':00';
         $seguimiento->estado          = $request->catalogo_17;
         $seguimiento->status          = 1;
         $stat                         = $seguimiento->save();
@@ -108,15 +111,19 @@ class SeguimientoController extends Controller
      */
     public function obtieneSeguimiento( $id ) {
         $seguimiento = Seguimiento::find( $id );
+        $ejecucion   = explode( ' ' , $seguimiento->fechaEjecucion );
+        $horario     = explode( ':' , $ejecucion[ 1 ] );
         $seg         = array(
-          'segID'          => $seguimiento->id,
-          'clienteID'      => $seguimiento->clienteID,
-          'titulo'         => $seguimiento->nombreActividad,
-          'fechaEjecucion' => $seguimiento->fechaEjecucion,
-          'tipo'           => $seguimiento->tipoActividad,
-          'estado'         => $seguimiento->estado,
-          'contacto'       => $seguimiento->contactoID,
-          'descripcion'    => $seguimiento->descripcion
+          'segID'           => $seguimiento->id,
+          'clienteID'       => $seguimiento->clienteID,
+          'titulo'          => $seguimiento->nombreActividad,
+          'fechaEjecucion'  => $ejecucion[ 0 ],
+          'horaEjecucion'   => $horario[ 0 ],
+          'minutoEjecucion' => $horario[ 1 ],
+          'tipo'            => $seguimiento->tipoActividad,
+          'estado'          => $seguimiento->estado,
+          'contacto'        => $seguimiento->contactoID,
+          'descripcion'     => $seguimiento->descripcion
         );
         return response()->json( $seg );
     }
@@ -125,13 +132,16 @@ class SeguimientoController extends Controller
      * Metodo que actualiza un registro en particular
      */
      public function actualizaSeguimiento( Request $request ) {
+        $fecha = explode( ' ' , $request->prospectos_nuevoseguimiento_fecha );
         $segID                        = $request->seguimiento_idty;
         $seguimiento                  = Seguimiento::find( $segID );
         $seguimiento->contactoID      = $request->prospectos_nuevoseguimiento_involucrados;
         $seguimiento->tipoActividad   = $request->catalogo_16;
         $seguimiento->nombreActividad = $request->prospectos_nuevoseguimiento_titulo;
         $seguimiento->descripcion     = $request->prospectos_nuevoseguimiento_texto;
-        $seguimiento->fechaEjecucion  = $request->prospectos_nuevoseguimiento_fecha;
+        $seguimiento->fechaEjecucion  = $fecha[ 0 ] . ' '
+                                      . $request->prospectos_nuevoseguimiento_hora . ':'
+                                      . $request->prospectos_nuevoseguimiento_minutos . ':00';
         $seguimiento->estado          = $request->catalogo_17;
         $gSeg                         = $seguimiento->save();
         $resp                         = array( 'stat' => $gSeg , 'idty' => $seguimiento->id );

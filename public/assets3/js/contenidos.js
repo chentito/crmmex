@@ -354,6 +354,16 @@ function cargaCamposAdicionales( seccion , valores=[] ) {
          );
 }
 
+// Establece el valor de un combo
+function setSelectedIndex( s , v) {
+    for ( var i = 0; i < s.options.length; i++ ) {
+        if ( s.options[i].text == v ) {
+            s.options[i].selected = true;
+            return;
+        }
+    }
+}
+
 // Alertas y avisos
 function aviso( mensaje , exito=true ) {
 

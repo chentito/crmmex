@@ -12,23 +12,14 @@
   </div>
 </div>
 <script>
-    $( document ).ready( function() {
-        var clienteID = document.getElementById( 'clienteID' ).value;
-        generaDataGrid( 'listadoSeguimientos' , clienteID );
-        cargaNombre();
-    });
+    var clienteID = document.getElementById( 'clienteID' ).value;
+    generaDataGrid( 'listadoSeguimientos' , clienteID );
+    cargaNombre();
 
     function cargaNombre() {
-        var token  = sessionStorage.getItem( 'apiToken' );
         var url    = '/api/clienteIdty/' + document.getElementById( 'clienteID' ).value;
-        var config = {
-          headers: {
-            "Accept" : "application/json",
-            "Authorization" : "Bearer " + token
-          }
-        };
 
-        axios.post( url , {} , config )
+        axios.post( url , {} , { headers: { "Accept" : "application/json", "Authorization" : "Bearer " + sessionStorage.getItem( 'apiToken' ) } } )
              .then( response => {
                 document.getElementById( 'clienteIdty' ).innerHTML = response.data;
              })

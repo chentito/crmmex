@@ -27,8 +27,8 @@
               document.getElementById( 'detalleCampania_asunto' ).value        = response.data.subject;
               document.getElementById( 'detalleCampania_destinatarios' ).value = response.data.destinatarios;
               document.getElementById( 'detalleCampania_templates' ).value     = response.data.pieza;
-              document.getElementById( 'detalleCampania_horaEnvio' ).value     = hora[ 0 ];
-              document.getElementById( 'detalleCampania_minutoEnvio' ).value   = hora[ 1 ];
+              setSelectedIndex( document.getElementById( 'detalleCampania_horaEnvio' ) , hora[ 0 ] );
+              setSelectedIndex( document.getElementById( 'detalleCampania_minutoEnvio' ) , hora[ 1 ] );
            })
            .catch( err => {
              console.log( err );
