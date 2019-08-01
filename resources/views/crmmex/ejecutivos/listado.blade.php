@@ -20,12 +20,15 @@
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
       <div class="container border-left border-right border-bottom p-2">
-        <form id="edicionUsuariosForm">
+        <form id="edicionUsuariosForm" class="needs-validation" novalidate>
           <input type="hidden" id="edicionUsuariosID" name="edicionUsuariosID" value="" >
-            <div class="row">
+            <div class="form-row">
               <div class="col-sm-3">
                 <label for="edicionUsuariosNombre">Nombre:</label>
-                <input type="text" class="form-control form-control-sm" id="edicionUsuariosNombre" name="edicionUsuariosNombre" placeholder="Nombre" />
+                <input type="text" class="form-control form-control-sm" id="edicionUsuariosNombre" name="edicionUsuariosNombre" placeholder="Nombre" value="" required>
+                <div class="invalid-feedback">
+                    No ha proporcionado el nombre del usuario.
+                </div>
               </div>
               <div class="col-sm-3">
                 <label for="edicionUsuariosAPaterno">A.Paterno:</label>
@@ -43,18 +46,27 @@
                 </select>
               </div>
             </div>
-            <div class="row">
+            <div class="form-row">
               <div class="col-sm-3">
                 <label for="edicionUsuariosEmail">Email:</label>
-                <input type="text" class="form-control form-control-sm" id="edicionUsuariosEmail" name="edicionUsuariosEmail" placeholder="Email" />
+                <input type="text" class="form-control form-control-sm" id="edicionUsuariosEmail" name="edicionUsuariosEmail" placeholder="Email" value="" required>
+                <div class="invalid-feedback">
+                  No ha proporcionado el email del usuario.
+                </div>
               </div>
               <div class="col-sm-3">
                 <label for="edicionUsuariosContrasena">Contrase&ntilde;a:</label>
-                <input type="password" class="form-control form-control-sm" id="edicionUsuariosContrasena" name="edicionUsuariosContrasena" placeholder="Contrase&ntilde;a" />
+                <input type="password" class="form-control form-control-sm" id="edicionUsuariosContrasena" name="edicionUsuariosContrasena" placeholder="Contrase&ntilde;a" value="" required>
+                <div class="invalid-feedback">
+                  No ha proporcionado una contraseña.
+                </div>
               </div>
               <div class="col-sm-3">
                 <label for="edicionUsuariosRepiteContrasena">Repetir Contrase&ntilde;a:</label>
-                <input type="password" class="form-control form-control-sm" id="edicionUsuariosRepiteContrasena" name="edicionUsuariosRepiteContrasena" placeholder="Repetir Contrase&ntilde;a" />
+                <input type="password" class="form-control form-control-sm" id="edicionUsuariosRepiteContrasena" name="edicionUsuariosRepiteContrasena" placeholder="Repetir Contrase&ntilde;a" value="" required>
+                <div class="invalid-feedback">
+                  Debe repetir la contraseña.
+                </div>
               </div>
               <div class="col-sm-3">
                 <label for="edicionUsuariosRol">Perfil:</label>
@@ -66,7 +78,7 @@
                 <input type="text" class="form-control form-control-sm" id="edicionUsuariosExtension" name="edicionUsuariosExtension" placeholder="Extension" />
               </div>
             </div>
-            <div class="row">
+            <div class="form-row">
               <div class="col-sm-12">
                 <label for="edicionUsuariosComentarios">Comentarios</label>
                 <textarea id="edicionUsuariosComentarios" name="edicionUsuariosComentarios" class="form-control form-control-sm"></textarea>
@@ -74,7 +86,7 @@
             </div>
             <div class="row">
               <div class="col-sm-12 text-center mt-3">
-                <button class="btn btn-sm {{$btn}}" id="btnAltaEjecutivo"><i class="fa fa-save fa-sm"></i> Guardar</button>
+                <button class="btn btn-sm {{$btn}}" id="btnAltaEjecutivo" type="submit"><i class="fa fa-save fa-sm"></i> Guardar</button>
               </div>
             </div>
         </form>
@@ -87,6 +99,24 @@
 </div>
 
 <script>
+    (function() {
+      'use strict';
+      window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+      }, false);
+    })();
+
     generaDataGrid( 'listadoEjecutivos' );
     listadoPerfiles();
 

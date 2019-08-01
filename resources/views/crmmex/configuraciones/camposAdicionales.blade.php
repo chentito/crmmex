@@ -46,7 +46,7 @@
               </div>
             </div>
             <div class="col-sm-3 mt-1">
-              <label for="adicional_clientes_valores">Valores:</label>
+              <label for="adicional_clientes_valores">Valores (Sólo para opción múltiple):</label>
               <input type="text" id="adicional_clientes_valores" name="adicional_clientes_valores" placeholder="Valores (Separados por coma)" disabled class="form-control form-control-sm">
             </div>
             <div class="col-sm-3 mt-1">
@@ -106,7 +106,7 @@
         var msj = 'Campo actualizado correctamente';
     }
 
-    axios.post( url , datos )
+    axios.post( url , datos , { headers:{'Accept':'application/json','Authentication':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
          .then( response => {
             aviso( msj );
             contenidos( 'configuraciones_camposAdicionales' , document.getElementById( 'idSeccionConsultar' ).value );
