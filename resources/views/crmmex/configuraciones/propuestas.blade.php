@@ -1,12 +1,7 @@
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
-      <i class="fa fa-user fa-sm"></i><span class="d-none d-sm-inline">  Nombre Propuesta</span>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-      <i class="fa fa-handshake fa-sm"></i><span class="d-none d-sm-inline">  Políticas/Condiciones</span>
+      <i class="fa fa-cogs fa-sm"></i><span class="d-none d-sm-inline">  Configuraciones</span>
     </a>
   </li>
   <li class="nav-item">
@@ -20,10 +15,13 @@
       <div class="container border-left border-right border-bottom p-1">
           <div class="row mt-3">
               <div class="col-sm-12">
-                  Nomenclatura a utilizar para el identificador de las propuestas:
+                  <i class="fa fa-sm fa-key"></i> Nomenclatura a utilizar para el identificador de las propuestas:
+              </div>
+              <div class="col-sm-12">
+                  <hr>
               </div>
           </div>
-          <div class="row mt-3">
+          <div class="row">
               <div class="col-sm-12 text-center">
                 <form id="frmPropNom" name="frmPropNom">
                   <input type="hidden" id="nomenclatura_id" name="nomenclatura_id" value="1">
@@ -46,28 +44,48 @@
                 </form>
               </div>
           </div>
-          <div class="row mt-3">
+          <div class="row mt-1">
               <div class="col-sm-12 text-center">
                   <button class="btn btn-sm {{$btn}}" id="btnGdaNomenclatura"><i class="fa fa-save fa-sm"></i> Guardar</button>
               </div>
+          </div>
+          <div class="row mt-3">
+              <div class="col-sm-12">
+                  <i class="fa fa-sm fa-handshake"></i> Texto políticas y condiciones de uso:
+              </div>
+              <div class="col-sm-12">
+                  <hr>
+              </div>
+          </div>
+          <form id="frmPoliticasCondiciones" name="frmPoliticasCondiciones">
+          <input type="hidden" id="politicasCondiciones_id" name="politicasCondiciones_id" value="2">
+            <div class="row">
+              <div class="col-sm-12">
+                  <textarea rows="6" class="form-control form-control-sm" id="propuesta_politicasCondiciones" name="propuesta_politicasCondiciones"></textarea>
+              </div>
+              <div class="col-sm-12 mt-1 text-center">
+                  <button class="btn btn-sm {{$btn}}" id="btnGdaPoliticasCondiciones"><i class="fa fa-save fa-sm"></i> Guardar</button>
+              </div>
+            </div>
+          </form>
+          <div class="row">
+            <div class="col-sm-12">
+                <i class="fa fa-sm fa-calendar-alt"></i> Dias de vigencia:
+            </div>
+            <div class="col-sm-12">
+                <hr>
+            </div>
+            <div class="col-sm-3">
+                <input type="number" class="form-control form-control-sm" name="propuesta_diasVigencia" id="propuesta_diasVigencia" value="">
+            </div>
+            <div class="col-sm-12 mt-1 text-center">
+                <button class="btn btn-sm {{$btn}}" id="btnDiasVigenciaPropuesta"><i class="fa fa-save fa-sm"></i> Guardar</button>
+            </div>
           </div>
       </div>
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
       <div class="container border-left border-right border-bottom p-1">
-          <form id="frmPoliticasCondiciones" name="frmPoliticasCondiciones">
-              <input type="hidden" id="politicasCondiciones_id" name="politicasCondiciones_id" value="2">
-              <div class="row">
-                  <div class="col-sm-12">
-                      <label for="propuesta_politicasCondiciones">Texto de condiciones:</label>
-                      <textarea rows="6" class="form-control form-control-sm" id="propuesta_politicasCondiciones" name="propuesta_politicasCondiciones"></textarea>
-                      <br />
-                  </div>
-                  <div class="col-sm-12 text-center">
-                      <button class="btn btn-sm {{$btn}}" id="btnGdaPoliticasCondiciones"><i class="fa fa-save fa-sm"></i> Guardar</button>
-                  </div>
-              </div>
-          </form>
       </div>
   </div>
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -121,6 +139,19 @@
              });
     });
 
+    document.getElementById( 'btnDiasVigenciaPropuesta' ).addEventListener( 'click' , function( e ){
+        e.preventDefault();
+        var url = '/api/setPredefinido/3';
+        axios.post( url , { valorPredefinido_3:document.getElementById( 'propuesta_diasVigencia' ).value } , config )
+             .then( response => {
+                 aviso( 'Valor actualizado correctamente' );
+                 contenidos( 'configuraciones_propuestas' );
+             })
+             .catch( err => {
+                  console.log( err );
+             });
+    });
+
     document.getElementById( 'btnGdaPoliticasCondiciones' ).addEventListener( 'click' , function( e ){
         e.preventDefault();
         var url = '/api/setPredefinido/' + document.getElementById( 'politicasCondiciones_id' ).value;
@@ -130,7 +161,7 @@
                 contenidos( 'configuraciones_propuestas' );
              })
              .catch( err => {
-               console.log( err );
+                console.log( err );
              });
     });
 
@@ -181,6 +212,15 @@
      axios.get( url2 , config )
           .then( response => {
               document.getElementById( 'propuesta_politicasCondiciones' ).value=response.data.valor;
+          })
+          .catch( err => {
+            console.log( err );
+          });
+
+     var url3 = '/api/getPredefinido/3';
+     axios.get( url3 , config )
+          .then( response => {
+              document.getElementById( 'propuesta_diasVigencia' ).value=response.data.valor;
           })
           .catch( err => {
             console.log( err );

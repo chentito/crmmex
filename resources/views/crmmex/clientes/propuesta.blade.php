@@ -158,8 +158,6 @@
 
 <script>
       $( function () {
-
-          //axios.post( '/api/carritoElimina' , {} , {headers:{'Accept':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' ) }} );
           axios.post( '/carritoElimina' , {} , {headers:{'Accept':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' ) }} );
 
           $( '#propuesta_fechaVigencia' ).datepicker({
@@ -171,6 +169,15 @@
               daysOfWeekDisabled: "0,6",
               daysOfWeekHighlighted: "0,6"
           });
+
+          axios.get( '/api/getPredefinido/3' , {headers:{'Accept':'application/json','Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' ) }} )
+               .then( response => {
+                   var dias = response.data.valor;
+                   document.getElementById( 'propuesta_fechaVigencia' ).value = moment().add( dias , 'days').format("YYYY-MM-DD");
+               })
+               .catch( err => {
+                 console.log( err );
+               });
 
           cargaDatosComboCatalogo();
 
@@ -191,14 +198,8 @@
                 propuestaProducto_retencion     : document.getElementById( 'propuestaProducto_retencion' ).value
               };
 
-              var conf = {
-                  headers:{
-                    "Accept"        : "application/json",
-                    "Authorization" : "Bearer " + sessionStorage.getItem( 'apiToken' )
-                  }
-              };
+              var conf = { headers:{ "Accept"        : "application/json", "Authorization" : "Bearer " + sessionStorage.getItem( 'apiToken' ) } };
 
-              //axios.post( '/api/carrito' , datos , conf )
               axios.post( '/carrito' , datos , conf )
                    .then( response => {
                        var tabla   = document.getElementById( 'containerProductosPropuesta' ).getElementsByTagName( 'tbody' )[ 0 ];
@@ -239,22 +240,10 @@
               e.preventDefault();
               contenidos( 'clientes_listadoPropuestas' , document.getElementById( 'clienteID' ).value );
           });
-          /*document.getElementById( 'propuestaProducto_cantidad' ).addEventListener( 'change' , function( e ) {
-              e.preventDefault();
-              setMonto( document.getElementById( 'propuestaProducto_precio' ).value );
-          });*/
-          /*document.getElementById( 'propuestaProducto_precio' ).addEventListener( 'change' , function( e ) {
-              e.preventDefault();
-              setMonto( this.value );
-          });*/
           document.getElementById( 'btnGeneraPropuesta' ).addEventListener( 'click' , function( e ) {
               e.preventDefault();
               guardaDatosPropuesta();
           });
-          /*document.getElementById( 'btnGeneraVistaPrevia' ).addEventListener( 'click' , function( e ) {
-              e.preventDefault();
-              generaVistaPrevia();
-          });*/
           document.getElementById( 'catalogo_12' ).addEventListener( 'change' , function( e ) {
               e.preventDefault();
               if( this.value != '' ) {
@@ -263,7 +252,6 @@
                 document.getElementById( 'catalogo_8' ).value = "";
                 document.getElementById( 'propuestaProducto_productoID' ).value = "";
                 document.getElementById( 'propuestaProducto_observaciones' ).value = "";
-                //setMonto( 0 );
                 comboProductos( this.value );
               }
           });
