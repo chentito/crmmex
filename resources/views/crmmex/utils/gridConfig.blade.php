@@ -21,13 +21,18 @@
             </div>
         @endfor
       </div>
+      <div class="row">
+          <div class="col-sm-10 text-right"></div>
+          <div class="col-sm-2">
+              <input type="checkbox" name="gridSeleccionaTodo" id="gridSeleccionaTodo" >
+              <label for="gridSeleccionaTodo">Todo</label>
+          </div>
+      </div>
 
   </form>
 
   <div class="row">
     <div class="col-sm-12 text-center">
-      <button class="btn btn-sm btn-info" id="btnSelTodosConfGrid" name="btnSelTodosConfGrid">Seleccionar todos</button>
-      <button class="btn btn-sm btn-info" id="btnDesSelTodosConfGrid" name="btnDesSelTodosConfGrid">Quitar todos</button>
       <button class="btn btn-sm btn-success" id="btnGdaConfGrid" name="btnGdaConfGrid">Guardar</button>
       <button class="btn btn-sm btn-warning" id="btnGdaConfGridCierra" name="btnGdaConfGridCierra">Cancelar</button>
     </div>

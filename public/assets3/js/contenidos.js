@@ -284,26 +284,15 @@ function generaDataGrid( id , filtro = '' ) {
                     });
 
                     document.getElementById( 'btnGdaConfGridCierra' ).addEventListener( 'click' , function() {
-                        //document.getElementById( id + '_config' ).style.display = "none";
                         $( '#' + id + '_config' ).hide( 'blind' );
                     });
 
-                    document.getElementById( 'btnSelTodosConfGrid' ).addEventListener( 'click' , function(){
+                    document.getElementById( 'gridSeleccionaTodo' ).addEventListener( 'click' , function(){
                         var checkboxes = new Array();
                         checkboxes = document.getElementById( 'formConfGrid' ).getElementsByTagName('input');
                         for (var i=0; i<checkboxes.length; i++)  {
                           if (checkboxes[i].type == 'checkbox')   {
-                            checkboxes[i].checked = true;
-                          }
-                        }
-                    });
-
-                    document.getElementById( 'btnDesSelTodosConfGrid' ).addEventListener( 'click' , function(){
-                        var checkboxes = new Array();
-                        checkboxes = document.getElementById( 'formConfGrid' ).getElementsByTagName('input');
-                        for (var i=0; i<checkboxes.length; i++)  {
-                          if (checkboxes[i].type == 'checkbox')   {
-                            checkboxes[i].checked = false;
+                            checkboxes[i].checked = document.getElementById( 'gridSeleccionaTodo' ).checked;
                           }
                         }
                     });
