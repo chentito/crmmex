@@ -73,15 +73,22 @@
     document.getElementById( 'configuracionPrivilegios_btnGuarda' ).addEventListener( 'click' , function( e ) {
         e.preventDefault();
         var datos = new FormData( document.getElementById( 'configuracionPrivilegios_form' ) );
-        var conf  = {headers:{ 'Accept':'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } };
-        axios.post( '/api/guardaPrivilegios' , datos , conf )
-             .then( response => {
-                aviso( 'Privilegio actualizado correctamente' );
-                contenidos( 'ejecutivos_roles' );
-             })
-             .catch( err => {
-                  console.log( err );
-             });
+        var fields = 0;
+        for ( var [key, value] of datos.entries() ) { fields ++; }
+
+        if( fields <= 1 ) {
+          aviso( 'Debe habilitar al menos un privilegio para el perfil seleccionado' , false );
+        } else {
+          var conf  = {headers:{ 'Accept':'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } };
+          axios.post( '/api/guardaPrivilegios' , datos , conf )
+               .then( response => {
+                  aviso( 'Privilegio actualizado correctamente' );
+                  contenidos( 'ejecutivos_roles' );
+               })
+               .catch( err => {
+                    console.log( err );
+               });
+        }
     });
 
     document.getElementById( 'configuracionPrivilegios_btnSelTodos' ).addEventListener( 'click' , function( e ){
