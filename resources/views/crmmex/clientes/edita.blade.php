@@ -89,17 +89,30 @@
                         var grafica = document.createElement( 'div' );
                         grafica.setAttribute( 'id' , idCont );
                         document.getElementById( 'contendorPipeline' ).appendChild( grafica );
-                        document.getElementById( idCont ).style.height = '220px';
+                        document.getElementById( idCont ).style.height = '180px';
                         document.getElementById( idCont ).className    = 'border-bottom';
 
                         Highcharts.chart( idCont , {
                             chart: { type: 'timeline' },
                             xAxis: { visible: false },
                             yAxis: { visible: false },
-                            title: { text: '<a href="javascript:void(0)" onclick="return contenidos(\'clientes_editapropuesta\','+id+')">' + titulo + '</a>', useHTML: true },
+                            title: {
+                              align: 'left',
+                              useHTML: true,
+                              margin: 5,
+                              text: '<a href="javascript:void(0)" onclick="return contenidos(\'clientes_editapropuesta\','+id+')">' + titulo + '</a>'
+                            },
                             colors: colores,
                             credits: { enabled: false },
-                            series: [{ data: datos }]
+                            exporting: { enabled: false },
+                            series: [{
+                              dataLabels: {
+                                connectorColor: 'silver',
+                                alternate: false,
+                                distance: 0
+                              },
+                              data: datos
+                            }]
                         });
                     });
                  })

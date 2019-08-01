@@ -27,7 +27,7 @@
                 </li-->
                 <li class="nav-item">
                     <a class="nav-link" id="adicionales-tab" data-toggle="tab" href="#adicionales" role="tab" aria-controls="adicionales" aria-selected="false">
-                        <i class="fa fa-chart-line fa-sm"></i><span class="d-none d-sm-inline">  Pipeline</span>
+                        <i class="fa fa-chart-line fa-sm"></i><span class="d-none d-sm-inline">  Seguimiento a propuestas</span>
                     </a>
                 </li>
             </ul>
