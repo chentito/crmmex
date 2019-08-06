@@ -11,18 +11,8 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-      <i class="fa fa-list fa-sm"></i><span class="d-none d-sm-inline">  Listas de envío</span>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="formularios-tab" data-toggle="tab" href="#formularios" role="tab" aria-controls="formularios" aria-selected="false">
-      <i class="fa fa-align-justify fa-sm"></i><span class="d-none d-sm-inline">  Formularios</span>
-    </a>
-  </li>
-  <li class="nav-item">
     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">
-      <i class="fa fa-cogs fa-sm"></i><span class="d-none d-sm-inline">  Servicios Externos</span>
+      <i class="fa fa-edit fa-sm"></i><span class="d-none d-sm-inline">  Contacto</span>
     </a>
   </li>
 </ul>
@@ -85,58 +75,6 @@
       </div>
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-    <div class="container border-left border-right border-bottom p-1">
-        <div class="row">
-            <div class="col-sm-4">
-              <label for="listadoAudiencias">Listados</label>
-              <select class="custom-select custom-select-sm" id="listadoAudiencias" name="listadoAudiencias" multiple style="height:200px"></select>
-            </div>
-            <div class="col-sm-8">
-              <label for="listadoContactos">Contactos</label>
-              <select class="custom-select custom-select-sm" id="listadoContactos" name="listadoContactos" multiple style="height:200px"></select>
-            </div>
-        </div>
-        <div class="row mt-3"><div class="col-sm-2">Cargar Listado</div><div class="col-sm-10"><hr></div></div>
-        <form id="altaAudiencia_form" name="altaAudiencia_form">
-        <div class="row">
-            <div class="col-sm-4">
-              <div class="input-group">
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input custom-file-input-sm" id="altaAudiencia_file" name="altaAudiencia_file" aria-describedby="inputGroupFileAddon01" accept=".csv">
-                  <label class="custom-file-label" for="altaAudiencia_file">Seleccione archivo (formato CSV)</label>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-8">
-              <div class="row">
-                <div class="col-sm-3">
-                  <label for="altaAudiencia_posEmail">Posición columna email:</label>
-                  <input type="number" class="form-control form-control-sm" name="altaAudiencia_posEmail" id="altaAudiencia_posEmail" value="0">
-                </div>
-                <div class="col-sm-3">
-                  <label for="altaAudiencia_posNom">Posición columna nombre:</label>
-                  <input type="number" class="form-control form-control-sm" name="altaAudiencia_posNom" id="altaAudiencia_posNom" value="1">
-                </div>
-                <div class="col-sm-3">
-                  <label for="altaAudiencia_posTel">Posición columna teléfono:</label>
-                  <input type="number" class="form-control form-control-sm" name="altaAudiencia_posTel" id="altaAudiencia_posTel" value="2">
-                </div>
-                <div class="col-sm-3">
-                  <label for="altaAudiencia_posEmpresa">Posición columna empresa:</label>
-                  <input type="number" class="form-control form-control-sm" name="altaAudiencia_posEmpresa" id="altaAudiencia_posEmpresa" value="3">
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4 mt-3">
-              <label for="altaAudiencia_nombreListado">Nombre Listado:</label>
-              <input type="text" class="form-control form-control-sm" name="altaAudiencia_nombreListado" id="altaAudiencia_nombreListado" placeholder="Nombre Listado">
-            </div>
-            <div class="col-sm-12 text-center mt-3">
-              <button type="button" name="altaAudiencia_btnGuarda" id="altaAudiencia_btnGuarda" class="btn btn-sm {{$btn}}"><i class="fa fa-save fa-sm"></i> Guardar</button>
-            </div>
-      </div>
-      </form>
-    </div>
   </div>
   <div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="edit-tab">
     <div class="container border-left border-right border-bottom p-1">
@@ -181,118 +119,28 @@
   </div>
   <div class="tab-pane fade" id="formularios" role="tabpanel" aria-labelledby="formularios-tab">
     <div class="container border-left border-right border-bottom p-1">
-      <form id="formularios_form" name="formularios_form">
-        <div class="row">
-            <div class="col-sm-4">
-                <label for="">Nombre formulario:</label>
-                <input type="text" name="formularios_nombreForm" id="formularios_nombreForm" value="" class="form-control form-control-sm" placeholder="Nombre del formulario">
-            </div>
-            <div class="col-sm-6"></div>
-            <div class="col-sm-2">
-              <button type="button" name="formularios_AgregarCampo" id="formularios_AgregarCampo" class="btn btn-sm {{$btn}}"><i class="fa fa-plus fa-sm"></i> Agregar otro campo</button>
-            </div>
-        </div>
-        <div class="row" id="contenedorCamporFormulario">
-            <div class="col-sm-12 mt-1">
-              <div class="row">
-                <div class="col-sm-3">
-                  <label for="formularios_nombreCampo">Nombre del campo:</label>
-                  <input type="text" name="formularios_nombreCampo[]" id="formularios_nombreCampo" value="" class="form-control form-control-sm formularios_nombreCampo_dinamico" placeholder="Nombre del campo" maxlength="50">
-                </div>
-                <div class="col-sm-2">
-                  <label for="formularios_tipoCampo">Tipo:</label>
-                  <select class="custom-select custom-select-sm formularios_tipoCampo_dinamico" name="formularios_tipoCampo[]" id="formularios_tipoCampo">
-                      <option value="1">Texto libre</option>
-                      <option value="2">Listado</option>
-                      <option value="3">Multiples opciones</option>
-                  </select>
-                </div>
-                <div class="col-sm-2">
-                  <label for="formularios_oblCampo">Obligatoriedad:</label>
-                  <select class="custom-select custom-select-sm formularios_oblCampo_dinamico" name="formularios_oblCampo[]" id="formularios_oblCampo">
-                    <option value="1">Opcional</option>
-                    <option value="2">Obligatorio</option>
-                  </select>
-                </div>
-                <div class="col-sm-4 text-center">
-                  <label for="formularios_valoresCampo">Valores</label>
-                  <input type="text" placeholder="Valores" name="formularios_valoresCampo[]" id="formularios_valoresCampo" class="form-control form-control-sm formularios_valoresCampo_dinamico" value="">
-                </div>
-                <div class="col-sm-1"></div>
-              </div>
-            </div>
-        </div>
-        <div class="row mt-3">
-          <div class="col-sm-12 text-center">
-            <button class="btn btn-sm {{$btn}}" id="formulario_btnGuardaCamposForm" name="formulario_btnGuardaCamposForm"><i class="fa fa-save fa-sm"></i> Guardar</button>
-          </div>
-        </div>
-      </form>
     </div>
   </div>
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
     <div class="container border-left border-right border-bottom p-1">
-        Conexiones
+        <textarea id="mytextarea">Hello, World!</textarea>
     </div>
   </div>
 </div>
 
 <script>
-    cargaListados();
+
+    tinymce.init({
+        selector: '#mytextarea',
+        plugins: 'a11ychecker advcode casechange formatpainter linkchecker lists checklist media mediaembed pageembed permanentpen powerpaste tinycomments tinydrive tinymcespellchecker',
+        toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter insertfile pageembed permanentpen',
+        toolbar_drawer: 'floating',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Mexagon.net'
+    });
+
     cargaFormularios();
     listadoPiezas();
-
-    document.getElementById( 'formularios_AgregarCampo' ).addEventListener( 'click' , function( e ){
-        e.preventDefault();
-        axios.get( '/api/formsNuevoCampo' , { headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
-             .then( response => {
-               $( '#contenedorCamporFormulario' ).append( response.data.contenido );
-             })
-             .catch( err => {
-               console.log( err );
-             });
-
-    });
-
-    document.getElementById( 'formulario_btnGuardaCamposForm' ).addEventListener( 'click' , function( e ) {
-        e.preventDefault();
-        var datos   = new FormData( document.getElementById( 'formularios_form' ) );
-        var nombres = document.getElementsByClassName( 'formularios_nombreCampo_dinamico' );
-        var valores = document.getElementsByClassName( 'formularios_valoresCampo_dinamico' );
-        var tipos   = document.getElementsByClassName( 'formularios_tipoCampo_dinamico' );
-        var oblig   = document.getElementsByClassName( 'formularios_oblCampo_dinamico' );
-
-        if( document.getElementById( 'formularios_nombreForm' ).value == '' ) {
-             aviso( 'No ha proporcionado el nombre del formulario' , false );
-           } else {
-             var err = 0;
-             for( var n = 0 ; n < nombres.length ; n ++ ) {
-               if( nombres[ n ].value == '' ) {
-                   aviso( 'El nombre del campo no puede ser vacio' , false );
-                   err ++;
-               }
-             }
-
-             for( var n2 = 0 ; n2 < valores.length ; n2 ++ ) {
-                 if( valores[ n2 ].value == "" && ( tipos[ n2 ].value == '2' || tipos[ n2 ].value == '3' ) ) {
-                     aviso( 'El valor del campo no puede ser vacio si es un listado o multiples opciones' , false );
-                     err ++;
-                 }
-             }
-
-             if( err == 0 ) {
-                axios.post( '/api/guardaFormulario' , datos , { headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
-                   .then( response => {
-                     aviso( 'Formulario agregado correctamente' );
-                     contenidos( 'configuraciones_destinatarios' );
-                })
-                   .catch( err => {
-                     console.log( err );
-                });
-             }
-
-        }
-    });
 
     document.getElementById( 'altaNuevoTemplate_btn' ).addEventListener( 'click' , function( e ) {
         e.preventDefault();
@@ -382,16 +230,6 @@
        }
     });
 
-    document.getElementById( 'altaAudiencia_btnGuarda' ).addEventListener( 'click' , function( e ){
-        e.preventDefault();
-        altaAudiencia();
-    });
-
-    document.getElementById( 'listadoAudiencias' ).addEventListener( 'click' , function( e ){
-        e.preventDefault();
-        listadoContactosEnvio( this.value );
-    });
-
     function listadoPiezas() {
         document.getElementById( 'listaTemplatesDisponibles' ).innerHTML = "";
         axios.get( '/api/listadoPiezasDisponibles/' , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
@@ -417,78 +255,22 @@
         document.getElementById( 'altaAudiencia_posEmpresa' ).value    = '3';
     }
 
-    function altaAudiencia() {
-        if( document.getElementById( 'altaAudiencia_file' ).value == '' ) {
-          aviso( 'No ha seleccionado un archivo a procesar' , false );
-        } else if( document.getElementById( 'altaAudiencia_nombreListado' ).value == '' ) {
-          aviso( 'No ha proporcionado un nombre para el nuevo listado' , false );
-        } else if(
-            document.getElementById( 'altaAudiencia_posEmail' ).value == '' ||
-            document.getElementById( 'altaAudiencia_posNom' ).value == '' ||
-            document.getElementById( 'altaAudiencia_posTel' ).value == '' ||
-            document.getElementById( 'altaAudiencia_posEmpresa' ).value == ''
-         ) {
-          aviso( 'Debe asignar el nombre de la columna para todos los campos enlistados' );
-        } else {
-          abreModal();
-          var datos = new FormData( document.getElementById( 'altaAudiencia_form' ) );
-          axios.post( '/api/altaAudiencia' , datos , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ),'content-type': 'multipart/form-data'}})
-               .then( response => {
-                  cierraModal();
-                  aviso( response.data.msj );
-               })
-               .catch( err => {
-                 cierraModal();
-                 console.log( err );
-               });
-           limpiaForm();
-        }
-    }
+    function cargaFormularios() {
+       document.getElementById( 'altaNuevoTemplate_formOpciones' ).innerHTML = '';
+       document.getElementById( 'nuevoTemplateForm' ).innerHTML = '';
+       document.getElementById( 'altaNuevoTemplate_formOpciones' ).add( new Option( 'No usa formulario' , '0' , false , false ) );
+       document.getElementById( 'nuevoTemplateForm' ).add( new Option( 'No usa formulario' , '0' , false , false ) );
 
-    function listadoContactosEnvio( audienciaID ) {
-        document.getElementById( 'listadoContactos' ).innerHTML = '';
-        axios.get( '/api/listadoContactosAudiencia/' + audienciaID , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
-             .then( response => {
-               response.data.forEach( function( e , i ) {
-                  document.getElementById( 'listadoContactos' ).add( new Option( e.nombre + '|Email ' + e.email + ' |Telefono ' + e.telefono + ' |Empresa ' + e.empresa , e.id , false , false ) );
-               });
-             })
-             .catch( err => {
-               console.log( err );
-             });
-     }
-
-     function cargaListados() {
-       document.getElementById( 'listadoAudiencias' ).innerHTML = '';
-       var config = {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}};
-       axios.get( '/api/listadoListas' , config )
-            .then( response => {
-               response.data.forEach( function( e , i ){
-                   document.getElementById( 'listadoAudiencias' ).add( new Option( e.nombre , e.id , false , false ) );
-               });
-            })
-            .catch( err => {
+       axios.get( '/api/listadoFormularios' , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
+          .then( response => {
+              response.data.forEach( function( e , i ) {
+                document.getElementById( 'altaNuevoTemplate_formOpciones' ).add( new Option( e.nombreForm , e.id , false , false ) );
+                document.getElementById( 'nuevoTemplateForm' ).add( new Option( e.nombreForm , e.id , false , false ) );
+              });
+          })
+          .catch( err => {
               console.log( err );
-            });
-     }
-
-     function cargaFormularios() {
-        document.getElementById( 'altaNuevoTemplate_formOpciones' ).innerHTML = '';
-        document.getElementById( 'nuevoTemplateForm' ).innerHTML = '';
-        document.getElementById( 'altaNuevoTemplate_formOpciones' ).add( new Option( 'No usa formulario' , '0' , false , false ) );
-        document.getElementById( 'nuevoTemplateForm' ).add( new Option( 'No usa formulario' , '0' , false , false ) );
-
-        var config = {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}};
-        axios.get( '/api/listadoFormularios' , config )
-             .then( response => {
-               response.data.forEach( function( e , i ) {
-                  document.getElementById( 'altaNuevoTemplate_formOpciones' ).add( new Option( e.nombreForm , e.id , false , false ) );
-                  document.getElementById( 'nuevoTemplateForm' ).add( new Option( e.nombreForm , e.id , false , false ) );
-               });
-             })
-             .catch( err => {
-               console.log( err );
-             });
-     }
+          });
+    }
 
 </script>

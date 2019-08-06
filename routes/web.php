@@ -22,6 +22,7 @@ Route::middleware('auth')->group( function() {
         return redirect('/login');
     });
     Route::get( '/setTema/{id}'             , 'branding\BrandingController@update' );
+    Route::get( '/visualizaMultimedia/{multimediaID}' , 'crmmex\Sistema\MultimediaController@verElemento' );
     Route::get( '/setImagen/{id}'           , 'branding\BrandingController@updateImagen' );
     Route::get( '/quitaImagen'              , 'branding\BrandingController@quitaImagen' );
     Route::get( '/guardaTrans/{val}'        , 'branding\BrandingController@guardaTrans' );

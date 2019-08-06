@@ -25,6 +25,7 @@
         <link href="{{ asset( 'assets3/css/bootstrap-datepicker.standalone.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/animate.css' ) }}" rel="stylesheet">
         <script src="{{ asset( 'assets3/js/jodit.min.js' ) }}"></script>
+        <script src="https://cdn.tiny.cloud/1/refyckaus1l087ev2ix1hakf8w8altuitceafl19hv1qbmua/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     </head>
     <body>
         <style>

@@ -149,9 +149,12 @@ Route::middleware( 'auth:api' )->post( '/altaPiezaTemplate'                     
 Route::middleware( 'auth:api' )->post( '/altaPiezaCampana'                                               , 'crmmex\Mercadotecnia\PiezasController@altaPiezaCampania' );
 Route::middleware( 'auth:api' )->post( '/eliminaPiezaTemplate/{piezaID}'                                 , 'crmmex\Mercadotecnia\PiezasController@eliminaPieza' );
 Route::middleware( 'auth:api' )->get ( '/detallePiezaTemplate/{piezaID}'                                 , 'crmmex\Mercadotecnia\PiezasController@detallePieza' );
-Route::middleware( 'auth:api' )->get ( '/formsNuevoCampo'                                                , 'crmmex\Configuraciones\FormController@agregaCampoForm' );
+Route::middleware( 'auth:api' )->get ( '/formsNuevoCampo/{id?}/{nombre?}/{tipo?}/{obligatoriedad?}/{valor?}' , 'crmmex\Configuraciones\FormController@agregaCampoForm' );
 Route::middleware( 'auth:api' )->post( '/guardaFormulario'                                               , 'crmmex\Configuraciones\FormController@guardaFormulario' );
+Route::middleware( 'auth:api' )->post( '/actualizaFormulario'                                            , 'crmmex\Configuraciones\FormController@actualizaFormulario' );
 Route::middleware( 'auth:api' )->get ( '/listadoFormularios'                                             , 'crmmex\Configuraciones\FormController@listadoFormularios' );
+Route::middleware( 'auth:api' )->get ( '/eliminaFormulario/{formularioID}'                               , 'crmmex\Configuraciones\FormController@eliminaFormulario' );
+Route::middleware( 'auth:api' )->get ( '/editaFormulario/{formularioID}'                                 , 'crmmex\Configuraciones\FormController@editaFormulario' );
 Route::middleware( 'auth:api' )->post( '/cargaHistoricosLayout'                                          , 'crmmex\Sistema\HistoricosController@cargaHistoricos' );
 Route::middleware( 'auth:api' )->get ( '/listadoHistoricos'                                              , 'crmmex\Sistema\HistoricosController@listadoHistoricos' );
 Route::middleware( 'auth:api' )->get ( '/generaLayoutHistoricos/{fechainicial}/{fechaFinal}'             , 'crmmex\Sistema\HistoricosController@exportarCSV' );
@@ -168,6 +171,7 @@ Route::middleware( 'auth:api' )->post( '/nuevoMultimedia'                       
 Route::middleware( 'auth:api' )->post( '/editaMultimedia'                               , 'crmmex\Sistema\MultimediaController@actualizaElemento' );
 Route::middleware( 'auth:api' )->post( '/eliminaMultimedia/{multimediaID}/{movimiento}' , 'crmmex\Sistema\MultimediaController@eliminaElemento' );
 Route::middleware( 'auth:api' )->post( '/habilitaMultimedia/{multimediaID}'             , 'crmmex\Sistema\MultimediaController@habilitaElemento' );
+//Route::middleware( 'auth:api' )->get ( '/visualizaMultimedia/{multimediaID}'            , 'crmmex\Sistema\MultimediaController@verElemento' );
 
 
 /************************************ Dashboard ************************************/

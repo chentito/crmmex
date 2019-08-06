@@ -76,8 +76,10 @@
             <li>
                 <a href="#configuracionesMercadotecnia" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Mercadotecnia</a>
                 <ul class="collapse list-unstyled" id="configuracionesMercadotecnia">
-                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_destinatarios');"> > Campañas</a></li>
+                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_destinatarios');"> > Templates</a></li>
                     <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_multimedia');"> > Multimedia</a></li>
+                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_listaEnvios');"> > Listas</a></li>
+                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_formularios');"> > Formularios</a></li>
                 </ul>
             </li>
             <!--li>

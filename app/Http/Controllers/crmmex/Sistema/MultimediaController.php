@@ -23,14 +23,15 @@ class MultimediaController extends Controller
             $datos[ 'multimedia' ][] = array (
                 'id'                 => $elemento->id,
                 'nombre'             => $elemento->nombre,
-                'contenido'          => $elemento->contenido,
+                //'contenido'          => $elemento->contenido,
                 'mime'               => $elemento->mime,
                 'fechaAlta'          => $elemento->fechaAlta,
                 'fechaActualizacion' => $elemento->fechaActualizacion,
                 'fechaBaja'          => $elemento->fechaBaja,
                 'status'             => ( ( $elemento->status == 1 ) ? 'Habilitada' : 'Deshabilitada' ),
                 'opciones'           => ( ( $elemento->status == 1 ) ?
-                                        '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Eliminar Imagen" onclick="contenidos(\'configuraciones_eliminaMultimedia\',\''.$elemento->id.'\')" class="ml-2"><i class="fa fa-trash fa-sm"></i></a>'
+                                         '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Ver Imagen" onclick="contenidos(\'configuraciones_verMultimedia\',\''.$elemento->id.'\')"><i class="fa fa-sm fa-image"></i></a>'
+                                        .'<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Eliminar Imagen" onclick="contenidos(\'configuraciones_eliminaMultimedia\',\''.$elemento->id.'\')" class="ml-2"><i class="fa fa-trash fa-sm"></i></a>'
                                       :
                                         '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Habilitar Imagen" onclick="habilitarMultimedia(\''.$elemento->id.'\')" class="ml-2"><i class="fa fa-check fa-sm"></i></a>'
                                       )
@@ -48,7 +49,7 @@ class MultimediaController extends Controller
             $datos                     = new Multimedia();
             $datos->nombre             = $archivo->getClientOriginalName();
             //$datos->contenido          = fopen( $request->altaMultimedia_file , 'rb' );
-            $datos->contenido          = base64_encode( file_get_contents( $archivo->getRealPath() ) );
+            $datos->contenido          = file_get_contents( $archivo->getRealPath() );
             $datos->mime               = $archivo->getMimeType();
             $datos->fechaAlta          = date( 'Y-m-d H:i:s' );
             $datos->status             = 1;
@@ -89,6 +90,12 @@ class MultimediaController extends Controller
         $datos->mime               = $request->mime;
         $datos->fechaActualizacion = date( 'Y-m-d H:i:s' );
         $datos->save();
+    }
+
+    //  Obtiene una imagen para su previsualizacion
+    public function verElemento( $multimediaID ) {
+        $datos = Multimedia::find( $multimediaID );
+        return response( $datos->contenido )->header( 'Content-Type' , $datos->mime );
     }
 
 }
