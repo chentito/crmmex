@@ -21,6 +21,7 @@ use App\Models\crmmex\Utils\Predefinidos AS Predefinidos;
 use App\Models\crmmex\Mercadotecnia\Listas AS Listados;
 use App\Models\crmmex\Mercadotecnia\Piezas AS Pieza;
 use App\Models\crmmex\Sistema\Perfiles AS Perfiles;
+use App\Models\crmmex\Configuraciones\Form AS Forms;
 use App\User AS Ejecutivo;
 
 use Illuminate\Http\Request;
@@ -379,5 +380,17 @@ class UtilsController extends Controller
               $perfil = Perfiles::find( $perfilID );
               return $perfil->rol;
           }
+
+          /*
+           * Obtiene el nombre del formulario
+           */
+           public static function nombreForm( $formID ) {
+              if( $formID == "0" ) {
+                  return "Sin formulario";
+                } else {
+                  $form = Forms::find( $formID );
+                  return $form->nombreForm;
+              }
+           }
 
 }
