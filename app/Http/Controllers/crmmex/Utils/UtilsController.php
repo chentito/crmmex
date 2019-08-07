@@ -217,7 +217,11 @@ class UtilsController extends Controller
             */
             public static function nombrePieza( $piezaID ) {
                 $pieza = Pieza::find( $piezaID );
-                return $pieza->nombrePieza;
+                if( $pieza ){
+                    return $pieza->nombrePieza;
+                } else {
+                    return '';
+                }
             }
 
       /*

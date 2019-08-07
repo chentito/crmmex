@@ -13,6 +13,7 @@ use App\Models\crmmex\Configuraciones\Form AS Form;
 use App\Models\crmmex\Configuraciones\FormFields AS FormFields;
 use App\Models\crmmex\Sistema\Templates As Templates;
 use App\Models\crmmex\Mercadotecnia\Piezas AS Pieza;
+use App\Models\crmmex\Mercadotecnia\Envios AS Envios;
 use Illuminate\Support\Facades\URL;
 
 use PHPMailer\PHPMailer;
@@ -25,17 +26,17 @@ class PHPMailerController extends Controller
     // Metodo para el envio de propuestas
     public static function envioPropuesta( $propuestaID , $destinatarios , $reservadas=array() , $adjuntos=array() ) {
         $msj = self::piezaCorreo( 1 , $reservadas );
-        self::envio( $msj[ 'Asunto' ] , $msj[ 'Body' ] , $destinatarios , $adjuntos );
+        self::envio( 'propuesta' , $msj[ 'Asunto' ] , $msj[ 'Body' ] , $destinatarios , 'propuesta' , $adjuntos );
     }
 
     // Metodo para el envio de Campanias
-    public static function envioCalendarizado( $subject , $piezaMail , $tracking , $destinatario , $personalizacion=array() ) {
+    public static function envioCalendarizado( $campaniaID , $subject , $piezaMail , $tracking , $destinatario , $personalizacion=array() ) {
         $msj = self::piezaCorreoCampania( $piezaMail , $personalizacion , $tracking );
-        self::envio( $subject , $msj , $destinatario );
+        self::envio( $campaniaID , $subject , $msj , $destinatario , $personalizacion[ 'contactoID' ] );
     }
 
     // Proceso de envio de correo electronico
-    private static function envio( $subject , $text , $destinatarios , $adjuntos=array() ) {
+    private static function envio( $campaniaID , $subject , $text , $destinatarios , $idty='' , $adjuntos=array() ) {
         $datos = self::datosConexion();
         $mail = new PHPMailer\PHPMailer();
         $mail->SMTPOptions = array(
@@ -70,10 +71,20 @@ class PHPMailerController extends Controller
         }
 
         if( $mail->Send() ) {
+              self::registroEnvio( $idty , $campaniaID );
               self::$status = true;
           } else {
               self::$status = false;
         }
+    }
+
+    // Registra el envio
+    private static function registroEnvio( $contactoID , $campaniaID ) {
+        $envio = new Envios();
+        $envio->campaniaID = $campaniaID;
+        $envio->contactoID = $contactoID;
+        $envio->fecha      = date( 'Y-m-d H:i:s' );
+        $envio->save();
     }
 
     // Obtiene los datos de la cuenta smtp configurada
@@ -116,7 +127,7 @@ class PHPMailerController extends Controller
         $pieza      = Pieza::find( $idPieza );
         $body       = $pieza->pieza . $tracking;
         $reservadas = array( 'formulario' , 'contactoID' , 'nombre' , 'email' , 'telefono' , 'empresa' );
-        $personalizacion[ 'formulario' ] = self::formulario( $pieza->formID );
+        //$personalizacion[ 'formulario' ] = self::formulario( $pieza->formID );
 
         foreach( $reservadas AS $reservada ){
             if( isset( $personalizacion[ $reservada ] ) ) {

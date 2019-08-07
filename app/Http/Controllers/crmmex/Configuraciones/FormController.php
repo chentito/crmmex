@@ -26,6 +26,7 @@ class FormController extends Controller
                 'fechaEdicion' => $formulario->fechaEdicion,
                 'status'       => ( ( $formulario->status == 1 ) ? 'Activo' : 'Inactivo' ),
                 'opciones'     => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Edita Formulario" onclick="contenidos(\'configuraciones_editaForm\',\''.$formulario->id.'\')" class="mr-1"><i class="fa fa-edit fa-sm"></i></a>'
+                                . '<a href="/campania/x/y/true/'.$formulario->id.'" target="_blank" data-toggle="tooltip" data-placement="top" title="Elimina Formulario" onclick="" class="mr-1"><i class="fa fa-sm fa-eye"></i></a>'
                                 . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Elimina Formulario" onclick="contenidos(\'configuraciones_eliminaForm\',\''.$formulario->id.'\')"><i class="fa fa-trash fa-sm"></i></a>'
             );
         }
