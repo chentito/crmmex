@@ -16,7 +16,7 @@
   </li>
   <li class="nav-item">
     <a class="nav-link" id="usuario-tab" data-toggle="tab" href="#usuario" role="tab" aria-controls="usuario" aria-selected="false">
-      <i class="fa fa-user fa-sm"></i><span class="d-none d-sm-inline">  Razón Social</span>
+      <i class="fa fa-user fa-sm"></i><span class="d-none d-sm-inline">  Propietario</span>
     </a>
   </li>
 </ul>
@@ -124,7 +124,7 @@
           </div>
           <div class="col-sm-3">
             <label for="estado">Estado:</label>
-            <input type="text" name="estado" id="estado" value="" class="form-control form-control-sm" placeholder="No. Exterior">
+            <select class="custom-select custom-select-sm" name="estado" id="estado"></select>
           </div>
           <div class="col-sm-3">
             <label for="codigoPostal">Código Postal:</label>
@@ -132,7 +132,7 @@
           </div>
           <div class="col-sm-3">
             <label for="pais">Pais:</label>
-            <input type="text" name="pais" id="pais" value="" class="form-control form-control-sm" placeholder="Código Postal">
+            <select class="custom-select custom-select-sm" name="pais" id="pais"></select>
           </div>
           <div class="col-sm-3">
             <label for="telefonos">Teléfonos:</label>
@@ -146,9 +146,11 @@
             <label for="informacionAdicional">Información Adicional:</label>
             <textarea name="informacionAdicional" id="informacionAdicional" value="" class="form-control form-control-sm" placeholder="Informacion Adicional"></textarea>
           </div>
-          <div class="col-sm-3">
-            <label for="logotipo">Logotipo:</label>
-            <input type="file" name="logotipo" id="logotipo" value="" class="form-control form-control-sm" placeholder="Locotipo">
+          <div class="col-sm-6">
+            <div class="custom-file mt-4">
+              <input type="file" class="custom-file-input" id="logotipo" name="logotipo" required>
+              <label class="custom-file-label" for="logotipo">Seleccione Imagen...</label>
+            </div>
           </div>
         </div>
         <div class="row mt-2 mb-2">
@@ -162,6 +164,26 @@
 </div>
 
 <script>
+
+    axios.get( '/api/utiles/comboPaises' , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
+         .then( response => {
+            response.data.forEach( function( e , i ){
+                document.getElementById( 'pais' ).add( new Option( e.nombre, e.id, false, false ) );
+            });
+         })
+         .catch( err => {
+           console.log( err );
+         });
+
+    axios.get( '/api/utiles/comboEstados' , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
+         .then( response => {
+            response.data.forEach( function( e , i ) {
+                document.getElementById( 'estado' ).add( new Option( e.entidad, e.id, false, false ) );
+            });
+         })
+         .catch( err => {
+           console.log( err );
+         });
 
     axios.get( '/api/obtieneDatosPropietario' , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
          .then( response => {
@@ -194,6 +216,9 @@
                       aviso( 'Error al actualizar el registro' , false );
                   } else {
                       aviso( response.data.mensaje );
+                      //document.getElementById( 'logoBranding' ).innerHTML = '';
+                      //document.getElementById( 'logoBranding' ).innerHTML = '<img src="/imagenPropietario" width="200px"><br>wwwww';
+                      document.getElementById( 'logoBrandingImg' ).src = '/imagenPropietario?'+ new Date().getTime();
                 }
              })
              .catch( err => {

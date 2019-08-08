@@ -41,8 +41,8 @@
 
             <!-- Barra lateral, contiene menu e imagen corporativa -->
             <nav id="sidebar" class="{{$estilo}} shadow" style="opacity: {{$trans}}">
-                <div id="logoBranding" class="sidebar-header sticky-top" >
-                    <img src="{{ asset( '/imagenPropietario' ) }}" width="200px">
+                <div id="logoBranding" class="sidebar-header sticky-top">
+                    <a href="/home"><img src="{{ asset( '/imagenPropietario' ) }}" width="200px" id="logoBrandingImg"></a>
                 </div>
                 <button type="button" id="sidebarCollapse2" class="btn {{$btn}} mt-2" style="width: 100%">
                     <i class="fas fa-angle-left"></i>
@@ -75,7 +75,7 @@
                 <!-- Contenido Principal -->
                 <div class="container">
                     <div class="row">
-                        <div class="col-12 mt-2 mb-3 pl-2 pr-2">
+                        <div class="col-12 mt-3 mb-3 pl-1 pr-1">
                             <div class="card card-small shadow {{$borde}}" style="opacity: {{$trans}}">
                                 <div class="card-body" id="contenidosPrincipales"></div>
                             </div>

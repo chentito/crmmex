@@ -35,7 +35,7 @@
                             <div class="col-sm-12">
                                 <label for="{{$field[ 'idInput' ]}}">{{$field['nombre']}}:</label>
                                 @if( $field[ 'tipo' ] == "1" )
-                                  <input type="text" name="{{$field[ 'idInput' ]}}" id="{{$field[ 'idInput' ]}}" placeholder="{{$field['nombre']}}" value="" class="form-control form-control-sm" @if( $field[ 'obligatoriedad' ] == 1 ) required @endif >
+                                  <input type="text" name="{{$field[ 'idInput' ]}}" id="{{$field[ 'idInput' ]}}" placeholder="{{$field['nombre']}}" value="" class="form-control form-control-sm" @if( $field[ 'obligatoriedad' ] == 2 ) required @endif >
                                   <div class="invalid-feedback">Correcto!</div>
                                   <div class="invalid-feedback">Este campo es obligatorio!</div>
                                 @elseif( $field[ 'tipo' ] == "2" )

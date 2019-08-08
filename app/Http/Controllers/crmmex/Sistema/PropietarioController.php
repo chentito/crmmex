@@ -15,8 +15,24 @@ class PropietarioController extends Controller
 {
     // Obtiene informacion del propietario
     public function propietario() {
+      $datos = array();
       $propietario = Propietario::where( 'id' , 1 )->first();
-      return response()->json( $propietario );
+      $datos[ 'id' ]                   = $propietario->id;
+      $datos[ 'razonSocial' ]          = $propietario->razonSocial;
+      $datos[ 'rfc' ]                  = $propietario->rfc;
+      $datos[ 'calle' ]                = $propietario->calle;
+      $datos[ 'exterior' ]             = $propietario->exterior;
+      $datos[ 'interior' ]             = $propietario->interior;
+      $datos[ 'colonia' ]              = $propietario->colonia;
+      $datos[ 'municipio' ]            = $propietario->municipio;
+      $datos[ 'estado' ]               = $propietario->estado;
+      $datos[ 'codigoPostal' ]         = $propietario->codigoPostal;
+      $datos[ 'pais' ]                 = $propietario->pais;
+      $datos[ 'telefonos' ]            = $propietario->telefonos;
+      $datos[ 'correoElectronico' ]    = $propietario->correoElectronico;
+      $datos[ 'informacionAdicional' ] = $propietario->informacionAdicional;
+      $datos[ 'status' ]               = $propietario->status;
+      return response()->json( $datos );
     }
 
     // Actualiza informacion del propietario
@@ -36,7 +52,7 @@ class PropietarioController extends Controller
         $propietario->correoElectronico    = $request->correoElectronico;
         $propietario->informacionAdicional = $request->informacionAdicional;
         if( $request->hasFile( 'logotipo' ) ) {
-          $propietario->logotipo           = base64_encode( file_get_contents( $request->file( 'logotipo' )->getRealPath() ) );
+          $propietario->logotipo           = file_get_contents( $request->file( 'logotipo' )->getRealPath() );
           $propietario->mimeLogo           = $request->file( 'logotipo' )->getMimeType();
         }
         if( $propietario->save() ){
