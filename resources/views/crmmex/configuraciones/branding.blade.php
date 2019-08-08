@@ -19,6 +19,11 @@
       <i class="fa fa-user fa-sm"></i><span class="d-none d-sm-inline">  Propietario</span>
     </a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" id="otros-tab" data-toggle="tab" href="#otros" role="tab" aria-controls="otros" aria-selected="false">
+      <i class="fa fa-ruler-combined fa-sm"></i><span class="d-none d-sm-inline">  Otros</span>
+    </a>
+  </li>
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -88,6 +93,29 @@
               </div>
           </div>
       </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="otros" role="tabpanel" aria-labelledby="otros-tab">
+    <div class="{{$container}} border-left border-bottom border-right p-1">
+        <div class=row>
+            <div class="col-sm-5 text-center">
+                <h6>Configuracion</h6>
+            </div>
+            <div class="col-sm-5 text-center">
+                <h6>Opciones</h6>
+            </div>
+            <div class="col-sm-2 text-center"></div>
+            <div class="col-sm-5 text-center">
+                Diseño del menu
+            </div>
+            <div class="col-sm-5">
+                <select class="custom-select custom-select-sm" name="disenioMenu" id="disenioMenu">
+                    <option value="1">Diseño Vertical</option>
+                    <option value="2">Diseño Horizontal</option>
+                </select>
+            </div>
+            <div class="col-sm-2 text-center"><button id="guardaDisenioMenu" type="button" class="btn btn-sm {{$btn}}"><i class="fa fa-sm fa-save"></i> Guardar</button></div>
+        </div>
     </div>
   </div>
   <div class="tab-pane fade" id="usuario" role="tabpanel" aria-labelledby="usuario-tab">
@@ -205,6 +233,17 @@
        .catch( err => {
          console.log( err );
        });
+
+    document.getElementById( 'guardaDisenioMenu' ).addEventListener( 'click' , function( e ){
+        e.preventDefault();
+        axios.post( '/api/configuraciones/1/' + document.getElementById( 'disenioMenu' ).value , {} ,  { headers:{ 'Accept' : 'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) , 'content-type' : 'multipart/form-data' } })
+              .then( response => {
+                  aviso("Configuracion Guardada");
+              })
+              .catch( err => {
+                console.log( err );
+              });
+    });
 
     document.getElementById( 'misDatosBtn' ).addEventListener( 'click' , function( e ) {
         e.preventDefault();

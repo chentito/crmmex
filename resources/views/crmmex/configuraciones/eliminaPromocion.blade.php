@@ -1,4 +1,3 @@
-
 <input type="hidden" name="editaPromoID" id="editaPromoID" value="{{$param}}">
 
 <div class="row">

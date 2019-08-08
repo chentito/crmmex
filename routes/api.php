@@ -202,6 +202,7 @@ Route::post( '/actualizaGridConfig'                         , 'crmmex\Utils\Data
 Route::post( '/actualizaOptCat/{optID}/{optNombre}'         , 'crmmex\Utils\UtilsController@actualizaOpcionCatalogo' );
 Route::post( '/agregaOptCat/{catID}/{optNombre}'            , 'crmmex\Utils\UtilsController@agregaOpcionCatalogo' );
 Route::post( '/eliminaOptCat/{optID}'                       , 'crmmex\Utils\UtilsController@eliminaOpcionCatalogo' );
+Route::post( '/configuraciones/{configuracionID}/{valor}'   , 'crmmex\Configuraciones\ConfiguracionesController@setValue' );
 
 
 /************************************ Acciones utiles para templates de envio de correo ************************************/
