@@ -17,13 +17,13 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <div class="container border-left border-bottom border-right p-1">
+    <div class="{{$container}} border-left border-bottom border-right p-1">
       <div id="listadoIndicadores_config"></div>
       <table id="listadoIndicadores" class="table table-striped display responsive nowrap" style="width:100%"></table>
     </div>
   </div>
   <div class="tab-pane fade" id="procesos" role="tabpanel" aria-labelledby="home-tab">
-    <div class="container border-left border-bottom border-right p-1">
+    <div class="{{$container}} border-left border-bottom border-right p-1">
       <form id="formDescripcionProcesosSistema" name="formDescripcionProcesosSistema">
           <ul class="list-group list-group-flush" id="contenedorProcesosSistema"></ul>
           <div class="row mt-3 mb-2">
@@ -37,7 +37,7 @@
     </div>
   </div>
   <div class="tab-pane fade" id="nuevo" role="tabpanel" aria-labelledby="nuevo-tab">
-    <div class="container border-left border-bottom border-right p-1">
+    <div class="{{$container}} border-left border-bottom border-right p-1">
       <form id="nuevoIndicador_Form" name="nuevoIndicador_Form">
         <div class="row mt-2">
             <div class="col-sm-6">

@@ -8,6 +8,7 @@ namespace App\Http\Controllers\crmmex\Utils;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\crmmex\Utils\UtilsController AS Utils;
 
 use App\Models\crmmex\Utils\Datatable;
 
@@ -41,6 +42,7 @@ class DatatableController extends Controller
                                                  'titulos'     => explode( ',' , $config[ 'titulos' ] ),
                                                  'campos'      => explode( ',' , $config[ 'campos' ] ),
                                                  'fields'      => $config[ 'campos' ],
+                                                 'container'   => ( Utils::tipoMenu() == 1 ? 'container' : 'container-fluid' ),
                                                  'visibilidad' => explode( ',' , $config[ 'visibilidad' ] ) ] );
     }
 

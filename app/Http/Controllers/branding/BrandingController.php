@@ -5,6 +5,7 @@ namespace App\Http\Controllers\branding;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\branding\Branding AS Branding;
+use App\Models\crmmex\Sistema\Configuraciones AS Configuraciones;
 
 class BrandingController extends Controller
 {
@@ -12,14 +13,17 @@ class BrandingController extends Controller
     /* Acceso */
     public function index() {
         $datos = Branding::where( 'seleccionado' , 1 )->first();
+        $menu  = $this->tipoMenu();
         return view( 'crmmex.home' , array (
-            'estilo'  => $datos->estilo ,
-            'css'     => $datos->css ,
-            'btn'     => $datos->boton ,
-            'back'    => $datos->background,
-            'usaBack' => $datos->usa_background,
-            'borde'   => $datos->borde,
-            'trans'   => $datos->transparencia
+            'estilo'    => $datos->estilo ,
+            'css'       => $datos->css ,
+            'btn'       => $datos->boton ,
+            'back'      => $datos->background,
+            'usaBack'   => $datos->usa_background,
+            'borde'     => $datos->borde,
+            'trans'     => $datos->transparencia,
+            'tipoMenu'  => $menu,
+            'container' => ( $menu == 1 ) ? 'container' : 'container-fluid',
         ));
     }
 
@@ -63,6 +67,12 @@ class BrandingController extends Controller
         $seleccionado = Branding::where( 'seleccionado' , 1 )->first();
         $seleccionado->transparencia = $val/10;
         $seleccionado->save();
+    }
+
+    /* Tipo de menu a desplegar */
+    private function tipoMenu() {
+        $menu = Configuraciones::find( 1 )->first();
+        return $menu->valor;
     }
 
 }

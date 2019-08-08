@@ -13,13 +13,13 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <div class="container border-left border-right border-bottom">
+    <div class="{{$container}} border-left border-right border-bottom">
         <div id="listadoFormularios_config"></div>
         <table id="listadoFormularios" class="table table-striped responsive nowrap" style="width:100%"></table>
     </div>
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-    <div class="container border-left border-right border-bottom">
+    <div class="{{$container}} border-left border-right border-bottom">
       <form id="formularios_form" name="formularios_form">
         <div class="row mt-2">
             <div class="col-sm-4">

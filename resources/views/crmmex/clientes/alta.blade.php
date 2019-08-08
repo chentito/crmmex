@@ -28,12 +28,12 @@
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade" id="adicionales" role="tabpanel" aria-labelledby="adicionales-tab">
-                    <div class="container border-left border-bottom border-right p-1">
+                    <div class="{{$container}} border-left border-bottom border-right p-1">
                         <div id="contendorPipeline"></div>
                     </div>
                 </div>
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="container border-left border-bottom border-right p-1" >
+                    <div class="{{$container}} border-left border-bottom border-right p-1" >
                       <div class="row">
                           <div class="col-sm-2">
                             <b>Contacto Principal</b>
@@ -110,7 +110,7 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="container border-left border-bottom border-right p-1">
+                    <div class="{{$container}} border-left border-bottom border-right p-1">
                       <div class="row">
                           <div class="col-sm-6 mb-1">
                               <label for="cliente_razon_social">Raz&oacute;n Social</label>
@@ -182,7 +182,7 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                    <div class="container border-left border-bottom border-right p-1"></div>
+                    <div class="{{$container}} border-left border-bottom border-right p-1"></div>
                 </div>
             </div>
         </div>

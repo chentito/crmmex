@@ -14,7 +14,7 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade" id="field" role="tabpanel" aria-labelledby="field-tab">
-      <div class="container border-left border-right border-bottom p-1">
+      <div class="{{$container}} border-left border-right border-bottom p-1">
         <form id="formAltaCampoAdicional" name="formAltaCampoAdicional">
           <input type="hidden" id="adicional_clientes_id" name="adicional_clientes_id" value="">
           <input type="hidden" id="adicional_clientes_seccion" name="adicional_clientes_seccion" value="">
@@ -70,7 +70,7 @@
       </div>
   </div>
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <div class="container border-left border-right border-bottom p-1">
+    <div class="{{$container}} border-left border-right border-bottom p-1">
       <div id="listadoCamposAdicionales_config"></div>
       <table id="listadoCamposAdicionales" class="table table-striped responsive nowrap" style="width:100%"></table>
     </div>

@@ -17,7 +17,7 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <div class="container border-left border-right border-bottom p-1">
+    <div class="{{$container}} border-left border-right border-bottom p-1">
       <div class="row mt-2">
         <div class="col-sm-12 mt-2 mb-1">
           <b>Parámetros prestablecidos:</b>
@@ -127,7 +127,7 @@
     </div>
   </div>
   <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-    <div class="container border-left border-right border-bottom p-1">
+    <div class="{{$container}} border-left border-right border-bottom p-1">
       <form id="pronosticosCargaDocumetoHistoricos_form" form="pronosticosCargaDocumetoHistoricos_form">
         <div class="row mt-2">
             <div class="col-sm-2">
@@ -221,7 +221,7 @@
     </div>
   </div>
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-    <div class="container border-left border-right border-bottom p-1">
+    <div class="{{$container}} border-left border-right border-bottom p-1">
 
     </div>
   </div>

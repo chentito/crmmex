@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Secciones AS Secciones;
 use App\branding\Branding AS Branding;
+use App\Models\crmmex\Sistema\Configuraciones AS Configuraciones;
 
 class ContenidosController extends Controller
 {
@@ -20,16 +21,19 @@ class ContenidosController extends Controller
         usleep(500000);
         $branding   = Branding::where( 'seleccionado' , 1 )->first();
         $secciones  = Secciones::where( 'identificador' , $id )->first();
+        $configuraciones = Configuraciones::find( 1 )->first();
+        $container = ( $configuraciones->valor == 1 ) ? 'container' : 'container-fluid';
         $breadcrumb = explode( '|' , $secciones->ruta );
         $parametro  = ( $param != '' ) ? $param : '';
 
         return response()->json([
-            'body'       => view( $secciones->vista , [ 'estilo' => $branding->estilo ,
-                                                        'css'    => $branding->css ,
-                                                        'btn'    => $branding->boton ,
-                                                        'trans'  => ( $branding->transparencia * 10 ) ,
-                                                        'borde'  => $branding->borde ,
-                                                        'param'  => $parametro ]
+            'body'       => view( $secciones->vista , [ 'estilo'    => $branding->estilo ,
+                                                        'css'       => $branding->css ,
+                                                        'btn'       => $branding->boton ,
+                                                        'trans'     => ( $branding->transparencia * 10 ) ,
+                                                        'borde'     => $branding->borde ,
+                                                        'container' => $container ,
+                                                        'param'     => $parametro ]
                                 )->render(),
             'breadcrumb' => view( 'crmmex.utils.breadcrumb' , [ 'elementos' => $breadcrumb ,
                                                                 'estilo'    => $branding->estilo ]

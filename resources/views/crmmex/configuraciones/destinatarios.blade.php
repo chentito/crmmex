@@ -18,7 +18,7 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-      <div class="container border-left border-right border-bottom p-1">
+      <div class="{{$container}} border-left border-right border-bottom p-1">
           <div id="listadoTemplates_config"></div>
           <table id="listadoTemplates" class="table table-striped nowrap responsive" style="width:100%"></table>
       </div>
@@ -26,7 +26,7 @@
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
   </div>
   <div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="edit-tab">
-    <div class="container border-left border-right border-bottom p-1">
+    <div class="{{$container}} border-left border-right border-bottom p-1">
       <div class="row">
         <div class="col-sm-9">
             <div id="editorHTML" style="height:500px">
@@ -57,7 +57,7 @@
     </div>
   </div>
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-    <div class="container border-left border-right border-bottom p-1">
+    <div class="{{$container}} border-left border-right border-bottom p-1">
 
     </div>
   </div>

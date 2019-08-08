@@ -7,7 +7,7 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <div class="container border-left border-bottom border-right p-1">
+    <div class="{{$container}} border-left border-bottom border-right p-1">
       <div class="row">
         <div class="col-sm-3 mt-2"><h6>Catalogos:</h6></div>
         <div class="col-sm-3 mt-2"><h6>Opciones:</h6></div>

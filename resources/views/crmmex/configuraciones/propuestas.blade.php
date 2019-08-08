@@ -12,7 +12,7 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-      <div class="container border-left border-right border-bottom p-1">
+      <div class="{{$container}} border-left border-right border-bottom p-1">
           <div class="row mt-3">
               <div class="col-sm-12">
                   <i class="fa fa-sm fa-key"></i> Nomenclatura a utilizar para el identificador de las propuestas:
@@ -85,11 +85,11 @@
       </div>
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-      <div class="container border-left border-right border-bottom p-1">
+      <div class="{{$container}} border-left border-right border-bottom p-1">
       </div>
   </div>
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-    <div class="container border-left border-right border-bottom p-1">
+    <div class="{{$container}} border-left border-right border-bottom p-1">
       <form id="formTemplateEnvioPropuesta" name="formTemplateEnvioPropuesta">
         <input type="hidden" id="template_id" name="template_id" value="1" >
         <div class="row">

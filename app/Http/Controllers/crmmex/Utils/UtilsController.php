@@ -22,6 +22,7 @@ use App\Models\crmmex\Mercadotecnia\Listas AS Listados;
 use App\Models\crmmex\Mercadotecnia\Piezas AS Pieza;
 use App\Models\crmmex\Sistema\Perfiles AS Perfiles;
 use App\Models\crmmex\Configuraciones\Form AS Forms;
+use App\Models\crmmex\Sistema\Configuraciones AS Configuraciones;
 use App\User AS Ejecutivo;
 
 use Illuminate\Http\Request;
@@ -396,5 +397,13 @@ class UtilsController extends Controller
                   return $form->nombreForm;
               }
            }
+
+           /*
+            * Tipo de menu en uso
+            */
+            public static function tipoMenu() {
+                $menu = Configuraciones::find( '1' )->first();
+                return $menu->value;
+            }
 
 }

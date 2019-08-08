@@ -10,7 +10,7 @@
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
     <form id="formPromociones" name="formPromociones">
         <input type="hidden" id="promociones_id" name="promociones_id" value="">
-        <div class="container border-left border-bottom border-right p-1">
+        <div class="{{$container}} border-left border-bottom border-right p-1">
           <div class="row">
             <div class="col-sm-4">
                 <label for="promociones_nombre">Nombre promoción:</label>
@@ -45,7 +45,7 @@
     </form>
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-    <div class="container border-left border-bottom border-right p-1">
+    <div class="{{$container}} border-left border-bottom border-right p-1">
       <div id="listadoPromociones_config"></div>
       <table id="listadoPromociones" class="table table-striped responsive nowrap" style="width:100%"></table>
     </div>

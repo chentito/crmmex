@@ -7,7 +7,7 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <div class="container border-left border-bottom border-right p-1">
+    <div class="{{$container}} border-left border-bottom border-right p-1">
       <form id="form_altaPropuestaComercial" name="form_altaPropuestaComercial">
         <input type="hidden" id="clienteID" name="clienteID" value="{{$param}}">
         <input type="hidden" id="pID" name="pID" value="">

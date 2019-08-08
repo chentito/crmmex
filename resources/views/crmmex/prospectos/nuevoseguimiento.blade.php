@@ -8,7 +8,7 @@
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-      <div class="container border-left border-bottom border-right p-1">
+      <div class="{{$container}} border-left border-bottom border-right p-1">
         <form id="formSeguimiento" name="formSeguimiento">
           <input type="hidden" name="clienteID" id="clienteID" value="{{$param}}">
           <input type="hidden" name="seguimiento_idty" id="seguimiento_idty" value="">

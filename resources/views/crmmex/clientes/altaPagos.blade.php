@@ -12,7 +12,7 @@
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-    <div class="container border-left border-right border-bottom p-1">
+    <div class="{{$container}} border-left border-right border-bottom p-1">
 
       <div id="listadoPagos_config"></div>
       <table id="listadoPagos" class="table table-striped table-bordered display responsive nowrap" style="width:100%"></table>
@@ -27,7 +27,7 @@
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
-    <div class="container border-left border-right border-bottom p-1">
+    <div class="{{$container}} border-left border-right border-bottom p-1">
       <form id="pagoPropuesta_from" name="pagoPropuesta_from">
         <input type="hidden" id="pagoPropuesta_propuestaID" name="pagoPropuesta_propuestaID" value="{{$param}}">
         <input type="hidden" id="pagoPropuesta_pagado" name="pagoPropuesta_pagado" value="">

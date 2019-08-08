@@ -20,11 +20,6 @@
                         <i class="fa fa-briefcase fa-sm"></i><span class="d-none d-sm-inline">  Razón Social</span>
                     </a>
                 </li>
-                <!--li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">
-                        <i class="fa fa-address-book fa-sm"></i><span class="d-none d-sm-inline">  Dirección</span>
-                    </a>
-                </li-->
                 <li class="nav-item">
                     <a class="nav-link" id="adicionales-tab" data-toggle="tab" href="#adicionales" role="tab" aria-controls="adicionales" aria-selected="false">
                         <i class="fa fa-chart-line fa-sm"></i><span class="d-none d-sm-inline">  Seguimiento a propuestas</span>
@@ -33,12 +28,12 @@
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade" id="adicionales" role="tabpanel" aria-labelledby="adicionales-tab">
-                    <div class="container border-left border-bottom border-right p-1" id="contendorPipeline">
+                    <div class="{{$container}} border-left border-bottom border-right p-1" id="contendorPipeline">
                         <div id="contendorPipeline"></div>
                     </div>
                 </div>
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="container border-left border-bottom border-right p-1" >
+                    <div class="{{$container}} border-left border-bottom border-right p-1" >
                       <div class="row">
                           <div class="col-sm-2">
                             <b>Contacto Principal</b>
@@ -114,7 +109,7 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="container border-left border-bottom border-right p-1">
+                    <div class="{{$container}} border-left border-bottom border-right p-1">
                       <div class="row">
                           <div class="col-sm-6 mb-1">
                               <label for="cliente_razon_social">Raz&oacute;n Social</label>
@@ -187,7 +182,7 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                    <div class="container border-left border-bottom border-right p-1"></div>
+                    <div class="{{$container}} border-left border-bottom border-right p-1"></div>
                 </div>
             </div>
         </div>

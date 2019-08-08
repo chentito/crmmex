@@ -22,7 +22,7 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <div class="container border-left border-bottom border-right p-1">
+    <div class="{{$container}} border-left border-bottom border-right p-1">
       <div class="col-12">
           <div class="row mb-3 mt-3">
               <div class="col-sm-3 text-center mb-1"><button class="btn btn-dark btn-block" onclick="return cambiaTema(1);">Tema Obscuro</button></div>
@@ -40,7 +40,7 @@
     </div>
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-    <div class="container border-left border-bottom border-right p-1">
+    <div class="{{$container}} border-left border-bottom border-right p-1">
       <div class="col-12">
           <div class="row mb-3 mt-3">
               <div class="col-sm-3 text-center mb-1">
@@ -78,7 +78,7 @@
     </div>
   </div>
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-    <div class="container border-left border-bottom border-right p-1">
+    <div class="{{$container}} border-left border-bottom border-right p-1">
       <div class="col-sm-12 mt-3">
           Transparencia
           <div class="input-group mb-3">
@@ -91,7 +91,7 @@
     </div>
   </div>
   <div class="tab-pane fade" id="usuario" role="tabpanel" aria-labelledby="usuario-tab">
-    <div class="container border-left border-bottom border-right p-1">
+    <div class="{{$container}} border-left border-bottom border-right p-1">
       <form id="propietario_form" name="propietario_form">
         <div class="row">
           <div class="col-sm-3">

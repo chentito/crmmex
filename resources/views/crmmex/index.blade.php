@@ -40,6 +40,7 @@
         <div class="wrapper @if($usaBack==1) fondo @endif">
 
             <!-- Barra lateral, contiene menu e imagen corporativa -->
+            @if( $tipoMenu == 1 )
             <nav id="sidebar" class="{{$estilo}} shadow" style="opacity: {{$trans}}">
                 <div id="logoBranding" class="sidebar-header sticky-top">
                     <a href="/home"><img src="{{ asset( '/imagenPropietario' ) }}" width="200px" id="logoBrandingImg"></a>
@@ -47,23 +48,33 @@
                 <button type="button" id="sidebarCollapse2" class="btn {{$btn}} mt-2" style="width: 100%">
                     <i class="fas fa-angle-left"></i>
                 </button>
-                @include( 'crmmex.utils.menu' , [ 'estilo' => $estilo , 'boton' => $btn ] )
+                @include( 'crmmex.utils.menuVertical' , [ 'estilo' => $estilo , 'boton' => $btn ] )
             </nav>
+            @endif
 
             <!-- Contenido central, contiene header, botones contro menu, breadcrumb y contenido principal -->
-            <div class="container-fluid" id="content">
+            <div class="{{$container}}" id="content">
+
                 <!-- Header -->
                 <header id="header" class="bg-light sticky-top" style="opacity: {{$trans}}; font-weight: bold">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light" >
-                        <button type="button" id="sidebarCollapse" class="btn {{$btn}} mt-1">
-                            <i class="fas fa-align-left"></i>
-                        </button>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
+                        @if( $tipoMenu == 1 )
+                          <button type="button" id="sidebarCollapse" class="btn {{$btn}} mt-1">
+                              <i class="fas fa-align-left"></i>
+                          </button>
+                          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                              <span class="navbar-toggler-icon"></span>
+                          </button>
+                        @endif
                         @include( 'crmmex.utils.header' )
                     </nav>
                 </header>
+
+                @if( $tipoMenu == 2 )
+                  <div style="height: 35px; opacity: {{$trans}}" style="z-index: 1600" id="menu">
+                      @include( 'crmmex.utils.menuHorizontal' , [ 'estilo' => $estilo , 'boton' => $btn ] )
+                  </div>
+                @endif
 
                 <!-- Breadcrumb -->
                 <div style="height: 35px; opacity: {{$trans}}" style="z-index: 1400" id="contenedorBreadCrumb">
@@ -73,7 +84,7 @@
                 </div>
 
                 <!-- Contenido Principal -->
-                <div class="container">
+                <div class="{{$container}}">
                     <div class="row">
                         <div class="col-12 mt-3 mb-3 pl-1 pr-1">
                             <div class="card card-small shadow {{$borde}}" style="opacity: {{$trans}}">
@@ -136,24 +147,34 @@
                 });
             });
             contenidos( 'dashboard' );
+        </script>
+        <script>
+            $(document).ready(function () {
+                  $('.navbar .dropdown-item').on('click', function (e) {
+                      var $el = $(this).children('.dropdown-toggle');
+                      var $parent = $el.offsetParent(".dropdown-menu");
+                      $(this).parent("li").toggleClass('open');
 
-            (function() {
-                'use strict';
-                window.addEventListener('load', function() {
-                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                    var forms = document.getElementsByClassName('needs-validation');
-                    // Loop over them and prevent submission
-                    var validation = Array.prototype.filter.call(forms, function(form) {
-                        form.addEventListener('submit', function(event) {
-                            if ( form.checkValidity() === false) {
-                                event.preventDefault();
-                                event.stopPropagation();
-                            }
-                            form.classList.add('was-validated');
-                        }, false);
-                    });
-                }, false);
-            })();
+                      if (!$parent.parent().hasClass('navbar-nav')) {
+                          if ($parent.hasClass('show')) {
+                              $parent.removeClass('show');
+                              $el.next().removeClass('show');
+                              $el.next().css({"top": -999, "left": -999});
+                          } else {
+                              $parent.parent().find('.show').removeClass('show');
+                              $parent.addClass('show');
+                              $el.next().addClass('show');
+                              $el.next().css({"top": $el[0].offsetTop, "left": $parent.outerWidth() - 4});
+                          }
+                          e.preventDefault();
+                          e.stopPropagation();
+                      }
+                  });
+                  $('.navbar .dropdown').on('hidden.bs.dropdown', function () {
+                      $(this).find('li.dropdown').removeClass('show open');
+                      $(this).find('ul.dropdown-menu').removeClass('show open');
+                  });
+            });
         </script>
     </body>
 </html>

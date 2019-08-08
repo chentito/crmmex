@@ -12,13 +12,13 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <div class="container border-right border-left border-bottom p-1">
+    <div class="{{$container}} border-right border-left border-bottom p-1">
       <div id="listadoMultimedia_config"></div>
       <table id="listadoMultimedia" class="table table-striped responsive nowrap" style="width:100%"></table>
     </div>
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-    <div class="container border-right border-left border-bottom p-1">
+    <div class="{{$container}} border-right border-left border-bottom p-1">
       <form id="altaMultimedia_form" name="altaMultimedia_form">
         <div class="row mt-3 mb-3">
           <div class="col-sm-10">

@@ -82,18 +82,10 @@
                     <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_formularios');"> > Formularios</a></li>
                 </ul>
             </li>
-            <!--li>
-                <a href="#configuracionesReportes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Reportes</a>
-                <ul class="collapse list-unstyled" id="configuracionesReportes">
-                    <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_disenoReportes');"> > Diseño Reportes</a></li>
-                </ul>
-            </li-->
             <li>
                 <a href="#configuracionesCatalogos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Catálogos</a>
                 <ul class="collapse list-unstyled" id="configuracionesCatalogos">
                     <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_catalogos_generales');"> > Catálogos Generales</a></li>
-
-                    <!--li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_adicionales');"> > Campos Adicionales</a></li-->
                 </ul>
             </li>
             <li>

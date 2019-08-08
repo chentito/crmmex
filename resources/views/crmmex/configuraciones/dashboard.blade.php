@@ -7,7 +7,7 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-      <div class="container border-left border-right border-bottom p-1">
+      <div class="{{$container}} border-left border-right border-bottom p-1">
         <form id="frmWidgets" name="frmWidgets">
           <div class="row ml-1 mr-1" id="contenedorWidgets">
           </div>

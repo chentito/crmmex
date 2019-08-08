@@ -4,15 +4,10 @@
       <i class="fa fa-list fa-sm"></i><span class="d-none d-sm-inline">  Listas de envío</span>
     </a>
   </li>
-  <!--li class="nav-item">
-    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">
-        AA
-    </a>
-  </li-->
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <div class="container border-left border-right border-bottom p-1">
+    <div class="{{$container}} border-left border-right border-bottom p-1">
         <div class="row">
             <div class="col-sm-4">
               <label for="listadoAudiencias">Listados</label>

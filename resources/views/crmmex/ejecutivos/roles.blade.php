@@ -11,13 +11,13 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="perfiles" role="tabpanel" aria-labelledby="perfiles-tab">
-      <div class="container border-left border-right border-bottom p-1">
+      <div class="{{$container}} border-left border-right border-bottom p-1">
           <div id="listadoPerfiles_config"></div>
           <table id="listadoPerfiles" class="table table-striped nowrap response" style="width:100%"></table>
       </div>
   </div>
   <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-      <div class="container border-left border-right border-bottom p-1">
+      <div class="{{$container}} border-left border-right border-bottom p-1">
         <form id="roles_form" name="roles_form">
           <input type="hidden" id="roles_idPerfil" name="roles_idPerfil" value="0">
           <div class="row">
@@ -40,7 +40,7 @@
       </div>
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-      <div class="container border-left border-right border-bottom p-1">
+      <div class="{{$container}} border-left border-right border-bottom p-1">
         <div class="row">
           <div class="col-sm-3">
             <label for="roles_listadoPerfiles">Seleccione Perfil</label>

@@ -7,7 +7,7 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="conf" role="tabpanel" aria-labelledby="conf-tab">
-    <div class="container border-left border-bottom border-right p-1">
+    <div class="{{$container}} border-left border-bottom border-right p-1">
       <form id="conf_smtp_form" name="conf_smtp_form">
         <div class="row">
             <div class="col-sm-3 mb-1">

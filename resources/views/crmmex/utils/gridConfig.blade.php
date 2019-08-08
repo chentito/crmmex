@@ -1,4 +1,4 @@
-<div class="container border m-1 p-1">
+<div class="{{$container}} border m-1 p-1">
 <h6><i class="fa fa-cogs fa-sm"></i> Configuración Grid</h6>
 <fieldset>
 

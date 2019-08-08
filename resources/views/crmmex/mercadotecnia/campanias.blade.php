@@ -5,7 +5,7 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <div class="container border-left border-bottom border-right p-1">
+    <div class="{{$container}} border-left border-bottom border-right p-1">
       <form id="detalleCampania_Form" name="detalleCampania_Form">
         <div class="row">
             <div class="col-sm-4 mb-1">
