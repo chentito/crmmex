@@ -42,7 +42,7 @@
     <body>
       <table width="100%" border="0" class="table">
           <tr>
-              <td width="25%"><img src="http://192.168.30.103/imagenParaPropuesta" width="200"></td>
+              <td width="25%"><img src="{{ asset( '/imagenParaPropuesta' ) }}" width="200"></td>
               <td width="75%" colspan="3" align="center" valign="top">
                   <h3>PROPUESTA COMERCIAL</h3>
                   <b>{{$datos['propuestaIDTY']}}</b>
