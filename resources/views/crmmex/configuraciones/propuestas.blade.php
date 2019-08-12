@@ -5,6 +5,11 @@
     </a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" id="image-tab" data-toggle="tab" href="#image" role="tab" aria-controls="contact" aria-selected="false">
+      <i class="fa fa-image fa-sm"></i><span class="d-none d-sm-inline">  Imagen Propuesta</span>
+    </a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">
       <i class="fa fa-inbox fa-sm"></i><span class="d-none d-sm-inline">  Template Envio</span>
     </a>
@@ -121,10 +126,48 @@
       </form>
     </div>
   </div>
+  <div class="tab-pane fade" id="image" role="tabpanel" aria-labelledby="image-tab">
+    <div class="{{$container}} border-left border-right border-bottom p-1">
+      <form id="imgPropuestaForm" name="imgPropuestaForm">
+        <div class="row">
+          <div class="col-sm-3 mt-2 text-center">
+              <img src="{{ asset( '/imagenParaPropuesta' ) }}" width="200px" id="logoImgPropuesta" class="img-thumbnail">
+          </div>
+          <div class="col-sm-9">
+            <div class="custom-file mt-2">
+              <input type="file" class="custom-file-input" id="logotipoPropuesta" name="logotipoPropuesta" required>
+              <label class="custom-file-label" for="logotipoPropuesta">Seleccione Imagen...</label>
+            </div>
+          </div>
+          <div class="col-sm-12 mt-2 text-center">
+            <button type="submit" name="btnGdaImgPropuesta" id="btnGdaImgPropuesta" class="btn btn-sm {{$btn}}"><i class="fa fa-sm fa-save"></i> Guardar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 
 <script>
     var config = {headers: {'Accept' : 'application/json','Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) }};
+
+    document.getElementById( 'btnGdaImgPropuesta' ).addEventListener( 'click' , function( e ) {
+        e.preventDefault();
+
+        if( document.getElementById( 'logotipoPropuesta' ).value == "" ) {
+            aviso( 'No ha seleccionado un archivo' , false );
+        } else {
+            var datos = new FormData( document.getElementById( 'imgPropuestaForm' ) );
+            axios.post( '/api/logoPropuesta' , datos , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem('apiToken'),'content-type':'multipart/form-data'}})
+              .then( response => {
+                  aviso( 'Logotipo actualizado correctamente.' );
+                  document.getElementById( 'logoImgPropuesta' ).src = '/imagenParaPropuesta?'+ new Date().getTime();
+              })
+              .catch( err => {
+                  console.log( err );
+              });
+        }
+    });
 
     document.getElementById( 'btnGuardaTemplateEnvio' ).addEventListener( 'click' , function( e ){
         e.preventDefault();
@@ -167,7 +210,6 @@
 
     document.getElementById( 'btnGdaNomenclatura' ).addEventListener( 'click' , function( e ){
         e.preventDefault();
-        //var valor = new FormData( document.getElementById( 'frmPropNom' ) );
         var valor = document.getElementById( 'nomenclatura_prefijo' ).value + '_'
                   + document.getElementById( 'nomenclatura_variable' ).value + '_'
                   + document.getElementById( 'nomenclatura_identificador' ).value;

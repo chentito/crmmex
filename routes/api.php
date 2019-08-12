@@ -164,6 +164,7 @@ Route::middleware( 'auth:api' )->get ( '/detallePerfil/{perfilID}'              
 Route::middleware( 'auth:api' )->post( '/actualizaPerfil'                                                , 'crmmex\Sistema\PerfilesController@editaPerfil' );
 Route::middleware( 'auth:api' )->post( '/altaPerfil'                                                     , 'crmmex\Sistema\PerfilesController@altaPerfil' );
 Route::middleware( 'auth:api' )->post( '/eliminaPerfil/{perfilID}'                                       , 'crmmex\Sistema\PerfilesController@eliminaPerfil' );
+Route::middleware( 'auth:api' )->post( '/logoPropuesta'                                                  , 'crmmex\Clientes\PropuestasController@logoPropuesta' );
 
 
 /************************************ Multimedia ************************************/
@@ -216,6 +217,7 @@ Route::post( '/actualizaDatosTemplate'            , 'crmmex\Sistema\TemplatesCon
 Route::middleware( 'auth:api' )->get ( '/obtieneDatosPropietario'   , 'crmmex\Sistema\PropietarioController@propietario' );
 Route::middleware( 'auth:api' )->post( '/actualizaDatosPropietario' , 'crmmex\Sistema\PropietarioController@actualiza' );
 Route::middleware( 'auth:api' )->post( '/imagenPropietario'         , 'crmmex\Sistema\PropietarioController@imagenPropietario' );
+Route::middleware( 'auth:api' )->post( '/imagenParaPropuesta'       , 'crmmex\Clientes\PropuestasController@imagenParaPropuesta' );
 
 
 /************************************ Pipeline ************************************/

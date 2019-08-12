@@ -21,6 +21,7 @@ use App\Models\crmmex\Utils\Predefinidos AS Predefinidos;
 use App\Models\crmmex\Mercadotecnia\Listas AS Listados;
 use App\Models\crmmex\Mercadotecnia\Piezas AS Pieza;
 use App\Models\crmmex\Sistema\Perfiles AS Perfiles;
+use App\Models\crmmex\Sistema\Propietario AS Propietario;
 use App\Models\crmmex\Configuraciones\Form AS Forms;
 use App\Models\crmmex\Sistema\Configuraciones AS Configuraciones;
 use App\User AS Ejecutivo;
@@ -32,378 +33,404 @@ class UtilsController extends Controller
 {
 
     protected static $meses = array(
-        '01' => 'Ene', '02' => 'Feb', '03' => 'Mar', '04' => 'Abr', '05' => 'May', '06' => 'Jun',
-        '07' => 'Jul', '08' => 'Ago', '09' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dic'
+      '01' => 'Ene', '02' => 'Feb', '03' => 'Mar', '04' => 'Abr', '05' => 'May', '06' => 'Jun',
+      '07' => 'Jul', '08' => 'Ago', '09' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dic'
     );
 
-    /*
-     * Regresa el listado de estados
-     */
-     public function estados( $paisID = '' ) {
-        $datos   = array();
-        $estados = Estados::where( 'status' , 1 )->get();
+   /*
+    * Regresa el listado de estados
+    */
+    public function estados( $paisID = '' ) {
+      $datos   = array();
+      $estados = Estados::where( 'status' , 1 )->get();
 
-        foreach( $estados AS $estado ) {
-            $datos[] = array(
-              'id'      => $estado->id,
-              'entidad' => $estado->entidad
-            );
-        }
-
-        return response()->json( $datos );
-     }
-
-     /*
-      * Regresa el listado de paises
-      */
-     public function paises() {
-        $datos  = array();
-        $paises = Paises::where( 'status' , 1 )->get();
-
-        foreach ( $paises as $pais ) {
-            $datos[] = array(
-                'id'     => $pais->id,
-                'nombre' => $pais->nombre
-            );
-        }
-
-        return response()->json( $datos );
-     }
-
-     /*
-      * Regresa los posibles estados de un registro
-      */
-      public function estatusRegistro() {
-          $datos = array();
-          $estatus = Estatus::all();
-
-          foreach( $estatus AS $e ) {
-              $datos[] = array(
-                'id'     => $e->id,
-                'status' => $e->status
-              );
-          }
-
-          return response()->json( $datos );
-      }
-
-     /*
-      * Obtiene las opciones de catalogos utiles
-      */
-      public function opcionesCatalogos( $catalogoID ) {
-          $catalogo = array();
-          $opciones = Catalogo::find( $catalogoID );
-
-          foreach( $opciones->opciones AS $opcion ) {
-            if( $opcion->status == 1 ) {
-              $catalogo[] = array(
-                  'id'     => $opcion->id,
-                  'nombre' => $opcion->opcion,
-                  'params' => $opcion->parametros
-              );
-            }
-          }
-
-          return response()->json( $catalogo );
-      }
-
-      /*
-       * Obtiene los catalogos y sus opciones
-       */
-      public function catalogo( $id ) {
-          $catalogo = array();
-          $opciones = Catalogo::find( $id );
-
-          $catalogo[] = array(
-              'id'     => 0,
-              'nombre' => $opciones->nombre,
-              'params' => ''
+      foreach( $estados AS $estado ) {
+          $datos[] = array(
+            'id'      => $estado->id,
+            'entidad' => $estado->entidad
           );
-
-          foreach( $opciones->opciones AS $opcion ) {
-              $catalogo[] = array (
-                  'id'     => $opcion->id,
-                  'nombre' => $opcion->opcion,
-                  'params' => $opcion->parametros
-              );
-          }
-
-          return response()->json( $catalogo );
       }
 
-      /*
-       * Listado de catalogos y sus opciones
-       */
-       public function catalogosOpciones() {
-            $cat       = array();
-            $catalogos = Catalogo::where( 'status' , 1 )->get();
+      return response()->json( $datos );
+    }
 
-            foreach ( $catalogos  as $catalogo ) {
-                $opts = array();
-                foreach( $catalogo->opciones AS $opcion ) {
-                    $opts[] = array(
-                        'idOpt'     => $opcion->id,
-                        'nombreOpt' => $opcion->opcion
-                    );
-                }
-                $cat[] = array(
-                    'id'       => $catalogo->id,
-                    'nombre'   => $catalogo->nombre,
-                    'opciones' => $opts
-                );
-            }
+   /*
+    * Regresa el listado de paises
+    */
+    public function paises() {
+      $datos  = array();
+      $paises = Paises::where( 'status' , 1 )->get();
 
-            return response()->json( $cat );
-       }
+      foreach ( $paises as $pais ) {
+          $datos[] = array(
+              'id'     => $pais->id,
+              'nombre' => $pais->nombre
+          );
+      }
 
-      /*
-       * Obtiene el valor de un parametro del catalogo
-       */
-       public static function valorCatalogo( $valorID ) {
-          if( $valorID == '' )return "";
-          $opciones = Opciones::find( $valorID );
-          return $opciones->opcion;
-       }
+      return response()->json( $datos );
+    }
 
-       /*
-        * Obtiene el nombre de un ejecutivo de acuerdo a su ID
-        */
-        public static function nombreEjecutivo( $ejecutivoID ) {
-            $ejecutivo = Ejecutivo::find( $ejecutivoID );
-            return $ejecutivo->name . ' ' . $ejecutivo->apPat . ' ' . $ejecutivo->apMat;
+   /*
+    * Regresa los posibles estados de un registro
+    */
+    public function estatusRegistro() {
+      $datos = array();
+      $estatus = Estatus::all();
+
+      foreach( $estatus AS $e ) {
+          $datos[] = array(
+            'id'     => $e->id,
+            'status' => $e->status
+          );
+      }
+
+      return response()->json( $datos );
+    }
+
+   /*
+    * Obtiene las opciones de catalogos utiles
+    */
+    public function opcionesCatalogos( $catalogoID ) {
+      $catalogo = array();
+      $opciones = Catalogo::find( $catalogoID );
+
+      foreach( $opciones->opciones AS $opcion ) {
+        if( $opcion->status == 1 ) {
+          $catalogo[] = array(
+              'id'     => $opcion->id,
+              'nombre' => $opcion->opcion,
+              'params' => $opcion->parametros
+          );
         }
+      }
 
-      /*
-       * Obtiene razon social de un cliente a partir de su id
-       */
-       public static function nombreCliente( $clienteID ) {
-          $cliente = Clientes::find( $clienteID );
-          return $cliente->razonSocial;
-       }
+      return response()->json( $catalogo );
+    }
 
-       /*
-        * Obtiene el nombre de algun contacto
-        */
-        public static function nombreContacto( $contactoID ) {
-            $contacto = Contactos::find( $contactoID );
-            return $contacto->nombre . ' ' . $contacto->apellidoPaterno . ' ' . $contacto->apellidoMaterno . ' [' . $contacto->correoElectronico . ']';
-        }
+   /*
+    * Obtiene los catalogos y sus opciones
+    */
+    public function catalogo( $id ) {
+      $catalogo = array();
+      $opciones = Catalogo::find( $id );
 
-        /*
-         * Obtiene el nombre del producto
-         */
-         public static function nombreProducto( $productoID ) {
-            $producto = Productos::find( $productoID );
-            return $producto->clave . ' ' . $producto->nombre . ( strlen( $producto->descripcion > 0 ) ? ' / ' . $producto->descripcion : '' );
-         }
+      $catalogo[] = array(
+          'id'     => 0,
+          'nombre' => $opciones->nombre,
+          'params' => ''
+      );
 
-         /*
-          * Identificador de la propuesta
-          */
-          public static function propuestaIDTY( $propuestaID ) {
-              $propuesta = Propuestas::find( $propuestaID );
-              return $propuesta->propuestaIDTY;
-          }
+      foreach( $opciones->opciones AS $opcion ) {
+          $catalogo[] = array (
+              'id'     => $opcion->id,
+              'nombre' => $opcion->opcion,
+              'params' => $opcion->parametros
+          );
+      }
 
-          /*
-           * Obtiene nombre de un listado de audiencias
-           */
-           public static function nombreAudiencia( $audienciaID ) {
-              $listado = Listados::find( $audienciaID );
-              return $listado->nombre;
-           }
+      return response()->json( $catalogo );
+    }
 
-           /*
-            * Nombre de la pieza de correo
-            */
-            public static function nombrePieza( $piezaID ) {
-                $pieza = Pieza::find( $piezaID );
-                if( $pieza ){
-                    return $pieza->nombrePieza;
-                } else {
-                    return '';
-                }
-            }
+   /*
+    * Listado de catalogos y sus opciones
+    */
+    public function catalogosOpciones() {
+      $cat       = array();
+      $catalogos = Catalogo::where( 'status' , 1 )->get();
 
-      /*
-       * Obtiene el combo de productos
-       */
-       public function productosServicios( $grupo='' ) {
-          $datos = array();
-          $productos = Productos::where( 'status' , 1 )
-                                ->when( $grupo!='' , function( $q ) use( $grupo ) {
-                                    $q->where( 'grupo' , $grupo );
-                                })
-                                ->get();
-
-          foreach( $productos AS $producto ) {
-              $datos[] = array(
-                'id'     => $producto->id,
-                'nombre' => 'Clave:' . $producto->clave . ' | Nombre:' . $producto->nombre
+      foreach ( $catalogos  as $catalogo ) {
+          $opts = array();
+          foreach( $catalogo->opciones AS $opcion ) {
+              $opts[] = array(
+                  'idOpt'     => $opcion->id,
+                  'nombreOpt' => $opcion->opcion
               );
           }
+          $cat[] = array(
+              'id'       => $catalogo->id,
+              'nombre'   => $catalogo->nombre,
+              'opciones' => $opts
+          );
+      }
 
-          return response()->json( $datos );
-       }
+      return response()->json( $cat );
+    }
 
-       /*
-        * Obtiene listado de contactos por cliente
-        */
-        public function listadoContactos( $clienteID ) {
-            $datos = array();
-            $contactos = Contactos::where( 'clienteID' , $clienteID )->where( 'status' , 1 )->get();
+   /*
+    * Obtiene el valor de un parametro del catalogo
+    */
+    public static function valorCatalogo( $valorID ) {
+      if( $valorID == '' )return "";
+      $opciones = Opciones::find( $valorID );
+      return $opciones->opcion;
+   }
 
-            foreach( $contactos AS $contacto ) {
-                $datos[] = array(
-                  'id' => $contacto->id,
-                  'nombre' => $contacto->nombre . ' ' . $contacto->apellidoPaterno . ' ' .
-                              $contacto->apellidoMaterno . ' [' . $contacto->correoElectronico . ']'
-                );
-            }
+   /*
+    * Obtiene el nombre de un ejecutivo de acuerdo a su ID
+    */
+    public static function nombreEjecutivo( $ejecutivoID ) {
+      $ejecutivo = Ejecutivo::find( $ejecutivoID );
+      return $ejecutivo->name . ' ' . $ejecutivo->apPat . ' ' . $ejecutivo->apMat;
+    }
 
-            return response()->json( $datos );
-        }
+   /*
+    * Obtiene razon social de un cliente a partir de su id
+    */
+    public static function nombreCliente( $clienteID ) {
+      $cliente = Clientes::find( $clienteID );
+      return $cliente->razonSocial;
+    }
 
-        /*
-         * Realiza el calculo para la promocion seleccionada
-         */
-        public static function aplicaPromocion( $promoID , $monto ) {
-            $hoy       = date( 'Y-m-d H:i:s' );
-            $promocion = Promociones::find( $promoID );
+   /*
+    * Obtiene el nombre de algun contacto
+    */
+    public static function nombreContacto( $contactoID ) {
+      $contacto = Contactos::find( $contactoID );
+      return $contacto->nombre . ' ' . $contacto->apellidoPaterno . ' ' . $contacto->apellidoMaterno . ' [' . $contacto->correoElectronico . ']';
+    }
 
-            if( $promocion->inicioVigencia > $hoy || $promocion->finVigencia < $hoy ) return $monto;
+   /*
+    * Obtiene el nombre del producto
+    */
+    public static function nombreProducto( $productoID ) {
+      $producto = Productos::find( $productoID );
+      return $producto->clave . ' ' . $producto->nombre . ( strlen( $producto->descripcion > 0 ) ? ' / ' . $producto->descripcion : '' );
+    }
 
-            if( $promocion->tipoDescuento == 1 ) {
-                  return number_format( ( $monto * $promocion->cantidad ) / 100 , 2 );
-              } elseif( $promocion->tipoDescuento == 2 ) {
-                  return number_format( $monto - $promocion->cantidad , 2 );
-            }
+   /*
+    * Identificador de la propuesta
+    */
+    public static function propuestaIDTY( $propuestaID ) {
+      $propuesta = Propuestas::find( $propuestaID );
+      return $propuesta->propuestaIDTY;
+    }
 
-        }
+   /*
+    * Obtiene nombre de un listado de audiencias
+    */
+    public static function nombreAudiencia( $audienciaID ) {
+      $listado = Listados::find( $audienciaID );
+      return $listado->nombre;
+    }
 
-        /*
-         * Regresa el listado de promociones activas
-         */
-        public function listadoPromociones() {
-            $promos   = array();
-            $promos[] = array( 'id' => '0' , 'nombre' => 'Sin promocion' );
-            $promociones = Promociones::where( 'status' , 1 )
-                                      ->where( 'inicioVigencia' , '<' , date( 'Y-m-d H:i:s' ) )
-                                      ->where( 'finVigencia' , '>' , date( 'Y-m-d H:i:s' ) )->get();
+   /*
+    * Nombre de la pieza de correo
+    */
+    public static function nombrePieza( $piezaID ) {
+      $pieza = Pieza::find( $piezaID );
+      if( $pieza ){
+          return $pieza->nombrePieza;
+      } else {
+          return '';
+      }
+    }
 
-            foreach ( $promociones AS $promocion ) {
-                $promos[] = array( 'id' => $promocion->id , 'nombre' => $promocion->nombreDescuento .  ( ( $promocion->tipoDescuento == 1 ) ? ' [' . $promocion->cantidad . '%]' : '' ) );
-            }
+   /*
+    * Obtiene el combo de productos
+    */
+    public function productosServicios( $grupo='' ) {
+      $datos = array();
+      $productos = Productos::where( 'status' , 1 )
+                            ->when( $grupo!='' , function( $q ) use( $grupo ) {
+                                $q->where( 'grupo' , $grupo );
+                            })
+                            ->get();
 
-            return response()->json( $promos );
-        }
+      foreach( $productos AS $producto ) {
+          $datos[] = array(
+            'id'     => $producto->id,
+            'nombre' => 'Clave:' . $producto->clave . ' | Nombre:' . $producto->nombre
+          );
+      }
 
-        /*
-         * Regresa el detalle de un producto
-         */
-        public static function datosProducto( $productoID ) {
-            $producto = Productos::find( $productoID );
-            return $producto;
-        }
+      return response()->json( $datos );
+    }
 
-        /*
-         * Regresa un valor predefinido de acuerdo a su id
-         */
-        public function getPredefinido( $predefinidoID ) {
-            $predefinido = Predefinidos::find( $predefinidoID );
-            return $predefinido;
-        }
+   /*
+    * Obtiene listado de contactos por cliente
+    */
+    public function listadoContactos( $clienteID ) {
+      $datos = array();
+      $contactos = Contactos::where( 'clienteID' , $clienteID )->where( 'status' , 1 )->get();
 
-        /*
-         * Establece un valor predefinido de acuerdo a su id
-         */
-        public function setPredefinido( $predefinidoID , Request $request ) {
-            //$valor = $request->nomenclatura_prefijo . '_' . $request->nomenclatura_variable . '_' . $request->nomenclatura_identificador;
-            $identificador = 'valorPredefinido_' . $predefinidoID;
-            $predefinido = Predefinidos::find( $predefinidoID );
-            $predefinido->valor = $request->$identificador;
-            $predefinido->save();
-        }
+      foreach( $contactos AS $contacto ) {
+          $datos[] = array(
+            'id' => $contacto->id,
+            'nombre' => $contacto->nombre . ' ' . $contacto->apellidoPaterno . ' ' .
+                        $contacto->apellidoMaterno . ' [' . $contacto->correoElectronico . ']'
+          );
+      }
 
-        /*
-         * Regresa el registro de un predefinido de acuerdo a su id
-         */
-        public static function detallePredefinido( $predefinidoID ) {
-            $predefinido = Predefinidos::find( $predefinidoID );
-            return $predefinido;
-        }
+      return response()->json( $datos );
+    }
 
-        /*
-         * Establece el formato de una fecha
-         */
-        public static function formatoFecha( $f ) {return $f;
-            list( $fecha , $hora )      = explode( ' ' , $f );
-            list( $anio , $mes , $dia ) = explode( '-' , $fecha );
-            $formato = $anio;
-            if( isset( $hora ) ) {
-                $formato .= ' ' . $fecha;
-            }
-            return $formato;
-        }
+   /*
+    * Realiza el calculo para la promocion seleccionada
+    */
+    public static function aplicaPromocion( $promoID , $monto ) {
+      $hoy       = date( 'Y-m-d H:i:s' );
+      $promocion = Promociones::find( $promoID );
 
-        /*
-         * Edita opcion del catalogo
-         */
-         public function actualizaOpcionCatalogo( $optID , $optNombre ) {
-            $opcion         = Opciones::find( $optID );
-            $opcion->opcion = $optNombre;
-            $opcion->save();
-            $cat = array( 'catID' , $opcion->idCat );
+      if( $promocion->inicioVigencia > $hoy || $promocion->finVigencia < $hoy ) return $monto;
 
-            return response()->json( $cat );
-         }
+      if( $promocion->tipoDescuento == 1 ) {
+            return number_format( ( $monto * $promocion->cantidad ) / 100 , 2 );
+        } elseif( $promocion->tipoDescuento == 2 ) {
+            return number_format( $monto - $promocion->cantidad , 2 );
+      }
+    }
 
-         /*
-          * Agrega una nueva opcion al catalogo
-          */
-          public function agregaOpcionCatalogo( $catalogoID , $nombre ) {
-              $opcion = new Opciones();
-              $opcion->idCat  = $catalogoID;
-              $opcion->opcion = $nombre;
-              $opcion->status = 1;
-              $opcion->save();
-          }
+   /*
+    * Regresa el listado de promociones activas
+    */
+    public function listadoPromociones() {
+      $promos   = array();
+      $promos[] = array( 'id' => '0' , 'nombre' => 'Sin promocion' );
+      $promociones = Promociones::where( 'status' , 1 )
+                                ->where( 'inicioVigencia' , '<' , date( 'Y-m-d H:i:s' ) )
+                                ->where( 'finVigencia' , '>' , date( 'Y-m-d H:i:s' ) )->get();
 
-          /*
-           * Elimina una opcion del catalogo
-           */
-           public function eliminaOpcionCatalogo( $opcionID ) {
-              $opcion = Opciones::find( $opcionID );
-              $opcion->status = 0;
-              $opcion->save();
-           }
+      foreach ( $promociones AS $promocion ) {
+          $promos[] = array( 'id' => $promocion->id , 'nombre' => $promocion->nombreDescuento .  ( ( $promocion->tipoDescuento == 1 ) ? ' [' . $promocion->cantidad . '%]' : '' ) );
+      }
 
-         /*
-          * Obtiene el nombre del perfil asignado a un usuario
-          */
-          public static function nombrePerfil( $perfilID ) {
-              $perfil = Perfiles::find( $perfilID );
-              return $perfil->rol;
-          }
+      return response()->json( $promos );
+    }
 
-          /*
-           * Obtiene el nombre del formulario
-           */
-           public static function nombreForm( $formID ) {
-              if( $formID == "0" ) {
-                  return "Sin formulario";
-                } else {
-                  $form = Forms::find( $formID );
-                  return $form->nombreForm;
-              }
-           }
+   /*
+    * Regresa el detalle de un producto
+    */
+    public static function datosProducto( $productoID ) {
+      $producto = Productos::find( $productoID );
+      return $producto;
+    }
 
-           /*
-            * Tipo de menu en uso
-            */
-            public static function tipoMenu() {
-                $menu = Configuraciones::find( '1' )->first();
-                return $menu->value;
-            }
+   /*
+    * Regresa un valor predefinido de acuerdo a su id
+    */
+    public function getPredefinido( $predefinidoID ) {
+      $predefinido = Predefinidos::find( $predefinidoID );
+      return $predefinido;
+    }
+
+   /*
+    * Establece un valor predefinido de acuerdo a su id
+    */
+    public function setPredefinido( $predefinidoID , Request $request ) {
+      $identificador = 'valorPredefinido_' . $predefinidoID;
+      $predefinido = Predefinidos::find( $predefinidoID );
+      $predefinido->valor = $request->$identificador;
+      $predefinido->save();
+    }
+
+   /*
+    * Regresa el registro de un predefinido de acuerdo a su id
+    */
+    public static function detallePredefinido( $predefinidoID ) {
+      $predefinido = Predefinidos::find( $predefinidoID );
+      return $predefinido;
+    }
+
+   /*
+    * Establece el formato de una fecha
+    */
+    public static function formatoFecha( $f ) {return $f;
+      list( $fecha , $hora )      = explode( ' ' , $f );
+      list( $anio , $mes , $dia ) = explode( '-' , $fecha );
+      $formato = $anio;
+      if( isset( $hora ) ) {
+          $formato .= ' ' . $fecha;
+      }
+      return $formato;
+    }
+
+   /*
+    * Edita opcion del catalogo
+    */
+    public function actualizaOpcionCatalogo( $optID , $optNombre ) {
+      $opcion         = Opciones::find( $optID );
+      $opcion->opcion = $optNombre;
+      $opcion->save();
+      $cat = array( 'catID' , $opcion->idCat );
+      return response()->json( $cat );
+    }
+
+   /*
+    * Agrega una nueva opcion al catalogo
+    */
+    public function agregaOpcionCatalogo( $catalogoID , $nombre ) {
+      $opcion = new Opciones();
+      $opcion->idCat  = $catalogoID;
+      $opcion->opcion = $nombre;
+      $opcion->status = 1;
+      $opcion->save();
+    }
+
+   /*
+    * Elimina una opcion del catalogo
+    */
+    public function eliminaOpcionCatalogo( $opcionID ) {
+      $opcion = Opciones::find( $opcionID );
+      $opcion->status = 0;
+      $opcion->save();
+    }
+
+   /*
+    * Obtiene el nombre del perfil asignado a un usuario
+    */
+    public static function nombrePerfil( $perfilID ) {
+      $perfil = Perfiles::find( $perfilID );
+      return $perfil->rol;
+    }
+
+   /*
+    * Obtiene el nombre del formulario
+    */
+    public static function nombreForm( $formID ) {
+      if( $formID == "0" ) {
+          return "Sin formulario";
+        } else {
+          $form = Forms::find( $formID );
+          return $form->nombreForm;
+      }
+    }
+
+   /*
+    * Tipo de menu en uso
+    */
+    public static function tipoMenu() {
+      $menu = Configuraciones::find( '1' )->first();
+      return $menu->value;
+    }
+
+   /*
+    *
+    */
+    public static function datosPropietario( $json=false ) {
+      $datos = array();
+      $propietario = Propietario::where( 'id' , 1 )->first();
+      $datos[ 'id' ]                   = $propietario->id;
+      $datos[ 'razonSocial' ]          = $propietario->razonSocial;
+      $datos[ 'rfc' ]                  = $propietario->rfc;
+      $datos[ 'calle' ]                = $propietario->calle;
+      $datos[ 'exterior' ]             = $propietario->exterior;
+      $datos[ 'interior' ]             = $propietario->interior;
+      $datos[ 'colonia' ]              = $propietario->colonia;
+      $datos[ 'municipio' ]            = $propietario->municipio;
+      $datos[ 'estado' ]               = $propietario->estado;
+      $datos[ 'codigoPostal' ]         = $propietario->codigoPostal;
+      $datos[ 'pais' ]                 = $propietario->pais;
+      $datos[ 'telefonos' ]            = $propietario->telefonos;
+      $datos[ 'correoElectronico' ]    = $propietario->correoElectronico;
+      $datos[ 'informacionAdicional' ] = $propietario->informacionAdicional;
+      $datos[ 'status' ]               = $propietario->status;
+
+      if( $json ) {
+        return response()->json( $datos );
+      } else {
+        return $datos;
+      }
+    }
 
 }

@@ -272,8 +272,6 @@
                       aviso( 'Error al actualizar el registro' , false );
                   } else {
                       aviso( response.data.mensaje );
-                      //document.getElementById( 'logoBranding' ).innerHTML = '';
-                      //document.getElementById( 'logoBranding' ).innerHTML = '<img src="/imagenPropietario" width="200px"><br>wwwww';
                       document.getElementById( 'logoBrandingImg' ).src = '/imagenPropietario?'+ new Date().getTime();
                 }
              })

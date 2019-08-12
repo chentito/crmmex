@@ -26,7 +26,7 @@ class PHPMailerController extends Controller
     // Metodo para el envio de propuestas
     public static function envioPropuesta( $propuestaID , $destinatarios , $reservadas=array() , $adjuntos=array() ) {
         $msj = self::piezaCorreo( 1 , $reservadas );
-        self::envio( 'propuesta' , $msj[ 'Asunto' ] , $msj[ 'Body' ] , $destinatarios , 'propuesta' , $adjuntos );
+        self::envio( '0' , $msj[ 'Asunto' ] , $msj[ 'Body' ] , $destinatarios , '0' , $adjuntos );
     }
 
     // Metodo para el envio de Campanias
