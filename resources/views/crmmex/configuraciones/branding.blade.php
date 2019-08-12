@@ -97,6 +97,7 @@
   </div>
   <div class="tab-pane fade" id="otros" role="tabpanel" aria-labelledby="otros-tab">
     <div class="{{$container}} border-left border-bottom border-right p-1">
+      <form id="formConfiguracione" name="formConfiguracione">
         <div class=row>
             <div class="col-sm-5 text-center">
                 <h6>Configuracion</h6>
@@ -109,13 +110,14 @@
                 Diseño del menu
             </div>
             <div class="col-sm-5">
-                <select class="custom-select custom-select-sm" name="disenioMenu" id="disenioMenu">
+                <select class="custom-select custom-select-sm" name="config_1" id="config_1">
                     <option value="1">Diseño Vertical</option>
                     <option value="2">Diseño Horizontal</option>
                 </select>
             </div>
-            <div class="col-sm-2 text-center"><button id="guardaDisenioMenu" type="button" class="btn btn-sm {{$btn}}"><i class="fa fa-sm fa-save"></i> Guardar</button></div>
+            <div class="col-sm-2 text-center"><button id="guardaDisenioMenu" type="submit" class="btn btn-sm {{$btn}}"><i class="fa fa-sm fa-save"></i> Guardar</button></div>
         </div>
+      </form>
     </div>
   </div>
   <div class="tab-pane fade" id="usuario" role="tabpanel" aria-labelledby="usuario-tab">
@@ -193,6 +195,17 @@
 
 <script>
 
+    axios.get( '/api/listadoConfiguraciones' , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
+         .then( response => {
+            var datos = response.data;
+            datos.forEach( function( e , i ) {
+                document.getElementById( 'config_' + e.id ).value = e.valor;
+            });
+         })
+         .catch( err => {
+            console.log( err );
+         });
+
     axios.get( '/api/utiles/comboPaises' , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
          .then( response => {
             response.data.forEach( function( e , i ){
@@ -236,13 +249,17 @@
 
     document.getElementById( 'guardaDisenioMenu' ).addEventListener( 'click' , function( e ){
         e.preventDefault();
-        axios.post( '/api/configuraciones/1/' + document.getElementById( 'disenioMenu' ).value , {} ,  { headers:{ 'Accept' : 'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) , 'content-type' : 'multipart/form-data' } })
+        var datos = new FormData( document.getElementById( 'formConfiguracione' ) );
+        //axios.post( '/api/configuraciones/1/' + document.getElementById( 'config_1' ).value , {} ,  { headers:{ 'Accept' : 'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) , 'content-type' : 'multipart/form-data' } })
+        axios.post('/api/setConfiguraciones',datos,{headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem('apiToken'),'content-type':'multipart/form-data'}})
               .then( response => {
                   aviso("Configuracion Guardada");
+                  location.reload();
               })
               .catch( err => {
                 console.log( err );
               });
+
     });
 
     document.getElementById( 'misDatosBtn' ).addEventListener( 'click' , function( e ) {

@@ -53,7 +53,7 @@
             @endif
 
             <!-- Contenido central, contiene header, botones contro menu, breadcrumb y contenido principal -->
-            <div class="{{$container}}" id="content">
+            <div class="container-fluid" id="content">
 
                 <!-- Header -->
                 <header id="header" class="bg-light sticky-top" style="opacity: {{$trans}}; font-weight: bold">

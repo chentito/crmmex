@@ -203,6 +203,8 @@ Route::post( '/actualizaOptCat/{optID}/{optNombre}'         , 'crmmex\Utils\Util
 Route::post( '/agregaOptCat/{catID}/{optNombre}'            , 'crmmex\Utils\UtilsController@agregaOpcionCatalogo' );
 Route::post( '/eliminaOptCat/{optID}'                       , 'crmmex\Utils\UtilsController@eliminaOpcionCatalogo' );
 Route::post( '/configuraciones/{configuracionID}/{valor}'   , 'crmmex\Configuraciones\ConfiguracionesController@setValue' );
+Route::get ( '/listadoConfiguraciones'                      , 'crmmex\Configuraciones\ConfiguracionesController@configuraciones' );
+Route::post( '/setConfiguraciones'                          , 'crmmex\Configuraciones\ConfiguracionesController@setConfiguraciones' );
 
 
 /************************************ Acciones utiles para templates de envio de correo ************************************/
