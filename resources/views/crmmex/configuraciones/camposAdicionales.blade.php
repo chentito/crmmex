@@ -107,9 +107,9 @@
     }
 
     if( document.getElementById( 'adicional_clientes_nombre' ).value == '' ) {
-      aviso( "No ha proporcionado un nombre para el campo adicional" );
+      aviso( "No ha proporcionado un nombre para el campo adicional" , false );
     } else {
-      axios.post( url , datos , { headers:{'Accept':'application/json','Authentication':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
+      axios.post( url , datos , { headers:{ 'Accept' : 'application/json', 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) }} )
            .then( response => {
               aviso( msj );
               contenidos( 'configuraciones_camposAdicionales' , document.getElementById( 'idSeccionConsultar' ).value );
