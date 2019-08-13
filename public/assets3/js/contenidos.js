@@ -136,24 +136,6 @@ function aplicaPromo( promoID , monto , input ) {
      });
 }
 
-menuNavegacion();
-function menuNavegacion() {
-    var menuContenedor = document.getElementById( 'menuNavegacionModulos' );
-    var perfilID= document.getElementById( 'log_perfilID' ).value;
-    axios.post( '/api/verificaModulos/' + perfilID , { headers:{'Accept':'application\json','Authorization' : 'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
-         .then( response => {
-              response.data.forEach( function( e , i ){
-                  if( e.acceso == '0' ) {
-                      var element = document.getElementById( 'moduloMenu_' + e.modulo );
-                      element.parentNode.removeChild(element);
-                  }
-              });
-         })
-         .catch( err => {
-            console.log( err );
-         });
-}
-
 function generaDataGrid( id , filtro = '' ) {
     var token = sessionStorage.getItem( 'apiToken' );
     f = ( filtro != '' ) ? '/' + filtro : '';

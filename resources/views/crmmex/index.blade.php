@@ -48,7 +48,7 @@
                 <button type="button" id="sidebarCollapse2" class="btn {{$btn}} mt-2" style="width: 100%">
                     <i class="fas fa-angle-left"></i>
                 </button>
-                @include( 'crmmex.utils.menuVertical' , [ 'estilo' => $estilo , 'boton' => $btn ] )
+                @include( 'crmmex.utils.menuVertical' , [ 'estilo' => $estilo , 'boton' => $btn , 'priv' => $priv ] )
             </nav>
             @endif
 
@@ -72,7 +72,7 @@
 
                 @if( $tipoMenu == 2 )
                   <div style="height: 35px; opacity: {{$trans}}" style="z-index: 1600" id="menu">
-                      @include( 'crmmex.utils.menuHorizontal' , [ 'estilo' => $estilo , 'boton' => $btn ] )
+                      @include( 'crmmex.utils.menuHorizontal' , [ 'estilo' => $estilo , 'boton' => $btn , 'priv' => $priv ] )
                   </div>
                 @endif
 
