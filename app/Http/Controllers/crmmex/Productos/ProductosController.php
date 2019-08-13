@@ -27,11 +27,13 @@ class ProductosController extends Controller
     $productos = Prod::whereIn( 'status' , array( 2 , 1 ) )->get();
 
     foreach( $productos AS $producto ) {
+      $grupo = Utils::valorCatalogo( $producto->grupo );
+      $tipo  = Utils::valorCatalogo( $producto->tipo );
       $datos[ 'productos' ][] = array (
         'id'                => $producto->id,
         'clave'             => $producto->clave,
-        'tipo'              =>  Utils::valorCatalogo( $producto->tipo ),
-        'grupo'             =>  Utils::valorCatalogo( $producto->grupo ),
+        'tipo'              => ( $tipo == '' ) ? 'Sin tipo' : $tipo ,
+        'grupo'             => ( $grupo == '' ) ? 'Sin grupo' : $grupo,
         'nombre'            => $producto->nombre,
         'descripcion'       => $producto->descripcion,
         'periodicidad'      => Utils::valorCatalogo( $producto->periodicidad ),
@@ -205,7 +207,7 @@ class ProductosController extends Controller
               $resultado[] = "Linea " . $linea . "|Error en la estructura del renglon.";
             } elseif( $datos[ 0 ] == '' || $datos[ 1 ] == '' || $datos[ 5 ] == '' ) {
               $resultado[] = "Linea " . $linea . "|SKU,Nombre y precio son valores obligatorios, se ha omitido la carga al catalog.";
-            }
+            } else { 
               $producto = new Prod();
               $producto->clave             = $datos[ 0 ];
               $producto->nombre            = $datos[ 1 ];
