@@ -54,12 +54,13 @@
                 <select class="custom-select custom-select-sm" id="catalogo_9" name="catalogo_9"></select>
               </div>
               <div class="col-sm-3">
-                <label for="catalogo_13">Categoría</label>
-                <select class="custom-select custom-select-sm" id="catalogo_13" name="catalogo_13"></select>
-              </div>
-              <div class="col-sm-3">
                 <label for="catalogo_12">Grupo</label>
                 <select class="custom-select custom-select-sm" id="catalogo_12" name="catalogo_12"></select>
+              </div>
+              <div class="col-sm-3">
+                <label for="confProductos_status">Estatus</label>
+                <select class="custom-select custom-select-sm" id="confProductos_status" name="confProductos_status">
+                </select>
               </div>
             </div>
             <div class="row">
@@ -67,19 +68,19 @@
                 <label for="confProductos_clave">Precio</label>
                 <input type="text" maxlength="45" placeholder="Precio" class="form-control form-control-sm" id="confProductos_precio" name="confProductos_precio">
               </div>
-              <!--div class="col-sm-3">
-                <label for="confProductos_clave">Impuestos</label>
-                <select class="custom-select custom-select-sm" id="catalogo_14" name="catalogo_14"></select>
-              </div-->
               <div class="col-sm-3">
                 <label for="catalogo_10">Divisa</label>
                 <select class="custom-select custom-select-sm" id="catalogo_10" name="catalogo_10"></select>
               </div>
               <div class="col-sm-3">
-                <label for="confProductos_status">Estatus</label>
-                <select class="custom-select custom-select-sm" id="confProductos_status" name="confProductos_status">
-                </select>
+                <label for="catalogo_10">Marca</label>
+                <select class="custom-select custom-select-sm" id="confProductos_marca" name="confProductos_marca"></select>
               </div>
+              <div class="col-sm-3">
+                <label for="catalogo_10">Modelo</label>
+                <select class="custom-select custom-select-sm" id="confProductos_modelo" name="confProductos_modelo"></select>
+              </div>
+
               <div class="col-sm-12"><hr></div>
               <div class="col-sm-3">
                   Usa traslados:
@@ -138,7 +139,7 @@
                   <button type="submit" name="confHistoricosProducto_btn" id="confHistoricosProducto_btn" class="btn btn-sm {{$btn}}"><i class="fa fa-sm fa-upload"></i> Cargar históricos</button>
                 </div>
 
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <div class="row">
                       <div class="col-sm-3 mt-1">
                         <b>Datos Históricos:</b>
@@ -161,7 +162,7 @@
                       </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <!--div class="col-sm-6">
                   <div class="row">
                     <div class="col-sm-3 mt-1">
                       <b>Pronósticos:</b>
@@ -185,7 +186,7 @@
                       <button type="button" name="guardaPronosticoProducto" class="btn btn-sm {{$btn}}"><i class="fa fa-sm fa-save"></i> Guardar pronóstico</button>
                     </div>
                   </div>
-                </div>
+                </div-->
 
             </div>
           </div>
@@ -239,13 +240,13 @@
       }
   });
 
-  document.getElementById( 'calculoPomedio_meses' ).addEventListener( 'change' , function( e ){
+  /*document.getElementById( 'calculoPomedio_meses' ).addEventListener( 'change' , function( e ){
       if( this.value == '0' ){
             document.getElementById( 'calculoPomedio_promedioCalculado' ).value = '';
         } else {
             calculoPronosticoPromedio( this.value , document.getElementById( 'idProductoEditar' ).value );
       }
-  });
+  });*/
 
   function calculoPronosticoPromedio( meses , productoID ) {
       var config     = {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}};
@@ -259,6 +260,7 @@
   }
 
   function cargaDatosHistoricos() {
+    if( document.getElementById( 'idProductoEditar' ) == null )return false;
     var productoID = document.getElementById( 'idProductoEditar' ).value;
     var config     = {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}};
 

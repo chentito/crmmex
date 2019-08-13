@@ -5,6 +5,7 @@
 <div class="row">
   <div class="col-sm-12 text-center">
     <button class="btn btn-sm {{$btn}}" onclick="contenidos('configuraciones_catalogos_nuevoProducto')"><i class="fa fa-plus fa-sm"></i> Agregar Producto/Servicio</button>
+    <button class="btn btn-sm {{$btn}}" onclick="contenidos('configuraciones_catalogos_productosCargaMasiva')"><i class="fa fa-upload fa-sm"></i> Carga Masiva</button>
   </div>
 </div>
 

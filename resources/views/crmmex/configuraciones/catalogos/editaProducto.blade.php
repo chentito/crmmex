@@ -24,13 +24,13 @@
           document.getElementById( 'confProductos_descripcion' ).value         = d.descripcion;
           document.getElementById( 'catalogo_8' ).value                        = d.periodicidad;
           document.getElementById( 'catalogo_9' ).value                        = d.tipo;
-          document.getElementById( 'catalogo_13' ).value                       = d.categoria;
           document.getElementById( 'catalogo_12' ).value                       = d.grupo;
           document.getElementById( 'confProductos_precio' ).value              = d.precio;
-          //document.getElementById( 'catalogo_14' ).value               = d.impuesto;
+          document.getElementById( 'confProductos_marca' ).value               = d.marca;
+          document.getElementById( 'confProductos_modelo' ).value              = d.modelo;
           if( d.impuesto != '0' && d.impuesto != '16' && d.impuesto != '8' ) {
               document.getElementById( 'confProductos_tasaTrasladosOtra' ).value= d.impuesto;
-          } else {
+            } else {
               document.getElementById( 'confProductos_tasaTraslados' ).value   = d.impuesto;
           }
           document.getElementById( 'confProductos_tasaRetencionesOtra' ).value = d.impuestoRetencion;
