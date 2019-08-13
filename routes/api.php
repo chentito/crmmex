@@ -207,6 +207,7 @@ Route::post( '/eliminaOptCat/{optID}'                       , 'crmmex\Utils\Util
 Route::post( '/configuraciones/{configuracionID}/{valor}'   , 'crmmex\Configuraciones\ConfiguracionesController@setValue' );
 Route::get ( '/listadoConfiguraciones'                      , 'crmmex\Configuraciones\ConfiguracionesController@configuraciones' );
 Route::post( '/setConfiguraciones'                          , 'crmmex\Configuraciones\ConfiguracionesController@setConfiguraciones' );
+Route::get ( '/download/{archivo}'                          , 'crmmex\Sistema\DescargasController@descargaArchivoEjemplo' );
 
 
 /************************************ Acciones utiles para templates de envio de correo ************************************/

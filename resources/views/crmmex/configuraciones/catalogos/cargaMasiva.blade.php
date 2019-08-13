@@ -39,9 +39,14 @@
   </div>
 </div>
 
+
 <script>
 
-  document.getElementById( 'btnCargaLayoutProductos' ).addEventListener( 'click' , function(){
+  document.getElementById( 'btnDescargaLayoutProductos' ).addEventListener( 'click' , function( e ) {
+    location.replace( '/download/LayoutProductos' );
+  });
+
+  document.getElementById( 'btnCargaLayoutProductos' ).addEventListener( 'click' , function( e ){
     var datos = new FormData( document.getElementById( 'layoutProductosForm' ) );
     var config = {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ),'content-type': 'multipart/form-data'}};
 

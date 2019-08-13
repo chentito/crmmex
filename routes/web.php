@@ -57,6 +57,7 @@ Route::middleware( 'web' )->group( function(){
   Route::post( '/carritoCarga/{propuestaID}'          , 'crmmex\Clientes\PropuestasController@cargaCarrito' );
   Route::get ( '/imagenPropietario'                   , 'crmmex\Sistema\PropietarioController@imagenPropietario' );
   Route::get ( '/imagenParaPropuesta'                 , 'crmmex\Clientes\PropuestasController@imagenParaPropuesta' );
+  Route::get ( '/download/{archivo}'                  , 'crmmex\Sistema\DescargasController@descargaArchivoEjemplo' );
 });
 
 Route::get ( '/campaniatracking/{campaniaID}/{contactoID}' , 'crmmex\Sistema\TrackingController@registro' );

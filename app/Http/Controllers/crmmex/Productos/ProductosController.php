@@ -206,8 +206,8 @@ class ProductosController extends Controller
             if( count( $datos ) != 8 ) {
               $resultado[] = "Linea " . $linea . "|Error en la estructura del renglon.";
             } elseif( $datos[ 0 ] == '' || $datos[ 1 ] == '' || $datos[ 5 ] == '' ) {
-              $resultado[] = "Linea " . $linea . "|SKU,Nombre y precio son valores obligatorios, se ha omitido la carga al catalog.";
-            } else { 
+              $resultado[] = "Linea " . $linea . "|SKU,Nombre y precio son valores obligatorios, se ha omitido la carga al catalogo.";
+            } else {
               $producto = new Prod();
               $producto->clave             = $datos[ 0 ];
               $producto->nombre            = $datos[ 1 ];

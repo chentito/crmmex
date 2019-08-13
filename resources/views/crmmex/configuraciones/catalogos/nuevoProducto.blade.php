@@ -73,14 +73,13 @@
                 <select class="custom-select custom-select-sm" id="catalogo_10" name="catalogo_10"></select>
               </div>
               <div class="col-sm-3">
-                <label for="catalogo_10">Marca</label>
-                <select class="custom-select custom-select-sm" id="confProductos_marca" name="confProductos_marca"></select>
+                <label for="confProductos_marca">Marca</label>
+                <input type="text" maxlength="45" placeholder="Marca" class="form-control form-control-sm" id="confProductos_marca" name="confProductos_marca">
               </div>
               <div class="col-sm-3">
-                <label for="catalogo_10">Modelo</label>
-                <select class="custom-select custom-select-sm" id="confProductos_modelo" name="confProductos_modelo"></select>
+                <label for="confProductos_modelo">Modelo</label>
+                <input type="text" maxlength="45" placeholder="Modelo" class="form-control form-control-sm" id="confProductos_modelo" name="confProductos_modelo">
               </div>
-
               <div class="col-sm-12"><hr></div>
               <div class="col-sm-3">
                   Usa traslados:
