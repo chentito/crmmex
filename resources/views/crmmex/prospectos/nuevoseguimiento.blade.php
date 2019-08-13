@@ -23,19 +23,14 @@
                       <div class="col-sm-6">
                           <label for="prospectos_nuevoseguimiento_hora">Hora:</label>
                           <select class="custom-select custom-select-sm" name="prospectos_nuevoseguimiento_hora" id="prospectos_nuevoseguimiento_hora">
-                            @for ($i = 7; $i <= 20; $i++)
+                            @for ($i = 0; $i <= 23; $i++)
                                 <option value="@if(strlen($i)===1) {{ '0'.$i }} @else {{$i}} @endif">@if(strlen($i)===1) {{ '0'.$i }} @else {{$i}} @endif</option>
                             @endfor
                           </select>
                       </div>
                       <div class="col-sm-6">
                         <label for="prospectos_nuevoseguimiento_minutos">Minuto:</label>
-                        <select class="custom-select custom-select-sm" name="prospectos_nuevoseguimiento_minutos" id="prospectos_nuevoseguimiento_minutos">
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                        </select>
+                        <select class="custom-select custom-select-sm" name="prospectos_nuevoseguimiento_minutos" id="prospectos_nuevoseguimiento_minutos"></select>
                       </div>
                   </div>
               </div>
@@ -76,88 +71,97 @@
 
 <script>
 
-  $( '#prospectos_nuevoseguimiento_fecha' ).datepicker({
-      format: "yyyy-mm-dd",
-      language: "es",
-      todayBtn: "linked",
-      clearBtn: true,
-      startDate: "today",
-      daysOfWeekDisabled: "0,6",
-      daysOfWeekHighlighted: "0,6"
-  });
-
   cargaDatosComboCatalogo();
-
-  if( document.getElementById( 'edicionSeguimiento' ) == undefined ) {
-      document.getElementById( 'btnActualizaSeguimiento' ).outerHTML = "";
-  }
-
   cargaContactos();
 
+  $( '#prospectos_nuevoseguimiento_fecha' ).datepicker({
+    format: "yyyy-mm-dd",
+    language: "es",
+    todayBtn: "linked",
+    clearBtn: true,
+    startDate: "today",
+    daysOfWeekDisabled: "0,6",
+    daysOfWeekHighlighted: "0,6"
+  });
+
+  if( document.getElementById( 'edicionSeguimiento' ) == undefined ) {
+    document.getElementById( 'btnActualizaSeguimiento' ).outerHTML = "";
+  }
+
   document.getElementById( 'btnGuardaSeguimiento' ).addEventListener( 'click' , function( e ){
-      e.preventDefault();
-      guardaSeguimiento();
+    e.preventDefault();
+    guardaSeguimiento();
   });
 
   document.getElementById( 'btnRegresaListadoSeguimientosPorCliente' ).addEventListener( 'click' , function( e ){
-      e.preventDefault();
-      contenidos( 'prospectos_seguimiento' , document.getElementById( 'clienteID' ).value );
+    e.preventDefault();
+    contenidos( 'prospectos_seguimiento' , document.getElementById( 'clienteID' ).value );
   });
 
   async function cargaContactos( selected='' ) {
-      var token     = sessionStorage.getItem( 'apiToken' );
-      var clienteID = document.getElementById( 'clienteID' ).value;
-      var path      = '/api/listadoContactos/' + clienteID;
-      var config    = {
-          headers: {
-            'Accept' : 'application/json',
-            'Authorization' : 'Bearer ' + token
-          }
-      };
+    var token     = sessionStorage.getItem( 'apiToken' );
+    var clienteID = document.getElementById( 'clienteID' ).value;
+    var path      = '/api/listadoContactos/' + clienteID;
+    var config    = {
+        headers: {
+          'Accept' : 'application/json',
+          'Authorization' : 'Bearer ' + token
+        }
+    };
 
-      await axios( path , config )
-          .then( datos => {
-              d         = datos.data;
-              if(typeof d[ 'contactos' ] != 'undefined') {
-                  contactos = d[ 'contactos' ];
-                  contactos.forEach( function( b ) {
-                    document.getElementById( 'prospectos_nuevoseguimiento_involucrados' ).add( new Option( b.contacto , b.id , '' , ( ( selected == b.id ) ? true : false ) ) );
-                  });
-              }
-          })
-          .catch( err => {
-              console.error( err );
+    await axios( path , config )
+      .then( datos => {
+        d         = datos.data;
+        if(typeof d[ 'contactos' ] != 'undefined') {
+          contactos = d[ 'contactos' ];
+          contactos.forEach( function( b ) {
+            document.getElementById( 'prospectos_nuevoseguimiento_involucrados' ).add( new Option( b.contacto , b.id , '' , ( ( selected == b.id ) ? true : false ) ) );
           });
+        }
+      })
+      .catch( err => {
+        console.error( err );
+      });
   }
 
   function guardaSeguimiento() {
-      var token = sessionStorage.getItem( 'apiToken' );
-      var datos = new FormData( document.getElementById( 'formSeguimiento' ) );
-      var config = {
-        headers: {
-          'Accept': 'application/json',
-          'Authorization': 'Bearer ' + token
-        }
-      };
-
-      if( document.getElementById( 'seguimiento_idty' ).value == '' ) {
-          var ruta  = '/api/guardaSeguimiento'; // Se da de alta
-        } else {
-          var ruta  = '/api/actualizaSeguimiento'; // Se actualiza
+    var token = sessionStorage.getItem( 'apiToken' );
+    var datos = new FormData( document.getElementById( 'formSeguimiento' ) );
+    var config = {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + token
       }
+    };
 
-      if( document.getElementById( 'prospectos_nuevoseguimiento_fecha' ).value == '' ) {
-          aviso( 'No ha proporcionado una fecha de ejecución' , false );
+    if( document.getElementById( 'seguimiento_idty' ).value == '' ) {
+        var ruta  = '/api/guardaSeguimiento'; // Se da de alta
       } else {
-        axios.post( ruta , datos , config )
-             .then( response => {
-               aviso( 'Seguimiento agregado correctamente' );+
-               contenidos( 'prospectos_editaseguimiento' , response.data.idty );
-             })
-             .catch( err => {
-                console.log( err );
-             });
-      }
+        var ruta  = '/api/actualizaSeguimiento'; // Se actualiza
+    }
 
+    if( document.getElementById( 'prospectos_nuevoseguimiento_fecha' ).value == '' ) {
+      aviso( 'No ha proporcionado una fecha de ejecución' , false );
+    } else {
+      axios.post( ruta , datos , config )
+         .then( response => {
+            aviso( 'Seguimiento agregado correctamente' );+
+            contenidos( 'prospectos_editaseguimiento' , response.data.idty );
+         })
+         .catch( err => {
+            console.log( err );
+         });
+    }
   }
+
+  axios.get( '/api/getPredefinido/4' , { headers: { 'Accept' : 'application/json', 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
+    .then( response => {
+      var minutos = response.data.valor.split( ',' );
+      minutos.forEach( function( e , i ){
+        document.getElementById( 'prospectos_nuevoseguimiento_minutos' ).add( new Option( e , e , false , false ) );
+      });
+    })
+    .catch( err => {
+      console.log( err );
+    });
 </script>

@@ -136,7 +136,7 @@
             <div class="col-sm-10">
                 <hr>
             </div>
-            <div class="col-sm-2"></div>
+            <div class="col-sm-2">Periodo inicial:</div>
             <div class="col-sm-1">
               <select id="layoutFechaMes_inicial" name="layoutFechaMes_inicial" class="custom-select custom-select-sm">
                 @for ($i = 1; $i <= 12; $i++)
@@ -151,7 +151,7 @@
                 @endfor
               </select>
             </div>
-            <div class="col-sm-1"></div>
+            <div class="col-sm-2">Periodo final:</div>
             <div class="col-sm-1">
               <select id="layoutFechaMes_final" name="layoutFechaMes_final" class="custom-select custom-select-sm">
                 @for ($i = 1; $i <= 12; $i++)
@@ -166,9 +166,9 @@
                 @endfor
               </select>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <button type="button" name="pronosticosDescargaDocHistoricos_layout" id="pronosticosDescargaDocHistoricos_layout" class="btn btn-sm {{$btn}}">
-                  <i class="fa fa-sm fa-download"></i> Descargar layout ejemplo
+                  <i class="fa fa-sm fa-download"></i> Descargar layout
                 </button>
             </div>
         </div>

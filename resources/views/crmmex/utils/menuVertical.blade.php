@@ -86,24 +86,36 @@
           @if( isset( $priv[ 'secciones' ][ 50 ] ) && $priv[ 'secciones' ][ 50 ] == 1 )<li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_promociones');"> > Alta de Promociones</a></li>@endif
         </ul>
       </li>
+      @if( isset( $priv[ 'secciones' ][ 48 ] ) && $priv[ 'secciones' ][ 48 ] == 1 )
       <li>
         <a href="#configuracionesPropuestas" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Propuestas</a>
         <ul class="collapse list-unstyled" id="configuracionesPropuestas">
-          @if( isset( $priv[ 'secciones' ][ 48 ] ) && $priv[ 'secciones' ][ 48 ] == 1 )<li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_propuestas','1');"> > Envio de propuestas</a></li>@endif
+          <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_propuestas','1');"> > Envio de propuestas</a></li>
         </ul>
       </li>
+      @endif
+      @if( isset( $priv[ 'secciones' ][ 84 ] ) && $priv[ 'secciones' ][ 84 ] == 1 )
       <li>
-        @if( isset( $priv[ 'secciones' ][ 66 ] ) && $priv[ 'secciones' ][ 66 ] == 1 )<a href="javascript:void(0)" onclick="return contenidos('configuraciones_pronosticos','1');">Pronosticos</a>@endif
+        <a href="#configuracionesSeguimientos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Seguimientos</a>
+        <ul class="collapse list-unstyled" id="configuracionesSeguimientos">
+          <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_seguimientos','1');"> > Configuraciones</a></li>
+        </ul>
       </li>
-      <li>
-        @if( isset( $priv[ 'secciones' ][ 67 ] ) && $priv[ 'secciones' ][ 67 ] == 1 )<a href="javascript:void(0)" onclick="return contenidos('configuraciones_pipeline','1');">Pipeline</a>@endif
-      </li>
+      @endif
+      @if( isset( $priv[ 'secciones' ][ 66 ] ) && $priv[ 'secciones' ][ 66 ] == 1 )
+        <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_pronosticos','1');">Pronosticos</a></li>
+      @endif
+      @if( isset( $priv[ 'secciones' ][ 67 ] ) && $priv[ 'secciones' ][ 67 ] == 1 )
+        <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_pipeline','1');">Pipeline</a></li>
+      @endif
+      @if( isset( $priv[ 'secciones' ][ 10 ] ) && $priv[ 'secciones' ][ 10 ] == 1 )
       <li>
         <a href="#configuracionesCatalogos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Catálogos</a>
         <ul class="collapse list-unstyled" id="configuracionesCatalogos">
-          @if( isset( $priv[ 'secciones' ][ 10 ] ) && $priv[ 'secciones' ][ 10 ] == 1 )<li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_catalogos_generales');"> > Catálogos Generales</a></li>@endif
+          <li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_catalogos_generales');"> > Catálogos Generales</a></li>
         </ul>
       </li>
+      @endif
       <li>
         <a href="#configuracionesSistema" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Sistema</a>
         <ul class="collapse list-unstyled" id="configuracionesSistema">

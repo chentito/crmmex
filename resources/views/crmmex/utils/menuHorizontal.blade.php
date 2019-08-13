@@ -8,7 +8,9 @@
       <li id="moduloMenu_1" class="nav-item dropdown">
         <a class="nav-link dropdown-toggle navBarFont" id="dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sm fa-user-tie"></i> Usuarios</a>
         <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
+          @if( isset( $priv[ 'secciones' ][ 1 ] ) && $priv[ 'secciones' ][ 1 ] == 1 )
           <li><a class="dropdown-item"  href="javascript:void(0)" onclick="return contenidos('ejecutivos_listado');">Listado</a></li>
+          @endif
         </ul>
       </li>
       @endif
@@ -17,8 +19,8 @@
       <li id="moduloMenu_2" class="nav-item dropdown">
         <a class="nav-link dropdown-toggle navBarFont" id="dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sm fa-users"></i>  Prospectos</a>
         <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
-          <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('prospectos_nuevo' );">Alta</a></li>
-          <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('prospectos_listado');">Listado</a></li>
+          @if( isset( $priv[ 'secciones' ][ 5 ] ) && $priv[ 'secciones' ][ 5 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('prospectos_nuevo' );">Alta</a></li>@endif
+          @if( isset( $priv[ 'secciones' ][ 4 ] ) && $priv[ 'secciones' ][ 4 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('prospectos_listado');">Listado</a></li>@endif
         </ul>
       </li>
       @endif
@@ -27,8 +29,8 @@
       <li id="moduloMenu_3" class="nav-item dropdown">
         <a class="nav-link dropdown-toggle navBarFont" id="dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sm fa-users"></i>  Clientes</a>
         <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
-          <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('clientes_alta');">Alta</a></li>
-          <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('clientes_listado');">Listado</a></li>
+          @if( isset( $priv[ 'secciones' ][ 15 ] ) && $priv[ 'secciones' ][ 15 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('clientes_alta');">Alta</a></li>@endif
+          @if( isset( $priv[ 'secciones' ][ 7 ] ) && $priv[ 'secciones' ][ 7 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('clientes_listado');">Listado</a></li>@endif
         </ul>
       </li>
       @endif
@@ -37,7 +39,7 @@
       <li id="moduloMenu_6" class="nav-item dropdown">
         <a class="nav-link dropdown-toggle navBarFont" id="dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sm fa-lightbulb"></i>  Mercadotecnia</a>
         <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
-          <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('mercadotecnia_listado');">Campañas</a></li>
+          @if( isset( $priv[ 'secciones' ][ 23 ] ) && $priv[ 'secciones' ][ 23 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('mercadotecnia_listado');">Campañas</a></li>@endif
         </ul>
       </li>
       @endif
@@ -59,58 +61,74 @@
           <li class="dropdown-item dropdown">
             <a class="dropdown-toggle dropdown-item" id="dropdown1-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuarios</a>
             <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
-              <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('ejecutivos_roles');"> > Perfiles</a></li>
+              @if( isset( $priv[ 'secciones' ][ 14 ] ) && $priv[ 'secciones' ][ 14 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('ejecutivos_roles');"> > Perfiles</a></li>@endif
             </ul>
           </li>
           <li class="dropdown-item dropdown">
             <a class="dropdown-toggle dropdown-item" id="dropdown1-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Prospectos</a>
             <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
-              <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_camposAdicionales','2');"> > Campos Adicionales</a></li>
+              @if( isset( $priv[ 'secciones' ][ 41 ] ) && $priv[ 'secciones' ][ 41 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_camposAdicionales','2');"> > Campos Adicionales</a></li>@endif
             </ul>
           </li>
           <li class="dropdown-item dropdown">
             <a class="dropdown-toggle dropdown-item" id="dropdown1-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Clientes</a>
             <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
-              <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_camposAdicionales','1');"> > Campos Adicionales</a></li>
+              @if( isset( $priv[ 'secciones' ][ 41 ] ) && $priv[ 'secciones' ][ 41 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_camposAdicionales','1');"> > Campos Adicionales</a></li>@endif
             </ul>
           </li>
           <li class="dropdown-item dropdown">
             <a class="dropdown-toggle dropdown-item" id="dropdown1-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mercadotecnia</a>
             <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
-              <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_destinatarios');"> > Templates</a></li>
-              <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_multimedia');"> > Multimedia</a></li>
-              <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_listaEnvios');"> > Listas</a></li>
-              <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_formularios');"> > Formularios</a></li>
+              @if( isset( $priv[ 'secciones' ][ 45 ] ) && $priv[ 'secciones' ][ 45 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_destinatarios');"> > Templates</a></li>
+              @if( isset( $priv[ 'secciones' ][ 64 ] ) && $priv[ 'secciones' ][ 64 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_multimedia');"> > Multimedia</a></li>
+              @if( isset( $priv[ 'secciones' ][ 79 ] ) && $priv[ 'secciones' ][ 79 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_listaEnvios');"> > Listas</a></li>
+              @if( isset( $priv[ 'secciones' ][ 80 ] ) && $priv[ 'secciones' ][ 80 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_formularios');"> > Formularios</a></li>
             </ul>
           </li>
           <li class="dropdown-item dropdown">
             <a class="dropdown-toggle dropdown-item" id="dropdown1-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Productos</a>
             <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
-              <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_catalogos_productos');"> > Productos/Servicios</a></li>
-              <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_camposAdicionales','3');"> > Campos Adicionales</a></li>
-              <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_promociones');"> > Alta de Promociones</a></li>
+              @if( isset( $priv[ 'secciones' ][ 18 ] ) && $priv[ 'secciones' ][ 18 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_catalogos_productos');"> > Productos/Servicios</a></li>@endif
+              @if( isset( $priv[ 'secciones' ][ 41 ] ) && $priv[ 'secciones' ][ 41 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_camposAdicionales','3');"> > Campos Adicionales</a></li>@endif
+              @if( isset( $priv[ 'secciones' ][ 50 ] ) && $priv[ 'secciones' ][ 50 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_promociones');"> > Alta de Promociones</a></li>@endif
             </ul>
           </li>
+          @if( isset( $priv[ 'secciones' ][ 48 ] ) && $priv[ 'secciones' ][ 48 ] == 1 )
           <li class="dropdown-item dropdown">
             <a class="dropdown-toggle dropdown-item" id="dropdown1-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Propuestas</a>
             <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
               <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_propuestas','1');"> > Envio de propuestas</a></li>
             </ul>
           </li>
-          <li class="dropdown-item dropdown"><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_pronosticos','1');">Pronosticos</a></li>
-          <li class="dropdown-item dropdown"><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_pipeline','1');">Pipeline</a></li>
+          @endif
+          @if( isset( $priv[ 'secciones' ][ 84 ] ) && $priv[ 'secciones' ][ 84 ] == 1 )
           <li class="dropdown-item dropdown">
-            <a class="dropdown-toggle dropdown-item" id="dropdown1-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catálogos</a>
+            <a class="dropdown-toggle dropdown-item" id="dropdown1-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Seguimientos</a>
             <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
-              <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_catalogos_generales');"> > Catálogos Generales</a></li>
+              <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_propuestas','1');"> > Configuraciones</a></li>
             </ul>
           </li>
+          @endif
+          @if( isset( $priv[ 'secciones' ][ 66 ] ) && $priv[ 'secciones' ][ 66 ] == 1 )
+            <li class="dropdown-item dropdown"><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_pronosticos','1');">Pronosticos</a></li>
+          @endif
+          @if( isset( $priv[ 'secciones' ][ 67 ] ) && $priv[ 'secciones' ][ 67 ] == 1 )
+            <li class="dropdown-item dropdown"><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_pipeline','1');">Pipeline</a></li>
+          @endif
+          @if( isset( $priv[ 'secciones' ][ 10 ] ) && $priv[ 'secciones' ][ 10 ] == 1 )
+            <li class="dropdown-item dropdown">
+              <a class="dropdown-toggle dropdown-item" id="dropdown1-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catálogos</a>
+              <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
+                <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_catalogos_generales');"> > Catálogos Generales</a></li>
+              </ul>
+            </li>
+          @endif
           <li class="dropdown-item dropdown">
             <a class="dropdown-toggle dropdown-item" id="dropdown1-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sistema</a>
             <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
-              <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_smtp');"> > SMTP</a></li>
-              <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_branding');"> > Branding</a></li>
-              <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_dashboard');"> > Dashboard</a></li>
+              @if( isset( $priv[ 'secciones' ][ 13 ] ) && $priv[ 'secciones' ][ 13 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_smtp');"> > SMTP</a></li>@endif
+              @if( isset( $priv[ 'secciones' ][ 16 ] ) && $priv[ 'secciones' ][ 16 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_branding');"> > Branding</a></li>@endif
+              @if( isset( $priv[ 'secciones' ][ 43 ] ) && $priv[ 'secciones' ][ 43 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_dashboard');"> > Dashboard</a></li>@endif
             </ul>
           </li>
         </ul>

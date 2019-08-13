@@ -58,7 +58,7 @@
               </div>
               <div class="col-sm-9 mt-2">
                   <label for="nombreFase">Nombre de la fase</label>
-                  <input type="text" id="nombreFase" name="nombreFase" placeholder="Nombre Fase" class="form-control form-control-sm">
+                  <input type="text" id="nombreFase" name="nombreFase" placeholder="Nombre Fase" class="form-control form-control-sm" maxlength="20">
               </div>
               <div class="col-sm-3 mt-3">
                 <div class="row">
@@ -82,8 +82,8 @@
                   <select class="custom-select custom-select-sm" id="nuevoIndicador_detalleFase" name="nuevoIndicador_detalleFase" multiple style="height:150px"></select>
               </div>
               <div class="col-sm-6 mt-2">
-                <label for="detalleFase">Detalle Fase:</label>
-                <input type="text" id="detalleFase" name="detalleFase" placeholder="Detalle Fase" class="form-control form-control-sm">
+                <label for="detalleFase">Nombre Detalle Fase:</label>
+                <input type="text" id="detalleFase" name="detalleFase" placeholder="Detalle Fase" class="form-control form-control-sm" maxlength="20">
               </div>
               <div class="col-sm-3 mt-2 text-center">
                 <label for="detalleFase">Peso:</label>

@@ -6,11 +6,14 @@
  * @Fecha Marzo 2019
  */
 namespace App\Http\Controllers\contenidos;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\Secciones AS Secciones;
 use App\branding\Branding AS Branding;
+use App\Http\Controllers\crmmex\Sistema\AccesoController AS AccesoController;
+
 use App\Models\crmmex\Sistema\Configuraciones AS Configuraciones;
 
 class ContenidosController extends Controller
@@ -22,8 +25,9 @@ class ContenidosController extends Controller
     usleep(500000);
     $branding   = Branding::where( 'seleccionado' , 1 )->first();
     $secciones  = Secciones::where( 'identificador' , $id )->first();
+    $perfilID   = Auth::user()->rol;
     $configuraciones = Configuraciones::find( 1 )->first();
-    $container = ( $configuraciones->valor == 1 ) ? 'container' : 'container-fluid';
+    $container  = ( $configuraciones->valor == 1 ) ? 'container' : 'container-fluid';
     $breadcrumb = explode( '|' , $secciones->ruta );
     $parametro  = ( $param != '' ) ? $param : '';
 
@@ -34,7 +38,8 @@ class ContenidosController extends Controller
                                             'trans'     => ( $branding->transparencia * 10 ) ,
                                             'borde'     => $branding->borde ,
                                             'container' => $container ,
-                                            'param'     => $parametro
+                                            'param'     => $parametro ,
+                                            'priv'      => AccesoController::verModulos( $perfilID )
                                           ] )->render(),
       'breadcrumb' => view( 'crmmex.utils.breadcrumb' , [ 'elementos' => $breadcrumb , 'estilo'    => $branding->estilo ] )->render()
     ]);

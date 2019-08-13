@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-sm-2 mb-1">
                         <label for="propuesta_cotizacion">Orden de compra:</label>
-                        <input type="text" class="form-control form-control-sm" id="propuesta_ordenCompra" name="propuesta_ordenCompra" placeholder="Orden de compra">
+                        <input type="text" class="form-control form-control-sm" id="propuesta_ordenCompra" name="propuesta_ordenCompra" placeholder="Orden de compra" value="N/A">
                     </div>
                 </div>
                 <div class="row">
@@ -263,8 +263,8 @@
           document.getElementById( 'catalogo_8' ).value = "";
           document.getElementById( 'propuestaProducto_productoID' ).value = "";
           document.getElementById( 'propuestaProducto_observaciones' ).value = "";
-          document.getElementById( 'listadoProductosPropuestaComercial' ).innerHTML = "";
-          document.getElementById( 'catalogo_12' ).value = 0;
+          //document.getElementById( 'listadoProductosPropuestaComercial' ).innerHTML = "";
+          //document.getElementById( 'catalogo_12' ).value = 0;
           $( '#formIndividual' ).hide( 'slow' );
       }
 
