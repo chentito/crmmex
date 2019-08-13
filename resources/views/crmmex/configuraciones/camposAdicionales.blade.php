@@ -106,27 +106,31 @@
         var msj = 'Campo actualizado correctamente';
     }
 
-    axios.post( url , datos , { headers:{'Accept':'application/json','Authentication':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
-         .then( response => {
-            aviso( msj );
-            contenidos( 'configuraciones_camposAdicionales' , document.getElementById( 'idSeccionConsultar' ).value );
-         })
-         .catch( err => {
-           console.log( err );
-         });
+    if( document.getElementById( 'adicional_clientes_nombre' ).value == '' ) {
+      aviso( "No ha proporcionado un nombre para el campo adicional" );
+    } else {
+      axios.post( url , datos , { headers:{'Accept':'application/json','Authentication':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
+           .then( response => {
+              aviso( msj );
+              contenidos( 'configuraciones_camposAdicionales' , document.getElementById( 'idSeccionConsultar' ).value );
+           })
+           .catch( err => {
+             console.log( err );
+           });
+    }
   });
 
   function nombreSeccion() {
-      axios.get( '/api/nombreSeccionCampoAdicional/' + document.getElementById( 'idSeccionConsultar' ).value )
-           .then( response => {
-              if( typeof response.data.nombreSeccion === 'undefined' ){
-                  document.getElementById( 'nombreSeccionAdicionales' ).innerHTML = '';
-              } else {
-                  document.getElementById( 'nombreSeccionAdicionales' ).innerHTML = response.data.nombreSeccion;
-              }
-           })
-           .catch( err => {
-              console.log( err );
+    axios.get( '/api/nombreSeccionCampoAdicional/' + document.getElementById( 'idSeccionConsultar' ).value )
+          .then( response => {
+            if( typeof response.data.nombreSeccion === 'undefined' ) {
+              document.getElementById( 'nombreSeccionAdicionales' ).innerHTML = '';
+            } else {
+              document.getElementById( 'nombreSeccionAdicionales' ).innerHTML = response.data.nombreSeccion;
+            }
+          })
+          .catch( err => {
+            console.log( err );
          });
   }
 
