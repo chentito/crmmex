@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\crmmex\Sistema;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,11 +13,11 @@ class DescargasController extends Controller
   public function descargaArchivoEjemplo( $archivo ) {
 
     switch( $archivo ) {
-      case 'LayoutProductos' : $file = public_path() . '/storage/ejemplos/EjemploLayoutProductos.csv'; break;
+      case 'LayoutProductos' : $file = 'EjemploLayoutProductos.csv'; break;
     }
 
     $headers = array( 'Content-Type: application/csv' );
-    return response()->download( $file , 'Layout.csv' , $headers );
+    return Storage::download('EjemploLayoutProductos.csv', 'Layout.csv' , $headers);
   }
 
 }

@@ -210,6 +210,13 @@ Route::post( '/setConfiguraciones'                          , 'crmmex\Configurac
 Route::get ( '/download/{archivo}'                          , 'crmmex\Sistema\DescargasController@descargaArchivoEjemplo' );
 
 
+/************************************ Pronosticos ************************************/
+Route::get ( '/getConfiguration'                                             , 'crmmex\Pronosticos\ConstantesController@getConfiguration' );
+Route::get ( '/getConstants'                                                 , 'crmmex\Pronosticos\ConstantesController@getConstants' );
+Route::get ( '/addConstantStructure/{nombre?}/{descripcion?}/{valor?}/{id?}' , 'crmmex\Pronosticos\ConstantesController@addConstantStructure' );
+Route::post( '/setConfiguration'                                             , 'crmmex\Pronosticos\ConstantesController@setConfiguration' );
+
+
 /************************************ Acciones utiles para templates de envio de correo ************************************/
 Route::get ( '/obtieneDatosTemplate/{templateID}' , 'crmmex\Sistema\TemplatesController@obtieneDatosTemplate' );
 Route::post( '/actualizaDatosTemplate'            , 'crmmex\Sistema\TemplatesController@actualizaDatosTemplate' );

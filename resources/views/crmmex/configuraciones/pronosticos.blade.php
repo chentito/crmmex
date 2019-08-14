@@ -1,131 +1,16 @@
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">
-      Carga Históricos
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">
-      Crear Formula
+      <i class="fa fa-sm fa-database"></i> <span class="d-none d-sm-inline">Históricos</span>
     </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">
-      Formulas
+      <i class="fa fa-sm fa-edit"></i> <span class="d-none d-sm-inline">Fórmula</span>
     </a>
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <div class="{{$container}} border-left border-right border-bottom p-1">
-      <div class="row mt-2">
-        <div class="col-sm-12 mt-2 mb-1">
-          <b>Parámetros prestablecidos:</b>
-        </div>
-        <div class="col-sm-3 text-center">
-          <div class="row">
-              <div class="col-sm-8">
-                Periodo (mes) <button class="btn btn-sm {{$btn}}" onclick="formula( 'sys' , 'mes' , 'periodoMes_cantidad_form')">Usar</button>
-              </div>
-              <div class="col-sm-4">
-                <input type="number" value="1" placeholder="Periodos" class="form-control form-control-sm" id="periodoMes_cantidad_form">
-              </div>
-          </div>
-        </div>
-        <div class="col-sm-3 text-center">
-          <div class="row">
-            <div class="col-sm-8">
-              Periodo (año) <button class="btn btn-sm {{$btn}}" onclick="formula( 'sys' , 'anio' , 'periodoAnio_cantidad_form')">Usar</button>
-            </div>
-            <div class="col-sm-4">
-              <input type="number" value="1" placeholder="Periodos" class="form-control form-control-sm" id="periodoAnio_cantidad_form">
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3 text-center">
-          <div class="row">
-            <div class="col-sm-8">
-              Importe Vendido <button class="btn btn-sm {{$btn}}" onclick="formula( 'sys' , 'importe','periodoImporte_cantidad_form' )">Usar</button>
-            </div>
-            <div class="col-sm-4">
-              <input type="number" value="1" placeholder="Periodos" class="form-control form-control-sm" id="periodoImporte_cantidad_form">
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3 text-center">
-          <div class="row">
-            <div class="col-sm-8">
-              Unidades vendidas <button class="btn btn-sm {{$btn}}" onclick="formula( 'sys' , 'unidades' , 'periodoUnidades_cantidad_form' )">Usar</button>
-            </div>
-            <div class="col-sm-4">
-              <input type="number" value="1" placeholder="Periodos" class="form-control form-control-sm" id="periodoUnidades_cantidad_form">
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-12">
-          <hr>
-        </div>
-
-        <div class="col-sm-12 mt-2 mb-1">
-          <b>Operadores:</b>
-        </div>
-        <div class="col-sm-3 text-center">
-            Entre <button class="btn btn-sm {{$btn}}" onclick="formula('oper','/')">Usar</button>
-        </div>
-        <div class="col-sm-3 text-center">
-            Por <button class="btn btn-sm {{$btn}}" onclick="formula('oper','*')">Usar</button>
-        </div>
-        <div class="col-sm-3 text-center">
-            Más <button class="btn btn-sm {{$btn}}" onclick="formula('oper','+')">Usar</button>
-        </div>
-        <div class="col-sm-3 text-center">
-            Menos <button class="btn btn-sm {{$btn}}" onclick="formula('oper','-')">Usar</button>
-        </div>
-        <div class="col-sm-12">
-          <hr>
-        </div>
-
-        <div class="col-sm-12 mt-2 mb-1">
-          <b>Parámetros personalizados:</b>
-        </div>
-        <div class="col-sm-3">
-          <div class="row">
-            <div class="col-sm-6">
-              <label for="pronosticos_personalizado_cantidad">Cantidad</label>
-              <input type="text" id="pronosticos_personalizado_cantidad" name="pronosticos_personalizado_cantidad" placeholder="Valor" class="form-control form-control-sm">
-            </div>
-            <div class="col-sm-6">
-              <button class="btn btn-sm {{$btn}}" onclick="formula( 'pers' , 'cantidad' , 'pronosticos_personalizado_cantidad' )">Usar</button>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="row">
-            <div class="col-sm-6">
-              <label for="pronosticos_personalizado_tasa">Tasa</label>
-              <input type="text" id="pronosticos_personalizado_tasa" name="pronosticos_personalizado_tasa" placeholder="Valor" class="form-control form-control-sm">
-            </div>
-            <div class="col-sm-6">
-              <button class="btn btn-sm {{$btn}}" onclick="formula( 'pers' , 'tasa' , 'pronosticos_personalizado_tasa' )">Usar</button>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-12">
-          <hr>
-        </div>
-
-
-        <div class="col-sm-12 mt-3 mb-2">
-          <input type="text" class="form-control form-control-sm" id="pronosticos_personalizado_formula" name="pronosticos_personalizado_formula" placeholder="Formula" readonly>
-        </div>
-        <div class="col-sm-12 text-center">
-          <button class="btn btn-sm btn-warning" onclick="restablece()"><i class="fa fa-sm fa-save"></i> Restablecer</button>
-          <!--button class="btn btn-sm btn-success"><i class="fa fa-sm fa-save"></i> Borrar Último</button-->
-          <button class="btn btn-sm btn-primary" onclick="guardaFormula()"><i class="fa fa-sm fa-save"></i> Guardar Formular</button>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
     <div class="{{$container}} border-left border-right border-bottom p-1">
       <form id="pronosticosCargaDocumetoHistoricos_form" form="pronosticosCargaDocumetoHistoricos_form">
@@ -222,82 +107,194 @@
   </div>
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
     <div class="{{$container}} border-left border-right border-bottom p-1">
-
+      <form id="formula_form" name="formula_form">
+        <div class="row mt-2">
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-sm-4"><b>El cálculo se realiza sobre:</b></div>
+              <div class="col-sm-8"><hr></div>
+              <div class="col-sm-2"></div>
+              <div class="col-sm-8">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="formula_objetivoCalculo" id="calculoImporte" value="1" checked>
+                  <label class="form-check-label" for="calculoImporte">Importe</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="formula_objetivoCalculo" id="calculoUnidades" value="2">
+                  <label class="form-check-label" for="calculoUnidades">Unidades vendidas</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-sm-4"><b>Datos históricos:</b></div>
+              <div class="col-sm-8"><hr></div>
+              <div class="col-sm-6">
+                <select class="custom-select custom-select-sm" name="formula_periodo" id="formula_periodo">
+                  <option value="1">Ultimos 3 meses</option>
+                  <option value="2">Ultimos 3 periodos</option>
+                </select>
+              </div>
+              <div class="col-sm-6">
+                <select class="custom-select custom-select-sm" name="formula_operacion" id="formula_operacion">
+                  <option value="1">Promedio</option>
+                  <option value="2">Media</option>
+                </select>
+              </div><div class="col-sm-1"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-sm-2"><b>Constantes:</b></div>
+          <div class="col-sm-6"><hr></div>
+          <div class="col-sm-4 text-right">
+            <button class="btn btn-sm {{$btn}}" id="btnDeshaceCambios"><i class="fa fa-sm fa-undo"></i> <span class="d-none d-sm-inline">Recarga constantes</span></button>
+            <button class="btn btn-sm {{$btn}}" id="btnAgregaNuevaConstante"><i class="fa fa-sm fa-plus"></i> <span class="d-none d-sm-inline">Agregar constante</span></button>
+          </div>
+          <div class="col-sm-12">
+            <div class="row" id="formula_constantes_container"></div>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-sm-2"><b>Formula:</b></div>
+          <div class="col-sm-10"><hr></div>
+          <div class="col-sm-12">
+            <div class="input-group mb-3">
+              <input type="hidden" name="formula_calculadaOriginal" id="formula_calculadaOriginal" >
+              <input type="text" class="form-control form-control-sm" name="formula_calculada" id="formula_calculada" placeholder="Formula" aria-label="Formula" aria-describedby="basic-addon2" readonly>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary btn-sm {{$btn}}" type="button" id="formula_limpiaFormula"><i class="fa fa-sm fa-eraser"></i> <span class="d-none d-sm-inline">Limpiar</span></button>
+                <button class="btn btn-outline-secondary btn-sm {{$btn}}" type="button" id="formula_cargaOriginal"><i class="fa fa-sm fa-sync"></i> <span class="d-none d-sm-inline">Cargar</span></button>
+                <button class="btn btn-outline-secondary btn-sm {{$btn}}" type="button" id="formula_creaFormula"><i class="fa fa-sm fa-cog"></i> <span class="d-none d-sm-inline">Crear</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-1 mb-2">
+          <div class="col-sm-12 text-center">
+            <button type="submit" name="formula_guardaDetalleFormula" id="formula_guardaDetalleFormula" class="btn btn-sm {{$btn}}"><i class="fa fa-sm fa-save"></i> <span class="d-none d-sm-inline">Guardar configuración</span></button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>
 
 <script>
   generaDataGrid( 'listadoHistoricos' );
-  // CONFIGURACION DE FORMULAS
-  function formula( tipo , valor , cantidad='' ) {
-      var formula = document.getElementById( 'pronosticos_personalizado_formula' ).value;
-      var err     = 0;
+  cargaConfiguracion();
+  cargaConstantes();
 
-      if( cantidad != '' ) {
-        if( document.getElementById(cantidad).value == "" ) {
-            aviso( 'El valor del parámetro seleccionado no puede ser vacío' , false );
-            err ++;
-        } else {
-            var cant = '|'+document.getElementById(cantidad).value;
-            document.getElementById(cantidad).value = ( tipo == 'sys' ) ? '1' : '' ;
+  // Creacion de formula
+  function cargaConfiguracion() {
+    axios.get( '/api/getConfiguration' , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
+      .then( response => {
+        //alert( JSON.stringify( response.data ) );
+        var datos = response.data;
+        if( datos.objetivoCalculo == 1 ) {
+            document.getElementById( 'calculoImporte' ).checked = true;
+          } else {
+            document.getElementById( 'calculoUnidades' ).checked = true;
         }
-      } else {
-        var cant = '';
-      }
 
-      if( err == 0 ) {
-        var add = '{'+tipo+':'+valor+cant+'}';
-        document.getElementById( 'pronosticos_personalizado_formula' ).value = formula + add;
-      }
-
+        document.getElementById( 'formula_periodo' ).value = datos.periodo;
+        document.getElementById( 'formula_operacion' ).value = datos.operacion;
+        document.getElementById( 'formula_calculada' ).value = datos.formula;
+        document.getElementById( 'formula_calculadaOriginal' ).value = datos.formula;
+      })
+      .catch( err => { console.log( err ); });
   }
 
-  function restablece() {
-      document.getElementById( 'pronosticos_personalizado_formula' ).value = '';
+  function cargaConstantes() {
+    document.getElementById( 'formula_constantes_container' ).innerHTML = '';
+    axios.get( '/api/getConstants' , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
+     .then( response => {
+        response.data.forEach( function( e , i ) {
+          axios.get( '/api/addConstantStructure/'+e.nombre+'/'+e.descripcion+'/'+e.valor+'/'+e.id , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}})
+           .then( response2 => {
+             $( '#formula_constantes_container' ).append( response2.data );
+           })
+           .catch( err => { console.log( err ); });
+        });
+      })
+     .catch( err => { console.log( err ); });
   }
 
-  function guardaFormula(){
-      if( document.getElementById( 'pronosticos_personalizado_formula' ).value == '' ) {
-        aviso( 'La formula está vacía' , false );
-      }
-  }
+  document.getElementById( 'btnDeshaceCambios' ).addEventListener( 'click' , function( e ){
+    e.preventDefault();
+    cargaConstantes();
+  });
+
+  document.getElementById( 'btnAgregaNuevaConstante' ).addEventListener( 'click' , function( e ) {
+    e.preventDefault();
+    axios.get( '/api/addConstantStructure' , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
+     .then( response => {
+       $( '#formula_constantes_container' ).append( response.data );
+     })
+     .catch( err => { console.log( err ); });
+  });
+
+  document.getElementById( 'formula_guardaDetalleFormula' ).addEventListener( 'click' , function( e ) {
+    e.preventDefault();
+    var datos = new FormData( document.getElementById( 'formula_form' ) );
+    axios.post( '/api/setConfiguration' , datos , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
+      .then( response => {
+        aviso( 'Configuracion guardada correctamente.' );
+      })
+      .catch( err => { console.log( err ); });
+  });
+
+  document.getElementById( 'formula_creaFormula' ).addEventListener( 'click' , function( e ) {
+    e.preventDefault();
+    alert("calculaaa");
+  });
+
+  document.getElementById( 'formula_limpiaFormula' ).addEventListener( 'click' , function( e ) {
+    e.preventDefault();
+    document.getElementById( 'formula_calculada' ).value = '';
+  });
+
+  document.getElementById( 'formula_cargaOriginal' ).addEventListener( 'click' , function( e ){
+    e.preventDefault();
+    document.getElementById( 'formula_calculada' ).value = document.getElementById( 'formula_calculadaOriginal' ).value;
+  });
 
   // CARGA HISTORICOS
   document.getElementById( 'confHistoricosProducto_btnGuarda' ).addEventListener( 'click' , function( e ){
-      e.preventDefault();
-      if( document.getElementById( 'confHistoricosProducto_file' ).value == '' ) {
-          aviso( 'No ha seleccionado ningun archivo' , false );
-      } else {
-          var datos = new FormData( document.getElementById( 'pronosticosCargaDocumetoHistoricos_form' ) );
-          var headers = {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ),'content-type':'multipart/form-data'}};
-          axios.post( '/api/cargaHistoricosLayout' , datos , headers )
-               .then( response => {
-                  aviso( response.data.msj );
-                  document.getElementById( 'confHistoricosProducto_file' ).value = '';
-               })
-               .catch( err => {
-                 console.log( err );
-               });
-      }
+    e.preventDefault();
+    if( document.getElementById( 'confHistoricosProducto_file' ).value == '' ) {
+      aviso( 'No ha seleccionado ningun archivo' , false );
+    } else {
+      var datos = new FormData( document.getElementById( 'pronosticosCargaDocumetoHistoricos_form' ) );
+      var headers = {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ),'content-type':'multipart/form-data'}};
+      axios.post( '/api/cargaHistoricosLayout' , datos , headers )
+       .then( response => {
+          aviso( response.data.msj );
+          document.getElementById( 'confHistoricosProducto_file' ).value = '';
+       })
+       .catch( err => {
+         console.log( err );
+       });
+    }
   });
 
-  document.getElementById( 'pronosticosDescargaDocHistoricos_layout' ).addEventListener( 'click' , function( e ){
-      e.preventDefault();
-      var fi = document.getElementById( 'layoutFechaAnio_inicial' ).value + '-' + document.getElementById( 'layoutFechaMes_inicial' ).value;
-      var ff = document.getElementById( 'layoutFechaAnio_final' ).value + '-' + document.getElementById( 'layoutFechaMes_final' ).value;
-      axios.get( '/api/generaLayoutHistoricos/' + fi + '/' + ff , {} , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem('apiToken') } } )
-           .then( response => {
-               const url = window.URL.createObjectURL(new Blob([response.data]));
-               const link = document.createElement('a');
-               link.href = url;
-               link.setAttribute( 'download' , 'ejemplo_layout.csv' );
-               document.body.appendChild(link);
-               link.click();
-           })
-           .catch( err => {
-              console.log( err );
-           });
+  document.getElementById( 'pronosticosDescargaDocHistoricos_layout' ).addEventListener( 'click' , function( e ) {
+    e.preventDefault();
+    var fi = document.getElementById( 'layoutFechaAnio_inicial' ).value + '-' + document.getElementById( 'layoutFechaMes_inicial' ).value;
+    var ff = document.getElementById( 'layoutFechaAnio_final' ).value + '-' + document.getElementById( 'layoutFechaMes_final' ).value;
+    axios.get( '/api/generaLayoutHistoricos/' + fi + '/' + ff , {} , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem('apiToken') } } )
+     .then( response => {
+         const url = window.URL.createObjectURL(new Blob([response.data]));
+         const link = document.createElement('a');
+         link.href = url;
+         link.setAttribute( 'download' , 'ejemplo_layout.csv' );
+         document.body.appendChild(link);
+         link.click();
+     })
+     .catch( err => {
+        console.log( err );
+     });
   });
 
 </script>
