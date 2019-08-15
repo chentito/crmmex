@@ -4,11 +4,13 @@ namespace App\Http\Controllers\crmmex\Pronosticos;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\crmmex\Pronosticos\Constantes AS Constantes;
 use App\Models\crmmex\Pronosticos\FormulaConfiguracion AS Config;
+use App\Models\crmmex\Pronosticos\Pronosticos AS Pronosticos;
 use App\Models\crmmex\Productos\Historicos AS Historicos;
-use FormulaParser\FormulaParser;
+use FormulaInterpreter;
 use Exception;
 
 class ProcesaForecastController extends Controller
@@ -24,27 +26,35 @@ class ProcesaForecastController extends Controller
     $tipoEstadisticaTXT = ( ( $configuracion->operacion == 1 ) ? 'PROMEDIO' : 'MEDIANA' );
     $formula            = $configuracion->formula;
     $periodosHist       = 3;
+    $vars               = array();
 
     try {
-      $parser = new FormulaParser( $formula , 2 );
-      $vars   = array();
+      $compiler   = new FormulaInterpreter\Compiler();
+      $executable = $compiler->compile( $formula );
+
 
       // Constantes
       foreach( $this->obtieneConstantes() AS $constante ) {
         // Tipo 1 es importe, otro caso es tasa, por eso se divide entre 100
-        $vars[ $constante->nombre ] = ( ( $constante->tipo == 1 ) ? $constante->valor : ( $constante->valor / 100 ) );
+        $vars[ $constante->nombre ] = ( ( $constante->tipo == 1 ) ? $constante->valor : ( 1 + ( $constante->valor / 100 ) ) );
       }
 
       // Estadistica
       if( strpos( $formula , $tipoEstadisticaTXT. '_' . $periodoTXT ) != false ) {
-        $vars[ $tipoEstadisticaTXT. '_' . $periodoTXT . '_' . $periodosHist  ] = $this->obtieneValoresHistoricos( $periodo , $tipoEstadistica , $metrica );
+        $historicos = $this->obtieneValoresHistoricos( $periodo , $tipoEstadistica , $metrica );
+        if( $metrica == 1  ) {
+          $vars[ $tipoEstadisticaTXT. '_' . $periodoTXT . '_' . $periodosHist  ] = $historicos[ 'importe' ];
+        }
+        if( $metrica == 2 ) {
+          $vars[ $tipoEstadisticaTXT. '_' . $periodoTXT . '_' . $periodosHist  ] = $historicos[ 'unidad' ];
+        }
       }
 
-      $parser->setVariables( $vars );
-      $result = $parser->getResult(); // [0 => 'done', 1 => 16.38]
+      $result = $executable->run( $vars );
+      $this->guardaPronostico( date( 'y' ) , date( 'n' ) , $result[ 'importe' ] , $result[ 'unidad' ] );
 
     } catch (\Exception $e) {
-      echo $e->getMessage(), "\n";
+      $result = array( [ 'maj' => $e->getMessage() , 'vars' => serialize( $vars ) ] );
     }
 
     return response()->json( $result );
@@ -66,18 +76,20 @@ class ProcesaForecastController extends Controller
    * @return regrersa un arreglo con el total aplicado al periodo y estadisitica correspondiente
    */
   private function obtieneValoresHistoricos( $periodo , $tipoEstadistica , $objetivo ) {
+    //DB::connection()->enableQueryLog();
     $calculos = array();
     $historicos = Historicos::when( $periodo == 1 , function( $q ) { // Ultimos X meses
-                                return $q->whereRaw( DB::raw( "CONCAT(anio,'-',mes)>='" . date( 'Y-j' , strtotime( '- 3 months' ) ) . "'" ) );
+                                return $q->whereRaw( DB::raw( "CONCAT(anio,'-',mes)>='" . date( 'Y-n' , strtotime( '- 3 months' ) ) . "'" ) );
                               })
                             ->when( $periodo == 2 , function( $q ) { // Ultimos X periodos
-                                $mes  = date( 'j' );
+                                $mes  = date( 'n' );
                                 $anio = date( 'Y' , strtotime( '- 3 year' ) );
                                 return $q->where( 'mes' , $mes )->where( 'anio' , '>=' , $anio );
                               })
-                            ->where( [ 'status' => 1 ] )
+                            ->where( 'status' , '1' )
                             ->get();
-
+                            //$queries = DB::getQueryLog();
+                            //Log::warning( $queries );
     $importes = array();
     $unidades = array();
     foreach( $historicos AS $historico ) {
@@ -117,6 +129,7 @@ class ProcesaForecastController extends Controller
   /* Metodo que calcula el promedio de un universo de valores */
   private function calculaPromedio( $valores ) {
     $total = count( $valores );
+    if( $total == 0 )return "0";
     $suma  = array_sum( $valores );
     return $suma/$total;
   }
@@ -126,6 +139,14 @@ class ProcesaForecastController extends Controller
     $ordenados = asort( $valores );
     $mitad     = count( $ordenados ) / 2;
     return $ordenados[ $mitad ];
+  }
+
+  /* Metodo que guarda el pronostico calculado */
+  private function guardaPronostico( $anio , $mes , $importe , $unidades ) {
+    $pronosticos = Pronosticos::updateOrCreate(
+      [ 'mes' => $mes, 'anio' => $anio],
+      [ 'importe' => $importe , 'cantidad' => $unidades , 'status' => 1]
+    );
   }
 
 }

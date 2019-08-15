@@ -495,6 +495,13 @@ class ComposerStaticInit3a28bef317f5408e65f71b62f6ecf713
                 0 => __DIR__ . '/..' . '/mockery/mockery/library',
             ),
         ),
+        'F' => 
+        array (
+            'FormulaInterpreter' => 
+            array (
+                0 => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src',
+            ),
+        ),
         'D' => 
         array (
             'Doctrine\\Common\\Lexer\\' => 
@@ -567,6 +574,7 @@ class ComposerStaticInit3a28bef317f5408e65f71b62f6ecf713
         'App\\Http\\Controllers\\crmmex\\Productos\\ProductosController' => __DIR__ . '/../..' . '/app/Http/Controllers/crmmex/Productos/ProductosController.php',
         'App\\Http\\Controllers\\crmmex\\Productos\\PromocionesController' => __DIR__ . '/../..' . '/app/Http/Controllers/crmmex/Productos/PromocionesController.php',
         'App\\Http\\Controllers\\crmmex\\Pronosticos\\ConstantesController' => __DIR__ . '/../..' . '/app/Http/Controllers/crmmex/Pronosticos/ConstantesController.php',
+        'App\\Http\\Controllers\\crmmex\\Pronosticos\\ProcesaForecastController' => __DIR__ . '/../..' . '/app/Http/Controllers/crmmex/Pronosticos/ProcesaForecastController.php',
         'App\\Http\\Controllers\\crmmex\\Pronosticos\\PronosticosController' => __DIR__ . '/../..' . '/app/Http/Controllers/crmmex/Pronosticos/PronosticosController.php',
         'App\\Http\\Controllers\\crmmex\\Reportes\\IndicadoresController' => __DIR__ . '/../..' . '/app/Http/Controllers/crmmex/Reportes/IndicadoresController.php',
         'App\\Http\\Controllers\\crmmex\\Sistema\\AccesoController' => __DIR__ . '/../..' . '/app/Http/Controllers/crmmex/Sistema/AccesoController.php',
@@ -1387,6 +1395,30 @@ class ComposerStaticInit3a28bef317f5408e65f71b62f6ecf713
         'FontLib\\WOFF\\File' => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib/WOFF/File.php',
         'FontLib\\WOFF\\Header' => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib/WOFF/Header.php',
         'FontLib\\WOFF\\TableDirectoryEntry' => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib/WOFF/TableDirectoryEntry.php',
+        'FormulaInterpreter\\Command\\CommandFactory' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Command/CommandFactory.php',
+        'FormulaInterpreter\\Command\\CommandFactory\\CommandFactoryException' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Command/CommandFactory/CommandFactoryException.php',
+        'FormulaInterpreter\\Command\\CommandFactory\\CommandFactoryInterface' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Command/CommandFactory/CommandFactoryInterface.php',
+        'FormulaInterpreter\\Command\\CommandFactory\\FunctionCommandFactory' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Command/CommandFactory/FunctionCommandFactory.php',
+        'FormulaInterpreter\\Command\\CommandFactory\\NumericCommandFactory' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Command/CommandFactory/NumericCommandFactory.php',
+        'FormulaInterpreter\\Command\\CommandFactory\\OperationCommandFactory' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Command/CommandFactory/OperationCommandFactory.php',
+        'FormulaInterpreter\\Command\\CommandFactory\\VariableCommandFactory' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Command/CommandFactory/VariableCommandFactory.php',
+        'FormulaInterpreter\\Command\\CommandInterface' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Command/CommandInterface.php',
+        'FormulaInterpreter\\Command\\FunctionCommand' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Command/FunctionCommand.php',
+        'FormulaInterpreter\\Command\\NumericCommand' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Command/NumericCommand.php',
+        'FormulaInterpreter\\Command\\OperationCommand' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Command/OperationCommand.php',
+        'FormulaInterpreter\\Command\\VariableCommand' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Command/VariableCommand.php',
+        'FormulaInterpreter\\Compiler' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Compiler.php',
+        'FormulaInterpreter\\Exception\\NotEnoughArgumentsException' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Exception/NotEnoughArgumentsException.php',
+        'FormulaInterpreter\\Exception\\UnknownFunctionException' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Exception/UnknownFunctionException.php',
+        'FormulaInterpreter\\Exception\\UnknownVariableException' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Exception/UnknownVariableException.php',
+        'FormulaInterpreter\\Executable' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Executable.php',
+        'FormulaInterpreter\\Parser\\CompositeParser' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Parser/CompositeParser.php',
+        'FormulaInterpreter\\Parser\\FunctionParser' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Parser/FunctionParser.php',
+        'FormulaInterpreter\\Parser\\NumericParser' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Parser/NumericParser.php',
+        'FormulaInterpreter\\Parser\\OperatorParser' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Parser/OperatorParser.php',
+        'FormulaInterpreter\\Parser\\ParserException' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Parser/ParserException.php',
+        'FormulaInterpreter\\Parser\\ParserInterface' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Parser/ParserInterface.php',
+        'FormulaInterpreter\\Parser\\VariableParser' => __DIR__ . '/..' . '/mormat/php-formula-interpreter/src/FormulaInterpreter/Parser/VariableParser.php',
         'FormulaParser\\FormulaParser' => __DIR__ . '/..' . '/denissimon/formula-parser/FormulaParser.php',
         'FormulaParser\\IFormulaParser' => __DIR__ . '/..' . '/denissimon/formula-parser/FormulaParser.php',
         'GuzzleHttp\\Client' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Client.php',

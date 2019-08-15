@@ -261,6 +261,7 @@
     axios.post( '/api/setConfiguration' , datos , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
       .then( response => {
         aviso( 'Configuracion guardada correctamente.' );
+        document.getElementById( 'formula_calculadaOriginal' ).value = document.getElementById( 'formula_calculada' ).value;
       })
       .catch( err => { console.log( err ); });
   });

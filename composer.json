@@ -18,6 +18,7 @@
         "laravel/framework": "5.7.*",
         "laravel/passport": "^7.2",
         "laravel/tinker": "^1.0",
+        "mormat/php-formula-interpreter": "^1.0",
         "nesbot/carbon": "~1.14",
         "phpmailer/phpmailer": "^6.0",
         "twbs/bootstrap": "4.2.1"
