@@ -12,6 +12,7 @@
         "artisaninweb/laravel-soap": "0.3.0.9",
         "barryvdh/laravel-dompdf": "^0.8.4",
         "components/jquery": "^3.3",
+        "denissimon/formula-parser": "^2.6",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.7.*",

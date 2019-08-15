@@ -211,10 +211,10 @@ Route::get ( '/download/{archivo}'                          , 'crmmex\Sistema\De
 
 
 /************************************ Pronosticos ************************************/
-Route::get ( '/getConfiguration'                                             , 'crmmex\Pronosticos\ConstantesController@getConfiguration' );
-Route::get ( '/getConstants'                                                 , 'crmmex\Pronosticos\ConstantesController@getConstants' );
-Route::get ( '/addConstantStructure/{nombre?}/{descripcion?}/{valor?}/{id?}' , 'crmmex\Pronosticos\ConstantesController@addConstantStructure' );
-Route::post( '/setConfiguration'                                             , 'crmmex\Pronosticos\ConstantesController@setConfiguration' );
+Route::get ( '/getConfiguration'                                                     , 'crmmex\Pronosticos\ConstantesController@getConfiguration' );
+Route::get ( '/getConstants'                                                         , 'crmmex\Pronosticos\ConstantesController@getConstants' );
+Route::get ( '/addConstantStructure/{nombre?}/{descripcion?}/{valor?}/{id?}/{tipo?}' , 'crmmex\Pronosticos\ConstantesController@addConstantStructure' );
+Route::post( '/setConfiguration'                                                     , 'crmmex\Pronosticos\ConstantesController@setConfiguration' );
 
 
 /************************************ Acciones utiles para templates de envio de correo ************************************/
@@ -239,6 +239,10 @@ Route::middleware( 'auth:api' )->post( '/habilitaIndicador/{indicadorID}'    , '
 Route::middleware( 'auth:api' )->post( '/actualizaIndicador'                 , 'crmmex\Pipeline\PipelineController@actualizaIndicador' );
 Route::middleware( 'auth:api' )->get ( '/obtieneProcesosSistema'             , 'crmmex\Pipeline\PipelineController@obtieneProcesosSistema' );
 Route::middleware( 'auth:api' )->post( '/actualizaDescripcionProcesos'       , 'crmmex\Pipeline\PipelineController@actualizaDescripcionProcesos' );
+
+
+/************************************ Forecast ************************************/
+Route::middleware( 'auth:api' )->get( '/obtienePronostico' , 'crmmex\Pronosticos\ProcesaForecastController@calculaSegunFormula' );
 
 
 /************************************ Reportes ************************************/

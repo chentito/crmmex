@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "91ebd6bb66a6e6a2eb60b16f6beab8c0",
+    "content-hash": "016855f857320b00e6b5a8ddde9b8fb2",
     "packages": [
         {
             "name": "artisaninweb/laravel-soap",
@@ -219,6 +219,51 @@
                 "symmetric key cryptography"
             ],
             "time": "2018-07-24T23:27:56+00:00"
+        },
+        {
+            "name": "denissimon/formula-parser",
+            "version": "v2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/denissimon/formula-parser.git",
+                "reference": "e8a9f50ad4e79527095a914e2b2cdd41aed1f616"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/denissimon/formula-parser/zipball/e8a9f50ad4e79527095a914e2b2cdd41aed1f616",
+                "reference": "e8a9f50ad4e79527095a914e2b2cdd41aed1f616",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FormulaParser\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Denis Simon",
+                    "role": "Developer",
+                    "email": "denis.v.simon@gmail.com"
+                }
+            ],
+            "description": "Parsing and evaluating mathematical formulas given as strings.",
+            "keywords": [
+                "Evaluation",
+                "expression",
+                "formula",
+                "math",
+                "parser",
+                "parsing"
+            ],
+            "time": "2019-07-17T22:05:11+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",

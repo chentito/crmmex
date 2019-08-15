@@ -285,6 +285,53 @@
         ]
     },
     {
+        "name": "denissimon/formula-parser",
+        "version": "v2.6.1",
+        "version_normalized": "2.6.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/denissimon/formula-parser.git",
+            "reference": "e8a9f50ad4e79527095a914e2b2cdd41aed1f616"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/denissimon/formula-parser/zipball/e8a9f50ad4e79527095a914e2b2cdd41aed1f616",
+            "reference": "e8a9f50ad4e79527095a914e2b2cdd41aed1f616",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "time": "2019-07-17T22:05:11+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "FormulaParser\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Denis Simon",
+                "role": "Developer",
+                "email": "denis.v.simon@gmail.com"
+            }
+        ],
+        "description": "Parsing and evaluating mathematical formulas given as strings.",
+        "keywords": [
+            "Evaluation",
+            "expression",
+            "formula",
+            "math",
+            "parser",
+            "parsing"
+        ]
+    },
+    {
         "name": "dnoegel/php-xdg-base-dir",
         "version": "0.1",
         "version_normalized": "0.1.0.0",

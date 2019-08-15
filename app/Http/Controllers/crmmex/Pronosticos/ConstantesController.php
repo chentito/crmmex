@@ -19,9 +19,15 @@ class ConstantesController extends Controller
   }
 
   // Agrega una nueva estructura para la constante
-  public function addConstantStructure( $nombre='' , $descripcion='' , $valor='' , $id='0' ) {
+  public function addConstantStructure( $nombre='' , $descripcion='' , $valor='' , $id='0' , $tipo='' ) {
     $random = rand(11111,99999);
-    return view( 'crmmex.pronosticos.constante' , [ 'nombre' => $nombre , 'descripcion' => $descripcion , 'valor' => $valor , 'id' => $id , 'rand' => $random ] );
+    return view( 'crmmex.pronosticos.constante' ,
+                [ 'nombre'      => $nombre ,
+                  'descripcion' => $descripcion ,
+                  'valor'       => $valor ,
+                  'id'          => $id ,
+                  'tipo'        => $tipo ,
+                  'rand'        => $random ] );
   }
 
   // Obtiene los datos de la configuracion
@@ -40,19 +46,22 @@ class ConstantesController extends Controller
     $conf->formula         = $request->formula_calculada;
 
     if( $conf->save() ) {
-      $constantes = count( $request->formula_constantes_nombre );
-      for( $c = 0 ; $c < $constantes ; $c ++ ) {
-        if( $request->formula_constantes_id[ $c ] == 0 ) {
-            $const = new Constantes();
-          } else {
-            $const = Constantes::find( $request->formula_constantes_id[ $c ] );
+      if( $request->has( 'formula_constantes_nombre' ) ) {
+        $constantes = count( $request->formula_constantes_nombre );
+        for( $c = 0 ; $c < $constantes ; $c ++ ) {
+          if( $request->formula_constantes_id[ $c ] == 0 ) {
+              $const = new Constantes();
+            } else {
+              $const = Constantes::find( $request->formula_constantes_id[ $c ] );
+          }
+          $const->nombre      = $request->formula_constantes_nombre[ $c ];
+          $const->descripcion = $request->formula_constantes_descripcion[ $c ];
+          $const->valor       = $request->formula_constantes_valor[ $c ];
+          $const->tipo        = $request->formula_constantes_tipo[ $c ];
+          $const->status      = 1;
+          $const->save();
+          $ids[] = $const->id;
         }
-        $const->nombre      = $request->formula_constantes_nombre[ $c ];
-        $const->descripcion = $request->formula_constantes_descripcion[ $c ];
-        $const->valor       = $request->formula_constantes_valor[ $c ];
-        $const->status      = 1;
-        $const->save();
-        $ids[] = $const->id;
       }
     }
 

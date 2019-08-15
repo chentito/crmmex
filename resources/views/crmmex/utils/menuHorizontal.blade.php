@@ -79,10 +79,10 @@
           <li class="dropdown-item dropdown">
             <a class="dropdown-toggle dropdown-item" id="dropdown1-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mercadotecnia</a>
             <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
-              @if( isset( $priv[ 'secciones' ][ 45 ] ) && $priv[ 'secciones' ][ 45 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_destinatarios');"> > Templates</a></li>
-              @if( isset( $priv[ 'secciones' ][ 64 ] ) && $priv[ 'secciones' ][ 64 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_multimedia');"> > Multimedia</a></li>
-              @if( isset( $priv[ 'secciones' ][ 79 ] ) && $priv[ 'secciones' ][ 79 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_listaEnvios');"> > Listas</a></li>
-              @if( isset( $priv[ 'secciones' ][ 80 ] ) && $priv[ 'secciones' ][ 80 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_formularios');"> > Formularios</a></li>
+              @if( isset( $priv[ 'secciones' ][ 45 ] ) && $priv[ 'secciones' ][ 45 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_destinatarios');"> > Templates</a></li>@endif
+              @if( isset( $priv[ 'secciones' ][ 64 ] ) && $priv[ 'secciones' ][ 64 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_multimedia');"> > Multimedia</a></li>@endif
+              @if( isset( $priv[ 'secciones' ][ 79 ] ) && $priv[ 'secciones' ][ 79 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_listaEnvios');"> > Listas</a></li>@endif
+              @if( isset( $priv[ 'secciones' ][ 80 ] ) && $priv[ 'secciones' ][ 80 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_formularios');"> > Formularios</a></li>@endif
             </ul>
           </li>
           <li class="dropdown-item dropdown">
@@ -113,7 +113,7 @@
             <li class="dropdown-item dropdown"><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_pronosticos','1');">Pronosticos</a></li>
           @endif
           @if( isset( $priv[ 'secciones' ][ 67 ] ) && $priv[ 'secciones' ][ 67 ] == 1 )
-            <li class="dropdown-item dropdown"><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_pipeline','1');">Pipeline</a></li>
+            <li class="dropdown-item dropdown"><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_pipeline','1');">Indicadores</a></li>
           @endif
           @if( isset( $priv[ 'secciones' ][ 10 ] ) && $priv[ 'secciones' ][ 10 ] == 1 )
             <li class="dropdown-item dropdown">
@@ -127,7 +127,7 @@
             <a class="dropdown-toggle dropdown-item" id="dropdown1-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sistema</a>
             <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
               @if( isset( $priv[ 'secciones' ][ 13 ] ) && $priv[ 'secciones' ][ 13 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_smtp');"> > SMTP</a></li>@endif
-              @if( isset( $priv[ 'secciones' ][ 16 ] ) && $priv[ 'secciones' ][ 16 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_branding');"> > Branding</a></li>@endif
+              @if( isset( $priv[ 'secciones' ][ 16 ] ) && $priv[ 'secciones' ][ 16 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_branding');"> > Diseño</a></li>@endif
               @if( isset( $priv[ 'secciones' ][ 43 ] ) && $priv[ 'secciones' ][ 43 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_dashboard');"> > Dashboard</a></li>@endif
             </ul>
           </li>

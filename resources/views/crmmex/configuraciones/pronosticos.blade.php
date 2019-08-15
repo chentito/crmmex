@@ -109,49 +109,52 @@
     <div class="{{$container}} border-left border-right border-bottom p-1">
       <form id="formula_form" name="formula_form">
         <div class="row mt-2">
+          <div class="col-sm-2"><b>Periodo:</b></div>
+          <div class="col-sm-10"><hr></div>
           <div class="col-sm-6">
-            <div class="row">
-              <div class="col-sm-4"><b>El cálculo se realiza sobre:</b></div>
-              <div class="col-sm-8"><hr></div>
-              <div class="col-sm-2"></div>
-              <div class="col-sm-8">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="formula_objetivoCalculo" id="calculoImporte" value="1" checked>
-                  <label class="form-check-label" for="calculoImporte">Importe</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="formula_objetivoCalculo" id="calculoUnidades" value="2">
-                  <label class="form-check-label" for="calculoUnidades">Unidades vendidas</label>
-                </div>
-              </div>
-            </div>
+            <select class="custom-select custom-select-sm" name="formula_periodo" id="formula_periodo">
+              <option value="1">Ultimos 3 meses</option>
+              <option value="2">Ultimos 3 periodos</option>
+            </select>
           </div>
-          <div class="col-sm-6">
-            <div class="row">
-              <div class="col-sm-4"><b>Datos históricos:</b></div>
-              <div class="col-sm-8"><hr></div>
-              <div class="col-sm-6">
-                <select class="custom-select custom-select-sm" name="formula_periodo" id="formula_periodo">
-                  <option value="1">Ultimos 3 meses</option>
-                  <option value="2">Ultimos 3 periodos</option>
-                </select>
-              </div>
-              <div class="col-sm-6">
-                <select class="custom-select custom-select-sm" name="formula_operacion" id="formula_operacion">
-                  <option value="1">Promedio</option>
-                  <option value="2">Media</option>
-                </select>
-              </div><div class="col-sm-1"></div>
-            </div>
+          <div class="col-sm-5">
+            <select class="custom-select custom-select-sm" name="formula_operacion" id="formula_operacion">
+              <option value="1">Promedio</option>
+              <option value="2">Mediana</option>
+            </select>
+          </div>
+          <div class="col-sm-1">
+            <button type="button" name="formula_agregaOperacion" id="formula_agregaOperacion" class="btn btn-sm btn-info"><i class="fa fa-sm fa-link"></i></button>
           </div>
         </div>
         <div class="row mt-2">
-          <div class="col-sm-2"><b>Constantes:</b></div>
-          <div class="col-sm-6"><hr></div>
-          <div class="col-sm-4 text-right">
-            <button class="btn btn-sm {{$btn}}" id="btnDeshaceCambios"><i class="fa fa-sm fa-undo"></i> <span class="d-none d-sm-inline">Recarga constantes</span></button>
-            <button class="btn btn-sm {{$btn}}" id="btnAgregaNuevaConstante"><i class="fa fa-sm fa-plus"></i> <span class="d-none d-sm-inline">Agregar constante</span></button>
+          <div class="col-sm-2"><b>Indicadores/Métricas:</b></div>
+          <div class="col-sm-10"><hr></div>
+          <div class="col-sm-2"></div>
+          <div class="col-sm-8 text-center">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary" id="calculoImporte">
+                <input type="radio" name="formula_objetivoCalculo" value="1" checked> Importe
+              </label>
+              <label class="btn btn-secondary" id="calculoUnidades">
+                <input type="radio" name="formula_objetivoCalculo" value="2"> Unidades
+              </label>
+              <label class="btn btn-secondary" id="calculoAmbasUnidades">
+                <input type="radio" name="formula_objetivoCalculo" value="3"> Ambas
+              </label>
+            </div>
           </div>
+          <div class="col-sm-2"></div>
+        </div>
+
+        <div class="row mt-1">
+          <div class="col-sm-2">
+            <b>Valores Constantes:</b>
+            <br>
+            <button class="btn btn-sm {{$btn}} mt-1 mb-1" id="btnDeshaceCambios" title="Recargar listado de constantes"><i class="fa fa-sm fa-sync"></i></button>
+            <button class="btn btn-sm {{$btn}} mt-1 mb-1" id="btnAgregaNuevaConstante" title="Agregar Constante"><i class="fa fa-sm fa-plus"></i></button>
+          </div>
+          <div class="col-sm-10"><hr></div>
           <div class="col-sm-12">
             <div class="row" id="formula_constantes_container"></div>
           </div>
@@ -164,9 +167,15 @@
               <input type="hidden" name="formula_calculadaOriginal" id="formula_calculadaOriginal" >
               <input type="text" class="form-control form-control-sm" name="formula_calculada" id="formula_calculada" placeholder="Formula" aria-label="Formula" aria-describedby="basic-addon2" readonly>
               <div class="input-group-append">
-                <button class="btn btn-outline-secondary btn-sm {{$btn}}" type="button" id="formula_limpiaFormula"><i class="fa fa-sm fa-eraser"></i> <span class="d-none d-sm-inline">Limpiar</span></button>
-                <button class="btn btn-outline-secondary btn-sm {{$btn}}" type="button" id="formula_cargaOriginal"><i class="fa fa-sm fa-sync"></i> <span class="d-none d-sm-inline">Cargar</span></button>
-                <button class="btn btn-outline-secondary btn-sm {{$btn}}" type="button" id="formula_creaFormula"><i class="fa fa-sm fa-cog"></i> <span class="d-none d-sm-inline">Crear</span></button>
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Insertar Operador</button>
+                <div class="dropdown-menu list-unstyled {{$borde}}">
+                  <a class="dropdown-item" href="javascript:void(0)" onclick="agregaOperador('+')">Suma</a>
+                  <a class="dropdown-item" href="javascript:void(0)" onclick="agregaOperador('-')">Resta</a>
+                  <a class="dropdown-item" href="javascript:void(0)" onclick="agregaOperador('*')">Multiplicaci&oacute;n</a>
+                  <a class="dropdown-item" href="javascript:void(0)" onclick="agregaOperador('/')">Divisi&oacute;n</a>
+                </div>
+                <button class="btn btn-outline-secondary btn-sm {{$btn}}" type="button" id="formula_agrupaFormula"><i class="fa fa-sm fa-eraser"></i> <span class="d-none d-sm-inline">Agrupar</span></button>
+                <button class="btn btn-outline-secondary btn-sm {{$btn}}" type="button" id="formula_cargaOriginal"><i class="fa fa-sm fa-sync"></i> <span class="d-none d-sm-inline">Reestablecer</span></button>
               </div>
             </div>
           </div>
@@ -187,15 +196,26 @@
   cargaConstantes();
 
   // Creacion de formula
+  function agregaOperador( operador ) {
+    document.getElementById( 'formula_calculada' ).value = document.getElementById( 'formula_calculada' ).value + operador;
+  }
+
+  function cargaConstante( constante ) {
+    document.getElementById( 'formula_calculada' ).value = document.getElementById( 'formula_calculada' ).value + constante;
+  }
+
   function cargaConfiguracion() {
     axios.get( '/api/getConfiguration' , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
       .then( response => {
-        //alert( JSON.stringify( response.data ) );
         var datos = response.data;
         if( datos.objetivoCalculo == 1 ) {
-            document.getElementById( 'calculoImporte' ).checked = true;
-          } else {
-            document.getElementById( 'calculoUnidades' ).checked = true;
+          document.getElementById( 'calculoImporte' ).classList.add( 'active' );
+        }
+        if( datos.objetivoCalculo == 2 ) {
+          document.getElementById( 'calculoUnidades' ).classList.add( 'active' );
+        }
+        if( datos.objetivoCalculo == 3 ) {
+          document.getElementById( 'calculoAmbasUnidades').classList.add( 'active' );
         }
 
         document.getElementById( 'formula_periodo' ).value = datos.periodo;
@@ -211,7 +231,7 @@
     axios.get( '/api/getConstants' , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
      .then( response => {
         response.data.forEach( function( e , i ) {
-          axios.get( '/api/addConstantStructure/'+e.nombre+'/'+e.descripcion+'/'+e.valor+'/'+e.id , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}})
+          axios.get( '/api/addConstantStructure/'+e.nombre+'/'+e.descripcion+'/'+e.valor+'/'+e.id+'/'+e.tipo , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}})
            .then( response2 => {
              $( '#formula_constantes_container' ).append( response2.data );
            })
@@ -245,19 +265,36 @@
       .catch( err => { console.log( err ); });
   });
 
-  document.getElementById( 'formula_creaFormula' ).addEventListener( 'click' , function( e ) {
-    e.preventDefault();
-    alert("calculaaa");
-  });
-
-  document.getElementById( 'formula_limpiaFormula' ).addEventListener( 'click' , function( e ) {
-    e.preventDefault();
-    document.getElementById( 'formula_calculada' ).value = '';
-  });
-
   document.getElementById( 'formula_cargaOriginal' ).addEventListener( 'click' , function( e ){
     e.preventDefault();
     document.getElementById( 'formula_calculada' ).value = document.getElementById( 'formula_calculadaOriginal' ).value;
+  });
+
+  document.getElementById( 'formula_agregaOperacion' ).addEventListener( 'click' , function( e ){
+    e.preventDefault();
+    document.getElementById( 'formula_calculada' ).value = '';
+    var periodo = document.getElementById( 'formula_periodo' ).value;
+    var p = '';
+    if( periodo == 1 ) {
+        p = 'MESES_3';
+      } else {
+        p = 'PERIODOS_3';
+    }
+
+    var opcion = document.getElementById( 'formula_operacion' ).value;
+    var operacion = '';
+    if( opcion == 1 ) {
+        operacion += 'PROMEDIO_' + p;
+      } else {
+        operacion += 'MEDIANA_' + p;
+    }
+
+    document.getElementById( 'formula_calculada' ).value = document.getElementById( 'formula_calculada' ).value + '(' + operacion + ')';
+  });
+
+  document.getElementById( 'formula_agrupaFormula' ).addEventListener( 'click' , function( e ){
+    e.preventDefault();
+    document.getElementById( 'formula_calculada' ).value = '('+ document.getElementById( 'formula_calculada' ).value + ')';
   });
 
   // CARGA HISTORICOS
