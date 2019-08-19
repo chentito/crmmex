@@ -16,8 +16,18 @@ use Exception;
 class ProcesaForecastController extends Controller
 {
 
+  private $mesCalculo;
+  private $anioCalculo;
+
+  // Ejecuta el calculo del forecast
+  public static function procesaForecast( $anio="" , $mes="" ) {
+    self::calculaSegunFormula( $anio="" , $mes="" );
+  }
+
   // Calcula forecast de acuerdo a formula
-  public function calculaSegunFormula() {
+  public function calculaSegunFormula( $mes="" , $anio="" ) {
+    $this->mesCalculo  = $mes;
+    $this->anioCalculo = $anio;
     $configuracion      = Config::find( 1 );
     $metrica            = $configuracion->objetivoCalculo; // Sobre importes, unidades o ambos
     $periodo            = $configuracion->periodo; // Ultimos 3 mese o ultimos 3 periodos
@@ -32,7 +42,6 @@ class ProcesaForecastController extends Controller
       $compiler   = new FormulaInterpreter\Compiler();
       $executable = $compiler->compile( $formula );
 
-
       // Constantes
       foreach( $this->obtieneConstantes() AS $constante ) {
         // Tipo 1 es importe, otro caso es tasa, por eso se divide entre 100
@@ -44,15 +53,37 @@ class ProcesaForecastController extends Controller
         $historicos = $this->obtieneValoresHistoricos( $periodo , $tipoEstadistica , $metrica );
         if( $metrica == 1  ) {
           $vars[ $tipoEstadisticaTXT. '_' . $periodoTXT . '_' . $periodosHist  ] = $historicos[ 'importe' ];
+          $importe = $executable->run( $vars );
+          $unidad  = 0;
         }
         if( $metrica == 2 ) {
           $vars[ $tipoEstadisticaTXT. '_' . $periodoTXT . '_' . $periodosHist  ] = $historicos[ 'unidad' ];
+          $importe = 0;
+          $unidad  = $executable->run( $vars );
+        }
+        if( $metrica == 3 ) {
+          $vars[ $tipoEstadisticaTXT. '_' . $periodoTXT . '_' . $periodosHist  ] = $historicos[ 'importe' ];
+          $importe = $executable->run( $vars );
+          $vars[ $tipoEstadisticaTXT. '_' . $periodoTXT . '_' . $periodosHist  ] = $historicos[ 'unidad' ];
+          $unidad = $executable->run( $vars );
+        }
+      } else {
+        if( $metrica == 1 ) {
+          $importe = $executable->run( $vars );
+          $unidad  = 0;
+        }
+        if( $metrica == 2 ) {
+          $importe = 0;
+          $unidad  = $executable->run( $vars );
+        }
+        if( $metrica == 3 ) {
+          $importe = $executable->run( $vars );
+          $unidad  = $executable->run( $vars );
         }
       }
 
-      $result = $executable->run( $vars );
-      $this->guardaPronostico( date( 'y' ) , date( 'n' ) , $result[ 'importe' ] , $result[ 'unidad' ] );
-
+      $this->guardaPronostico( ( $this->anioCalculo != '' ? $this->anioCalculo : date( 'Y' ) ) , ( $this->mesCalculo != '' ? $this->mesCalculo : date( 'n' ) ) , $importe , $unidad );
+      $result = array( [ 'importe' => $importe , 'unidades' => $unidad ] );
     } catch (\Exception $e) {
       $result = array( [ 'maj' => $e->getMessage() , 'vars' => serialize( $vars ) ] );
     }
@@ -76,20 +107,21 @@ class ProcesaForecastController extends Controller
    * @return regrersa un arreglo con el total aplicado al periodo y estadisitica correspondiente
    */
   private function obtieneValoresHistoricos( $periodo , $tipoEstadistica , $objetivo ) {
-    //DB::connection()->enableQueryLog();
+    DB::connection()->enableQueryLog();
     $calculos = array();
     $historicos = Historicos::when( $periodo == 1 , function( $q ) { // Ultimos X meses
-                                return $q->whereRaw( DB::raw( "CONCAT(anio,'-',mes)>='" . date( 'Y-n' , strtotime( '- 3 months' ) ) . "'" ) );
+                                $fechaLimite = ( ( $this->anioCalculo != '' ) ? $this->anioCalculo : 'Y' ) . '-' . ( ( $this->mesCalculo != '' ) ? $this->mesCalculo : 'n' );
+                                return $q->whereRaw( DB::raw( "CONCAT(anio,'-',mes)>='" . date( $fechaLimite , strtotime( '- 3 months' ) ) . "'" ) );
                               })
                             ->when( $periodo == 2 , function( $q ) { // Ultimos X periodos
-                                $mes  = date( 'n' );
+                                $mes  = ( ( $this->mesCalculo=="" ) ? date( 'n' ) : self::$mesCalculo );
                                 $anio = date( 'Y' , strtotime( '- 3 year' ) );
                                 return $q->where( 'mes' , $mes )->where( 'anio' , '>=' , $anio );
                               })
                             ->where( 'status' , '1' )
                             ->get();
-                            //$queries = DB::getQueryLog();
-                            //Log::warning( $queries );
+                            $queries = DB::getQueryLog();
+                            Log::warning( $queries );
     $importes = array();
     $unidades = array();
     foreach( $historicos AS $historico ) {
@@ -143,10 +175,13 @@ class ProcesaForecastController extends Controller
 
   /* Metodo que guarda el pronostico calculado */
   private function guardaPronostico( $anio , $mes , $importe , $unidades ) {
+    //DB::connection()->enableQueryLog();
     $pronosticos = Pronosticos::updateOrCreate(
-      [ 'mes' => $mes, 'anio' => $anio],
-      [ 'importe' => $importe , 'cantidad' => $unidades , 'status' => 1]
+      [ 'mes' => $mes , 'anio' => $anio , 'status' => 1 ],
+      [ 'importe' => $importe , 'cantidad' => $unidades  ]
     );
+    //$queries = DB::getQueryLog();
+    //Log::warning( $queries );
   }
 
 }

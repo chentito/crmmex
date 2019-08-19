@@ -137,6 +137,8 @@
 
         if( document.getElementById( 'edicionUsuariosNombre' ).value == '' ) {
             aviso( 'No ha proporcionado el nombre del usuario' , false );
+        } else if( document.getElementById( 'edicionUsuariosAPaterno' ).value == '' ) {
+            aviso( 'No ha proporcionado el apellido paterno del usuario' , false );
         } else if( document.getElementById( 'edicionUsuariosEmail' ).value == '' ) {
             aviso( 'No ha proporcionado el correo electrónico del usuario' , false );
         } else if( document.getElementById( 'edicionUsuariosContrasena' ).value !=  document.getElementById( 'edicionUsuariosRepiteContrasena' ).value ) {

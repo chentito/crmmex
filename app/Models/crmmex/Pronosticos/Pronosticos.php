@@ -12,6 +12,6 @@ class Pronosticos extends Model
   // Timestamps
   public $timestamps = false;
 
-  protected $fillable = ['mes', 'anio'];
+  protected $fillable = ['mes', 'anio', 'cantidad' , 'importe' , 'status'];
 
 }

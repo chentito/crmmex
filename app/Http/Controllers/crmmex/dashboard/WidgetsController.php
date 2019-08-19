@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\crmmex\Estadisticas\VentasController AS EstadisticasVentas;
 
 use App\Models\crmmex\dashboard\Widgets AS Widgets;
-use App\Models\crmmex\Estadisticas\Pronosticos AS Pronosticos;
+use App\Models\crmmex\Pronosticos\Pronosticos AS Pronosticos;
 use App\Models\crmmex\Clientes\Propuestas AS Propuestas;
 use App\Models\crmmex\Clientes\Clientes AS Clientes;
 
@@ -46,21 +46,21 @@ class WidgetsController extends Controller
         return $datos;
     }
 
-    // Metodo para alimentar el reporte de ventas
-    public function ObjetivoCumplimiento() {
-        $mesesMostrar = $this->confWidget( 1 );
-        $periodos     = EstadisticasVentas::ventasMensuales( false , $mesesMostrar );
-        $datos        = array();
+  // Metodo para alimentar el reporte de ventas
+  public function ObjetivoCumplimiento() {
+    $mesesMostrar = $this->confWidget( 1 );
+    $periodos     = EstadisticasVentas::ventasMensuales( false , $mesesMostrar );
+    $datos        = array();
 
-        foreach( $periodos AS $periodo ) {
-            $fechas                    = explode( '-' , $periodo[ 'periodo' ] );
-            $datos[ 'categorias' ][]   = $periodo[ 'periodo' ];
-            $datos[ 'objetivos' ][]    = $this->pronostico( $fechas[ 1 ] , $fechas[ 0 ] );
-            $datos[ 'cumplimiento' ][] = $periodo[ 'monto' ];
-        }
-
-        return response()->json( $datos );
+    foreach( $periodos AS $periodo ) {
+      $fechas                    = explode( '-' , $periodo[ 'periodo' ] );
+      $datos[ 'categorias' ][]   = $periodo[ 'periodo' ];
+      $datos[ 'objetivos' ][]    = $this->pronostico( $fechas[ 1 ] , $fechas[ 0 ] );
+      $datos[ 'cumplimiento' ][] = $periodo[ 'monto' ];
     }
+
+    return response()->json( $datos );
+  }
 
     // Metodo para obtener las ventas por ejecutivo
     public function VentasPorEjecutivo() {
@@ -101,41 +101,43 @@ class WidgetsController extends Controller
         return response()->json( $datos );
     }
 
-    public function ClientesProspectos() {
-        $mesesMostrar          = $this->confWidget( 5 );
-        $fecha                 = date( 'Y-m' , strtotime( '-' . $mesesMostrar . ' months' ) );
-        $datos[ 'periodos' ]   = array();
-        $datos[ 'clientes' ]   = array();
-        $datos[ 'prospectos' ] = array();
-        $totales               = Clientes::select( DB::raw( "COUNT(*) AS total, tipo, substr(fechaAlta,1,7) AS periodo" ) )
-                                ->whereRaw( DB::raw( "substr(fechaAlta,1,7)>='$fecha'" ) )
-                                ->groupBy( DB::raw( "substr(fechaAlta,1,7),tipo" ) )
-                                ->get();
+  public function ClientesProspectos() {
+    $mesesMostrar          = $this->confWidget( 5 );
+    $fecha                 = date( 'Y-m' , strtotime( '-' . $mesesMostrar . ' months' ) );
+    $datos[ 'periodos' ]   = array();
+    $datos[ 'clientes' ]   = array();
+    $datos[ 'prospectos' ] = array();
+    $totales               = Clientes::select( DB::raw( "COUNT(*) AS total, tipo, substr(fechaAlta,1,7) AS periodo" ) )
+                            ->whereRaw( DB::raw( "substr(fechaAlta,1,7)>='$fecha'" ) )
+                            ->groupBy( DB::raw( "substr(fechaAlta,1,7),tipo" ) )
+                            ->get();
 
-        foreach( $totales AS $total ) {
-            if( !in_array( $total->periodo , $datos[ 'periodos' ] ) ) { $datos[ 'periodos' ][]   = $total->periodo; }
-            if( $total->tipo == 1 ){
-                  $datos[ 'clientes' ][]   = $total->total;
-              } elseif ( $total->tipo == 2 ) {
-                  $datos[ 'prospectos' ][] = $total->total;
-            }
-        }
-
-        return response()->json( $datos );
+    foreach( $totales AS $total ) {
+      if( !in_array( $total->periodo , $datos[ 'periodos' ] ) ) { $datos[ 'periodos' ][]   = $total->periodo; }
+      if( $total->tipo == 1 ){
+          $datos[ 'clientes' ][]   = $total->total;
+        } elseif ( $total->tipo == 2 ) {
+          $datos[ 'prospectos' ][] = $total->total;
+      }
     }
 
-    // Obtiene el pronostico de un periodo
-    public function pronostico( $mes , $anio ) {
-        $pronostico = Pronosticos::select( DB::raw( "IFNULL( SUM( monto ) , 0 ) AS pronostico" ) )
-                                 ->whereRaw( DB::raw( "mes='" . $mes . "' AND anio='" . $anio . "' AND status=1" ) )
-                                 ->first();
-        return $pronostico->pronostico;
-    }
+    return response()->json( $datos );
+  }
 
-    // Obtiene la configuracion de un widget
-    private function confWidget( $widgetID ) {
-        $conf = Widgets::find( $widgetID );
-        return $conf->configuracion;
-    }
+  // Obtiene el pronostico de un periodo
+  public function pronostico( $mes , $anio ) {
+    $pronostico = Pronosticos::where( 'mes' , $mes )->where( 'anio' , $anio )->first();
+    if( $pronostico ) {
+      return $pronostico->importe;
+    } else {
+      return 0;
+    }    
+  }
+
+  // Obtiene la configuracion de un widget
+  private function confWidget( $widgetID ) {
+      $conf = Widgets::find( $widgetID );
+      return $conf->configuracion;
+  }
 
 }

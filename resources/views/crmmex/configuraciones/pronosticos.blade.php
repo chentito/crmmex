@@ -9,6 +9,11 @@
       <i class="fa fa-sm fa-edit"></i> <span class="d-none d-sm-inline">Fórmula</span>
     </a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" id="ejecuciones-tab" data-toggle="tab" href="#ejecuciones" role="tab" aria-controls="ejecuciones" aria-selected="false">
+      <i class="fa fa-sm fa-cogs"></i> <span class="d-none d-sm-inline">Ejecuciones</span>
+    </a>
+  </li>
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -188,6 +193,36 @@
       </form>
     </div>
   </div>
+  <div class="tab-pane fade" id="ejecuciones" role="tabpanel" aria-labelledby="contact-tab">
+    <div class="{{$container}} border-left border-right border-bottom p-1">
+      <div class="row">
+        <div class="col-sm-12">
+          <table class="table table-striped responsive nowrap" style="width:100%">
+            <thead>
+              <tr>
+                <th width="20%">Año</th>
+                <th width="20%">Mes</th>
+                <th width="20%">Importe</th>
+                <th width="20%">Unidades</th>
+                <th width="20%">Opciones</th>
+              </tr>
+            </thead>
+            <tbody id="contenedorProcesamientos">
+            </tbody>
+            <tfoot>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -334,5 +369,28 @@
         console.log( err );
      });
   });
+
+  // Listado de procesamientos
+  axios.get( '/api/listadoProcesamientos' , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
+       .then( response => {
+         var container = document.getElementById( 'contenedorProcesamientos' );
+         response.data.forEach( function( e , i ) {
+          var row = container.insertRow(0);
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+          var cell3 = row.insertCell(2);
+          var cell4 = row.insertCell(3);
+          var cell5 = row.insertCell(4);
+          cell1.innerHTML = e.anio;
+          cell2.innerHTML = e.mes;
+          cell3.innerHTML = e.cantidad;
+          cell4.innerHTML = e.importe;
+          cell5.innerHTML = '<a title="Volver a ejecutar" href="javascript:void(0)" onclick=""><i class="fa fa-sm fa-cogs"></i> <span class="d-none d-sm-inline">Volver a ejecutar</span></a>';
+        });
+       })
+       .catch( err => {
+         console.log( err );
+       });
+
 
 </script>

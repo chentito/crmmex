@@ -242,7 +242,8 @@ Route::middleware( 'auth:api' )->post( '/actualizaDescripcionProcesos'       , '
 
 
 /************************************ Forecast ************************************/
-Route::middleware( 'auth:api' )->get( '/obtienePronostico' , 'crmmex\Pronosticos\ProcesaForecastController@calculaSegunFormula' );
+Route::middleware( 'auth:api' )->get( '/obtienePronostico'     , 'crmmex\Pronosticos\ProcesaForecastController@calculaSegunFormula' );
+Route::middleware( 'auth:api' )->get( '/listadoProcesamientos' , 'crmmex\Pronosticos\PronosticosController@listadoProcesaimentos' );
 
 
 /************************************ Reportes ************************************/
