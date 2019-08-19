@@ -35,6 +35,9 @@ class PropuestasController extends Controller
       $datos[ 'propuestas' ] = array();
       $propuestas = Propuestas::where( 'status' , 1 )
                               ->where( 'clienteID' , $clienteID )
+                              ->when( Auth::user()->rol != 1 , function( $q ){
+                                return $q->where( 'ejecutivoID' , Auth::user()->id );
+                              })
                               ->get();
 
       foreach( $propuestas AS $propuesta ) {

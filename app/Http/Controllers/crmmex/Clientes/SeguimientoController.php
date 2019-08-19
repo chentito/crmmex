@@ -26,10 +26,12 @@ class SeguimientoController extends Controller
         $ejecutivoID                    = Auth::user()->id;
         $seguimientos                   = array();
         $seguimientos[ 'seguimientos' ] = array();
-        $seg          = Seguimiento::where( [ 'status' => 1 ] )
-                      ->where( [ 'ejecutivoID' => $ejecutivoID ] )
+        $seg          = Seguimiento::where( [ 'status' => 1 ] )                      
                       ->when( $clienteID != '' , function( $cond ) use( $clienteID ) {
                         return $cond->where( [ 'clienteID' => $clienteID ] );
+                      })
+                      ->when( Auth::user()->rol != 1 , function( $q ){
+                        return $q->where( 'ejecutivoID' , Auth::user()->id );
                       })
                       ->get();
 

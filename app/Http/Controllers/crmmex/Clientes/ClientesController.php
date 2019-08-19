@@ -117,6 +117,9 @@ class ClientesController extends Controller
                              ->when(  $tipo != '' , function( $q ) use ( $tipo ) {
                                return $q->where( 'tipo' , $tipo );
                              })
+                             ->when( Auth::user()->rol != 1 , function( $q ){
+                               return $q->where( 'ejecutivo' , Auth::user()->id );
+                             })
                              ->orderBy( 'id' , 'DESC' )
                              ->get();
 
@@ -160,8 +163,10 @@ class ClientesController extends Controller
                     ->where( 'crmmex_ventas_cliente.tipo' , 2)
                     ->whereIn( 'crmmex_ventas_cliente.status' , [ 1,2 ] )
                     ->where( 'crmmex_ventas_contacto.status' , 1 )
-                    //->groupBy( 'crmmex_ventas_contacto.id' )
-                    ->orderBy( 'crmmex_ventas_cliente.id' , 'ASC' )
+                    ->when( Auth::user()->rol != 1 , function( $q ){
+                      return $q->where( 'crmmex_ventas_cliente.ejecutivo' , Auth::user()->id );
+                    })
+                    ->orderBy( 'crmmex_ventas_cliente.id' , 'DESC' )
                     ->get();
 
         foreach( $prospectos AS $prospecto ) {
