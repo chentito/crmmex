@@ -13,7 +13,7 @@
       document.getElementById( 'adicional_clientes_id' ).value = campoAdicionalID;
       var url = '/api/datosCampoAdicional/' + campoAdicionalID;
 
-      await axios.get( url )
+      await axios.get( url , { headers:{ 'Accept':'application\json' , 'Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
            .then( response => {
                 datos = response.data;
                 document.getElementById( 'adicional_clientes_seccion' ).value    = datos.seccion;
@@ -33,5 +33,5 @@
            }).catch( err => {console.log( err );});
   }
 
-  setTimeout( function(){ document.querySelector('a[href="#field"]').click(); } , 1500 );  
+  setTimeout( function(){ document.querySelector('a[href="#field"]').click(); } , 1500 );
 </script>

@@ -125,36 +125,38 @@
           altaEjecutivo();
     });
 
-    function altaEjecutivo() {
-        var datos  = new FormData( document.getElementById( 'edicionUsuariosForm' ) );
-        if( $( '#edicionUsuariosIdAdmin' ).length == 0 ) {
-            var url = '/api/altaEjecutivo';
-            var mensaje = 'agregado';
-        } else {
-            var url = '/api/editaEjecutivo';
-            var mensaje = 'editado';
-        }
-
-        if( document.getElementById( 'edicionUsuariosNombre' ).value == '' ) {
-            aviso( 'No ha proporcionado el nombre del usuario' , false );
-        } else if( document.getElementById( 'edicionUsuariosAPaterno' ).value == '' ) {
-            aviso( 'No ha proporcionado el apellido paterno del usuario' , false );
-        } else if( document.getElementById( 'edicionUsuariosEmail' ).value == '' ) {
-            aviso( 'No ha proporcionado el correo electrónico del usuario' , false );
-        } else if( document.getElementById( 'edicionUsuariosContrasena' ).value !=  document.getElementById( 'edicionUsuariosRepiteContrasena' ).value ) {
-            aviso( 'Las contraseñas no coinciden' , false );
-        } else {
-            var config = {headers: {'Accept': 'application/json','Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' )}};
-            axios.post( url , datos , config )
-                 .then( resp => {
-                    contenidos( 'ejecutivos_listado' );
-                    aviso( 'Usuario ' + mensaje + ' correctamente' );
-                 })
-                 .catch( err => {
-                    console.log( err );
-                 });
-         }
+  function altaEjecutivo() {
+    var datos  = new FormData( document.getElementById( 'edicionUsuariosForm' ) );
+    if( $( '#edicionUsuariosIdAdmin' ).length == 0 ) {
+      var url = '/api/altaEjecutivo';
+      var mensaje = 'agregado';
+    } else {
+      var url = '/api/editaEjecutivo';
+      var mensaje = 'editado';
     }
+
+    if( document.getElementById( 'edicionUsuariosNombre' ).value == '' ) {
+      aviso( 'No ha proporcionado el nombre del usuario' , false );
+    } else if( document.getElementById( 'edicionUsuariosAPaterno' ).value == '' ) {
+      aviso( 'No ha proporcionado el apellido paterno del usuario' , false );
+    } else if( document.getElementById( 'edicionUsuariosEmail' ).value == '' ) {
+      aviso( 'No ha proporcionado el correo electrónico del usuario' , false );
+    } else if( mensaje == 'agregado' && document.getElementById( 'edicionUsuariosContrasena' ).value == '' ) {
+      aviso( 'No ha proporcionado una contraseña' , false );
+    } else if( document.getElementById( 'edicionUsuariosContrasena' ).value !=  document.getElementById( 'edicionUsuariosRepiteContrasena' ).value ) {
+      aviso( 'Las contraseñas no coinciden' , false );
+    } else {
+      var config = { headers: {'Accept': 'application/json','Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } };
+      axios.post( url , datos , config )
+        .then( resp => {
+          contenidos( 'ejecutivos_listado' );
+          aviso( 'Usuario ' + mensaje + ' correctamente' );
+        })
+        .catch( err => {
+          console.log( err );
+       });
+    }
+  }
 
     function listadoPerfiles() {
         var config = {headers: {'Accept': 'application/json','Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' )}};
