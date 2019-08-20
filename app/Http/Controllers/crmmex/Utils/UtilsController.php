@@ -389,10 +389,14 @@ class UtilsController extends Controller
     */
     public static function nombreForm( $formID ) {
       if( $formID == "0" ) {
-          return "Sin formulario";
-        } else {
-          $form = Forms::find( $formID );
+        return "Sin formulario";
+      } else {
+        $form = Forms::find( $formID );
+        if( $form ) {
           return $form->nombreForm;
+        } else {
+          return "Sin formulario";
+        }
       }
     }
 

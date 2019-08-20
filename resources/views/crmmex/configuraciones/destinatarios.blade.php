@@ -29,16 +29,25 @@
     <div class="{{$container}} border-left border-right border-bottom p-1">
       <div class="row">
         <div class="col-sm-9">
-            <div id="editorHTML" style="height:500px">
-
-                <h1 style="float:right"><b>Titulo</b></h1>
-
-            </div>
+            <input type="hidden" name="idTemplateEditado" id="idTemplateEditado" value="0">
+            <div id="editorHTML" style="height:500px"></div>
+            <script>
+              var editor = new Jodit("#editorHTML", {
+                "autofocus": true,
+                "uploader": {
+                  "insertImageAsBase64URI": true
+                },
+                "language": "es",
+                "toolbarButtonSize": "small",
+                "toolbarSticky": false,
+                "height": 500
+              });
+            </script>
         </div>
         <div class="col-sm-3">
           <div class="row">
             <div class="col-sm-12">
-                <label for="listadoTemplatesDefault">Diseños default:</label>
+                <label for="listadoTemplatesDefault">Diseños:</label>
                 <select class="custom-select custom-select-sm" name="listadoTemplatesDefault" id="listadoTemplatesDefault">
                     <option></option>
                 </select>
@@ -46,6 +55,11 @@
             <div class="col-sm-12 mt-2">
                 <label for="">Nombre para el template:</label>
                 <input type="text" name="nombreTemplate" id="nombreTemplate" placeholder="Nombre" class="form-control form-control-sm">
+            </div>
+            <div class="col-sm-12 mt-2">
+                <label for="">Usa Formulario?</label>
+                <select name="nuevoTemplateForm" id="nuevoTemplateForm" class="custom-select custom-select-sm">
+                </select>
             </div>
             <div class="col-sm-12 mt-2 text-center">
                 <button type="button" name="limpiaTemplate" id="limpiaTemplate" class="btn btn-sm {{$btn}}"><i class="fa fa-sm fa-trash-alt"></i> Limpiar</button>
@@ -64,70 +78,78 @@
 </div>
 
 <script>
-    generaDataGrid( 'listadoTemplates' );
+  generaDataGrid( 'listadoTemplates' );
 </script>
 
 <script>
-  var toolbarOptions = [
-      ['bold', 'italic', 'underline', 'strike','table'],
-      ['blockquote', 'code-block'],
-      [{ 'header': 1 }, { 'header': 2 }],
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-      [{ 'indent': '-1'}, { 'indent': '+1' }],
-      ['image'],
-      [{ 'size': ['small', false, 'large', 'huge'] }],
-      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-      [{ 'color': [] }, { 'background': [] }],
-      [{ 'align': [] }]
-  ];
-
-  var contenedor = document.getElementById( 'editorHTML' );
-  var quill = new Quill( contenedor , {
-      modules: {
-        toolbar: toolbarOptions
-      },
-      theme: 'snow'
+  axios.get( '/api/listadoFormularios' , { headers: { 'Accept' : 'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
+    .then( response => {
+      response.data.formularios.forEach( function( e , i ){
+        document.getElementById( 'nuevoTemplateForm' ).add( new Option( e.nombreForm , e.id , false, false ) );
+      });
+    })
+    .catch( err => {
+      console.log( err );
     });
 
-  quill.setHTML = (html) => {
-    contenedor.innerHTML = html;
-  };
-
-  quill.getHTML = () => {
-    return contenedor.innerHTML;
-  };
-</script>
-
-<script>
-
-    axios.get( '/api/listadoPiezasDisponibles/false' , { headers: { 'Accept' : 'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
-         .then( response => {
-              response.data.forEach( function( e , i ){
-                  document.getElementById( 'listadoTemplatesDefault' ).add( new Option( e.nombrePieza , e.id , false , false ) );
-              });
-         })
-         .catch( err => {
-            console.log( err );
-         });
-
-    document.getElementById( 'limpiaTemplate' ).addEventListener( 'click' , function( e ) {
-        quill.setHTML( '<br>' );
+  axios.get( '/api/listadoPiezasDisponibles/false' , { headers: { 'Accept' : 'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
+    .then( response => {
+      response.data.forEach( function( e , i ){
+        document.getElementById( 'listadoTemplatesDefault' ).add( new Option( e.nombrePieza , e.id , false , false ) );
+      });
+    })
+    .catch( err => {
+      console.log( err );
     });
 
-    document.getElementById( 'guardaTemplate' ).addEventListener( 'click' , function( e ) {
-          e.preventDefault();
-          alert( quill.getHTML() );
-    });
+  document.getElementById( 'limpiaTemplate' ).addEventListener( 'click' , function( e ) {
+    editor.value = "";
+    document.getElementById( 'idTemplateEditado' ).value       = 0;
+    document.getElementById( 'listadoTemplatesDefault' ).value = "";
+    document.getElementById( 'nombreTemplate' ).value          = "";
+    document.getElementById( 'nuevoTemplateForm' ).value       = 0;
+  });
 
-    document.getElementById( 'listadoTemplatesDefault' ).addEventListener( 'change' , function( e ) {
-          axios.get( '/api/detallePiezaTemplate/' + this.value , { headers: { 'Accept' : 'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
-               .then( response => {
-                  var contenido = response.data.pieza;
-                  quill.setHTML( contenido );
-               })
-               .catch( err => {
-                  console.log( err );
-               });
-     });
+  document.getElementById( 'guardaTemplate' ).addEventListener( 'click' , function( e ) {
+    e.preventDefault();
+    var datos = new FormData();
+    datos.append( 'idTemplateEditado'      , document.getElementById( 'idTemplateEditado' ).value );
+    datos.append( 'nombreNuevoTemplate'    , document.getElementById( 'nombreTemplate' ).value );
+    datos.append( 'diseno_template_editor' , editor.value );
+    datos.append( 'nuevoTemplateForm'      , document.getElementById( 'nuevoTemplateForm' ).value );
+
+    if( editor.value == "" ) {
+      aviso( 'No ha agregado contenidos a la pieza de correo' , false );
+    } else if( document.getElementById( 'nombreTemplate' ).value == "" ) {
+      aviso( 'No ha asignado un nombre a la pieza de correo' , false );
+    } else {
+      axios.post( '/api/altaPiezaTemplate' , datos , { headers: { 'Accept' : 'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
+        .then( response => {
+          aviso( 'Template guardado correctamente' );
+          document.getElementById( 'idTemplateEditado' ).value = "0";
+          document.getElementById( 'nombreTemplate' ).value = "";
+          document.getElementById( 'listadoTemplatesDefault' ).value = "";
+          editor.value = "";
+        })
+        .catch( err => {
+          console.log( err );
+        });
+    }
+  });
+
+  document.getElementById( 'listadoTemplatesDefault' ).addEventListener( 'change' , function( e ) {
+    axios.get( '/api/detallePiezaTemplate/' + this.value , { headers: { 'Accept' : 'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
+      .then( response => {
+        var datos = response.data;
+        var contenido = datos.pieza;
+        editor.value = contenido;
+        document.getElementById( 'idTemplateEditado' ).value = datos.id;
+        document.getElementById( 'nombreTemplate' ).value = datos.nombrePieza;
+        document.getElementById( 'nuevoTemplateForm' ).value = datos.formID;
+      })
+      .catch( err => {
+        console.log( err );
+      });
+   });
 
 </script>

@@ -22,6 +22,7 @@ try {
     window.Highcharts = Highcharts;
     require('highcharts/modules/exporting')(Highcharts);
     require( 'moment' );
+    require( 'jodit' );
 
 } catch (e) {}
 

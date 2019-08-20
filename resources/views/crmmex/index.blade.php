@@ -24,7 +24,7 @@
         <link href="{{ asset( 'assets3/css/contenidos.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/bootstrap-datepicker.standalone.css' ) }}" rel="stylesheet">
         <link href="{{ asset( 'assets3/css/animate.css' ) }}" rel="stylesheet">
-        <link href="{{ asset( 'assets3/css/quill.snow.css' ) }}" rel="stylesheet">
+        <script src="{{ asset( 'assets3/js/jodit.min.js' ) }}"></script>
     </head>
     <body>
         <style>
@@ -114,8 +114,8 @@
         <script src="{{ asset( 'assets3/js/notify.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/timeline.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/contenidos.js' ) }}"></script>
-        <script src="{{ asset( 'assets3/js/quill.js' ) }}"></script>
-        <script src="{{ asset( 'assets3/js/editor.js' ) }}"></script>
+        <!--script src="{{ asset( 'assets3/js/quill.js' ) }}"></script>
+        <script src="{{ asset( 'assets3/js/editor.js' ) }}"></script-->
         <!-- Grid -->
         <script src="{{ asset( 'assets3/js/dataTables.bootstrap4.min.js' ) }}"></script>
         <script src="{{ asset( 'assets3/js/dataTables.responsive.min.js' ) }}"></script>
