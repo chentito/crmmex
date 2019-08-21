@@ -37,16 +37,6 @@
   </li>
   @endif
 
-  @if($priv['modulos'][ 7 ] == 1)
-  <li>
-    <a href="#reportes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-sm fa-chart-pie"></i>  Reportes</a>
-    <ul class="collapse list-unstyled" id="reportes">
-      <li><a href="javascript:void(0)" onclick="return contenidos('reportes_pipeline');">Pipeline</a></li>
-      <li><a href="javascript:void(0)" onclick="return contenidos('reportes_resumen');">Ventas</a></li>
-    </ul>
-  </li>
-  @endif
-
   @if($priv['modulos'][ 8 ] == 1)
   <li>
     <a href="#configuraciones" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-sm fa-cogs"></i>  Configuraciones</a>
