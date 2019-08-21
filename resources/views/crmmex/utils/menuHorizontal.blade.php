@@ -44,16 +44,6 @@
       </li>
       @endif
 
-      @if($priv['modulos'][ 7 ] == 1)
-      <li id="moduloMenu_7" class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle navBarFont" id="dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sm fa-chart-pie"></i>  Reportes</a>
-        <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
-          <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('reportes_pipeline');">Pipeline</a></li>
-          <li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('reportes_resumen');">Ventas</a></li>
-        </ul>
-      </li>
-      @endif
-
       @if($priv['modulos'][ 8 ] == 1)
       <li id="moduloMenu_8" class="nav-item dropdown">
         <a class="nav-link dropdown-toggle navBarFont" id="dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sm fa-cogs"></i>  Configuraciones</a>
