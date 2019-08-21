@@ -171,7 +171,11 @@ class UtilsController extends Controller
     */
     public static function nombreEjecutivo( $ejecutivoID ) {
       $ejecutivo = Ejecutivo::find( $ejecutivoID );
-      return $ejecutivo->name . ' ' . $ejecutivo->apPat . ' ' . $ejecutivo->apMat;
+      if( $ejecutivo ){
+        return $ejecutivo->name . ' ' . $ejecutivo->apPat . ' ' . $ejecutivo->apMat;
+      } else {
+        return "";
+      }      
     }
 
    /*

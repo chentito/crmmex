@@ -10,11 +10,6 @@
       <i class="fa fa-edit fa-sm"></i><span class="d-none d-sm-inline">  Crear Template</span>
     </a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">
-      <i class="fa fa-edit fa-sm"></i><span class="d-none d-sm-inline">  Contacto</span>
-    </a>
-  </li>
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -40,7 +35,21 @@
                 "language": "es",
                 "toolbarButtonSize": "small",
                 "toolbarSticky": false,
-                "height": 500
+                "height": 500,
+                "extraButtons": [
+                  {
+                    name: "insertForm",
+                    iconURL: "{{asset('assets3/icons/form.png')}}",
+                    exec: function (editor) {
+                      if( document.getElementById( 'nuevoTemplateForm' ).value == "-" ) {
+                        aviso( "No ha seleccionado un formulario" , false );
+                      } else{
+                        var link = "<a href=\"{{ url('/') }}/campania/{campaniaID}/{contactoID}\">Click aqu&iacute;</a>";
+                        editor.selection.insertHTML( link );
+                      }
+                    }
+                  }
+                ]
               });
             </script>
         </div>
@@ -84,6 +93,7 @@
 <script>
   axios.get( '/api/listadoFormularios' , { headers: { 'Accept' : 'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
     .then( response => {
+      document.getElementById( 'nuevoTemplateForm' ).add( new Option( '-' , '-' , false, false ) );
       response.data.formularios.forEach( function( e , i ){
         document.getElementById( 'nuevoTemplateForm' ).add( new Option( e.nombreForm , e.id , false, false ) );
       });
