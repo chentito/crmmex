@@ -162,7 +162,7 @@ Route::middleware( 'auth:api' )->get ( '/editaFormulario/{formularioID}'        
 Route::middleware( 'auth:api' )->post( '/cargaHistoricosLayout'                                          , 'crmmex\Sistema\HistoricosController@cargaHistoricos' );
 Route::middleware( 'auth:api' )->get ( '/listadoHistoricos'                                              , 'crmmex\Sistema\HistoricosController@listadoHistoricos' );
 Route::middleware( 'auth:api' )->get ( '/generaLayoutHistoricos/{fechainicial}/{fechaFinal}'             , 'crmmex\Sistema\HistoricosController@exportarCSV' );
-Route::middleware( 'auth:api' )->get ( '/listadoPerfiles'                                                , 'crmmex\Sistema\PerfilesController@listadoPerfiles' );
+Route::middleware( 'auth:api' )->get ( '/listadoPerfiles/{edicion?}'                                     , 'crmmex\Sistema\PerfilesController@listadoPerfiles' );
 Route::middleware( 'auth:api' )->get ( '/detallePerfil/{perfilID}'                                       , 'crmmex\Sistema\PerfilesController@consultaPerfil' );
 Route::middleware( 'auth:api' )->post( '/actualizaPerfil'                                                , 'crmmex\Sistema\PerfilesController@editaPerfil' );
 Route::middleware( 'auth:api' )->post( '/altaPerfil'                                                     , 'crmmex\Sistema\PerfilesController@altaPerfil' );

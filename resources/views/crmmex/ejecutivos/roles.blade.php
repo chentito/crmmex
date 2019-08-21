@@ -1,12 +1,18 @@
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
-    <a class="nav-link active" id="perfiles-tab" data-toggle="tab" href="#perfiles" role="tab" aria-controls="perfiles" aria-selected="true">Perfiles</a>
+    <a class="nav-link active" id="perfiles-tab" data-toggle="tab" href="#perfiles" role="tab" aria-controls="perfiles" aria-selected="true">
+      <i class="fa fa-id-badge fa-sm"></i><span class="d-none d-sm-inline">  Perfiles</span>
+    </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Nuevo Perfil</a>
+    <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+      <i class="fa fa-id-card-alt fa-sm"></i><span class="d-none d-sm-inline">  Nuevo Perfil</span>
+    </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Asignar Privilegios</a>
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+      <i class="fa fa-user-shield fa-sm"></i><span class="d-none d-sm-inline">  Asignar Privilegios</span>
+    </a>
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
@@ -133,7 +139,7 @@
     });
 
     function cargaRoles() {
-        axios.get( '/api/listadoPerfiles' , {headers:{ 'Accept':'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
+        axios.get( '/api/listadoPerfiles/1' , {headers:{ 'Accept':'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
              .then( response => {
                 response.data.perfiles.forEach( function( e , i ){
                     document.getElementById( 'roles_listadoPerfiles' ).add( new Option( e.nombre , e.id , false , false ) );

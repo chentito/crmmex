@@ -13,10 +13,14 @@ use App\Models\crmmex\Sistema\Perfiles AS Perfiles;
 class PerfilesController extends Controller
 {
     // Obtiene el listado de Perfiles
-    public function listadoPerfiles() {
+    public function listadoPerfiles($edicion=false) {
         $datos               = array();
         $datos[ 'perfiles' ] = array();
-        $perfiles            = Perfiles::whereIn( 'status' , [ 1 , 2 ] )->get();
+        $perfiles            = Perfiles::whereIn( 'status' , [ 1 , 2 ] )
+                                       ->when( $edicion==1 , function( $q ){
+                                         return $q->where( 'id' , '>' , 1 );
+                                       })
+                                       ->get();
 
         foreach( $perfiles AS $perfil ) {
             $datos[ 'perfiles' ][] = array(
@@ -25,8 +29,8 @@ class PerfilesController extends Controller
                 'fechaAlta'         => $perfil->fechaAlta,
                 'fechaModificacion' => $perfil->fechaModificacion,
                 'status'            => ( ( $perfil->status == 1 ) ? 'Activo' : 'Inactivo' ) ,
-                'opciones'          => '<a href="javascript:void(0)" onclick="contenidos(\'edita_perfil\',\''.$perfil->id.'\')" class="ml-2"><i class="fa fa-sm fa-edit"></i></a>'
-                                     . '<a href="javascript:void(0)" onclick="contenidos(\'elimina_perfil\',\''.$perfil->id.'\')" class="ml-2"><i class="fa fa-sm fa-trash"></i></a>'
+                'opciones'          => ( $perfil->id != 1 ) ? '<a href="javascript:void(0)" onclick="contenidos(\'edita_perfil\',\''.$perfil->id.'\')" class="ml-2"><i class="fa fa-sm fa-edit"></i></a>'
+                                     . '<a href="javascript:void(0)" onclick="contenidos(\'elimina_perfil\',\''.$perfil->id.'\')" class="ml-2"><i class="fa fa-sm fa-trash"></i></a>' : ''
             );
         }
 
