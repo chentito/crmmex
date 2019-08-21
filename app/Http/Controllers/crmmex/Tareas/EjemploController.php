@@ -29,6 +29,7 @@ class EjemploController extends Controller
 
         foreach( $campanias AS $campania ) { // Verifica la campaña a ejecutar
             foreach( self::destinatarios( $campania->id_listado_destinatarios ) AS $destino ) { // Recorre el listado de destinatarios
+              $destino[ 'campaniaID' ] = $campania->id;
               Mail::envioCalendarizado( $campania->id , $campania->subject , $campania->pieza , $campania->tracking , array( $destino[ 'email' ] ) , $destino );
             }
 

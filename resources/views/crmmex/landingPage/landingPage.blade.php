@@ -18,9 +18,7 @@
               </a>
             </nav>
             <div class="row">
-              <div class="col-sm-12">
-                  {{$contenido}}
-              </div>
+              
               <div class="col-sm-12">
                 <form id="formCampania" name="formCampania" class="needs-validation" novalidate action="/campaniaSave" method="post">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">

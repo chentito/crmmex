@@ -125,11 +125,13 @@ Route::middleware( 'auth:api' )->post( '/eliminaEjecutivo/{ejecutivoID}' , 'crmm
 
 
 /************************************ Campanias ************************************/
-Route::middleware( 'auth:api' )->get ( '/listadoCampanias'             , 'crmmex\Mercadotecnia\CampaniasController@listadoCampanias' );
-Route::middleware( 'auth:api' )->post( '/guardaCampania'               , 'crmmex\Mercadotecnia\CampaniasController@save' );
-Route::middleware( 'auth:api' )->post( '/actualizaCampania'            , 'crmmex\Mercadotecnia\CampaniasController@update' );
-Route::middleware( 'auth:api' )->post( '/buscaCampania/{campaniaID}'   , 'crmmex\Mercadotecnia\CampaniasController@search' );
-Route::middleware( 'auth:api' )->post( '/eliminaCampania/{campaniaID}' , 'crmmex\Mercadotecnia\CampaniasController@delete' );
+Route::middleware( 'auth:api' )->get ( '/listadoCampanias'                  , 'crmmex\Mercadotecnia\CampaniasController@listadoCampanias' );
+Route::middleware( 'auth:api' )->post( '/guardaCampania'                    , 'crmmex\Mercadotecnia\CampaniasController@save' );
+Route::middleware( 'auth:api' )->post( '/actualizaCampania'                 , 'crmmex\Mercadotecnia\CampaniasController@update' );
+Route::middleware( 'auth:api' )->post( '/buscaCampania/{campaniaID}'        , 'crmmex\Mercadotecnia\CampaniasController@search' );
+Route::middleware( 'auth:api' )->post( '/eliminaCampania/{campaniaID}'      , 'crmmex\Mercadotecnia\CampaniasController@delete' );
+Route::middleware( 'auth:api' )->get ( '/listadoDestinatarios/{campaniaID}' , 'crmmex\Mercadotecnia\CampaniasController@destinatariosPorCampania' );
+Route::middleware( 'auth:api' )->get ( '/respuestasForm/{campaniaID}'       , 'crmmex\Mercadotecnia\CampaniasController@obtieneRespuestasForm' );
 
 
 /************************************ Configuraciones ************************************/

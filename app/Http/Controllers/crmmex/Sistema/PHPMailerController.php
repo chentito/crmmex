@@ -126,7 +126,7 @@ class PHPMailerController extends Controller
   private static function piezaCorreoCampania( $idPieza , $personalizacion , $tracking ) {
     $pieza      = Pieza::find( $idPieza );
     $body       = $pieza->pieza . $tracking;
-    $reservadas = array( 'formulario' , 'contactoID' , 'nombre' , 'email' , 'telefono' , 'empresa' );
+    $reservadas = array( 'formulario' , 'contactoID' , 'nombre' , 'email' , 'telefono' , 'empresa' , 'campaniaID' );
 
     foreach( $reservadas AS $reservada ){
       if( isset( $personalizacion[ $reservada ] ) ) {
