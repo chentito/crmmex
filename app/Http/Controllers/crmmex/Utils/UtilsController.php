@@ -175,7 +175,7 @@ class UtilsController extends Controller
         return $ejecutivo->name . ' ' . $ejecutivo->apPat . ' ' . $ejecutivo->apMat;
       } else {
         return "";
-      }      
+      }
     }
 
    /*
@@ -410,6 +410,14 @@ class UtilsController extends Controller
     public static function tipoMenu() {
       $menu = Configuraciones::find( '1' )->first();
       return $menu->value;
+    }
+
+   /*
+    * Ejecutivo de propuesta
+    */
+    public static function datosPropuesta( $propuestaID ) {
+      $propuesta = Propuestas::find( $propuestaID );
+      return $propuesta;
     }
 
    /*

@@ -7,6 +7,7 @@
 namespace App\Http\Controllers\crmmex\Dashboard;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\crmmex\Estadisticas\VentasController AS EstadisticasVentas;
@@ -15,36 +16,38 @@ use App\Models\crmmex\dashboard\Widgets AS Widgets;
 use App\Models\crmmex\Pronosticos\Pronosticos AS Pronosticos;
 use App\Models\crmmex\Clientes\Propuestas AS Propuestas;
 use App\Models\crmmex\Clientes\Clientes AS Clientes;
+use App\Models\crmmex\Clientes\Pagos AS Pagos;
+use App\User AS User;
+use Carbon\Carbon;
 
 class WidgetsController extends Controller
 {
 
-    public $periodosMes = array(
-                                    [ '01' => 'Ene' ],
-                                    [ '02' => 'Feb' ],
-                                    [ '03' => 'Mar' ],
-                                    [ '04' => 'Abr' ],
-                                    [ '05' => 'May' ],
-                                    [ '06' => 'Jun' ],
-                                    [ '07' => 'Jul' ],
-                                    [ '08' => 'Ago' ],
-                                    [ '09' => 'Sep' ],
-                                    [ '10' => 'Oct' ],
-                                    [ '11' => 'Nov' ],
-                                    [ '12' => 'Dic' ]
-                                );
+  public $periodosMes = array(
+    [ '01' => 'Ene' ],
+    [ '02' => 'Feb' ],
+    [ '03' => 'Mar' ],
+    [ '04' => 'Abr' ],
+    [ '05' => 'May' ],
+    [ '06' => 'Jun' ],
+    [ '07' => 'Jul' ],
+    [ '08' => 'Ago' ],
+    [ '09' => 'Sep' ],
+    [ '10' => 'Oct' ],
+    [ '11' => 'Nov' ],
+    [ '12' => 'Dic' ]
+  );
 
-    public function datosWidget( $widgetID ) {
-        switch( $widgetID ) {
-            case '1': $datos = $this->ObjetivoCumplimiento(); break;
-            case '2': $datos = $this->VentasPorEjecutivo(); break;
-            case '3': $datos = $this->Propuestas(); break;
-            case '4': $datos = $this->Propuestas(); break;
-            case '5': $datos = $this->ClientesProspectos(); break;
-        }
-
-        return $datos;
+  public function datosWidget( $widgetID ) {
+    switch( $widgetID ) {
+      case '1': $datos = $this->ObjetivoCumplimiento(); break;
+      case '2': $datos = $this->VentasPorEjecutivo(); break;
+      case '3': $datos = $this->Propuestas(); break;
+      case '4': $datos = $this->Propuestas(); break;
+      case '5': $datos = $this->ClientesProspectos(); break;
     }
+    return $datos;
+  }
 
   // Metodo para alimentar el reporte de ventas
   public function ObjetivoCumplimiento() {
@@ -62,44 +65,63 @@ class WidgetsController extends Controller
     return response()->json( $datos );
   }
 
-    // Metodo para obtener las ventas por ejecutivo
-    public function VentasPorEjecutivo() {
-        $datos  = array();
-        $ventas = DB::table( 'crmmex_ventas_pagos' )
-                    ->select( DB::raw( 'SUM(p.monto) AS monto, SUBSTRING(p.fechaPago,1,7) AS periodo, pc.ejecutivoID AS ejecutivo' ) )
-                    ->leftJoin( 'crmmex_ventas_propuestacomercial' , 'crmmex_ventas_pagos.propuestaID' , '=' , 'crmmex_ventas_propuestacomercial.id' )
-                    ->groupBy( DB::raw( 'pc.ejecutivoID, SUBSTRING(p.fechaPago,1,7)' ) );
+  // Metodo para obtener las ventas por ejecutivo
+  public function VentasPorEjecutivo() {
+    $mesesMostrar = $this->confWidget( 2 );
+    $datos        = array();
+    $inicial      = date( 'Y-m' , strtotime( '- ' . $mesesMostrar . ' months' ) );
+    $final        = date( 'Y-m' );
+    $fechas       = $this->rangoDeFechas( Carbon::parse( $inicial ) , Carbon::parse( $final ) );
+    $usuarios     = User::where( 'active' , 1 )->get();
 
-        foreach( $ventas AS $venta ) {
-
-        }
-
-        return $datos;
+    foreach( $fechas AS $fecha ) {
+      $datos[ 'periodos' ][] = $fecha;
+      foreach( $usuarios AS $usuario ) {
+        $pagos = DB::table( 'crmmex_ventas_pagos' )
+                   ->select( DB::raw( 'IFNULL( SUM(monto) , 0 ) AS montotot' ) )
+                   ->whereRaw( DB::raw( 'SUBSTRING( fechaPago , 1 , 7 )="'.$fecha.'"' ) )
+                   ->where( 'ejecutivoID' , $usuario->id )
+                   ->first();
+        $datos[ 'ejecutivos' ][ $usuario->name . ' ' .$usuario->apPat ][] = $pagos->montotot;
+      }
     }
 
-    // Metodo que obtiene el detalle de propuestas
-    public function Propuestas() {
-        #DB::enableQueryLog();
-        $mesesMostrar = $this->confWidget( 3 );
-        $fecha        = date( 'Y-m' , strtotime( '-' . $mesesMostrar . ' months' ) );
-        $datos[ 'aceptadas' ]  = 0;
-        $datos[ 'rechazadas' ] = 0;
-        $datos[ 'proceso' ]    = 0;
-        $propuestas   = Propuestas::whereRaw( DB::raw( "substr(fechaCreacion,1,7)>='$fecha'" ) )
-                                  ->get();
-        #$datos[ 'query' ] = DB::getQueryLog();
-        foreach( $propuestas AS $propuesta ) {
-            if( $propuesta->status == 3 ) {
-                  $datos[ 'rechazadas' ] = $datos[ 'rechazadas' ] + 1;
-              } else if( $propuesta->status == 1 && $propuesta->estadoPropuesta == 0 ) {
-                  $datos[ 'proceso' ] = $datos[ 'proceso' ] + 1;
-              } else {
-                  $datos[ 'aceptadas' ] = $datos[ 'aceptadas' ] + 1;
-            }
-        }
+    return response()->json( $datos );
+  }
 
-        return response()->json( $datos );
+  private function rangoDeFechas( Carbon $start_date , Carbon $end_date ) {
+      $dates = [];
+
+      for($date = $start_date->copy(); $date->lte($end_date); $date->addMonth()) {
+          $dates[] = $date->format('Y-m');
+      }
+
+      return $dates;
+  }
+
+  // Metodo que obtiene el detalle de propuestas
+  public function Propuestas() {
+    #DB::enableQueryLog();
+    $mesesMostrar = $this->confWidget( 3 );
+    $fecha        = date( 'Y-m' , strtotime( '-' . $mesesMostrar . ' months' ) );
+    $datos[ 'aceptadas' ]  = 0;
+    $datos[ 'rechazadas' ] = 0;
+    $datos[ 'proceso' ]    = 0;
+    $propuestas   = Propuestas::whereRaw( DB::raw( "substr(fechaCreacion,1,7)>='$fecha'" ) )
+                              ->get();
+    #$datos[ 'query' ] = DB::getQueryLog();
+    foreach( $propuestas AS $propuesta ) {
+        if( $propuesta->status == 3 ) {
+              $datos[ 'rechazadas' ] = $datos[ 'rechazadas' ] + 1;
+          } else if( $propuesta->status == 1 && $propuesta->estadoPropuesta == 0 ) {
+              $datos[ 'proceso' ] = $datos[ 'proceso' ] + 1;
+          } else {
+              $datos[ 'aceptadas' ] = $datos[ 'aceptadas' ] + 1;
+        }
     }
+
+    return response()->json( $datos );
+  }
 
   public function ClientesProspectos() {
     $mesesMostrar          = $this->confWidget( 5 );
@@ -131,13 +153,13 @@ class WidgetsController extends Controller
       return $pronostico->importe;
     } else {
       return 0;
-    }    
+    }
   }
 
   // Obtiene la configuracion de un widget
   private function confWidget( $widgetID ) {
-      $conf = Widgets::find( $widgetID );
-      return $conf->configuracion;
+    $conf = Widgets::find( $widgetID );
+    return $conf->configuracion;
   }
 
 }

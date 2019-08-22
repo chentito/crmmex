@@ -44,6 +44,7 @@ class PagosController extends Controller
     public function altaPago( Request $request ) {
         $pagos = new Pagos();
         $pagos->propuestaID = $request->pagoPropuesta_propuestaID;
+        $pagos->ejecutivoID = Utils::datosPropuesta( $request->pagoPropuesta_propuestaID )->ejecutivoID;
         $pagos->monto       = $request->pagoPropuesta_monto;
         $pagos->banco       = $request->catalogo_19;
         $pagos->metodoPago  = $request->catalogo_15;
