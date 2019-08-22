@@ -1,7 +1,7 @@
 
 <div class="row">
 
-  <div class="col-sm-12 mt-3" id="contWidget_1" style="display: none">
+  <div class="col-sm-12 mt-3" id="contWidget_1" style="display: none" draggable="true">
     <div class="card card-sm">
       <div class="card-header">Reporte de Ventas</div>
         <div class="card-body">
@@ -48,7 +48,7 @@
     </div>
   </div>
 
-  <div class="col-sm-9 mt-3" id="contWidget_2" style="display: none">
+  <div class="col-sm-9 mt-3" id="contWidget_2" style="display: none" draggable="true">
       <div class="card card-sm">
           <div class="card-header">Ventas por Ejecutivo</div>
           <div class="card-body">
@@ -122,7 +122,7 @@
       </div>
   </div>
 
-  <div class="col-sm-3 mt-3" id="contWidget_3" style="display: none">
+  <div class="col-sm-3 mt-3" id="contWidget_3" style="display: none" draggable="true">
     <div class="card card-sm">
       <div class="card-header">Propuestas generadas</div>
       <div class="card-body">
@@ -177,7 +177,7 @@
     </div>
   </div>
 
-  <div class="col-sm-6 mt-3" id="contWidget_4" style="display: none">
+  <div class="col-sm-6 mt-3" id="contWidget_4" style="display: none" draggable="true">
       <div class="card card-sm">
           <div class="card-header">Ventas por producto/servicio</div>
           <div class="card-body">
@@ -424,7 +424,7 @@
       </div>
   </div>
 
-  <div class="col-sm-6 mt-3" id="contWidget_5" style="display: none">
+  <div class="col-sm-6 mt-3" id="contWidget_5" style="display: none" draggable="true">
       <div class="card card-sm">
           <div class="card-header">Altas</div>
           <div class="card-body">
