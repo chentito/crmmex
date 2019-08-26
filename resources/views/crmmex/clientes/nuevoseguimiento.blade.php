@@ -10,7 +10,7 @@
 
       <div class="{{$container}} border-left border-bottom border-right p-1">
         <form id="formSeguimiento" name="formSeguimiento">
-          <input type="text" name="clienteID" id="clienteID" value="{{$param}}">
+          <input type="hidden" name="clienteID" id="clienteID" value="{{$param}}">
           <input type="hidden" name="seguimiento_idty" id="seguimiento_idty" value="">
           <div class="row">
               <input type="hidden" id="prospectos_nuevoseguimiento_titulo" name="prospectos_nuevoseguimiento_titulo">

@@ -9,7 +9,7 @@
         <a class="nav-link dropdown-toggle navBarFont" id="dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sm fa-user-tie"></i> Usuarios</a>
         <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
           @if( isset( $priv[ 'secciones' ][ 1 ] ) && $priv[ 'secciones' ][ 1 ] == 1 )
-          <li><a class="dropdown-item"  href="javascript:void(0)" onclick="return contenidos('ejecutivos_listado');">Listado</a></li>
+          <li><a class="dropdown-item"  href="javascript:void(0)" onclick="return contenidos('ejecutivos_listado');">Administración</a></li>
           @endif
         </ul>
       </li>

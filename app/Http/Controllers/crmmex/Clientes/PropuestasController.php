@@ -65,7 +65,8 @@ class PropuestasController extends Controller
           'opciones'        => ( $this->tipoCliente( $propuesta->clienteID ) == 1 ) ?
                               '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Propuesta" onclick="contenidos(\'clientes_editapropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-edit fa-sm"></i></a>'
                              . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Visualizar Propuesta" onclick="generaPDF(\''.$propuesta->id.'\',\''.$propuesta->propuestaIDTY.'.pdf\')" class="mr-2"><i class="fa fa-file-pdf fa-sm"></i></a>'
-                             . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Enviar Propuesta" onclick="envioPropuesta(\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-paper-plane fa-sm"></i></a>'
+                             //. '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Enviar Propuesta" onclick="envioPropuesta(\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-paper-plane fa-sm"></i></a>'
+                             . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Enviar Propuesta" onclick="contenidos( \'clientes_enviaPropuesta\', \''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-paper-plane fa-sm"></i></a>'
                              . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Pago" onclick="contenidos(\'clientes_pagos\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-money-bill-wave fa-sm"></i></a>'
                              . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Elimina Propuesta" onclick="contenidos(\'clientes_eliminaPropuesta\',\''.$propuesta->id.'\')" class="mr-2"><i class="fa fa-trash fa-sm"></i></a>'
                              :
@@ -274,8 +275,8 @@ class PropuestasController extends Controller
    * Metodo que genera el PDF de la propuesta
    */
     public function generaPDF( $propuestaID , $envio = false ) {
-      $datos  = $this->datosPropuesta( $propuestaID , 'arreglo' );
-      $pdf = \PDF::loadView( 'crmmex.pdf.propuesta' , compact( 'datos' ) );
+      $datos = $this->datosPropuesta( $propuestaID , 'arreglo' );
+      $pdf   = \PDF::loadView( 'crmmex.pdf.propuesta' , compact( 'datos' ) );
       if( $envio ) {
           return $pdf->output();
         } else {
@@ -428,18 +429,38 @@ class PropuestasController extends Controller
    /*
     * Envio de la propuesta
     */
-    public function enviaPropuesta( $propuestaID ) {
+    public function enviaPropuesta( $propuestaID , Request $request ) {
       $datos   = $this->datosPropuesta( $propuestaID , 'arreglo' );
       $doc     = $this->generaPDF( $propuestaID , true );
+      $adjunto = array();
 
-      $adjunto = array( array(
+      $adjunto[] = array(
         'archivo'  => $doc,
         'nombre'   => $datos[ 'propuestaIDTY' ] . '.pdf',
         'encoding' => 'base64',
         'mime'     => 'application/pdf'
-      ));
+      );
 
-      $destinatarios = array( 'cvreyes@mexagon.net' , 'clam@mexagon.net' );
+      if( $request->hasFile( 'adjuntoDestinatarioEnvioPropuesta' ) ) { // Documento presentacion
+        $adjunto[] = array(
+          'archivo'  => file_get_contents( $request->file( 'adjuntoDestinatarioEnvioPropuesta' )->getRealPath() ),
+          'nombre'   => $request->file( 'adjuntoDestinatarioEnvioPropuesta' )->getClientOriginalName(),
+          'encoding' => 'base64',
+          'mime'     => $request->file( 'adjuntoDestinatarioEnvioPropuesta' )->getMimeType()
+        );
+      }
+
+      if( $request->hasFile( 'adjuntoAdicionalDestinatarioEnvioPropuesta' ) ) { // Documento adicional
+        $adjunto[] = array(
+          'archivo'  => file_get_contents( $request->file( 'adjuntoAdicionalDestinatarioEnvioPropuesta' )->getRealPath() ),
+          'nombre'   => $request->file( 'adjuntoAdicionalDestinatarioEnvioPropuesta' )->getClientOriginalName(),
+          'encoding' => 'base64',
+          'mime'     => $request->file( 'adjuntoAdicionalDestinatarioEnvioPropuesta' )->getMimeType()
+        );
+      }
+
+      //$destinatarios = array( 'cvreyes@mexagon.net' , 'clam@mexagon.net' );
+      $destinatarios = array( 'cvreyes@mexagon.net' );
       $reservadas = array(
         array( 'cliente'        , $datos[ 'contactoTxt' ] ),
         array( 'fechaSolicitud' , $datos[ 'fechaCreacion' ] ),

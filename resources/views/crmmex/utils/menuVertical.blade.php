@@ -3,7 +3,7 @@
   <li>
     <a href="#usuarios" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-sm fa-user-tie"></i>  Usuarios</a>
     <ul class="collapse list-unstyled" id="usuarios">
-      @if( isset( $priv[ 'secciones' ][ 1 ] ) && $priv[ 'secciones' ][ 1 ] == 1 )<li><a href="javascript:void(0)" onclick="return contenidos('ejecutivos_listado');">Listado</a></li>@endif
+      @if( isset( $priv[ 'secciones' ][ 1 ] ) && $priv[ 'secciones' ][ 1 ] == 1 )<li><a href="javascript:void(0)" onclick="return contenidos('ejecutivos_listado');">Administración</a></li>@endif
     </ul>
   </li>
   @endif

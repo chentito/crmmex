@@ -11,6 +11,7 @@
     <button class="btn btn-sm {{$btn}}" id="abreAltaPropuesta"><i class="fa fa-plus fa-lg"></i> Agregar Propuesta</button>
   </div>
 </div>
+
 <script>
   $(document).ready( function() {
     var clienteID = document.getElementById( 'clienteID' ).value;
@@ -18,7 +19,7 @@
     cargaNombre();
 
     /* Evento para abrir la alta de propuestas */
-    document.getElementById( 'abreAltaPropuesta' ).addEventListener( 'click' , function( e ){
+    document.getElementById( 'abreAltaPropuesta' ).addEventListener( 'click' , function( e ) {
       e.preventDefault();
       contenidos( 'clientes_propuesta' , clienteID );
     });
@@ -29,12 +30,12 @@
       var config = { headers: { "Accept" : "application/json", "Authorization" : "Bearer " + token } };
 
       axios.post( url , {} , config )
-           .then( response => {
-              document.getElementById( 'clienteIdty' ).innerHTML = response.data;
-           })
-           .catch( err => {
-             console.log( err );
-           });
+        .then( response => {
+          document.getElementById( 'clienteIdty' ).innerHTML = response.data;
+        })
+        .catch( err => {
+          console.log( err );
+        });
     }
   });
 
@@ -45,30 +46,30 @@
     var config = { headers: { "Accept" : "application/json", "Authorization" : "Bearer " + token } };
 
     axios({ url: url, method: 'GET', responseType: 'blob'}, config )
-            .then((response) => {
-              cierraModal();
-              const url = window.URL.createObjectURL(new Blob([response.data]));
-              const link = document.createElement('a');
-              link.href = url;
-              link.setAttribute( 'download' , propuestaIDTY );
-              document.body.appendChild(link);
-              link.click();
-            })
-            .catch( err => {
-              console.log( err );
-            });
+      .then((response) => {
+        cierraModal();
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute( 'download' , propuestaIDTY );
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch( err => {
+        console.log( err );
+      });
   }
 
   function envioPropuesta( propuestaID ) {
     abreModal();
     var config = {headers: {"Accept" : "application/json","Authorization" : "Bearer " + sessionStorage.getItem( 'apiToken' )}};
     axios.get( '/api/enviaPropuesta/' + propuestaID , config )
-         .then( response => {
-            contenidos( 'clientes_listadoPropuestas' , document.getElementById( 'clienteID' ).value );
-            aviso( 'Propuesta enviada correctamente' );
-         })
-         .catch( err => {
-           console.log( err );
-         });
+      .then( response => {
+        contenidos( 'clientes_listadoPropuestas' , document.getElementById( 'clienteID' ).value );
+        aviso( 'Propuesta enviada correctamente' );
+      })
+      .catch( err => {
+        console.log( err );
+      });
   }
 </script>

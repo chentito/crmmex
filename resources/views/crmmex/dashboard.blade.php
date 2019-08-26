@@ -1,6 +1,42 @@
 
 <div class="row">
 
+  <div class="col-sm-12 mt-1">
+    <div class="card">
+      <div class="card-header">
+        Accesos rápidos
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="list-group">
+              <a href="javascript:void(0)" onclick="contenidos('prospectos_nuevo')" class="list-group-item list-group-item-action py-1"><i class="fa fa-sm fa-user-plus"></i> Alta Prospecto </a>
+              <a href="javascript:void(0)" onclick="contenidos('prospectos_listado')" class="list-group-item list-group-item-action py-1"><i class="fa fa-sm fa-users"></i> Prospectos </a>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="list-group">
+              <a href="javascript:void(0)" onclick="contenidos('clientes_alta')" class="list-group-item list-group-item-action py-1"><i class="fa fa-sm fa-user-check"></i> Alta Cliente </a>
+              <a href="javascript:void(0)" onclick="contenidos('clientes_listado')" class="list-group-item list-group-item-action py-1"><i class="fa fa-sm fa-user-friends"></i> Clientes </a>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="list-group">
+              <a href="javascript:void(0)" onclick="contenidos('mercadotecnia_campanias')" class="list-group-item list-group-item-action py-1"><i class="fa fa-sm fa-envelope"></i> Agregar campaña </a>
+              <a href="javascript:void(0)" onclick="contenidos('mercadotecnia_listado')" class="list-group-item list-group-item-action py-1"><i class="fa fa-sm envelope-open-text"></i> Listado de campañas </a>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="list-group">
+              <a href="javascript:void(0)" onclick="contenidos('ejecutivos_listado')" class="list-group-item list-group-item-action py-1"><i class="fa fa-sm fa-user-tie"></i> Usuarios </a>
+              <a href="javascript:void(0)" onclick="contenidos('ejecutivos_roles')" class="list-group-item list-group-item-action py-1"><i class="fa fa-sm fa-cogs"></i> Perfiles </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="col-sm-12 mt-3" id="contWidget_1" style="display: none" draggable="true">
     <div class="card card-sm">
       <div class="card-header">Reporte de Ventas</div>

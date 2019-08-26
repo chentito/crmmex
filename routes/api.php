@@ -59,7 +59,8 @@ Route::middleware( 'auth:api' )->get ( '/listadoPagos/{propuestaID}'   , 'crmmex
 Route::middleware( 'auth:api' )->post( '/altaPago'                     , 'crmmex\Clientes\PagosController@altaPago' );
 Route::middleware( 'auth:api' )->post( '/eliminaPago/{pagoID}'         , 'crmmex\Clientes\PagosController@eliminaPago' );
 Route::middleware( 'auth:api' )->get ( '/statusPago/{propuestaID}'     , 'crmmex\Clientes\PropuestasController@statusPago' );
-Route::middleware( 'auth:api' )->get ( '/enviaPropuesta/{propuestaID}' , 'crmmex\Clientes\PropuestasController@enviaPropuesta' );
+//Route::middleware( 'auth:api' )->get ( '/enviaPropuesta/{propuestaID}' , 'crmmex\Clientes\PropuestasController@enviaPropuesta' );
+Route::middleware( 'auth:api' )->post( '/enviaPropuesta/{propuestaID}' , 'crmmex\Clientes\PropuestasController@enviaPropuesta' );
 Route::middleware( 'auth:api' )->get ( '/obtienePipeline/{clienteID}'  , 'crmmex\Pipeline\AnalisisPipelineController@analisisPiepeline' );
 
 
@@ -77,9 +78,9 @@ Route::middleware( 'auth:api' )->post( '/eliminaSeguimiento/{seguimientoID}' , '
 Route::middleware( 'auth:api' )->get ( '/proximosSeguimientos'               , 'crmmex\Clientes\SeguimientoController@proximosSeguimientos' );
 
 
-/************************************ Propuestas ***********************************
+/************************************ Propuestas ***********************************/
 Route::middleware( 'auth:api' )->get ( '/obtieneDatosPropuesta/{propuestaID}' , 'crmmex\Clientes\PropuestasController@datosPropuesta' );
-Route::middleware( 'auth:api' )->post( '/altaPropuesta'                       , 'crmmex\Clientes\PropuestasController@altaPropuesta' );
+/*Route::middleware( 'auth:api' )->post( '/altaPropuesta'                       , 'crmmex\Clientes\PropuestasController@altaPropuesta' );
 Route::middleware( 'auth:api' )->post( '/editaPropuesta'                      , 'crmmex\Clientes\PropuestasController@editaPropuesta' );
 Route::middleware( 'auth:api' )->post( '/eliminaPropuesta/{propuestaID}'      , 'crmmex\Clientes\PropuestasController@eliminaPropuesta' );
 Route::middleware( 'auth:api' )->get ( '/idtyPropuesta'                       , 'crmmex\Clientes\PropuestasController@generaIdPropuesta' );
