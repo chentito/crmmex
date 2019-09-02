@@ -1,3 +1,4 @@
+<input type="hidden" value="{{$adicionales}}" name="adicionales_{{$rand}}" id="adicionales_{{$rand}}">
 <div class="col-sm-12" id="contacto_{{$rand}}">
     <div class="row">
         <div class="col-sm-2 my-auto">Contacto adicional</div>
@@ -27,15 +28,6 @@
             <label for="contacto_celular">No. Celular</label>
             <input type="text" id="contacto_celular" name="contacto_celular[]" class="form-control form-control-sm" value="{{$celular}}" placeholder="Celular">
         </div>
-        <!--div class="col-sm-3 mb-1">
-            <label for="contacto_celular_compania">Compañia</label>
-            <select id="contacto_celular_compania" name="contacto_celular_compania[]" class="custom-select custom-select-sm">
-                <option value="1" @if($compania=="1")selected="selected"@endif>AT&T</option>
-                <option value="2" @if($compania=="2")selected="selected"@endif>Telcel</option>
-                <option value="3" @if($compania=="3")selected="selected"@endif>Unefon</option>
-                <option value="4" @if($compania=="4")selected="selected"@endif>Movistar</option>
-            </select>
-        </div-->
         <input type="hidden" id="contacto_celular_compania" name="contacto_celular_compania[]" value="">
         <div class="col-sm-3 mb-1">
             <label for="contacto_telefono">Teléfono</label>
@@ -47,29 +39,11 @@
         </div>
         <div class="col-sm-3 mb-1 text-center my-auto"><button class="btn btn-sm {{$btn}}" id="btnEliminaContacto_{{$rand}}"><i class="fa fa-sm fa-trash"></i></button></div>
     </div>
-    <div class="row">
-        <!--div class="col-sm-3 mb-1">
-            <label for="contacto_area">Área</label>
-            <select id="contacto_area" name="contacto_area[]" class="custom-select custom-select-sm">
-                <option value="1" @if($area=="1")selected="selected"@endif>Finanzas</option>
-                <option value="2" @if($area=="2")selected="selected"@endif>Ventas</option>
-                <option value="3" @if($area=="3")selected="selected"@endif>TI</option>
-                <option value="4" @if($area=="4")selected="selected"@endif>Administraci&oacute;n</option>
-                <option value="5" @if($area=="5")selected="selected"@endif>Recursos Humanos</option>
-            </select>
-        </div-->
-        <input type="hidden" id="contacto_area" name="contacto_area[]" value="">
-        <!--div class="col-sm-3 mb-1">
-            <label for="contacto_puesto">Puesto</label>
-            <input type="text" id="contacto_puesto" name="contacto_puesto[]" class="form-control form-control-sm" value="{{$puesto}}" placeholder="Puesto">
-        </div-->
-        <input type="hidden" id="contacto_puesto" name="contacto_puesto[]" value="">
-        <div class="col-sm-3 mb-1"></div>
-
-    </div>
+    <div class="row" id="containerCamposAdicionalesContactos_{{$rand}}"></div>
 </div>
 
 <script>
+    cargaCamposAdicionales( '4' , JSON.parse( document.getElementById( 'adicionales_{{$rand}}' ).value ) , '{{$rand}}' );
     $( '#btnEliminaContacto_{{$rand}}' ).button().click( function( e ) {
         e.preventDefault();
         $( '#contacto_{{$rand}}' ).remove();

@@ -182,7 +182,7 @@
               // contactos
               var contactos = '<ul class="list-group">';
               response.data.contactos.forEach( function( e , p ){
-                  contactos += '<li class="list-group-item">'+e['nombre']+' '+e['apellidoPaterno']+' '+e['apellidoMaterno'];
+                  contactos += '<li class="list-group-item py-1">'+e['nombre']+' '+e['apellidoPaterno']+' '+e['apellidoMaterno'];
                   contactos += '<br> Email: <a href="mailto:'+e['correoElectronico']+'">' + e['correoElectronico']+'</a>';
                   contactos += ' Tel: <a href="tel:'+e['celular']+'">' +e['celular']+'</a> / <a href="tel:'+e['telefono']+'">'+e['telefono']+'</a>';
                   contactos += '<span class="float-right">'
@@ -207,8 +207,8 @@
               // seguimientos
               if( Symbol.iterator in Object( response.data.seguimientos ) ) {
                 var seguimientos  = '<ul class="list-group">';
-                response.data.seguimientos.forEach( function( e , p ){
-                  seguimientos += '<li class="list-group-item">';
+                response.data.seguimientos.forEach( function( e , p ) {
+                  seguimientos += '<li class="list-group-item py-1">';
                   seguimientos += '['+e['fechaAlta']+'] ' + e['nombreActividad'] + ' / ' + e['estado'];
                   seguimientos += '<br>' + ' Contacto '+e[ 'contactoID' ];
                   seguimientos += '<span class="float-right">'
@@ -223,7 +223,7 @@
               if( Symbol.iterator in Object( response.data.propuestas ) ) {
                 var propuestas = '<ul class="list-group">';
                 response.data.propuestas.forEach( function( e , p ){
-                    propuestas += '<li class="list-group-item">';
+                    propuestas += '<li class="list-group-item py-1">';
                     propuestas += '[Vigencia '+ e[ 'fechaVigencia' ] +'] ' + e[ 'contactoID' ];
                     propuestas += '<br>' + 'ID ' + e[ 'idty' ];
                     propuestas += '<span class="float-right">';
@@ -237,8 +237,8 @@
               // adicionales
               if( Symbol.iterator in Object( response.data.adicionalesEdicion ) ) {
                 var adicionales = '<ul class="list-group">';
-                response.data.adicionalesEdicion.forEach( function( k , v ){
-                  adicionales += '<li class="list-group-item">';
+                response.data.adicionalesEdicion.forEach( function( k , v ) {
+                  adicionales += '<li class="list-group-item py-2">';
                   adicionales += k[ 'id' ] + ": " + k[ 'valor' ];
                   adicionales += '</li>';
                 });

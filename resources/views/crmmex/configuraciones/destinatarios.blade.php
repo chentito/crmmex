@@ -93,7 +93,7 @@
 <script>
   axios.get( '/api/listadoFormularios' , { headers: { 'Accept' : 'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
     .then( response => {
-      document.getElementById( 'nuevoTemplateForm' ).add( new Option( '-' , '-' , false, false ) );
+      document.getElementById( 'nuevoTemplateForm' ).add( new Option( '-' , '0' , false, false ) );
       response.data.formularios.forEach( function( e , i ){
         document.getElementById( 'nuevoTemplateForm' ).add( new Option( e.nombreForm , e.id , false, false ) );
       });

@@ -23,7 +23,7 @@
           <div class="col-sm-3">
             <div class="list-group">
               <a href="javascript:void(0)" onclick="contenidos('mercadotecnia_campanias')" class="list-group-item list-group-item-action py-1"><i class="fa fa-sm fa-envelope"></i> Agregar campaña </a>
-              <a href="javascript:void(0)" onclick="contenidos('mercadotecnia_listado')" class="list-group-item list-group-item-action py-1"><i class="fa fa-sm envelope-open-text"></i> Listado de campañas </a>
+              <a href="javascript:void(0)" onclick="contenidos('mercadotecnia_listado')" class="list-group-item list-group-item-action py-1"><i class="fa fa-sm fa-clipboard-list"></i> Listado de campañas </a>
             </div>
           </div>
           <div class="col-sm-3">

@@ -62,6 +62,7 @@ Route::middleware( 'auth:api' )->get ( '/statusPago/{propuestaID}'     , 'crmmex
 //Route::middleware( 'auth:api' )->get ( '/enviaPropuesta/{propuestaID}' , 'crmmex\Clientes\PropuestasController@enviaPropuesta' );
 Route::middleware( 'auth:api' )->post( '/enviaPropuesta/{propuestaID}' , 'crmmex\Clientes\PropuestasController@enviaPropuesta' );
 Route::middleware( 'auth:api' )->get ( '/obtienePipeline/{clienteID}'  , 'crmmex\Pipeline\AnalisisPipelineController@analisisPiepeline' );
+Route::middleware( 'auth:api' )->post( '/estructuraContacto'           , 'crmmex\Clientes\ClientesController@cargaEstructuraContacto' );
 
 
 /************************************ Seguimientos ************************************/
@@ -138,7 +139,7 @@ Route::middleware( 'auth:api' )->get ( '/respuestasForm/{campaniaID}'       , 'c
 /************************************ Configuraciones ************************************/
 Route::middleware( 'auth:api' )->get ( '/obtieneSMTP'                                                    , 'crmmex\Configuraciones\SMTPController@obtieneConfiguracion' );
 Route::middleware( 'auth:api' )->post( '/actualizaSMTP'                                                  , 'crmmex\Configuraciones\SMTPController@update' );
-Route::middleware( 'auth:api' )->get ( '/listadoCamposAdicionales/{seccion?}'                            , 'crmmex\Utils\CamposAdicionalesController@listado' );
+Route::middleware( 'auth:api' )->get ( '/listadoCamposAdicionales/{seccion?}/{orden?}'                   , 'crmmex\Utils\CamposAdicionalesController@listado' );
 Route::middleware( 'auth:api' )->post( '/nuevoCampoAdicional'                                            , 'crmmex\Utils\CamposAdicionalesController@agregaCampo' );
 Route::middleware( 'auth:api' )->post( '/editaCampoAdicional'                                            , 'crmmex\Utils\CamposAdicionalesController@editaCampoAdicional' );
 Route::middleware( 'auth:api' )->post( '/eliminaCampoAdicional/{campoAdicionalID}'                       , 'crmmex\Utils\CamposAdicionalesController@eliminaCampoAdicional' );

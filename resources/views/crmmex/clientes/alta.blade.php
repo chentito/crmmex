@@ -79,11 +79,7 @@
                             <button class="btn btn-sm {{$btn}}" id="btnAgregaEstructuraCliente"><i class="fa fa-user-plus fa-lg"></i><span class="d-none d-sm-inline"> Agregar otro contacto</span></button>
                           </div>
                       </div>
-                      <div class="row">
-                          <input type="hidden" id="contacto_area" name="contacto_area[]" value="">
-                          <input type="hidden" id="contacto_puesto" name="contacto_puesto[]" value="">
-                          <div class="col-sm-3 mb-1"></div>
-                      </div>
+                      <div class="row" id="containerCamposAdicionalesContactos"></div>
                       <div class="row" id="contenedorContactos">
                       </div>
                       <div class="row mt-2">
@@ -105,7 +101,7 @@
                           <hr>
                         </div>
                       </div>
-                      <div class="row" id="camposAdicionalesContainer">
+                      <div class="row" id="containerCamposAdicionalesClientes">
                       </div>
                     </div>
                 </div>
@@ -195,6 +191,7 @@
         cargaDatosComboCatalogo();
         if( $( '#idCargaInfo' ).length == 0 ) {
             cargaCamposAdicionales( '1' );
+            cargaCamposAdicionales( '4' );
         }
 
         $('#myTab a').on( 'click', function ( e ) {
@@ -209,76 +206,66 @@
 
         $( '#btnAgregaEstructuraCliente' ).button().click( function( e ) {
             e.preventDefault();
-            agregaEstructuraContacto();
+            agregaEstructuraContacto( [] , true );
           });
     });
 
-    function guardaInfoExpediente() {
-        var token = sessionStorage.getItem( 'apiToken' );
-        var datos = $( '#form_alta_expediente' ).serialize();
-        var mov   = '';
-        if( $( '#idCargaInfo' ).length == 0 ) {
-          var ruta  = '/api/altaExpediente';
-          mov = 'alta';
-        } else {
-          var ruta  = '/api/editaExpediente';
-          mov = 'edicion';
-        }
-
-        if( document.getElementById( 'contacto_nombre' ).value == '' ) {
-            aviso( 'No ha proporcionado el nombre del contacto' , false );
-        } else if( document.getElementById( 'contacto_email' ).value == '' ) {
-            aviso( 'No ha proporcionado el correo electrónico del contacto' , false );
-        } else if( document.getElementById( 'cliente_producto_interes' ).value == '' ) {
-            aviso( 'No ha proporcionado el producto de interes para el cliente' , false );
-        } else {
-            $.ajaxSetup({ headers: {
-                'Accept': 'application/json',
-                'Authorization': 'Bearer ' + token
-              }
-            });
-            $.ajax({
-                type  : "post",
-                url   : ruta,
-                data  : datos,
-                cache : false,
-                beforeSend : function() {},
-                success : function(d) {
-                    aviso( 'Cliente actualizado correctamente' );
-                    if( mov == 'alta' ) {
-                        contenidos( 'clientes_listado' );
-                    } else {
-                        contenidos( 'clientes_edicion' , $( '#idCargaInfo' ).val() );
-                    }
-                },
-                error : function() {}
-            });
-        }
+  function guardaInfoExpediente() {
+    var token = sessionStorage.getItem( 'apiToken' );
+    var datos = new FormData( document.getElementById( 'form_alta_expediente' ) );
+    if( $( '#idCargaInfo' ).length == 0 ) {
+      var ruta  = '/api/altaExpediente';
+      var mov = 'alta';
+    } else {
+      var ruta  = '/api/editaExpediente';
+      var mov = 'edicion';
     }
 
-    function agregaEstructuraContacto(nom='',idty='',appat='',apmat='',correo='',celular='',compania='',tel='',ext='',area='',puesto='') {
-        ruta  = '/estructuraContacto/';
-        ruta += ( nom!='' )      ? nom+'/'      : '';
-        ruta += ( idty!='' )     ? idty+'/'     : '';
-        ruta += ( appat!='' )    ? appat+'/'    : '';
-        ruta += ( apmat!='' )    ? apmat+'/'    : '';
-        ruta += ( correo!='' )   ? correo+'/'   : '';
-        ruta += ( celular!='' )  ? celular+'/'  : '';
-        ruta += ( compania!='' ) ? compania+'/' : '';
-        ruta += ( tel!='' )      ? tel+'/'      : '';
-        ruta += ( ext!='' )      ? ext+'/'      : '';
-        ruta += ( area!='' )     ? area+'/'     : '';
-        ruta += ( puesto!='' )   ? puesto+'/'   : '';
-        $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
-        $.ajax({
-            type       : "get",
-            url        : ruta,
-            cache      : false,
-            beforeSend : function() {},
-            success    : function( d ) {
-                $( "#contenedorContactos" ).append( d );
-            },
-            error : function() { }
+    //alert( $( '#form_alta_expediente' ).serialize() );
+    //return false;
+
+    if( document.getElementById( 'contacto_nombre' ).value == '' ) {
+      aviso( 'No ha proporcionado el nombre del contacto' , false );
+    } else if( document.getElementById( 'contacto_email' ).value == '' ) {
+      aviso( 'No ha proporcionado el correo electrónico del contacto' , false );
+    } else if( document.getElementById( 'cliente_producto_interes' ).value == '' ) {
+      aviso( 'No ha proporcionado el producto de interes para el cliente' , false );
+    } else {
+      axios.post( ruta , datos , { headers: { 'Accept': 'application/json', 'Authorization': 'Bearer ' + token } } )
+        .then( response => {
+          aviso( 'Cliente actualizado correctamente' );
+          if( mov == 'alta' ) {
+            contenidos( 'clientes_listado' );
+          } else {
+            contenidos( 'clientes_edicion' , $( '#idCargaInfo' ).val() );
+          }
+        })
+        .catch( err => {
+          console.log( err );
+        });
+
+    }
+  }
+
+    function agregaEstructuraContacto( b=[] , nuevo=false ) {
+      var token = sessionStorage.getItem( 'apiToken' );
+      var datos = new FormData();
+      datos.append( 'idty'        , ( nuevo ) ? '' : b.idty );
+      datos.append( 'nombre'      , ( nuevo ) ? '' : b.nombre );
+      datos.append( 'appat'       , ( nuevo ) ? '' : b.apellidoPaterno );
+      datos.append( 'apmat'       , ( nuevo ) ? '' : b.apellidoMaterno );
+      datos.append( 'correo'      , ( nuevo ) ? '' : b.correoElectronico );
+      datos.append( 'celular'     , ( nuevo ) ? '' : b.celular );
+      datos.append( 'telefono'    , ( nuevo ) ? '' : b.telefono );
+      datos.append( 'extension'   , ( nuevo ) ? '' : b.extension );
+      datos.append( 'adicionales' , ( nuevo ) ? '{}' : JSON.stringify( b.adicionales[ 'adicionales' ] , null ) );
+
+      axios.post( '/api/estructuraContacto' , datos , { headers: { 'Accept': 'application/json', 'Authorization': 'Bearer ' + token } } )
+        .then( response => {
+          $( "#contenedorContactos" ).append( response.data );
+        })
+        .catch( err => {
+          console.log( err );
         });
     }
 

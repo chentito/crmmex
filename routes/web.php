@@ -29,16 +29,17 @@ Route::middleware('auth')->group( function() {
     Route::get( '/contenidos/{id}/{param?}' , 'contenidos\ContenidosController@contenidos' )->middleware( 'bitacora' );
     Route::get( '/home'                     , 'branding\BrandingController@index');
     Route::get( '/generaToken'              , 'crmmex\Utils\ApiTokenController@getTokenWeb' );
-    Route::get( '/estructuraContacto/{nom?}/{idty?}/{appat?}/{apmat?}/{correo?}/{celular?}/{compania?}/{tel?}/{ext?}/{area?}/{puesto?}/' ,
-        function( $nom='', $idty='', $appat='', $apmat='', $correo='', $celular='', $compania='', $tel='', $ext='', $area='', $puesto='' ) {
+    /*Route::get( '/estructuraContacto/{nom?}/{idty?}/{appat?}/{apmat?}/{correo?}/{celular?}/{tel?}/{ext?}/{adicionales?}' ,
+        function( $nom='', $idty='', $appat='', $apmat='', $correo='', $celular='', $tel='', $ext='' , $adicionales='') {
           return view( 'crmmex.prospectos.contacto' ,
             [
-              'rand'    => rand(1111,9999), 'btn'      => 'btn-danger', 'idty'=> $idty, 'nom' => $nom, 'appat' => $appat, 'apmat'  => $apmat, 'correo' => $correo,
-              'celular' => $celular       , 'compania' => $compania   , 'tel' => $tel , 'ext' => $ext, 'area'  => $area , 'puesto' => $puesto
+              'rand'  => rand(1111,9999), 'btn'   => 'btn-danger', 'idty'        => $idty        , 'nom'     => $nom,
+              'appat' => $appat         , 'apmat' => $apmat      , 'correo'      => $correo      , 'celular' => $celular,
+              'tel'   => $tel           , 'ext'   => $ext        , 'adicionales' => $adicionales
             ]
           );
         }
-    );
+    );*/
 });
 
 // Rutas utiles para el carrito de la propuesta

@@ -291,38 +291,35 @@ function generaDataGrid( id , filtro = '' ) {
 }
 
 // COntrol de campos Adicionales
-function cargaCamposAdicionales( seccion , valores=[] ) {
-    document.getElementById( 'camposAdicionalesContainer' ).innerHTML = '';
-    var container = document.getElementById( 'camposAdicionalesContainer' );
-    var url       = '/api/listadoCamposAdicionales/'+seccion;
-    var config    = {
-      headers: {
-        'Accept' : 'application/json',
-        'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' )
-      }
-    };
-    axios.get( url , config )
-         .then( response => {
-           if( typeof response.data[ 'camposAdicionales' ] === 'undefined' ) {
-           }else{
-              response.data[ 'camposAdicionales' ].forEach( function( e , v ) {
-                var urlHTML  = '/api/htmlCampoAdicional/' + e.id;
-                    urlHTML += ( typeof valores[ e.id ] === "undefined" ) ? '' : '/' + valores[ e.id ];
+function cargaCamposAdicionales( seccion , valores=[] , idtyAdicional='' ) {
+  var url    = '/api/listadoCamposAdicionales/' + seccion + '/asc';
+  var config = { headers: { 'Accept' : 'application/json', 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } };
+  axios.get( url , config )
+    .then( response => {
+      if( typeof response.data[ 'camposAdicionales' ] === 'undefined' ) {
+      }else{
+        var nContainer  = response.data[ 'container' ];
+            nContainer += ( idtyAdicional != '' ) ? '_' + idtyAdicional : '';
+        document.getElementById( nContainer ).innerHTML = '';
+        var container  = document.getElementById( nContainer );
+        response.data[ 'camposAdicionales' ].forEach( function( e , v ) {
+          var urlHTML  = '/api/htmlCampoAdicional/' + e.id;
+              urlHTML += ( typeof valores[ e.id ] === "undefined" ) ? '' : '/' + valores[ e.id ];
 
-                axios.get( urlHTML , config )
-                     .then( response => {
-                        var x = document.getElementById( 'camposAdicionalesContainer' ).innerHTML;
-                        container.innerHTML = x + response.data[ 'campo' ];
-                     })
-                     .catch( err => {
-                       console.log( err );
-                     });
-              });
-            }
-         })
-         .catch(
-           err => {console.log( err );}
-         );
+              axios.get( urlHTML , config )
+                .then( response => {
+                  var x = document.getElementById( nContainer ).innerHTML;
+                  container.innerHTML = x + response.data[ 'campo' ];
+                })
+                .catch( err => {
+                  console.log( err );
+               });
+        });
+      }
+    })
+    .catch(
+      err => {console.log( err );}
+    );
 }
 
 // Establece el valor de un combo

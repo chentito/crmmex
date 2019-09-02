@@ -37,7 +37,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
         if(Auth::check()){
-            Auth::logoutOtherDevices($request->input('password'));
+          Auth::logoutOtherDevices($request->input('password'));
         }
     }
 
