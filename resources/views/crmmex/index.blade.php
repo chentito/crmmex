@@ -43,7 +43,7 @@
       @if( $tipoMenu == 1 )
       <nav id="sidebar" class="{{$estilo}} shadow" style="opacity: {{$trans}}">
           <div id="logoBranding" class="sidebar-header sticky-top">
-              <a href="/home"><img src="{{ asset( '/imagenPropietario' ) }}" width="200px" id="logoBrandingImg"></a>
+              <a href="/home"><img src="{{ asset( '/imagenPropietario' ) }}" width="200px" height="100px" id="logoBrandingImg"></a>
           </div>
           <button type="button" id="sidebarCollapse2" class="btn {{$btn}} mt-2" style="width: 100%">
               <i class="fas fa-angle-left"></i>
@@ -174,6 +174,9 @@
           $(this).find('li.dropdown').removeClass('show open');
           $(this).find('ul.dropdown-menu').removeClass('show open');
         });
+      });
+      $(document).on('change', '.custom-file-input', function (event) {
+        $(this).next('.custom-file-label').html(event.target.files[0].name);
       });
     </script>
   </body>

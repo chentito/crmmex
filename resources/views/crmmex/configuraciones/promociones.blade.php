@@ -1,13 +1,23 @@
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
-    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Nueva Promoción</a>
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+      <i class="fa fa-tags fa-sm"></i><span class="d-none d-sm-inline">  Listado Promociones</span>
+    </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Listado Promociones</a>
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+      <i class="fa fa-tag fa-sm"></i><span class="d-none d-sm-inline">  Nueva Promoción</span>
+    </a>
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <div class="{{$container}} border-left border-bottom border-right p-1">
+      <div id="listadoPromociones_config"></div>
+      <table id="listadoPromociones" class="table table-striped responsive nowrap" style="width:100%"></table>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
     <form id="formPromociones" name="formPromociones">
         <input type="hidden" id="promociones_id" name="promociones_id" value="">
         <div class="{{$container}} border-left border-bottom border-right p-1">
@@ -44,12 +54,6 @@
         </div>
     </form>
   </div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-    <div class="{{$container}} border-left border-bottom border-right p-1">
-      <div id="listadoPromociones_config"></div>
-      <table id="listadoPromociones" class="table table-striped responsive nowrap" style="width:100%"></table>
-    </div>
-  </div>
 </div>
 
 <script>
@@ -81,7 +85,6 @@
         todayBtn: "linked",
         clearBtn: true,
         startDate: "today",
-        daysOfWeekDisabled: "0,6",
         daysOfWeekHighlighted: "0,6"
     });
     generaDataGrid( 'listadoPromociones' );

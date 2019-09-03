@@ -119,7 +119,7 @@
             <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
               @if( isset( $priv[ 'secciones' ][ 13 ] ) && $priv[ 'secciones' ][ 13 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_smtp');"> > SMTP</a></li>@endif
               @if( isset( $priv[ 'secciones' ][ 16 ] ) && $priv[ 'secciones' ][ 16 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_branding');"> > Diseño</a></li>@endif
-              @if( isset( $priv[ 'secciones' ][ 43 ] ) && $priv[ 'secciones' ][ 43 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_dashboard');"> > Dashboard</a></li>@endif
+              @if( isset( $priv[ 'secciones' ][ 43 ] ) && $priv[ 'secciones' ][ 43 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_dashboard');"> > Pantalla Principal</a></li>@endif
             </ul>
           </li>
         </ul>

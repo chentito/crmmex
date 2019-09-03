@@ -111,10 +111,11 @@
             <div class="col-sm-4 mt-1">
                 Palabras reservadas
                 <ul class="list-group">
-                  <li class="list-group-item"><b>{cliente}</b> Nombre del cliente/contacto</li>
+                  <li class="list-group-item"><b>{cliente}</b> Nombre del cliente / contacto (Nombre y Apellido)</li>
                   <li class="list-group-item"><b>{propuestaIDTY}</b> Identificador de la propuesta</li>
                   <li class="list-group-item"><b>{fechaSolicitud}</b> Fecha en que solicitó la propuesta</li>
                   <li class="list-group-item"><b>{fechaVigencia}</b> Fecha de vigencia de la propuesta</li>
+                  <li class="list-group-item"><b>{producto}</b> Nombre del producto o servicio solicitado</li>
                 </ul>
             </div>
         </div>

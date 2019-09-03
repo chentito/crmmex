@@ -24,4 +24,5 @@
            });
     }
 
+    setTimeout( function(){ document.querySelector('a[href="#profile"]').click(); } , 1500 );
 </script>

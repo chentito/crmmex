@@ -177,10 +177,13 @@
             <textarea name="informacionAdicional" id="informacionAdicional" value="" class="form-control form-control-sm" placeholder="Informacion Adicional"></textarea>
           </div>
           <div class="col-sm-6">
-            <div class="custom-file mt-4">
-              <input type="file" class="custom-file-input" id="logotipo" name="logotipo" required>
-              <label class="custom-file-label" for="logotipo">Seleccione Imagen...</label>
+            <div class="input-group mt-4">
+              <div class="custom-file custom-file-sm">
+                <input type="file" class="custom-file-input custom-file-input-sm" aria-describedby="inputGroupFileAddon01" id="logotipo" name="logotipo" accept=".jpg,.png,.jpge,.gif" value="Buscar">
+                <label class="custom-file-label custom-file-label-sm" for="logotipo">Seleccione imagen</label>
+              </div>
             </div>
+            <small>Para una mejor visibilidad de la imagen, se recomienda un tamaño de 200px X 100px</small>
           </div>
         </div>
         <div class="row mt-2 mb-2">
