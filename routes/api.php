@@ -65,6 +65,11 @@ Route::middleware( 'auth:api' )->get ( '/obtienePipeline/{clienteID}'  , 'crmmex
 Route::middleware( 'auth:api' )->post( '/estructuraContacto'           , 'crmmex\Clientes\ClientesController@cargaEstructuraContacto' );
 
 
+/******************** Importacion de clientes/prospectos ********************/
+Route::middleware( 'auth:api' )->post( '/importaCatalogoClientes'        , 'crmmex\Clientes\ImportacionController@cargaLayoutClientes' );
+Route::middleware( 'auth:api' )->post( '/importaCatalogoClientesMexagon' , 'crmmex\Clientes\ImportacionController@cargaLayoutClientesMexagon' );
+
+
 /************************************ Seguimientos ************************************/
 Route::middleware( 'auth:api' )->get ( '/validaRFC/{rfc}'                    , 'crmmex\Clientes\ClientesController@valRFC' );
 Route::middleware( 'auth:api' )->get ( '/listadoSeguimientos/{clienteID?}'   , 'crmmex\Clientes\SeguimientoController@listadoSeguimientos' );

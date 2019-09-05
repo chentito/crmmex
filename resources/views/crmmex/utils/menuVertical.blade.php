@@ -51,6 +51,7 @@
         <a href="#configuracionesProspectos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Prospectos</a>
         <ul class="collapse list-unstyled" id="configuracionesProspectos">
           @if( isset( $priv[ 'secciones' ][ 41 ] ) && $priv[ 'secciones' ][ 41 ] == 1 )<li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_camposAdicionales','2');"> > Campos Adicionales</a></li>@endif
+          @if( isset( $priv[ 'secciones' ][ 41 ] ) && $priv[ 'secciones' ][ 41 ] == 1 )<li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_camposAdicionales','4');"> > Campos Adicionales Contactos</a></li>@endif
           @if( isset( $priv[ 'secciones' ][ 86 ] ) && $priv[ 'secciones' ][ 86 ] == 1 )<li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_cargaProspectos','2');"> > Carga Información</a></li>@endif
         </ul>
       </li>
@@ -58,6 +59,7 @@
         <a href="#configuracionesClientes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Clientes</a>
         <ul class="collapse list-unstyled" id="configuracionesClientes">
           @if( isset( $priv[ 'secciones' ][ 41 ] ) && $priv[ 'secciones' ][ 41 ] == 1 )<li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_camposAdicionales','1');"> > Campos Adicionales</a></li>@endif
+          @if( isset( $priv[ 'secciones' ][ 41 ] ) && $priv[ 'secciones' ][ 41 ] == 1 )<li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_camposAdicionales','4');"> > Campos Adicionales Contactos</a></li>@endif
         </ul>
       </li>
       <li>

@@ -213,6 +213,7 @@ class ClientesController extends Controller
       // Busca en datos adicionales por contacto
       $adicionalesCont = CamposAdicionales::obtieneDatosAdicionales( 4 , $contacto->id );
       $camposAdicionalesPorContacto = array();
+      $camposAdicionalesPorContacto[ 'adicionales' ] = array();
       foreach( $adicionalesCont AS $adicionalCont ) {
         $camposAdicionalesPorContacto[ 'adicionales' ][ $adicionalCont->campoAdicionalID ] = $adicionalCont->valor;
       }

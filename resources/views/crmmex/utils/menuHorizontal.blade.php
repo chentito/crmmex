@@ -58,6 +58,7 @@
             <a class="dropdown-toggle dropdown-item" id="dropdown1-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Prospectos</a>
             <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
               @if( isset( $priv[ 'secciones' ][ 41 ] ) && $priv[ 'secciones' ][ 41 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_camposAdicionales','2');"> > Campos Adicionales</a></li>@endif
+              @if( isset( $priv[ 'secciones' ][ 41 ] ) && $priv[ 'secciones' ][ 41 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_camposAdicionales','4');"> > Campos Adicionales Contactos</a></li>@endif
               @if( isset( $priv[ 'secciones' ][ 86 ] ) && $priv[ 'secciones' ][ 86 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_cargaProspectos','2');"> > Carga Información</a></li>@endif
             </ul>
           </li>
@@ -65,6 +66,7 @@
             <a class="dropdown-toggle dropdown-item" id="dropdown1-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Clientes</a>
             <ul class="dropdown-menu collapse list-unstyled {{$borde}}" aria-labelledby="navbarDropdown" style="font-size: 12px">
               @if( isset( $priv[ 'secciones' ][ 41 ] ) && $priv[ 'secciones' ][ 41 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_camposAdicionales','1');"> > Campos Adicionales</a></li>@endif
+              @if( isset( $priv[ 'secciones' ][ 41 ] ) && $priv[ 'secciones' ][ 41 ] == 1 )<li><a class="dropdown-item" href="javascript:void(0)" onclick="return contenidos('configuraciones_camposAdicionales','4');"> > Campos Adicionales Contactos</a></li>@endif
             </ul>
           </li>
           <li class="dropdown-item dropdown">
