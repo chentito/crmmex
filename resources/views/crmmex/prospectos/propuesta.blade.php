@@ -263,8 +263,6 @@
           document.getElementById( 'catalogo_8' ).value = "";
           document.getElementById( 'propuestaProducto_productoID' ).value = "";
           document.getElementById( 'propuestaProducto_observaciones' ).value = "";
-          //document.getElementById( 'listadoProductosPropuestaComercial' ).innerHTML = "";
-          //document.getElementById( 'catalogo_12' ).value = 0;
           $( '#formIndividual' ).hide( 'slow' );
       }
 
@@ -298,23 +296,14 @@
       }
 
       function guardaDatosPropuesta() {
-        var token  = sessionStorage.getItem( 'apiToken' );
-
         if( document.getElementById( 'propuestaID' ) == null ) {
-              //var url = '/api/altaPropuesta';
-              var url = '/altaPropuesta';
+            var url = '/altaPropuesta';
           } else {
-              //var url = '/api/editaPropuesta';
-              var url = '/editaPropuesta';
+            var url = '/editaPropuesta';
         }
 
         var datos  = new FormData( document.getElementById( 'form_altaPropuestaComercial' ) );
-        var config = {
-            headers:{
-              "Accept"        : "application/json",
-              "Authorization" : "Bearer " + token
-            }
-        };
+        var config = { headers:{ "Accept" : "application/json", "Authorization" : "Bearer " + sessionStorage.getItem( 'apiToken' ) } };
 
         if( document.getElementById( 'propuesta_fechaVigencia' ).value == '' ) {
             aviso( 'No ha proporcionado la fecha de vigencia' , false );
@@ -324,7 +313,7 @@
             axios.post( url , datos , config )
                  .then( response => {
                     aviso( 'Propuesta guardada correctamente' );
-                    contenidos( 'prospectos_editapropuesta' , response.data.idty );
+                    contenidos( 'clientes_listadoPropuestas' , document.getElementById( 'clienteID' ).value );
                  })
                  .catch( err => {
                    console.log( err );

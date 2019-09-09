@@ -298,23 +298,14 @@
       }
 
       function guardaDatosPropuesta() {
-        var token  = sessionStorage.getItem( 'apiToken' );
-
         if( document.getElementById( 'propuestaID' ) == null ) {
-              //var url = '/api/altaPropuesta';
-              var url = '/altaPropuesta';
+            var url = '/altaPropuesta';
           } else {
-              //var url = '/api/editaPropuesta';
-              var url = '/editaPropuesta';
+            var url = '/editaPropuesta';
         }
 
         var datos  = new FormData( document.getElementById( 'form_altaPropuestaComercial' ) );
-        var config = {
-            headers:{
-              "Accept"        : "application/json",
-              "Authorization" : "Bearer " + token
-            }
-        };
+        var config = { headers:{ "Accept"        : "application/json", "Authorization" : "Bearer " + sessionStorage.getItem( 'apiToken' ) } };
 
         if( document.getElementById( 'propuesta_fechaVigencia' ).value == '' ) {
             aviso( 'No ha proporcionado la fecha de vigencia' , false );
@@ -324,7 +315,7 @@
             axios.post( url , datos , config )
                  .then( response => {
                     aviso( 'Propuesta guardada correctamente' );
-                    contenidos( 'clientes_editapropuesta' , response.data.idty );
+                    contenidos( 'clientes_listadoPropuestas' , document.getElementById( 'clienteID' ).value );
                  })
                  .catch( err => {
                    console.log( err );
@@ -372,29 +363,29 @@
       }
 
       function obtieneDatosProducto( productoID ) {
-          var token = sessionStorage.getItem( 'apiToken' );
-          var url   = '/api/obtieneProducto/' + productoID;
-          var conf  = {
-              headers: {
-                'Accept' : 'application/json',
-                'Authorization' : 'Bearer ' + token
-              }
-          };
+        var token = sessionStorage.getItem( 'apiToken' );
+        var url   = '/api/obtieneProducto/' + productoID;
+        var conf  = {
+          headers: {
+            'Accept' : 'application/json',
+            'Authorization' : 'Bearer ' + token
+          }
+        };
 
-          axios.get( url , conf )
-               .then( response => {
-                  var datos = response.data;
-                  document.getElementById( 'propuestaProducto_productoID' ).value    = datos.id;
-                  document.getElementById( 'propuestaProducto_precio' ).value        = datos.precio;
-                  document.getElementById( 'catalogo_8' ).value                      = datos.periodicidad;
-                  document.getElementById( 'propuestaProducto_observaciones' ).value = datos.descripcion;
-                  document.getElementById( 'propuestaProducto_traslados' ).value     = datos.impuesto;
-                  document.getElementById( 'propuestaProducto_retencion' ).value     = datos.impuestoRetencion;
-                  //setMonto( datos.precio );
-               })
-               .catch( err => {
-                 console.log( err );
-               });
+        axios.get( url , conf )
+          .then( response => {
+            var datos = response.data;
+            document.getElementById( 'propuestaProducto_productoID' ).value    = datos.id;
+            document.getElementById( 'propuestaProducto_precio' ).value        = datos.precio;
+            document.getElementById( 'catalogo_8' ).value                      = datos.periodicidad;
+            document.getElementById( 'propuestaProducto_observaciones' ).value = datos.descripcion;
+            document.getElementById( 'propuestaProducto_traslados' ).value     = datos.impuesto;
+            document.getElementById( 'propuestaProducto_retencion' ).value     = datos.impuestoRetencion;
+            //setMonto( datos.precio );
+          })
+          .catch( err => {
+            console.log( err );
+          });
       }
 
       function cargaIdtyPropuesta() {
