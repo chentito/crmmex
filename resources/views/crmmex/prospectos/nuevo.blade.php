@@ -104,7 +104,7 @@
                           <hr>
                         </div>
                       </div>
-                      <div class="row" id="camposAdicionalesContainer">
+                      <div class="row" id="containerCamposAdicionalesProspectos">
                       </div>
                     </div>
                 </div>
