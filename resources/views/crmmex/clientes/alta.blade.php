@@ -80,8 +80,7 @@
                           </div>
                       </div>
                       <div class="row" id="containerCamposAdicionalesContactos"></div>
-                      <div class="row" id="contenedorContactos">
-                      </div>
+                      <div class="row" id="contenedorContactos"></div>
                       <div class="row mt-2">
                         <div class="col-sm-2">
                           <b>Producto de interés</b>

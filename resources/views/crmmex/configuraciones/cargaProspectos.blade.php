@@ -40,7 +40,7 @@
     } else {
       var headers = { headers:{ 'Accept' : 'application/json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) , 'content-type' : 'multipart/form-data' } };
       var data = new FormData( document.getElementById( 'formCargaProspectos' ) );
-      axios.post( '/api/importaCatalogoClientesMexagon' , data , headers )
+      axios.post( '/api/importaCatalogoContactosMexagon' , data , headers )
             .then( response => {
               sessionStorage.setItem( 'layoutClientes', JSON.stringify( response.data ) );
               contenidos( 'configuraciones_cargaProspectosConfig' );

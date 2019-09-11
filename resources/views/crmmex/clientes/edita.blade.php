@@ -50,7 +50,6 @@
             $.each( contactos , function( a , b ) {
                 if( a > 0 ) {
                   document.getElementById( 'idsContactos' ).value       = document.getElementById( 'idsContactos' ).value + b.idty + ',';
-                  //agregaEstructuraContacto(b.nombre, b.idty, b.apellidoPaterno, b.apellidoMaterno, b.correoElectronico, b.celular, b.telefono, b.extension,b.adicionales[ 'adicionales' ]);
                   agregaEstructuraContacto( b );
                 } else {
                   document.getElementById( 'contacto_idty' ).value      = b.idty;

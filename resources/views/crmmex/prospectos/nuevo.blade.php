@@ -79,11 +79,7 @@
                             <button class="btn btn-sm {{$btn}}" id="btnAgregaEstructuraCliente"><i class="fa fa-user-plus fa-lg"></i><span class="d-none d-sm-inline"> Agregar otro contacto</span></button>
                           </div>
                       </div>
-                      <div class="row">
-                          <input type="hidden" id="contacto_area" name="contacto_area[]" value="">
-                          <input type="hidden" id="contacto_puesto" name="contacto_puesto[]" value="">
-                          <div class="col-sm-3 mb-1"></div>
-                      </div>
+                      <div class="row" id="containerCamposAdicionalesContactos"></div>
                       <div class="row" id="contenedorContactos"></div>
                       <div class="row mt-2">
                         <div class="col-sm-2">
@@ -195,6 +191,7 @@
         cargaDatosComboCatalogo();
         if( $( '#idCargaInfo' ).length == 0 ) {
             cargaCamposAdicionales( '2' );
+            cargaCamposAdicionales( '4' );
         }
 
         $('#myTab a').on( 'click', function ( e ) {
@@ -209,7 +206,7 @@
 
         $( '#btnAgregaEstructuraCliente' ).button().click( function( e ) {
             e.preventDefault();
-            agregaEstructuraContacto();
+            agregaEstructuraContacto( [] , true );
           });
     });
 
@@ -256,29 +253,25 @@
         }
     }
 
-    function agregaEstructuraContacto(nom='',idty='',appat='',apmat='',correo='',celular='',compania='',tel='',ext='',area='',puesto='') {
-        ruta  = '/estructuraContacto/';
-        ruta += ( nom!='' )      ? nom+'/'      : '';
-        ruta += ( idty!='' )     ? idty+'/'     : '';
-        ruta += ( appat!='' )    ? appat+'/'    : '';
-        ruta += ( apmat!='' )    ? apmat+'/'    : '';
-        ruta += ( correo!='' )   ? correo+'/'   : '';
-        ruta += ( celular!='' )  ? celular+'/'  : '';
-        ruta += ( compania!='' ) ? compania+'/' : '';
-        ruta += ( tel!='' )      ? tel+'/'      : '';
-        ruta += ( ext!='' )      ? ext+'/'      : '';
-        ruta += ( area!='' )     ? area+'/'     : '';
-        ruta += ( puesto!='' )   ? puesto+'/'   : '';
-        $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
-        $.ajax({
-            type       : "get",
-            url        : ruta,
-            cache      : false,
-            beforeSend : function() {},
-            success    : function( d ) {
-                $( "#contenedorContactos" ).append( d );
-            },
-            error : function() { }
+    function agregaEstructuraContacto( b=[] , nuevo=false ) {
+      var token = sessionStorage.getItem( 'apiToken' );
+      var datos = new FormData();
+      datos.append( 'idty'        , ( nuevo ) ? '' : b.idty );
+      datos.append( 'nombre'      , ( nuevo ) ? '' : b.nombre );
+      datos.append( 'appat'       , ( nuevo ) ? '' : b.apellidoPaterno );
+      datos.append( 'apmat'       , ( nuevo ) ? '' : b.apellidoMaterno );
+      datos.append( 'correo'      , ( nuevo ) ? '' : b.correoElectronico );
+      datos.append( 'celular'     , ( nuevo ) ? '' : b.celular );
+      datos.append( 'telefono'    , ( nuevo ) ? '' : b.telefono );
+      datos.append( 'extension'   , ( nuevo ) ? '' : b.extension );
+      datos.append( 'adicionales' , ( nuevo ) ? '{}' : JSON.stringify( b.adicionales[ 'adicionales' ] , null ) );
+
+      axios.post( '/api/estructuraContacto' , datos , { headers: { 'Accept': 'application/json', 'Authorization': 'Bearer ' + token } } )
+        .then( response => {
+          $( "#contenedorContactos" ).append( response.data );
+        })
+        .catch( err => {
+          console.log( err );
         });
     }
 

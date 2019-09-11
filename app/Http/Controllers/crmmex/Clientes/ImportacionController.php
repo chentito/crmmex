@@ -5,6 +5,7 @@ namespace App\Http\Controllers\crmmex\Clientes;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 use App\Models\crmmex\Clientes\Clientes AS Clientes;
 use App\Models\crmmex\Clientes\Contactos AS Contactos;
@@ -155,6 +156,52 @@ class ImportacionController extends Controller
       }
 
       return response()->json( $data );
+    }
+
+    public function cargaLayoutContactosMexagon( Request $request ) {
+      $line = 0;
+      $data = array();
+      if( $request->file( 'layoutCargaProspectos' )->isValid() ) {
+        $recurso = fopen( $request->layoutCargaProspectos->path() , 'r' );
+        while ( ( $datos = fgetcsv( $recurso , 0 , "\t" , "'" ) ) !== FALSE ) {
+          if( $line > 1 ) {
+            if( $this->existsParent( $datos[ 8 ] ) > 0 ) {
+              $contacto = new Contactos();
+              $contacto->clienteID         = $datos[ 8 ];
+              $contacto->nombre            = $datos[ 1 ];
+              $contacto->apellidoPaterno   = "";
+              $contacto->apellidoMaterno   = "";
+              $contacto->correoElectronico = $datos[ 2 ];
+              $contacto->celular           = $datos[ 4 ];
+              $contacto->telefono          = $datos[ 3 ];
+              $contacto->extension         = "";
+              $contacto->status            = 1;
+              $contacto->fechaAlta         = $datos[ 9 ];
+              $contacto->ejecutivo         = Auth::user()->id;
+              $contacto->ejecutivoAlta     = Auth::user()->id;
+
+              $contacto->save();
+              $requestCont = new Request([
+                'edicionCampoAdicional_4_29' => $datos[ 5 ],
+                'edicionCampoAdicional_4_30' => $datos[ 6 ],
+                'edicionCampoAdicional_4_31' => $datos[ 7 ],
+              ]);
+              CamposAdicionales::almacenaDatosAdicionales( $requestCont , $contacto->id , 4 );
+            }
+          }
+          $line ++;
+        }
+        $data = array( 'Se almacenaron ' . $line . 'registros' );
+      } else {
+        $data = array( 'Error al adjuntar archivo' );
+      }
+
+      return response()->json( $data );
+    }
+
+    private function existsParent( $parentID ) {
+      $total = Clientes::where( 'id' , $parentID )->count();
+      return $total;
     }
 
 }

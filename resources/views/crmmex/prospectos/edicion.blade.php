@@ -49,7 +49,7 @@
             $.each( contactos , function( a , b ) {
                 if( a > 0 ) {
                   document.getElementById( 'idsContactos' ).value              = document.getElementById( 'idsContactos' ).value + b.idty + ',';
-                  agregaEstructuraContacto(b.nombre,b.idty,b.apellidoPaterno,b.apellidoMaterno,b.correoElectronico,b.celular,b.compania,b.telefono,b.extension,b.area,b.puesto);
+                  agregaEstructuraContacto( b );
                 } else {
                   document.getElementById( 'contacto_idty' ).value             = b.idty;
                   document.getElementById( 'contacto_nombre' ).value           = b.nombre;
@@ -57,11 +57,9 @@
                   document.getElementById( 'contacto_materno' ).value          = b.apellidoMaterno;
                   document.getElementById( 'contacto_email' ).value            = b.correoElectronico;
                   document.getElementById( 'contacto_celular' ).value          = b.celular;
-                  //document.getElementById( 'contacto_celular_compania' ).value = b.compania;
                   document.getElementById( 'contacto_telefono' ).value         = b.telefono;
                   document.getElementById( 'contacto_extension' ).value        = b.extension;
-                  //document.getElementById( 'contacto_area' ).value             = b.area;
-                  //document.getElementById( 'contacto_puesto' ).value           = b.puesto;
+                  cargaCamposAdicionales( '4' , b.adicionales[ 'adicionales' ] );
                 }
             });
 
