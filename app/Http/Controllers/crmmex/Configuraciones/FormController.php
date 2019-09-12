@@ -12,65 +12,67 @@ use App\Models\crmmex\Configuraciones\FormFields AS FormFields;
 class FormController extends Controller
 {
 
-    // Listado de todos los formularios dados de alta
-    public function listadoFormularios() {
-        $datos       = array();
-        $formularios = Form::where( 'status' , 1 )
-                           ->get();
+  // Listado de todos los formularios dados de alta
+  public function listadoFormularios() {
+    $datos                  = array();
+    $datos[ 'formularios' ] = array();
+    $formularios = Form::where( 'status' , 1 )->get();
 
-        foreach( $formularios AS $formulario ) {
-            $datos[ 'formularios' ][] = array(
-                'id'           => $formulario->id,
-                'nombreForm'   => $formulario->nombreForm,
-                'fechaAlta'    => $formulario->fechaAlta,
-                'fechaEdicion' => $formulario->fechaEdicion,
-                'status'       => ( ( $formulario->status == 1 ) ? 'Activo' : 'Inactivo' ),
-                'opciones'     => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Edita Formulario" onclick="contenidos(\'configuraciones_editaForm\',\''.$formulario->id.'\')" class="mr-1"><i class="fa fa-edit fa-sm"></i></a>'
-                                . '<a href="/campania/x/y/true/'.$formulario->id.'" target="_blank" data-toggle="tooltip" data-placement="top" title="Elimina Formulario" onclick="" class="mr-1"><i class="fa fa-sm fa-eye"></i></a>'
-                                . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Elimina Formulario" onclick="contenidos(\'configuraciones_eliminaForm\',\''.$formulario->id.'\')"><i class="fa fa-trash fa-sm"></i></a>'
-            );
-        }
-
-        return response()->json( $datos );
+    foreach( $formularios AS $formulario ) {
+      $datos[ 'formularios' ][] = array(
+        'id'           => $formulario->id,
+        'nombreForm'   => $formulario->nombreForm,
+        'fechaAlta'    => $formulario->fechaAlta,
+        'fechaEdicion' => $formulario->fechaEdicion,
+        'status'       => ( ( $formulario->status == 1 ) ? 'Activo' : 'Inactivo' ),
+        'opciones'     => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Edita Formulario" onclick="contenidos(\'configuraciones_editaForm\',\''.$formulario->id.'\')" class="mr-1"><i class="fa fa-edit fa-sm"></i></a>'
+                        . '<a href="/campania/x/y/true/'.$formulario->id.'" target="_blank" data-toggle="tooltip" data-placement="top" title="Elimina Formulario" onclick="" class="mr-1"><i class="fa fa-sm fa-eye"></i></a>'
+                        . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Elimina Formulario" onclick="contenidos(\'configuraciones_eliminaForm\',\''.$formulario->id.'\')"><i class="fa fa-trash fa-sm"></i></a>'
+      );
     }
 
-    // Metodo que agrega una nueva estructura para campos
-    public function agregaCampoForm( $id="0", $nombre="" , $tipo="" , $obligatoriedad="" , $valores="" ) {
-        $vista = array(
-          'contenido' => view( 'crmmex.configuraciones.fieldForm' ,
-                        [
-                          'rand'           => rand(1111,9999) ,
-                          'id'             => $id ,
-                          'nombre'         => $nombre ,
-                          'tipo'           => $tipo ,
-                          'obligatoriedad' => $obligatoriedad ,
-                          'valor'          => $valores
-                        ])->render()
-        );
+    return response()->json( $datos );
+  }
 
-        return response()->json( $vista );
+  // Metodo que agrega una nueva estructura para campos
+  public function agregaCampoForm( $id="0", $nombre="" , $tipo="" , $obligatoriedad="" , $validacion="" , $valores="" ) {
+    $vista = array(
+      'contenido' => view( 'crmmex.configuraciones.fieldForm' ,
+        [
+          'rand'           => rand(1111,9999) ,
+          'id'             => $id ,
+          'nombre'         => $nombre ,
+          'tipo'           => $tipo ,
+          'obligatoriedad' => $obligatoriedad ,
+          'validacion'     => $validacion ,
+          'valor'          => $valores
+        ])->render()
+    );
+
+    return response()->json( $vista );
+  }
+
+  // Metodo que obtiene los detalles de un formulario para editar
+  public function editaFormulario( $formularioID ) {
+    $form  = Form::where( 'id' , $formularioID )->first();
+    $datos = array();
+    $datos[ 'nombreForm' ] = $form->nombreForm;
+    $datos[ 'idForm' ]     = $formularioID;
+    $campos = FormFields::where( 'formID' , $formularioID )->where( 'status' , 1 )->get();
+
+    foreach( $campos AS $campo ) {
+      $datos[ 'campos' ][] = array (
+        'id'             => $campo->id,
+        'nombre'         => $campo->nombre,
+        'tipo'           => $campo->tipo,
+        'obligatoriedad' => $campo->obligatoriedad,
+        'validacion'     => $campo->validacion,
+        'valores'        => ( $campo->valores != '' ? $campo->valores : '' )
+      );
     }
 
-    // Metodo que obtiene los detalles de un formulario para editar
-    public function editaFormulario( $formularioID ) {
-        $form  = Form::where( 'id' , $formularioID )->first();
-        $datos = array();
-        $datos[ 'nombreForm' ] = $form->nombreForm;
-        $datos[ 'idForm' ]     = $formularioID;
-        $campos = FormFields::where( 'formID' , $formularioID )->where( 'status' , 1 )->get();
-
-        foreach( $campos AS $campo ) {
-            $datos[ 'campos' ][] = array(
-                'id'             => $campo->id,
-                'nombre'         => $campo->nombre,
-                'tipo'           => $campo->tipo,
-                'obligatoriedad' => $campo->obligatoriedad,
-                'valores'        => ( $campo->valores != '' ? $campo->valores : '' )
-            );
-        }
-
-        return response()->json( $datos );
-    }
+    return response()->json( $datos );
+  }
 
     // Metodo que guarda la configuracion de un nuevo formulario
     public function guardaFormulario( Request $request ) {
@@ -88,6 +90,7 @@ class FormController extends Controller
             $field->tipo           = $request->formularios_tipoCampo[ $f ];
             $field->obligatoriedad = $request->formularios_oblCampo[ $f ];
             $field->valores        = $request->formularios_valoresCampo[ $f ];
+            $field->validacion     = $request->formularios_valCampo[ $f ];
             $field->status         = 1;
             $field->save();
         }
@@ -111,9 +114,9 @@ class FormController extends Controller
                 $campos->tipo           = $request->formularios_tipoCampo[ $f ];
                 $campos->obligatoriedad = $request->formularios_oblCampo[ $f ];
                 $campos->valores        = $request->formularios_valoresCampo[ $f ];
+                $campos->validacion     = $request->formularios_valCampo[ $f ];
                 $campos->status         = 1;
                 $campos->save();
-                //$camposIDs[]            = $request->formularios_campoID[ $f ];
                 $camposIDs[]            = $campos->id;
             }
         }

@@ -161,7 +161,7 @@ Route::middleware( 'auth:api' )->post( '/altaPiezaTemplate'                     
 Route::middleware( 'auth:api' )->post( '/altaPiezaCampana'                                               , 'crmmex\Mercadotecnia\PiezasController@altaPiezaCampania' );
 Route::middleware( 'auth:api' )->post( '/eliminaPiezaTemplate/{piezaID}'                                 , 'crmmex\Mercadotecnia\PiezasController@eliminaPieza' );
 Route::middleware( 'auth:api' )->get ( '/detallePiezaTemplate/{piezaID}'                                 , 'crmmex\Mercadotecnia\PiezasController@detallePieza' );
-Route::middleware( 'auth:api' )->get ( '/formsNuevoCampo/{id?}/{nombre?}/{tipo?}/{obligatoriedad?}/{valor?}' , 'crmmex\Configuraciones\FormController@agregaCampoForm' );
+Route::middleware( 'auth:api' )->get ( '/formsNuevoCampo/{id?}/{nombre?}/{tipo?}/{obligatoriedad?}/{validacion?}/{valor?}' , 'crmmex\Configuraciones\FormController@agregaCampoForm' );
 Route::middleware( 'auth:api' )->post( '/guardaFormulario'                                               , 'crmmex\Configuraciones\FormController@guardaFormulario' );
 Route::middleware( 'auth:api' )->post( '/actualizaFormulario'                                            , 'crmmex\Configuraciones\FormController@actualizaFormulario' );
 Route::middleware( 'auth:api' )->get ( '/listadoFormularios'                                             , 'crmmex\Configuraciones\FormController@listadoFormularios' );

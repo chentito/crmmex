@@ -35,7 +35,7 @@
         <div class="row" id="contenedorCamporFormulario">
             <div class="col-sm-12 mt-1">
               <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                   <label for="formularios_nombreCampo">Nombre del campo:</label>
                   <input type="text" name="formularios_nombreCampo[]" id="formularios_nombreCampo" value="" class="form-control form-control-sm formularios_nombreCampo_dinamico" placeholder="Nombre del campo" maxlength="50">
                   <input type="hidden" name="formularios_campoID[]" id="formularios_campoID" value="0">
@@ -55,11 +55,20 @@
                     <option value="2">Obligatorio</option>
                   </select>
                 </div>
-                <div class="col-sm-4 text-center">
+                <div class="col-sm-2">
+                  <label for="formularios_oblCampo">Validación:</label>
+                  <select class="custom-select custom-select-sm formularios_valCampo_dinamico" name="formularios_valCampo[]" id="formularios_valCampo">
+                    <option value="0">Ninguna</option>
+                    <option value="1">Correo</option>
+                    <option value="2">Número telefónico</option>
+                    <option value="3">RFC</option>
+                  </select>
+                </div>
+                <div class="col-sm-3 text-center">
                   <label for="formularios_valoresCampo">Valores</label>
                   <input type="text" placeholder="Valores" name="formularios_valoresCampo[]" id="formularios_valoresCampo" class="form-control form-control-sm formularios_valoresCampo_dinamico" value="">
                 </div>
-                <div class="col-sm-1"></div>
+                <div class="col-sm-1 text-center"></div>
               </div>
             </div>
         </div>
@@ -75,69 +84,66 @@
 </div>
 
 <script>
+  generaDataGrid( 'listadoFormularios' );
 
-    generaDataGrid( 'listadoFormularios' );
+  document.getElementById( 'formularios_AgregarCampo' ).addEventListener( 'click' , function( e ){
+    e.preventDefault();
+    axios.get( '/api/formsNuevoCampo' , { headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
+     .then( response => {
+       $( '#contenedorCamporFormulario' ).append( response.data.contenido );
+     })
+     .catch( err => {
+       console.log( err );
+     });
+  });
 
-    document.getElementById( 'formularios_AgregarCampo' ).addEventListener( 'click' , function( e ){
-        e.preventDefault();
-        axios.get( '/api/formsNuevoCampo' , { headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
-             .then( response => {
-               $( '#contenedorCamporFormulario' ).append( response.data.contenido );
-             })
-             .catch( err => {
-               console.log( err );
-             });
+  document.getElementById( 'formulario_btnGuardaCamposForm' ).addEventListener( 'click' , function( e ) {
+    e.preventDefault();
+    var datos      = new FormData( document.getElementById( 'formularios_form' ) );
+    var nombres    = document.getElementsByClassName( 'formularios_nombreCampo_dinamico' );
+    var valores    = document.getElementsByClassName( 'formularios_valoresCampo_dinamico' );
+    var validacion = document.getElementsByClassName( 'formularios_valCampo_dinamico' );
+    var tipos      = document.getElementsByClassName( 'formularios_tipoCampo_dinamico' );
+    var oblig      = document.getElementsByClassName( 'formularios_oblCampo_dinamico' );
 
-    });
-
-    document.getElementById( 'formulario_btnGuardaCamposForm' ).addEventListener( 'click' , function( e ) {
-        e.preventDefault();
-        var datos   = new FormData( document.getElementById( 'formularios_form' ) );
-        var nombres = document.getElementsByClassName( 'formularios_nombreCampo_dinamico' );
-        var valores = document.getElementsByClassName( 'formularios_valoresCampo_dinamico' );
-        var tipos   = document.getElementsByClassName( 'formularios_tipoCampo_dinamico' );
-        var oblig   = document.getElementsByClassName( 'formularios_oblCampo_dinamico' );
-
-        if( document.getElementById( 'formularios_nombreForm' ).value == '' ) {
-             aviso( 'No ha proporcionado el nombre del formulario' , false );
-           } else {
-             var err = 0;
-             for( var n = 0 ; n < nombres.length ; n ++ ) {
-               if( nombres[ n ].value == '' ) {
-                   aviso( 'El nombre del campo no puede ser vacio' , false );
-                   err ++;
-               }
-             }
-
-             for( var n2 = 0 ; n2 < valores.length ; n2 ++ ) {
-                 if( valores[ n2 ].value == "" && ( tipos[ n2 ].value == '2' || tipos[ n2 ].value == '3' ) ) {
-                     aviso( 'El valor del campo no puede ser vacio si es un listado o multiples opciones' , false );
-                     err ++;
-                 }
-             }
-
-             if( err == 0 ) {
-
-                if( document.getElementById( 'formularioID' ) != null ) { //edita
-                    var url = '/api/actualizaFormulario';
-                    var mov = 'actualizado';
-                } else { //agrega
-                    var url = '/api/guardaFormulario';
-                    var mov = 'agregado';
-                }
-
-                axios.post( url , datos , { headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
-                   .then( response => {
-                     aviso( 'Formulario ' + mov + ' correctamente' );
-                     contenidos( 'configuraciones_formularios' );
-                })
-                   .catch( err => {
-                     console.log( err );
-                });
-             }
-
+    if( document.getElementById( 'formularios_nombreForm' ).value == '' ) {
+      aviso( 'No ha proporcionado el nombre del formulario' , false );
+    } else {
+      var err = 0;
+      for( var n = 0 ; n < nombres.length ; n ++ ) {
+        if( nombres[ n ].value == '' ) {
+          aviso( 'El nombre del campo no puede ser vacio' , false );
+          err ++;
         }
-    });
+      }
 
+    for( var n2 = 0 ; n2 < valores.length ; n2 ++ ) {
+      if( valores[ n2 ].value == "" && ( tipos[ n2 ].value == '2' || tipos[ n2 ].value == '3' ) ) {
+        aviso( 'El valor del campo no puede ser vacio si es un listado o multiples opciones' , false );
+        err ++;
+      }
+    }
+
+    if( err == 0 ) {
+      if( document.getElementById( 'formularioID' ) != null ) { //edita
+        var url = '/api/actualizaFormulario';
+        var mov = 'actualizado';
+      } else { //agrega
+        var url = '/api/guardaFormulario';
+        var mov = 'agregado';
+      }
+
+      axios.post( url , datos , { headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
+        .then( response => {
+          aviso( 'Formulario ' + mov + ' correctamente' );
+          contenidos( 'configuraciones_formularios' );
+        })
+        .catch( err => {
+          console.log( err );
+        });
+      }
+
+    }
+  });
 
 </script>
