@@ -40,7 +40,7 @@
   });
 
   function generaPDF( propuestaID , propuestaIDTY ) {
-    abreModal();
+    aviso("Generando PDF, espere por favor...");
     var token  = sessionStorage.getItem( 'apiToken' );
     var url    = '/generaPDF/' + propuestaID;
     var config = { headers: { "Accept" : "application/json", "Authorization" : "Bearer " + token } };
@@ -53,11 +53,10 @@
         link.setAttribute( 'download' , propuestaIDTY );
         document.body.appendChild(link);
         link.click();
-        cierraModal();
       })
       .catch( err => {
         console.log( err );
-      });    
+      });
   }
 
   function envioPropuesta( propuestaID ) {
