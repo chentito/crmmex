@@ -220,15 +220,16 @@
       var mov = 'edicion';
     }
 
-    //alert( $( '#form_alta_expediente' ).serialize() );
-    //return false;
-
     if( document.getElementById( 'contacto_nombre' ).value == '' ) {
       aviso( 'No ha proporcionado el nombre del contacto' , false );
     } else if( document.getElementById( 'contacto_email' ).value == '' ) {
       aviso( 'No ha proporcionado el correo electrónico del contacto' , false );
     } else if( document.getElementById( 'cliente_producto_interes' ).value == '' ) {
       aviso( 'No ha proporcionado el producto de interes para el cliente' , false );
+    } else if( document.getElementById( 'cliente_razon_social' ).value == '' ) {
+      aviso( 'No ha proporcionado la razón social para el cliente' , false );
+    } else if( document.getElementById( 'cliente_rfc' ).value == '' ) {
+      aviso( 'No ha proporcionado el RFC para el cliente' , false );
     } else {
       axios.post( ruta , datos , { headers: { 'Accept': 'application/json', 'Authorization': 'Bearer ' + token } } )
         .then( response => {

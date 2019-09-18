@@ -129,8 +129,14 @@ class CamposAdicionalesController extends Controller
     foreach( $campos AS $campo ) {
       $campoAdicionalID = $campo->id;
       $field = 'edicionCampoAdicional_' . $seccion . '_' . $campoAdicionalID;
-      $v = ( ( $indice == '' ) ? $request->$field : $request->$field[ $indice ] );
-      //$v = $request->$field[ $indice ];
+      //$v = ( ( $indice == '' ) ? $request->$field : $request->$field[ $indice ] );
+      if( $indice == '' ) {
+        $v = $request->$field[ 0 ];
+      } else {
+        $v = $request->$field[ $indice ];
+      }
+
+
       CamposAdicionalesValores::updateOrCreate(
         [ 'campoAdicionalID' => $campoAdicionalID , 'registroID' => $registroID , 'seccion' => $seccion ],
         [ 'valor' => $v , 'status' => '1' ]
