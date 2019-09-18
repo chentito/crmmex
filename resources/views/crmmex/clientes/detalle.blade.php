@@ -182,9 +182,10 @@
               // contactos
               var contactos = '<ul class="list-group">';
               response.data.contactos.forEach( function( e , p ){
-                  contactos += '<li class="list-group-item py-1">'+e['nombre']+' '+e['apellidoPaterno']+' '+e['apellidoMaterno'];
+                  contactos += '<li class="list-group-item py-1">'+e['nombre']+' '+e['apellidoPaterno']+' '+ ( ( e['apellidoMaterno'] != null ) ? e['apellidoMaterno'] : '' );
                   contactos += '<br> Email: <a href="mailto:'+e['correoElectronico']+'">' + e['correoElectronico']+'</a>';
-                  contactos += ' Tel: <a href="tel:'+e['celular']+'">' +e['celular']+'</a> / <a href="tel:'+e['telefono']+'">'+e['telefono']+'</a>';
+                  contactos += ( ( e['telefono'] != null ) ? ' Tel: <a href="tel:'+e['telefono']+'">'+e['telefono']+'</a> / ' : '' ) ;
+                  contactos += ( ( e[ 'celular' ] != null ) ? ' Cel: <a href="tel:'+e['celular']+'">' +e['celular']+'</a>' : '' );
                   contactos += '<span class="float-right">'
                   contactos += '<button class="btn btn-sm btn-info ml-1" onclick="contenidos(\'clientes_edicion\',\''+clienteID+'\')"><i class="fa fa-edit fa-sm"></i></button>';
                   contactos += '</span>';

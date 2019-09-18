@@ -236,6 +236,7 @@ Route::post( '/actualizaDatosTemplate'            , 'crmmex\Sistema\TemplatesCon
 Route::middleware( 'auth:api' )->get ( '/obtieneDatosPropietario'   , 'crmmex\Sistema\PropietarioController@propietario' );
 Route::middleware( 'auth:api' )->post( '/actualizaDatosPropietario' , 'crmmex\Sistema\PropietarioController@actualiza' );
 Route::middleware( 'auth:api' )->post( '/imagenPropietario'         , 'crmmex\Sistema\PropietarioController@imagenPropietario' );
+Route::middleware( 'auth:api' )->post( '/usaBackgroundPersonalizado', 'crmmex\Sistema\PropietarioController@savePersBackground' );
 Route::middleware( 'auth:api' )->post( '/imagenParaPropuesta'       , 'crmmex\Clientes\PropuestasController@imagenParaPropuesta' );
 
 

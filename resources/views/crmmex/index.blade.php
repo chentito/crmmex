@@ -29,7 +29,8 @@
   <body>
     <style>
       .fondo {
-        background: url("{{asset('/imgs/background/'.$back)}}") no-repeat center center fixed;
+        #background: url("{{asset('/imgs/background/'.$back)}}") no-repeat center center fixed;
+        background: url("{{asset($backPath)}}") no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;

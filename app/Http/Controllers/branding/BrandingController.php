@@ -29,6 +29,7 @@ class BrandingController extends Controller
       'usaBack'   => $datos->usa_background,
       'borde'     => $datos->borde,
       'trans'     => $datos->transparencia,
+      'backPath'  => ( ( $datos->usa_background_pers == 1 ) ? '/fondoPersonalizado' : '/imgs/background/' . $datos->background ),
       'tipoMenu'  => $menu,
       'container' => ( $menu == 1 ) ? 'container' : 'container-fluid',
       'priv'      => AccesoController::verModulos( $perfilID )
@@ -42,14 +43,16 @@ class BrandingController extends Controller
     $back   = $actual->background;
     $actual->seleccionado=0;
     $actual->usa_background=0;
+    $actual->usa_background_pers=0;
     $actual->background='';
     $actual->save();
 
     /* Asigna nuevo */
     $seleccionado = Branding::where( 'id' , $id )->first();
-    $seleccionado->seleccionado=1;
-    $seleccionado->usa_background=1;
-    $seleccionado->background=$back;
+    $seleccionado->seleccionado        = 1;
+    $seleccionado->usa_background      = 1;
+    $seleccionado->usa_background_pers = 0;
+    $seleccionado->background          = $back;
     $seleccionado->save();
   }
 
@@ -57,16 +60,19 @@ class BrandingController extends Controller
   public function updateImagen( $imagen ) {
     /* Quita default */
     $actual = Branding::where( 'seleccionado' , 1 )->first();
-    $actual->background=$imagen;
+    $actual->background          = $imagen;
+    $actual->usa_background      = 1;
+    $actual->usa_background_pers = 0;
     $actual->save();
   }
 
   /* Quita el uso de la imagen */
   public function quitaImagen() {
     $seleccionado = Branding::where( 'seleccionado' , 1 )->first();
-    $seleccionado->usa_background = 0;
-    $seleccionado->background     = "";
-    $seleccionado->transparencia  = 1;
+    $seleccionado->usa_background      = 0;
+    $seleccionado->usa_background_pers = 0;
+    $seleccionado->background          = "";
+    $seleccionado->transparencia       = 1;
     $seleccionado->save();
   }
 

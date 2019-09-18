@@ -46,40 +46,46 @@
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
     <div class="{{$container}} border-left border-bottom border-right p-1">
-      <div class="col-12">
-          <div class="row mb-3 mt-3">
-              <div class="col-sm-3 text-center mb-1">
-                  <img src="{{asset( 'imgs/background/ciudad.jpg' )}}" style="cursor: pointer" width="150px" class="img-thumbnail" onclick="return cambiaFondo( 'ciudad.jpg' );">
-              </div>
-              <div class="col-sm-3 text-center mb-1">
-                  <img src="{{asset( 'imgs/background/salajuntas.jpg' )}}" style="cursor: pointer" width="150px" class="img-thumbnail" onclick="return cambiaFondo( 'salajuntas.jpg' );">
-              </div>
-              <div class="col-sm-3 text-center mb-1">
-                  <img src="{{asset( 'imgs/background/edificios.jpg' )}}" style="cursor: pointer" width="150px" class="img-thumbnail" onclick="return cambiaFondo( 'edificios.jpg' );">
-              </div>
-              <div class="col-sm-3 text-center mb-1">
-                  <img src="{{asset( 'imgs/background/plumas.jpg' )}}" style="cursor: pointer" width="150px" class="img-thumbnail" onclick="return cambiaFondo( 'plumas.jpg' );">
-              </div>
-          </div>
+      <div class="row mt-2">
+        <div class="col-sm-3 text-center">
+          <img src="{{asset( 'imgs/background/ciudad.jpg' )}}" style="cursor: pointer" width="150px" class="img-thumbnail" onclick="return cambiaFondo( 'ciudad.jpg' );">
+        </div>
+        <div class="col-sm-3 text-center">
+          <img src="{{asset( 'imgs/background/salajuntas.jpg' )}}" style="cursor: pointer" width="150px" class="img-thumbnail" onclick="return cambiaFondo( 'salajuntas.jpg' );">
+        </div>
+        <div class="col-sm-3 text-center">
+          <img src="{{asset( 'imgs/background/edificios.jpg' )}}" style="cursor: pointer" width="150px" class="img-thumbnail" onclick="return cambiaFondo( 'edificios.jpg' );">
+        </div>
+        <div class="col-sm-3 text-center">
+          <img src="{{asset( 'imgs/background/plumas.jpg' )}}" style="cursor: pointer" width="150px" class="img-thumbnail" onclick="return cambiaFondo( 'plumas.jpg' );">
+        </div>
+        <div class="col-sm-12 text-center">
+          <button class="btn btn-sm {{$btn}}" onclick="return quitaImagen();">Sin fondo</button>
+        </div>
       </div>
-      <div class="col-12">
-          <div class="row mb-3">
-              <div class="col-sm-12 text-center">
-                  <button class="btn btn-sm {{$btn}}" onclick="return quitaImagen();">Quitar imágen de fondo</button>
-              </div>
-          </div>
+      <div class="row mt-1">
+        <div class="col-sm-12">
+          <hr>
+        </div>
       </div>
-      <div class="col-sm-12">
-          <div class="input-group">
+      <form name="guardaBackgroundPers_form" id="guardaBackgroundPers_form" action="" method="post">
+        <div class="row mt-1">
+          <div class="col-sm-10">
+            <div class="input-group">
               <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroupFileAddon01">Seleccione</span>
+                <span class="input-group-text" id="inputGroupFileAddon01">Seleccione</span>
               </div>
               <div class="custom-file">
-                  <input type="file" class="custom-field-sm custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                  <label class="custom-file-label" for="inputGroupFile01">Imagen Personalizada</label>
+                <input type="file" class="custom-field-sm custom-file-input" id="imgBackgroundPersonalizado" name="imgBackgroundPersonalizado" aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="imgBackgroundPersonalizado">Imagen Personalizada</label>
               </div>
+            </div>
           </div>
-      </div>
+          <div class="col-sm-2 text-center">
+            <button type="button" name="guardaBackgroundPers" id="guardaBackgroundPers" class="btn bt-sm {{$btn}}"><i class="fa fa-sm fa-save"></i> Guardar</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -188,7 +194,7 @@
         </div>
         <div class="row mt-2 mb-2">
           <div class="col-sm-12 text-center">
-              <button type="button" name="misDatosBtn" id="misDatosBtn" class="btn btn-sm {{$btn}}"><i class="fa fa-save fa-sm"></i> Guardar</button>
+            <button type="button" name="misDatosBtn" id="misDatosBtn" class="btn btn-sm {{$btn}}"><i class="fa fa-save fa-sm"></i> Guardar</button>
           </div>
         </div>
       </div>
@@ -199,15 +205,15 @@
 <script>
 
     axios.get( '/api/listadoConfiguraciones' , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
-         .then( response => {
-            var datos = response.data;
-            datos.forEach( function( e , i ) {
-                document.getElementById( 'config_' + e.id ).value = e.valor;
-            });
-         })
-         .catch( err => {
-            console.log( err );
-         });
+        .then( response => {
+          var datos = response.data;
+          datos.forEach( function( e , i ) {
+            document.getElementById( 'config_' + e.id ).value = e.valor;
+          });
+        })
+        .catch( err => {
+          console.log( err );
+        });
 
     axios.get( '/api/utiles/comboPaises' , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
          .then( response => {
@@ -249,6 +255,18 @@
        .catch( err => {
          console.log( err );
        });
+
+    document.getElementById( 'guardaBackgroundPers' ).addEventListener( 'click' , function( e ){
+      var datos = new FormData( document.getElementById( 'guardaBackgroundPers_form' ) );
+      axios.post( '/api/usaBackgroundPersonalizado' , datos , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem('apiToken'),'content-type':'multipart/form-data'}})
+        .then( response => {
+          aviso( 'El fondo se ha actualizado correctamente' );
+          location.reload();
+        })
+        .catch( err => {
+          console.log( err );
+        });
+    });
 
     document.getElementById( 'guardaDisenioMenu' ).addEventListener( 'click' , function( e ){
         e.preventDefault();

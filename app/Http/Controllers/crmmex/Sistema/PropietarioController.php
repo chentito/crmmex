@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\crmmex\Sistema\Propietario AS Propietario;
+use App\branding\Branding AS Branding;
 
 class PropietarioController extends Controller
 {
@@ -67,6 +68,30 @@ class PropietarioController extends Controller
   public function imagenPropietario() {
     $imagen = Propietario::find( 1 );
     return response( $imagen->logotipo )->header( 'Content-type' , $imagen->mimeLogo );
+  }
+
+  // Guarda la imagen para uso de background
+  public function savePersBackground( Request $r ) {
+    $branding = Branding::where( 'seleccionado' , 1 )->first();
+    if( $r->hasFile( 'imgBackgroundPersonalizado' ) ) {
+      $branding->usa_background_pers             = 1;
+      $branding->background_pers                 = file_get_contents( $r->file( 'imgBackgroundPersonalizado' )->getRealPath() );
+      $branding->background_pers_name            = $r->file( 'imgBackgroundPersonalizado' )->getClientOriginalName() ;
+      $branding->background_pers_img_contenttype = $r->file( 'imgBackgroundPersonalizado' )->getMimeType();
+      $branding->usa_background                  = 1;
+    }
+
+    if( $branding->save() ) {
+      return response()->json( array( 'mensaje' => 'Fondo actualizado correctamente' ) );
+    } else {
+      return response()->json( array( 'mensaje' => false ) );
+    }
+  }
+
+  // Obtiene y muestra imagen de fondo personalizada
+  public function getPersBackground() {
+    $branding = Branding::where( 'seleccionado' , 1 )->first();
+    return response( $branding->background_pers )->header( 'Content-type' , $branding->background_pers_img_contenttype );
   }
 
 }

@@ -95,7 +95,7 @@ class ImportacionController extends Controller
               } else {
                 $request = new Request([
                   'edicionCampoAdicional_' . $cliente->tipo . '_15' => $datos[ 14 ],
-                  'edicionCampoAdicional_' . $cliente->tipo . '_16' => $datos[ 16 ],
+                  'edicionCampoAdicional_' . $cliente->tipo . '_16' => $datos[ 15 ],
                   'edicionCampoAdicional_' . $cliente->tipo . '_17' => $datos[ 20 ],
                   'edicionCampoAdicional_' . $cliente->tipo . '_18' => $datos[ 21 ],
                   'edicionCampoAdicional_' . $cliente->tipo . '_19' => $datos[ 22 ],

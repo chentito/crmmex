@@ -7,7 +7,7 @@
       h3 { text-align: center; text-transform: uppercase; }
       body { font-size: 12px; font-family: Arial, Helvetica, sans-serif; }
       header { position: fixed; top: -60px; left: 0px; right: 0px; height: 100px; text-align: left; }
-      footer { position: fixed; bottom: -40px; left: 0px; right: 0px; height: 70px; text-align: center; }
+      footer { position: fixed; bottom: -40px; left: 0px; right: 0px; height: 90px; text-align: center; }
       .page-break { page-break-before: always; }
       #primero { background-color: #ccc; }
       #segundo { color:blue; }
@@ -22,6 +22,7 @@
       {{$datos[ 'footer' ][ 'razonSocial' ]}} / {{$datos[ 'footer' ][ 'rfc' ]}}<br />
       {{$datos[ 'footer' ][ 'calle' ]}} {{$datos[ 'footer' ][ 'exterior' ]}}, {{$datos[ 'footer' ][ 'interior' ]}}. Col {{$datos[ 'footer' ][ 'colonia' ]}}, {{$datos[ 'footer' ][ 'municipio' ]}} {{$datos[ 'footer' ][ 'estado' ]}}. CP {{$datos[ 'footer' ][ 'codigoPostal' ]}}
       <br />Tel {{$datos[ 'footer' ][ 'telefonos' ]}} Email {{$datos[ 'footer' ][ 'correoElectronico' ]}}
+      <p style="color:red">{{$datos[ 'disclaimer' ]}}</p>
     </footer>
 
     <table width="100%" border="0" class="table">

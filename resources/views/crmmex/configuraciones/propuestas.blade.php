@@ -87,6 +87,22 @@
                 <button class="btn btn-sm {{$btn}}" id="btnDiasVigenciaPropuesta"><i class="fa fa-save fa-sm"></i> Guardar</button>
             </div>
           </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <i class="fa fa-sm fa-discourse"></i> Disclaimer:
+            </div>
+            <div class="col-sm-12">
+                <hr>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <textarea name="propuesta_disclaimer" id="propuesta_disclaimer" class="form-control form-control-sm" rows="3"></textarea>
+            </div>
+            <div class="col-sm-12 text-center mt-1">
+              <button type="button" name="btnGdaDisclaimer" id="btnGdaDisclaimer" class="btn btn-sm {{$btn}}"><i class="fa fa-sm fa-save"></i> Guardar</button>
+            </div>
+          </div>
       </div>
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -196,6 +212,19 @@
              });
     });
 
+    document.getElementById( 'btnGdaDisclaimer' ).addEventListener( 'click' , function( e ){
+        e.preventDefault();
+        var url = '/api/setPredefinido/5';
+        axios.post( url , {valorPredefinido_5:document.getElementById( 'propuesta_disclaimer' ).value} , config )
+             .then( response => {
+                aviso( 'Disclaimer actualizado correctamente' );
+                contenidos( 'configuraciones_propuestas' );
+             })
+             .catch( err => {
+                console.log( err );
+             });
+    });
+
     document.getElementById( 'btnGdaPoliticasCondiciones' ).addEventListener( 'click' , function( e ){
         e.preventDefault();
         var url = '/api/setPredefinido/' + document.getElementById( 'politicasCondiciones_id' ).value;
@@ -264,6 +293,15 @@
      axios.get( url3 , config )
           .then( response => {
               document.getElementById( 'propuesta_diasVigencia' ).value=response.data.valor;
+          })
+          .catch( err => {
+            console.log( err );
+          });
+
+     var url5 = '/api/getPredefinido/5';
+     axios.get( url5 , config )
+          .then( response => {
+              document.getElementById( 'propuesta_disclaimer' ).value=response.data.valor;
           })
           .catch( err => {
             console.log( err );

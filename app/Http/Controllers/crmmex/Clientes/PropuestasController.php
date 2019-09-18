@@ -239,6 +239,7 @@ class PropuestasController extends Controller
         );
       }
       $datos[ 'condiciones' ] = Utils::detallePredefinido( 2 )->valor;
+      $datos[ 'disclaimer' ]  = Utils::detallePredefinido( 5 )->valor;
 
       if( $modo == 'arreglo' ) {
         return $datos;
