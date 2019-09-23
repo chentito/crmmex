@@ -192,7 +192,7 @@
         </div>
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
           <div class="container border-left border-bottom border-right p-1">
-            <div class="row" id="camposAdicionalesContainer">
+            <div class="row" id="containerCamposAdicionalesProductos">
             </div>
           </div>
         </div>

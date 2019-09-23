@@ -29,7 +29,7 @@ class ProductosController extends Controller
     foreach( $productos AS $producto ) {
       $grupo = Utils::valorCatalogo( $producto->grupo );
       $tipo  = Utils::valorCatalogo( $producto->tipo );
-      $datos[ 'productos' ][] = array (
+      $productos = array (
         'id'                => $producto->id,
         'clave'             => $producto->clave,
         'tipo'              => ( $tipo == '' ) ? 'Sin tipo' : $tipo ,
@@ -46,6 +46,10 @@ class ProductosController extends Controller
         'status'            => ( $producto->status == '1' ? 'Activo' : 'Inactivo' ),
         'opciones'          => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Producto" onclick="contenidos(\'configuraciones_catalogos_editaProducto\',\''.$producto->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
       );
+
+      // Agrega campos adicionales
+      $adicionales = CamposAdicionales::obtieneAdicionalesPorRegistro( 3 , $producto->id );
+      $datos[ 'productos' ][] = array_merge( $productos , $adicionales );
     }
     return response()->json( $datos );
   }
