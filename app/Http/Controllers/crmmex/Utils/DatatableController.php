@@ -22,10 +22,10 @@ class DatatableController extends Controller
     $datatable = DataTable::where( 'idty' , $idty )->first();
     $config = array(
       'titulo'          => $datatable->titulo,
-      'titulos'         => $datatable->colnames . ( $datatable->idSeccionAdicionales > 0 ? ',' . $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 0 ] : '' ),
-      'campos'          => $datatable->fieldnames . ( $datatable->idSeccionAdicionales > 0 ? ',' . $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 0 ] : '' ),
+      'titulos'         => $datatable->colnames   . ( ( $datatable->idSeccionAdicionales > 0 ) ? $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 0 ] : '' ),
+      'campos'          => $datatable->fieldnames . ( ( $datatable->idSeccionAdicionales > 0 ) ? $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 0 ] : '' ),
       'datasource'      => $datatable->datasource,
-      'visibilidad'     => $datatable->visibility . ( $datatable->idSeccionAdicionales > 0 ? ',' . $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 1 ] : '' )
+      'visibilidad'     => $datatable->visibility . ( ( $datatable->idSeccionAdicionales > 0 ) ? $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 1 ] : '' )
       //'visibilidad'     => $datatable->visibility
     );
     return response()->json( $config );
@@ -35,11 +35,11 @@ class DatatableController extends Controller
   public function dataTableConfigView( $idty ) {
     $datatable = DataTable::where( 'idty' , $idty )->first();
     $config = array(
-      'titulos'     => $datatable->colnames . ( $datatable->idSeccionAdicionales > 0 ? ',' . $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 0 ] : '' ),
-      'campos'      => $datatable->fieldnames . ( $datatable->idSeccionAdicionales > 0 ? ',' . $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 0 ] : '' ),
+      'titulos'     => $datatable->colnames   . ( ( $datatable->idSeccionAdicionales > 0 ) ? $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 0 ] : '' ),
+      'campos'      => $datatable->fieldnames . ( ( $datatable->idSeccionAdicionales > 0 ) ? $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 0 ] : '' ),
       'datasource'  => $datatable->datasource,
       'seccion'     => $datatable->seccion,
-      'visibilidad' => $datatable->visibility . ( $datatable->idSeccionAdicionales > 0 ? ',' . $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 1 ] : '' )
+      'visibilidad' => $datatable->visibility . ( ( $datatable->idSeccionAdicionales > 0 ) ? $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 1 ] : '' )
       //'visibilidad' => $datatable->visibility
     );
 
@@ -66,7 +66,6 @@ class DatatableController extends Controller
       } else {
         $visibilidad .= '0,';
       }
-      Log::warning( $field . ( ( isset( $request->$field ) ) ? ' SI SE ENCUENTRA ' : ' NO SE ENCUENTRA '  ) );
     }
     $datatable->visibility = trim( $visibilidad , ',' );
     $datatable->save();
@@ -75,13 +74,13 @@ class DatatableController extends Controller
   /* Obtiene registros de datos adicionales para ser incluidos en el grid */
   public function infoDatosAdicionales( $seccionID ) {
     $adicionales = CamposAdicionales::where( 'seccion' , $seccionID )->where( 'status' , 1 )->get();
-    $titulos     = '';
-    $visibilidad = '';
+    $titulos     = ',';
+    $visibilidad = ',';
     foreach( $adicionales AS $adicional ) {
       $titulos     .= str_replace( ' ' , '_' ,  $adicional->nombre ) . ',';
       $visibilidad .= '0,';
     }
-    return array( trim( $titulos , ',' ) , trim( $visibilidad , ',' ) );
+    return array( rtrim( $titulos , ',' ) , rtrim( $visibilidad , ',' ) );
   }
 
 }
