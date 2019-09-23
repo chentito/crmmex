@@ -118,7 +118,7 @@ class ClientesController extends Controller
       ->get();
 
     foreach( $clientes AS $cliente ) {
-      $arrClientes[ 'clientes' ][] = array (
+      $datosCliente = array (
         'id'                => ( Acceso::ver( 29 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')">'.$cliente->id.'</a>' : $cliente->id ),
         'razonSocial'       => ( Acceso::ver( 29 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')">'.$cliente->razonSocial.'</a>' : $cliente->razonSocial ),
         'rfc'               => ( Acceso::ver( 29 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')">'.$cliente->rfc.'</a>' : $cliente->rfc ),
@@ -130,16 +130,21 @@ class ClientesController extends Controller
         'producto'          => $cliente->productoID,
         'status'            => ( ( $cliente->status == '1' ) ? 'Activo' : 'Deshabilitado' ),
         'opciones'          => ( ( $cliente->status == '2' ) ?
-                                    ( Acceso::ver( 40 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Habilitar Cliente" onclick="habilitaCliente(\''.$cliente->id.'\')"><i class="fa fa-check fa-sm"></i></a>' : '' )
-                                    :
-                                    ( Acceso::ver( 29 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')"><i class="fa fa-edit fa-sm"></i></a>' : '' )
-                                    . ( Acceso::ver( 45 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Detalle Cliente" onclick="contenidos(\'clientes_detalle\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-id-card fa-sm"></i></a>' : '' )
-                                    . ( Acceso::ver( 27 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Seguimiento" onclick="contenidos(\'clientes_seguimiento\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-toolbox fa-sm"></i></a>' : '' )
-                                    . ( Acceso::ver( 33 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Propuesta" onclick="contenidos(\'clientes_listadoPropuestas\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-file-alt fa-sm"></i></a>' : '' )
-                                    . ( Acceso::ver( 40 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Eliminar Cliente" onclick="contenidos(\'clientes_eliminaCliente\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-trash fa-sm"></i></a>' : '' )
-                                )
+            ( Acceso::ver( 40 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Habilitar Cliente" onclick="habilitaCliente(\''.$cliente->id.'\')"><i class="fa fa-check fa-sm"></i></a>' : '' )
+            :
+            ( Acceso::ver( 29 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Cliente" onclick="contenidos(\'clientes_edicion\',\''.$cliente->id.'\')"><i class="fa fa-edit fa-sm"></i></a>' : '' )
+            . ( Acceso::ver( 45 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Detalle Cliente" onclick="contenidos(\'clientes_detalle\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-id-card fa-sm"></i></a>' : '' )
+            . ( Acceso::ver( 27 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Seguimiento" onclick="contenidos(\'clientes_seguimiento\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-toolbox fa-sm"></i></a>' : '' )
+            . ( Acceso::ver( 33 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Agregar Propuesta" onclick="contenidos(\'clientes_listadoPropuestas\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-file-alt fa-sm"></i></a>' : '' )
+            . ( Acceso::ver( 40 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Eliminar Cliente" onclick="contenidos(\'clientes_eliminaCliente\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-trash fa-sm"></i></a>' : '' )
+        )
       );
+
+      // Agrega campos adicionales
+      $adicionales = CamposAdicionales::obtieneAdicionalesPorRegistro( $tipo , $cliente->id );
+      $arrClientes[ 'clientes' ][] = array_merge( $datosCliente , $adicionales );
     }
+
     return response()->json( $arrClientes );
   }
 
@@ -159,7 +164,7 @@ class ClientesController extends Controller
                 ->get();
 
     foreach( $prospectos AS $prospecto ) {
-      $datos[ 'prospectos' ][] = array(
+      $datosProspecto = array(
         'id'                => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Prospecto" onclick="contenidos(\'prospectos_edicion\',\''.$prospecto->id.'\')">'.$prospecto->id.'</a>',
         'nombre'            => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Prospecto" onclick="contenidos(\'prospectos_edicion\',\''.$prospecto->id.'\')">'.$prospecto->nombre.'</a>',
         'apellidoPaterno'   => $prospecto->apellidoPaterno,
@@ -183,6 +188,10 @@ class ClientesController extends Controller
                                . ( Acceso::ver( 61 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="right" title="Agregar Propuesta" onclick="contenidos(\'prospectos_listadoPropuestas\',\''.$prospecto->id.'\')" class="ml-2"><i class="fa fa-file-alt fa-sm"></i></a>' : '' )
                                . ( Acceso::ver( 54 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="right" title="Elimina Prospecto" onclick="contenidos(\'prospectos_elimina\',\''.$prospecto->id.'\')" class="ml-2"><i class="fa fa-trash fa-sm"></i></a>' : '' )
       );
+
+      // Agrega campos adicionales
+      $adicionales = CamposAdicionales::obtieneAdicionalesPorRegistro( 2 , $prospecto->id );
+      $datos[ 'prospectos' ][] = array_merge( $datosProspecto , $adicionales );
     }
     return response()->json( $datos );
   }

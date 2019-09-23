@@ -242,6 +242,7 @@ function generaDataGrid( id , filtro = '' ) {
                  .then( response => {
                     document.getElementById( id + '_config' ).innerHTML = response.data;
                     document.getElementById( id + '_config' ).style.display = "none";
+
                     document.getElementById( 'btnGdaConfGrid' ).addEventListener( 'click' , function( e ) {
                         e.preventDefault();
                         var url = '/api/actualizaGridConfig';

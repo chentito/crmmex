@@ -162,11 +162,13 @@ class CamposAdicionalesController extends Controller
   // Obtiene los valores de campos adicionales de un registro especifico
   public static function obtieneAdicionalesPorRegistro( $seccionID , $registroID ) {
     $adicionales = CamposAdicionales::where( 'seccion' , $seccionID )->where( 'status' , 1 )->get();
-    $valores = array();
+    $valores     = array();
     foreach( $adicionales AS $adicional ) {
-      $valores = CamposAdicionalesValores::where( 'seccion' , $seccionID )->where( 'registroID' , $registroID )->where( 'campoAdicionalID' , $adicional->id );
-      $valores[] = array( $adicional->nombre => $valor );
+      $valAdicionales = CamposAdicionalesValores::where( 'seccion' , $seccionID )->where( 'registroID' , $registroID )->where( 'campoAdicionalID' , $adicional->id )->first();
+      $v = ( ( !$valAdicionales ) ? 'N/D' : ( ( $valAdicionales->valor == null ) ? 'N/D' : $valAdicionales->valor ) );
+      $valores[ str_replace( ' ' , '_' , $adicional->nombre ) ] = $v;
     }
+    return $valores;
   }
 
   // Obtiene el nombre de la seccion a la que se le agregaran campos Adicionales

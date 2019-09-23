@@ -7,6 +7,7 @@
 namespace App\Http\Controllers\crmmex\Utils;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\crmmex\Utils\UtilsController AS Utils;
 
@@ -21,10 +22,11 @@ class DatatableController extends Controller
     $datatable = DataTable::where( 'idty' , $idty )->first();
     $config = array(
       'titulo'          => $datatable->titulo,
-      'titulos'         => $datatable->colnames . ( $datatable->idSeccionAdicionales > 0 ? $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 0 ] : '' ),
-      'campos'          => $datatable->fieldnames,
+      'titulos'         => $datatable->colnames . ( $datatable->idSeccionAdicionales > 0 ? ',' . $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 0 ] : '' ),
+      'campos'          => $datatable->fieldnames . ( $datatable->idSeccionAdicionales > 0 ? ',' . $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 0 ] : '' ),
       'datasource'      => $datatable->datasource,
-      'visibilidad'     => $datatable->visibility . ( $datatable->idSeccionAdicionales > 0 ? $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 1 ] : '' )
+      'visibilidad'     => $datatable->visibility . ( $datatable->idSeccionAdicionales > 0 ? ',' . $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 1 ] : '' )
+      //'visibilidad'     => $datatable->visibility
     );
     return response()->json( $config );
   }
@@ -33,11 +35,12 @@ class DatatableController extends Controller
   public function dataTableConfigView( $idty ) {
     $datatable = DataTable::where( 'idty' , $idty )->first();
     $config = array(
-      'titulos'     => $datatable->colnames . ( $datatable->idSeccionAdicionales > 0 ? $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 0 ] : '' ),
-      'campos'      => $datatable->fieldnames . ( $datatable->idSeccionAdicionales > 0 ? $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 0 ] : '' ),
+      'titulos'     => $datatable->colnames . ( $datatable->idSeccionAdicionales > 0 ? ',' . $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 0 ] : '' ),
+      'campos'      => $datatable->fieldnames . ( $datatable->idSeccionAdicionales > 0 ? ',' . $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 0 ] : '' ),
       'datasource'  => $datatable->datasource,
       'seccion'     => $datatable->seccion,
-      'visibilidad' => $datatable->visibility . ( $datatable->idSeccionAdicionales > 0 ? $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 1 ] : '' )
+      'visibilidad' => $datatable->visibility . ( $datatable->idSeccionAdicionales > 0 ? ',' . $this->infoDatosAdicionales( $datatable->idSeccionAdicionales )[ 1 ] : '' )
+      //'visibilidad' => $datatable->visibility
     );
 
     return view( 'crmmex.utils.gridConfig' ,
@@ -63,6 +66,7 @@ class DatatableController extends Controller
       } else {
         $visibilidad .= '0,';
       }
+      Log::warning( $field . ( ( isset( $request->$field ) ) ? ' SI SE ENCUENTRA ' : ' NO SE ENCUENTRA '  ) );
     }
     $datatable->visibility = trim( $visibilidad , ',' );
     $datatable->save();
@@ -74,7 +78,7 @@ class DatatableController extends Controller
     $titulos     = '';
     $visibilidad = '';
     foreach( $adicionales AS $adicional ) {
-      $titulos     .= $adicional->nombre . ',';
+      $titulos     .= str_replace( ' ' , '_' ,  $adicional->nombre ) . ',';
       $visibilidad .= '0,';
     }
     return array( trim( $titulos , ',' ) , trim( $visibilidad , ',' ) );
