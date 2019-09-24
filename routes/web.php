@@ -57,7 +57,7 @@ Route::middleware( 'web' )->group( function(){
   Route::post( '/carritoEliminaProd/{productoID}'     , 'crmmex\Clientes\PropuestasController@eliminaElementoCarrito' );
   Route::post( '/carritoCarga/{propuestaID}'          , 'crmmex\Clientes\PropuestasController@cargaCarrito' );
   Route::get ( '/imagenPropietario'                   , 'crmmex\Sistema\PropietarioController@imagenPropietario' );
-  Route::get ( '/imagenParaPropuesta'                 , 'crmmex\Clientes\PropuestasController@imagenParaPropuesta' );
+  Route::get ( '/imagenParaPropuesta/{id}'            , 'crmmex\Clientes\PropuestasController@imagenParaPropuesta' );
   Route::get ( '/fondoPersonalizado'                  , 'crmmex\Sistema\PropietarioController@getPersBackground' );
   Route::get ( '/download/{archivo}'                  , 'crmmex\Sistema\DescargasController@descargaArchivoEjemplo' );
 });
@@ -72,7 +72,7 @@ Route::get( '/envioCorreo/{propuestaID}' , 'crmmex\Sistema\PHPMailerController@e
 
 Route::get ( '/campania/{campaniaID}/{contactoID}/{preview?}/{formToPreview?}' , 'crmmex\Mercadotecnia\CampaniaContainerController@landingPage' );
 Route::post( '/campaniaSave'                                                   , 'crmmex\Mercadotecnia\CampaniaContainerController@landingPageSave' );
-Route::get ( '/listadoProductos'                               , 'crmmex\Productos\ProductosController@listadoProductos' );
+Route::get ( '/listadoCamposAdicionales/{seccion?}/{orden?}'                   , 'crmmex\Utils\CamposAdicionalesController@listado' );
 
 /**********************
  * Ejemplos a eliminar

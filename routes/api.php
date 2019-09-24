@@ -176,6 +176,7 @@ Route::middleware( 'auth:api' )->post( '/actualizaPerfil'                       
 Route::middleware( 'auth:api' )->post( '/altaPerfil'                                                     , 'crmmex\Sistema\PerfilesController@altaPerfil' );
 Route::middleware( 'auth:api' )->post( '/eliminaPerfil/{perfilID}'                                       , 'crmmex\Sistema\PerfilesController@eliminaPerfil' );
 Route::middleware( 'auth:api' )->post( '/logoPropuesta'                                                  , 'crmmex\Clientes\PropuestasController@logoPropuesta' );
+Route::middleware( 'auth:api' )->get ( '/usaFirmaDigitalizada'                                           , 'crmmex\Clientes\PropuestasController@usaFirmaDigitalizada' );
 
 
 /************************************ Multimedia ************************************/
@@ -237,7 +238,7 @@ Route::middleware( 'auth:api' )->get ( '/obtieneDatosPropietario'   , 'crmmex\Si
 Route::middleware( 'auth:api' )->post( '/actualizaDatosPropietario' , 'crmmex\Sistema\PropietarioController@actualiza' );
 Route::middleware( 'auth:api' )->post( '/imagenPropietario'         , 'crmmex\Sistema\PropietarioController@imagenPropietario' );
 Route::middleware( 'auth:api' )->post( '/usaBackgroundPersonalizado', 'crmmex\Sistema\PropietarioController@savePersBackground' );
-Route::middleware( 'auth:api' )->post( '/imagenParaPropuesta'       , 'crmmex\Clientes\PropuestasController@imagenParaPropuesta' );
+Route::middleware( 'auth:api' )->post( '/imagenParaPropuesta/{id}'  , 'crmmex\Clientes\PropuestasController@imagenParaPropuesta' );
 
 
 /************************************ Pipeline ************************************/

@@ -303,18 +303,22 @@ function cargaCamposAdicionales( seccion , valores=[] , idtyAdicional='' ) {
             nContainer += ( idtyAdicional != '' ) ? '_' + idtyAdicional : '';
         document.getElementById( nContainer ).innerHTML = '';
         var container  = document.getElementById( nContainer );
+
         response.data[ 'camposAdicionales' ].forEach( function( e , v ) {
+
           var urlHTML  = '/api/htmlCampoAdicional/' + e.id;
               urlHTML += ( typeof valores[ e.id ] === "undefined" ) ? '' : '/' + valores[ e.id ];
 
               axios.get( urlHTML , config )
                 .then( response => {
-                  var x = document.getElementById( nContainer ).innerHTML;
-                  container.innerHTML = x + response.data[ 'campo' ];
+                  //var x = document.getElementById( nContainer ).innerHTML;
+                  //container.innerHTML = x + response.data[ 'campo' ];
+                  $( '#' + nContainer ).append( response.data[ 'campo' ] );
                 })
                 .catch( err => {
                   console.log( err );
                });
+
         });
       }
     })

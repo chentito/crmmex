@@ -6,7 +6,7 @@
   </li>
   <li class="nav-item">
     <a class="nav-link" id="image-tab" data-toggle="tab" href="#image" role="tab" aria-controls="contact" aria-selected="false">
-      <i class="fa fa-image fa-sm"></i><span class="d-none d-sm-inline">  Imagen Propuesta</span>
+      <i class="fa fa-image fa-sm"></i><span class="d-none d-sm-inline">  Imágenes</span>
     </a>
   </li>
   <li class="nav-item">
@@ -147,13 +147,30 @@
     <div class="{{$container}} border-left border-right border-bottom p-1">
       <form id="imgPropuestaForm" name="imgPropuestaForm">
         <div class="row">
+          <div class="col-sm-12">
+            Logo: <hr>
+          </div>
           <div class="col-sm-3 mt-2 text-center">
-              <img src="{{ asset( '/imagenParaPropuesta' ) }}" width="200px" id="logoImgPropuesta" class="img-thumbnail">
+              <img src="{{ asset( '/imagenParaPropuesta/1' ) }}" width="200px" id="logoImgPropuesta" class="img-thumbnail">
           </div>
           <div class="col-sm-9">
             <div class="custom-file mt-2">
-              <input type="file" class="custom-file-input" id="logotipoPropuesta" name="logotipoPropuesta" required>
-              <label class="custom-file-label" for="logotipoPropuesta">Seleccione Imagen...</label>
+              <input type="file" class="custom-file-input" id="logotipoPropuesta" name="logotipoPropuesta">
+              <label class="custom-file-label" for="logotipoPropuesta">Seleccione Imagen Logotipo...</label>
+              <small>Para una mejor visibilidad de la imagen, se recomienda un tamaño de 200px X 80px</small>
+            </div>
+          </div>
+          <div class="col-sm-12 mt-3">
+            <input type="checkbox" name="usaFirmaDigitalizada" id="usaFirmaDigitalizada"> Firma: <hr>
+          </div>
+          <div class="col-sm-3 mt-2 text-center">
+            <img src="{{ asset( '/imagenParaPropuesta/2' ) }}" width="180" height="180" id="firmaImgPropuesta" class="img-thumbnail">
+          </div>
+          <div class="col-sm-9">
+            <div class="custom-file mt-2">
+              <input type="file" class="custom-file-input" id="firmaPropuesta" name="firmaPropuesta">
+              <label class="custom-file-label" for="firmaPropuesta">Seleccione Imagen Firma...</label>
+              <small>Para una mejor visibilidad de la imagen, se recomienda un tamaño de 180px X 180px</small>
             </div>
           </div>
           <div class="col-sm-12 mt-2 text-center">
@@ -171,14 +188,24 @@
     document.getElementById( 'btnGdaImgPropuesta' ).addEventListener( 'click' , function( e ) {
         e.preventDefault();
 
-        if( document.getElementById( 'logotipoPropuesta' ).value == "" ) {
-            aviso( 'No ha seleccionado un archivo' , false );
+        if( document.getElementById( 'logotipoPropuesta' ).value == "" && document.getElementById( 'firmaImgPropuesta' ).value == "" ) {
+          aviso( 'No ha seleccionado ninguna imagen a actualizar' , false );
+        } else if( document.getElementById( 'usaFirmaDigitalizada' ).checked == true && document.getElementById( 'firmaPropuesta' ).value == "" ) {
+          aviso( 'Ha elegido usar firma digitalizada pero no ha proporcionado una imagen válida' , false );
         } else {
             var datos = new FormData( document.getElementById( 'imgPropuestaForm' ) );
             axios.post( '/api/logoPropuesta' , datos , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem('apiToken'),'content-type':'multipart/form-data'}})
               .then( response => {
-                  aviso( 'Logotipo actualizado correctamente.' );
-                  document.getElementById( 'logoImgPropuesta' ).src = '/imagenParaPropuesta?'+ new Date().getTime();
+                  aviso( 'Imagenes actualizadas correctamente.' );
+                  var resp = response.data;
+                  document.getElementById( 'logoImgPropuesta' ).src  = '/imagenParaPropuesta/1?'+ new Date().getTime();
+
+                  if( resp[ 'firma' ] == 1 ) {
+                    document.getElementById( 'firmaImgPropuesta' ).src = '/imagenParaPropuesta/2?'+ new Date().getTime();
+                    document.getElementById( 'firmaImgPropuesta' ).style.visibility = 'visible';
+                  }  else {
+                    document.getElementById( 'firmaImgPropuesta' ).style.visibility = 'hidden';
+                  }
               })
               .catch( err => {
                   console.log( err );
@@ -317,4 +344,16 @@
             console.log( err );
           });
 
+      axios.get( '/api/usaFirmaDigitalizada' , config )
+           .then( response => {
+             if( response.data == 1 ) {
+               document.getElementById( 'usaFirmaDigitalizada' ).checked = true;
+             } else {
+               document.getElementById( 'usaFirmaDigitalizada' ).checked = false;
+             }
+             document.getElementById( 'firmaImgPropuesta' ).style.visibility = ( response.data ? 'visible' : 'hidden');
+           })
+           .catch( err => {
+             console.log( err );
+           });
 </script>

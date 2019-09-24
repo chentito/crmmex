@@ -6,7 +6,7 @@
     <style>
       h3 { text-align: center; text-transform: uppercase; }
       body { font-size: 12px; font-family: Arial, Helvetica, sans-serif; }
-      header { position: fixed; top: -60px; left: 0px; right: 0px; height: 100px; text-align: left; }
+      header { position: fixed; top: -40px; left: 0px; right: 0px; height: 100px; text-align: left; }
       footer { position: fixed; bottom: -40px; left: 0px; right: 0px; height: 90px; text-align: center; }
       .page-break { page-break-before: always; }
       #primero { background-color: #ccc; }
@@ -16,22 +16,22 @@
     </style>
   </head>
   <body>
-    <header><img src="{{ asset( '/imagenParaPropuesta' ) }}" width="200"></header>
+    <header><img src="{{ asset( '/imagenParaPropuesta/1' ) }}" width="200"></header>
     <footer>
       <hr>
-      {{$datos[ 'footer' ][ 'razonSocial' ]}} / {{$datos[ 'footer' ][ 'rfc' ]}}<br />
+      {{$datos[ 'footer' ][ 'razonSocial' ]}}<br />
       {{$datos[ 'footer' ][ 'calle' ]}} {{$datos[ 'footer' ][ 'exterior' ]}}, {{$datos[ 'footer' ][ 'interior' ]}}. Col {{$datos[ 'footer' ][ 'colonia' ]}}, {{$datos[ 'footer' ][ 'municipio' ]}} {{$datos[ 'footer' ][ 'estado' ]}}. CP {{$datos[ 'footer' ][ 'codigoPostal' ]}}
       <br />Tel {{$datos[ 'footer' ][ 'telefonos' ]}} Email {{$datos[ 'footer' ][ 'correoElectronico' ]}}
       <p style="color:red">{{$datos[ 'disclaimer' ]}}</p>
     </footer>
 
-    <table width="100%" border="0" class="table">
+    <table width="100%" border="0" class="table" style="margin-top:50px">
       <tr>
         <td width="75%" colspan="4" align="center" valign="top">
           <h3>PROPUESTA COMERCIAL</h3>
           <b>{{$datos['propuestaIDTY']}}</b>
           <br />
-          <i style="float:right">{{$datos['fechaCreacion']}}</i>
+          <i style="float:right">Fecha creación: {{$datos['fechaCreacion']}}</i>
         </td>
       </tr>
       <tr><td><br /></td></tr>
@@ -65,12 +65,10 @@
       </tr>
       <tr><td><br /></td></tr>
       <tr>
-        <th valign="top" colspan="2">Requerimientos:</th>
-        <th valign="top" colspan="2">Observaciones:</th>
+        <th valign="top" colspan="4">Requerimientos:</th>
       </tr>
       <tr>
-        <td colspan="2">{{$datos['requerimientos']}}</td>
-        <td colspan="2">{{$datos['observaciones']}}</td>
+        <td colspan="4">{!! nl2br(e($datos[ 'requerimientos' ])) !!}</td>
       </tr>
       <tr><td><br /></td></tr>
       <tr><td colspan="4" align="center"><hr><b>CONCEPTOS</b><hr></td></tr>
@@ -79,8 +77,8 @@
             <table width="100%" border="0" style="border-bottom-style: dashed">
               <thead>
                 <tr>
-                  <th>Producto/Servicio</th>
                   <th>Cantidad</th>
+                  <th>Producto/Servicio</th>
                   <th>Unitario</th>
                   <th>Descuento</th>
                   <th>Importe</th>
@@ -92,14 +90,14 @@
                 {{$subtotal=0}}
                 @foreach($datos['detalle'] AS $producto)
                   <tr>
-                    <td width="50%">{{$producto[ 'productoTxt' ]}}</td>
                     <td width="10%" align="center">{{$producto[ 'cantidad' ]}}</td>
+                    <td width="50%">{{$producto[ 'productoTxt' ]}}</td>
                     <td width="10%" align="right">{{@moneda($producto[ 'unitario' ])}}</td>
                     <td width="10%" align="right">{{@moneda($producto[ 'descuento' ])}}</td>
                     <td width="10%" align="right">{{@moneda($producto[ 'cantidad' ]*$producto[ 'unitario' ])}}</td>
                   </tr>
                   <tr>
-                    <td colspan="5">{{$producto[ 'comentarios' ]}}</td>
+                    <td colspan="5">{!! nl2br(e($producto[ 'comentarios' ])) !!}</td>
                   </tr>
                   {{$totalTraslados=$totalTraslados+( ( $producto[ 'traslados' ] == 0 ) ? 0 : ( $producto[ 'traslados' ]/100) * ($producto[ 'cantidad' ]*$producto[ 'unitario' ]) )}}
                   {{$totalRetenciones=$totalRetenciones+( ( $producto[ 'retenciones' ] == 0 ) ? 0 : ( $producto[ 'retenciones' ]/100 ) * ($producto[ 'cantidad' ]*$producto[ 'unitario' ]) )}}
@@ -137,8 +135,27 @@
           </td>
         </tr>
     </table>
+    <br><br>
+    <div>
+      <center><h4>Políticas y Condiciones:</h4></center>
+      <div style="text-align: justify">{!! nl2br(e($datos[ 'condiciones' ])) !!}</div>
+    </div>
+    <br><br>
+    <table width="100%">
+      <tr>
+        <th valign="top">Observaciones:</th>
+      </tr>
+      <tr>
+        <td>{!! nl2br(e($datos[ 'observaciones' ])) !!}</td>
+      </tr>
+    </table>
     <br><br><br><br><br><br>
     <table width="100%">
+      <tr>
+        <td></td>
+        <td align="center"><img src="{{ asset( '/imagenParaPropuesta/2' ) }}" width="180" height="180"></td>
+        <td></td>
+      </tr>
       <tr>
         <td width="30%"></td>
         <td width="30%" align="center">
@@ -148,9 +165,5 @@
         <td width="30%"></td>
       </tr>
     </table>
-    <div class="page-break">
-      <center><h4>Políticas y Condiciones:</h4></center>
-      <div style="text-align: justify">{{$datos[ 'condiciones' ]}}</div>
-    </div>
   </body>
 </html>

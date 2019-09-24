@@ -54,6 +54,14 @@ class UtilsController extends Controller
       return response()->json( $datos );
     }
 
+    /*
+     * Obtiene el estado de acuerdo a su id
+     */
+    public static function nombreEstado( $estadoID ) {
+      $estado = Estados::where( 'id' , $estadoID )->first();
+      return $estado->entidad;
+    }
+
    /*
     * Regresa el listado de paises
     */
@@ -189,9 +197,9 @@ class UtilsController extends Controller
    /*
     * Obtiene el nombre de algun contacto
     */
-    public static function nombreContacto( $contactoID ) {
+    public static function nombreContacto( $contactoID , $email=true ) {
       $contacto = Contactos::find( $contactoID );
-      return $contacto->nombre . ' ' . $contacto->apellidoPaterno . ' ' . $contacto->apellidoMaterno . ' [' . $contacto->correoElectronico . ']';
+      return $contacto->nombre . ' ' . $contacto->apellidoPaterno . ' ' . $contacto->apellidoMaterno . ( ( $email ) ? ' [' . $contacto->correoElectronico . ']' : '' );
     }
 
    /*
@@ -199,7 +207,7 @@ class UtilsController extends Controller
     */
     public static function nombreProducto( $productoID ) {
       $producto = Productos::find( $productoID );
-      return $producto->clave . ' ' . $producto->nombre . ( strlen( $producto->descripcion > 0 ) ? ' / ' . $producto->descripcion : '' );
+      return $producto->clave . ' / ' . $producto->nombre;
     }
 
    /*
@@ -339,14 +347,13 @@ class UtilsController extends Controller
    /*
     * Establece el formato de una fecha
     */
-    public static function formatoFecha( $f ) {return $f;
-      list( $fecha , $hora )      = explode( ' ' , $f );
-      list( $anio , $mes , $dia ) = explode( '-' , $fecha );
-      $formato = $anio;
-      if( isset( $hora ) ) {
-          $formato .= ' ' . $fecha;
+    public static function formatoFecha( $f , $time=true ) {
+      if( $time ){
+          return $f;
+        } else {
+          $partes = explode( ' ' , $f );
+          return $partes[ 0 ];
       }
-      return $formato;
     }
 
    /*
@@ -421,7 +428,7 @@ class UtilsController extends Controller
     }
 
    /*
-    *
+    * Datos del propietario para la propuesta comercial
     */
     public static function datosPropietario( $json=false ) {
       $datos = array();
@@ -434,7 +441,7 @@ class UtilsController extends Controller
       $datos[ 'interior' ]             = $propietario->interior;
       $datos[ 'colonia' ]              = $propietario->colonia;
       $datos[ 'municipio' ]            = $propietario->municipio;
-      $datos[ 'estado' ]               = $propietario->estado;
+      $datos[ 'estado' ]               = self::nombreEstado( $propietario->estado );
       $datos[ 'codigoPostal' ]         = $propietario->codigoPostal;
       $datos[ 'pais' ]                 = $propietario->pais;
       $datos[ 'telefonos' ]            = $propietario->telefonos;

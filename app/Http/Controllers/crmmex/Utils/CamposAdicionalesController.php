@@ -26,9 +26,10 @@ class CamposAdicionalesController extends Controller
       ->when( $seccion != "" , function( $q ) use( $seccion ) {
         return $q->where( 'seccion' , $seccion );
       })
-      ->when( $orden != '' , function( $q ) use( $orden ) {
-        return $q->orderBy( 'id' , $orden );
-      })
+      #->when( $orden != '' , function( $q ) use( $orden ) {
+      #  return $q->orderBy( 'id' , $orden );
+      #})
+      ->orderBy( 'id' , 'DESC' )
       ->get();
 
     foreach( $camposAdicionales AS $campoAdicional ) {

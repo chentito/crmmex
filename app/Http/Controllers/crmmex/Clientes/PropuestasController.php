@@ -199,8 +199,8 @@ class PropuestasController extends Controller
         'ejecutivoTxt'   => Utils::nombreEjecutivo( $propuesta->ejecutivoID ),
         'cliente'        => $propuesta->clienteID,
         'contacto'       => $propuesta->contactoID,
-        'contactoTxt'    => Utils::nombreContacto( $propuesta->contactoID ),
-        'fechaCreacion'  => Utils::formatoFecha( $propuesta->fechaCreacion ),
+        'contactoTxt'    => Utils::nombreContacto( $propuesta->contactoID , false ),
+        'fechaCreacion'  => Utils::formatoFecha( $propuesta->fechaCreacion , false ),
         'fechaVigencia'  => Utils::formatoFecha( $propuesta->fechaVigencia ),
         'ordenCompra'    => $propuesta->ordenCompra,
         'fechaEnvio'     => Utils::formatoFecha( $propuesta->fechaEnvio ),
@@ -343,7 +343,7 @@ class PropuestasController extends Controller
         $importe = $v[ 'cantidad' ] * $v[ 'unitario' ];
         $totales[ 'subtotal' ]    = $totales[ 'subtotal' ] + $importe;
 
-        $montoTraslados = number_format( ( $v[ 'traslados' ] / 100 ) * $importe , 2 , '.' , '' );Log::warning("VALOR:".$montoTraslados);
+        $montoTraslados = number_format( ( $v[ 'traslados' ] / 100 ) * $importe , 2 , '.' , '' );
         $totales[ 'traslados' ]   = $totales[ 'traslados' ] + $montoTraslados;
 
         $montoRetenciones = number_format( ( $v[ 'retenciones' ] / 100 ) * $importe , 2 , '.' , '' );
@@ -486,21 +486,50 @@ class PropuestasController extends Controller
    */
     public function logoPropuesta( Request $request ) {
       if( $request->hasFile( 'logotipoPropuesta' ) ) {
-        $archivo = $request->file( 'logotipoPropuesta' );
-        $img     = ImgPropuesta::find( 1 )->first();
+        $archivo        = $request->file( 'logotipoPropuesta' );
+        $img            = ImgPropuesta::where( 'id' , 1 )->first();
         $img->contenido = file_get_contents( $request->file( 'logotipoPropuesta' )->getRealPath() );
         $img->tipo      = $request->file( 'logotipoPropuesta' )->getMimeType();
         $img->nombreImg = $archivo->getClientOriginalName();
         $img->edicion   = date( 'Y-m-d H:i:s' );
+        $img->status    = 1;
         $img->save();
       }
+
+      if( $request->has( 'usaFirmaDigitalizada' ) ) {
+        if( $request->hasFile( 'firmaPropuesta' ) ) {
+          $archivo2        = $request->file( 'firmaPropuesta' );
+          $img2            = ImgPropuesta::where( 'id' , 2 )->first();
+          $img2->contenido = file_get_contents( $request->file( 'firmaPropuesta' )->getRealPath() );
+          $img2->tipo      = $request->file( 'firmaPropuesta' )->getMimeType();
+          $img2->nombreImg = $archivo2->getClientOriginalName();
+          $img2->edicion   = date( 'Y-m-d H:i:s' );
+          $img2->status    = 1;
+          $img2->save();
+        }
+      } else {
+          $img2 = ImgPropuesta::where( 'id' , 2 )->first();
+          $img2->contenido = '';
+          $img2->tipo      = '';
+          $img2->nombreImg = '';
+          $img2->edicion   = date( 'Y-m-d H:i:s' );
+          $img2->status    = 0;
+          $img2->save();
+      }
+
+      return response()->json( array( 'logo' => 'ok' , 'firma' => $img2->status ) );
+    }
+
+    public function usaFirmaDigitalizada() {
+      $status = ImgPropuesta::where( 'id' , 2 )->first();
+      return $status->status;
     }
 
     /*
     * Para visualizar la imagen de la propuesta
     */
-    public function imagenParaPropuesta() {
-      $imagen = ImgPropuesta::find( 1 );
+    public function imagenParaPropuesta( $id ) {
+      $imagen = ImgPropuesta::find( $id );
       return response( $imagen->contenido )->header( 'Content-type' , $imagen->tipo );
     }
 
