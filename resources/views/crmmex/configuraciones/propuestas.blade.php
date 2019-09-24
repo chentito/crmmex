@@ -161,7 +161,7 @@
             </div>
           </div>
           <div class="col-sm-12 mt-3">
-            <input type="checkbox" name="usaFirmaDigitalizada" id="usaFirmaDigitalizada"> Firma: <hr>
+            <input type="checkbox" name="usaFirmaDigitalizada" id="usaFirmaDigitalizada"> Usar firma digitalizada? <hr>
           </div>
           <div class="col-sm-3 mt-2 text-center">
             <img src="{{ asset( '/imagenParaPropuesta/2' ) }}" width="180" height="180" id="firmaImgPropuesta" class="img-thumbnail">
@@ -290,7 +290,7 @@
              document.getElementById( 'nomenclatura_variable' ).value      = valor[ 1 ];
              document.getElementById( 'nomenclatura_identificador' ).value = valor[ 2 ];
 
-             var opciones = [ 'inicialesEjecutivo' , 'fechaCreacion' , 'categoria' ];
+             var opciones = [ 'inicialesEjecutivo' , 'fechaCreacion' , 'grupo' ];
              var select1  = document.getElementById( 'nomenclatura_variable' );
              opciones.forEach( function( e , ll ) {
                 select1.appendChild( new Option( e , e , false , ( ( valor[ 1 ] == e ) ? true : false ) ) );

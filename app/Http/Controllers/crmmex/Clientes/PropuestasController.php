@@ -130,7 +130,7 @@ class PropuestasController extends Controller
 
         // Actualiza IDTY de la propuesta
         $propUpdate = Propuestas::find( $propuesta->id );
-        $propUpdate->propuestaIDTY = str_replace( '{autoincremento}' , $propuesta->id , str_replace( '{valorcategoria}' , Utils::valorCatalogo( $request->catalogo_18 ) , $request->propuesta_identificador ) );
+        $propUpdate->propuestaIDTY = str_replace( '{autoincremento}' , $propuesta->id , str_replace( '{valorcategoria}' , Utils::valorCatalogo( $request->catalogo_12 ) , $request->propuesta_identificador ) );
         $propUpdate->save();
 
         $resp[ 'msj' ] = "Propuesta agregada correctamente";
@@ -303,7 +303,7 @@ class PropuestasController extends Controller
         case 'fechaCreacion'     :
             $val = date( 'Ymd' );
           break;
-        case 'categoria'         :
+        case 'grupo'         :
             $val = '{valorcategoria}';
           break;
       }

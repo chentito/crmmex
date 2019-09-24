@@ -6,8 +6,9 @@
     <style>
       h3 { text-align: center; text-transform: uppercase; }
       body { font-size: 12px; font-family: Arial, Helvetica, sans-serif; }
-      header { position: fixed; top: -40px; left: 0px; right: 0px; height: 100px; text-align: left; }
-      footer { position: fixed; bottom: -40px; left: 0px; right: 0px; height: 90px; text-align: center; }
+      header { position: fixed; top: -100px; left: 0px; right: 0px; height: 100px; text-align: left;}
+      footer { position: fixed; bottom: -40px; left: 0px; right: 0px; height: 90px; text-align: center;}
+      @page { margin-top: 110px; }
       .page-break { page-break-before: always; }
       #primero { background-color: #ccc; }
       #segundo { color:blue; }
@@ -25,7 +26,7 @@
       <p style="color:red">{{$datos[ 'disclaimer' ]}}</p>
     </footer>
 
-    <table width="100%" border="0" class="table" style="margin-top:50px">
+    <table width="100%" border="0" class="table" >
       <tr>
         <td width="75%" colspan="4" align="center" valign="top">
           <h3>PROPUESTA COMERCIAL</h3>
@@ -135,13 +136,13 @@
           </td>
         </tr>
     </table>
-    <br><br>
+    <br>
     <div>
       <center><h4>Políticas y Condiciones:</h4></center>
       <div style="text-align: justify">{!! nl2br(e($datos[ 'condiciones' ])) !!}</div>
     </div>
     <br><br>
-    <table width="100%">
+    <table width="100%" style="position: relative">
       <tr>
         <th valign="top">Observaciones:</th>
       </tr>
@@ -149,7 +150,7 @@
         <td>{!! nl2br(e($datos[ 'observaciones' ])) !!}</td>
       </tr>
     </table>
-    <br><br><br><br><br><br>
+    <br><br>
     <table width="100%">
       <tr>
         <td></td>
@@ -165,5 +166,15 @@
         <td width="30%"></td>
       </tr>
     </table>
+
+
+    <script type="text/php">
+      if ( isset($pdf) ) {
+        $x = 550;
+        $y = 730;
+        $font = $fontMetrics->get_font("Arial", "bold");
+        $pdf->page_text($x, $y, "{PAGE_NUM} de {PAGE_COUNT}", $font, 8, array(0,0,0), 0.0, 0.0, 0.0);
+      }
+    </script>
   </body>
 </html>
