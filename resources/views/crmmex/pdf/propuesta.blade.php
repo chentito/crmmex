@@ -154,7 +154,13 @@
     <table width="100%">
       <tr>
         <td></td>
-        <td align="center"><img src="{{ asset( '/imagenParaPropuesta/2' ) }}" width="180" height="180"></td>
+        <td align="center">
+          @if( $datos['usaFirma'] == 1 )
+            <img src="{{ asset( '/imagenParaPropuesta/2' ) }}" width="180" height="180">
+          @else
+            <p style="margin-bottom: 3cm;"></p>
+          @endif
+        </td>
         <td></td>
       </tr>
       <tr>
