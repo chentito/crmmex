@@ -296,7 +296,7 @@ function cargaCamposAdicionales( seccion , valores=[] , idtyAdicional='' ) {
   var url    = '/api/listadoCamposAdicionales/' + seccion + '/asc';
   var config = { headers: { 'Accept' : 'application/json', 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } };
   axios.get( url , config )
-    .then( response => {
+    .then( async response => {
       if( typeof response.data[ 'camposAdicionales' ] === 'undefined' ) {
       }else{
         var nContainer  = response.data[ 'container' ];
@@ -304,22 +304,17 @@ function cargaCamposAdicionales( seccion , valores=[] , idtyAdicional='' ) {
         document.getElementById( nContainer ).innerHTML = '';
         var container  = document.getElementById( nContainer );
 
-        response.data[ 'camposAdicionales' ].forEach( function( e , v ) {
-
-          var urlHTML  = '/api/htmlCampoAdicional/' + e.id;
-              urlHTML += ( typeof valores[ e.id ] === "undefined" ) ? '' : '/' + valores[ e.id ];
-
-              axios.get( urlHTML , config )
-                .then( response => {
-                  //var x = document.getElementById( nContainer ).innerHTML;
-                  //container.innerHTML = x + response.data[ 'campo' ];
-                  $( '#' + nContainer ).append( response.data[ 'campo' ] );
-                })
-                .catch( err => {
-                  console.log( err );
-               });
-
-        });
+         for( const e of response.data[ 'camposAdicionales' ] ) {
+          var urlHTML  = '/api/htmlCampoAdicional/' + e.id + ( ( typeof valores[ e.id ] === "undefined" ) ? '' : '/' + valores[ e.id ] );
+          await axios.get( urlHTML , config )
+            .then( response => {
+              var x = document.getElementById( nContainer ).innerHTML;
+              container.innerHTML = x + response.data[ 'campo' ];
+            })
+            .catch( err => {
+              console.log( err );
+           });
+        }
       }
     })
     .catch(

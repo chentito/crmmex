@@ -96,7 +96,7 @@ class CamposAdicionalesController extends Controller
 
   // Genera el campo adicional en html
   public function campoAdicionalHTML( $campoAdicionalID , $val = '' ) {
-    $datos   = CamposAdicionales::find( $campoAdicionalID );
+    $datos   = CamposAdicionales::where( 'id' , $campoAdicionalID )->first();
     $valores = explode( ',' , $datos->valores );
     $v       = array();
 
@@ -120,6 +120,7 @@ class CamposAdicionalesController extends Controller
     );
 
     return response()->json([
+      'id' => $campoAdicionalID,
       'campo' => view( 'crmmex.utils.estructuraCampoAdicional' , $data )->render()
     ]);
   }
