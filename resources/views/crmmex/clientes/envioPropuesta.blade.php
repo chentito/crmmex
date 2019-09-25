@@ -77,7 +77,7 @@
     var url   = '/api/obtieneDatosPropuesta/' + document.getElementById( 'propuestaID' ).value;
     axios.get( url , { headers:{ 'Accept' : 'application/json', 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
       .then( response => {
-        var contacto = response.data.contactoTxt.split( '[' );
+        var contacto = response.data.contactoTxtEnvio.split( '[' );
         document.getElementById( 'clienteID' ).value                               = response.data.cliente;
         document.getElementById( 'nombreDestinatarioEnvioPropuesta' ).value        = contacto[ 0 ];
         document.getElementById( 'emailDestinatarioEnvioPropuesta' ).value         = contacto[ 1 ].replace( ']' , '' );

@@ -21,7 +21,7 @@
     <footer>
       <hr>
       {{$datos[ 'footer' ][ 'razonSocial' ]}}<br />
-      {{$datos[ 'footer' ][ 'calle' ]}} {{$datos[ 'footer' ][ 'exterior' ]}}, {{$datos[ 'footer' ][ 'interior' ]}}. Col {{$datos[ 'footer' ][ 'colonia' ]}}, {{$datos[ 'footer' ][ 'municipio' ]}} {{$datos[ 'footer' ][ 'estado' ]}}. CP {{$datos[ 'footer' ][ 'codigoPostal' ]}}
+      {{$datos[ 'footer' ][ 'calle' ]}} {{$datos[ 'footer' ][ 'exterior' ]}}, {{$datos[ 'footer' ][ 'interior' ]}}. COL. {{$datos[ 'footer' ][ 'colonia' ]}}, {{$datos[ 'footer' ][ 'municipio' ]}} {{$datos[ 'footer' ][ 'estado' ]}}. CP {{$datos[ 'footer' ][ 'codigoPostal' ]}}
       <br />Tel {{$datos[ 'footer' ][ 'telefonos' ]}} Email {{$datos[ 'footer' ][ 'correoElectronico' ]}}
       <p style="color:red">{{$datos[ 'disclaimer' ]}}</p>
     </footer>
@@ -32,19 +32,15 @@
           <h3>PROPUESTA COMERCIAL</h3>
           <b>{{$datos['propuestaIDTY']}}</b>
           <br />
-          <i style="float:right">Fecha creación: {{$datos['fechaCreacion']}}</i>
+          <i style="float:right">{{$datos['fechaCreacion']}}</i>
         </td>
       </tr>
       <tr><td><br /></td></tr>
       <tr>
-        <th colspan="2">Elaborado por:</th>
-        <th colspan="2">Dirigido a:</th>
+        <th colspan="4">Dirigido a:</th>
       </tr>
       <tr>
-        <td colspan="2">
-          {{$datos['ejecutivoTxt']}}
-        </td>
-        <td colspan="2">
+        <td colspan="4">
           {{$datos['contactoTxt']}}
         </td>
       </tr>
@@ -78,58 +74,62 @@
             <table width="100%" border="0" style="border-bottom-style: dashed">
               <thead>
                 <tr>
-                  <th>Cantidad</th>
-                  <th>Producto/Servicio</th>
-                  <th>Unitario</th>
-                  <th>Descuento</th>
-                  <th>Importe</th>
+                  <th align="center">Cantidad</th>
+                  <th align="center">Producto/Servicio</th>
+                  <th align="center">Unitario</th>
+                  <th align="center">Descuento</th>
+                  <th align="center">Importe</th>
                 </tr>
               </thead>
               <tbody>
                 {{$totalTraslados=0}}
                 {{$totalRetenciones=0}}
                 {{$subtotal=0}}
+                {{$divisa=''}}
                 @foreach($datos['detalle'] AS $producto)
                   <tr>
                     <td width="10%" align="center">{{$producto[ 'cantidad' ]}}</td>
                     <td width="50%">{{$producto[ 'productoTxt' ]}}</td>
-                    <td width="10%" align="right">{{@moneda($producto[ 'unitario' ])}}</td>
-                    <td width="10%" align="right">{{@moneda($producto[ 'descuento' ])}}</td>
-                    <td width="10%" align="right">{{@moneda($producto[ 'cantidad' ]*$producto[ 'unitario' ])}}</td>
+                    <td width="10%" align="center">{{@moneda($producto[ 'unitario' ])}}</td>
+                    <td width="10%" align="center">{{@moneda($producto[ 'descuento' ])}}</td>
+                    <td width="10%" align="center">{{@moneda($producto[ 'cantidad' ]*$producto[ 'unitario' ])}}</td>
                   </tr>
                   <tr>
-                    <td colspan="5">{!! nl2br(e($producto[ 'comentarios' ])) !!}</td>
+                    <td></td>
+                    <td>{!! nl2br(e($producto[ 'comentarios' ])) !!}</td>
+                    <td colspan="3"></td>
                   </tr>
                   {{$totalTraslados=$totalTraslados+( ( $producto[ 'traslados' ] == 0 ) ? 0 : ( $producto[ 'traslados' ]/100) * ($producto[ 'cantidad' ]*$producto[ 'unitario' ]) )}}
                   {{$totalRetenciones=$totalRetenciones+( ( $producto[ 'retenciones' ] == 0 ) ? 0 : ( $producto[ 'retenciones' ]/100 ) * ($producto[ 'cantidad' ]*$producto[ 'unitario' ]) )}}
                   {{$subtotal=$subtotal+(($producto[ 'cantidad' ]*$producto[ 'unitario' ]))}}
+                  {{$divisa=$producto['divisa']}}
                 @endforeach
                   <tr><th colspan="5"><hr></th></tr>
               </tbody>
               <tfoot>
                 <tr>
-                  <td colspan="2"></td>
+                  <td></td>
                   <td colspan="2" align="right"><b>Subtotal:</b></td>
-                  <td align="right">{{@moneda($subtotal)}}</td>
+                  <td colspan="2" align="right">{{@moneda($subtotal)}}</td>
                 </tr>
                 <tr>
-                  <td colspan="2"></td>
+                  <td></td>
                   <td colspan="2" align="right"><b>Traslados:</b></td>
-                  <td align="right">{{@moneda($totalTraslados)}}</td>
+                  <td colspan="2" align="right">{{@moneda($totalTraslados)}}</td>
                 </tr>
                 <tr>
-                  <td colspan="2"></td>
+                  <td></td>
                   <td colspan="2" align="right"><b>Retenciones:</b></td>
-                  <td align="right">{{@moneda($totalRetenciones)}}</td>
+                  <td colspan="2" align="right">{{@moneda($totalRetenciones)}}</td>
                 </tr>
                 <tr>
-                  <td colspan="2"></td>
-                  <td colspan="3"><hr></td>
+                  <td></td>
+                  <td colspan="4"><hr></td>
                 </tr>
                 <tr>
-                  <td colspan="2"></td>
+                  <td></td>
                   <td colspan="2" align="right"><b>Total Cotización:</b></td>
-                  <td align="right"><b>{{@moneda($datos[ 'total' ])}}</b></td>
+                  <td colspan="2" align="right"><b>{{$divisa}}  {{@moneda($datos[ 'total' ])}}</b></td>
                 </tr>
               </tfoot>
             </table>
@@ -153,23 +153,20 @@
     <br><br>
     <table width="100%">
       <tr>
-        <td></td>
-        <td align="center">
+        <td align="left" colspan="2">
           @if( $datos['usaFirma'] == 1 )
             <img src="{{ asset( '/imagenParaPropuesta/2' ) }}" width="180" height="180">
           @else
             <p style="margin-bottom: 3cm;"></p>
           @endif
         </td>
-        <td></td>
       </tr>
       <tr>
-        <td width="30%"></td>
-        <td width="30%" align="center">
+        <td width="30%" align="left">
           <hr>
           Ejecutivo {{$datos['ejecutivoTxt']}}
         </td>
-        <td width="30%"></td>
+        <td width="70%"></td>
       </tr>
     </table>
 

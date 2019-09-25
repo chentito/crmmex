@@ -193,29 +193,30 @@ class PropuestasController extends Controller
       $propuesta = Propuestas::find( $propuestaID );
 
       $datos = array (
-        'id'             => $propuesta->id,
-        'propuestaIDTY'  => $propuesta->propuestaIDTY,
-        'ejecutivo'      => $propuesta->ejecutivoID,
-        'ejecutivoTxt'   => Utils::nombreEjecutivo( $propuesta->ejecutivoID ),
-        'cliente'        => $propuesta->clienteID,
-        'contacto'       => $propuesta->contactoID,
-        'contactoTxt'    => Utils::nombreContacto( $propuesta->contactoID , false ),
-        'fechaCreacion'  => Utils::formatoFecha( $propuesta->fechaCreacion , false ),
-        'fechaVigencia'  => Utils::formatoFecha( $propuesta->fechaVigencia ),
-        'ordenCompra'    => $propuesta->ordenCompra,
-        'fechaEnvio'     => Utils::formatoFecha( $propuesta->fechaEnvio ),
-        'observaciones'  => $propuesta->observaciones,
-        'requerimientos' => $propuesta->requerimientos,
-        'formaPago'      => $propuesta->formaPago,
-        'categoria'      => $propuesta->categoria,
-        'monto'          => $propuesta->monto,
-        'total'          => $propuesta->total,
-        'descuento'      => $propuesta->descuento,
-        'promocion'      => $propuesta->promocion,
-        'estado'         => ( ( $propuesta->estadoPropuesta == 0 ) ? 'Sin enviar' : 'Enviado'  ),
-        'pagoPropuesta'  => ( ( $this->statusPago( $propuesta->id ) == 0 ) ? 'No pagada' : ( ( $this->statusPago( $propuesta->id ) < $propuesta->total ) ? 'Parcial' : 'Pagada' ) ),
-        'footer'         => Utils::datosPropietario(),
-        'status'         => ( ( $propuesta->status == 0 ? 'Deshabilitada' : 'Habilitada' ) )
+        'id'               => $propuesta->id,
+        'propuestaIDTY'    => $propuesta->propuestaIDTY,
+        'ejecutivo'        => $propuesta->ejecutivoID,
+        'ejecutivoTxt'     => Utils::nombreEjecutivo( $propuesta->ejecutivoID ),
+        'cliente'          => $propuesta->clienteID,
+        'contacto'         => $propuesta->contactoID,
+        'contactoTxt'      => Utils::nombreContacto( $propuesta->contactoID , false ),
+        'contactoTxtEnvio' => Utils::nombreContacto( $propuesta->contactoID ),
+        'fechaCreacion'    => Utils::formatoFecha( $propuesta->fechaCreacion , false ),
+        'fechaVigencia'    => Utils::formatoFecha( $propuesta->fechaVigencia ),
+        'ordenCompra'      => $propuesta->ordenCompra,
+        'fechaEnvio'       => Utils::formatoFecha( $propuesta->fechaEnvio ),
+        'observaciones'    => $propuesta->observaciones,
+        'requerimientos'   => $propuesta->requerimientos,
+        'formaPago'        => $propuesta->formaPago,
+        'categoria'        => $propuesta->categoria,
+        'monto'            => $propuesta->monto,
+        'total'            => $propuesta->total,
+        'descuento'        => $propuesta->descuento,
+        'promocion'        => $propuesta->promocion,
+        'estado'           => ( ( $propuesta->estadoPropuesta == 0 ) ? 'Sin enviar' : 'Enviado'  ),
+        'pagoPropuesta'    => ( ( $this->statusPago( $propuesta->id ) == 0 ) ? 'No pagada' : ( ( $this->statusPago( $propuesta->id ) < $propuesta->total ) ? 'Parcial' : 'Pagada' ) ),
+        'footer'           => Utils::datosPropietario(),
+        'status'           => ( ( $propuesta->status == 0 ? 'Deshabilitada' : 'Habilitada' ) )
       );
 
       $productos = PropuestasDetalle::where( 'idPropuesta' , $propuesta->id )
@@ -235,6 +236,7 @@ class PropuestasController extends Controller
           'retenciones' => $producto->retenciones,
           'descuento'   => $producto->descuento,
           'estatus'     => $producto->status,
+          'divisa'      => Utils::divisaProducto( $producto->idProducto ),
           'promocion'   => $producto->promocion
         );
       }
@@ -461,8 +463,8 @@ class PropuestasController extends Controller
         );
       }
 
-      //$destinatarios = array( 'cvreyes@mexagon.net' , 'clam@mexagon.net' );
-      $destinatarios = array( 'cvreyes@mexagon.net' );
+      $destinatarios = array( 'cvreyes@mexagon.net' , 'clam@mexagon.net' );
+      //$destinatarios = array( 'cvreyes@mexagon.net' );
       $reservadas = array(
         array( 'cliente'        , $datos[ 'contactoTxt' ] ),
         array( 'fechaSolicitud' , $datos[ 'fechaCreacion' ] ),

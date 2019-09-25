@@ -59,7 +59,7 @@ class UtilsController extends Controller
      */
     public static function nombreEstado( $estadoID ) {
       $estado = Estados::where( 'id' , $estadoID )->first();
-      return $estado->entidad;
+      return mb_strtoupper( $estado->entidad );
     }
 
    /*
@@ -175,6 +175,14 @@ class UtilsController extends Controller
    }
 
    /*
+    * Obtiene la divisa del producto
+    */
+    public static function divisaProducto( $productoID ) {
+      $producto = Productos::where( 'id' , $productoID )->first();
+      return self::valorCatalogo( $producto->divisa );
+    }
+
+   /*
     * Obtiene el nombre de un ejecutivo de acuerdo a su ID
     */
     public static function nombreEjecutivo( $ejecutivoID ) {
@@ -207,7 +215,7 @@ class UtilsController extends Controller
     */
     public static function nombreProducto( $productoID ) {
       $producto = Productos::find( $productoID );
-      return $producto->clave . ' / ' . $producto->nombre;
+      return ( ( strlen( $producto->clave ) > 0 ) ?  $producto->clave . ' / ' : '' ) . $producto->nombre;
     }
 
    /*
