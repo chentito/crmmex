@@ -141,12 +141,10 @@
       <center><h4>Políticas y Condiciones:</h4></center>
       <div style="text-align: justify">{!! nl2br(e($datos[ 'condiciones' ])) !!}</div>
     </div>
-    <br><br>
+    <br>
     <table width="100%" style="position: relative">
       <tr>
-        <th valign="top">Observaciones:</th>
-      </tr>
-      <tr>
+        <td width="10%">Observaciones:</td>
         <td>{!! nl2br(e($datos[ 'observaciones' ])) !!}</td>
       </tr>
     </table>
