@@ -38,18 +38,19 @@ class PHPMailerController extends Controller
   // Proceso de envio de correo electronico
   private static function envio( $campaniaID , $subject , $text , $destinatarios , $idty='' , $adjuntos=array() ) {
     $datos = self::datosConexion();
-    $mail = new PHPMailer\PHPMailer();
-    $mail->SMTPOptions = array(
-        'ssl' => array(
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-            'allow_self_signed' => true
-        )
+    $mail  = new PHPMailer\PHPMailer();
+    $mail->SMTPOptions = array (
+      'ssl' => array (
+        'verify_peer'       => false,
+        'verify_peer_name'  => false,
+        'allow_self_signed' => true
+      )
     );
     $mail->SMTPDebug  = 1;
     if( $datos[ 'host' ] != 'smtp.gmail.com' ){ $mail->isSMTP(); }
     $mail->isSMTP();
     $mail->SMTPAuth   = true;
+    $mail->CharSet    = 'UTF-8';
     $mail->SMTPSecure = $datos[ 'seguridad' ];
     $mail->Host       = $datos[ 'host' ];
     $mail->Port       = $datos[ 'puerto' ];
@@ -62,12 +63,12 @@ class PHPMailerController extends Controller
 
     // Adjuntos
     foreach( $adjuntos AS $adjunto ) {
-        $mail->AddStringAttachment( ( $adjunto[ 'archivo' ] ) , $adjunto[ 'nombre' ] , $adjunto[ 'encoding' ] , $adjunto[ 'mime' ] );
+      $mail->AddStringAttachment( ( $adjunto[ 'archivo' ] ) , $adjunto[ 'nombre' ] , $adjunto[ 'encoding' ] , $adjunto[ 'mime' ] );
     }
 
     // Destinatarios
     foreach( $destinatarios AS $destinatario ){
-        $mail->AddAddress( $destinatario );
+      $mail->AddAddress( $destinatario );
     }
 
     if( $mail->Send() ) {
