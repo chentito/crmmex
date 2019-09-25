@@ -38,6 +38,10 @@
                 <input type="number" class="form-control form-control-sm" value="" id="promociones_cantidad" name="promociones_cantidad">
             </div>
             <div class="col-sm-4">
+                <label for="promociones_grupo">Grupo (Productos/Servicios):</label>
+                <select class="custom-select custom-select-sm" name="catalogo_12" id="catalogo_12"></select>
+            </div>
+            <div class="col-sm-4">
                 <label for="promociones_cantidad">Inicio Vigencia:</label>
                 <input type="text" class="form-control form-control-sm" value="" id="promociones_inicioVigencia" name="promociones_inicioVigencia" readonly>
             </div>
@@ -49,6 +53,7 @@
           <div class="row">
               <div class="col-sm-12 mt-3 text-center">
                   <button class="btn btn-sm {{$btn}}" id="btnPromocionesGuardar"><i class="fa fa-save fa-sm"></i>  Guardar</button>
+                  <button class="btn btn-sm {{$btn}}" id="btnPromocionesCancelarAltaEdicio"><i class="fa fa-undo fa-sm"></i>  Regresar</button>
               </div>
           </div>
         </div>
@@ -57,6 +62,12 @@
 </div>
 
 <script>
+
+  document.getElementById( 'btnPromocionesCancelarAltaEdicio' ).addEventListener( 'click' , function( e ){
+    e.preventDefault();
+    contenidos( 'configuraciones_promociones' );
+  });
+
     document.getElementById( 'btnPromocionesGuardar' ).addEventListener( 'click' , function( e ){
         e.preventDefault();
         var datos = new FormData( document.getElementById( 'formPromociones' ) );
@@ -88,4 +99,5 @@
         daysOfWeekHighlighted: "0,6"
     });
     generaDataGrid( 'listadoPromociones' );
+    cargaDatosComboCatalogo();
 </script>

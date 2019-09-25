@@ -12,12 +12,14 @@
       axios.get( '/api/detallePromocion/' + promoID )
            .then( response => {
                 var datos = response.data;
-                document.getElementById( 'promociones_id' ).value             = datos.id
-                document.getElementById( 'promociones_nombre' ).value         = datos.nombreDescuento
-                document.getElementById( 'promociones_tipo' ).value           = datos.tipoDescuento
-                document.getElementById( 'promociones_cantidad' ).value       = datos.cantidad
-                document.getElementById( 'promociones_inicioVigencia' ).value = datos.inicioVigencia
+                document.getElementById( 'promociones_id' ).value             = datos.id;
+                document.getElementById( 'promociones_nombre' ).value         = datos.nombreDescuento;
+                document.getElementById( 'promociones_tipo' ).value           = datos.tipoDescuento;
+                document.getElementById( 'promociones_cantidad' ).value       = datos.cantidad;
+                document.getElementById( 'promociones_inicioVigencia' ).value = datos.inicioVigencia;
                 document.getElementById( 'promociones_finVigencia' ).value    = datos.finVigencia;
+                document.getElementById( 'catalogo_12' ).value                = datos.grupoID;
+                setSelectedIndex( document.getElementById( 'catalogo_12' ) , datos.grupoID );
            })
            .catch( err => {
              console.log( err );

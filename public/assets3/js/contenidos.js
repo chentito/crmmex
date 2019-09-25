@@ -111,31 +111,6 @@ async function solicitud( metodo, token, url, datos ) {
   return result;
 }
 
-function aplicaPromo( promoID , monto , input ) {
-    if( promoID == '0' ) {
-      document.getElementById( input ).value = '0.00';
-      return monto;
-    }
-    var token = sessionStorage.getItem( 'apiToken' );
-    var url   = '/api/utiles/aplicaPromo/' + promoID + '/' + monto;
-    var datos = {};
-    var config = {
-      headers: {
-        'Accept' : 'application/json',
-        'Authorization' : 'Bearer ' + token
-      }
-    };
-
-    axios.post( url , datos , config )
-     .then( response => {
-       document.getElementById( input ).value       = response.data.toFixed( 2 );
-       document.getElementById( 'propuesta_total' ) = parseInt( document.getElementById( 'propuesta_total' ).value ) - parseInt( response.data );
-     })
-     .catch( err => {
-       console.log( err );
-     });
-}
-
 function generaDataGrid( id , filtro = '' ) {
     var token = sessionStorage.getItem( 'apiToken' );
     f = ( filtro != '' ) ? '/' + filtro : '';
@@ -417,18 +392,18 @@ function notificacionesInicio( mensaje ) {
 }
 
 function notificacionesIniciales() {
-    axios.get( '/api/proximosSeguimientos' , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
+  axios.get( '/api/proximosSeguimientos' , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
     .then( response => {
-            response.data.forEach( function( e , ll ) {
-                setTimeout(function() {
-                    var msj = '<a style="cursor:pointer" onclick="contenidos(\'clientes_editaseguimiento\',\''+e.id+'\')">' + e.titulo + '</a> '
-                            + e.fechaEjecucion + ' <br>'
-                            + '<a style="cursor:pointer" onclick="contenidos(\'clientes_edicion\',\''+e.clienteID+'\')">' + e.cliente + '</a>';
-                    notificacionesInicio( msj );
-                }, 2000);
-            });
-        })
-        .catch( err => {
-          console.log( err );
-        });
+      response.data.forEach( function( e , ll ) {
+        setTimeout(function() {
+          var msj = '<a style="cursor:pointer" onclick="contenidos(\'clientes_editaseguimiento\',\''+e.id+'\')">' + e.titulo + '</a> '
+            + e.fechaEjecucion + ' <br>'
+            + '<a style="cursor:pointer" onclick="contenidos(\'clientes_edicion\',\''+e.clienteID+'\')">' + e.cliente + '</a>';
+          notificacionesInicio( msj );
+        }, 2000);
+      });
+    })
+    .catch( err => {
+      console.log( err );
+    });
 }

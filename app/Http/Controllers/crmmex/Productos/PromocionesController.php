@@ -8,6 +8,7 @@ namespace App\Http\Controllers\crmmex\Productos;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\crmmex\Utils\UtilsController AS Utils;
 
 use App\Models\crmmex\Utils\Promociones AS Promociones;
 
@@ -25,8 +26,9 @@ class PromocionesController extends Controller
             $promos[ 'promociones' ][] = array(
               'id'              => $promocion->id,
               'nombreDescuento' => $promocion->nombreDescuento,
+              'grupo'           => Utils::valorCatalogo( $promocion->grupoID ),
               'tipoDescuento'   => ( ( $promocion->tipoDescuento == 1 ) ? 'Porcentaje' : 'Monto' ),
-              'cantidad'        => $promocion->cantidad,
+              'cantidad'        => ( ( $promocion->tipoDescuento == 1 ) ? $promocion->cantidad . ' %' : '$ ' . number_format( $promocion->cantidad , 2 ) ),
               'inicioVigencia'  => $promocion->inicioVigencia,
               'finVigencia'     => $promocion->finVigencia,
               'status'          => ( ( $promocion->status == 1 ) ? 'Activa' : 'Inactiva' ),
@@ -49,6 +51,7 @@ class PromocionesController extends Controller
           $promocion->cantidad        = $request->promociones_cantidad;
           $promocion->inicioVigencia  = $request->promociones_inicioVigencia;
           $promocion->finVigencia     = $request->promociones_finVigencia;
+          $promocion->grupoID         = $request->catalogo_12;
           $promocion->status          = 1;
           $promocion->save();
       }
@@ -63,6 +66,7 @@ class PromocionesController extends Controller
           $promocion->cantidad        = $request->promociones_cantidad;
           $promocion->inicioVigencia  = $request->promociones_inicioVigencia;
           $promocion->finVigencia     = $request->promociones_finVigencia;
+          $promocion->grupoID         = $request->catalogo_12;
           $promocion->save();
        }
 

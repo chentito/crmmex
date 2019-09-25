@@ -204,8 +204,8 @@ Route::get ( '/utiles/opcionesCatalogos/{catalogoID}'       , 'crmmex\Utils\Util
 Route::get ( '/utiles/estatus'                              , 'crmmex\Utils\UtilsController@estatusRegistro' );
 Route::get ( '/utiles/listadoProductosServicios/{grupoID?}' , 'crmmex\Utils\UtilsController@productosServicios' );
 Route::get ( '/utiles/listadoContactos/{clienteID}'         , 'crmmex\Utils\UtilsController@listadoContactos' );
-Route::post( '/utiles/aplicaPromo/{promoID}/{monto}'        , 'crmmex\Utils\UtilsController@aplicaPromocion' );
-Route::get ( '/utiles/listadoPromociones'                   , 'crmmex\Utils\UtilsController@listadoPromociones' );
+Route::post( '/utiles/aplicaPromo/{promoID}'                , 'crmmex\Utils\UtilsController@aplicaPromocion' );
+Route::get ( '/utiles/listadoPromociones/{grupoID}'         , 'crmmex\Utils\UtilsController@listadoPromociones' );
 Route::get ( '/opcionesCombos/{id}'                         , 'crmmex\Utils\UtilsController@catalogo' );
 Route::get ( '/catalogos'                                   , 'crmmex\Utils\UtilsController@catalogosOpciones' );
 Route::get ( '/opcionesCombosPorId/{id}'                    , 'crmmex\Utils\UtilsController@opcionesCatalogos' );

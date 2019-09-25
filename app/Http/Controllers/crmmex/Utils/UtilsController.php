@@ -288,31 +288,25 @@ class UtilsController extends Controller
    /*
     * Realiza el calculo para la promocion seleccionada
     */
-    public static function aplicaPromocion( $promoID , $monto ) {
-      $hoy       = date( 'Y-m-d H:i:s' );
+    public static function aplicaPromocion( $promoID ) {
       $promocion = Promociones::find( $promoID );
-
-      if( $promocion->inicioVigencia > $hoy || $promocion->finVigencia < $hoy ) return $monto;
-
-      if( $promocion->tipoDescuento == 1 ) {
-            return number_format( ( $monto * $promocion->cantidad ) / 100 , 2 );
-        } elseif( $promocion->tipoDescuento == 2 ) {
-            return number_format( $monto - $promocion->cantidad , 2 );
-      }
+      return response()->json( array( 'tipoDescuento' => $promocion->tipoDescuento, 'cantidad' => $promocion->cantidad ) );
     }
 
    /*
     * Regresa el listado de promociones activas
     */
-    public function listadoPromociones() {
+    public function listadoPromociones( $grupoID ) {
       $promos   = array();
       $promos[] = array( 'id' => '0' , 'nombre' => 'Sin promocion' );
       $promociones = Promociones::where( 'status' , 1 )
+                                ->where( 'grupoID' , $grupoID )
                                 ->where( 'inicioVigencia' , '<' , date( 'Y-m-d H:i:s' ) )
-                                ->where( 'finVigencia' , '>' , date( 'Y-m-d H:i:s' ) )->get();
+                                ->where( 'finVigencia' , '>' , date( 'Y-m-d H:i:s' ) )
+                                ->get();
 
       foreach ( $promociones AS $promocion ) {
-          $promos[] = array( 'id' => $promocion->id , 'nombre' => $promocion->nombreDescuento .  ( ( $promocion->tipoDescuento == 1 ) ? ' [' . $promocion->cantidad . '%]' : '' ) );
+          $promos[] = array( 'id' => $promocion->id , 'nombre' => $promocion->nombreDescuento .  ( ( $promocion->tipoDescuento == 1 ) ? ' [ % ]' : ' [ $ ]' ) );
       }
 
       return response()->json( $promos );
