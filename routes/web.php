@@ -43,8 +43,7 @@ Route::middleware('auth')->group( function() {
 });
 
 // Rutas utiles para el carrito de la propuesta
-Route::middleware( 'web' )->group( function(){
-
+Route::middleware( 'web' )->group( function() {
   Route::get ( '/obtieneDatosPropuesta/{propuestaID}' , 'crmmex\Clientes\PropuestasController@datosPropuesta' );
   Route::post( '/altaPropuesta'                       , 'crmmex\Clientes\PropuestasController@altaPropuesta' );
   Route::post( '/editaPropuesta'                      , 'crmmex\Clientes\PropuestasController@editaPropuesta' );
