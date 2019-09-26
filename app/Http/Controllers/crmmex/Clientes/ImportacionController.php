@@ -207,7 +207,6 @@ class ImportacionController extends Controller
     }
 
     public function ajustaGiro( Request $request ) {
-      DB::enableQueryLog();
       $line = 0;
       $data = array();
       if( $request->file( 'layoutCargaProspectos' )->isValid() ) {
@@ -215,15 +214,14 @@ class ImportacionController extends Controller
         while ( ( $datos = fgetcsv( $recurso , 0 , "\t" , "'" ) ) !== FALSE ) {
           if( $line > 1 ) {
             $seccion = ( ( $datos[ 36 ] == 0 ) ? "2" : "1" );
-            $campoID = ( ( $datos[ 36 ] == 0 ) ? "2" : "16" );
+            $campoID = ( ( $datos[ 36 ] == 0 ) ? "1" : "15" );
             $adicionales = CamposAdicionalesValores::where( 'registroID' , $datos[ 0 ] )->where( 'seccion' , $seccion )->where( 'campoAdicionalID' , $campoID )->first();
-            $adicionales->valor = $datos[ 15 ];
+            $adicionales->valor = $datos[ 14 ];
             $adicionales->save();
             Log::warning(  DB::getQueryLog() );
           }
           $line ++;
         }
-        $data = array( 'Se almacenaron ' . $line . 'registros' );
       } else {
         $data = array( 'Error al adjuntar archivo' );
       }
