@@ -46,7 +46,7 @@ class PropuestasController extends Controller
           'propuestaIDTY'   => $propuesta->propuestaIDTY,
           'ejecutivoID'     => Utils::nombreEjecutivo( $propuesta->ejecutivoID ),
           'clienteID'       => Utils::nombreCliente( $propuesta->clienteID ),
-          'contactoID'      => Utils::nombreContacto( $propuesta->contactoID ),
+          'contactoID'      => Utils::nombreContacto( $propuesta->contactoID , false ),
           'categoria'       => Utils::valorCatalogo( $propuesta->categoria ),
           'fechaCreacion'   => $propuesta->fechaCreacion,
           'fechaVigencia'   => $propuesta->fechaVigencia,

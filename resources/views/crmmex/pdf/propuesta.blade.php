@@ -91,7 +91,7 @@
                     <td width="10%" align="center">{{$producto[ 'cantidad' ]}}</td>
                     <td width="50%">{{$producto[ 'productoTxt' ]}}</td>
                     <td width="10%" align="center">{{@moneda($producto[ 'unitario' ])}}</td>
-                    <td width="10%" align="center">{{@moneda($producto[ 'descuento' ])}}</td>
+                    <td width="10%" align="center">{{@moneda($datos[ 'descuento' ])}}</td>
                     <td width="10%" align="center">{{@moneda($producto[ 'cantidad' ]*$producto[ 'unitario' ])}}</td>
                   </tr>
                   <tr>
@@ -111,6 +111,11 @@
                   <td></td>
                   <td colspan="2" align="right"><b>Subtotal:</b></td>
                   <td colspan="2" align="right">{{@moneda($subtotal)}}</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="2" align="right"><b>Descuentos:</b></td>
+                  <td colspan="2" align="right">{{@moneda($datos['descuento'])}}</td>
                 </tr>
                 <tr>
                   <td></td>

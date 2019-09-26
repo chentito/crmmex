@@ -238,24 +238,26 @@
       var valMonto = 0;
       var valDesc  = 0;
       if( this.value == '0' ) {
-        document.getElementById( 'propuesta_total' ).value = parseFloat( document.getElementById( 'propuesta_total' ).value ) + parseFloat( document.getElementById( 'propuesta_descuento' ).value );
+        document.getElementById( 'propuesta_total' ).value = ( parseFloat( document.getElementById( 'propuesta_monto' ).value )  + parseFloat( document.getElementById( 'propuesta_traslados' ).value ) + parseFloat( document.getElementById( 'propuesta_retenciones' ).value ) ).toFixed( 2 );
+
         document.getElementById( 'propuesta_descuento' ).value = '0.00';
       } else {
-        axios.post( '/api/utiles/aplicaPromo/' + promoID , {} , { headers: { 'Accept' : 'application/json', 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
+        axios.post( '/api/utiles/aplicaPromo/' + this.value , {} , { headers: { 'Accept' : 'application/json', 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
           .then( response => {
             var tipo     = response.data[ 'tipoDescuento' ];
             var cantidad = response.data[ 'cantidad' ];
+            var monto    = document.getElementById( 'propuesta_monto' ).value;
 
             if( tipo == 1 ) {
-                valMonto = monto - ( monto * ( 1 / cantidad ) );
-                valDesc  = ( monto * ( 1 / cantidad ) );
+                valMonto = monto - ( monto * ( cantidad / 100 ) ) + parseFloat( document.getElementById( 'propuesta_traslados' ).value ) + parseFloat( document.getElementById( 'propuesta_retenciones' ).value );
+                valDesc  = ( monto * ( cantidad / 100 ) );
               } else if( tipo == 2 ) {
-                valMonto = monto - cantidad;
+                valMonto = monto - cantidad + parseFloat( document.getElementById( 'propuesta_traslados' ).value ) + parseFloat( document.getElementById( 'propuesta_retenciones' ).value );
                 valDesc  = cantidad;
             }
 
-            document.getElementById( 'propuesta_descuento' ).value = valDesc;
-            document.getElementById( 'propuesta_total' ).value = valMonto;
+            document.getElementById( 'propuesta_descuento' ).value = valDesc.toFixed( 2 );
+            document.getElementById( 'propuesta_total' ).value = valMonto.toFixed( 2 );
           })
           .catch( err => {
             console.log( err );
