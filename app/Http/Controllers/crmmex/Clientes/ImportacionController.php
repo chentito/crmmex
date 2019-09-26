@@ -5,11 +5,13 @@ namespace App\Http\Controllers\crmmex\Clientes;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 use App\Models\crmmex\Clientes\Clientes AS Clientes;
 use App\Models\crmmex\Clientes\Contactos AS Contactos;
 use App\Models\crmmex\Clientes\Direccion AS Direccion;
+use App\Models\crmmex\Utils\CamposAdicionalesValores AS CamposAdicionalesValores;
 
 use App\Http\Controllers\crmmex\Utils\CamposAdicionalesController AS CamposAdicionales;
 
@@ -202,6 +204,31 @@ class ImportacionController extends Controller
     private function existsParent( $parentID ) {
       $total = Clientes::where( 'id' , $parentID )->count();
       return $total;
+    }
+
+    public function ajustaGiro( Request $request ) {
+      DB::enableQueryLog();
+      $line = 0;
+      $data = array();
+      if( $request->file( 'layoutCargaProspectos' )->isValid() ) {
+        $recurso = fopen( $request->layoutCargaProspectos->path() , 'r' );
+        while ( ( $datos = fgetcsv( $recurso , 0 , "\t" , "'" ) ) !== FALSE ) {
+          if( $line > 1 ) {
+            $seccion = ( ( $datos[ 36 ] == 0 ) ? "2" : "1" );
+            $campoID = ( ( $datos[ 36 ] == 0 ) ? "2" : "16" );
+            $adicionales = CamposAdicionalesValores::where( 'registroID' , $datos[ 0 ] )->where( 'seccion' , $seccion )->where( 'campoAdicionalID' , $campoID )->first();
+            $adicionales->valor = $datos[ 15 ];
+            $adicionales->save();
+            Log::warning(  DB::getQueryLog() );
+          }
+          $line ++;
+        }
+        $data = array( 'Se almacenaron ' . $line . 'registros' );
+      } else {
+        $data = array( 'Error al adjuntar archivo' );
+      }
+
+      return response()->json( $data );
     }
 
 }
