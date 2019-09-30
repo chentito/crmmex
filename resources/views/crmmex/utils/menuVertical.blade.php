@@ -115,6 +115,7 @@
           @if( isset( $priv[ 'secciones' ][ 13 ] ) && $priv[ 'secciones' ][ 13 ] == 1 )<li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_smtp');"> > SMTP</a></li>@endif
           @if( isset( $priv[ 'secciones' ][ 16 ] ) && $priv[ 'secciones' ][ 16 ] == 1 )<li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_branding');"> > Diseño</a></li>@endif
           @if( isset( $priv[ 'secciones' ][ 43 ] ) && $priv[ 'secciones' ][ 43 ] == 1 )<li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_dashboard');"> > Dashboard</a></li>@endif
+          @if( isset( $priv[ 'secciones' ][ 89 ] ) && $priv[ 'secciones' ][ 89 ] == 1 )<li><a href="javascript:void(0)" onclick="return contenidos('configuraciones_configuracionesAdicionales');"> > Configuraciones Adicionales</a></li>@endif
         </ul>
       </li>
     </ul>

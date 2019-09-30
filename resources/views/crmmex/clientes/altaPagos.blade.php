@@ -44,7 +44,10 @@
             </div>
             <div class="col-sm-3">
               <label for="pagoPropuesta_cuenta">Cuenta:</label>
-              <input type="text" id="pagoPropuesta_cuenta" name="pagoPropuesta_cuenta" class="form-control form-control-sm">
+              <!--input type="text" id="pagoPropuesta_cuenta" name="pagoPropuesta_cuenta" class="form-control form-control-sm"-->
+
+              <select class="custom-select custom-select-sm" name="pagoPropuesta_cuenta" id="pagoPropuesta_cuenta"></select>
+
             </div>
             <div class="col-sm-3">
               <label for="catalogo_15">Forma de Pago:</label>
@@ -80,6 +83,21 @@
       daysOfWeekHighlighted: "0,6"
   });
 
+  document.getElementById( 'catalogo_19' ).addEventListener( 'change' , function( e ){
+    e.preventDefault();
+    document.getElementById( 'pagoPropuesta_cuenta' ).innerHTML = '';
+    axios.get( '/api/listadoCuentasBancarias/' + this.value , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
+          .then( response => {
+            response.data.ctasBancarias.forEach( function( e , i ){
+              document.getElementById( 'pagoPropuesta_cuenta' ).add( new Option( e.numeroCuenta , e.id ) );
+            });
+          })
+          .catch( err => {
+            console.log( err );
+          });
+
+  });
+
   document.getElementById( 'btnAltaPagoGuardarPago' ).addEventListener( 'click' , function( e ){
       e.preventDefault();
 
@@ -95,13 +113,13 @@
         aviso( 'El pago excede el monto restante de esta propuesta' , false );
       } else {
         axios.post( '/api/altaPago' , new FormData( document.getElementById( 'pagoPropuesta_from' ) ) , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
-             .then( response => {
-                contenidos( 'clientes_pagos' , document.getElementById( 'propuestaID' ).value );
-                aviso( 'El pago se ha aplicado correctamente' );
-             })
-             .catch( err => {
-               console.log( err );
-             });
+          .then( response => {
+            contenidos( 'clientes_pagos' , document.getElementById( 'propuestaID' ).value );
+            aviso( 'El pago se ha aplicado correctamente' );
+          })
+          .catch( err => {
+            console.log( err );
+          });
       }
   });
 

@@ -177,6 +177,12 @@ Route::middleware( 'auth:api' )->post( '/altaPerfil'                            
 Route::middleware( 'auth:api' )->post( '/eliminaPerfil/{perfilID}'                                       , 'crmmex\Sistema\PerfilesController@eliminaPerfil' );
 Route::middleware( 'auth:api' )->post( '/logoPropuesta'                                                  , 'crmmex\Clientes\PropuestasController@logoPropuesta' );
 Route::middleware( 'auth:api' )->get ( '/usaFirmaDigitalizada'                                           , 'crmmex\Clientes\PropuestasController@usaFirmaDigitalizada' );
+Route::middleware( 'auth:api' )->get ( '/listadoCuentasBancarias/{bancoID?}'                             , 'crmmex\Sistema\CuentasBancariasController@listado' );
+Route::middleware( 'auth:api' )->post( '/altaCuentaBancaria'                                             , 'crmmex\Sistema\CuentasBancariasController@alta' );
+Route::middleware( 'auth:api' )->post( '/editaCuentaBancaria'                                            , 'crmmex\Sistema\CuentasBancariasController@actualiza' );
+Route::middleware( 'auth:api' )->get ( '/obtieneCuentaBancaria/{cuentaID}'                               , 'crmmex\Sistema\CuentasBancariasController@obtiene' );
+Route::middleware( 'auth:api' )->post( '/eliminaCuentaBancaria/{cuentaID}/{movimiento}'                  , 'crmmex\Sistema\CuentasBancariasController@elimina' );
+Route::middleware( 'auth:api' )->post( '/habilitaCuentaBancaria/{cuentaID}'                              , 'crmmex\Sistema\CuentasBancariasController@habilita' );
 
 
 /************************************ Multimedia ************************************/
