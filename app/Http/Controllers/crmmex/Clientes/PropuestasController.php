@@ -188,7 +188,7 @@ class PropuestasController extends Controller
    /*
     * Metodo que busca los datos de un registro en particular
     */
-    public function datosPropuesta( $propuestaID , $modo = '') {
+    public function datosPropuesta( $propuestaID , $modo = '' , $esEnvio=false) {
       $datos     = array();
       $propuesta = Propuestas::find( $propuestaID );
 
@@ -204,7 +204,7 @@ class PropuestasController extends Controller
         'fechaCreacion'    => Utils::formatoFecha( $propuesta->fechaCreacion , false ),
         'fechaVigencia'    => Utils::formatoFecha( $propuesta->fechaVigencia ),
         'ordenCompra'      => $propuesta->ordenCompra,
-        'fechaEnvio'       => Utils::formatoFecha( $propuesta->fechaEnvio ),
+        'fechaEnvio'       => Utils::formatoFecha($propuesta->fechaEnvio),
         'observaciones'    => $propuesta->observaciones,
         'requerimientos'   => $propuesta->requerimientos,
         'formaPago'        => $propuesta->formaPago,
@@ -434,7 +434,12 @@ class PropuestasController extends Controller
     * Envio de la propuesta
     */
     public function enviaPropuesta( $propuestaID , Request $request ) {
-      $datos   = $this->datosPropuesta( $propuestaID , 'arreglo' );
+      $enviado = Propuestas::find( $propuestaID );
+      $enviado->estadoPropuesta = 1;
+      $enviado->fechaEnvio      = date( 'Y-m-d H:i:s' );
+      $enviado->save();
+
+      $datos   = $this->datosPropuesta( $propuestaID , 'arreglo' , true );
       $doc     = $this->generaPDF( $propuestaID , true );
       $adjunto = array();
 
@@ -475,10 +480,6 @@ class PropuestasController extends Controller
 
       $propuesta = Envio::envioPropuesta( $propuestaID , $destinatarios , $reservadas , $adjunto );
       if( Envio::$status ) {
-          $enviado = Propuestas::find( $propuestaID );
-          $enviado->estadoPropuesta = 1;
-          $enviado->fechaEnvio      = date( 'Y-m-d H:i:s' );
-          $enviado->save();
           return response()->json( array( 'Enviado correctamente' ) );
       } else {
           return response()->json( array( 'Error al enviar' ) );
