@@ -110,13 +110,14 @@ class PHPMailerController extends Controller
     $body     = $template->cuerpo;
 
     foreach( $reservadas AS $reservada ){
-        $busca[]     = '{'.$reservada[ 0 ].'}';
-        $reemplaza[] = $reservada[ 1 ];
+      $busca[]     = '{'.$reservada[ 0 ].'}';
+      $reemplaza[] = $reservada[ 1 ];
     }
 
-    $body = str_replace( $busca , $reemplaza , $body );
-    $datos = array(
-      'Asunto' => $template->asunto,
+    $body   = str_replace( $busca , $reemplaza , $body );
+    $asunto = str_replace( $busca , $reemplaza , $template->asunto );
+    $datos  = array(
+      'Asunto' => $asunto,
       'Body'   => $body
     );
 

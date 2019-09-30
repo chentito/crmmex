@@ -83,12 +83,13 @@
         document.getElementById( 'emailDestinatarioEnvioPropuesta' ).value         = contacto[ 1 ].replace( ']' , '' );
         document.getElementById( 'idtyDestinatarioEnvioPropuesta' ).value          = response.data.propuestaIDTY;
         document.getElementById( 'fechaCreacionDestinatarioEnvioPropuesta' ).value = response.data.fechaCreacion;
-
+      
         axios.get( '/api/obtieneDatosTemplate/1' , { headers:{ 'Accept' : 'application/json', 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
           .then( response2 => {
             var mensaje = response2.data.cuerpo.replace( '{cliente}'        , response.data.contactoTxt )
                                                .replace( '{fechaSolicitud}' , response.data.fechaCreacion )
                                                .replace( '{propuestaIDTY}'  , response.data.propuestaIDTY )
+                                               .replace( '{producto}'       , response.data.detalle[ 0 ].productoTxt )
                                                .replace( '{fechaVigencia}'  , response.data.fechaVigencia );
             document.getElementById( 'mensajeDestinatarioEnvioPropuesta' ).innerHTML = mensaje;
           })

@@ -1,5 +1,10 @@
 <?php
-
+/*
+ * Procesos de carga de información a través de layout:
+ * Clientes/Prospectos, Contactos y campos adicionales.
+ * @AUtor Mexagon.net / Carlos Reyes
+ * @Fecha Abril 2019
+ */
 namespace App\Http\Controllers\crmmex\Clientes;
 
 use Illuminate\Http\Request;
@@ -7,13 +12,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\crmmex\Utils\CamposAdicionalesController AS CamposAdicionales;
 
 use App\Models\crmmex\Clientes\Clientes AS Clientes;
 use App\Models\crmmex\Clientes\Contactos AS Contactos;
 use App\Models\crmmex\Clientes\Direccion AS Direccion;
 use App\Models\crmmex\Utils\CamposAdicionalesValores AS CamposAdicionalesValores;
-
-use App\Http\Controllers\crmmex\Utils\CamposAdicionalesController AS CamposAdicionales;
 
 class ImportacionController extends Controller
 {

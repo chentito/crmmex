@@ -463,13 +463,14 @@ class PropuestasController extends Controller
         );
       }
 
-      $destinatarios = array( 'cvreyes@mexagon.net' , 'clam@mexagon.net' );
-      //$destinatarios = array( 'cvreyes@mexagon.net' );
+      //$destinatarios = array( 'cvreyes@mexagon.net' , 'clam@mexagon.net' );
+      $destinatarios = array( 'cvreyes@mexagon.net' );
       $reservadas = array(
         array( 'cliente'        , $datos[ 'contactoTxt' ] ),
         array( 'fechaSolicitud' , $datos[ 'fechaCreacion' ] ),
         array( 'fechaVigencia'  , $datos[ 'fechaVigencia' ] ),
-        array( 'propuestaIDTY'  , $datos[ 'propuestaIDTY' ] )
+        array( 'propuestaIDTY'  , $datos[ 'propuestaIDTY' ] ),
+        array( 'producto'       , $datos[ 'detalle' ][ 0 ][ 'productoTxt' ] )
       );
 
       $propuesta = Envio::envioPropuesta( $propuestaID , $destinatarios , $reservadas , $adjunto );
