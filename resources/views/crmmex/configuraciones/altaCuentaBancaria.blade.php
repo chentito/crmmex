@@ -32,13 +32,11 @@
   document.getElementById( 'altaCuentaBancaria_guarda' ).addEventListener( 'click' , function( e ){
     e.preventDefault();
     var datos = new FormData( document.getElementById( 'altaCuentaBancaria_form' ) );
-
     if( document.getElementById( 'altaCuentaBancaria_nombreCuenta' ).value == '' ) {
       aviso( 'No ha proporcionado un nombre a la cuenta' , false );
     } else if( document.getElementById( 'altaCuentaBancaria_numeroCuenta' ).value == '' ) {
       aviso( 'No ha proporcionado el numero de cuenta' , false );
     } else {
-
       if( document.getElementById( 'editaCuentaBancaria' ) == null ) { // Alta
         var url = '/api/altaCuentaBancaria';
         var msj = 'agregada';
@@ -50,13 +48,12 @@
 
       axios.post( url , datos , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
         .then( response => {
-         aviso( 'Cuenta ' + msj + ' correctamente' );
-         contenidos( 'configuraciones_configuracionesAdicionales' );
+          aviso( 'Cuenta ' + msj + ' correctamente' );
+          contenidos( 'configuraciones_configuracionesAdicionales' );
         })
         .catch( err => {
-         console.log( err );
+          console.log( err );
         });
     }
-
   });
 </script>

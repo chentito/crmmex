@@ -195,10 +195,11 @@ Route::middleware( 'auth:api' )->post( '/habilitaMultimedia/{multimediaID}'     
 
 
 /************************************ Dashboard ************************************/
-Route::middleware( 'auth:api' )->get ( '/listadoWidgets'         , 'crmmex\Dashboard\DashboardController@listadoWidgets' );
-Route::middleware( 'auth:api' )->post( '/guardaConfWidgets'      , 'crmmex\Dashboard\DashboardController@guardaConfWidgets' );
-Route::middleware( 'auth:api' )->get ( '/listadoEstadoWidgets'   , 'crmmex\Dashboard\DashboardController@listadoStatusWidgets' );
-Route::middleware( 'auth:api' )->get ( '/datosWidget/{widgetID}' , 'crmmex\Dashboard\WidgetsController@datosWidget' );
+Route::middleware( 'auth:api' )->get ( '/listadoWidgets'                          , 'crmmex\Dashboard\DashboardController@listadoWidgets' );
+Route::middleware( 'auth:api' )->post( '/guardaConfWidgets'                       , 'crmmex\Dashboard\DashboardController@guardaConfWidgets' );
+Route::middleware( 'auth:api' )->post( '/actualizaPosicion/{widgetID}/{posicion}' , 'crmmex\Dashboard\DashboardController@actualizaPosicionWidget' );
+Route::middleware( 'auth:api' )->get ( '/listadoEstadoWidgets'                    , 'crmmex\Dashboard\DashboardController@listadoStatusWidgets' );
+Route::middleware( 'auth:api' )->get ( '/datosWidget/{widgetID}'                  , 'crmmex\Dashboard\WidgetsController@datosWidget' );
 
 
 /************************************ Acciones utiles en el sistema ************************************/

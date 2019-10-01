@@ -35,7 +35,6 @@
     contenidos( 'configuraciones_altaCuentaBancaria' );
   });
 
-
   function habilitaCuentaBancaria( cuenta ) {
     axios.post( '/api/habilitaCuentaBancaria/' + cuenta, {headers:{'Accept':'application\json','Authorization':'Bearer ' + sessionStorage.getItem( 'apiToken' )}} )
       .then( response => {

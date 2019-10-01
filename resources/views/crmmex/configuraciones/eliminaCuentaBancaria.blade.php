@@ -25,7 +25,6 @@
     movimientoCuentaBancaria( 3 );
   });
 
-
   function movimientoCuentaBancaria( mov ) {
     var msj = ( ( mov == 2 ) ? 'deshabilitado' : 'eliminado' );
     axios.post( '/api/eliminaCuentaBancaria/' + document.getElementById( 'cuentaBancaria_id' ).value + '/' + mov ,
@@ -38,5 +37,4 @@
         console.log( err );
       });
   }
-
 </script>

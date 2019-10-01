@@ -41,17 +41,26 @@ class DashboardController extends Controller
     }
 
     public function listadoStatusWidgets() {
-        $estados = array();
-        $widgets = Widgets::where( 'status' , 1 )->get();
+      $estados = array();
+      $widgets = Widgets::where( 'status' , 1 )->orderBy( 'orden' , 'asc' )->get();
 
-        foreach( $widgets AS $widget ) {
-            $estados[] = array(
-                'id'     => $widget->id,
-                'estado' => $widget->estado
-            );
-        }
+      foreach( $widgets AS $widget ) {
+        $estados[] = array(
+          'id'        => $widget->id,
+          'estado'    => $widget->estado,
+          'titulo'    => $widget->titulo,
+          'contenido' => $widget->contenido,
+          'tamanio'   => $widget->tamanio
+        );
+      }
 
-        return response()->json( $estados );
+      return response()->json( $estados );
+    }
+
+    public function actualizaPosicionWidget( $widgetID , $posicion ) {
+      $widget = Widgets::find( $widgetID );
+      $widget->orden = ( $posicion + 1 );
+      $widget->save();
     }
 
 }

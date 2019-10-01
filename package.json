@@ -31,6 +31,7 @@
         "datatables.net": "^1.10.19",
         "datatables.net-colreorder-dt": "^1.5.1",
         "datatables.net-dt": "^1.10.19",
+        "gridstack": "^0.4.0",
         "highcharts": "^7.1.2",
         "jodit": "^3.2.55",
         "layout-grid": "^2.2.0",

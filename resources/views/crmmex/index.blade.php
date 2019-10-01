@@ -24,6 +24,7 @@
     <link href="{{ asset( 'assets3/css/contenidos.css' ) }}" rel="stylesheet">
     <link href="{{ asset( 'assets3/css/bootstrap-datepicker.standalone.css' ) }}" rel="stylesheet">
     <link href="{{ asset( 'assets3/css/animate.css' ) }}" rel="stylesheet">
+    <link href="{{ asset( 'assets3/css/draggable.css' ) }}" rel="stylesheet">
     <script src="{{ asset( 'assets3/js/jodit.min.js' ) }}"></script>
   </head>
   <body>
@@ -133,6 +134,7 @@
     <script src="{{ asset( 'assets3/js/fontawesome.js' ) }}"></script>
     <!-- Funcionalidades -->
     <script src="{{ asset( 'assets3/js/funcionalidades.js' ) }}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <script type="text/javascript">
       $(function () {
@@ -179,7 +181,9 @@
       $(document).on('change', '.custom-file-input', function (event) {
         $(this).next('.custom-file-label').html(event.target.files[0].name);
       });
-
     </script>
+
+    
+
   </body>
 </html>
