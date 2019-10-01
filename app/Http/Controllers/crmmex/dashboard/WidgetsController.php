@@ -55,6 +55,7 @@ class WidgetsController extends Controller
     $mesesMostrar = $this->confWidget( 1 );
     $periodos     = EstadisticasVentas::ventasMensuales( false , $mesesMostrar );
     $datos        = array();
+    $ingresos     = array();
 
     foreach( $periodos AS $periodo ) {
       $fechas                    = explode( '-' , $periodo[ 'periodo' ] );
@@ -74,17 +75,26 @@ class WidgetsController extends Controller
     $final        = date( 'Y-m' );
     $fechas       = $this->rangoDeFechas( Carbon::parse( $inicial ) , Carbon::parse( $final ) );
     $usuarios     = User::where( 'active' , 1 )->get();
+    $iteracion    = 0;
 
     foreach( $fechas AS $fecha ) {
       $datos[ 'periodos' ][] = $fecha;
-      foreach( $usuarios AS $usuario ) {
+    }
+
+    foreach( $usuarios AS $usuario ) {
+      $ingresos = $ingresosFecha = array();
+
+      foreach( $datos[ 'periodos' ] AS $fecha ) {
         $pagos = DB::table( 'crmmex_ventas_pagos' )
                    ->select( DB::raw( 'IFNULL( SUM(monto) , 0 ) AS montotot' ) )
                    ->whereRaw( DB::raw( 'SUBSTRING( fechaPago , 1 , 7 )="'.$fecha.'"' ) )
                    ->where( 'ejecutivoID' , $usuario->id )
                    ->first();
-        $datos[ 'ejecutivos' ][ $usuario->name . ' ' .$usuario->apPat ][] = $pagos->montotot;
+        $ingresosFecha[] = $pagos->montotot;
       }
+
+      $ingresos = array( 'nombre'   => $usuario->name . ' ' . $usuario->apPat, 'ingresos' => $ingresosFecha );
+      $datos[ 'ejecutivos' ][] = $ingresos;
     }
 
     return response()->json( $datos );
