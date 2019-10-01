@@ -1,7 +1,7 @@
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-            <a class="nav-link" href="/home" title="Página principal"><i class="fa fa-sm fa-home"></i></a>
+            <a class="nav-link" href="javascript:contenidos('dashboard')" title="Página principal"><i class="fa fa-sm fa-home"></i></a>
         </li>
         <li class="nav-item dropdown">
             <a href="#" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" class="nav-link">

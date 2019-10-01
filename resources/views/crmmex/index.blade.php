@@ -134,7 +134,7 @@
     <script src="{{ asset( 'assets3/js/fontawesome.js' ) }}"></script>
     <!-- Funcionalidades -->
     <script src="{{ asset( 'assets3/js/funcionalidades.js' ) }}"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ asset( 'assets3/js/jquery-ui.js' ) }}"></script>
 
     <script type="text/javascript">
       $(function () {
@@ -183,7 +183,7 @@
       });
     </script>
 
-    
+
 
   </body>
 </html>

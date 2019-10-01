@@ -45,6 +45,7 @@ class WidgetsController extends Controller
       case '3': $datos = $this->Propuestas(); break;
       case '4': $datos = $this->Propuestas(); break;
       case '5': $datos = $this->ClientesProspectos(); break;
+      case '7': $datos = $this->ResumenVentas(); break;
     }
     return $datos;
   }
@@ -160,6 +161,30 @@ class WidgetsController extends Controller
   private function confWidget( $widgetID ) {
     $conf = Widgets::find( $widgetID );
     return $conf->configuracion;
+  }
+
+  // Metodo para obtener las estadisticas del widget de resumen de ventas
+  public function ResumenVentas() {
+    $pagos = Pagos::whereYear( 'fechaPago' , '=' , date( 'Y' ) )->where( 'status' , 1 )->get();
+    $totalAnio = 0;
+    $totalMes  = 0;
+    $totalHoy  = 0;
+
+    foreach ( $pagos AS $pago ) {
+      $fechaPago = explode( ' ' , $pago->fechaPago );
+      $fecha     = explode( '-' , $fechaPago[ 0 ] );
+      $totalAnio = $totalAnio + $pago->monto;
+
+      if( $fecha[ 0 ] == date( 'Y' ) && $fecha[ 1 ] == date( 'm' ) ) {
+        $totalMes = $totalMes + $pago->monto;
+      }
+
+      if( $fecha[ 0 ] == date( 'Y' ) && $fecha[ 1 ] == date( 'm' ) && $fecha[ 2 ] == date( 'd' ) ) {
+        $totalHoy = $totalHoy + $pago->monto;
+      }
+    }
+
+    return response()->json( array( 'totalAnio' => $totalAnio , 'totalMes' => $totalMes , 'totalHoy' => $totalHoy ) );
   }
 
 }
