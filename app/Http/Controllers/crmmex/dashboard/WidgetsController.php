@@ -18,6 +18,7 @@ use App\Models\crmmex\Pronosticos\Pronosticos AS Pronosticos;
 use App\Models\crmmex\Clientes\Propuestas AS Propuestas;
 use App\Models\crmmex\Clientes\Clientes AS Clientes;
 use App\Models\crmmex\Clientes\Pagos AS Pagos;
+use App\Models\crmmex\Sistema\Tokens AS Tokens;
 use App\User AS User;
 use Carbon\Carbon;
 
@@ -47,6 +48,7 @@ class WidgetsController extends Controller
       case '4': $datos = $this->VentasPorCategoria(); break;
       case '5': $datos = $this->ClientesProspectos(); break;
       case '7': $datos = $this->ResumenVentas(); break;
+      case '8': $datos = $this->ultimosAccesos(); break;
     }
     return $datos;
   }
@@ -223,6 +225,22 @@ class WidgetsController extends Controller
     }
 
     return response()->json( array( 'totalAnio' => $totalAnio , 'totalMes' => $totalMes , 'totalHoy' => $totalHoy ) );
+  }
+
+  // Metodo que muestra los ultimos 20 accesos
+  public function ultimosAccesos() {
+    $datos  = array();
+    $tokens = Tokens::take( 10 )->orderBy( 'created_at' , 'desc' )->get();
+
+    foreach( $tokens AS $token ) {
+      $datos[ 'tokens' ][] = array(
+        'user_id'    => $token->user_id,
+        'name'       => $token->name,
+        'created_at' => date( $token->created_at ),
+      );
+    }
+
+    return response()->json( $datos );
   }
 
 }
