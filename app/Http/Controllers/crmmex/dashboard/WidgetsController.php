@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\crmmex\Estadisticas\VentasController AS EstadisticasVentas;
+use App\Http\Controllers\crmmex\Utils\UtilsController AS Utils;
 
 use App\Models\crmmex\dashboard\Widgets AS Widgets;
 use App\Models\crmmex\Pronosticos\Pronosticos AS Pronosticos;
@@ -43,7 +44,7 @@ class WidgetsController extends Controller
       case '1': $datos = $this->ObjetivoCumplimiento(); break;
       case '2': $datos = $this->VentasPorEjecutivo(); break;
       case '3': $datos = $this->Propuestas(); break;
-      case '4': $datos = $this->Propuestas(); break;
+      case '4': $datos = $this->VentasPorCategoria(); break;
       case '5': $datos = $this->ClientesProspectos(); break;
       case '7': $datos = $this->ResumenVentas(); break;
     }
@@ -108,6 +109,33 @@ class WidgetsController extends Controller
       }
 
       return $dates;
+  }
+
+  // Ventas por categiria
+  public function VentasPorCategoria() {
+    $mesesMostrar = $this->confWidget( 4 );
+    $inicial      = date( 'Y-m' , strtotime( '- ' . $mesesMostrar . ' months' ) );
+    $datos        = array();
+    $registros    = DB::table( "crmmex_ventas_propuestacomercial" )
+                    ->select( DB::raw( "crmmex_ventas_propuestacomercial.categoria AS cat, count(*) AS total" ) )
+                    ->whereRaw( DB::raw( "crmmex_ventas_propuestacomercial.status=1" ) )
+                    ->whereRaw( DB::raw( "substr(crmmex_ventas_propuestacomercial.fechaCreacion,1,7)>='$inicial'" ) )
+                    ->whereRaw( DB::raw( "crmmex_ventas_propuestacomercial.total = ( SELECT SUM( monto ) FROM crmmexagon.crmmex_ventas_pagos WHERE crmmex_ventas_pagos.propuestaID=crmmex_ventas_propuestacomercial.id AND crmmex_ventas_pagos.status=1 )" ) )
+                    ->groupBy( "crmmex_ventas_propuestacomercial.categoria" )
+                    ->get();
+    $pagadas = 0;
+    foreach( $registros AS $registro ) {
+      $pagadas = $pagadas + $registro->total;
+    }
+
+    foreach( $registros AS $registro ) {
+      $datos[ 'registros' ][] = array(
+        'categoria' => Utils::valorCatalogo( $registro->cat ),
+        'porciento' => ( ( $registro->total * 100 ) / $pagadas )
+      );
+    }
+
+    return response()->json( $datos );
   }
 
   // Metodo que obtiene el detalle de propuestas
