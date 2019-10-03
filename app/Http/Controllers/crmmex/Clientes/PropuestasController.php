@@ -209,6 +209,7 @@ class PropuestasController extends Controller
         'requerimientos'   => $propuesta->requerimientos,
         'formaPago'        => $propuesta->formaPago,
         'categoria'        => Utils::valorCatalogo( $propuesta->categoria ),
+        'categoriaID'        => $propuesta->categoria,
         'monto'            => $propuesta->monto,
         'total'            => $propuesta->total,
         'descuento'        => $propuesta->descuento,
