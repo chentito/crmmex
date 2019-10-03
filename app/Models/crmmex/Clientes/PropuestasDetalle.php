@@ -10,6 +10,6 @@ class PropuestasDetalle extends Model
     protected $table = 'crmmex_ventas_propuestacomercial_detalle';
 
     /* Timestamps */
-    public $timestamps = false;
+    public $timestamps = true;
 
 }
