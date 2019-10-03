@@ -180,6 +180,7 @@ class PropuestasController extends Controller
         }
         $resp[ 'msj' ] = "Propuesta actualizada correctamente";
         $resp[ 'idty' ] = $propuesta->id;
+        Session::forget( 'carrito' );
       } else {
         $resp[ 'msj' ] = "Error al actualizar propuesta";
       }
@@ -365,7 +366,6 @@ class PropuestasController extends Controller
     */
     public function cargaCarrito( $propuestaID ) {
       Session::forget( 'carrito' );
-      Session::flush();
       $productos = PropuestasDetalle::where( 'idPropuesta' , $propuestaID )
                                     ->where( 'status' , "1" )
                                     ->get();
