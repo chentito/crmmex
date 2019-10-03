@@ -19,6 +19,7 @@ use App\Models\crmmex\Sistema\ImgPropuesta AS ImgPropuesta;
 
 use App\Http\Controllers\crmmex\Utils\UtilsController AS Utils;
 use App\Http\Controllers\crmmex\Sistema\PHPMailerController AS Envio;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -161,7 +162,7 @@ class PropuestasController extends Controller
       $propuesta->estadoPropuesta = 0;
 
       if( $propuesta->save() ) {
-        DB::table( 'crmmex_ventas_propuestacomercial_detalle' )->where( [ 'idPropuesta' => $propuestaID , 'status' => 1 ] )->update( [ 'status' => 0 ] );
+        DB::table( 'crmmex_ventas_propuestacomercial_detalle' )->where( [ 'idPropuesta' => $propuestaID , 'status' => 1 ] )->update( [ 'status' => 0 , 'deleted_at' => Carbon::now() ] );
         $productos = Session::get( 'carrito' );
         foreach( $productos AS $prod ) {
           $detalle = new PropuestasDetalle();
