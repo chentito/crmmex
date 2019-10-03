@@ -161,7 +161,7 @@ class PropuestasController extends Controller
       $propuesta->estadoPropuesta = 0;
 
       if( $propuesta->save() ) {
-        DB::table( 'crmmex_ventas_propuestacomercial_detalle' )->where( 'idPropuesta' , $propuestaID )->update( [ 'status' => 0 ] );
+        DB::table( 'crmmex_ventas_propuestacomercial_detalle' )->where( [ 'idPropuesta' => $propuestaID , 'status' => 1 ] )->update( [ 'status' => 0 ] );
         $productos = Session::get( 'carrito' );
         foreach( $productos AS $prod ) {
           $detalle = new PropuestasDetalle();
