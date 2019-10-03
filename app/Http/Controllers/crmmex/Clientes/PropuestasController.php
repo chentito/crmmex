@@ -364,6 +364,8 @@ class PropuestasController extends Controller
     * Carga variable de sesion para editar propuesta
     */
     public function cargaCarrito( $propuestaID ) {
+      Session::forget( 'carrito' );
+      Session::flush();
       $productos = PropuestasDetalle::where( 'idPropuesta' , $propuestaID )
                                     ->where( 'status' , "1" )
                                     ->get();
