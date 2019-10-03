@@ -8,7 +8,7 @@
   function datosPropuesta() {
     var token       = sessionStorage.getItem( 'apiToken' );
     var propuestaID = document.getElementById( 'propuestaID' ).value;
-    var url         = '/obtieneDatosPropuesta/' + propuestaID;
+    var url         = '/api/obtieneDatosPropuesta/' + propuestaID;
     var config      = { headers: { "Accept" : "application/json", "Authorization" : "Bearer " + token } };
 
     axios.get( url , config )
@@ -30,7 +30,7 @@
         comboContactos( response.data.cliente , response.data.contacto );
         comboProductos( response.data.categoriaID );
         setSelectedIndex( document.getElementById( 'catalogo_12' ) , response.data.categoriaID );
-
+        
         var tabla = document.getElementById( 'containerProductosPropuesta' ).getElementsByTagName( 'tbody' )[ 0 ];
         response.data.detalle.forEach( function( e , i ) {
           var renglon = tabla.insertRow();

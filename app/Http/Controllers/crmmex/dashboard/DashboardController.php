@@ -51,7 +51,7 @@ class DashboardController extends Controller
         'tamanio'   => $widget->tamanio
       );
     }
-    return response()->json( $estados )
+    return response()->json( $estados );
   }
 
   public function actualizaPosicionWidget( $widgetID , $posicion ) {

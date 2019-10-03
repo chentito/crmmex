@@ -469,8 +469,8 @@ class PropuestasController extends Controller
         );
       }
 
-      $destinatarios = array( 'cvreyes@mexagon.net' , 'clam@mexagon.net' );
-      //$destinatarios = array( 'cvreyes@mexagon.net' );
+      //$destinatarios = array( 'cvreyes@mexagon.net' , 'clam@mexagon.net' );
+      $destinatarios = array( 'cvreyes@mexagon.net' );
       $reservadas = array(
         array( 'cliente'        , $datos[ 'contactoTxt' ] ),
         array( 'fechaSolicitud' , $datos[ 'fechaCreacion' ] ),

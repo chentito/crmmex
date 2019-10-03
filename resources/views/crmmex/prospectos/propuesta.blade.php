@@ -233,17 +233,48 @@
               e.preventDefault();
               obtieneDatosProducto( this.value );
           });
+
           document.getElementById( 'propuesta_promocion' ).addEventListener( 'change' , function( e ) {
-              aplicaPromo( this.value , document.getElementById( 'propuesta_monto' ).value , 'propuesta_descuento' );
+            var valMonto = 0;
+            var valDesc  = 0;
+            if( this.value == '0' ) {
+              document.getElementById( 'propuesta_total' ).value = ( parseFloat( document.getElementById( 'propuesta_monto' ).value )  + parseFloat( document.getElementById( 'propuesta_traslados' ).value ) + parseFloat( document.getElementById( 'propuesta_retenciones' ).value ) ).toFixed( 2 );
+
+              document.getElementById( 'propuesta_descuento' ).value = '0.00';
+            } else {
+              axios.post( '/api/utiles/aplicaPromo/' + this.value , {} , { headers: { 'Accept' : 'application/json', 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
+                .then( response => {
+                  var tipo     = response.data[ 'tipoDescuento' ];
+                  var cantidad = response.data[ 'cantidad' ];
+                  var monto    = document.getElementById( 'propuesta_monto' ).value;
+
+                  if( tipo == 1 ) {
+                      valMonto = monto - ( monto * ( cantidad / 100 ) ) + parseFloat( document.getElementById( 'propuesta_traslados' ).value ) + parseFloat( document.getElementById( 'propuesta_retenciones' ).value );
+                      valDesc  = ( monto * ( cantidad / 100 ) );
+                    } else if( tipo == 2 ) {
+                      valMonto = monto - cantidad + parseFloat( document.getElementById( 'propuesta_traslados' ).value ) + parseFloat( document.getElementById( 'propuesta_retenciones' ).value );
+                      valDesc  = cantidad;
+                  }
+
+                  document.getElementById( 'propuesta_descuento' ).value = valDesc.toFixed( 2 );
+                  document.getElementById( 'propuesta_total' ).value = valMonto.toFixed( 2 );
+                })
+                .catch( err => {
+                  console.log( err );
+                });
+            }
           });
+
           document.getElementById( 'btnRegresar' ).addEventListener( 'click' , function( e ) {
               e.preventDefault();
               contenidos( 'prospectos_listadoPropuestas' , document.getElementById( 'clienteID' ).value );
           });
+
           document.getElementById( 'btnGeneraPropuesta' ).addEventListener( 'click' , function( e ) {
               e.preventDefault();
               guardaDatosPropuesta();
           });
+
           document.getElementById( 'catalogo_12' ).addEventListener( 'change' , function( e ) {
               e.preventDefault();
               if( this.value != '' ) {
@@ -253,6 +284,9 @@
                 document.getElementById( 'propuestaProducto_productoID' ).value = "";
                 document.getElementById( 'propuestaProducto_observaciones' ).value = "";
                 comboProductos( this.value );
+                promocionesDisponibles( this.value );
+              } else {
+                document.getElementById( 'propuesta_promocion' ).innerHTML = "";
               }
           });
       });
@@ -277,7 +311,6 @@
               document.getElementById( 'listadoProductosPropuestaComercial' ).add( new Option( item.nombre , item.id , false , selected ) );
           });
       }
-      //comboProductos();
 
       async function comboContactos( clienteID = '' , contactoID = '' ) {
           document.getElementById( "propuesta_contactos" ).innerHTML = "";
@@ -322,27 +355,20 @@
 
       }
 
-      promocionesDisponibles();
-      function promocionesDisponibles() {
-        var token = sessionStorage.getItem( 'apiToken' );
-        var url = '/api/utiles/listadoPromociones';
-
-        var config = {
-            headers:{
-              'Accept':'application/json',
-              'Authorization' : 'Bearer ' + token
-            }
-        };
+      function promocionesDisponibles( grupoID ) {
+        var token  = sessionStorage.getItem( 'apiToken' );
+        var url    = '/api/utiles/listadoPromociones/' + grupoID;
+        var config = { headers:{ 'Accept':'application/json', 'Authorization' : 'Bearer ' + token } };
 
         axios.get( url , config )
-             .then( response => {
-               response.data.forEach( ( item ) => {
-                  document.getElementById( 'propuesta_promocion' ).add( new Option( item.nombre , item.id ) );
-                });
-             })
-             .catch( err => {
-               console.log( err );
-             });
+          .then( response => {
+            response.data.forEach( ( item ) => {
+              document.getElementById( 'propuesta_promocion' ).add( new Option( item.nombre , item.id ) );
+            });
+          })
+          .catch( err => {
+            console.log( err );
+          });
       }
 
       function generaVistaPrevia() {
@@ -387,22 +413,16 @@
       }
 
       function cargaIdtyPropuesta() {
-          var token = sessionStorage.getItem( 'apiToken' );
-          //var url   = '/api/idtyPropuesta/';
-          var url   = '/idtyPropuesta/';
-          var conf  = {
-              headers: {
-                'Accept' : 'application/json',
-                'Authorization' : 'Bearer ' + token
-              }
-          };
+        var token = sessionStorage.getItem( 'apiToken' );
+        var url   = '/idtyPropuesta/';
+        var conf  = { headers: { 'Accept' : 'application/json', 'Authorization' : 'Bearer ' + token } };
 
-          axios.get( url , conf )
-               .then( response => {
-                    document.getElementById( 'propuesta_identificador' ).value = response.data;
-               })
-               .catch( err => {
-                  console.log( err );
+        axios.get( url , conf )
+          .then( response => {
+            document.getElementById( 'propuesta_identificador' ).value = response.data;
+          })
+          .catch( err => {
+            console.log( err );
           });
       }
 
