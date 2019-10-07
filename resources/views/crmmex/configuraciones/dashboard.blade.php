@@ -22,42 +22,43 @@
 <script>
   var url = '/api/listadoWidgets';
   axios.get( url , {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}} )
-       .then( response => {
-          response.data.forEach( function( e , i ) {
-              var nuevoDiv = document.createElement( 'div' );
-              nuevoDiv.classList.add( 'col-sm-3', 'pl-1', 'pt-1' , 'mt-2' );
-              var contenido  = '<h6>' + e.titulo + '</h6><br /><p>' + e.descripcion + '</p>';
-                  contenido += '<div class="row mb-2"><div class="col-sm-4">Ver</div><div class="col-sm-4">';
-                  contenido += '<input type="number" class="form-control form-control-sm" id="conf_'+e.id+'" name="conf_'+e.id+'" value="'+e.configuracion+'"></div>';
-                  contenido += '<div class="col-sm-4">meses</div></div>';
-                  contenido += '<label for="widget_'+e.id+'">Habilitar widget?</label>  ';
-                  contenido += '<input type="checkbox" name="widget_'+e.id+'" id="widget_'+e.id+'" '+( ( e.estado=='1' ) ? 'checked' : '' )+'>';
-                  contenido += '<input type="hidden" name="idty_'+e.id+'" id="idty_'+e.id+'" value="'+e.id+'">';
-                  //contenido += '<input type="hidden" name="conf_'+e.id+'" id="conf_'+e.id+'" value="">';
-              nuevoDiv.innerHTML = contenido;
-              document.getElementById( 'contenedorWidgets' ).appendChild( nuevoDiv );
-          });
-       })
-       .catch( err => {
-         console.log( err );
-       });
-
-    document.getElementById( 'btnGuardaConfigWidgets' ).addEventListener( 'click' , function( e ){
-        e.preventDefault();
-        guardaConfiguracionWidgets();
+    .then( response => {
+      response.data.forEach( function( e , i ) {
+        var nuevoDiv = document.createElement( 'div' );
+        nuevoDiv.classList.add( 'col-sm-3', 'pl-1', 'pt-1' , 'mt-2' );
+        var contenido  = '<div class="card">'
+                    + '<div class="card-header">' + e.titulo + '</div>'
+                    + '<div class="card-body">' + e.descripcion
+                    + '<br /><input type="number" class="form-control form-control-sm" id="conf_'+e.id+'" name="conf_'+e.id+'" value="'+e.configuracion+'"></div>'
+                    + '<div class="card-footer">'
+                    + '<label for="widget_'+e.id+'">Habilitar widget?</label> '
+                    + '<input type="checkbox" name="widget_'+e.id+'" id="widget_'+e.id+'" '+( ( e.estado=='1' ) ? 'checked' : '' )+'>'
+                    + '<input type="hidden" name="idty_'+e.id+'" id="idty_'+e.id+'" value="'+e.id+'">'
+                    + '</div>'
+                    + '</div>';
+        nuevoDiv.innerHTML = contenido;
+        document.getElementById( 'contenedorWidgets' ).appendChild( nuevoDiv );
+      });
+    })
+    .catch( err => {
+      console.log( err );
     });
 
-    function guardaConfiguracionWidgets() {
-        var datos = new FormData( document.getElementById( 'frmWidgets' ) );
-        var url = '/api/guardaConfWidgets';
-        axios.post( url , datos , { headers:{ 'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
-             .then( response => {
-                contenidos( 'configuraciones_dashboard' );
-             })
-             .catch( err => {
-               console.log( err );
-             });
-    }
+  document.getElementById( 'btnGuardaConfigWidgets' ).addEventListener( 'click' , function( e ){
+    e.preventDefault();
+    guardaConfiguracionWidgets();
+  });
 
+  function guardaConfiguracionWidgets() {
+    var datos = new FormData( document.getElementById( 'frmWidgets' ) );
+    var url   = '/api/guardaConfWidgets';
+    axios.post( url , datos , { headers:{ 'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ) } } )
+      .then( response => {
+        contenidos( 'dashboard' );
+      })
+      .catch( err => {
+        console.log( err );
+      });
+  }
 
 </script>
