@@ -8,12 +8,14 @@ namespace App\Http\Controllers\crmmex\Dashboard;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\crmmex\Estadisticas\VentasController AS EstadisticasVentas;
 use App\Http\Controllers\crmmex\Utils\UtilsController AS Utils;
 
 use App\Models\crmmex\dashboard\Widgets AS Widgets;
+use App\Models\crmmex\dashboard\WidgetsConfig AS WidgetsConfig;
 use App\Models\crmmex\Pronosticos\Pronosticos AS Pronosticos;
 use App\Models\crmmex\Clientes\Propuestas AS Propuestas;
 use App\Models\crmmex\Clientes\Clientes AS Clientes;
@@ -199,8 +201,13 @@ class WidgetsController extends Controller
 
   // Obtiene la configuracion de un widget
   private function confWidget( $widgetID ) {
-    $conf = Widgets::find( $widgetID );
-    return $conf->configuracion;
+    $configWidget = WidgetsConfig::where( [ 'userID' => Auth::user()->id , 'widgetID' => $widgetID ] )->first();
+    if( $configWidget ) {
+      return $configWidget->configuracion;
+    } else {
+      $conf = Widgets::find( $widgetID );
+      return $conf->configuracion;
+    }    
   }
 
   // Metodo para obtener las estadisticas del widget de resumen de ventas

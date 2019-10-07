@@ -12,4 +12,7 @@ class WidgetsConfig extends Model
     // Timestamps
     public $timestamps = false;
 
+    // Mass updates
+    protected $fillable = ['userID','widgetID','visible','configuracion','orden'];
+
 }

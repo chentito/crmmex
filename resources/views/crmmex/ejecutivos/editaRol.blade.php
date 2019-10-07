@@ -3,7 +3,7 @@
 @include( 'crmmex.ejecutivos.roles' )
 
 <script>
-    setTimeout( function(){ document.querySelector('a[href="#home"]').click(); } , 1000 );
+    setTimeout( function(){ document.querySelector('a[href="#home"]').click(); } , 500 );
     var perfilID = document.getElementById( 'perfilID' ).value;
     var conf  = {headers:{ 'Accept':'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } };
     axios.get( '/api/detallePerfil/' + perfilID , conf )

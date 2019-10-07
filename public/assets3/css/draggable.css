@@ -25,7 +25,7 @@
     padding: 3rem !important
 }
 
-.card-header{
+#sortable .card-header{
   cursor: move;
 }
 
