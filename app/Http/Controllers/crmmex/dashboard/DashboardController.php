@@ -59,7 +59,7 @@ class DashboardController extends Controller
     $configUsr = WidgetsConfig::where( [ 'userID' => Auth::user()->id ] )->first();
 
     if( $configUsr ) {
-        $widgets = WidgetsConfig::where( [ 'userID' => Auth::user()->id ] )->orderBy( 'orden' , 'asc' )->get();
+        $widgets = WidgetsConfig::where( [ 'userID' => Auth::user()->id , 'visible' => 1 ] )->orderBy( 'orden' , 'asc' )->get();
         foreach( $widgets AS $widget ) {
           $default   = Widgets::find( $widget->widgetID );
           $estados[] = array(
