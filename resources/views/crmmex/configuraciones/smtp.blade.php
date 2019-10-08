@@ -29,6 +29,10 @@
         </div>
         <div class="row">
           <div class="col-sm-3 mb-1">
+            <label for="conf_smtp_from">De Nombre</label>
+            <input type="text" class="form-control form-control-sm" id="conf_smtp_fromName" name="conf_smtp_fromName" required placeholder="De (Nombre)">
+          </div>
+          <div class="col-sm-3 mb-1">
             <label for="conf_smtp_usuario">Usuario</label>
             <input type="text" class="form-control form-control-sm" id="conf_smtp_usuario" name="conf_smtp_usuario" required placeholder="Usuario">
           </div>
@@ -38,14 +42,10 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-3 mb-1">
+          <!--div class="col-sm-3 mb-1">
             <label for="conf_smtp_from">De</label>
             <input type="text" class="form-control form-control-sm" id="conf_smtp_from" name="conf_smtp_from" required placeholder="De">
-          </div>
-          <div class="col-sm-3 mb-1">
-            <label for="conf_smtp_from">De Nombre</label>
-            <input type="text" class="form-control form-control-sm" id="conf_smtp_fromName" name="conf_smtp_fromName" required placeholder="De (Nombre)">
-          </div>
+          </div-->
           <div class="col-sm-3 mb-1">
             <label for="conf_smtp_copy">Copia</label>
             <input type="text" class="form-control form-control-sm" id="conf_smtp_copy" name="conf_smtp_copy" placeholder="Para">
@@ -62,7 +62,6 @@
             <label for="conf_smtp_copy">Copia</label>
             <input type="text" class="form-control form-control-sm" id="conf_smtp_replyToName" name="conf_smtp_replyToName" placeholder="Responder a (Nombre)">
           </div>
-          <div class="col-sm-3 mb-1"></div>
           <div class="col-sm-3 mb-1">
             <label for="conf_smtp_copy">Destinatario Prueba</label>
             <input type="text" class="form-control form-control-sm" id="conf_smtp_destinatarioPrueba" name="conf_smtp_destinatarioPrueba" placeholder="Destinatario prueba">
@@ -145,7 +144,6 @@
         document.getElementById( 'conf_smtp_passwd' ).value      = response.data.contrasena;
         document.getElementById( 'conf_smtp_port' ).value        = response.data.puerto;
         document.getElementById( 'conf_smtp_security' ).value    = response.data.seguridad;
-        document.getElementById( 'conf_smtp_from' ).value        = response.data.de;
         document.getElementById( 'conf_smtp_fromName' ).value    = response.data.nombre;
         document.getElementById( 'conf_smtp_copy' ).value        = response.data.copia;
         document.getElementById( 'conf_smtp_copyName' ).value    = response.data.copiaNombre;

@@ -105,7 +105,7 @@ class PHPMailerController extends Controller
     $smtp = SMTP::find( 1 );
     $conexion = array(
       'nombre'    => $smtp->nombre,
-      'de'        => $smtp->de,
+      //'de'        => $smtp->de,
       'host'      => $smtp->servidor,
       'usuario'   => $smtp->usuario,
       'password'  => $smtp->contrasena,
