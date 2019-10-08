@@ -113,7 +113,8 @@
                           </div>
                           <div class="col-sm-3 mb-1">
                               <label for="cliente_rfc">RFC</label>
-                              <input type="text" id="cliente_rfc" name="cliente_rfc" class="form-control form-control-sm" placeholder="RFC" onchange="validaRFC(this.value)" maxlength="13">
+                              <input type="text" id="cliente_rfc" name="cliente_rfc" class="form-control form-control-sm" placeholder="RFC" onkeyup="validaRFC(this.value);this.value = this.value.toUpperCase();" maxlength="13">
+                              <input type="hidden" id="statusValidacionRFC" name="statusValidacionRFC" value="-1">
                           </div>
                           <div class="col-sm-3 mb-1">
                               <label for="catalogo_11">Cuenta</label>
@@ -222,14 +223,28 @@
 
     if( document.getElementById( 'contacto_nombre' ).value == '' ) {
       aviso( 'No ha proporcionado el nombre del contacto' , false );
-    } else if( document.getElementById( 'contacto_email' ).value == '' ) {
-      aviso( 'No ha proporcionado el correo electrónico del contacto' , false );
+      document.querySelector('a[href="#home"]').click();
+      document.getElementById( 'contacto_nombre' ).focus();
+    } else if( document.getElementById( 'contacto_email' ).value == '' || !correoElectronicoRx.test( document.getElementById( 'contacto_email' ).value ) ) {
+      aviso( 'No ha proporcionado un correo electrónico válido para el contacto' , false );
+      document.querySelector('a[href="#home"]').click();
+      document.getElementById( 'contacto_email' ).focus();
     } else if( document.getElementById( 'cliente_producto_interes' ).value == '' ) {
+      document.querySelector('a[href="#home"]').click();
       aviso( 'No ha proporcionado el producto de interes para el cliente' , false );
+      document.getElementById( 'cliente_producto_interes' ).focus();
     } else if( document.getElementById( 'cliente_razon_social' ).value == '' ) {
       aviso( 'No ha proporcionado la razón social para el cliente' , false );
-    } else if( document.getElementById( 'cliente_rfc' ).value == '' ) {
-      aviso( 'No ha proporcionado el RFC para el cliente' , false );
+      document.querySelector('a[href="#profile"]').click();
+      document.getElementById( 'cliente_razon_social' ).focus();
+    } else if( document.getElementById( 'cliente_rfc' ).value == '' || !rfcRx.test( document.getElementById( 'cliente_rfc' ).value ) ) {
+      aviso( 'No ha proporcionado un RFC valido para el cliente' , false );
+      document.querySelector('a[href="#profile"]').click();
+      document.getElementById( 'cliente_rfc' ).focus();
+    } else if( document.getElementById( 'statusValidacionRFC' ).value == '-1' ) {
+      aviso( 'Se está validando la disponibilidad del RFC, espere por favor.' );
+    } else if( document.getElementById( 'statusValidacionRFC' ).value > 0 ) {
+      aviso( 'El RFC ya se encuentra registrado.' , false );
     } else {
       axios.post( ruta , datos , { headers: { 'Accept': 'application/json', 'Authorization': 'Bearer ' + token } } )
         .then( response => {
@@ -243,72 +258,81 @@
         .catch( err => {
           console.log( err );
         });
-
     }
   }
 
-    function agregaEstructuraContacto( b=[] , nuevo=false ) {
-      var token = sessionStorage.getItem( 'apiToken' );
-      var datos = new FormData();
-      datos.append( 'idty'        , ( nuevo ) ? '' : b.idty );
-      datos.append( 'nombre'      , ( nuevo ) ? '' : b.nombre );
-      datos.append( 'appat'       , ( nuevo ) ? '' : b.apellidoPaterno );
-      datos.append( 'apmat'       , ( nuevo ) ? '' : b.apellidoMaterno );
-      datos.append( 'correo'      , ( nuevo ) ? '' : b.correoElectronico );
-      datos.append( 'celular'     , ( nuevo ) ? '' : b.celular );
-      datos.append( 'telefono'    , ( nuevo ) ? '' : b.telefono );
-      datos.append( 'extension'   , ( nuevo ) ? '' : b.extension );
-      datos.append( 'adicionales' , ( nuevo ) ? '{}' : JSON.stringify( b.adicionales[ 'adicionales' ] , null ) );
+  function agregaEstructuraContacto( b=[] , nuevo=false ) {
+    var token = sessionStorage.getItem( 'apiToken' );
+    var datos = new FormData();
+    datos.append( 'idty'        , ( nuevo ) ? '' : b.idty );
+    datos.append( 'nombre'      , ( nuevo ) ? '' : b.nombre );
+    datos.append( 'appat'       , ( nuevo ) ? '' : b.apellidoPaterno );
+    datos.append( 'apmat'       , ( nuevo ) ? '' : b.apellidoMaterno );
+    datos.append( 'correo'      , ( nuevo ) ? '' : b.correoElectronico );
+    datos.append( 'celular'     , ( nuevo ) ? '' : b.celular );
+    datos.append( 'telefono'    , ( nuevo ) ? '' : b.telefono );
+    datos.append( 'extension'   , ( nuevo ) ? '' : b.extension );
+    datos.append( 'adicionales' , ( nuevo ) ? '{}' : JSON.stringify( b.adicionales[ 'adicionales' ] , null ) );
 
-      axios.post( '/api/estructuraContacto' , datos , { headers: { 'Accept': 'application/json', 'Authorization': 'Bearer ' + token } } )
-        .then( response => {
-          $( "#contenedorContactos" ).append( response.data );
-        })
-        .catch( err => {
-          console.log( err );
-        });
+    axios.post( '/api/estructuraContacto' , datos , { headers: { 'Accept': 'application/json', 'Authorization': 'Bearer ' + token } } )
+      .then( response => {
+        $( "#contenedorContactos" ).append( response.data );
+      })
+      .catch( err => {
+        console.log( err );
+      });
+  }
+
+  async function comboEstados() {
+    $( '#direccion_estado' ).empty();
+    let promise = axios.get( '/api/utiles/comboEstados' );
+    let result = await promise;
+    result.data.forEach( ( item ) => {
+      $( '#direccion_estado' ).append( '<option value="'+item.id+'">'+item.entidad+'</option>' );
+    });
+  }
+  comboEstados();
+
+  async function comboPaises() {
+    $( '#direccion_pais' ).empty();
+    let promise2 = axios.get( '/api/utiles/comboPaises' );
+    let result2 = await promise2;
+    result2.data.forEach( ( item ) => {
+      $( '#direccion_pais' ).append( '<option value="'+item.id+'">'+item.nombre+'</option>' );
+    });
+  }
+  comboPaises();
+
+  async function comboProductos( grupo='' , producto='' ) {
+    $( '#cliente_producto_interes' ).empty();
+    document.getElementById( 'cliente_producto_interes' ).add( new Option( '-' , '' ) );
+    var filtro = ( grupo != '' ) ? '/' + grupo : '';
+    let promise = axios.get( '/api/utiles/listadoProductosServicios' + filtro );
+    let result = await promise;
+    result.data.forEach( ( item ) => {
+      var selected = ( ( producto != '' ) ? ( ( producto == item.id ) ? true : false ) : false );
+      document.getElementById( 'cliente_producto_interes' ).add( new Option( item.nombre , item.id , false , selected ) );
+    });
+  }
+  comboProductos();
+
+  function validaRFC( rfc ) {
+    if( rfc.length == 12 || rfc.length == 13 ) {
+      aviso( 'Validando estatus RFC...' );
+      axios.get( '/api/validaRFC/' + rfc )
+          .then( response => {
+            if( response.data == 0 ) {
+              document.getElementById( 'statusValidacionRFC' ).value = '0';
+              aviso( 'El RFC no ha sido registrado anteriormente' );
+            } else {
+              aviso( 'El RFC ya fué registrado' , false );
+              document.getElementById( 'statusValidacionRFC' ).value = '1';
+            }
+          })
+          .catch( err => {
+            console.log( err );
+          });
     }
+  }
 
-    async function comboEstados() {
-        $( '#direccion_estado' ).empty();
-        let promise = axios.get( '/api/utiles/comboEstados' );
-        let result = await promise;
-        result.data.forEach( ( item ) => {
-            $( '#direccion_estado' ).append( '<option value="'+item.id+'">'+item.entidad+'</option>' );
-        });
-    }
-    comboEstados();
-
-    async function comboPaises() {
-        $( '#direccion_pais' ).empty();
-        let promise2 = axios.get( '/api/utiles/comboPaises' );
-        let result2 = await promise2;
-        result2.data.forEach( ( item ) => {
-            $( '#direccion_pais' ).append( '<option value="'+item.id+'">'+item.nombre+'</option>' );
-        });
-    }
-    comboPaises();
-
-    async function comboProductos( grupo='' , producto='' ) {
-        $( '#cliente_producto_interes' ).empty();
-        document.getElementById( 'cliente_producto_interes' ).add( new Option( '-' , '' ) );
-        var filtro = ( grupo != '' ) ? '/' + grupo : '';
-        let promise = axios.get( '/api/utiles/listadoProductosServicios' + filtro );
-        let result = await promise;
-        result.data.forEach( ( item ) => {
-            var selected = ( ( producto != '' ) ? ( ( producto == item.id ) ? true : false ) : false );
-            document.getElementById( 'cliente_producto_interes' ).add( new Option( item.nombre , item.id , false , selected ) );
-        });
-    }
-    comboProductos();
-
-    async function validaRFC( rfc ) {
-      if( rfc.length == 12 || rfc.length == 13 ) {
-        let promise3 = axios.get( '/api/validaRFC/' + rfc );
-        let result3  = await promise3;
-        if( result3.data > 0 ) {
-
-        }
-      }
-    }
 </script>

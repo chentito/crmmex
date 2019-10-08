@@ -224,10 +224,13 @@
 
         if( document.getElementById( 'contacto_nombre' ).value == '' ) {
             aviso( 'No ha proporcionado el nombre del contacto' , false );
-        } else if( document.getElementById( 'contacto_email' ).value == '' ) {
-            aviso( 'No ha proporcionado el correo electrónico del contacto' , false );
+            document.getElementById( 'contacto_nombre' ).focus();
+        } else if( document.getElementById( 'contacto_email' ).value == '' || !correoElectronicoRx.test( document.getElementById( 'contacto_email' ).value ) ) {
+            aviso( 'No ha proporcionado un correo electrónico válido para el contacto' , false );
+            document.getElementById( 'contacto_email' ).focus();
         } else if( document.getElementById( 'cliente_producto_interes' ).value == '' ) {
             aviso( 'No ha proporcionado el producto de interes para el prospecto' , false );
+            document.getElementById( 'cliente_producto_interes' ).focus();
         } else {
               $.ajaxSetup({ headers: {
                   'Accept': 'application/json',

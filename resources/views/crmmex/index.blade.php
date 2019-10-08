@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title> {{ config('app.name', 'Laravel') }} </title>
     <!-- ESTILOS -->
+    <link href="{{ asset( 'css/app.css' ) }}" rel="stylesheet">
     <link href="{{ asset( 'assets2/css/all.css' ) }}" rel="stylesheet">
     <link href="{{ asset( 'assets2/css/icon.css' ) }}" rel="stylesheet">
     <link href="{{ asset( 'assets2/css/bootstrap.css' ) }}" rel="stylesheet">
@@ -109,6 +110,7 @@
     </div>
 
     <!-- SCRIPTS -->
+    <script src="{{ asset( 'assets3/js/expresiones.js' ) }}"></script>
     <script src="{{ asset( 'assets3/js/popper.min.js' ) }}"></script>
     <script src="{{ asset( 'js/app.js' ) }}" ></script>
     <script src="{{ asset( 'assets3/js/moment.js' ) }}"></script>

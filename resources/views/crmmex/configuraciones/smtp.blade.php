@@ -42,10 +42,6 @@
           </div>
         </div>
         <div class="row">
-          <!--div class="col-sm-3 mb-1">
-            <label for="conf_smtp_from">De</label>
-            <input type="text" class="form-control form-control-sm" id="conf_smtp_from" name="conf_smtp_from" required placeholder="De">
-          </div-->
           <div class="col-sm-3 mb-1">
             <label for="conf_smtp_copy">Copia</label>
             <input type="text" class="form-control form-control-sm" id="conf_smtp_copy" name="conf_smtp_copy" placeholder="Para">
@@ -128,14 +124,9 @@
   }
 
   function obtieneDatosSMTP() {
-    var url   = '/api/obtieneSMTP';
-    var token = sessionStorage.getItem( 'apiToken' );
-    var config = {
-      headers: {
-        'Accept' : 'application/json',
-        'Authorization': 'Bearer ' + token
-      }
-    };
+    var url    = '/api/obtieneSMTP';
+    var token  = sessionStorage.getItem( 'apiToken' );
+    var config = { headers: { 'Accept' : 'application/json', 'Authorization': 'Bearer ' + token } };
 
     axios.get( url , config )
       .then( response => {

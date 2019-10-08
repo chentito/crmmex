@@ -23,6 +23,7 @@ try {
     require('highcharts/modules/exporting')(Highcharts);
     require( 'moment' );
     require( 'jodit' );
+    require( 'password-strength-meter' );
     //require( 'gridstack' );
 
 } catch (e) {}

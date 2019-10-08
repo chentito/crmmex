@@ -11,6 +11,7 @@
     </a>
   </li>
 </ul>
+
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
       <div class="{{$container}} border-left border-right border-bottom p-2">
@@ -57,6 +58,7 @@
               <div class="col-sm-3">
                 <label for="edicionUsuariosContrasena">Contrase&ntilde;a:</label>
                 <input type="password" class="form-control form-control-sm" id="edicionUsuariosContrasena" name="edicionUsuariosContrasena" placeholder="Contrase&ntilde;a" value="" required>
+                <input type="hidden" name="passsocre" id="passscore" value="-1">
                 <div class="invalid-feedback">
                   No ha proporcionado una contraseña.
                 </div>
@@ -102,9 +104,7 @@
     (function() {
       'use strict';
       window.addEventListener('load', function() {
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
       var forms = document.getElementsByClassName('needs-validation');
-      // Loop over them and prevent submission
       var validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener('submit', function(event) {
           if (form.checkValidity() === false) {
@@ -120,9 +120,29 @@
     generaDataGrid( 'listadoEjecutivos' );
     listadoPerfiles();
 
+    $( '#edicionUsuariosContrasena' ).password({
+      shortPass: 'La contraseña es muy corta',
+      badPass: 'Débil; intenta usando letras y caracteres',
+      goodPass: 'Media; usa caracteres especiales',
+      strongPass: 'Contraseña segura',
+      containsUsername: 'Contiene el nombre de usuario',
+      enterPass: 'Introduce una contraseña segura',
+      showPercent: false,
+      showText: true,
+      animate: true,
+      animateSpeed: 'fast',
+      username: false,
+      usernamePartialMatch: true,
+      minimumLength: 8
+    });
+
+    $('#edicionUsuariosContrasena').on('password.score', (e,  score) => {
+      document.getElementById( 'passscore' ).value = score;
+    });
+
     document.getElementById( 'btnAltaEjecutivo' ).addEventListener( 'click' , function( e ){
-          e.preventDefault();
-          altaEjecutivo();
+      e.preventDefault();
+      altaEjecutivo();
     });
 
   function altaEjecutivo() {
@@ -137,14 +157,21 @@
 
     if( document.getElementById( 'edicionUsuariosNombre' ).value == '' ) {
       aviso( 'No ha proporcionado el nombre del usuario' , false );
+      document.getElementById( 'edicionUsuariosNombre' ).focus();
     } else if( document.getElementById( 'edicionUsuariosAPaterno' ).value == '' ) {
       aviso( 'No ha proporcionado el apellido paterno del usuario' , false );
-    } else if( document.getElementById( 'edicionUsuariosEmail' ).value == '' ) {
-      aviso( 'No ha proporcionado el correo electrónico del usuario' , false );
+      document.getElementById( 'edicionUsuariosAPaterno' ).focus();
+    } else if( document.getElementById( 'edicionUsuariosEmail' ).value == '' || !correoElectronicoRx.test( document.getElementById( 'edicionUsuariosEmail' ).value ) ) {
+      aviso( 'No ha proporcionado un correo electrónico válido' , false );
+      document.getElementById( 'edicionUsuariosEmail' ).focus();
     } else if( mensaje == 'agregado' && document.getElementById( 'edicionUsuariosContrasena' ).value == '' ) {
       aviso( 'No ha proporcionado una contraseña' , false );
+      document.getElementById( 'edicionUsuariosContrasena' ).focus();
     } else if( document.getElementById( 'edicionUsuariosContrasena' ).value !=  document.getElementById( 'edicionUsuariosRepiteContrasena' ).value ) {
       aviso( 'Las contraseñas no coinciden' , false );
+      document.getElementById( 'edicionUsuariosRepiteContrasena' ).focus();
+    }  else if( document.getElementById( 'passscore' ).value < 68 ) {
+      aviso( 'La contraseña no es segura' , false );
     } else {
       var config = { headers: {'Accept': 'application/json','Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } };
       axios.post( url , datos , config )
