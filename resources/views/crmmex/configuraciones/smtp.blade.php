@@ -15,19 +15,9 @@
               <input type="text" class="form-control form-control-sm" id="conf_smtp_host" name="conf_smtp_host" required placeholder="Servidor SMTP (host)">
             </div>
             <div class="col-sm-3 mb-1">
-              <label for="conf_smtp_usuario">Usuario</label>
-              <input type="text" class="form-control form-control-sm" id="conf_smtp_usuario" name="conf_smtp_usuario" required placeholder="Usuario">
-            </div>
-            <div class="col-sm-3 mb-1">
-              <label for="conf_smtp_passwd">Contrase&ntilde;a</label>
-              <input type="password" class="form-control form-control-sm" id="conf_smtp_passwd" name="conf_smtp_passwd" required placeholder="Contrase&ntilde;a">
-            </div>
-            <div class="col-sm-3 mb-1">
               <label for="conf_smtp_port">Puerto</label>
               <input type="text" class="form-control form-control-sm" id="conf_smtp_port" name="conf_smtp_port" required placeholder="Puerto">
             </div>
-        </div>
-        <div class="row">
             <div class="col-sm-3 mb-1">
               <label for="conf_smtp_security">Seguridad</label>
               <select class="custom-select custom-select-sm" id="conf_smtp_security" name="conf_smtp_security">
@@ -36,18 +26,47 @@
                   <option value="ssl">SSL</option>
               </select>
             </div>
-            <div class="col-sm-3 mb-1">
-              <label for="conf_smtp_from">De</label>
-              <input type="text" class="form-control form-control-sm" id="conf_smtp_from" name="conf_smtp_from" required placeholder="De">
-            </div>
-            <div class="col-sm-3 mb-1">
-              <label for="conf_smtp_copy">Copia</label>
-              <input type="text" class="form-control form-control-sm" id="conf_smtp_copy" name="conf_smtp_copy" placeholder="Para">
-            </div>
-            <div class="col-sm-3 mb-1">
-              <label for="conf_smtp_copy">Destinatario Prueba</label>
-              <input type="text" class="form-control form-control-sm" id="conf_smtp_destinatarioPrueba" name="conf_smtp_destinatarioPrueba" placeholder="Destinatario prueba">
-            </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3 mb-1">
+            <label for="conf_smtp_usuario">Usuario</label>
+            <input type="text" class="form-control form-control-sm" id="conf_smtp_usuario" name="conf_smtp_usuario" required placeholder="Usuario">
+          </div>
+          <div class="col-sm-3 mb-1">
+            <label for="conf_smtp_passwd">Contrase&ntilde;a</label>
+            <input type="password" class="form-control form-control-sm" id="conf_smtp_passwd" name="conf_smtp_passwd" required placeholder="Contrase&ntilde;a">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3 mb-1">
+            <label for="conf_smtp_from">De</label>
+            <input type="text" class="form-control form-control-sm" id="conf_smtp_from" name="conf_smtp_from" required placeholder="De">
+          </div>
+          <div class="col-sm-3 mb-1">
+            <label for="conf_smtp_from">De Nombre</label>
+            <input type="text" class="form-control form-control-sm" id="conf_smtp_fromName" name="conf_smtp_fromName" required placeholder="De (Nombre)">
+          </div>
+          <div class="col-sm-3 mb-1">
+            <label for="conf_smtp_copy">Copia</label>
+            <input type="text" class="form-control form-control-sm" id="conf_smtp_copy" name="conf_smtp_copy" placeholder="Para">
+          </div>
+          <div class="col-sm-3 mb-1">
+            <label for="conf_smtp_copy">Copia Nombre</label>
+            <input type="text" class="form-control form-control-sm" id="conf_smtp_copyName" name="conf_smtp_copyName" placeholder="Para (Nombre)">
+          </div>
+          <div class="col-sm-3 mb-1">
+            <label for="conf_smtp_copy">Responder a</label>
+            <input type="text" class="form-control form-control-sm" id="conf_smtp_replyTo" name="conf_smtp_replyTo" placeholder="Responder a">
+          </div>
+          <div class="col-sm-3 mb-1">
+            <label for="conf_smtp_copy">Copia</label>
+            <input type="text" class="form-control form-control-sm" id="conf_smtp_replyToName" name="conf_smtp_replyToName" placeholder="Responder a (Nombre)">
+          </div>
+          <div class="col-sm-3 mb-1"></div>
+          <div class="col-sm-3 mb-1">
+            <label for="conf_smtp_copy">Destinatario Prueba</label>
+            <input type="text" class="form-control form-control-sm" id="conf_smtp_destinatarioPrueba" name="conf_smtp_destinatarioPrueba" placeholder="Destinatario prueba">
+          </div>
         </div>
       </form>
       <div class="row">
@@ -101,6 +120,7 @@
 
     axios.post( url , datos , config )
         .then( response => {
+          aviso( 'Configuracion guardada correctamente' );
           contenidos( 'configuraciones_smtp' );
         })
         .catch( err => {
@@ -119,18 +139,22 @@
     };
 
     axios.get( url , config )
-        .then( response => {
-          document.getElementById( 'conf_smtp_host' ).value = response.data.servidor;
-          document.getElementById( 'conf_smtp_usuario' ).value = response.data.usuario;
-          document.getElementById( 'conf_smtp_passwd' ).value = response.data.contrasena;
-          document.getElementById( 'conf_smtp_port' ).value = response.data.puerto;
-          document.getElementById( 'conf_smtp_security' ).value = response.data.seguridad;
-          document.getElementById( 'conf_smtp_from' ).value = response.data.de;
-          document.getElementById( 'conf_smtp_copy' ).value = response.data.copia;
-        })
-        .catch( err => {
-          console.log( err );
-        });
+      .then( response => {
+        document.getElementById( 'conf_smtp_host' ).value        = response.data.servidor;
+        document.getElementById( 'conf_smtp_usuario' ).value     = response.data.usuario;
+        document.getElementById( 'conf_smtp_passwd' ).value      = response.data.contrasena;
+        document.getElementById( 'conf_smtp_port' ).value        = response.data.puerto;
+        document.getElementById( 'conf_smtp_security' ).value    = response.data.seguridad;
+        document.getElementById( 'conf_smtp_from' ).value        = response.data.de;
+        document.getElementById( 'conf_smtp_fromName' ).value    = response.data.nombre;
+        document.getElementById( 'conf_smtp_copy' ).value        = response.data.copia;
+        document.getElementById( 'conf_smtp_copyName' ).value    = response.data.copiaNombre;
+        document.getElementById( 'conf_smtp_replyTo' ).value     = response.data.replyTo;
+        document.getElementById( 'conf_smtp_replyToName' ).value = response.data.replyToNombre;
+      })
+      .catch( err => {
+        console.log( err );
+      });
   }
 
 </script>

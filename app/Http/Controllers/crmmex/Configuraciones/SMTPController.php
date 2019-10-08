@@ -24,22 +24,23 @@ class SMTPController extends Controller
   /* Metodo que actualiza la cuenta smtp */
   public function update( Request $request ) {
     $smtp = SMTP::find( 1 );
-    $smtp->nombre     = 'Principal';
-    $smtp->servidor   = $request[ 'conf_smtp_host' ];
-    $smtp->usuario    = $request[ 'conf_smtp_usuario' ];
-    $smtp->contrasena = $request[ 'conf_smtp_passwd' ];
-    $smtp->puerto     = $request[ 'conf_smtp_port' ];
-    $smtp->seguridad  = $request[ 'conf_smtp_security' ];
-    $smtp->test       = 0;
-    $smtp->de         = $request[ 'conf_smtp_from' ];
-    $smtp->copia      = $request[ 'conf_smtp_copy' ];
-
+    $smtp->servidor      = $request[ 'conf_smtp_host' ];
+    $smtp->usuario       = $request[ 'conf_smtp_usuario' ];
+    $smtp->contrasena    = $request[ 'conf_smtp_passwd' ];
+    $smtp->puerto        = $request[ 'conf_smtp_port' ];
+    $smtp->seguridad     = $request[ 'conf_smtp_security' ];
+    $smtp->test          = 0;
+    $smtp->de            = $request[ 'conf_smtp_from' ];
+    $smtp->nombre        = $request[ 'conf_smtp_fromName' ];
+    $smtp->copia         = $request[ 'conf_smtp_copy' ];
+    $smtp->copiaNombre   = $request[ 'conf_smtp_copyName' ];
+    $smtp->replyTo       = $request[ 'conf_smtp_replyTo' ];
+    $smtp->replyToNombre = $request[ 'conf_smtp_replyToName' ];
     if( $smtp->save() ) {
         $msj = "Cuenta actualizada";
       } else {
         $msj = "Error al actualizar datos";
     }
-
     return response()->json( array( 'msj' => $msj ) );
   }
 
@@ -52,7 +53,10 @@ class SMTPController extends Controller
       'password'  => $request->conf_smtp_passwd,
       'puerto'    => $request->conf_smtp_port,
       'seguridad' => $request->conf_smtp_security,
-      'copia'     => $request->conf_smtp_destinatarioPrueba
+      'copia'     => '',
+      'copiaN'    => '',
+      'replyTo'   => '',
+      'replyToN'  => ''
     );
 
     $envio = PHPMailerController::envioTest( 0 , 'Envio pruebas configuracion' , 'Correo de pruebas de envio' , array( $request->conf_smtp_destinatarioPrueba ) , '', array(), $datosConf);

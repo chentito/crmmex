@@ -63,6 +63,12 @@ class PHPMailerController extends Controller
     $mail->Username   = $datos[ 'usuario' ];
     $mail->Password   = $datos[ 'password' ];
     $mail->SetFrom( $datos[ 'usuario' ] , $datos[ 'nombre' ] );
+    if( $datos[ 'replyTo' ] != '' ) {
+      $mail->AddReplyTo( $datos[ 'replyTo' ] , $datos[ 'replyToN' ] );
+    }
+    if( $datos[ 'copia' ] != '' ) {
+      $mail->AddCC( $datos[ 'copia' ] , $datos[ 'copiaN' ] );
+    }
     $mail->Subject    = $subject;
     $mail->Body       = $text;
 
@@ -99,12 +105,16 @@ class PHPMailerController extends Controller
     $smtp = SMTP::find( 1 );
     $conexion = array(
       'nombre'    => $smtp->nombre,
+      'de'        => $smtp->de,
       'host'      => $smtp->servidor,
       'usuario'   => $smtp->usuario,
       'password'  => $smtp->contrasena,
       'puerto'    => $smtp->puerto,
       'seguridad' => $smtp->seguridad,
-      'copia'     => $smtp->copia
+      'copia'     => $smtp->copia,
+      'copiaN'    => $smtp->copiaNombre,
+      'replyTo'   => $smtp->replyTo,
+      'replyToN'  => $smtp->replyToNombre
     );
     return $conexion;
   }
