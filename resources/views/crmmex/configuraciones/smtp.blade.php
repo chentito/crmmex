@@ -20,7 +20,7 @@
             </div>
             <div class="col-sm-3 mb-1">
               <label for="conf_smtp_passwd">Contrase&ntilde;a</label>
-              <input type="text" class="form-control form-control-sm" id="conf_smtp_passwd" name="conf_smtp_passwd" required placeholder="Contrase&ntilde;a">
+              <input type="password" class="form-control form-control-sm" id="conf_smtp_passwd" name="conf_smtp_passwd" required placeholder="Contrase&ntilde;a">
             </div>
             <div class="col-sm-3 mb-1">
               <label for="conf_smtp_port">Puerto</label>
@@ -32,8 +32,8 @@
               <label for="conf_smtp_security">Seguridad</label>
               <select class="custom-select custom-select-sm" id="conf_smtp_security" name="conf_smtp_security">
                   <option value="">Ninguna</option>
-                  <option value="TLS">TLS</option>
-                  <option value="SSL">SSL</option>
+                  <option value="tls">TLS</option>
+                  <option value="ssl">SSL</option>
               </select>
             </div>
             <div class="col-sm-3 mb-1">
@@ -44,12 +44,16 @@
               <label for="conf_smtp_copy">Copia</label>
               <input type="text" class="form-control form-control-sm" id="conf_smtp_copy" name="conf_smtp_copy" placeholder="Para">
             </div>
+            <div class="col-sm-3 mb-1">
+              <label for="conf_smtp_copy">Destinatario Prueba</label>
+              <input type="text" class="form-control form-control-sm" id="conf_smtp_destinatarioPrueba" name="conf_smtp_destinatarioPrueba" placeholder="Destinatario prueba">
+            </div>
         </div>
       </form>
       <div class="row">
         <div class="col-sm-12 mb-1 mt-3 text-center">
-          <button class="btn btn-sm {{$btn}}"><i class="fa fa-paper-plane fa-sm"></i> Probar Configuraci&oacute;n</button>
-          <button id="btnGuardaConfSMTP" class="btn btn-sm {{$btn}}"><i class="fa fa-save fa-sm"></i> Guardar Configuraci&oacute;n</button>
+          <button id="btnPruebaConfiguracion" class="btn btn-sm {{$btn}}"><i class="fa fa-paper-plane fa-sm"></i> Probar Configuraci&oacute;n</button>
+          <button id="btnGuardaConfSMTP" class="btn btn-sm {{$btn}}" disabled><i class="fa fa-save fa-sm"></i> Guardar Configuraci&oacute;n</button>
         </div>
       </div>
     </div>
@@ -58,6 +62,31 @@
 
 <script>
   obtieneDatosSMTP();
+
+  document.getElementById( 'btnPruebaConfiguracion' ).addEventListener( 'click' , function(){
+    var datos  = new FormData( document.getElementById( 'conf_smtp_form' ) );
+    var config = { headers: { 'Accept' : 'application/json', 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } };
+
+    if( document.getElementById( 'conf_smtp_destinatarioPrueba' ).value == "" ) {
+      aviso( 'No ha proporcionado una cuenta de recepción para el envio de la prueba' , false );
+      document.getElementById( 'conf_smtp_destinatarioPrueba' ).focus();
+    } else {
+      axios.post( '/api/testSMTP' , datos , config )
+          .then( response => {
+            if( response.data == 'true' ) {
+              aviso( 'Los datos configurados son correctos, puede guardar la infromación' );
+              document.getElementById( 'btnGuardaConfSMTP' ).disabled = false;
+            } else {
+              aviso( 'Los datos configurados no son correctos, verifique su información' , false );
+              document.getElementById( 'btnGuardaConfSMTP' ).disabled = true;
+            }
+          })
+          .catch( err => {
+            console.log( err );
+          });
+    }
+
+  });
 
   $( '#btnGuardaConfSMTP' ).click( function( e ) {
     e.preventDefault();
@@ -68,20 +97,15 @@
     var datos = $( '#conf_smtp_form' ).serialize();
     var token = sessionStorage.getItem( 'apiToken' );
     var url   = '/api/actualizaSMTP';
-    var config = {
-      headers: {
-        'Accept' : 'application/json',
-        'Authorization' : 'Bearer ' + token
-      }
-    };
+    var config = { headers: { 'Accept' : 'application/json', 'Authorization' : 'Bearer ' + token } };
 
     axios.post( url , datos , config )
-         .then( response => {
-            contenidos( 'configuraciones_smtp' );
-         })
-         .catch( err => {
-           console.log( err );
-         });
+        .then( response => {
+          contenidos( 'configuraciones_smtp' );
+        })
+        .catch( err => {
+          console.log( err );
+        });
   }
 
   function obtieneDatosSMTP() {
@@ -96,18 +120,17 @@
 
     axios.get( url , config )
         .then( response => {
-            document.getElementById( 'conf_smtp_host' ).value = response.data.servidor;
-            document.getElementById( 'conf_smtp_usuario' ).value = response.data.usuario;
-            document.getElementById( 'conf_smtp_passwd' ).value = response.data.contrasena;
-            document.getElementById( 'conf_smtp_port' ).value = response.data.puerto;
-            document.getElementById( 'conf_smtp_security' ).value = response.data.seguridad;
-            document.getElementById( 'conf_smtp_from' ).value = response.data.de;
-            document.getElementById( 'conf_smtp_copy' ).value = response.data.copia;
+          document.getElementById( 'conf_smtp_host' ).value = response.data.servidor;
+          document.getElementById( 'conf_smtp_usuario' ).value = response.data.usuario;
+          document.getElementById( 'conf_smtp_passwd' ).value = response.data.contrasena;
+          document.getElementById( 'conf_smtp_port' ).value = response.data.puerto;
+          document.getElementById( 'conf_smtp_security' ).value = response.data.seguridad;
+          document.getElementById( 'conf_smtp_from' ).value = response.data.de;
+          document.getElementById( 'conf_smtp_copy' ).value = response.data.copia;
         })
         .catch( err => {
-            console.log( err );
+          console.log( err );
         });
-
   }
 
 </script>

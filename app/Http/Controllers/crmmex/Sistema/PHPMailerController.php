@@ -35,9 +35,14 @@ class PHPMailerController extends Controller
     self::envio( $campaniaID , $subject , $msj , $destinatario , $personalizacion[ 'contactoID' ] );
   }
 
+  // Metodo para hacer los envios de prueba
+  public static function envioTest( $campaniaID , $subject , $text , $destinatarios , $idty='' , $adjuntos=array() , $datosConf ) {
+    self::envio( $campaniaID , $subject , $text , $destinatarios , $idty , $adjuntos , $datosConf );
+  }
+
   // Proceso de envio de correo electronico
-  private static function envio( $campaniaID , $subject , $text , $destinatarios , $idty='' , $adjuntos=array() ) {
-    $datos = self::datosConexion();
+  private static function envio( $campaniaID , $subject , $text , $destinatarios , $idty='' , $adjuntos=array() , $datosConf=array() ) {
+    $datos = ( empty ( $datosConf ) ) ? self::datosConexion() : $datosConf;
     $mail  = new PHPMailer\PHPMailer();
     $mail->SMTPOptions = array (
       'ssl' => array (
@@ -46,7 +51,7 @@ class PHPMailerController extends Controller
         'allow_self_signed' => true
       )
     );
-    $mail->SMTPDebug  = 1;
+    $mail->SMTPDebug  = 0;
     if( $datos[ 'host' ] != 'smtp.gmail.com' ){ $mail->isSMTP(); }
     $mail->isSMTP();
     $mail->SMTPAuth   = true;
@@ -67,7 +72,7 @@ class PHPMailerController extends Controller
     }
 
     // Destinatarios
-    foreach( $destinatarios AS $destinatario ){
+    foreach( $destinatarios AS $destinatario ) {
       $mail->AddAddress( $destinatario );
     }
 

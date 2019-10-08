@@ -144,6 +144,7 @@ Route::middleware( 'auth:api' )->get ( '/respuestasForm/{campaniaID}'       , 'c
 
 /************************************ Configuraciones ************************************/
 Route::middleware( 'auth:api' )->get ( '/obtieneSMTP'                                                    , 'crmmex\Configuraciones\SMTPController@obtieneConfiguracion' );
+Route::middleware( 'auth:api' )->post( '/testSMTP'                                                       , 'crmmex\Configuraciones\SMTPController@testSMTP' );
 Route::middleware( 'auth:api' )->post( '/actualizaSMTP'                                                  , 'crmmex\Configuraciones\SMTPController@update' );
 Route::middleware( 'auth:api' )->get ( '/listadoCamposAdicionales/{seccion?}/{orden?}'                   , 'crmmex\Utils\CamposAdicionalesController@listado' );
 Route::middleware( 'auth:api' )->post( '/nuevoCampoAdicional'                                            , 'crmmex\Utils\CamposAdicionalesController@agregaCampo' );
