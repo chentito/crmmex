@@ -254,4 +254,9 @@ class ProductosController extends Controller
     $prod->save();
   }
 
+  public function verificaClave( $term ) {
+    $tot = Prod::where( [ 'clave' => $term , 'status' => 1 ] )->count();
+    return $tot;
+  }
+
 }

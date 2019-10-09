@@ -33,7 +33,8 @@
             <div class="row">
               <div class="col-sm-3">
                 <label for="confProductos_clave">Clave</label>
-                <input type="text" maxlength="45" placeholder="Clave" class="form-control form-control-sm" id="confProductos_clave" name="confProductos_clave">
+                <input type="text" maxlength="45" placeholder="Clave" class="form-control form-control-sm" id="confProductos_clave" name="confProductos_clave" onblur="verificaDisponibilidadProducto( this.value );">
+                <input type="hidden" name="confProductos_claveDisp" id="confProductos_claveDisp" value="0">
               </div>
               <div class="col-sm-3">
                 <label for="confProductos_nombre">Nombre</label>
@@ -161,33 +162,7 @@
                       </div>
                     </div>
                 </div>
-                <!--div class="col-sm-6">
-                  <div class="row">
-                    <div class="col-sm-3 mt-1">
-                      <b>Pronósticos:</b>
-                    </div>
-                    <div class="col-sm-9 mt-1">
-                      <hr>
-                    </div>
-                    <div class="col-sm-12">
-                        <label for="calculoPomedio_meses">Promedio de</label>
-                        <select class="custom-select custom-select-sm" id="calculoPomedio_meses" name="calculoPomedio_meses">
-                            <option value="-">-</option>
-                            <option value="3">3 últimos meses</option>
-                            <option value="6">6 últimos meses</option>
-                            <option value="12">12 últimos meses</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-6 mt-1">
-                      <input type="text" name="calculoPomedio_promedioCalculado" id="calculoPomedio_promedioCalculado" value="" placeholder="Pronóstico" class="form-control form-control-sm" readonly>
-                    </div>
-                    <div class="col-sm-6 mt-1 text-center">
-                      <button type="button" name="guardaPronosticoProducto" class="btn btn-sm {{$btn}}"><i class="fa fa-sm fa-save"></i> Guardar pronóstico</button>
-                    </div>
-                  </div>
-                </div-->
-
-            </div>
+              </div>
           </div>
         </div>
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -219,43 +194,34 @@
   });
 
   document.getElementById( 'confHistoricosProducto_btn' ).addEventListener( 'click' , function( e ) {
-      e.preventDefault();
-      var config = {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ),'content-type': 'multipart/form-data'}};
+    e.preventDefault();
+    var config = {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' ),'content-type': 'multipart/form-data'}};
 
-      if( document.getElementById( 'confHistoricosProducto_file' ).value == '' ) {
-        aviso( 'No ha proporcionado un layout' , false );
-      } else {
-        var datos  = new FormData( document.getElementById( 'form_alta_productoservicio' ) );
-        datos.append( 'productoID' , document.getElementById( 'idProductoEditar' ).value );
-
-        axios.post( '/api/cargaHistoricosProducto' , datos , config )
-             .then( response => {
-                aviso( response.data.msj );
-                cargaDatosHistoricos();
-             })
-             .catch( err => {
-               console.log( err );
-             });
-      }
+    if( document.getElementById( 'confHistoricosProducto_file' ).value == '' ) {
+      aviso( 'No ha proporcionado un layout' , false );
+    } else {
+      var datos  = new FormData( document.getElementById( 'form_alta_productoservicio' ) );
+      datos.append( 'productoID' , document.getElementById( 'idProductoEditar' ).value );
+      axios.post( '/api/cargaHistoricosProducto' , datos , config )
+            .then( response => {
+              aviso( response.data.msj );
+              cargaDatosHistoricos();
+            })
+            .catch( err => {
+              console.log( err );
+            });
+    }
   });
 
-  /*document.getElementById( 'calculoPomedio_meses' ).addEventListener( 'change' , function( e ){
-      if( this.value == '0' ){
-            document.getElementById( 'calculoPomedio_promedioCalculado' ).value = '';
-        } else {
-            calculoPronosticoPromedio( this.value , document.getElementById( 'idProductoEditar' ).value );
-      }
-  });*/
-
   function calculoPronosticoPromedio( meses , productoID ) {
-      var config     = {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}};
-      axios.get( '/api/obtienePromedioHistoricos/' + productoID + '/' + meses , config )
-           .then( response => {
-              document.getElementById( 'calculoPomedio_promedioCalculado' ).value = response.data.promedio;
-           })
-           .catch( err => {
-             console.log( err );
-           });
+    var config     = {headers:{'Accept':'application\json','Authorization':'Bearer '+sessionStorage.getItem( 'apiToken' )}};
+    axios.get( '/api/obtienePromedioHistoricos/' + productoID + '/' + meses , config )
+        .then( response => {
+          document.getElementById( 'calculoPomedio_promedioCalculado' ).value = response.data.promedio;
+        })
+        .catch( err => {
+          console.log( err );
+        });
   }
 
   function cargaDatosHistoricos() {
@@ -265,18 +231,18 @@
 
     axios.get( '/api/obtieneHistoricos/' + productoID , config )
         .then( response => {
-            var contenedor = document.getElementById( 'contenedorInfoHistoricosProducto' );
-            response.data.forEach( function( e , i ){
-              var row = contenedor.insertRow( 0 );
-              var cell1 = row.insertCell( 0 );
-              var cell2 = row.insertCell( 1 );
-              var cell3 = row.insertCell( 2 );
-              var cell4 = row.insertCell( 3 );
-              cell1.innerHTML = e.anio;
-              cell2.innerHTML = e.mes;
-              cell3.innerHTML = e.monto;
-              cell4.innerHTML = e.unidades;
-            });
+          var contenedor = document.getElementById( 'contenedorInfoHistoricosProducto' );
+          response.data.forEach( function( e , i ){
+            var row = contenedor.insertRow( 0 );
+            var cell1 = row.insertCell( 0 );
+            var cell2 = row.insertCell( 1 );
+            var cell3 = row.insertCell( 2 );
+            var cell4 = row.insertCell( 3 );
+            cell1.innerHTML = e.anio;
+            cell2.innerHTML = e.mes;
+            cell3.innerHTML = e.monto;
+            cell4.innerHTML = e.unidades;
+          });
         })
         .catch( err => {
           console.log( err );
@@ -287,38 +253,68 @@
     var datos      = $( '#form_alta_productoservicio' ).serialize();
     var movimiento = 'alta';
     if( document.getElementById( 'confProductos_id' ).value != '' ) { // Edita registro
-          ruta       = '/api/actualizaProducto';
-          movimiento = 'actualiza';
-      } else { // Nuevo registro
-          ruta  = '/api/guardaProducto';
+        ruta       = '/api/actualizaProducto';
+        movimiento = 'actualiza';
+    } else { // Nuevo registro
+        ruta  = '/api/guardaProducto';
     }
 
-    axios.post( ruta , datos , { headers: {'Accept': 'application/json', 'Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
-       .then( response => {
-         if( movimiento == 'alta' ) {
+    if( document.getElementById( 'confProductos_clave' ).value == '' || document.getElementById( 'confProductos_clave' ).value.length < 6 ) {
+      aviso( 'No ha proporcionado una clave válida' , false );
+      document.getElementById( 'confProductos_clave' ).focus();
+    } else if( document.getElementById( 'confProductos_claveDisp' ).value > 0 ) {
+      aviso( 'La clave proporcionada ya se encuentra en uso por otro producto' , false );
+      document.getElementById( 'confProductos_clave' ).focus();
+    } else if( document.getElementById( 'confProductos_nombre' ).value == '' ) {
+      aviso( 'No ha proporcionado un nombre para el producto' , false );
+      document.getElementById( 'confProductos_nombre' ).focus();
+    } else if( document.getElementById( 'confProductos_precio' ).value == '' || isNaN( document.getElementById( 'confProductos_precio' ).value ) ) {
+      aviso( 'No ha proporcionado un precio válido para el producto' , false );
+      document.getElementById( 'confProductos_precio' ).focus();
+    } else {
+      axios.post( ruta , datos , { headers: {'Accept': 'application/json', 'Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
+          .then( response => {
+            if( movimiento == 'alta' ) {
               aviso( 'Producto agregado correctamente' );
               contenidos( 'configuraciones_catalogos_productos' );
-           } else {
+            } else {
               aviso( 'Producto actualizado correctamente' );
               contenidos( 'configuraciones_catalogos_editaProducto' , document.getElementById( 'confProductos_id' ).value );
-         }
-       })
-       .catch( err => {
-         console.log( err );
-       });
+            }
+          })
+          .catch( err => {
+            console.log( err );
+          });
+    }
   }
 
   async function comboEstatus() {
-      $( '#confProductos_status' ).empty();
-      let promise = axios.get( '/api/utiles/estatus' );
-      let result = await promise;
-      result.data.forEach( ( item ) => {
-          $( '#confProductos_status' ).append( '<option value="'+item.id+'">'+item.status+'</option>' );
-      });
+    $( '#confProductos_status' ).empty();
+    let promise = axios.get( '/api/utiles/estatus' );
+    let result = await promise;
+    result.data.forEach( ( item ) => {
+      $( '#confProductos_status' ).append( '<option value="'+item.id+'">'+item.status+'</option>' );
+    });
   }
 
   comboEstatus();
   if( document.getElementById( 'idProductoEditar' ) === null ) {
-      cargaCamposAdicionales( '3' );
+    cargaCamposAdicionales( '3' );
   }
+
+  function verificaDisponibilidadProducto( val ) {
+    if( val.length > 5 ) {
+      axios.get( '/api/disponibilidadClave/' + val , { headers: {'Accept': 'application/json', 'Authorization': 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
+        .then( response => {
+          document.getElementById( 'confProductos_claveDisp' ).value = response.data;
+          if( response.data > 0 ) {
+            aviso( 'La clave proporcionada ya se encuentra en uso por otro producto' , false );
+          }
+        })
+        .catch( err => {
+          console.log( err );
+        });
+    }
+  }
+
 </script>
