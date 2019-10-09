@@ -4,49 +4,48 @@
  * @Autor Mexagon.net / Carlos Reyes
  * @Fecha Marzo 2019
  */
-
  $.fn.datepicker.dates['es'] = {
-     days: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
-     daysShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
-     daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
-     months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-     monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-     today: "Hoy",
-     clear: "Borrar",
-     format: "mm/dd/yyyy",
-     titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
-     weekStart: 0
+  days: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
+  daysShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+  daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+  months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+  monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+  today: "Hoy",
+  clear: "Borrar",
+  format: "mm/dd/yyyy",
+  titleFormat: "MM yyyy",
+  weekStart: 0
  };
 
 function contenidos( idContenido , param='' ) {
-    abreModal();
-    path  = '/contenidos/' + idContenido;
-    path += ( param != '' ) ? '/'+param : '';
-    axios( path )
-        .then( datos => {
-            $( '#contenidosPrincipales' ).html( datos.data.body );
-            $( '#contenedorBreadCrumb' ).html( datos.data.breadcrumb );
-            cierraModal();
-        })
-        .catch( err => {
-            console.error( err );
-        });
+  abreModal();
+  path  = '/contenidos/' + idContenido;
+  path += ( param != '' ) ? '/'+param : '';
+  axios( path )
+      .then( datos => {
+        $( '#contenidosPrincipales' ).html( datos.data.body );
+        $( '#contenedorBreadCrumb' ).html( datos.data.breadcrumb );
+        cierraModal();
+      })
+      .catch( err => {
+        console.error( err );
+      });
 }
 
 function cargaDatosComboCatalogo() {
-    $( 'select' ).each( function() {
-        idty = $( this ).attr( 'id' );
-        if( idty.substring( 0 , 8 ) === 'catalogo' ) {
-            id = idty.split( '_' );
-            axios
-            .get( '/api/opcionesCombosPorId/' + id[ 1 ] )
-            .then(response => {
-                response.data.forEach((item) => {
-                    $( "#" + $( this ).attr( 'id' ) ).append( '<option value="' + item.id + '">' + item.nombre + '</option>' );
-                });
-            });
-        }
-    });
+  $( 'select' ).each( function() {
+    idty = $( this ).attr( 'id' );
+    if( idty.substring( 0 , 8 ) === 'catalogo' ) {
+      id = idty.split( '_' );
+      axios
+      .get( '/api/opcionesCombosPorId/' + id[ 1 ] )
+      .then(response => {
+        response.data.forEach((item) => {
+          $( "#" + $( this ).attr( 'id' ) ).append( '<option value="' + item.id + '">' + item.nombre + '</option>' );
+        });
+      });
+    }
+  });
 }
 
 async function generaToken() {
@@ -56,12 +55,12 @@ async function generaToken() {
       .then( response => {
         console.log( 'Token generado...' );
         sessionStorage.setItem( 'apiToken', response.data.apiToken );
-      }).
-      catch( function( e ){
+      })
+      .catch( function( e ) {
         console.log( 'ERROR TOKEN ' + e );
       });
   } else {
-      console.log( 'Token previamente generado...' );
+    console.log( 'Token previamente generado...' );
   }
 }
 
@@ -84,18 +83,18 @@ function eliminaToken() {
 }
 
 async function utiles( accion ) {
-    let promise = axios.get( '/api/utiles/' + accion );
-    let result = await promise;
-    return result.data;
+  let promise = axios.get( '/api/utiles/' + accion );
+  let result = await promise;
+  return result.data;
 }
 
 function abreModal() {
-    $( '.modal' ).modal( 'show' );
+  $( '.modal' ).modal( 'show' );
 }
 
 function cierraModal() {
-    $( '.modal' ).modal( 'hide' );
-    $( '#sidebar' ).removeClass( 'active' );
+  $( '.modal' ).modal( 'hide' );
+  $( '#sidebar' ).removeClass( 'active' );
 }
 
 async function solicitud( metodo, token, url, datos ) {
@@ -263,7 +262,6 @@ function generaDataGrid( id , filtro = '' ) {
      .catch( err => {
        console.log( err );
      });
-
 }
 
 // COntrol de campos Adicionales
@@ -299,25 +297,21 @@ function cargaCamposAdicionales( seccion , valores=[] , idtyAdicional='' ) {
 
 // Establece el valor de un combo
 function setSelectedIndex( s , v) {
-    for ( var i = 0; i < s.options.length; i++ ) {
-        if ( s.options[i].text == v ) {
-            s.options[i].selected = true;
-            return;
-        }
+  for ( var i = 0; i < s.options.length; i++ ) {
+    if ( s.options[i].text == v ) {
+      s.options[i].selected = true;
+      return;
     }
+  }
 }
 
 // Alertas y avisos
 function aviso( mensaje , exito=true ) {
-
-    tipo = ( exito == true ) ? 'info' : 'danger';
-
+    tipo = ( exito == true ) ? 'success' : 'danger';
     $.notify({
-      	// options
       	icon: 'glyphicon glyphicon-warning-sign',
       	message: mensaje,
       },{
-      	// settings
       	element: 'body',
       	position: null,
       	type: tipo,
@@ -353,11 +347,9 @@ function aviso( mensaje , exito=true ) {
 
 function notificacionesInicio( mensaje ) {
   $.notify({
-      // options
       icon: 'glyphicon glyphicon-warning-sign',
       message: mensaje,
     },{
-      // settings
       element: 'body',
       position: null,
       type: 'info',

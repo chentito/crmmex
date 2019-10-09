@@ -3,10 +3,9 @@
     <div class="card card-small mb-4 pt-3">
       <div class="card-body border-bottom text-center">
         <div class="mb-3 mx-auto">
-          <img class="rounded-circle" src="{{ asset( 'assets2/img/saint.jpg' ) }}" alt="User Avatar" width="110">
+          <img class="rounded-circle" src="{{ asset( '/imagenEjecutivo/' . Auth::user()->id ) }}" alt="{{ Auth::user()->name }} {{ Auth::user()->apPat }}" id="imgEjecutivo" width="110">
         </div>
-        <h4 class="mb-0">{{ Auth::user()->name }} {{ Auth::user()->apPat }}</h4>
-        <span class="text-muted d-block mb-2">Ejecutivo comercial</span>
+        <h4 class="mb-0">{{ Auth::user()->name }} {{ Auth::user()->apPat }} {{ Auth::user()->apMat }}</h4>        
       </div>
     </div>
   </div>
@@ -38,24 +37,15 @@
                     <input type="password" class="form-control form-control-sm" id="perfilPassword" name="perfilPassword" placeholder="Password">
                   </div>
                 </div>
-                <div class="form-group">
-                  <input type="text" class="form-control form-control-sm" id="perfilDireccion" name="perfilDireccion" readonly placeholder="Direccion"
-                  value="{{ Auth::user()->direccion->calle }} Int. {{ Auth::user()->direccion->interior }} Ext. {{ Auth::user()->direccion->exterior }}, Col {{ Auth::user()->direccion->colonia }}">
-                </div>
                 <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <input type="text" class="form-control form-control-sm" id="perfilCiudad" name="perfilCiudad" readonly placeholder="Ciudad" value="{{ Auth::user()->direccion->municipio }}">
-                  </div>
-                  <div class="form-group col-md-4">
-                    <select id="perfilEstado" name="perfilCiudad" class="custom-select custom-select-sm" disabled>
-                      <option>Estado</option>
-                      <option value="1">Estado de Mexico</option>
-                      <option value="2">Queretaro</option>
-                      <option value="3">CDMX</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-2">
-                    <input type="text" class="form-control form-control-sm" id="perfilCP" name="perfilCP" readonly placeholder="CP" value="{{ Auth::user()->direccion->cp }}">
+                  <div class="form-group col-md-12">
+                    <div class="input-group mt-4">
+                      <div class="custom-file custom-file-sm">
+                        <input type="file" class="custom-file-input custom-file-input-sm" aria-describedby="inputGroupFileAddon01" id="perfilLogo" name="perfilLogo" accept=".jpg,.png,.jpge,.gif" value="Buscar">
+                        <label class="custom-file-label custom-file-label-sm" for="logotipo">Seleccione imagen</label>
+                      </div>
+                    </div>
+                    <small>Para una mejor visibilidad de la imagen, se recomienda un tamaño de 70px X 70px</small>
                   </div>
                 </div>
                 <div class="row">
@@ -79,17 +69,18 @@
   });
 
   function actualizaDatosEjecutivo() {
-    var token  = sessionStorage.getItem( 'apiToken' );
     var url    = '/api/shortEditaEjecutivo';
-    var datos  = $( '#datosPerfil_form' ).serialize();
-    var config = { headers: { 'Accept' : 'application/json', 'Authorization' : 'Bearer ' + token } ;
+    var datos  = new FormData( document.getElementById( 'datosPerfil_form' ) );
+    var config = { headers: { 'Accept' : 'application/json', 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) , 'content-type':'multipart/form-data' } };
 
     axios.post( url , datos , config )
-       .then( response => {
-         contenidos( 'ejecutivos_perfil' );
-       })
-       .catch( err => {
-         console.log( err );
-       });
+        .then( response => {
+          aviso( 'Datos actualizados correctamente' );
+          document.getElementById( 'imgEjecutivo' ).src = '/imagenEjecutivo/{{ Auth::user()->id }}?'+ new Date().getTime();
+          contenidos( 'ejecutivos_perfil' );
+        })
+        .catch( err => {
+          console.log( err );
+        });
   }
 </script>

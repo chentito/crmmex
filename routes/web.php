@@ -59,6 +59,7 @@ Route::middleware( 'web' )->group( function() {
   Route::get ( '/imagenParaPropuesta/{id}'            , 'crmmex\Clientes\PropuestasController@imagenParaPropuesta' );
   Route::get ( '/fondoPersonalizado'                  , 'crmmex\Sistema\PropietarioController@getPersBackground' );
   Route::get ( '/download/{archivo}'                  , 'crmmex\Sistema\DescargasController@descargaArchivoEjemplo' );
+  Route::get ( '/imagenEjecutivo/{ejecutivoID}'       , 'crmmex\Administradores\Administradores@imagenPerfil' );
 });
 
 Route::get ( '/campaniatracking/{campaniaID}/{contactoID}' , 'crmmex\Sistema\TrackingController@registro' );
