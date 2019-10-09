@@ -108,11 +108,13 @@
 
     if( document.getElementById( 'formularios_nombreForm' ).value == '' ) {
       aviso( 'No ha proporcionado el nombre del formulario' , false );
+      document.getElementById( 'formularios_nombreForm' ).focus();
     } else {
       var err = 0;
       for( var n = 0 ; n < nombres.length ; n ++ ) {
         if( nombres[ n ].value == '' ) {
           aviso( 'El nombre del campo no puede ser vacio' , false );
+          nombres[ n ].value.focus();
           err ++;
         }
       }

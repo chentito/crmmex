@@ -108,6 +108,7 @@
 
     if( document.getElementById( 'adicional_clientes_nombre' ).value == '' ) {
       aviso( "No ha proporcionado un nombre para el campo adicional" , false );
+      document.getElementById( 'adicional_clientes_nombre' ).focus();
     } else {
       axios.post( url , datos , { headers:{ 'Accept' : 'application/json', 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) }} )
            .then( response => {

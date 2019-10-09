@@ -5,7 +5,7 @@
         <div class="mb-3 mx-auto">
           <img class="rounded-circle" src="{{ asset( '/imagenEjecutivo/' . Auth::user()->id ) }}" alt="{{ Auth::user()->name }} {{ Auth::user()->apPat }}" id="imgEjecutivo" width="110">
         </div>
-        <h4 class="mb-0">{{ Auth::user()->name }} {{ Auth::user()->apPat }} {{ Auth::user()->apMat }}</h4>        
+        <h4 class="mb-0">{{ Auth::user()->name }} {{ Auth::user()->apPat }} {{ Auth::user()->apMat }}</h4>
       </div>
     </div>
   </div>
@@ -74,13 +74,13 @@
     var config = { headers: { 'Accept' : 'application/json', 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) , 'content-type':'multipart/form-data' } };
 
     axios.post( url , datos , config )
-        .then( response => {
-          aviso( 'Datos actualizados correctamente' );
-          document.getElementById( 'imgEjecutivo' ).src = '/imagenEjecutivo/{{ Auth::user()->id }}?'+ new Date().getTime();
-          contenidos( 'ejecutivos_perfil' );
-        })
-        .catch( err => {
-          console.log( err );
-        });
+      .then( response => {
+        aviso( 'Datos actualizados correctamente' );
+        document.getElementById( 'imgEjecutivo' ).src = '/imagenEjecutivo/{{ Auth::user()->id }}?'+ new Date().getTime();
+        contenidos( 'ejecutivos_perfil' );
+      })
+      .catch( err => {
+        console.log( err );
+      });
   }
 </script>

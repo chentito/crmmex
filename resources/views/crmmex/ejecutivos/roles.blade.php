@@ -136,14 +136,19 @@
         var msj = 'modificado';
     }
 
-    axios.post( url , datos , {headers:{ 'Accept':'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
-        .then( response => {
-          aviso( 'El perfil se ha ' + msj + ' correctamente' );
-          contenidos( 'ejecutivos_roles' );
-        })
-        .catch( err => {
-          console.log( err );
-        });
+    if( document.getElementById( 'roles_nombrePerfil' ).value == '' ) {
+      aviso( 'No ha proporcionado un nombre para el perfil' , false );
+      document.getElementById( 'roles_nombrePerfil' ).focus();
+    } else {
+      axios.post( url , datos , {headers:{ 'Accept':'application\json' , 'Authorization' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } } )
+          .then( response => {
+            aviso( 'El perfil se ha ' + msj + ' correctamente' );
+            contenidos( 'ejecutivos_roles' );
+          })
+          .catch( err => {
+            console.log( err );
+          });
+    }
   });
 
   function cargaRoles() {

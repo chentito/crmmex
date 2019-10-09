@@ -76,15 +76,15 @@ class PropietarioController extends Controller
     if( $r->hasFile( 'imgBackgroundPersonalizado' ) ) {
       $branding->usa_background_pers             = 1;
       $branding->background_pers                 = file_get_contents( $r->file( 'imgBackgroundPersonalizado' )->getRealPath() );
-      $branding->background_pers_name            = $r->file( 'imgBackgroundPersonalizado' )->getClientOriginalName() ;
+      $branding->background_pers_name            = $r->file( 'imgBackgroundPersonalizado' )->getClientOriginalName();
       $branding->background_pers_img_contenttype = $r->file( 'imgBackgroundPersonalizado' )->getMimeType();
       $branding->usa_background                  = 1;
     }
 
     if( $branding->save() ) {
-      return response()->json( array( 'mensaje' => 'Fondo actualizado correctamente' ) );
-    } else {
-      return response()->json( array( 'mensaje' => false ) );
+        return response()->json( array( 'mensaje' => 'Fondo actualizado correctamente' ) );
+      } else {
+        return response()->json( array( 'mensaje' => false ) );
     }
   }
 
