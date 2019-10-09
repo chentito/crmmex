@@ -11,4 +11,16 @@
 
 <script>
   generaDataGrid( 'listadoProductos' );
+
+  function habilitaProducto( productoID ) {
+    axios.post( '/api/eliminaProducto/' + productoID + '/1' , {} , { headers:{ 'Accept' : 'application\json' , 'Authentication' : 'Bearer ' + sessionStorage.getItem( 'apiToken' ) } })
+        .then( response => {
+          aviso( 'Producto habilitado correctamente' );
+          contenidos( 'configuraciones_catalogos_productos' );
+        })
+        .catch( error => {
+          console.log( error );
+        });
+  }
+
 </script>

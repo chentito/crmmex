@@ -44,7 +44,11 @@ class ProductosController extends Controller
         'impuestoRetencion' => $producto->impuestoRetencion,
         'divisa'            => $producto->divisa,
         'status'            => ( $producto->status == '1' ? 'Activo' : 'Inactivo' ),
-        'opciones'          => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Producto" onclick="contenidos(\'configuraciones_catalogos_editaProducto\',\''.$producto->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
+        'opciones'          => ( $producto->status == '1' ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Editar Producto" onclick="contenidos(\'configuraciones_catalogos_editaProducto\',\''.$producto->id.'\')"><i class="fa fa-edit fa-sm"></i></a>'
+        . '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Eliminar Producto" class="ml-1" onclick="contenidos(\'configuraciones_catalogos_eliminaProducto\',\''.$producto->id.'\')"><i class="fa fa-trash fa-sm"></i></a>'
+          :
+          '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Habilitar Producto" class="ml-1" onclick="habilitaProducto(\''.$producto->id.'\')"><i class="fa fa-check fa-sm"></i></a>'
+        )
       );
 
       // Agrega campos adicionales
@@ -242,6 +246,12 @@ class ProductosController extends Controller
       $resultado[] = "Error al procesar el archivo, verifique su estructura.";
     }
     return response()->json( $resultado );
+  }
+
+  public function eliminaProducto( $productoID , $mov ) {
+    $prod = Prod::find( $productoID );
+    $prod->status = $mov;
+    $prod->save();
   }
 
 }

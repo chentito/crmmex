@@ -121,6 +121,7 @@ Route::middleware( 'auth:api' )->get ( '/obtieneHistoricos/{productoID}'        
 Route::middleware( 'auth:api' )->get ( '/obtienePromedioHistoricos/{productoID}/{meses}' , 'crmmex\Productos\ProductosController@obtienePromedioHistorico' );
 Route::middleware( 'auth:api' )->get ( '/obtieneListadoProductos/{catalogoID}'           , 'crmmex\Utils\UtilsController@opcionesCatalogos' );
 Route::middleware( 'auth:api' )->post( '/cargaMasivaProductos'                           , 'crmmex\Productos\ProductosController@cargaMasivaProductos' );
+Route::middleware( 'auth:api' )->post( '/eliminaProducto/{productoID}/{mov}'             , 'crmmex\Productos\ProductosController@eliminaProducto' );
 
 
 /************************************ Control de ejecutivos ************************************/
