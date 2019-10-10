@@ -60,8 +60,7 @@
               </div>
               <div class="col-sm-3">
                 <label for="confProductos_status">Estatus</label>
-                <select class="custom-select custom-select-sm" id="confProductos_status" name="confProductos_status">
-                </select>
+                <select class="custom-select custom-select-sm" id="confProductos_status" name="confProductos_status"></select>
               </div>
             </div>
             <div class="row">
