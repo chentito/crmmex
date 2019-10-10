@@ -18,9 +18,6 @@
       document.getElementById( 'catalogo_8' ).value                        = d.periodicidad;
       document.getElementById( 'catalogo_9' ).value                        = d.tipo;
       document.getElementById( 'catalogo_12' ).value                       = d.grupo;
-      setSelectedIndex( document.getElementById( 'catalogo_8' )  , d.periodicidad );
-      setSelectedIndex( document.getElementById( 'catalogo_9' )  , d.tipo );
-      setSelectedIndex( document.getElementById( 'catalogo_12' ) , d.grupo );
       document.getElementById( 'confProductos_precio' ).value              = d.precio;
       document.getElementById( 'confProductos_marca' ).value               = d.marca;
       document.getElementById( 'confProductos_modelo' ).value              = d.modelo;
@@ -34,6 +31,9 @@
       document.getElementById( 'confProductos_status' ).value              = d.status;
       adicionales = datos.data.adicionales;
       cargaCamposAdicionales( '3' , adicionales );
+      setSelectedIndex( document.getElementById( 'catalogo_8' )  , d.periodicidad );
+      setSelectedIndex( document.getElementById( 'catalogo_9' )  , d.tipo );
+      setSelectedIndex( document.getElementById( 'catalogo_12' ) , d.grupo );
     });
 
 </script>
