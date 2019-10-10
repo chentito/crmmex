@@ -179,18 +179,18 @@
 <script>
 
   $(function () {
-      $( '#btnNvoProdRegresar' ).click( function( e ){
-          e.preventDefault();
-          contenidos( 'configuraciones_catalogos_productos' );
-      });
+    $( '#btnNvoProdRegresar' ).click( function( e ){
+      e.preventDefault();
+      contenidos( 'configuraciones_catalogos_productos' );
+    });
 
-      $( '#btnGuardaProducto' ).click( function( e ){
-          e.preventDefault();
-          guardaProductoNuevo();
-      });
+    $( '#btnGuardaProducto' ).click( function( e ){
+      e.preventDefault();
+      guardaProductoNuevo();
+    });
 
-      cargaDatosComboCatalogo();
-      cargaDatosHistoricos();
+    cargaDatosComboCatalogo();
+    cargaDatosHistoricos();
   });
 
   document.getElementById( 'confHistoricosProducto_btn' ).addEventListener( 'click' , function( e ) {
