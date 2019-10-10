@@ -43,8 +43,7 @@ class PiezasController extends Controller
     $piezas = Piezas::where( 'status' , 1 )
                     ->when( $editable=false , function( $q ){
                         return $q->where( 'editable' , 0 );
-                    })
-                    ->get();
+                    })->get();
     return response()->json( $piezas );
   }
 
@@ -86,23 +85,21 @@ class PiezasController extends Controller
     return response()->json( $pieza );
   }
 
-    // Metodo que elimina una pieza
-    public function eliminaPieza( $piezaID ) {
-        $enUso = Campanias::where( 'status' , 1 )
-                          ->where( 'pieza' , $piezaID )
-                          ->where( 'fechaEnvio' , '>' , date( 'Y-m-d H:i:s' ) )
-                          ->count();
+  // Metodo que elimina una pieza
+  public function eliminaPieza( $piezaID ) {
+    $enUso = Campanias::where( 'status' , 1 )->where( 'pieza' , $piezaID )
+                      ->where( 'fechaEnvio' , '>' , date( 'Y-m-d H:i:s' ) )->count();
 
-        if( $enUso > 0 ) {
-          $mensaje = 'La pieza se encuentra asignada a una campaña vigente';
-        } else {
-          $pieza = Piezas::find( $piezaID );
-          $pieza->status = 0;
-          $pieza->save();
-          $mensaje = 'Pieza eliminada correctamente';
-        }
-
-        return response()->json( array( 'mensaje' => $mensaje ) );
+    if( $enUso > 0 ) {
+      $mensaje = 'La pieza se encuentra asignada a una campaña vigente';
+    } else {
+      $pieza = Piezas::find( $piezaID );
+      $pieza->status = 0;
+      $pieza->save();
+      $mensaje = 'Pieza eliminada correctamente';
     }
+
+    return response()->json( array( 'mensaje' => $mensaje ) );
+  }
 
 }

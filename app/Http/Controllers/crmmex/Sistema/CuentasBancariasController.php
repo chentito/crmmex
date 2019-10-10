@@ -1,5 +1,9 @@
 <?php
-
+/*
+ * Controlador para la administracion de cuentas bancarias
+ * @AUtor Mexagon.net / Carlos cvreyes
+ * @Fecha Septiembre 2019
+ */
 namespace App\Http\Controllers\crmmex\Sistema;
 
 use Illuminate\Http\Request;

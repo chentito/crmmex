@@ -30,7 +30,6 @@ class SMTPController extends Controller
     $smtp->puerto        = $request[ 'conf_smtp_port' ];
     $smtp->seguridad     = $request[ 'conf_smtp_security' ];
     $smtp->test          = 0;
-    //$smtp->de            = $request[ 'conf_smtp_from' ];
     $smtp->nombre        = $request[ 'conf_smtp_fromName' ];
     $smtp->copia         = $request[ 'conf_smtp_copy' ];
     $smtp->copiaNombre   = $request[ 'conf_smtp_copyName' ];

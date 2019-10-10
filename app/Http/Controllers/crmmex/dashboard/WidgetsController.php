@@ -90,11 +90,8 @@ class WidgetsController extends Controller
       $ingresos = $ingresosFecha = array();
 
       foreach( $datos[ 'periodos' ] AS $fecha ) {
-        $pagos = DB::table( 'crmmex_ventas_pagos' )
-                   ->select( DB::raw( 'IFNULL( SUM(monto) , 0 ) AS montotot' ) )
-                   ->whereRaw( DB::raw( 'SUBSTRING( fechaPago , 1 , 7 )="'.$fecha.'"' ) )
-                   ->where( 'ejecutivoID' , $usuario->id )
-                   ->first();
+        $pagos = DB::table( 'crmmex_ventas_pagos' )->select( DB::raw( 'IFNULL( SUM(monto) , 0 ) AS montotot' ) )
+                   ->whereRaw( DB::raw( 'SUBSTRING( fechaPago , 1 , 7 )="'.$fecha.'"' ) )->where( 'ejecutivoID' , $usuario->id )->first();
         $ingresosFecha[] = $pagos->montotot;
       }
 
@@ -106,13 +103,13 @@ class WidgetsController extends Controller
   }
 
   private function rangoDeFechas( Carbon $start_date , Carbon $end_date ) {
-      $dates = [];
+    $dates = [];
 
-      for($date = $start_date->copy(); $date->lte($end_date); $date->addMonth()) {
-          $dates[] = $date->format('Y-m');
-      }
+    for($date = $start_date->copy(); $date->lte($end_date); $date->addMonth()) {
+      $dates[] = $date->format('Y-m');
+    }
 
-      return $dates;
+    return $dates;
   }
 
   // Ventas por categiria
@@ -154,13 +151,13 @@ class WidgetsController extends Controller
                               ->get();
     #$datos[ 'query' ] = DB::getQueryLog();
     foreach( $propuestas AS $propuesta ) {
-        if( $propuesta->status == 3 ) {
-              $datos[ 'rechazadas' ] = $datos[ 'rechazadas' ] + 1;
-          } else if( $propuesta->status == 1 && $propuesta->estadoPropuesta == 0 ) {
-              $datos[ 'proceso' ] = $datos[ 'proceso' ] + 1;
-          } else {
-              $datos[ 'aceptadas' ] = $datos[ 'aceptadas' ] + 1;
-        }
+      if( $propuesta->status == 3 ) {
+          $datos[ 'rechazadas' ] = $datos[ 'rechazadas' ] + 1;
+        } else if( $propuesta->status == 1 && $propuesta->estadoPropuesta == 0 ) {
+          $datos[ 'proceso' ] = $datos[ 'proceso' ] + 1;
+        } else {
+          $datos[ 'aceptadas' ] = $datos[ 'aceptadas' ] + 1;
+      }
     }
 
     return response()->json( $datos );
@@ -174,8 +171,7 @@ class WidgetsController extends Controller
     $datos[ 'prospectos' ] = array();
     $totales               = Clientes::select( DB::raw( "COUNT(*) AS total, tipo, substr(fechaAlta,1,7) AS periodo" ) )
                             ->whereRaw( DB::raw( "substr(fechaAlta,1,7)>='$fecha'" ) )
-                            ->groupBy( DB::raw( "substr(fechaAlta,1,7),tipo" ) )
-                            ->get();
+                            ->groupBy( DB::raw( "substr(fechaAlta,1,7),tipo" ) )->get();
 
     foreach( $totales AS $total ) {
       if( !in_array( $total->periodo , $datos[ 'periodos' ] ) ) { $datos[ 'periodos' ][]   = $total->periodo; }
@@ -207,7 +203,7 @@ class WidgetsController extends Controller
     } else {
       $conf = Widgets::find( $widgetID );
       return $conf->configuracion;
-    }    
+    }
   }
 
   // Metodo para obtener las estadisticas del widget de resumen de ventas

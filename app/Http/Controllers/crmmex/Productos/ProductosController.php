@@ -181,11 +181,8 @@ class ProductosController extends Controller
 
   /* Metodo que obtiene los datos historicos de un producto */
   public function obtieneHistoricos( $productoID ) {
-    $historicos = Historicos::where( 'productoID' , $productoID )
-                              ->where( 'status' , 1 )
-                              ->orderBy( 'anio' , 'ASC' )
-                              ->orderBy( 'mes' , 'ASC' )
-                              ->get();
+    $historicos = Historicos::where( 'productoID' , $productoID )->where( 'status' , 1 )
+                  ->orderBy( 'anio' , 'ASC' )->orderBy( 'mes' , 'ASC' )->get();
     return response()->json( $historicos );
   }
 
@@ -194,8 +191,7 @@ class ProductosController extends Controller
     $prom       = array();
     $fecha      = date( 'Y-m' , strtotime( '- '.$meses.' months' ) );
     $historicos = Historicos::select( DB::raw( "AVG(monto) AS promedio" ) )
-                            ->whereRaw( DB::raw( "productoID = '$productoID' AND status=1 AND STR_TO_DATE( concat( anio , '-' , mes ) , '%Y-%m' ) >= '$fecha'" ) )
-                            ->first();
+                ->whereRaw( DB::raw( "productoID = '$productoID' AND status=1 AND STR_TO_DATE( concat( anio , '-' , mes ) , '%Y-%m' ) >= '$fecha'" ) )->first();
 
     $prom[ 'promedio' ] = $historicos->promedio;
     return response()->json( $prom );

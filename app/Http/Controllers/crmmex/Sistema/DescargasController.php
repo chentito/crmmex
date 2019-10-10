@@ -1,5 +1,9 @@
 <?php
-
+/*
+ * Controlador para la descarga de layout de ejemplo
+ * @AUtor Mexagon.net / Carlos cvreyes
+ * @Fecha Julio 2019
+ */
 namespace App\Http\Controllers\crmmex\Sistema;
 
 use Illuminate\Support\Facades\Storage;

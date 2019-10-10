@@ -1,10 +1,14 @@
 <?php
-
+/*
+ * Controlador para la administracion de acceso a las diferentes funcionalidades
+ * de acuerdo al usuario logeado
+ * @AUtor Mexagon.net / Carlos cvreyes
+ * @Fecha Septiembre 2019
+ */
 namespace App\Http\Controllers\crmmex\Sistema;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -20,9 +24,7 @@ class AccesoController extends Controller
   // logeado y al identificador de la seccion
   public static function ver( $seccionID ) {
     if( Auth::user()->rol == 1 ) return true;
-    $acceso = Privilegios::where( 'idRol' , Auth::user()->rol )
-              ->where( 'idSeccion' , $seccionID )
-              ->first();
+    $acceso = Privilegios::where( 'idRol' , Auth::user()->rol )->where( 'idSeccion' , $seccionID )->first();
     return ( $acceso->status == 1 ) ? true : false ;
   }
 

@@ -13,10 +13,9 @@ use App\Models\crmmex\Sistema\Modulos AS Modulos;
 
 class ModulosController extends Controller
 {
-    // Listado de Modulos
-    public function listadoModulos() {
-        $modulos = Modulos::where( 'status' , 1 )
-                          ->get();
-        return response()->json( $modulos );
-    }
+  // Listado de Modulos
+  public function listadoModulos() {
+    $modulos = Modulos::where( 'status' , 1 )->get();
+    return response()->json( $modulos );
+  }
 }

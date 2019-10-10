@@ -13,19 +13,19 @@ use App\Models\crmmex\Sistema\Tracking AS Tracking;
 
 class TrackingController extends Controller
 {
-    // Registro de la visualizacion del correo
-    public function registro( $campaniaID , $contactoID ) {
-        $tracking = new Tracking();
-        $tracking->campaniaID    = $campaniaID;
-        $tracking->contactoID    = $contactoID;
-        $tracking->fechaRegistro = date( 'Y-m-d H:i:s' );
-        $tracking->status        = 1;
-        $tracking->save();
-    }
+  // Registro de la visualizacion del correo
+  public function registro( $campaniaID , $contactoID ) {
+    $tracking = new Tracking();
+    $tracking->campaniaID    = $campaniaID;
+    $tracking->contactoID    = $contactoID;
+    $tracking->fechaRegistro = date( 'Y-m-d H:i:s' );
+    $tracking->status        = 1;
+    $tracking->save();
+  }
 
-    // Registro de respuestas de formularios
-    public function formAnswering( Request $request ) {
-        echo "Gracias!";
-    }
+  // Registro de respuestas de formularios
+  public function formAnswering( Request $request ) {
+    echo "Gracias!";
+  }
 
 }

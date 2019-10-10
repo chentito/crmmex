@@ -16,18 +16,18 @@ use App\Models\crmmex\Sistema\Templates As Templates;
 class TemplatesController extends Controller
 {
 
-    // Obtiene los datos de un Template
-    public function obtieneDatosTemplate( $templateID ) {
-        $template = Templates::find( $templateID );
-        return response()->json( $template );
-    }
+  // Obtiene los datos de un Template
+  public function obtieneDatosTemplate( $templateID ) {
+    $template = Templates::find( $templateID );
+    return response()->json( $template );
+  }
 
-    // Actualiza los datos de un template
-    public function actualizaDatosTemplate( Request $request ) {
-        $template = Templates::find( $request->template_id );
-        $template->asunto = $request->template_subject;
-        $template->cuerpo = $request->detalleTemplate_contenidoPieza;
-        $template->save();
-    }
+  // Actualiza los datos de un template
+  public function actualizaDatosTemplate( Request $request ) {
+    $template = Templates::find( $request->template_id );
+    $template->asunto = $request->template_subject;
+    $template->cuerpo = $request->detalleTemplate_contenidoPieza;
+    $template->save();
+  }
 
 }

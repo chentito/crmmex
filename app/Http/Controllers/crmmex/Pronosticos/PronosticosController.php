@@ -12,8 +12,7 @@ class PronosticosController extends Controller
 
   //Obtiene el listado de los procesamientos para el calculo de forecast
   public function listadoProcesaimentos() {
-    $ejecuciones = Pronosticos::where( 'status' , 1 )
-                              ->get();
+    $ejecuciones = Pronosticos::where( 'status' , 1 )->get();
     return response()->json( $ejecuciones );
   }
 }

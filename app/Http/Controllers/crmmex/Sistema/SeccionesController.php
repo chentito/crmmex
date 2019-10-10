@@ -13,14 +13,13 @@ use App\Models\crmmex\Sistema\Secciones AS Secciones;
 
 class SeccionesController extends Controller
 {
-    // Listado de secciones
-    public function listadoSecciones( $moduloID = '' ) {
-        $secciones = Secciones::where( 'status' , 1 )
-                              ->when( $moduloID != '' , function( $q ) use( $moduloID ) {
-                                  return $q->where( 'modulo' , $moduloID );
-                              })
-                              ->get();
-        return response()->json( $secciones );
-    }
+  // Listado de secciones
+  public function listadoSecciones( $moduloID = '' ) {
+    $secciones = Secciones::where( 'status' , 1 )
+                          ->when( $moduloID != '' , function( $q ) use( $moduloID ) {
+                              return $q->where( 'modulo' , $moduloID );
+                          })->get();
+    return response()->json( $secciones );
+  }
 
 }

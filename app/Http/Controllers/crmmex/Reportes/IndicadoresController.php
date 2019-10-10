@@ -18,28 +18,22 @@ use App\Models\crmmex\Clientes\Clientes AS Clientes;
 
 class IndicadoresController extends Controller
 {
-    // Lisado de indicadores disponibles
-    public function listadoIndicadores() {
-        $datos   = array();
-        $usoGral = Indicadores::where( 'status' , 1 )->where( 'grupoID' , 0 )->count();
+  // Lisado de indicadores disponibles
+  public function listadoIndicadores() {
+    $datos   = array();
+    $usoGral = Indicadores::where( 'status' , 1 )->where( 'grupoID' , 0 )->count();
 
-        if( $usoGral > 0 ) {
-            $indicadorUso = Indicadores::where( 'status' , 1 )->where( 'grupoID' , 0 )->first();
-            $datos[ 'indicador' ] = $indicadorUso->id;
+    if( $usoGral > 0 ) {
+      $indicadorUso = Indicadores::where( 'status' , 1 )->where( 'grupoID' , 0 )->first();
+      $datos[ 'indicador' ] = $indicadorUso->id;
 
-            $clientes = Clientes::where( 'status' , 1 )->whereIn( 'tipo' , [ 1 , 2 ] )->get();
-            foreach( $clientes AS $cliente ) {
-                $pipeline = AnalisisPipelineController::getIndicador( 0 , $cliente->id );
-                $datos[ $cliente->tipo ][] = $pipeline;
-            }
-
-        } else {
-
-        }
-
-        return response()->json( $datos );
+      $clientes = Clientes::where( 'status' , 1 )->whereIn( 'tipo' , [ 1 , 2 ] )->get();
+      foreach( $clientes AS $cliente ) {
+          $pipeline = AnalisisPipelineController::getIndicador( 0 , $cliente->id );
+          $datos[ $cliente->tipo ][] = $pipeline;
+      }
     }
-
-
+    return response()->json( $datos );
+  }
 
 }
