@@ -177,6 +177,7 @@
 </form>
 
 <script>
+  cargaDatosComboCatalogo();
 
   $(function () {
     $( '#btnNvoProdRegresar' ).click( function( e ){
@@ -189,7 +190,6 @@
       guardaProductoNuevo();
     });
 
-    cargaDatosComboCatalogo();
     cargaDatosHistoricos();
   });
 
