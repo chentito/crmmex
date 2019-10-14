@@ -31,12 +31,28 @@ class ClientesController extends Controller
     return $total;
   }
 
+  /* Metodo que genera un identificador temporal para el RFC */
+  public function rfcTemp() {
+    $temp = '';
+    $opciones = array( 'a' , 'b' , 'c' , 'd' , 'e' , 'f' , 'g' ,
+                       'h' , 'i' , 'j' , 'k' , 'l' , 'm' , 'n' ,
+                       'o' , 'p' , 'q' , 'r' , 's' , 't' , 'u' ,
+                       'v' , 'w' , 'x' , 'y' , 'z' , '1' , '2' ,
+                       '3' , '4' , '5' , '6' , '7' , '8' , '9'
+                );
+    for( $i = 0 ; $i < 10 ; $i ++ ) {
+      $temp .= $opciones[ rand( 0 , 34 ) ];
+    }
+
+    return $temp;
+  }
+
   /* Alta de un nuevo cliente con sus respectivas estructuras */
   public function guardaCliente( Request $request ) {
     /* Alta del registro cliente */
     $cliente = new Clientes;
     $cliente->razonSocial   = $request->cliente_razon_social;
-    $cliente->rfc           = $request->cliente_rfc;
+    $cliente->rfc           = ( ( $request->cliente_rfc != '' ) ? $request->cliente_rfc : $this->rfcTemp() );
     $cliente->ejecutivo     = Auth::user()->id;
     $cliente->fechaAlta     = date( 'Y-m-d H:i:s' );
     $cliente->tipo          = $request->cliente_tipo;
@@ -173,7 +189,7 @@ class ClientesController extends Controller
         'celular'           => $prospecto->celular,
         'telefono'          => $prospecto->telefono,
         'razonSocial'       => $prospecto->razonSocial,
-        'rfc'               => $prospecto->rfc,
+        'rfc'               => ( strlen( $prospecto->rfc ) > 10 ? $prospecto->rfc : '' ),
         'ejecutivo'         => Utiles::nombreEjecutivo( $prospecto->ejecutivo ),
         'fechaAlta'         => $prospecto->fechaAlta,
         'fechaModificacion' => $prospecto->fechaModificacion,
@@ -409,6 +425,20 @@ class ClientesController extends Controller
         'tel'   => $request->telefono, 'ext'   => $request->extension, 'adicionales' => $request->adicionales
       ]
     );
+  }
+
+  public function rfcs() {
+    $rfcs = Clientes::where( 'status' , 1 )->get();
+
+    foreach( $rfcs AS $rfc ) {
+      if( $rfc->rfc == '' ) {
+        $rfc->rfc = $this->rfcTemp();
+        $rfc->save();
+        echo "Se actualiza a" . $rfc->rfc;
+      } else {
+        echo "Se mantiene igual " . $rfc->rfc;
+      }
+    }
   }
 
 }

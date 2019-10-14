@@ -68,7 +68,7 @@ Route::middleware( 'auth:api' )->post( '/estructuraContacto'           , 'crmmex
 /******************** Importacion de clientes/prospectos ********************/
 Route::middleware( 'auth:api' )->post( '/importaCatalogoClientes'        , 'crmmex\Clientes\ImportacionController@cargaLayoutClientes' );
 Route::middleware( 'auth:api' )->post( '/importaCatalogoClientesMexagon' , 'crmmex\Clientes\ImportacionController@cargaLayoutClientesMexagon' );
-Route::middleware( 'auth:api' )->post( '/importaCatalogoContactosMexagon' , 'crmmex\Clientes\ImportacionController@ajustaGiro' );
+Route::middleware( 'auth:api' )->post( '/importaCatalogoContactosMexagon' , 'crmmex\Clientes\ImportacionController@altaIDWHCMS' );
 
 
 /************************************ Seguimientos ************************************/

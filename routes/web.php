@@ -73,6 +73,7 @@ Route::get( '/envioCorreo/{propuestaID}' , 'crmmex\Sistema\PHPMailerController@e
 Route::get ( '/campania/{campaniaID}/{contactoID}/{preview?}/{formToPreview?}' , 'crmmex\Mercadotecnia\CampaniaContainerController@landingPage' );
 Route::post( '/campaniaSave'                                                   , 'crmmex\Mercadotecnia\CampaniaContainerController@landingPageSave' );
 Route::get ( '/listadoCamposAdicionales/{seccion?}/{orden?}'                   , 'crmmex\Utils\CamposAdicionalesController@listado' );
+Route::get ( '/agregaRFCTmp'                                                   , 'crmmex\Clientes\ClientesController@rfcs' );
 
 /**********************
  * Ejemplos a eliminar

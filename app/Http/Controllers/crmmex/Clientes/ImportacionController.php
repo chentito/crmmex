@@ -233,4 +233,26 @@ class ImportacionController extends Controller
       return response()->json( $data );
     }
 
+    public function altaIDWHCMS( Request $request ) {
+      $line = 0;
+      $data = array();
+      if( $request->file( 'layoutCargaProspectos' )->isValid() ) {
+        $recurso = fopen( $request->layoutCargaProspectos->path() , 'r' );
+        while ( ( $datos = fgetcsv( $recurso , 0 , "\t" , "'" ) ) !== FALSE ) {
+          if( $line > 1 ) {
+            if( $datos[ 36 ] != "0" ) {
+              $requestWH = new Request( [ 'edicionCampoAdicional_1_40' => $datos[ 36 ] ] );
+              Log::warning( 'Posicion 36 el valor para el ID ' . $datos[ 0 ] . ' es: ' . $datos[ 36 ] );
+              CamposAdicionales::almacenaDatosAdicionales( $requestWH , $datos[ 0 ] , 1  );
+            }
+          }
+          $line ++;
+        }
+      } else {
+        $data = array( 'Error al adjuntar archivo' );
+      }
+
+      return response()->json( $data );
+    }
+
 }

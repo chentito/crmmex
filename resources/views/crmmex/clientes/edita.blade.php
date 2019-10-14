@@ -42,6 +42,7 @@
             document.getElementById( 'cliente_razon_social' ).value     = cliente[ 'razonSocial' ];
             document.getElementById( 'nombreCliente' ).innerHTML        = cliente[ 'razonSocial' ];
             document.getElementById( 'cliente_rfc' ).value              = cliente[ 'rfc' ];
+            document.getElementById( 'statusValidacionRFC' ).value      = 0;            
             document.getElementById( 'cliente_observaciones' ).value    = cliente[ 'observaciones' ];
             document.getElementById( 'cliente_tipo' ).value             = cliente[ 'tipo' ];
             document.getElementById( 'cliente_producto_interes' ).value = cliente[ 'producto' ];
