@@ -43,7 +43,6 @@ class ClientesController extends Controller
     for( $i = 0 ; $i < 10 ; $i ++ ) {
       $temp .= $opciones[ rand( 0 , 34 ) ];
     }
-
     return $temp;
   }
 
@@ -155,7 +154,6 @@ class ClientesController extends Controller
             . ( Acceso::ver( 40 ) ? '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Eliminar Cliente" onclick="contenidos(\'clientes_eliminaCliente\',\''.$cliente->id.'\')" class="ml-2"><i class="fa fa-trash fa-sm"></i></a>' : '' )
         )
       );
-
       // Agrega campos adicionales
       $adicionales = CamposAdicionales::obtieneAdicionalesPorRegistro( $tipo , $cliente->id );
       $arrClientes[ 'clientes' ][] = array_merge( $datosCliente , $adicionales );

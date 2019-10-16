@@ -54,7 +54,7 @@ class PagosController extends Controller
   // Eliminar un pago
   public function eliminaPago( $pagoID ) {
     $pagos = Pagos::find( $pagoID );
-    $pagos->status      = 0;
+    $pagos->status = 0;
     $pagos->save();
   }
 
