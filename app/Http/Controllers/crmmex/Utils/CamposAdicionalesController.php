@@ -139,10 +139,20 @@ class CamposAdicionalesController extends Controller
         $v = $request->$field[ $indice ];
       }
 
-
       CamposAdicionalesValores::updateOrCreate(
         [ 'campoAdicionalID' => $campoAdicionalID , 'registroID' => $registroID , 'seccion' => $seccion ],
         [ 'valor' => $v , 'status' => '1' ]
+      );
+    }
+  }
+
+  // Proceso que actualiza campos adicionales masivos
+  public static function almacenaDatosAdicionalesMasivos( Request $request , $registroID , $seccion ) {
+    foreach( $request->all() AS $key => $value) {
+      $partes = explode( '_' , $key );
+      CamposAdicionalesValores::updateOrCreate(
+        [ 'campoAdicionalID' => $partes[ 2 ] , 'registroID' => $registroID , 'seccion' => $seccion ],
+        [ 'valor' => $value , 'status' => '1' ]
       );
     }
   }

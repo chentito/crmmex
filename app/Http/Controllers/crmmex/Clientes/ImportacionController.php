@@ -255,4 +255,127 @@ class ImportacionController extends Controller
       return response()->json( $data );
     }
 
+    public function idWH_RFC( Request $request ) {
+      $line = 0;
+      $data = array();
+      if( $request->file( 'layoutCargaProspectos' )->isValid() ) {
+        $recurso = fopen( $request->layoutCargaProspectos->path() , 'r' );
+        while ( ( $datos = fgetcsv( $recurso , 0 , "\t" , "'" ) ) !== FALSE ) {
+          if( $line > 0 ) {
+            $cliente = Clientes::where( 'rfc' , $datos[ 1 ] )->first();
+            if( $cliente ) {
+              $requestWH = new Request( [ 'edicionCampoAdicional_1_40' => $datos[ 0 ] ] );
+              CamposAdicionales::almacenaDatosAdicionalesMasivos( $requestWH , $cliente->id , 1 );
+            }
+          }
+          $line ++;
+        }
+      } else {
+        $data = array( 'Error al adjuntar archivo' );
+      }
+
+      return response()->json( $data );
+    }
+
+    public function cargaBaseDatosWHMCSCamposAdicionales( Request $request ) {
+      $line = 0;
+      $data = array();
+      if( $request->file( 'layoutCargaProspectos' )->isValid() ) {
+        $recurso = fopen( $request->layoutCargaProspectos->path() , 'r' );
+        while ( ( $datos = fgetcsv( $recurso , 0 , "\t" , "'" ) ) !== FALSE ) {
+          if( $line > 0 ) {
+            /* Guarda los campos adicionales asignados al cliente */
+            $requestWH = new Request([ 'edicionCampoAdicional_1_' . $datos[ 0 ]  => $datos[ 3 ] ]);
+            CamposAdicionales::almacenaDatosAdicionalesMasivos( $requestWH , $datos[ 2 ] , 1 );
+          }
+          $line ++;
+        }
+      } else {
+        $data = array( 'Error al adjuntar archivo' );
+      }
+      return response()->json( $data );
+    }
+
+    public function cargaBaseDatosWHMCS( Request $request ) {
+      $line = 0;
+      $data = array();
+      if( $request->file( 'layoutCargaProspectos' )->isValid() ) {
+        $recurso = fopen( $request->layoutCargaProspectos->path() , 'r' );
+        while ( ( $datos = fgetcsv( $recurso , 0 , "\t" , "'" ) ) !== FALSE ) {
+          if( $line > 0 ) {
+            // Crea cliente
+            $cliente = new Clientes();
+            $cliente->razonSocial   = $datos[ 4 ];
+            $cliente->rfc           = $datos[ 1 ];
+            $cliente->ejecutivo     = Auth::user()->id;
+            //$cliente->fechaAlta     = $datos[ 51 ];
+            $cliente->fechaAlta     = date( 'Y-m-d H:i:s' );
+            $cliente->tipo          = 1;// Exclusivamente clientes
+            $cliente->observaciones = ( isset( $datos[ 25 ] ) ? $datos[ 25 ] : '' );
+            $cliente->productoID    = 0;
+            $cliente->status        = 1;
+
+            if( $cliente->save() ) {
+              /* Guarda los campos adicionales asignados al cliente */
+              $requestWH = new Request([ 'edicionCampoAdicional_1_40' => $datos[ 0 ] ]);
+              CamposAdicionales::almacenaDatosAdicionales( $requestWH , $cliente->id , 1 );
+
+              // Alta del registro contacto
+              $contacto = new Contactos();
+              $contacto->clienteID         = $cliente->id;
+              $contacto->nombre            = $datos[ 2 ];
+              $contacto->apellidoPaterno   = $datos[ 3 ];
+              $contacto->apellidoMaterno   = "";
+              $contacto->correoElectronico = $datos[ 5 ];
+              $contacto->celular           = "";
+              $contacto->telefono          = $datos[ 12 ];
+              $contacto->extension         = "";
+              $contacto->status            = 1;
+              $contacto->fechaAlta         = date( 'Y-m-d H:i:s' );
+              $contacto->ejecutivo         = Auth::user()->id;
+              $contacto->ejecutivoAlta     = Auth::user()->id;
+              $contacto->save();
+
+              // Alta del registro direccion
+              $direccion = new Direccion();
+              $direccion->clienteID     = $cliente->id;
+              $direccion->calle         = $datos[ 6 ];
+              $direccion->noExterior    = '';
+              $direccion->noInterior    = '';
+              $direccion->colonia       = "";
+              $direccion->cp            = $datos[ 10 ];
+              $direccion->delegacion    = "";
+              $direccion->ciudad        = $datos[ 8 ];
+              $direccion->estado        = $datos[ 9 ];
+              $direccion->pais          = 1;//$datos[ 10 ];
+              $direccion->fechaAlta     = date( 'Y-m-d H:i:s' );
+              $direccion->ejecutivoAlta = Auth::user()->id;
+              $direccion->status = 1;
+              $direccion->save();
+            }
+          }
+          $line ++;
+        }
+      } else {
+        $data = array( 'Error al adjuntar archivo' );
+      }
+      return response()->json( $data );
+    }
+
+      /* Metodo que genera un identificador temporal para el RFC */
+      public function rfcTemp() {
+        $temp = '';
+        $opciones = array( 'a' , 'b' , 'c' , 'd' , 'e' , 'f' , 'g' ,
+                           'h' , 'i' , 'j' , 'k' , 'l' , 'm' , 'n' ,
+                           'o' , 'p' , 'q' , 'r' , 's' , 't' , 'u' ,
+                           'v' , 'w' , 'x' , 'y' , 'z' , '1' , '2' ,
+                           '3' , '4' , '5' , '6' , '7' , '8' , '9'
+                    );
+        for( $i = 0 ; $i < 10 ; $i ++ ) {
+          $temp .= $opciones[ rand( 0 , 34 ) ];
+        }
+
+        return $temp;
+      }
+
 }
