@@ -133,8 +133,8 @@ class CamposAdicionalesController extends Controller
       $field = 'edicionCampoAdicional_' . $seccion . '_' . $campoAdicionalID;
       //$v = ( ( $indice == '' ) ? $request->$field : $request->$field[ $indice ] );
       if( $indice == '' ) {
-        //$v = $request->$field[ 0 ];
-        $v = $request->$field;
+        $v = $request->$field[ 0 ];
+        //$v = $request->$field;
       } else {
         $v = $request->$field[ $indice ];
       }

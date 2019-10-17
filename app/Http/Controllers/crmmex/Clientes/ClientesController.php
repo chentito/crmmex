@@ -178,7 +178,7 @@ class ClientesController extends Controller
                 ->get();
 
     foreach( $prospectos AS $prospecto ) {
-      $datosProspecto = array(
+      $datosProspecto = array (
         'id'                => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Prospecto" onclick="contenidos(\'prospectos_edicion\',\''.$prospecto->id.'\')">'.$prospecto->id.'</a>',
         'nombre'            => '<a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Modificar Prospecto" onclick="contenidos(\'prospectos_edicion\',\''.$prospecto->id.'\')">'.$prospecto->nombre.'</a>',
         'apellidoPaterno'   => $prospecto->apellidoPaterno,
@@ -432,9 +432,6 @@ class ClientesController extends Controller
       if( $rfc->rfc == '' ) {
         $rfc->rfc = $this->rfcTemp();
         $rfc->save();
-        echo "Se actualiza a" . $rfc->rfc;
-      } else {
-        echo "Se mantiene igual " . $rfc->rfc;
       }
     }
   }
