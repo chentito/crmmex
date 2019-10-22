@@ -118,6 +118,7 @@
     <script src="{{ asset( 'assets3/js/notify.js' ) }}"></script>
     <script src="{{ asset( 'assets3/js/timeline.js' ) }}"></script>
     <script src="{{ asset( 'assets3/js/contenidos.js' ) }}"></script>
+    <script src="{{ asset( 'assets3/js/grid.js' ) }}"></script>
     <!--script src="{{ asset( 'assets3/js/quill.js' ) }}"></script>
     <script src="{{ asset( 'assets3/js/editor.js' ) }}"></script-->
     <!-- Grid -->
